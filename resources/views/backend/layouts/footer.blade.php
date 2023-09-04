@@ -27,7 +27,9 @@
 <!-- Datepicker library -->
 <link rel="stylesheet" href="{{ asset('/assets/plugins/datepicker/datepicker3.css') }}">
 <script src="{{ asset('/assets/plugins/datepicker/bootstrap-datepicker.js') }}"></script>
+
 <script src="{{ asset('assets/js/jquery.printElement.min.js') }}"></script>
+<script src="{{ asset('/assets/frontend-assets/libs/bootstrap/js/bootstrap.min.js') }}"></script>
 
 <script>
     $.fn.modal.Constructor.prototype.enforceFocus = function() {};

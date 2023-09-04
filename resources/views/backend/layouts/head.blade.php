@@ -13,6 +13,7 @@
 
 <!-- Favicons -->
 <link rel="shortcut icon" href="{{asset('/assets/images/favicon.png')}}">
+<link rel="stylesheet" type="text/css" href="{{ asset('/assets/frontend-assets/libs/bootstrap/css/bootstrap.min.css')}}" />
 
 
 <link rel="stylesheet" href="{{ asset('/assets/css/main.css') }}">
