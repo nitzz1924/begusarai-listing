@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Backend\Admin;
 
 use Illuminate\Http\Request;
-// use App\Models\Master;
+ use App\Models\Master;
 use App\Http\Controllers\Controller; // Update the namespace here
 
 class MasterController extends Controller
@@ -12,10 +12,10 @@ class MasterController extends Controller
    public function index()
 {
 
-   // $data = Master::where('type', '=', 'Master')->get();
+  $data = Master::where('type', '=', 'Master')->get();
    
-   // dd($data);
-   return view('admin.master');
+
+   return view('backend.admin.master',compact('data'));
 }
 
    public function insertMaster(Request $request){

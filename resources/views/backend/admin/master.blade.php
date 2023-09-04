@@ -1,4 +1,6 @@
-<x-app-layout>
+@extends('backend.layouts.master')
+@section('title', 'Dashboard')
+@section('content')
     <div class="modal fade" id="basicModal" tabindex="-1">
         <div class="modal-dialog">
            
@@ -31,22 +33,20 @@
           </div>
         </div>
       </div><!-- End Scrolling Modal-->
-
-    <section class="section">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="card">
-                    <div class="card-header">
-                        <div class="row">
-                            <div class="col-md-10">    <label><i class="fa fa-list ml-2"></i>Master List</label></div>
-                        <div class="col-md-2">
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#basicModal"><i class="fa fa-plus"></i> Add master category</button>
+<div class="row">
+        <div class="col-md-12">
+            <div class="main-card mb-3 card">
+                <div class="card-header"><label><i class="fa fa-list ml-2"></i>Master List</label>
+                    <div class="btn-actions-pane-right">
+                        <div role="group" class="btn-group-sm btn-group">
+                        <button type="button" class="active btn btn-focus" data-bs-toggle="modal" data-bs-target="#basicModal"><i class="fa fa-plus"></i> Add master category</button>
+ 
                         </div>
                     </div>
-                    </div>
-                    <div class="card-body mt-3">
-                        <table id="example" class="table table-sm" style="width:100%">
-                            <thead>
+                </div>
+                <div class="table-responsive">
+                    <table class="align-middle mb-0 table table-borderless table-striped table-hover">
+                    <thead>
                                 <tr>
                                     <th scope="col">#</th>
                                     <th scope="col">Type</th>
@@ -70,11 +70,12 @@
                                 </tr>
                                 @endforeach
                             </tbody>
-                        </table>
-                    </div>
+                    </table>
                 </div>
-
+                 
             </div>
         </div>
-    </section>
-</x-app-layout>
+    </div>
+    
+
+    @endsection

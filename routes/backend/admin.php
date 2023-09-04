@@ -1,4 +1,10 @@
 <?php
+namespace App\Http\Controllers;
+
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Backend\Admin\MasterController ;
+
+
 
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 
@@ -54,3 +60,5 @@ Route::delete('backups/delete/{file_name}', 'BackupController@delete');
 
 Route::get('/barcode', 'AdminController@barcode');
 Route::get('/passport', 'AdminController@passport');
+Route::get('/some-route', 'App\Http\Controllers\MasterController@index');
+Route::resource('master', 'MasterController');
