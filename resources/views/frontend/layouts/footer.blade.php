@@ -93,7 +93,7 @@
     <!-- .container -->
 </footer>
 <!-- site-footer -->
-<div class="landing-banner business-landing-banner">
+{{-- <div class="landing-banner business-landing-banner">
     <div class="container">
         <div class="lb-info">
             <h2>The Golo App</h2>
@@ -103,10 +103,10 @@
                 <a href="#" title="Google play"><img src="images/google-play.png"
                         alt="Google play" /></a>
             </div>
-        </div>
+        </div> --}}
         <!-- .lb-info -->
-    </div>
-</div>
+    {{-- </div>
+</div> --}}
 <!-- .landing-banner -->
 </div>
 <!-- #wrapper -->
