@@ -4,9 +4,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <title> @yield('title') | {{ config('app.name') }}</title>
 <meta name="viewport"
-      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no"/>
+        content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no"/>
 <meta name="description" content="laravel, laravel-boilerplate">
-<meta name="author" content="Riyadh Ahmed">
+<meta name="author" content="Yuvmedia">
 <meta name="msapplication-tap-highlight" content="no">
 <meta name="robots" content="index, follow">
 <meta name="csrf-token" content="{{ csrf_token() }}">

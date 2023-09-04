@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Frontend\HomeController;
 
 Route::group([
     'namespace' => 'Frontend',
@@ -10,7 +11,12 @@ Route::group([
     });
 
 
-// Bakcend
+// Backend
+
+
+// Frontend Routes
+
+Route::get('/news',[HomeController::class,'news'])->name('news');
 
 
 // Admin Auth
@@ -21,7 +27,7 @@ Route::prefix('admin_login')->group(function () {
     Route::get('logout', 'Auth\Admin\LoginController@logout');
 });
 
-// Admin Dashborad
+// Admin Dashboard
 Route::group([
     'namespace' => 'Backend\Admin',
     'prefix' => 'admin',
@@ -39,7 +45,7 @@ Route::prefix('user_login')->group(function () {
     Route::get('logout', 'Auth\User\LoginController@logout');
 });
 
-// User Dashborad
+// User Dashboard
 Route::group([
     'namespace' => 'Backend\User',
     'prefix' => 'user',
