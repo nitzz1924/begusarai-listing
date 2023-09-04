@@ -1,7 +1,7 @@
 <div class="app-footer">
     <div class="col-12 text-center rounded-top"
          style="bottom: 0; font-weight: bold;padding: 10px;">
-        Developed by Riyadh Ahmed || &nbsp; {{date('Y')}}
+         <a href='http://yuvmedia.com/'> Developed by YuvMedia</a> || &nbsp; {{date('Y')}}
     </div>
 </div>
 <script src="{{ asset('/assets/js/main.js') }}"></script>
