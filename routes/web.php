@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Frontend\HomeController;
 
 Route::group([
     'namespace' => 'Frontend',
@@ -10,8 +11,20 @@ Route::group([
     });
 
 
-// Bakcend
+// Backend
 
+
+// Frontend user Routes
+
+Route::get('/aboutUs',[HomeController::class,'aboutUs'])->name('aboutUs');
+Route::get('/contactUs',[HomeController::class,'contactUs'])->name('contactUs');
+Route::get('/contactUs',[HomeController::class,'contactUs'])->name('contactUs');
+Route::get('/addPlace',[HomeController::class,'addPlace'])->name('addPlace');
+Route::get('/packages',[HomeController::class,'packages'])->name('packages');
+
+// Business Owner routes
+Route::get('/businessDashboard',[HomeController::class,'businessDashboard'])->name('businessDashboard');
+Route::get('/businessOwnerPage',[HomeController::class,'businessOwnerPage'])->name('businessOwnerPage');
 
 // Admin Auth
 Route::prefix('admin_login')->group(function () {
@@ -21,7 +34,7 @@ Route::prefix('admin_login')->group(function () {
     Route::get('logout', 'Auth\Admin\LoginController@logout');
 });
 
-// Admin Dashborad
+// Admin Dashboard
 Route::group([
     'namespace' => 'Backend\Admin',
     'prefix' => 'admin',
@@ -39,7 +52,7 @@ Route::prefix('user_login')->group(function () {
     Route::get('logout', 'Auth\User\LoginController@logout');
 });
 
-// User Dashborad
+// User Dashboard
 Route::group([
     'namespace' => 'Backend\User',
     'prefix' => 'user',

@@ -1,7 +1,6 @@
 <div class="app-footer">
-    <div class="col-12 text-center rounded-top"
-         style="bottom: 0; font-weight: bold;padding: 10px;">
-         <a href='http://yuvmedia.com/'> Developed by YuvMedia</a> || &nbsp; {{date('Y')}}
+    <div class="col-12 text-center rounded-top" style="bottom: 0; font-weight: bold;padding: 10px;">
+        Developed by Yuvmedia || &nbsp; {{ date('Y') }}
     </div>
 </div>
 <script src="{{ asset('/assets/js/main.js') }}"></script>
@@ -31,11 +30,9 @@
 <script src="{{ asset('assets/js/jquery.printElement.min.js') }}"></script>
 
 <script>
-    $.fn.modal.Constructor.prototype.enforceFocus = function () {
-    };
+    $.fn.modal.Constructor.prototype.enforceFocus = function() {};
 </script>
 <script>
-
     function notify_view(type, message) {
 
         toastr.options = {
