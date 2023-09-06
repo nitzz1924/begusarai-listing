@@ -21,17 +21,14 @@ class MasterController extends Controller
     //   return view('backend.admin.master.index',compact("master"));
     // }
 
-    public function index(Request $request)
-    {
-        $keyword = $request->input('keyword');
-        $master = Master::when($keyword, function ($query) use ($keyword) {
-            $query->where('title', 'like', '%' . $keyword . '%');
-        })
-            ->orderBy('created_at', 'desc')
-            ->get();
+   
 
-        return view('backend.admin.master.index', compact('master', 'keyword'));
-    }
+    public function index(Request $request)
+{
+    $master = Master::orderBy('created_at', 'desc')->get();
+    return view('backend.admin.master.index', compact('master'));
+}
+
 
     /**
      * Show the form for creating a new resource.
@@ -58,6 +55,7 @@ class MasterController extends Controller
         ]);
         try {
             $master = new Master();
+           
 
             $master->title = $request->input('title');
             $master->value = $request->input('value');
