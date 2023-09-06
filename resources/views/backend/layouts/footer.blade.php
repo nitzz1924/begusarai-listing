@@ -1,6 +1,12 @@
 <div class="app-footer">
+<<<<<<< HEAD
     <div class="col-12 text-center rounded-top" style="bottom: 0; font-weight: bold;padding: 10px;">
         Developed by Yuvmedia || &nbsp; {{ date('Y') }}
+=======
+    <div class="col-12 text-center rounded-top"
+         style="bottom: 0; font-weight: bold;padding: 10px;">
+        Developed by Riyadh Ahmed || &nbsp; {{date('Y')}}
+>>>>>>> parent of bb50bcb (2nd)
     </div>
 </div>
 <script src="{{ asset('/assets/js/main.js') }}"></script>
