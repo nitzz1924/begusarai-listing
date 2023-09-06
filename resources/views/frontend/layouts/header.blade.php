@@ -166,7 +166,7 @@
 											<a title="Page" href="#">Page</a>
 											<ul class="sub-menu">
 												<li>
-													<a title="About" href="/aboutUs">About Us</a>
+													<a title="About" href="about-us.html">About Us</a>
 												</li>
 												<li>
 													<a title="FAQ's" href="faqs.html">FAQ's</a>
@@ -176,17 +176,17 @@
 														Landing</a>
 												</li>
 												<li>
-													<a title="Contacts" href="/contactUs">Contacts</a>
+													<a title="Contacts" href="contact-us.html">Contacts</a>
 												</li>
-												{{-- <li>
-													<a title="Add Listing" href="add-place.html">Add Listing</a>
-												</li> --}}
 												<li>
-													<a title="Packages" href="#">Packages</a>
+													<a title="Add Listing" href="add-place.html">Add Listing</a>
+												</li>
+												<li>
+													<a title="Pricing" href="#">Pricing</a>
 													<ul class="sub-menu">
 														<li>
-															<a title="Pacakages"
-																href="/packages">Pacakages</a>
+															<a title="Pricing Plan"
+																href="pricing-plan.html">Pricing Plan</a>
 														</li>
 														<li>
 															<a title="Pricing Plan Checkout"
@@ -195,7 +195,7 @@
 														</li>
 													</ul>
 												</li>
-												{{-- <li>
+												<li>
 													<a title="Page" href="#">Shop</a>
 													<ul class="sub-menu">
 														<li>
@@ -206,7 +206,7 @@
 																href="shop-detail.html">Product Detail</a>
 														</li>
 													</ul>
-												</li> --}}
+												</li>
 												<li>
 													<a title="Page" href="#">Blog</a>
 													<ul class="sub-menu">
@@ -225,12 +225,12 @@
 													</ul>
 												</li>
 												<li>
-													<a title="Owner Dashboard" href="/businessDashboard">Owner
+													<a title="Owner Dashboard" href="owner-dashboard.html">Owner
 														Dashboard</a>
 												</li>
 												<li>
-													<a title="Owner Single" href="/businessOwnerPage">Owner
-														Page</a>
+													<a title="Owner Single" href="owner-page.html">Owner
+														Single</a>
 												</li>
 												<li>
 													<a title="Construction"
@@ -251,7 +251,7 @@
 							</div>
 							<!-- .popup__content -->
 							<div class="popup__button popup__box">
-								<a title="Add place" href="/addPlace" class="btn">
+								<a title="Add place" href="add-place.html" class="btn">
 									<i class="la la-plus"></i>
 									<span>Add place</span>
 								</a>
@@ -377,23 +377,24 @@
 								<a title="Page" href="#">Page</a>
 								<ul class="sub-menu">
 									<li>
-										<a title="About" href="/aboutUs">About Us</a>
+										<a title="About" href="about-us.html">About Us</a>
 									</li>
 									<li><a title="FAQ's" href="faqs.html">FAQ's</a></li>
 									<!-- <li>
 										<a title="App Landing" href="app-landing.html">App Landing</a>
 									</li> -->
 									<li>
-										<a title="Contacts" href="/contactUs">Contacts Us</a>
+										<a title="Contacts" href="contact-us.html">Contacts Us</a>
 									</li>
 									<li>
 										<a title="Add Listing" href="add-place.html">Add Listing</a>
 									</li>
 									<li>
-										<a title="Packages" href="#">Packages</a>
+										<a title="Pricing" href="#">Pricing</a>
 										<ul class="sub-menu">
 											<li>
-												<a title="Packages" href="/packages">Packages</a>
+												<a title="Pricing Plan" href="pricing-plan.html">Pricing
+													Plan</a>
 											</li>
 											<li>
 												<a title="Pricing Plan Checkout"
@@ -401,7 +402,7 @@
 											</li>
 										</ul>
 									</li>
-									{{-- <li>
+									<li>
 										<a title="Page" href="#">Shop</a>
 										<ul class="sub-menu">
 											<li>
@@ -412,7 +413,7 @@
 													Detail</a>
 											</li>
 										</ul>
-									</li> --}}
+									</li>
 									<li>
 										<a title="Page" href="#">Blog</a>
 										<ul class="sub-menu">
@@ -429,20 +430,20 @@
 										</ul>
 									</li>
 									<li>
-										<a title="Owner Dashboard" href="/businessDashboard">Owner
+										<a title="Owner Dashboard" href="owner-dashboard.html">Owner
 											Dashboard</a>
 									</li>
 									<li>
-										<a title="Owner Single" href="/businessOwnerPage">Owner page</a>
+										<a title="Owner Single" href="owner-page.html">Owner Single</a>
 									</li>
-									{{-- <li>
+									<li>
 										<a title="Construction" href="construction.html">Construction</a>
 									</li>
 									<li>
 										<a title="Coming Soon" href="coming-soon.html">Coming Soon
 										</a>
-									</li> --}}
-									{{-- <li><a title="404" href="404.html">404 Page</a></li> --}}
+									</li>
+									<li><a title="404" href="404.html">404 Page</a></li>
 								</ul>
 							</li>
 						</ul>
@@ -532,7 +533,7 @@
 						<!-- .site__search -->
 					</div>
 					<div class="right-header__button btn">
-						<a title="Add place" href="/addPlace">
+						<a title="Add place" href="add-place.html">
 							<i class="las la-plus la-24-white"></i>
 							<span>Add Listing</span>
 						</a>
