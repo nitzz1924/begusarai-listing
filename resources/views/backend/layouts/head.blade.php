@@ -11,6 +11,7 @@
 <meta name="robots" content="index, follow">
 <meta name="csrf-token" content="{{ csrf_token() }}">
 
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap.min.css">
 <!-- Favicons -->
 <link rel="shortcut icon" href="{{asset('/assets/images/favicon.png')}}">
 <link rel="stylesheet" type="text/css" href="{{ asset('/assets/frontend-assets/libs/bootstrap/css/bootstrap.min.css')}}" />
@@ -26,6 +27,7 @@
 <script src="{{ asset('/assets/js/jquery-3.4.1.min.js') }}"></script>
 <!-- Bootstrap 4 -->
 <script src="{{ asset('/assets/js/bootstrap.min.js') }}"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 
 <script>
     var CSRF_TOKEN = "{{ csrf_token() }}";
@@ -35,3 +37,9 @@
 <script src="{{ asset('/frontend-assets/js/bootstrap.min.js') }}"></script> 
 
 <link rel="stylesheet" href="frontend-assets/css/bootstrap.min.css"> 
+
+
+
+<script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.0.js"></script>

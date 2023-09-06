@@ -65,6 +65,7 @@
                         </li>
                     </ul>
                 </li>
+              
                 <li>
                     <a href="#">
                         <i class="metismenu-icon pe-7s-diamond"></i>
@@ -97,6 +98,16 @@
                         </li>
                     </ul>
                 </li>
+
+
+                <li>
+                    <a href="{{ URL :: to('/admin/master') }}">
+                        <i class="metismenu-icon pe-7s-bookmarks"></i>
+                       Master
+                    </a>
+                </li>
+
+
                 <li>
                     <a href="{{ URL :: to('/admin_login/logout') }}">
                         <i class="metismenu-icon pe-7s-upload"></i>

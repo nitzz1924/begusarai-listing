@@ -62,3 +62,9 @@ Route::get('/barcode', 'AdminController@barcode');
 Route::get('/passport', 'AdminController@passport');
 Route::get('/some-route', 'App\Http\Controllers\MasterController@index');
 Route::resource('master', 'MasterController');
+
+
+//
+
+
+Route::resource('master', 'MasterController');
