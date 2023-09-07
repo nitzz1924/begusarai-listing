@@ -21,7 +21,12 @@ class UserController extends Controller
     */
    public function index()
    {
-      return view('backend.admin.user.index');
+
+
+      $user = User::orderBy('created_at', 'asc')->get();
+      
+
+      return view('backend.admin.user.index', compact('user'));
    }
 
    public function getAll()
@@ -61,21 +66,15 @@ class UserController extends Controller
     * Show the form for creating a new resource.
     * @return \Illuminate\Http\Response
     */
-   public function create(Request $request)
-   {
-      if ($request->ajax()) {
-         $haspermision = auth()->user()->can('user-create');
-         if ($haspermision) {
-            $roles = Role::all();
-            $view = View::make('backend.admin.user.create', compact('roles'))->render();
-            return response()->json(['html' => $view]);
-         } else {
-            abort(403, 'Sorry, you are not authorized to access the page');
-         }
-      } else {
-         return response()->json(['status' => 'false', 'message' => "Access only ajax request"]);
+ 
+    
+
+      public function create(Request $request)
+      {
+          $user = User::orderby('created_at', 'asc')->get();
+          return view('backend.admin.user.create', compact('user'));
       }
-   }
+
 
    /**
     * Store a newly created resource in storage.
@@ -176,22 +175,35 @@ class UserController extends Controller
     *
     * @return \Illuminate\Http\Response
     */
-   public function edit($id, Request $request)
+   // public function edit($id, Request $request)
+   // {
+   //    if ($request->ajax()) {
+   //       $haspermision = auth()->user()->can('user-edit');
+   //       if ($haspermision) {
+   //          $user = User::with('roles')->where('id', $id)->first();
+   //          $roles = Role::all(); //Get all roles
+   //          $view = View::make('backend.admin.user.edit', compact('user', 'roles'))->render();
+   //          return response()->json(['html' => $view]);
+   //       } else {
+   //          abort(403, 'Sorry, you are not authorized to access the page');
+   //       }
+   //    } else {
+   //       return response()->json(['status' => 'false', 'message' => "Access only ajax request"]);
+   //    }
+   // } 
+   
+   // public function edit($id, Request $request)
+   // {
+   //    $user = User::with('roles')->where('id', $id)->first();
+   //     return view('backend.admin.user.edit', compact('user'));
+   // }
+   public function edit($id)
    {
-      if ($request->ajax()) {
-         $haspermision = auth()->user()->can('user-edit');
-         if ($haspermision) {
-            $user = User::with('roles')->where('id', $id)->first();
-            $roles = Role::all(); //Get all roles
-            $view = View::make('backend.admin.user.edit', compact('user', 'roles'))->render();
-            return response()->json(['html' => $view]);
-         } else {
-            abort(403, 'Sorry, you are not authorized to access the page');
-         }
-      } else {
-         return response()->json(['status' => 'false', 'message' => "Access only ajax request"]);
-      }
+       $user = User::where('id', $id)->first();
+       return view('backend.admin.user.edit', compact('user'));
    }
+
+
 
    /**
     * Update the specified resource in storage.
@@ -201,72 +213,50 @@ class UserController extends Controller
     *
     * @return \Illuminate\Http\Response
     */
-   public function update(Request $request, User $user)
-   {
-      if ($request->ajax()) {
+    public function update(Request $request, $id)
+    {
+        // Validate the incoming data
+        $request->validate([
+            'name' => 'required',
+            'number' => 'required',
+            'verificationCode' => 'required',
+            'password' => 'required',
+            'file_path' => 'required',
+        ]);
+    
+        // Find the user by ID
+        $user = User::findOrFail($id);
+    
+        // Update the user's attributes
+        $user->name = $request->input('name');
+        $user->mobileNumber = $request->input('number');
+        $user->verificationCode = $request->input('verificationCode');
+        $user->password = $request->input('password');
+        $user->status = $request->input('status');
 
-         User::findOrFail($user->id);
 
-         $rules = [
-           'name' => 'required',
-           'email' => 'required|email|unique:users,email,' . $user->id,
-           'photo' => 'image|max:2024|mimes:jpeg,jpg,png'
-         ];
-
-         $validator = Validator::make($request->all(), $rules);
-         if ($validator->fails()) {
-            return response()->json([
-              'type' => 'error',
-              'errors' => $validator->getMessageBag()->toArray()
-            ]);
-         } else {
-
-            $file_path = $request->input('SelectedFileName');;
-
-            if ($request->hasFile('photo')) {
-               if ($request->file('photo')->isValid()) {
-                  $destinationPath = public_path('assets/images/users/');
-                  $extension = $request->file('photo')->getClientOriginalExtension(); // getting image extension
-                  $fileName = time() . '.' . $extension;
-                  $file_path = 'assets/images/users/' . $fileName;
-                  $request->file('photo')->move($destinationPath, $fileName);
-               } else {
-                  return response()->json([
-                    'type' => 'error',
-                    'message' => "<div class='alert alert-warning'>Please! File is not valid</div>"
-                  ]);
-               }
-            }
-
-            DB::beginTransaction();
-            try {
-               $user->name = $request->input('name');
-               $user->email = $request->input('email');
-               $user->status = $request->input('status');
-               $user->password = Hash::make($request->password);
-               $user->file_path = $file_path;
-               $user->save();
-
-               $roles = $request->input('roles');
-               if (isset($roles)) {
-                  $user->roles()->sync($roles);  //If one or more role is selected associate user to roles
-               } else {
-                  $user->roles()->detach(); //If no role is selected remove exisiting role associated to a user
-               }
-
-               DB::commit();
-               return response()->json(['type' => 'success', 'message' => "Successfully Updated"]);
-
-            } catch (\Exception $e) {
-               DB::rollback();
-               return response()->json(['type' => 'error', 'message' => $e->getMessage()]);
-            }
-
+        if ($request->hasFile('file_path')) {
+         $extension = strtolower($request->file('file_path')->getClientOriginalExtension());
+         if ($extension == 'jpg' || $extension == 'jpeg' || $extension == 'png' || $extension == 'svg' || $extension == 'webp') {
+             if ($request->file('file_path')->isValid()) {
+                 $destinationPath = public_path('uploads'); // upload path
+                 $extension = $request->file('file_path')->getClientOriginalExtension(); // getting file_path extension
+                 $fileName = time() . '.' . $extension; // renameing file_path
+                 $request->file('file_path')->move($destinationPath, $fileName); // uploading file to given path
+                 $user->file_path = $fileName;
+             }
          }
-      } else {
-         return response()->json(['status' => 'false', 'message' => "Access only ajax request"]);
-      }
-   }
+     }
+
+    
+        // Save the updated user
+        $user->save();
+    
+        // Redirect to a success page or return a response
+        return redirect()->route('admin.users.index')->with('success', 'User updated successfully.');
+
+        
+    }
 
    /**
     * Remove the specified resource from storage.
@@ -275,19 +265,19 @@ class UserController extends Controller
     *
     * @return \Illuminate\Http\Response
     */
-   public function destroy($id, Request $request)
-   {
-      if ($request->ajax()) {
-         $haspermision = auth()->user()->can('user-delete');
-         if ($haspermision) {
-            $user = User::findOrFail($id); //Get user with specified id
-            $user->delete();
-            return response()->json(['type' => 'success', 'message' => "Successfully Deleted"]);
-         } else {
-            abort(403, 'Sorry, you are not authorized to access the page');
-         }
-      } else {
-         return response()->json(['status' => 'false', 'message' => "Access only ajax request"]);
-      }
-   }
+    public function destroy($id, Request $request)
+
+    {
+        $user = User::where(['id' => $id])->delete();
+        return back();
+    }
 }
+
+
+// return redirect()->route('admin.submaster.index');
+// } catch (\Exception $e) {
+//     session()->flash('sticky_error', $e->getMessage());
+//     print_r($e->getMessage());
+//     die();
+//     return back();
+// }

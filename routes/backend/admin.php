@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\Admin\MasterController ;
 use App\Http\Controllers\Backend\Admin\SubMasterController ;
+use App\Http\Controllers\Backend\Admin\UserController ;
+
 
 
 

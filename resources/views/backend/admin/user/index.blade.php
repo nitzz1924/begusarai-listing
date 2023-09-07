@@ -1,114 +1,102 @@
 @extends('backend.layouts.master')
 @section('title', ' All Users')
 @section('content')
-    <div class="app-page-title">
-        <div class="page-title-wrapper">
-            <div class="page-title-heading">
-                <div class="page-title-icon">
-                    <i class="pe-7s-users icon-gradient bg-mean-fruit"> </i>
-                </div>
-                <div>All Users</div>
-                <div class="d-inline-block ml-2">
-                    @can('user-create')
-                        <button class="btn btn-success" onclick="create()"><i
-                                class="glyphicon glyphicon-plus"></i>
-                            New User
-                        </button>
-                    @endcan
-                </div>
+<div class="app-page-title">
+    <div class="page-title-wrapper">
+        <div class="page-title-heading">
+            <div class="page-title-icon">
+                <i class="pe-7s-users icon-gradient bg-mean-fruit"></i>
             </div>
+            <div>All Users</div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-12 col-sm-12">
-            <div class="main-card mb-3 card">
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table id="manage_all"
-                               class="align-middle mb-0 table table-borderless table-striped table-hover">
-                            <thead>
-                            <tr>
+</div>
+<div class="row">
+    <div class="col-md-12 col-sm-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table id="example" class="table table-striped table-bordered" style="width:100%">
+                        <thead>
+                            <tr class="table-dark">
                                 <th>#</th>
-                                <th>Photo</th>
                                 <th>User Name</th>
-                                <th>Email</th>
-                                <th>Roles</th>
+                                <th>Mo. Number</th>
+                                <th>Verification Code</th>
+                                <th>Password</th>
+                                <th>Image</th>
                                 <th>Status</th>
                                 <th>Action</th>
                             </tr>
-                            </thead>
-                        </table>
-                    </div>
+                        </thead>
+                        <tbody>
+                            @foreach ($user as $value)
+                            <tr>
+                                <td class="serial-number">{{ $loop->iteration }}</td>
+                                <td class="fw-bold text-nowrap">{{ $value->name }}</td>
+                                <td class="fw-bold">{{ $value->mobileNumber }}</td>
+                                <td class="fw-bold">{{ $value->verificationCode }}</td>
+                                <td class="fw-bold">{{ $value->password }}</td>
+                                <td style="width: 58px;">
+                                    <img class="img-thumbnail img-fluid tool-img-edit"
+                                        src="{{ URL::to('/uploads/' . $value->file_path) }}" />
+                                </td>
+                                <td class="fw-bold">
+                                    @if ($value->status == 1)
+                                    <p class="badge badge-success">Active</p>
+                                    @elseif ($value->status == 0)
+                                    <p class="badge badge-danger">Inactive</p>
+                                    @else
+                                    Unknown
+                                    @endif
+                                </td>
+                                <td class="d-flex">
+                                    <a href="{{ route('admin.users.edit', $value->id) }}"
+                                        class="btn fw-bold btn-primary text-nowrap" data-mdb-ripple-color="dark">
+                                        <i class="metismenu-icon bi bi-gear-wide-connected"></i>
+                                        Edit
+                                    </a>
+                                    <form action="{{ route('admin.users.destroy', $value->id) }}" method="POST"
+                                        id="deleteForm">
+                                        @method('DELETE')
+                                        @csrf
+                                        <button type="button" class="btn btn-danger ms-3 text-nowrap"
+                                            onclick="confirmDelete(this)">
+                                            <i class="metismenu-icon bi bi-trash3"></i>
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
-    <style>
-        @media screen and (min-width: 768px) {
-            #myModal .modal-dialog {
-                width: 85%;
-                border-radius: 5px;
-            }
+</div>
+
+<style>
+    @media screen and (min-width: 768px) {
+        #myModal .modal-dialog {
+            width: 70%;
+            border-radius: 5px;
         }
-    </style>
-    <script>
-        $(function () {
+    }
+</style>
 
-            table = $('#manage_all').DataTable({
-                processing: true,
-                serverSide: true,
-                ajax: {
-                    "url": '{!! route('admin.allUser.users') !!}',
-                    "type": "GET",
-                    headers: {
-                        "X-CSRF-TOKEN": CSRF_TOKEN,
-                    },
-                    "dataType": 'json'
-                },
-                columns: [
-                    {data: 'DT_RowIndex', name: 'DT_RowIndex'},
-                    {data: 'file_path', name: 'file_path'},
-                    {data: 'name', name: 'name'},
-                    {data: 'email', name: 'email'},
-                    {data: 'role', name: 'role'},
-                    {data: 'status', name: 'status'},
-                    {data: 'action', name: 'action'}
-                ],
-                "autoWidth": false,
-            });
-            $('.dataTables_filter input[type="search"]').attr('placeholder', 'Type here to search...').css({
-                'width': '220px',
-                'height': '30px'
-            });
-
-        });
-    </script>
-    <script type="text/javascript">
-        function create() {
-            ajax_submit_create('users');
+<script>
+    function confirmDelete(button) {
+        if (confirm("Are you sure you want to delete this item?")) {
+            var form = button.parentElement; // Get the parent element of the button, which is the form
+            form.submit();
+        } else {
+            alert("Delete operation cancelled.");
         }
+    }
+</script>
 
-        $(document).ready(function () {
-            // View Form
-            $("#manage_all").on("click", ".view", function () {
-                var id = $(this).attr('id');
-                ajax_submit_view('users', id)
-            });
-
-            // Edit Form
-            $("#manage_all").on("click", ".edit", function () {
-                var id = $(this).attr('id');
-                ajax_submit_edit('users', id)
-            });
-
-
-            // Delete
-            $("#manage_all").on("click", ".delete", function () {
-                var id = $(this).attr('id');
-                ajax_submit_delete('users', id)
-            });
-
-        });
-
-    </script>
+<script>
+    new DataTable('#example');
+</script>
 @stop
