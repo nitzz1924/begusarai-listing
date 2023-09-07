@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\Admin\MasterController ;
+use App\Http\Controllers\Backend\Admin\SubMasterController ;
 
 
 
@@ -60,11 +61,12 @@ Route::delete('backups/delete/{file_name}', 'BackupController@delete');
 
 Route::get('/barcode', 'AdminController@barcode');
 Route::get('/passport', 'AdminController@passport');
-Route::get('/some-route', 'App\Http\Controllers\MasterController@index');
+
+
+// Master Routing
 Route::resource('master', 'MasterController');
 
 
-//
 
-
-Route::resource('master', 'MasterController');
+// Sub-Master Routing
+Route::resource('submaster', 'SubMasterController');

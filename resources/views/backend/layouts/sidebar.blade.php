@@ -107,7 +107,12 @@
                     </a>
                 </li>
 
-
+                <li>
+                    <a href="{{ URL :: to('/admin/submaster') }}">
+                        <i class="metismenu-icon pe-7s-bookmarks"></i>
+                       Sub Master
+                    </a>
+                </li>
                 <li>
                     <a href="{{ URL :: to('/admin_login/logout') }}">
                         <i class="metismenu-icon pe-7s-upload"></i>

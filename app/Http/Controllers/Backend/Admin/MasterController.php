@@ -25,7 +25,7 @@ class MasterController extends Controller
 
     public function index(Request $request)
 {
-    $master = Master::orderBy('created_at', 'desc')->get();
+    $master = Master::orderBy('created_at', 'asc')->where('type','=','Master')->get();
     return view('backend.admin.master.index', compact('master'));
 }
 
@@ -37,7 +37,7 @@ class MasterController extends Controller
      */
     public function create()
     {
-        $master = Master::orderby('created_at', 'desc')->get();
+        $master = Master::orderby('created_at', 'asc')->get();
         return view('backend.admin.master.create', compact('master'));
     }
 
@@ -66,12 +66,9 @@ class MasterController extends Controller
             $master->save(); //
             return redirect()->route('admin.master.index');
         }  catch (Exception $e) {
-            if ($e->getCode() === 23000) { // Check if it's an integrity constraint violation error
-                session()->flash('error', 'The record with the same title already exists.');
-            } else {
-                session()->flash('error', 'An error occurred while saving the record.');
-            }
-            return back();
+            print_r($e->getMessage());
+            die();
+          
         }
     }
 

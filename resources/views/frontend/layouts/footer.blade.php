@@ -109,13 +109,7 @@
     </div>
 </div>
 <!-- .landing-banner -->
-=======
-<div class="app-footer">
-    <div class="col-12 widget-content bg-premium-dark text-center rounded-top"
-    style="bottom: 0; color: #fff; font-weight: bold;padding: 10px;">
-    Developed by Riyadh Ahmed || &nbsp; {{date('Y')}}
-</div>
->>>>>>> parent of bb50bcb (2nd)
+
 </div>
 <!-- #wrapper -->
 <script data-cfasync="false" src="{{ asset('../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js') }}"></script>

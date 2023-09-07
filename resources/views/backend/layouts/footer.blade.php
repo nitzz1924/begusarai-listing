@@ -1,12 +1,8 @@
 <div class="app-footer">
-<<<<<<< HEAD
+
     <div class="col-12 text-center rounded-top" style="bottom: 0; font-weight: bold;padding: 10px;">
-        Developed by Yuvmedia || &nbsp; {{ date('Y') }}
-=======
-    <div class="col-12 text-center rounded-top"
-         style="bottom: 0; font-weight: bold;padding: 10px;">
-        Developed by Riyadh Ahmed || &nbsp; {{date('Y')}}
->>>>>>> parent of bb50bcb (2nd)
+        Developed by<a href="http://yuvmedia.com/"> Yuvmedia</a> || &nbsp; {{ date('Y') }}
+      
     </div>
 </div>
 <script src="{{ asset('/assets/js/main.js') }}"></script>
@@ -25,6 +21,7 @@
 <!-- Toastr  library -->
 <link rel="stylesheet" href="{{ asset('/assets/plugins/toastr/toastr.min.css') }}">
 <script src="{{ asset('/assets/plugins/toastr/toastr.min.js') }}"></script>
+<script src="{{ asset('/assets/js/custom_backend.js') }}"></script>
 
 <!-- icheck  library -->
 <link rel="stylesheet" href="{{ asset('/assets/plugins/iCheck/all.css') }}">
