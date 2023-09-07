@@ -462,15 +462,15 @@
 								<a title="Log In" href="#login">Log In</a>
 							</li>
 						</ul>
-						<p class="choose-more">
+						{{-- <p class="choose-more">
 							Continue with
 							<a title="Facebook" class="fb" href="#">Facebook</a> or
 							<a title="Google" class="gg" href="#">Google</a>
-						</p>
-						<p class="choose-or"><span>Or</span></p>
+						</p> --}}
+						{{-- <p class="choose-or"><span>Or</span></p> --}}
 						<div class="popup-content">
-							<form action="#" class="form-sign form-content" id="signup">
-								<div class="field-inline">
+							<form action="#" class="form-sign form-content form-account" id="signup">
+								{{-- <div class="field-inline">
 									<div class="field-input">
 										<input type="text" placeholder="First Name" value=""
 											name="first_name" />
@@ -478,13 +478,44 @@
 									<div class="field-input">
 										<input type="text" placeholder="Last Name" value="" name="last_name" />
 									</div>
+								</div> --}}
+
+								<div class="field-inline mb-3" style="justify-content: center;">
+									<div class="form-group-user">
+										<div class="row">
+											<div class="col-6">
+												<div class="col-group">
+													<label for="guest" class="label-field radio-field">
+														<input type="radio" value="guest" id="guest" name="account_type">
+														<span><i class="las la-user"></i>User</span>
+													</label>
+												</div>
+											</div>
+											<div class="col-6">
+												<div class="col-group">
+													<label for="owner" class="label-field radio-field">
+														<input type="radio" value="owner" id="owner" name="account_type" checked="">
+														<span><i class="las la-briefcase"></i>Buiness Owner</span>
+													</label>
+												</div>
+											</div>
+										</div>
+									</div>
 								</div>
-								<div class="field-input">
+								<div class="">
+									<div class="field-input">
+										<input type="number" placeholder="Phone Number" value="" name="phone" pattern="[0-9]{10}" required/>
+									</div>
+									<div class="field-input">
+										<input type="number" placeholder="OTP" value="" name="otp" pattern="[0-9]{6}" required/>
+									</div>
+								</div>
+								{{-- <div class="field-input">
 									<input type="email" placeholder="Email" value="" name="email" />
-								</div>
-								<div class="field-input">
+								</div> --}}
+								{{-- <div class="field-input">
 									<input type="password" placeholder="Password" value="" name="password" />
-								</div>
+								</div> --}}
 								<div class="field-check">
 									<label for="accept">
 										<input type="checkbox" id="accept" value="" />
@@ -499,10 +530,10 @@
 							</form>
 							<form action="#" class="form-log form-content" id="login">
 								<div class="field-input">
-									<input type="text" placeholder="Username or Email" value="" name="user" />
+									<input type="number" placeholder="Phone Number" value="" name="number" pattern="[0-9]{10}" required/>
 								</div>
 								<div class="field-input">
-									<input type="password" placeholder="Password" value="" name="password" />
+									<input type="password" placeholder="Password" value="" name="password" required/>
 								</div>
 								<a title="Forgot password" class="forgot_pass" href="#">Forgot password</a>
 								<input type="submit" name="submit" value="Login" />

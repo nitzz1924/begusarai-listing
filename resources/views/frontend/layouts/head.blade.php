@@ -11,6 +11,7 @@
 <link rel="shortcut icon" href="{{asset('/assets/images/favicon.png')}}">
 
 
+<link rel="stylesheet" href="{{ asset('/assets/frontend-assets/css/custom_frontend.css') }}">
 <link rel="stylesheet" href="{{ asset('/assets/css/main.css') }}">
 
 <!-- Override CSS file - add your own CSS rules -->

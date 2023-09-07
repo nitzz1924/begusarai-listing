@@ -6,7 +6,8 @@
         <div>
 
             <main id="main" class="site-main home-main business-main overflow">
-                <div class="site-banner bg_hero_02" style="background-color:rgb(0, 207, 207)">
+                <div class="site-banner bg_hero_02" style="background-color:rgb(0, 207, 207); background-image: url('assets/images/home/hero-bg.webp');
+                ">
                     {{-- <video class="overlay-video" autoplay="" muted="" playsinline="" loop=""
                         src="{{ asset('https://getgolo.com/images/video3.mp4') }}"></video> --}}
                     <div class="container">
