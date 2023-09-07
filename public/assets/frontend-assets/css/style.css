@@ -11457,7 +11457,7 @@ a.place__comments__reply i {
 }
 
 .footer__top__info .footer__top__info__logo img {
-    max-width: 96px;
+    /* max-width: 96px; */
     margin-bottom: 20px;
 }
 .footer__top__info .footer__top__info__desc {

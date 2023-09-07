@@ -5,15 +5,15 @@
                 <div class="col-lg-5">
                     <div class="footer__top__info">
                         <a title="Logo" href="01_index_1.html" class="footer__top__info__logo"><img
-                                src="images/assets/logo.png" alt="Golo" /></a>
+                                src="{{ asset('assets/images/begusarai-logo.png')}}" alt="Begusarai" /></a>
                         <p class="footer__top__info__desc">
                             Discover amazing things to do everywhere you go.
                         </p>
                         <div class="footer__top__info__app">
                             <a title="App Store" href="#" class="banner-apps__download__iphone"><img
-                                    src="images/assets/app-store.png" alt="App Store" /></a>
+                                    src="{{ asset('assets/images/footer/app-store-big-2.png')}}" alt="App Store" /></a>
                             <a title="Google Play" href="#" class="banner-apps__download__android"><img
-                                    src="images/assets/google-play.png" alt="Google Play" /></a>
+                                    src="{{ asset('assets/images/footer/google-play-big-1.png')}}" alt="Google Play" /></a>
                         </div>
                     </div>
                 </div>
@@ -50,11 +50,11 @@
                         <h3>Contact Us</h3>
                         <p>
                             Email:
-                            <a href="https://golohtml.uxper.co/cdn-cgi/l/email-protection"
+                            <a href="#"
                                 class="__cf_email__"
-                                data-cfemail="b6c5c3c6c6d9c4c2f6d2d9dbd7dfd898d5d9db">[email&#160;protected]</a>
+                                data-cfemail="b6c5c3c6c6d9c4c2f6d2d9dbd7dfd898d5d9db">contact@inbegusarai.com</a>
                         </p>
-                        <p>Phone: 1 (00) 832 2342</p>
+                        <p>Phone: 9693667887 / 06243-316290</p>
                         <ul>
                             <li class="facebook">
                                 <a title="Facebook" href="#">
@@ -84,7 +84,7 @@
         <!-- .top-footer -->
         <div class="footer__bottom">
             <p class="footer__bottom__copyright">
-                2020 &copy; <a title="Yuvmedia Team" href="https://yuvmedia.in">Yuvmedia.in</a>. All
+                2023 &copy; <a title="Yuvmedia Team" href="https://yuvmedia.in">Yuvmedia.in</a>. All
                 rights reserved.
             </p>
         </div>
