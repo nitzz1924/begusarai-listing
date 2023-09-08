@@ -3,273 +3,18 @@
 		<div class="row">
 			<div class="col-xl-6 col-5">
 				<div class="site">
-					<div class="site__menu">
-						<a title="Menu Icon" href="#" class="site__menu__icon">
-							<i class="las la-bars la-24-black"></i>
-						</a>
-						<div class="popup-background"></div>
-						<div class="popup popup--left">
-							<a title="Close" href="#" class="popup__close">
-								<i class="las la-times la-24-black"></i> </a><!-- .popup__close -->
-							<div class="popup__content">
-								<div class="popup__user popup__box open-form">
-									<a title="Login" href="#" class="open-login">Login</a>
-									<a title="Sign Up" href="#" class="open-signup">Sign Up</a>
-								</div>
-								<!-- .popup__user -->
-								<div class="popup__destinations popup__box">
-									<ul class="menu-arrow">
-										<li>
-											<a title="Destinations" href="#">Destinations </a>
-											<ul class="sub-menu">
-												<li>
-													<a href="city-details-1.html" title="Tokyo">Tokyo</a>
-												</li>
-												<li>
-													<a href="city-details-1.html" title="New York">New York</a>
-												</li>
-												<li>
-													<a href="city-details-1.html"
-														title="Barcelona">Barcelona</a>
-												</li>
-												<li>
-													<a href="city-details-1.html"
-														title="Amsterdam">Amsterdam</a>
-												</li>
-												<li>
-													<a href="city-details-1.html" title="Los Angeles">Los
-														Angeles</a>
-												</li>
-												<li>
-													<a href="city-details-1.html" title="London">London</a>
-												</li>
-												<li>
-													<a href="city-details-1.html" title="Bangkok">Bangkok</a>
-												</li>
-												<li>
-													<a href="city-details-1.html" title="Paris">Paris</a>
-												</li>
-											</ul>
-										</li>
-									</ul>
-								</div>
-								<div class="popup__menu popup__box">
-									<ul class="menu-arrow">
-										<li>
-											<a href="home-business.html" title="Demos">Home</a>
-											<!-- <ul class="sub-menu">
-												<li>
-													<a href="home-restaurant.html"
-														title="Restaurant Listing">Restaurant Listing</a>
-												</li>
-												<li>
-													<a href="home-business.html"
-														title="Business Listing">Business Listing</a>
-												</li>
-												<li>
-													<a href="home-countryguide.html"
-														title="Country Travel Guide">Country Travel Guide</a>
-												</li>
-												<li>
-													<a href="home-cityguide.html" title="City Travel Guide">City
-														Travel Guide</a>
-												</li>
-												<li>
-													<a href="home-workspaces.html"
-														title="Workspace Listing">Workspace Listing</a>
-												</li>
-												<li>
-													<a href="home-healthmedical.html"
-														title="Health Medical">Health Medical</a>
-												</li>
-											</ul> -->
-										</li>
-										<li>
-											<a href="#" title="Listings">Listings</a>
-											<ul class="sub-menu">
-												<li>
-													<a href="#" title="Search Layout">Search Layout</a>
-													<ul class="sub-menu">
-														<li>
-															<a href="ex-half-map-1.html"
-																title="Half Map – Left Filter">Half Map – Left
-																Filter</a>
-														</li>
-														<li>
-															<a href="ex-half-map-2.html"
-																title="Half Map – Top Filter">Half Map – Top
-																Filter</a>
-														</li>
-													</ul>
-												</li>
-												<li>
-													<a href="#" title="City Layout">City Layout</a>
-													<ul class="sub-menu">
-														<li>
-															<a href="city-details-1.html"
-																title="Half Map – Left Filter">Half Map – Left
-																Filter</a>
-														</li>
-														<li>
-															<a href="city-details-2.html"
-																title="Half Map – Top Filter">Half Map – Top
-																Filter</a>
-														</li>
-														<li>
-															<a href="city-details-3.html"
-																title="Without Map">Without Map</a>
-														</li>
-													</ul>
-												</li>
-												<li>
-													<a href="#" title="Listing Detail">Single Layout</a>
-													<ul class="sub-menu">
-														<li>
-															<a href="single-1.html" title="Carousel">Default -
-																Carousel</a>
-														</li>
-														<li>
-															<a href="single-2.html" title="Image">Default -
-																Image</a>
-														</li>
-														<li>
-															<a href="single-3.html"
-																title="Restaurant">Restaurant Type</a>
-														</li>
-													</ul>
-												</li>
-												<li>
-													<a href="#" title="Booking Type">Booking Type</a>
-													<ul class="sub-menu">
-														<li>
-															<a href="bk-booking-form.html"
-																title="Appointment Booking">Appointment
-																Booking</a>
-														</li>
-														<li>
-															<a href="bk-enquiry-form.html"
-																title="Enquiry Form">Enquiry Form</a>
-														</li>
-														<li>
-															<a href="bk-affiliate-link.html"
-																title="Affiliate Link">Affiliate Link</a>
-														</li>
-														<li>
-															<a href="bk-banner-ads.html"
-																title="Affiliate Banner">Affiliate Banner</a>
-														</li>
-													</ul>
-												</li>
-											</ul>
-										</li>
-										<li>
-											<a title="Page" href="#">Page</a>
-											<ul class="sub-menu">
-												<li>
-													<a title="About" href="/aboutUs">About Us</a>
-												</li>
-												<li>
-													<a title="FAQ's" href="faqs.html">FAQ's</a>
-												</li>
-												<li>
-													<a title="App Landing" href="app-landing.html">App
-														Landing</a>
-												</li>
-												<li>
-													<a title="Contacts" href="/contactUs">Contacts</a>
-												</li>
-												{{-- <li>
-													<a title="Add Listing" href="add-place.html">Add Listing</a>
-												</li> --}}
-												<li>
-													<a title="Packages" href="#">Packages</a>
-													<ul class="sub-menu">
-														<li>
-															<a title="Pacakages"
-																href="/packages">Pacakages</a>
-														</li>
-														<li>
-															<a title="Pricing Plan Checkout"
-																href="pricing-checkout.html">Pricing
-																Checkout</a>
-														</li>
-													</ul>
-												</li>
-												{{-- <li>
-													<a title="Page" href="#">Shop</a>
-													<ul class="sub-menu">
-														<li>
-															<a title="Products" href="shop.html">Products</a>
-														</li>
-														<li>
-															<a title="Product Detail"
-																href="shop-detail.html">Product Detail</a>
-														</li>
-													</ul>
-												</li> --}}
-												<li>
-													<a title="Page" href="#">Blog</a>
-													<ul class="sub-menu">
-														<li>
-															<a title="Fullwidth"
-																href="blog-fullwidth.html">Fullwidth</a>
-														</li>
-														<li>
-															<a title="Right Sidebar"
-																href="blog-right-sidebar.html">Right Sidebar</a>
-														</li>
-														<li>
-															<a title="Blog Detail" href="blog-detail.html">Blog
-																Detail</a>
-														</li>
-													</ul>
-												</li>
-												<li>
-													<a title="Owner Dashboard" href="/businessDashboard">Owner
-														Dashboard</a>
-												</li>
-												<li>
-													<a title="Owner Single" href="/businessOwnerPage">Owner
-														Page</a>
-												</li>
-												<li>
-													<a title="Construction"
-														href="construction.html') }}">Construction</a>
-												</li>
-												<li>
-													<a title="Coming Soon" href="coming-soon.html">Coming Soon
-													</a>
-												</li>
-												<li>
-													<a title="404" href="404.html">404 Page</a>
-												</li>
-											</ul>
-										</li>
-									</ul>
-								</div>
-								<!-- .popup__menu -->
-							</div>
-							<!-- .popup__content -->
-							<div class="popup__button popup__box">
-								<a title="Add place" href="/addPlace" class="btn">
-									<i class="la la-plus"></i>
-									<span>Add place</span>
-								</a>
-							</div>
-							<!-- .popup__button -->
-						</div>
-						<!-- .popup -->
-					</div>
-					<!-- .site__menu -->
+
 					<div class="site__brand">
 						<a title="Logo" href="/" class="site__brand__logo"><img
-								src="{{ asset('assets/images/begusarai-logo.png')}}" alt="Golo" /></a>
+								src="{{ asset('assets/images/begusarai-logo.png')}}" alt="Begusarai" /></a>
 					</div>
 					<!-- .site__brand -->
 				</div>
 				<!-- .site -->
 			</div>
 			<!-- .col-md-6 -->
+
+			{{-- this is currently working main menu --}}
 			<div class="col-xl-6 col-7">
 				<div class="right-header align-right">
 					<nav class="main-menu">
@@ -503,12 +248,19 @@
 									</div>
 								</div>
 								<div class="">
-									<div class="field-input">
-										<input type="number" placeholder="Phone Number" value="" name="phone" pattern="[0-9]{10}" required/>
-									</div>
-									<div class="field-input">
-										<input type="number" placeholder="OTP" value="" name="otp" pattern="[0-9]{6}" required/>
-									</div>
+									<div class="field-inline">
+										<div class="field-input-number">
+											<input type="number" placeholder="Phone Number" value="" name="phone" pattern="[0-9]{10}" required/>
+										</div>
+										<div>
+											<input type="submit" name="submit" value="Send OTP" style="width: 100px;" />
+										</div>
+									</div>	
+									
+									
+										<div class="field-input">
+											<input type="number" placeholder="OTP" value="" name="otp" pattern="[0-9]{6}" required/>
+										</div>
 								</div>
 								{{-- <div class="field-input">
 									<input type="email" placeholder="Email" value="" name="email" />
@@ -526,7 +278,7 @@
 										</span>
 									</label>
 								</div>
-								<input type="submit" name="submit" value="Sign Up" />
+								<input type="submit" name="submit" value="Verify" />
 							</form>
 							<form action="#" class="form-log form-content" id="login">
 								<div class="field-input">
@@ -540,8 +292,10 @@
 							</form>
 						</div>
 					</div>
+
+					{{-- Search pop form --}}
 					<!-- .popup-form -->
-					<div class="right-header__search">
+					{{-- <div class="right-header__search">
 						<a title="Search" href="#" class="search-open">
 							<i class="las la-search la-24-black"></i>
 						</a>
@@ -561,7 +315,9 @@
 							<!-- .search__form -->
 						</div>
 						<!-- .site__search -->
-					</div>
+					</div> --}}
+
+
 					<div class="right-header__button btn">
 						<a title="Add place" href="/addPlace">
 							<i class="las la-plus la-24-white"></i>

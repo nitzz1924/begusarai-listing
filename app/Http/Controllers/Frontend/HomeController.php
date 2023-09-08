@@ -46,4 +46,9 @@ class HomeController extends Controller
       return view('frontend.businessOwnerPage');
    }
 
+   public function registration()
+   {
+      return view('frontend.registration');
+   }
+
 }

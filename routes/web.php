@@ -15,12 +15,12 @@ Route::group([
 
 
 // Frontend user Routes
-
 Route::get('/aboutUs',[HomeController::class,'aboutUs'])->name('aboutUs');
 Route::get('/contactUs',[HomeController::class,'contactUs'])->name('contactUs');
 Route::get('/contactUs',[HomeController::class,'contactUs'])->name('contactUs');
 Route::get('/addPlace',[HomeController::class,'addPlace'])->name('addPlace');
 Route::get('/packages',[HomeController::class,'packages'])->name('packages');
+Route::get('/registration',[HomeController::class,'registration'])->name('registration');
 
 // Business Owner routes
 Route::get('/businessDashboard',[HomeController::class,'businessDashboard'])->name('businessDashboard');
