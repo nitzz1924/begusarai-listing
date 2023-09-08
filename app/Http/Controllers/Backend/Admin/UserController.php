@@ -221,6 +221,7 @@ class UserController extends Controller
             'number' => 'required',
             'verificationCode' => 'required',
             'password' => 'required',
+            'file_path' => 'required',
         ]);
     
         // Find the user by ID
