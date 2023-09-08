@@ -22,39 +22,54 @@ class HomeController extends Controller
         return view('frontend.newsDetails', compact('blog'));
     }
 
-    public function showLoginForm()
-    {
-        return view('frontend.layouts.header');
-    }
+   public function contactUs()
+   {
+      return view('frontend.contactUs');
+   }
+   
+   public function addPlace()
+   {
+      return view('frontend.addPlace');
+   }
+   
+   public function packages()
+   {
+      return view('frontend.packages');
+   }
+   
+   public function ownerDashboard()
+   {
+      return view('frontend.ownerDashboard');
+   }
+   
+   public function businessOwnerPage()
+   {
+      return view('frontend.businessOwnerPage');
+   }
 
-    public function loginForm(Request $request)
-    {
-        if (Auth::attempt(['mobileNumber' => $request->mobileNumber, 'password' => $request->password])) {
-            $user = Auth::user();
-            $success['token'] = $user->createToken('userApiToken')->accessToken;
-            $success['name'] = $user->name;
+   public function setPassword()
+   {
+      return view('frontend.setPassword');
+   }
 
-            return $this->sendResponse($success, 'User logged successfully.');
-        } else {
-            return $this->sendError('Unauthorized.', ['error' => 'Unauthorized']);
-        }
-    }
- 
+   public function ownerListing()
+   {
+      return view('frontend.ownerListing');
+   }
+   
+   public function ownerWishlist()
+   {
+      return view('frontend.ownerWishlist');
+   }
 
-    public function someMethod()
-    {
-        if (Auth::check()) {
-            // Retrieve the authenticated user's data
-            $user = Auth::user();
+   public function ownerProfile()
+   {
+      return view('frontend.ownerProfile');
+   }
 
-            // You can now access the user's attributes
-            $userName = $user->name;
-            $userEmail = $user->email;
-            // ...
+   public function ownerLeads()
+   {
+      return view('frontend.ownerLeads');
+   }
 
-            // Use the user data as needed
-        } else {
-            // User is not authenticated, handle accordingly
-        }
-    }
 }

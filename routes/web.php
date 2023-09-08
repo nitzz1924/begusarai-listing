@@ -16,10 +16,23 @@ Route::group([
 // Backend
 
 
-// Frontend Routes
+// Frontend user Routes - logged out
+Route::get('/aboutUs',[HomeController::class,'aboutUs'])->name('aboutUs');
+Route::get('/contactUs',[HomeController::class,'contactUs'])->name('contactUs');
+Route::get('/contactUs',[HomeController::class,'contactUs'])->name('contactUs');
+Route::get('/addPlace',[HomeController::class,'addPlace'])->name('addPlace');
+Route::get('/packages',[HomeController::class,'packages'])->name('packages');
+Route::get('/setPassword',[HomeController::class,'setPassword'])->name('setPassword');
 
-Route::get('/news',[HomeController::class,'news'])->name('news');
+// Business Owner routes - logged in
+Route::get('/ownerDashboard',[HomeController::class,'ownerDashboard'])->name('ownerDashboard');
+Route::get('/businessOwnerPage',[HomeController::class,'businessOwnerPage'])->name('businessOwnerPage');
+Route::get('/ownerListing',[HomeController::class,'ownerListing'])->name('ownerListing');
+Route::get('/ownerWishlist',[HomeController::class,'ownerWishlist'])->name('ownerWishlist');
+Route::get('/ownerProfile',[HomeController::class,'ownerProfile'])->name('ownerProfile');
+Route::get('/ownerLeads',[HomeController::class,'ownerLeads'])->name('ownerLeads');
 
+// guest user backend routes - logged in
 
 // Admin Auth
 Route::prefix('admin_login')->group(function () {
