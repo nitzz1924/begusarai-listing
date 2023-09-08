@@ -93,3 +93,72 @@ input[type="number"] {
 .overlay_2 {
     inset: 0;
 }
+
+/* logged in menu */
+
+.avatar img{
+    width: 40px;
+    height: 40px;
+    margin-right: 8px;
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+    border-radius: 30px;
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+    object-fit: cover;
+}
+
+/* header.site-header .right-header .account {
+    display: flex;
+    align-items: center;
+    margin-left: 25px;
+}
+
+.account {
+    position: relative;
+}
+
+.account .user-show {
+    display: flex;
+    align-items: center;
+}
+
+header.site-header .right-header .account a:last-child {
+    margin-right: 0;
+}
+
+header.site-header .right-header .account a {
+    margin-right: 25px;
+    display: flex;
+    align-items: center;
+}
+
+.account .user-show a.avatar {
+    margin-right: 8px;
+}
+
+a,
+button,
+input,
+svg {
+    -webkit-transition: all 0.3s ease 0s;
+    -moz-transition: all 0.3s ease 0s;
+    -o-transition: all 0.3s ease 0s;
+    transition: all 0.3s ease 0s;
+}
+
+.account .user-show a.avatar img {
+    width: 30px;
+    height: 30px;
+    margin-right: 8px;
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+    border-radius: 30px;
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+    object-fit: cover;
+} */

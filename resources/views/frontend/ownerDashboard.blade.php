@@ -1,5 +1,5 @@
 @extends('frontend.layouts.master')
-@section('title', 'Business Dashboard')
+@section('title', 'Owner Dashboard')
 @section('content')
     
 
@@ -8,11 +8,11 @@
         <div class="member-menu">
             <div class="container">
                 <ul>
-                    <li class="active"><a href="owner-dashboard.html">Dashboard</a></li>
-                    <li><a href="owner-bookings.html">Bookings</a></li>
-                    <li><a href="owner-listings.html">Listings</a></li>
-                    <li><a href="owner-wishlist.html">Wishlist</a></li>
-                    <li><a href="owner-profile.html">Profile</a></li>
+                    <li class="active"><a href="/ownerDashboard">Dashboard</a></li>
+                    <li><a href="/ownerLeads">Leads</a></li>
+                    <li><a href="/ownerListing">Listings</a></li>
+                    <li><a href="/ownerWishlist">Wishlist</a></li>
+                    <li><a href="/ownerProfile">Profile</a></li>
                 </ul>
             </div>
         </div>

@@ -36,9 +36,9 @@ class HomeController extends Controller
       return view('frontend.packages');
    }
    
-   public function businessDashboard()
+   public function ownerDashboard()
    {
-      return view('frontend.businessDashboard');
+      return view('frontend.ownerDashboard');
    }
    
    public function businessOwnerPage()
@@ -49,6 +49,26 @@ class HomeController extends Controller
    public function setPassword()
    {
       return view('frontend.setPassword');
+   }
+
+   public function ownerListing()
+   {
+      return view('frontend.ownerListing');
+   }
+   
+   public function ownerWishlist()
+   {
+      return view('frontend.ownerWishlist');
+   }
+
+   public function ownerProfile()
+   {
+      return view('frontend.ownerProfile');
+   }
+
+   public function ownerLeads()
+   {
+      return view('frontend.ownerLeads');
    }
 
 }
