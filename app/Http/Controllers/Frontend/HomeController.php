@@ -46,9 +46,9 @@ class HomeController extends Controller
       return view('frontend.businessOwnerPage');
    }
 
-   public function registration()
+   public function setPassword()
    {
-      return view('frontend.registration');
+      return view('frontend.setPassword');
    }
 
 }

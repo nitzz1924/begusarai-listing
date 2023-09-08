@@ -20,7 +20,7 @@ Route::get('/contactUs',[HomeController::class,'contactUs'])->name('contactUs');
 Route::get('/contactUs',[HomeController::class,'contactUs'])->name('contactUs');
 Route::get('/addPlace',[HomeController::class,'addPlace'])->name('addPlace');
 Route::get('/packages',[HomeController::class,'packages'])->name('packages');
-Route::get('/registration',[HomeController::class,'registration'])->name('registration');
+Route::get('/setPassword',[HomeController::class,'setPassword'])->name('setPassword');
 
 // Business Owner routes
 Route::get('/businessDashboard',[HomeController::class,'businessDashboard'])->name('businessDashboard');

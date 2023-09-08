@@ -240,7 +240,7 @@
 												<div class="col-group">
 													<label for="owner" class="label-field radio-field">
 														<input type="radio" value="owner" id="owner" name="account_type" checked="">
-														<span><i class="las la-briefcase"></i>Buiness Owner</span>
+														<span><i class="las la-briefcase"></i>Buiness Owner <span style="color: gray">(Optional)</span></span>
 													</label>
 												</div>
 											</div>
