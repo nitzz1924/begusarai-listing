@@ -22,7 +22,7 @@ Route::get('/contactUs',[HomeController::class,'contactUs'])->name('contactUs');
 Route::get('/contactUs',[HomeController::class,'contactUs'])->name('contactUs');
 Route::get('/addPlace',[HomeController::class,'addPlace'])->name('addPlace');
 Route::get('/packages',[HomeController::class,'packages'])->name('packages');
-Route::get('/setPassword',[HomeController::class,'setPassword'])->name('setPassword');
+Route::get('/registration',[HomeController::class,'registration'])->name('registration');
 
 // Business Owner routes - logged in
 Route::get('/ownerDashboard',[HomeController::class,'ownerDashboard'])->name('ownerDashboard');

@@ -230,8 +230,7 @@
 						</p> --}}
                         {{-- <p class="choose-or"><span>Or</span></p> --}}
 
-
-                        <div class="popup-content">
+                        <<<<<<< HEAD <div class="popup-content">
                             <form action="#" class="form-sign form-content form-account" id="signup">
 
                                 <div class="field-inline mb-3" style="justify-content: center;">
@@ -277,6 +276,46 @@
                                     </div>
                                 </div>
                                 {{-- <div class="field-input">
+=======
+								<div class="field-inline mb-3" style="justify-content: center;">
+									<div class="form-group-user">
+										<div class="row">
+											<div class="col-6">
+												<div class="col-group">
+													<label for="guest" class="label-field radio-field">
+														<input type="radio" value="guest" id="guest" name="account_type">
+														<span><i class="las la-user"></i>User</span>
+													</label>
+												</div>
+							 				</div> 
+											<div class="col-6"> 
+												<div class="col-group">
+													<label for="owner" class="label-field radio-field">
+														<input type="radio" value="owner" id="owner" name="account_type" checked="">
+														<span><i class="las la-briefcase"></i>Buiness Owner</span>
+													</label>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="">
+									<div class="field-inline">
+										<div class="field-input-number">
+											<input type="number" placeholder="Phone Number" value="" name="phone" pattern="[0-9]{10}" required/>
+										</div>
+										<div>
+											<input type="submit" name="submit" value="Send OTP" style="width: 100px;" />
+										</div>
+									</div>	
+									
+									
+										<div class="field-input">
+											<input type="number" placeholder="OTP" value="" name="otp" pattern="[0-9]{6}" required/>
+										</div>
+								</div>
+								{{-- <div class="field-input">
+>>>>>>> parent of 8d70386 (set password page created)
 									<input type="email" placeholder="Email" value="" name="email" />
 								</div> --}}
                                 {{-- <div class="field-input">
@@ -306,12 +345,12 @@
                                 <a title="Forgot password" class="forgot_pass" href="#">Forgot password</a>
                                 <input type="submit" name="submit" value="Login" />
                             </form>
-                        </div>
                     </div>
+                </div>
 
-                    {{-- Search pop form --}}
-                    <!-- .popup-form -->
-                    {{-- <div class="right-header__search">
+                {{-- Search pop form --}}
+                <!-- .popup-form -->
+                {{-- <div class="right-header__search">
 						<a title="Search" href="#" class="search-open">
 							<i class="las la-search la-24-black"></i>
 						</a>
@@ -334,19 +373,19 @@
 					</div> --}}
 
 
-                    <div class="right-header__button btn">
-                        <a title="Add place" href="/addPlace">
-                            <i class="las la-plus la-24-white"></i>
-                            <span>Add Listing</span>
-                        </a>
-                    </div>
-                    <!-- .right-header__button -->
+                <div class="right-header__button btn">
+                    <a title="Add place" href="/addPlace">
+                        <i class="las la-plus la-24-white"></i>
+                        <span>Add Listing</span>
+                    </a>
                 </div>
-                <!-- .right-header -->
+                <!-- .right-header__button -->
             </div>
-            <!-- .col-md-6 -->
+            <!-- .right-header -->
         </div>
-        <!-- .row -->
+        <!-- .col-md-6 -->
+    </div>
+    <!-- .row -->
     </div>
     <!-- .container-fluid -->
 </header>
