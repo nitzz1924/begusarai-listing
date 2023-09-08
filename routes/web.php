@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\Backend\AuthController;
+
 
 Route::group([
     'namespace' => 'Frontend',
@@ -69,4 +71,12 @@ Route::group([
 //      return "<h1>Not valid Artisan command</h1>";
 //   }
 //});
+
+
+
+// Route::post('/login',[HomeController::class,'login'])->name('login');
+// Route::group(['middleware' => 'web'], function () {
+    Route::post('/loginForm', [AuthController::class, 'login'])->name('loginForm');
+
+// });
 

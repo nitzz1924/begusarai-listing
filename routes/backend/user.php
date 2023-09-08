@@ -1,7 +1,6 @@
 <?php
 
 Route::get('/dashboard', 'UserDashboardController@index')->name('dashboard');
-
 // Admin
 Route::get('/profile', 'UserDashboardController@profile')->name('profile');
 Route::get('/edit_profile', 'UserDashboardController@edit')->name('edit');
