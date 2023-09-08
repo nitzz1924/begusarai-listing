@@ -37,6 +37,11 @@ class HomeController extends Controller
       return view('frontend.packages');
    }
    
+   public function setPassword()
+   {
+      return view('frontend.setPassword');
+   }
+   
    public function ownerDashboard()
    {
       return view('frontend.ownerDashboard');

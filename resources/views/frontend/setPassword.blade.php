@@ -1,5 +1,5 @@
 @extends('frontend.layouts.master')
-@section('title', 'Registration')
+@section('title', 'Set Password')
 @section('content')
 
     <div class="container">
@@ -19,10 +19,10 @@
                         <label for="first_name">First name</label>
                         <input type="text" name="first_name" placeholder="Invan" id="first_name">
                     </div>
-                    <div class="field-input">
+                    <!-- <div class="field-input">
                         <label for="last_name">Business name</label>
                         <input type="text" name="Business_name" placeholder="Company name" id="business_name">
-                    </div>
+                    </div> -->
                 </div>
 
                 <div class="field-input">

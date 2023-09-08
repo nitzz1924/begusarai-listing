@@ -31,6 +31,7 @@ Route::get('/ownerListing',[HomeController::class,'ownerListing'])->name('ownerL
 Route::get('/ownerWishlist',[HomeController::class,'ownerWishlist'])->name('ownerWishlist');
 Route::get('/ownerProfile',[HomeController::class,'ownerProfile'])->name('ownerProfile');
 Route::get('/ownerLeads',[HomeController::class,'ownerLeads'])->name('ownerLeads');
+Route::get('/setPassword',[HomeController::class,'setPassword'])->name('setPassword');
 
 // guest user backend routes - logged in
 

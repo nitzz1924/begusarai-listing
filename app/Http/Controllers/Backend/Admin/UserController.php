@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Backend\Admin;
 
 use App\Models\Role;
-use App\Models\User;
+use App\Models\User_Login;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
@@ -23,7 +23,7 @@ class UserController extends Controller
    {
 
 
-      $user = User::orderBy('created_at', 'asc')->get();
+      $user = User_Login::orderBy('created_at', 'asc')->get();
       
 
       return view('backend.admin.user.index', compact('user'));
@@ -38,7 +38,7 @@ class UserController extends Controller
       if (!auth()->user()->can('user-delete')) {
          $can_delete = "style='display:none;'";
       }
-      $users = User::all();
+      $users = User_Login::all();
       return Datatables::of($users)
         ->addColumn('file_path', function ($users) {
            return "<img src='" . asset($users->file_path) . "' class='img-thumbnail' width='50px'>";
@@ -71,7 +71,7 @@ class UserController extends Controller
 
       public function create(Request $request)
       {
-          $user = User::orderby('created_at', 'asc')->get();
+          $user = User_Login::orderby('created_at', 'asc')->get();
           return view('backend.admin.user.create', compact('user'));
       }
 
@@ -123,7 +123,7 @@ class UserController extends Controller
             DB::beginTransaction();
             try {
 
-               $user = new User();
+               $user = new User_Login();
                $user->name = $request->input('name');
                $user->email = $request->input('email');
                $user->password = Hash::make($request->password);
@@ -160,7 +160,7 @@ class UserController extends Controller
    public function show($id, Request $request)
    {
       if ($request->ajax()) {
-         $user = User::findOrFail($id);
+         $user = User_Login::findOrFail($id);
          $view = View::make('backend.admin.user.view', compact('user'))->render();
          return response()->json(['html' => $view]);
       } else {
@@ -180,7 +180,7 @@ class UserController extends Controller
    //    if ($request->ajax()) {
    //       $haspermision = auth()->user()->can('user-edit');
    //       if ($haspermision) {
-   //          $user = User::with('roles')->where('id', $id)->first();
+   //          $user = User_Login::with('roles')->where('id', $id)->first();
    //          $roles = Role::all(); //Get all roles
    //          $view = View::make('backend.admin.user.edit', compact('user', 'roles'))->render();
    //          return response()->json(['html' => $view]);
@@ -194,12 +194,12 @@ class UserController extends Controller
    
    // public function edit($id, Request $request)
    // {
-   //    $user = User::with('roles')->where('id', $id)->first();
+   //    $user = User_Login::with('roles')->where('id', $id)->first();
    //     return view('backend.admin.user.edit', compact('user'));
    // }
    public function edit($id)
    {
-       $user = User::where('id', $id)->first();
+       $user = User_Login::where('id', $id)->first();
        return view('backend.admin.user.edit', compact('user'));
    }
 
@@ -221,11 +221,11 @@ class UserController extends Controller
             'number' => 'required',
             'verificationCode' => 'required',
             'password' => 'required',
-            'file_path' => 'required',
+           
         ]);
     
         // Find the user by ID
-        $user = User::findOrFail($id);
+        $user = User_Login::findOrFail($id);
     
         // Update the user's attributes
         $user->name = $request->input('name');
@@ -253,7 +253,7 @@ class UserController extends Controller
         $user->save();
     
         // Redirect to a success page or return a response
-        return redirect()->route('admin.users.index')->with('success', 'User updated successfully.');
+        return redirect()->route('admin.users.index')->with('success', 'User_Login updated successfully.');
 
         
     }
@@ -268,7 +268,7 @@ class UserController extends Controller
     public function destroy($id, Request $request)
 
     {
-        $user = User::where(['id' => $id])->delete();
+        $user = User_Login::where(['id' => $id])->delete();
         return back();
     }
 }
