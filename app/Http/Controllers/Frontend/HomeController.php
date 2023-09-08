@@ -16,11 +16,11 @@ class HomeController extends Controller
         return View::make('frontend.index', compact('latest_news'));
     }
 
-    // News Details
-    public function viewNews(Blog $blog)
+    public function aboutUs()
     {
-        return view('frontend.newsDetails', compact('blog'));
+       return view('frontend.aboutUs');
     }
+    
 
    public function contactUs()
    {
