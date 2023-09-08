@@ -1,11 +1,12 @@
 <?php
 
 namespace App\Http\Controllers\Auth\User;
-use Illuminate\Support\Facades\Auth;
+// use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
+use Auth;
 
 class LoginController extends Controller
 {
@@ -44,34 +45,55 @@ class LoginController extends Controller
 
     public function loginUser(Request $request)
     {
-        // if successful, then redirect to their intended location
-        //dd($request->all());
         // Validate the form data
         $this->validate($request, [
-            'mobileNumber' => 'required',
+            'email' => 'required',
             'password' => 'required',
         ]);
-        try {
-            // Attempt to log the user in using the "user" guard
-            if (Auth::guard('user')->attempt(['mobileNumber' => $request->mobileNumber, 'password' => $request->password, 'status' => 1], $request->remember)) {
-                $user = Auth::user();
-                // If successful, then redirect to their intended location
-                return redirect()->route('user.home');
-            }
-        } catch (Exception $e) {
-            // Handle exceptions here
-            // For example, you can log the exception or show an error message
-            return redirect()
-                ->route('loginForm')
-                ->with('error', 'Login failed.');
+
+        // Attempt to log the user in
+        if (Auth::guard('user')->attempt(['email' => $request->email, 'password' => $request->password, 'status' => 1], $request->remember)) {
+            // if successful, then redirect to their intended location
+            return redirect()->route('user.dashboard');
         }
         // if unsuccessful, then redirect back to the login with the form data
-        $errors = ['mobileNumber' => 'Sorry! Wrong mobileNumber or password '];
+        $errors = ['email' => 'Sorry! Wrong email or password '];
         return redirect()
             ->back()
-            ->withInput($request->only('mobileNumber', 'remember'))
+            ->withInput($request->only('email', 'remember'))
             ->withErrors($errors);
     }
+
+    // public function loginUser(Request $request)
+    // {
+    //     // if successful, then redirect to their intended location
+    //     //dd($request->all());
+    //     // Validate the form data
+    //     $this->validate($request, [
+    //         'mobileNumber' => 'required',
+    //         'password' => 'required',
+    //     ]);
+    //     try {
+    //         // Attempt to log the user in using the "user" guard
+    //         if (Auth::guard('user')->attempt(['mobileNumber' => $request->mobileNumber, 'password' => $request->password, 'status' => 1], $request->remember)) {
+    //             $user = Auth::user();
+    //             // If successful, then redirect to their intended location
+    //             return redirect()->route('user.home');
+    //         }
+    //     } catch (Exception $e) {
+    //         // Handle exceptions here
+    //         // For example, you can log the exception or show an error message
+    //         return redirect()
+    //             ->route('loginForm')
+    //             ->with('error', 'Login failed.');
+    //     }
+    //     // if unsuccessful, then redirect back to the login with the form data
+    //     $errors = ['mobileNumber' => 'Sorry! Wrong mobileNumber or password '];
+    //     return redirect()
+    //         ->back()
+    //         ->withInput($request->only('mobileNumber', 'remember'))
+    //         ->withErrors($errors);
+    // }
 
     public function logout()
     {
