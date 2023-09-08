@@ -1,0 +1,95 @@
+.form-group-user {
+    position: relative;
+    /* background-color: rgb(71, 71, 71); */
+    width: 90%;
+}
+
+.form-group-user .col-group {
+    position: relative;
+}
+
+.form-account label.radio-field {
+    /* position: static; */
+    display: block;
+}
+
+.form-group-user .label-field {
+    font-size: 15px;
+    line-height: 20px;
+    color: #8d8d8d;
+    /* position: absolute; */
+    /* left: 0; */
+    /* top: 0; */
+    margin-bottom: 0;
+    -webkit-transition: all 0.3s ease 0s;
+    -moz-transition: all 0.3s ease 0s;
+    -o-transition: all 0.3s ease 0s;
+    transition: all 0.3s ease 0s;
+}
+
+.form-account label.radio-field input:checked ~ span {
+    background-color: #23d3d3;
+    color: #fff;
+}
+
+.form-account label.radio-field span {
+    height: 48px;
+    line-height: 48px;
+    display: block;
+    border-radius: 4px;
+    background-color: #f2f2f2;
+    text-align: center;
+    cursor: pointer;
+}
+
+.form-account label.radio-field i {
+    margin-right: 5px;
+}
+
+.form-account label.radio-field input {
+    position: absolute;
+    opacity: 0;
+    visibility: hidden;
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+    box-sizing: border-box;
+    padding: 0;
+}
+
+/* hide arrow in number field */
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+/* hero section banner */
+.overlay {
+    position: absolute;
+    background: rgba(0, 0, 0, 0.5);
+
+    /* center overlay text */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.site-banner {
+    display: block;
+    object-fit: cover;
+    width: 100%;
+    height: auto;
+}
+
+.overlay_2 {
+    inset: 0;
+}

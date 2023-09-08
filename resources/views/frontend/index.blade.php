@@ -5,71 +5,76 @@
         <div>
 
             <main id="main" class="site-main home-main business-main overflow">
-                <div class="site-banner bg_hero_02" style="background-color:rgb(0, 207, 207)">
-                    {{-- <video class="overlay-video" autoplay="" muted="" playsinline="" loop=""
-                        src="{{ asset('https://getgolo.com/images/video3.mp4') }}"></video> --}}
-                    <div class="container">
-                        <div class="site-banner__content">
-                            <h1 class="site-banner__title">Business Listing</h1>
-                            <p>
-                                <i>20</i> cities, <i>10</i> categories, <i>5662</i> listings.
-                            </p>
-                            <form action="#" class="site-banner__search layout-02">
-                                <div class="field-input">
-                                    <label for="s">Find</label>
-                                    <input class="site-banner__search__input open-suggestion" id="s" type="text"
-                                        name="s" placeholder="Ex: fastfood, beer" autocomplete="off" />
-                                    <div class="search-suggestions name-suggestions">
-                                        <ul>
-                                            <li>
-                                                <a href="#"><i class="las la-utensils"></i><span>Restaurant</span></a>
-                                            </li>
-                                            <li>
-                                                <a href="#"><i class="las la-spa"></i><span>Beauty</span></a>
-                                            </li>
-                                            <li>
-                                                <a href="#"><i class="las la-dumbbell"></i><span>Fitness</span></a>
-                                            </li>
-                                            <li>
-                                                <a href="#"><i class="las la-cocktail"></i><span>Nightlight</span></a>
-                                            </li>
-                                            <li>
-                                                <a href="#"><i
-                                                        class="las la-shopping-bag"></i><span>Shopping</span></a>
-                                            </li>
-                                            <li>
-                                                <a href="#"><i class="las la-film"></i><span>Cinema</span></a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <!-- .site-banner__search__input -->
-                                <div class="field-input">
-                                    <label for="loca">Where</label>
-                                    <input class="site-banner__search__input open-suggestion" id="loca" type="text"
-                                        name="where" placeholder="Your city" autocomplete="off" />
-                                    <div class="search-suggestions location-suggestions">
-                                        <ul>
-                                            <li>
-                                                <a href="#"><i class="las la-location-arrow"></i><span>Current
-                                                        location</span></a>
-                                            </li>
-                                            <li>
-                                                <a href="#"><span>San Francisco, CA</span></a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <!-- .site-banner__search__input -->
-                                <div class="field-submit">
-                                    <button><i class="las la-search la-24-black"></i></button>
-                                </div>
-                            </form>
-                            <!-- .site-banner__search -->
+                
+                    <div class="site-banner bg_hero_02" style=" background-image: url('assets/images/home/hero-bg.webp'); ">
+                        {{-- <video class="overlay-video" autoplay="" muted="" playsinline="" loop=""
+                            src="{{ asset('https://getgolo.com/images/video3.mp4') }}"></video> --}}
+                        <div class="overlay overlay_2">
                         </div>
-                        <!-- .site-banner__content -->
+                            <div class="container">
+                                <div class="site-banner__content">
+                                    <h1 class="site-banner__title">Business Listing</h1>
+                                    <p>
+                                        <i>20</i> cities, <i>10</i> categories, <i>5662</i> listings.
+                                    </p>
+                                    <form action="#" class="site-banner__search layout-02">
+                                        <div class="field-input">
+                                            <label for="s">Find</label>
+                                            <input class="site-banner__search__input open-suggestion" id="s" type="text"
+                                                name="s" placeholder="Ex: fastfood, beer" autocomplete="off" />
+                                            <div class="search-suggestions name-suggestions">
+                                                <ul>
+                                                    <li>
+                                                        <a href="#"><i class="las la-utensils"></i><span>Restaurant</span></a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#"><i class="las la-spa"></i><span>Beauty</span></a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#"><i class="las la-dumbbell"></i><span>Fitness</span></a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#"><i class="las la-cocktail"></i><span>Nightlight</span></a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#"><i
+                                                                class="las la-shopping-bag"></i><span>Shopping</span></a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#"><i class="las la-film"></i><span>Cinema</span></a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <!-- .site-banner__search__input -->
+                                        <div class="field-input">
+                                            <label for="loca">Where</label>
+                                            <input class="site-banner__search__input open-suggestion" id="loca" type="text"
+                                                name="where" placeholder="Your city" autocomplete="off" />
+                                            <div class="search-suggestions location-suggestions">
+                                                <ul>
+                                                    <li>
+                                                        <a href="#"><i class="las la-location-arrow"></i><span>Current
+                                                                location</span></a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#"><span>San Francisco, CA</span></a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <!-- .site-banner__search__input -->
+                                        <div class="field-submit">
+                                            <button><i class="las la-search la-24-black"></i></button>
+                                        </div>
+                                    </form>
+                                    <!-- .site-banner__search -->
+                                </div>
+                                <!-- .site-banner__content -->
+                            </div>
+                        
                     </div>
-                </div>
+                
                 <!-- .site-banner -->
                 <div class="business-category">
                     <div class="container">
@@ -88,7 +93,8 @@
                                         <span class="place">12 Places</span>
                                     </a>
                                 </div>
-                                <div class="bsn-cat-item purple">
+
+                                {{-- <div class="bsn-cat-item purple">
                                     <a href="ex-half-map-1.html">
                                         <i class="las la-spa"></i>
                                         <span class="title">Beauty</span>
@@ -129,7 +135,8 @@
                                         <span class="title">Restaurant</span>
                                         <span class="place">12 Places</span>
                                     </a>
-                                </div>
+                                </div> --}}
+
                             </div>
                             <div class="place-slider__nav slick-nav">
                                 <div class="place-slider__prev slick-nav__prev">
@@ -156,10 +163,11 @@
                                 data-itemScroll="4" data-dots="true" data-centerPadding="30" data-tabletitem="2"
                                 data-tabletscroll="2" data-smallpcscroll="3" data-smallpcitem="3" data-mobileitem="1"
                                 data-mobilescroll="1" data-mobilearrows="false">
+
                                 <div class="place-item layout-02 place-hover">
                                     <div class="place-inner">
                                         <div class="place-thumb hover-img">
-                                            <a class="entry-thumb" href="single-1.html"><img src="images/listing/01.jpg"
+                                            <a class="entry-thumb" href="single-1.html"><img src="{{ asset('assets/images/home/hero-bg.webp')}}"
                                                     alt="" /></a>
                                             <a href="#" class="golo-add-to-wishlist btn-add-to-wishlist"
                                                 data-place-id="185">
@@ -171,7 +179,7 @@
                                                 <i class="las la-utensils"></i><span>Restaurant</span>
                                             </a>
                                             <a href="#" class="author" title="Author"><img
-                                                    src="images/avatars/male-3.jpg" alt="Author" /></a>
+                                                    src="{{ asset('assets/images/reviews/male-1.jpg')}}" alt="Author" /></a>
                                             <div class="feature">Featured</div>
                                         </div>
                                         <div class="entry-detail">
@@ -204,7 +212,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="place-item layout-02 place-hover">
+                                {{-- <div class="place-item layout-02 place-hover">
                                     <div class="place-inner">
                                         <div class="place-thumb hover-img">
                                             <a class="entry-thumb" href="single-1.html"><img src="images/listing/02.jpg"
@@ -383,7 +391,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> --}}
+
                             </div>
                             <div class="place-slider__nav slick-nav">
                                 <div class="place-slider__prev slick-nav__prev">
@@ -414,7 +423,7 @@
                                     <div class="cities__item hover__box">
                                         <div class="cities__thumb hover__box__thumb">
                                             <a title="London" href="city-details-1.html">
-                                                <img src="images/city/newyork.jpg" alt="London" />
+                                                <img src="{{ asset('assets/images/home/hero-bg.webp')}}" alt="London" />
                                             </a>
                                         </div>
                                         <h4 class="cities__name">United States</h4>
@@ -425,7 +434,8 @@
                                     </div>
                                     <!-- .cities__item -->
                                 </div>
-                                <div class="slick-item">
+
+                                {{-- <div class="slick-item">
                                     <div class="cities__item hover__box">
                                         <div class="cities__thumb hover__box__thumb">
                                             <a title="Rome" href="city-details-1.html">
@@ -484,7 +494,8 @@
                                         </div>
                                     </div>
                                     <!-- .cities__item -->
-                                </div>
+                                </div> --}}
+
                             </div>
                             <div class="place-slider__nav slick-nav">
                                 <div class="place-slider__prev slick-nav__prev">
@@ -501,22 +512,21 @@
                     </div>
                 </div>
                 <!-- .featured-cities -->
-                <div class="business-about" style="background-image: url(images/img_about_1.jpg)">
+                <div class="business-about" style="background-image: url(assets/images/home/hero-bg.webp)">
                     <div class="container">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="business-about-info">
                                     <h2 class="offset-item">Who we are</h2>
                                     <p class="offset-item">
-                                        Many desktop publishing packages and web page editors now
-                                        use Lorem Ipsum as their default model text, and a search
-                                        for 'lorem ipsum' will uncover many web sites still in their
-                                        infancy. Various versions have evolved over the years,
-                                        sometimes by accident.
+                                        We are a specialised platform created to assist regional companies in Begusarai increase internet presence and connect with more customers. Our website provides a practical and efficient approach to highlight your products to potential clients in the neighbourhood, regardless of your business’s industry—restaurant, boutique, service provider, etc.
+                                        <br>
+                                        You may include important facts like your company name, address, contact information, and a succinct description by listing your business on our site. This makes it much easier for people to find and interact with your company. Our website also gives you the option of enhancing your listing by using attractive images and videos that showcase the unique features of your goods or services
                                     </p>
                                     <a href="#" class="btn offset-item">Read more</a>
                                 </div>
                             </div>
+                            
                         </div>
                     </div>
                 </div>
@@ -533,8 +543,8 @@
                                 data-mobilearrows="false">
                                 <div class="testimonial-item">
                                     <div class="avatar">
-                                        <img src="images/avatars/male-1.jpg" alt="Avatar" />
-                                        <img src="images/assets/quote-active.png" alt="Quote" class="quote" />
+                                        <img src="{{ asset('assets/images/reviews/male-1.jpg')}}" alt="Avatar" />
+                                        <img src="{{ asset('assets/images/reviews/quote-active.webp')}}" alt="Quote" class="quote" />
                                     </div>
                                     <div class="testimonial-info">
                                         <p>
@@ -550,8 +560,8 @@
                                 </div>
                                 <div class="testimonial-item">
                                     <div class="avatar">
-                                        <img src="images/avatars/female-1.jpg" alt="Avatar" />
-                                        <img src="images/assets/quote-active.png" alt="Quote" class="quote" />
+                                        <img src="{{ asset('assets/images/reviews/male-1.jpg')}}" alt="Avatar" />
+                                        <img src="{{ asset('assets/images/reviews/quote-active.webp')}}" alt="Quote" class="quote" />
                                     </div>
                                     <div class="testimonial-info">
                                         <p>
@@ -567,8 +577,8 @@
                                 </div>
                                 <div class="testimonial-item">
                                     <div class="avatar">
-                                        <img src="images/avatars/female-3.jpg" alt="Avatar" />
-                                        <img src="images/assets/quote-active.png" alt="Quote" class="quote" />
+                                        <img src="{{ asset('assets/images/reviews/male-1.jpg')}}" alt="Avatar" />
+                                        <img src="{{ asset('assets/images/reviews/quote-active.webp')}}" alt="Quote" class="quote" />
                                     </div>
                                     <div class="testimonial-info">
                                         <p>
@@ -609,7 +619,7 @@
                                     <article class="post hover__box">
                                         <div class="post__thumb hover__box__thumb">
                                             <a title="The 8 Most Affordable Michelin Restaurants in Paris"
-                                                href="blog-detail.html"><img src="images/blog/thumb-05.jpg"
+                                                href="blog-detail.html"><img src="{{ asset('assets/images/home/hero-bg.webp')}}"
                                                     alt="The 8 Most Affordable Michelin Restaurants in Paris" /></a>
                                         </div>
                                         <div class="post__info">
@@ -627,7 +637,7 @@
                                     <article class="post hover__box">
                                         <div class="post__thumb hover__box__thumb">
                                             <a title="The 7 Best Restaurants to Try Kobe Beef in London"
-                                                href="blog-detail.html"><img src="images/blog/thumb-01.jpg"
+                                                href="blog-detail.html"><img src="{{ asset('assets/images/home/hero-bg.webp')}}"
                                                     alt="The 7 Best Restaurants to Try Kobe Beef in London" /></a>
                                         </div>
                                         <div class="post__info">
@@ -645,7 +655,7 @@
                                     <article class="post hover__box">
                                         <div class="post__thumb hover__box__thumb">
                                             <a title="The 8 Most Affordable Michelin Restaurants in Paris"
-                                                href="blog-detail.html"><img src="images/blog/thumb-10.jpg"
+                                                href="blog-detail.html"><img src="{{ asset('assets/images/home/hero-bg.webp')}}"
                                                     alt="The 8 Most Affordable Michelin Restaurants in Paris" /></a>
                                         </div>
                                         <div class="post__info">

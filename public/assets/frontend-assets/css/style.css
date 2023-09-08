@@ -7106,10 +7106,11 @@ a.place__comments__reply i {
     background-size: cover;
     background-position: center;
     position: relative;
+    
 }
 .home-main .site-banner:after {
     content: "";
-    background-image: url(../images/assets/mask-1.svg);
+    background-image: url('assets/images/home/hero-bg.webp');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -11456,7 +11457,7 @@ a.place__comments__reply i {
 }
 
 .footer__top__info .footer__top__info__logo img {
-    max-width: 96px;
+    /* max-width: 96px; */
     margin-bottom: 20px;
 }
 .footer__top__info .footer__top__info__desc {
