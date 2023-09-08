@@ -50,9 +50,7 @@
                                 <label class="custom-file-label" for="file_path">Choose file</label>
                             </div>
                         </div>
-                        @error('file_path')
-                            <span class="text-danger">{{ $message }}</span>
-                        @enderror
+                     
                     </div>
                     <div class="form-group">
                         <label for="status">Status</label>
