@@ -264,7 +264,7 @@
                                     </div>
                                 </div>
                                 @error('type')
-                                    <span id="error_description" class="has-error">{{ $message }}</span>
+                                    <span id="error_description_type" class="has-error">{{ $message }}</span>
                                 @enderror
 
                                 <!-- Phone number and OTP input fields -->
@@ -275,8 +275,10 @@
                                                 value=""id="mobileNumber" name="mobileNumber"
                                                 pattern="[0-9]{10}" required />
                                             @error('mobileNumber')
-                                                <span id="error_description" class="has-error">{{ $message }}</span>
+                                                <span id="error_description_mobileNumber"
+                                                    class="has-error">{{ $message }}</span>
                                             @enderror
+
                                         </div>
 
                                         <div>
@@ -289,11 +291,12 @@
 
                                     <div class="field-input">
                                         <input type="number" id="verificationCode" placeholder="OTP" value=""
-                                            name="verificationCode" pattern="[0-9]{6}" required />
+                                            name="verificationCode" pattern="[0-9]{6}" required readonly />
                                         <input type="hidden" id="generatedOTP" placeholder="OTP" value=""
                                             name="generatedOTP" />
                                         @error('verificationCode')
-                                            <span id="error_description" class="has-error">{{ $message }}</span>
+                                            <span id="error_description_verificationCode"
+                                                class="has-error">{{ $message }}</span>
                                         @enderror
                                     </div>
 
@@ -310,7 +313,8 @@
                                             <i class="la la-check"></i>
                                         </span>
                                         @error('accept')
-                                            <div class="invalid-feedback">{{ $message }}</div>
+                                            <div id="error_description_accept" class="invalid-feedback">
+                                                {{ $message }}</div>
                                         @enderror
                                     </label>
 
@@ -380,8 +384,23 @@
                     if (response.success) {
                         // Form submitted successfully
                         alert('Form submitted successfully');
-                        // Optionally, reset the form
-                        $('#signup')[0].reset();
+
+                        // Check if a redirect URL is provided
+                        if (response.redirect) {
+                            // Redirect the user to the specified URL
+                            window.location.href = response.redirect;
+                        } else {
+                            // Optionally, reset the form
+                            $('#signup')[0].reset();
+                            $('#popup-message').text(
+                                'Please correct the following errors:');
+                            $('#error_description_type').text(response.errors.type);
+                            $('#error_description_mobileNumber').text(response.errors
+                                .mobileNumber);
+                            $('#error_description_verificationCode').text(response.errors
+                                .verificationCode);
+                            $('#error_description_accept').text(response.errors.accept);
+                        }
                     } else {
                         // Display validation errors
                         $('#popup-message').text('Please correct the following errors:');

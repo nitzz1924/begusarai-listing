@@ -93,6 +93,9 @@ Route::group([
     Route::post('/loginForm', [AuthController::class, 'login'])->name('loginForm');
     // Route::get('/UserRegistration',[HomeController::class,'UserRegistration'])->name('UserRegistration');
     Route::post('/signup', [HomeController::class, 'signup'])->name('signup');
+    Route::post('/SubmitPassword', [HomeController::class, 'SubmitPassword'])->name('SubmitPassword');
+    Route::get('/', [HomeController::class, 'index'])->name('index');
 
+    // Route::get('/', 'HomeController@index');
 // });
 

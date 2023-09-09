@@ -22,7 +22,18 @@ class HomeController extends Controller
        // Validate the form data
        $validator = Validator::make($request->all(), [
            'type' => 'required|in:guest,owner',
-           'mobileNumber' => 'required|digits:10', // Updated to allow 10 digits
+           'mobileNumber' => 'required|digits:10',
+           
+           function ($attribute, $value, $fail) use ($request) {
+            // Check if the mobileNumber already exists in the database
+            $existingUser = User_Login::where('mobileNumber', $value)->first();
+
+            if ($existingUser) {
+                $fail('The mobile number already exists.');
+            }
+        },
+           
+           
            'verificationCode' => [
                'required',
                'digits:6',
@@ -56,8 +67,10 @@ class HomeController extends Controller
            // Clear the stored OTP from the session
            $request->session()->forget('generatedOTP');
    
-           // Return a success response
-           return response()->json(['success' => true]);
+           // Return a success response=.
+         //   return view('frontend.setPassword', compact('user'));
+           return response()->json(['success' => true, 'redirect' => route('setPassword',compact('user'))]);
+
        } catch (\Exception $e) {
            // Handle any exceptions that occur during the database operation
            return response()->json(['success' => false, 'errors' => ['An error occurred during signup.']]);
@@ -116,11 +129,73 @@ class HomeController extends Controller
       return view('frontend.packages');
    }
    
-   public function setPassword()
+   public function setPassword(Request $request)
    {
-      return view('frontend.setPassword');
+
+      $User_id = $request->user;
+      
+      return view('frontend.setPassword',compact('User_id'));
+   }
+   // public function SubmitPassword(Request $request)
+   // {
+   //    $record = User_Login::where('id', $request->mobileNumber)->first();
+
+   //    if ($record) {
+   //        // Record found: Update it
+   //        $record->name = $request->input('first_name');
+   //        $record->password = $request->input('new_password');
+   //        $record->status = '1';
+   //        $record->save();
+   //    } 
+   //    return redirect()->route('index')->with('success', 'Thank you For Creating Account.');
+
+   // }
+   
+
+   public function SubmitPassword(Request $request)
+   {
+       $validator = Validator::make($request->all(), [
+           'first_name' => 'required|string',
+           'new_password' => 'required|min:6|confirmed', // Ensure 'new_password' and 're_new' match
+       ]);
+   
+       if ($validator->fails()) {
+           return redirect()->back()
+               ->withErrors($validator)
+               ->withInput();
+       }
+   
+       $record = User_Login::where('id', $request->mobileNumber)->first();
+   
+       if ($record) {
+           // Record found: Update it
+           $record->name = $request->input('first_name');
+           $record->password = bcrypt($request->input('new_password')); // Hash the password
+           $record->status = '1';
+           $record->save();
+       } 
+   
+       return redirect()->route('index')->with('success', 'Thank you For Creating Account.');
    }
    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
    public function ownerDashboard()
    {
       return view('frontend.ownerDashboard');
