@@ -232,8 +232,8 @@
 
 
 
-                            <form action="{{ route('signup') }}" class="form-sign form-content form-account"
-                                id="signup">
+                            <form action="{{ route('signup') }}" method="POST"
+                                class="form-sign form-content form-account" id="signup">
 
                                 @csrf
 
@@ -280,14 +280,18 @@
                                         </div>
 
                                         <div>
-                                            <input type="submit" name="submit" value="Send OTP"
-                                                style="width: 100px;" />
+                                            <input type="button" name="submit-otp" value="Send OTP"
+                                                style="width: 100px;" id="sendOTPButton" />
                                         </div>
                                     </div>
 
+
+
                                     <div class="field-input">
-                                        <input type="number"id="verificationCode" placeholder="OTP" value=""
+                                        <input type="number" id="verificationCode" placeholder="OTP" value=""
                                             name="verificationCode" pattern="[0-9]{6}" required />
+                                        <input type="hidden" id="generatedOTP" placeholder="OTP" value=""
+                                            name="generatedOTP" />
                                         @error('verificationCode')
                                             <span id="error_description" class="has-error">{{ $message }}</span>
                                         @enderror
@@ -350,8 +354,16 @@
     </div>
     <!-- .container-fluid -->
 </header>
+
 <script>
     $(document).ready(function() {
+        // Add the CSRF token to all AJAX requests
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
         $('#signup').on('submit', function(event) {
             event.preventDefault(); // Prevent the default form submission
 
@@ -379,8 +391,23 @@
                 error: function(xhr) {
                     // Handle AJAX errors
                     console.log(xhr.responseText);
+                    // Display the error message to the user
+                    alert('An error occurred while processing your request.');
                 }
             });
+        });
+
+        $('#sendOTPButton').on('click', function(event) {
+            event.preventDefault(); // Prevent the form from submitting
+
+            // Generate a random 6-digit OTP
+            var randomOTP = Math.floor(100000 + Math.random() * 900000);
+
+            // Set the generated OTP in the input field
+            $('#verificationCode').val(randomOTP);
+            $('#generatedOTP').val(randomOTP);
+            // Enable the input field
+            $('#verificationCode').removeAttr('readonly');
         });
     });
 </script>

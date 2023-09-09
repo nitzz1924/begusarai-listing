@@ -17,38 +17,53 @@ class HomeController extends Controller
    
    
    
-   // public function UserRegistration()
-   //  {
-   //     return view('layouts.header');
-   //  }
-
    public function signup(Request $request)
    {
        // Validate the form data
-       $validatedData = $request->validate([
+       $validator = Validator::make($request->all(), [
            'type' => 'required|in:guest,owner',
-           'mobileNumber' => 'required|digits:10',
-           'verificationCode' => 'required|digits:6',
+           'mobileNumber' => 'required|digits:10', // Updated to allow 10 digits
+           'verificationCode' => [
+               'required',
+               'digits:6',
+               function ($attribute, $value, $fail) use ($request) {
+                   // Retrieve the stored OTP from the session
+                   $generatedOTP = $request->input('generatedOTP');
+
+                   // Check if the submitted OTP matches the generated OTP
+                   if ($value != $generatedOTP) {
+                       $fail('The OTP is invalid.');
+                   }
+               },
+           ],
            'accept' => 'accepted',
        ]);
+   
+       if ($validator->fails()) {
+           return response()->json(['success' => false, 'errors' => $validator->errors()->all()]);
+       }
    
        try {
            // Create a new Login_User instance and fill it with the validated data
            $user = new User_Login();
-           $user->type = $validatedData['type'];
-           $user->mobileNumber = $validatedData['mobileNumber'];
-           $user->verificationCode = $validatedData['verificationCode'];
+           $user->type = $request->input('type');
+           $user->mobileNumber = $request->input('mobileNumber');
+           $user->verificationCode = $request->input('verificationCode');
            $user->save();
    
            // Your processing logic here
    
-           // Return a JSON response indicating success
+           // Clear the stored OTP from the session
+           $request->session()->forget('generatedOTP');
+   
+           // Return a success response
            return response()->json(['success' => true]);
        } catch (\Exception $e) {
            // Handle any exceptions that occur during the database operation
            return response()->json(['success' => false, 'errors' => ['An error occurred during signup.']]);
        }
    }
+   
    
    
    
