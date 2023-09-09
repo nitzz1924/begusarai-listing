@@ -12,6 +12,10 @@
     /* position: static; */
     display: block;
 }
+/* 
+.form-account{
+    display: block!important;
+} */
 
 .form-group-user .label-field {
     font-size: 15px;

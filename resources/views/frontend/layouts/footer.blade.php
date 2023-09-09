@@ -112,7 +112,7 @@
 
 </div>
 <!-- #wrapper -->
-<script data-cfasync="false" src="{{ asset('../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js') }}"></script>
+<!-- <script data-cfasync="false" src="{{ asset('../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js') }}"></script> -->
 <!-- SlimScroll -->
 <script src="{{ asset('assets/js/main.js') }}"></script>
 

@@ -91,6 +91,8 @@ Route::group([
 // Route::post('/login',[HomeController::class,'login'])->name('login');
 // Route::group(['middleware' => 'web'], function () {
     Route::post('/loginForm', [AuthController::class, 'login'])->name('loginForm');
+    // Route::get('/UserRegistration',[HomeController::class,'UserRegistration'])->name('UserRegistration');
+    Route::post('/signup', [HomeController::class, 'signup'])->name('signup');
 
 // });
 

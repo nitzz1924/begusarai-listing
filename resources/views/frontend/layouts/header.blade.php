@@ -19,6 +19,10 @@
                 <div class="right-header align-right">
                     <nav class="main-menu">
                         <ul>
+                            <!-- <li>
+                                <a href="/setpassword" title="Home">SetPasswod</a>
+
+                            </li> -->
                             <li>
                                 <a href="/" title="Home">Home</a>
 
@@ -222,108 +226,113 @@
                             </li>
                         </ul>
 
-                        {{-- login with facebook --}}
-                        {{-- <p class="choose-more">
-							Continue with
-							<a title="Facebook" class="fb" href="#">Facebook</a> or
-							<a title="Google" class="gg" href="#">Google</a>
-						</p> --}}
-                        {{-- <p class="choose-or"><span>Or</span></p> --}}
 
-								<div class="field-inline mb-3" style="justify-content: center;">
-									<div class="form-group-user">
-										<div class="row">
-											<div class="col-6">
-												<div class="col-group">
-													<label for="guest" class="label-field radio-field">
-														<input type="radio" value="guest" id="guest" name="account_type">
-														<span><i class="las la-user"></i>User</span>
-													</label>
-												</div>
-							 				</div> 
-											<div class="col-6"> 
-												<div class="col-group">
-													<label for="owner" class="label-field radio-field">
-														<input type="radio" value="owner" id="owner" name="account_type" checked="">
-														<span><i class="las la-briefcase"></i>Buiness Owner</span>
-													</label>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="">
-									<div class="field-inline">
-										<div class="field-input-number">
-											<input type="number" placeholder="Phone Number" value="" name="phone" pattern="[0-9]{10}" required/>
-										</div>
-										<div>
-											<input type="submit" name="submit" value="Send OTP" style="width: 100px;" />
-										</div>
-									</div>	
-									
-									
-										<div class="field-input">
-											<input type="number" placeholder="OTP" value="" name="otp" pattern="[0-9]{6}" required/>
-										</div>
-								</div>
-								{{-- <div class="field-input">
-									<input type="email" placeholder="Email" value="" name="email" />
-								</div> --}}
-                                {{-- <div class="field-input">
-									<input type="password" placeholder="Password" value="" name="password" />
-								</div> --}}
+
+                        <div class="popup-content">
+
+
+
+                            <form action="{{ route('signup') }}" class="form-sign form-content form-account"
+                                id="signup">
+
+                                @csrf
+
+
+                                <!-- Radio buttons for account type -->
+                                <div class="field-inline mb-3" style="justify-content: center;">
+                                    <div class="form-group-user">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <div class="col-group">
+                                                    <label for="guest" class="label-field radio-field">
+                                                        <input type="radio" value="guest" id="guest"
+                                                            name="type" checked>
+                                                        <span><i class="las la-user"></i>User</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="col-group">
+                                                    <label for="owner" class="label-field radio-field">
+                                                        <input type="radio" value="owner" id="owner"
+                                                            name="type">
+                                                        <span><i class="las la-briefcase"></i>Business Owner</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                @error('type')
+                                    <span id="error_description" class="has-error">{{ $message }}</span>
+                                @enderror
+
+                                <!-- Phone number and OTP input fields -->
+                                <div class="">
+                                    <div class="field-inline">
+                                        <div class="field-input-number">
+                                            <input type="number" placeholder="Phone Number"
+                                                value=""id="mobileNumber" name="mobileNumber"
+                                                pattern="[0-9]{10}" required />
+                                            @error('mobileNumber')
+                                                <span id="error_description" class="has-error">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+
+                                        <div>
+                                            <input type="submit" name="submit" value="Send OTP"
+                                                style="width: 100px;" />
+                                        </div>
+                                    </div>
+
+                                    <div class="field-input">
+                                        <input type="number"id="verificationCode" placeholder="OTP" value=""
+                                            name="verificationCode" pattern="[0-9]{6}" required />
+                                        @error('verificationCode')
+                                            <span id="error_description" class="has-error">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+
+                                </div>
+
+                                <!-- Acceptance checkbox -->
                                 <div class="field-check">
                                     <label for="accept">
-                                        <input type="checkbox" id="accept" value="" />
-                                        Accept the <a title="Terms" href="#">Terms</a> and
-                                        <a title="Privacy Policy" href="#">Privacy Policy</a>
+                                        <input type="checkbox" id="accept" value="1" name="accept"
+                                            class="form-check-input @error('accept') is-invalid @enderror" required>
+                                        Accept the <a title="Terms" href="#">Terms</a> and <a
+                                            title="Privacy Policy" href="#">Privacy Policy</a>
                                         <span class="checkmark">
                                             <i class="la la-check"></i>
                                         </span>
+                                        @error('accept')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
                                     </label>
+
+
                                 </div>
+
+
                                 <input type="submit" name="submit" value="Verify" />
                             </form>
+
+
+
+
                             <form action="#" class="form-log form-content" id="login">
                                 <div class="field-input">
                                     <input type="number" placeholder="Phone Number" value="" name="number"
-                                        pattern="[0-9]{10}" required />
+                                        pattern="[0-9]{10}" />
                                 </div>
                                 <div class="field-input">
-                                    <input type="password" placeholder="Password" value="" name="password"
-                                        required />
+                                    <input type="password" placeholder="Password" value="" name="password" />
                                 </div>
                                 <a title="Forgot password" class="forgot_pass" href="#">Forgot password</a>
                                 <input type="submit" name="submit" value="Login" />
                             </form>
                         </div>
                     </div>
-
-                    {{-- Search pop form --}}
-                    <!-- .popup-form -->
-                    {{-- <div class="right-header__search">
-						<a title="Search" href="#" class="search-open">
-							<i class="las la-search la-24-black"></i>
-						</a>
-						<div class="site__search">
-							<a title="Close" href="#" class="search__close">
-								<i class="la la-times"></i> </a><!-- .search__close -->
-							<form action="#" class="site__search__form" method="GET">
-								<div class="site__search__field">
-									<span class="site__search__icon">
-										<i class="las la-search la-24-black"></i>
-									</span><!-- .site__search__icon -->
-									<input class="site__search__input" type="text" name="s"
-										placeholder="Search places, cities" />
-								</div>
-								<!-- .search__input -->
-							</form>
-							<!-- .search__form -->
-						</div>
-						<!-- .site__search -->
-					</div> --}}
-
 
                     <div class="right-header__button btn">
                         <a title="Add place" href="/addPlace">
@@ -341,3 +350,37 @@
     </div>
     <!-- .container-fluid -->
 </header>
+<script>
+    $(document).ready(function() {
+        $('#signup').on('submit', function(event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            // Serialize the form data
+            var formData = $(this).serialize();
+
+            // Submit the form data via AJAX
+            $.ajax({
+                url: $(this).attr('action'),
+                method: 'POST',
+                data: formData,
+                dataType: 'json', // Expect JSON response
+                success: function(response) {
+                    if (response.success) {
+                        // Form submitted successfully
+                        alert('Form submitted successfully');
+                        // Optionally, reset the form
+                        $('#signup')[0].reset();
+                    } else {
+                        // Display validation errors
+                        $('#popup-message').text('Please correct the following errors:');
+                        $('#error_description').html(response.errors.join('<br>'));
+                    }
+                },
+                error: function(xhr) {
+                    // Handle AJAX errors
+                    console.log(xhr.responseText);
+                }
+            });
+        });
+    });
+</script>
