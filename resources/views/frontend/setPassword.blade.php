@@ -35,7 +35,15 @@
                 </div>
             </form>
              --}}
-
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <form action="{{ route('SubmitPassword') }}" method="POST" class="member-profile form-underline">
                 @csrf
                 <h3>New User</h3>
@@ -45,10 +53,10 @@
                     <label for="first_name">First name</label>
                     <input type="text" name="first_name" placeholder="Invan" id="first_name"
                         value="{{ old('first_name') }}">
+
+
                 </div>
-                @error('first_name')
-                    <span id="error_description_type" class="has-error">{{ $message }}</span>
-                @enderror
+
 
                 <div class="field-input">
                     <label for="new_password">New password</label>

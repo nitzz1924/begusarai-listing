@@ -307,6 +307,7 @@
                                     <label for="accept">
                                         <input type="checkbox" id="accept" value="1" name="accept"
                                             class="form-check-input @error('accept') is-invalid @enderror" required>
+                                        @csrf
                                         Accept the <a title="Terms" href="#">Terms</a> and <a
                                             title="Privacy Policy" href="#">Privacy Policy</a>
                                         <span class="checkmark">
