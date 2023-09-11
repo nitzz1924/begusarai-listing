@@ -10,6 +10,11 @@ use App\Models\User_Login;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Cookie;
+
+use App\Models\BusinessList;
+use App\Models\Master;
+    
+
 use View;
 
 class HomeController extends Controller
@@ -114,6 +119,7 @@ class HomeController extends Controller
   
    
    public function index()
+
     {
         $latest_news = Blog::where('category', 'Latest News')->where('status', 1)->orderby('created_at', 'desc')->take(4)->get();
         return View::make('frontend.index', compact('latest_news'));
@@ -129,12 +135,95 @@ class HomeController extends Controller
    {
       return view('frontend.contactUs');
    }
-   
+
    public function addPlace()
    {
-      return view('frontend.addPlace');
+
+
+
+    $types = ['Category', 'Placetype', 'Highlight', 'City','Booking_Type'];
+    $data = [];
+    
+    foreach ($types as $type) {
+        $data[$type] = Master::orderBy('created_at', 'desc')->where('type', $type)->get();
+    }   
+
+      return view('frontend.addPlace', $data);
+   }
+
+   
+   public function savePlace(Request $request)
+   {
+       // Validation rules for all fields
+       $rules = [
+           'type' => 'required',
+           'placeType' => 'required',
+           'description' => 'required',
+           'price' => 'required',
+           'duration' => 'required',
+           'highlights' => 'required|array',
+           'city' => 'required',
+           'placeAddress' => 'required',
+           'email' => 'required|email',
+           'phoneNumber1' => 'required',
+           'whatsappNo' => 'required',
+           'websiteUrl' => 'required|url',
+           'additionalFields' => 'required|url',
+           'facebook' => 'required|url',
+           'instagram' => 'required|url',
+           'twitter' => 'required|url',
+           'bookingType' => 'required',
+           'bookingurl' => 'required|url',
+           'businessName' => 'required',
+           'youtube' => 'required|url',
+           'coverImage' => 'required|image|max:1024', // Max 1 MB
+           'galleryImage' => 'required|image|max:1024', // Max 1 MB
+           'documentImage' => 'required|image|max:1024', // Max 1 MB
+           'logo' => 'required|image|max:1024', // Max 1 MB
+           'video' => 'required|url',
+       ];
+   
+       // Validate the request data
+       $request->validate($rules);
+   
+       // Create a new BusinessList instance and populate it with the validated data
+       $business = new BusinessList();
+       $business->type = $request->input('type');
+       $business->placeType = implode(',', $request->input('placeType'));
+       $business->description = $request->input('description');
+       $business->price = $request->input('price');
+       $business->duration = $request->input('duration');
+       $business->highlights = implode(',', $request->input('highlights'));
+       $business->city = $request->input('city');
+       $business->placeAddress = $request->input('placeAddress');
+       $business->email = $request->input('email');
+       $business->phoneNumber1 = $request->input('phoneNumber1');
+       $business->phoneNumber2 = $request->input('phoneNumber2');
+       $business->whatsappNo = $request->input('whatsappNo');
+       $business->websiteUrl = $request->input('websiteUrl');
+       $business->additionalFields = $request->input('additionalFields');
+       $business->facebook = $request->input('facebook');
+       $business->instagram = $request->input('instagram');
+       $business->twitter = $request->input('twitter');
+       $business->bookingType = $request->input('bookingType');
+       $business->bookingurl = $request->input('bookingurl');
+       $business->businessName = $request->input('businessName');
+       $business->youtube = $request->input('youtube');
+       
+       // Handle file uploads (coverImage, galleryImage, documentImage, logo) if needed
+       // Save the model to the database
+       $business->save();
+   
+       // Redirect back with a success message or do something else
+       return redirect()->back()->with('success', 'Business added successfully');
    }
    
+
+
+
+
+
+
    public function packages()
    {
       return view('frontend.packages');
@@ -151,7 +240,7 @@ class HomeController extends Controller
    public function SubmitPassword(Request $request)
    {
        $validator = Validator::make($request->all(), [
-           'first_name' => 'required|string',
+           'first_name' => 'required',
            'new_password' => 'required|min:6|confirmed', // Ensure 'new_password' and 're_new' match
        ]);
    

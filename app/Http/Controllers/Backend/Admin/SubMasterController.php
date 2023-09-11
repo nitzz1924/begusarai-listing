@@ -56,7 +56,7 @@ class SubMasterController extends Controller
             'title' => 'required',
             'value' => 'required',
             'type' => 'required',
-            'logo' => 'required',
+           
 
 
         ]);

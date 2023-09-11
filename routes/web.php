@@ -20,7 +20,6 @@ Route::group(
 Route::get('/aboutUs', [HomeController::class, 'aboutUs'])->name('aboutUs');
 Route::get('/contactUs', [HomeController::class, 'contactUs'])->name('contactUs');
 Route::get('/contactUs', [HomeController::class, 'contactUs'])->name('contactUs');
-Route::get('/addPlace', [HomeController::class, 'addPlace'])->name('addPlace');
 Route::get('/packages', [HomeController::class, 'packages'])->name('packages');
 Route::get('/registration', [HomeController::class, 'registration'])->name('registration');
 
@@ -106,3 +105,7 @@ Route::get('/logout', [HomeController::class, 'logout'])->name('logout');
 Route::middleware(['auth'])->group(function () {
     // Your protected routes go here
 });
+
+Route::post('/add-business', 'HomeController@store')->name('business.store');
+Route::get('/addPlace', [HomeController::class, 'addPlace'])->name('addPlace');
+Route::post('/addPlace/savePlace', [HomeController::class, 'savePlace'])->name('savePlace');
