@@ -4,34 +4,34 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Backend\AuthController;
 
-
-Route::group([
-    'namespace' => 'Frontend',
-    'as' => 'frontend.'],
+Route::group(
+    [
+        'namespace' => 'Frontend',
+        'as' => 'frontend.',
+    ],
     function () {
         require base_path('routes/frontend/frontend.php');
-    });
-
+    },
+);
 
 // Backend
 
-
 // Frontend user Routes - logged out
-Route::get('/aboutUs',[HomeController::class,'aboutUs'])->name('aboutUs');
-Route::get('/contactUs',[HomeController::class,'contactUs'])->name('contactUs');
-Route::get('/contactUs',[HomeController::class,'contactUs'])->name('contactUs');
-Route::get('/addPlace',[HomeController::class,'addPlace'])->name('addPlace');
-Route::get('/packages',[HomeController::class,'packages'])->name('packages');
-Route::get('/registration',[HomeController::class,'registration'])->name('registration');
+Route::get('/aboutUs', [HomeController::class, 'aboutUs'])->name('aboutUs');
+Route::get('/contactUs', [HomeController::class, 'contactUs'])->name('contactUs');
+Route::get('/contactUs', [HomeController::class, 'contactUs'])->name('contactUs');
+Route::get('/addPlace', [HomeController::class, 'addPlace'])->name('addPlace');
+Route::get('/packages', [HomeController::class, 'packages'])->name('packages');
+Route::get('/registration', [HomeController::class, 'registration'])->name('registration');
 
 // Business Owner routes - logged in
-Route::get('/ownerDashboard',[HomeController::class,'ownerDashboard'])->name('ownerDashboard');
-Route::get('/businessOwnerPage',[HomeController::class,'businessOwnerPage'])->name('businessOwnerPage');
-Route::get('/ownerListing',[HomeController::class,'ownerListing'])->name('ownerListing');
-Route::get('/ownerWishlist',[HomeController::class,'ownerWishlist'])->name('ownerWishlist');
-Route::get('/ownerProfile',[HomeController::class,'ownerProfile'])->name('ownerProfile');
-Route::get('/ownerLeads',[HomeController::class,'ownerLeads'])->name('ownerLeads');
-Route::get('/setPassword',[HomeController::class,'setPassword'])->name('setPassword');
+Route::get('/ownerDashboard', [HomeController::class, 'ownerDashboard'])->name('ownerDashboard');
+Route::get('/businessOwnerPage', [HomeController::class, 'businessOwnerPage'])->name('businessOwnerPage');
+Route::get('/ownerListing', [HomeController::class, 'ownerListing'])->name('ownerListing');
+Route::get('/ownerWishlist', [HomeController::class, 'ownerWishlist'])->name('ownerWishlist');
+Route::get('/ownerProfile', [HomeController::class, 'ownerProfile'])->name('ownerProfile');
+Route::get('/ownerLeads', [HomeController::class, 'ownerLeads'])->name('ownerLeads');
+Route::get('/setPassword', [HomeController::class, 'setPassword'])->name('setPassword');
 
 // guest user backend routes - logged in
 
@@ -44,14 +44,17 @@ Route::prefix('admin_login')->group(function () {
 });
 
 // Admin Dashboard
-Route::group([
-    'namespace' => 'Backend\Admin',
-    'prefix' => 'admin',
-    'as' => 'admin.',
-    'middleware' => 'auth:admin'],
+Route::group(
+    [
+        'namespace' => 'Backend\Admin',
+        'prefix' => 'admin',
+        'as' => 'admin.',
+        'middleware' => 'auth:admin',
+    ],
     function () {
         require base_path('routes/backend/admin.php');
-    });
+    },
+);
 
 // User Auth
 Route::prefix('user_login')->group(function () {
@@ -62,14 +65,17 @@ Route::prefix('user_login')->group(function () {
 });
 
 // User Dashboard
-Route::group([
-    'namespace' => 'Backend\User',
-    'prefix' => 'user',
-    'as' => 'user.',
-    'middleware' => 'auth:user'],
+Route::group(
+    [
+        'namespace' => 'Backend\User',
+        'prefix' => 'user',
+        'as' => 'user.',
+        'middleware' => 'auth:user',
+    ],
     function () {
         require base_path('routes/backend/user.php');
-    });
+    },
+);
 
 // clear config and cache
 //['cache:clear', 'optimize', 'route:cache', 'route:clear', 'view:clear', 'config:cache']
@@ -86,16 +92,17 @@ Route::group([
 //   }
 //});
 
+Route::post('/signup', [HomeController::class, 'signup'])->name('signup');
+Route::post('/SubmitPassword', [HomeController::class, 'SubmitPassword'])->name('SubmitPassword');
+Route::get('/', [HomeController::class, 'index'])->name('index');
 
+// Route::get('/login', [HomeController::class, 'showLoginForm'])->name('user.login');
+// Route::post('/login', [HomeController::class, 'loginForm'])->name('user.loginForm');
 
-// Route::post('/login',[HomeController::class,'login'])->name('login');
-// Route::group(['middleware' => 'web'], function () {
-    Route::post('/loginForm', [AuthController::class, 'login'])->name('loginForm');
-    // Route::get('/UserRegistration',[HomeController::class,'UserRegistration'])->name('UserRegistration');
-    Route::post('/signup', [HomeController::class, 'signup'])->name('signup');
-    Route::post('/SubmitPassword', [HomeController::class, 'SubmitPassword'])->name('SubmitPassword');
-    Route::get('/', [HomeController::class, 'index'])->name('index');
+Route::get('/login', [HomeController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [HomeController::class, 'loginForm'])->name('loginForm');
+Route::get('/logout', [HomeController::class, 'logout'])->name('logout');
 
-    // Route::get('/', 'HomeController@index');
-// });
-
+Route::middleware(['auth'])->group(function () {
+    // Your protected routes go here
+});

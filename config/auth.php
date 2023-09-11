@@ -14,7 +14,7 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'web',
+        'guard' => 'user',
         'passwords' => 'users',
     ],
 
@@ -48,11 +48,11 @@ return [
 
         'user' => [
             'driver' => 'session',
-            'provider' => 'users',
+            'provider' => 'users_login', // Ensure the provider is correct
         ],
 
         'api' => [
-            'driver' => 'passport',
+            'driver' => 'token',
             'provider' => 'users',
             'hash' => false,
         ],
@@ -62,7 +62,7 @@ return [
             'provider' => 'admins',
         ],
     ],
-
+    
     /*
     |--------------------------------------------------------------------------
     | User Providers
@@ -83,20 +83,19 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => App\Models\User::class,
+            'model' => App\Models\User_Login::class,
         ],
 
         'admins' => [
             'driver' => 'eloquent',
             'model' => \App\Models\Admin::class,
         ],
-
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+        
+        'users_login' => [ // Add this provider
+            'driver' => 'eloquent',
+            'model' => App\Models\User_Login::class,
+        ],
     ],
-
     /*
     |--------------------------------------------------------------------------
     | Resetting Passwords
@@ -131,7 +130,6 @@ return [
             'provider' => 'users',
         ],
     ],
-
     /*
     |--------------------------------------------------------------------------
     | Password Confirmation Timeout

@@ -8,14 +8,46 @@ use App\Models\Blog;
 use App\Models\User;
 use App\Models\User_Login;
 use Illuminate\Support\Facades\Validator;
-
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Cookie;
 use View;
 
 class HomeController extends Controller
 {
     
-   
-   
+   use AuthenticatesUsers ;
+
+    public function showLoginForm()
+    {
+        return view('auth.login'); 
+    }
+
+    
+    
+    public function loginForm(Request $request)
+    {
+        $request->validate([
+            'mobileNumber' => 'required|numeric|digits:10',
+            'password' => 'required',
+        ]);
+    
+        $credentials = $request->only('mobileNumber', 'password');
+    
+        if (Auth::guard('user')->attempt($credentials)) {
+            // Authentication passed
+            return redirect()->intended('/'); // Redirect to the dashboard or any other page after login
+        }
+    
+        // If authentication fails, you can optionally add a message here
+        return back()->withErrors(['password' => 'Invalid credentials']);
+    }
+    
+
+    public function logout()
+    {
+        Auth::guard('user')->logout();
+        return redirect()->intended('/');
+    }
    
    public function signup(Request $request)
    {
@@ -79,28 +111,7 @@ class HomeController extends Controller
    
    
    
-   
-// public function signup(Request $request)
-// {
-//     // Validate the form data
-//     $validatedData = $request->validate([
-//         'type' => 'required|in:guest,owner',
-//         'mobileNumber' => 'required|digits:10',
-//         'verificationCode' => 'required|digits:6',
-//         'accept' => 'accepted',
-//     ]);
-
-//     // Create a new Login_User instance and fill it with the validated data
-//     $user = new User_Login();
-//     $user->type = $validatedData['type'];
-//     $user->mobileNumber = $validatedData['mobileNumber'];
-//     $user->verificationCode = $validatedData['verificationCode'];
-//     $user->save();
-
-//     // Your processing logic here
-
-//     return redirect()->back()->with('success', 'Form submitted successfully');
-// }
+  
    
    public function index()
     {
@@ -135,22 +146,7 @@ class HomeController extends Controller
       $User_id = $request->user;
       
       return view('frontend.setPassword',compact('User_id'));
-   }
-   // public function SubmitPassword(Request $request)
-   // {
-   //    $record = User_Login::where('id', $request->mobileNumber)->first();
-
-   //    if ($record) {
-   //        // Record found: Update it
-   //        $record->name = $request->input('first_name');
-   //        $record->password = $request->input('new_password');
-   //        $record->status = '1';
-   //        $record->save();
-   //    } 
-   //    return redirect()->route('index')->with('success', 'Thank you For Creating Account.');
-
-   // }
-   
+   } 
 
    public function SubmitPassword(Request $request)
    {
@@ -179,23 +175,6 @@ class HomeController extends Controller
    }
    
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
    public function ownerDashboard()
    {
       return view('frontend.ownerDashboard');
@@ -205,11 +184,6 @@ class HomeController extends Controller
    {
       return view('frontend.businessOwnerPage');
    }
-
-   // public function registration()
-   // {
-   //    return view('frontend.registration');
-   // }
 
    public function ownerListing()
    {

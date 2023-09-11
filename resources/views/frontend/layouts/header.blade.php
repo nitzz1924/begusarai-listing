@@ -14,17 +14,19 @@
             </div>
             <!-- .col-md-6 -->
 
+
+
+
             {{-- this is currently working main menu --}}
             <div class="col-xl-6 col-7">
                 <div class="right-header align-right">
                     <nav class="main-menu">
                         <ul>
-                            <!-- <li>
-                                <a href="/setpassword" title="Home">SetPasswod</a>
 
-                            </li> -->
+
                             <li>
                                 <a href="/" title="Home">Home</a>
+
 
                             </li>
                             <li>
@@ -47,7 +49,8 @@
                                         <a href="#" title="City Layout">City Layout</a>
                                         <ul class="sub-menu">
                                             <li>
-                                                <a href="city-details-1.html" title="Half Map – Left Filter">Half Map –
+                                                <a href="city-details-1.html" title="Half Map – Left Filter">Half
+                                                    Map –
                                                     Left Filter</a>
                                             </li>
                                             <li>
@@ -148,7 +151,12 @@
 
                                 </ul>
                             </li>
+                            <?php 
+                            if(Auth::user()){
 
+                       
+                            if (Auth::user()->type=='Guest'){
+                                ?>
                             <li>
                                 <a class="avatar" href="">
                                     <img src="https://wp.getgolo.com/country-guide/wp-content/themes/golo/assets/images/default-user-image.png"
@@ -156,22 +164,28 @@
                                     <span>Guest</span>
                                 </a>
                                 <ul class="sub-menu">
-                                    <li class=""><a href="">Profile</a>
+                                    <li class=""><a href="">Profile</a></li>
+                                    <li class="/ownerWishlist"><a href="">My Wishlist</a></li>
+                                    <li>
+                                        <a href="/logout">
+                                            <span>Logout</span>
+                                        </a>
                                     </li>
-                                    <li class="/ownerWishlist"><a href="">My
-                                            Wishlist</a></li>
+                                </ul>
+                            </li>
+                            <?php 
+                        }     }
+                        ?>
 
-                                    <hr class="dropdown-divider">
-                            </li>
-                            <li>
-                                <a href="">
-                                    <span>Logout</span>
-                                </a>
-                            </li>
+
 
                         </ul>
                         </li>
+                        <?php 
+                         if(Auth::user()){
 
+                        if (Auth::user()->type=='Owner'){
+                        ?>
                         <li>
                             <a class="avatar" href="">
                                 <img src="https://wp.getgolo.com/wp-content/uploads/sites/3/2022/06/customersupport-30x30.png"
@@ -195,16 +209,27 @@
                                     <hr class="dropdown-divider">
                                 </li>
                                 <li>
-                                    <a href="">
+                                    <a href="/logout">
                                         <span>Logout</span> </i>
                                     </a>
                                 </li>
+                                <?php 
+                                }}
+                                ?>
+
+
                             </ul>
                     </nav>
+
+                    <?php 
+                    if (Auth::user()==null){
+                    ?>
                     <div class="right-header__login">
                         <a title="Login" class="open-login" href="#">Login</a>
                     </div>
-
+                    <?php 
+                    }
+                    ?>
                     {{-- logged in Business owner --}}
 
                     </nav>
@@ -328,18 +353,49 @@
 
 
 
-
+                            {{-- 
                             <form action="#" class="form-log form-content" id="login">
                                 <div class="field-input">
-                                    <input type="number" placeholder="Phone Number" value="" name="number"
-                                        pattern="[0-9]{10}" />
+                                    <input type="number" placeholder="Phone Number" value=""
+                                        name="mobileNumber" id="mobileNumber" pattern="[0-9]{10}" />
                                 </div>
                                 <div class="field-input">
-                                    <input type="password" placeholder="Password" value="" name="password" />
+                                    <input type="password" placeholder="Password" value="" name="password"
+                                        id="password" />
                                 </div>
                                 <a title="Forgot password" class="forgot_pass" href="#">Forgot password</a>
                                 <input type="submit" name="submit" value="Login" />
+                            </form> --}}
+
+                            @error('type')
+                                <span id="error_description_type" class="has-error">{{ $message }}</span>
+                            @enderror
+
+                            <form action="{{ route('loginForm') }}" method="POST" class="form-log form-content"
+                                id="login">
+                                @csrf
+                                <div class="field-input">
+                                    <input type="number" placeholder="Phone Number" value=""
+                                        name="mobileNumber" pattern="[0-9]{10}" minlength="10" maxlength="10"
+                                        id="mobileNumber" required />
+                                    @error('mobileNumber')
+                                        <span id="error_description_mobileNumber"
+                                            class="has-error">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <div class="field-input">
+                                    <input type="password" placeholder="Password" value="" name="password"
+                                        id="password" required />
+                                    @error('Password')
+                                        <span id="error_description_mobileNumber"
+                                            class="has-error">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <a title="Forgot password" class="forgot_pass" href="#">Forgot password</a>
+                                <input type="submit" name="submit" value="Login" id="loginSubmit" />
                             </form>
+
+
                         </div>
                     </div>
 
@@ -359,7 +415,7 @@
     </div>
     <!-- .container-fluid -->
 </header>
-
+{{-- -----------------------------------------------reguster form ------------------------------------------ --}}
 <script>
     $(document).ready(function() {
         // Add the CSRF token to all AJAX requests
@@ -431,3 +487,6 @@
         });
     });
 </script>
+
+
+{{-- -----------------------------------------------Login form ------------------------------------------ --}}
