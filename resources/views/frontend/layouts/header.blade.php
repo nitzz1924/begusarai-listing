@@ -353,19 +353,6 @@
 
 
 
-                            {{-- 
-                            <form action="#" class="form-log form-content" id="login">
-                                <div class="field-input">
-                                    <input type="number" placeholder="Phone Number" value=""
-                                        name="mobileNumber" id="mobileNumber" pattern="[0-9]{10}" />
-                                </div>
-                                <div class="field-input">
-                                    <input type="password" placeholder="Password" value="" name="password"
-                                        id="password" />
-                                </div>
-                                <a title="Forgot password" class="forgot_pass" href="#">Forgot password</a>
-                                <input type="submit" name="submit" value="Login" />
-                            </form> --}}
 
                             @error('type')
                                 <span id="error_description_type" class="has-error">{{ $message }}</span>
@@ -399,12 +386,25 @@
                         </div>
                     </div>
 
+
+                    <?php 
+                         if(Auth::user()){
+
+                        if (Auth::user()->type=='Owner'){
+                        ?>
+
                     <div class="right-header__button btn">
                         <a title="Add place" href="/addPlace">
                             <i class="las la-plus la-24-white"></i>
                             <span>Add Listing</span>
                         </a>
                     </div>
+
+                    <?php 
+                    }}
+                    ?>
+
+
                     <!-- .right-header__button -->
                 </div>
                 <!-- .right-header -->

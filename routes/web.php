@@ -26,7 +26,6 @@ Route::get('/registration', [HomeController::class, 'registration'])->name('regi
 // Business Owner routes - logged in
 Route::get('/ownerDashboard', [HomeController::class, 'ownerDashboard'])->name('ownerDashboard');
 Route::get('/businessOwnerPage', [HomeController::class, 'businessOwnerPage'])->name('businessOwnerPage');
-Route::get('/ownerListing', [HomeController::class, 'ownerListing'])->name('ownerListing');
 Route::get('/ownerWishlist', [HomeController::class, 'ownerWishlist'])->name('ownerWishlist');
 Route::get('/ownerProfile', [HomeController::class, 'ownerProfile'])->name('ownerProfile');
 Route::get('/ownerLeads', [HomeController::class, 'ownerLeads'])->name('ownerLeads');
@@ -107,5 +106,9 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::post('/add-business', 'HomeController@store')->name('business.store');
+
 Route::get('/addPlace', [HomeController::class, 'addPlace'])->name('addPlace');
+Route::get('/editPlace/{id}', [HomeController::class, 'editPlace'])->name('editPlace');
+
 Route::post('/addPlace/savePlace', [HomeController::class, 'savePlace'])->name('savePlace');
+Route::get('/ownerListing', [HomeController::class, 'ownerListing'])->name('ownerListing');
