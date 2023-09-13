@@ -8,8 +8,12 @@
         </div><!-- .listing-nav -->
         <div class="listing-content">
             <h2>Add/Edit Place</h2>
-            <form action="{{ route('savePlace') }}" method="POST" class="upload-form" enctype="multipart/form-data">
+
+            <form action="{{ route('updatePlace', ['id' => $business->id]) }}" method="POST" class="upload-form"
+                enctype="multipart/form-data">
                 @csrf
+                @method('PUT')
+
                 {{-- @if (isset($business))
                     @method('PUT')
                 @endif --}}
@@ -17,7 +21,7 @@
                 <!-- General Information -->
                 <div class="listing-box">
                     <h3>General</h3>
-                    <input type="hidden" name="editId" value="{{ isset($business) ? $business->id : 0 }}" />
+                    <input type="hidden" name="editId" value="{{ $business->id }}" {{-- value="{{ isset($business) ? $business->id : 0 }}" --}} />
                     <!-- Business Name -->
                     <div class="field-group field-input">
                         <label for="businessName">Business Name</label>
@@ -54,12 +58,12 @@
                             <div class="has-error mt-2">{{ $message }}</div>
                         @enderror
                     </div>
-                    <!-- Category -->
+                    <!-- category -->
                     <div class="field-group field-select">
-                        <label for="Category">Category</label>
+                        <label for="category">category</label>
                         <select data-placeholder="Select category" class="chosen-select" id="category" name="category">
                             <option selected></option>
-                            @foreach ($data['Category'] as $value)
+                            @foreach ($data['category'] as $value)
                                 <option {{ isset($business) && $business->category == $value->title ? 'selected' : '' }}>
                                     {{ $value->title }}</option>
                             @endforeach

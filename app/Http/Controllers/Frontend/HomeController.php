@@ -129,7 +129,7 @@ class HomeController extends Controller
 
     public function addPlace()
     {
-        $types = ['Category', 'Placetype', 'Highlight', 'City', 'bookingType'];
+        $types = ['category', 'Placetype', 'Highlight', 'City', 'bookingType'];
         $data = [];
 
         foreach ($types as $type) {
@@ -143,7 +143,7 @@ class HomeController extends Controller
 
     public function editPlace($id)
     {
-        $types = ['Category', 'Placetype', 'Highlight', 'City', 'bookingType'];
+        $types = ['category', 'Placetype', 'Highlight', 'City', 'bookingType'];
         $data = [];
 
         foreach ($types as $type) {
@@ -161,73 +161,110 @@ class HomeController extends Controller
     }
     public function updatePlace(Request $request, $id)
     {
-        // Logic to update the place
-    }
-
-    public function savePlace(Request $request)
-    {
-        try {
-            // dd($request->all());
-            // Validate the request data
-            $Validationvar = $this->validateBusinessData($request);
-            // dd($request->input('editId'));
-            // Create a new BusinessList instance or fetch an existing one based on $id
-            $business = $request->input('editId') != 0 ? BusinessList::findOrFail($request->input('editId')) : new BusinessList();
-
-            // Set common attributes
-            $business->userId = Auth::id();
-            $business->category = $request->input('Category');
-            $business->placeType = implode(',', $request->input('placeType'));
-            $business->description = $request->input('description');
-            $business->price = $request->input('price');
-            $business->duration = $request->input('duration');
-            $business->highlight = implode(',', $request->input('highlight'));
-            $business->city = $request->input('city');
-            $business->placeAddress = $request->input('placeAddress');
-            $business->email = $request->input('email');
-            $business->phoneNumber1 = $request->input('phoneNumber1');
-            $business->phoneNumber2 = $request->input('phoneNumber2');
-            $business->whatsappNo = $request->input('whatsappNo');
-            $business->websiteUrl = $request->input('websiteUrl');
-            $business->additionalFields = $request->input('additionalFields');
-            $business->facebook = $request->input('facebook');
-            $business->instagram = $request->input('instagram');
-            $business->twitter = $request->input('twitter');
-            $business->bookingType = $request->input('bookingType');
-            $business->bookingurl = $request->input('bookingurl');
-            $business->businessName = $request->input('businessName');
-            $business->youtube = $request->input('youtube');
-            $business->video = $request->input('video');
-
-            // Handle file uploads (coverImage, galleryImage, documentImage, logo) if needed
-            $this->handleFileUpload($request, $business);
-
-            // Save the model to the database
-            $business->save();
-
-            // Redirect back with a success message or do something else
-            return redirect()
-                ->route('ownerListing')
-                ->with('success', $id ? 'Business updated successfully' : 'Business added successfully');
-        } catch (\Exception $e) {
-            // Handle the error, log it, or display an error message
-            return redirect()
-                ->back()
-                ->with('error', 'Error uploading images: ' . $e->getMessage());
-        }
-    }
-
-    protected function validateBusinessData(Request $request)
-    {
+        // dd($id);
+        // Validation rules (same as savePlace)
         $rules = [
-            'Category' => 'required',
+            'category' => 'required',
             'placeType' => 'required',
-            'placeType.*' => 'string',
+
             'description' => 'required',
             'price' => 'required',
             'duration' => 'required',
             'highlight' => 'required',
-            'highlight.*' => 'string',
+
+            'city' => 'required',
+            'placeAddress' => 'required',
+            'email' => 'required',
+            'phoneNumber1' => 'required',
+            'phoneNumber2' => 'nullable',
+            'whatsappNo' => 'nullable',
+            'websiteUrl' => 'nullable',
+            'additionalFields' => 'nullable',
+            'facebook' => 'nullable',
+            'instagram' => 'nullable',
+            'twitter' => 'nullable|url',
+            'bookingType' => 'required',
+            'bookingurl' => 'nullable',
+            'businessName' => 'required',
+            'youtube' => 'nullable|url',
+            'video' => 'nullable',
+        ];
+
+        foreach (['coverImage', 'galleryImage', 'documentImage', 'logo'] as $fileField) {
+            if ($request->hasFile($fileField)) {
+                // Dynamically add validation rules for the file fields if they are present in the request.
+                $rules[$fileField] = 'nullable|image|mimes:jpg,jpeg,png,svg,webp|max:2048';
+            }
+        }
+
+        $this->validate($request, $rules);
+
+        // Find the existing business by ID
+        $business = BusinessList::findOrFail($id);
+
+        // Update business properties
+        $business->userId = Auth::id();
+        $business->category = $request->input('category');
+        $business->placeType = implode(',', $request->input('placeType'));
+        $business->description = $request->input('description');
+        $business->price = $request->input('price');
+        $business->duration = $request->input('duration');
+        $business->highlight = implode(',', $request->input('highlight'));
+        $business->city = $request->input('city');
+        $business->placeAddress = $request->input('placeAddress');
+        $business->email = $request->input('email');
+        $business->phoneNumber1 = $request->input('phoneNumber1');
+        $business->phoneNumber2 = $request->input('phoneNumber2');
+        $business->whatsappNo = $request->input('whatsappNo');
+        $business->websiteUrl = $request->input('websiteUrl');
+        $business->additionalFields = $request->input('additionalFields');
+        $business->facebook = $request->input('facebook');
+        $business->instagram = $request->input('instagram');
+        $business->twitter = $request->input('twitter');
+        $business->bookingType = $request->input('bookingType');
+        $business->bookingurl = $request->input('bookingurl');
+        $business->businessName = $request->input('businessName');
+        $business->youtube = $request->input('youtube');
+        $business->video = $request->input('video');
+
+        // Handle file uploads (same as savePlace)
+        $allowedExtensions = ['jpg', 'jpeg', 'png', 'svg', 'webp'];
+        $destinationPath = public_path('uploads');
+
+        foreach (['coverImage', 'galleryImage', 'documentImage', 'logo'] as $fileField) {
+            if ($request->hasFile($fileField)) {
+                $file = $request->file($fileField);
+
+                $extension = strtolower($file->getClientOriginalExtension());
+
+                if (in_array($extension, $allowedExtensions) && $file->isValid()) {
+                    $fileName = time() . '.' . $extension;
+                    $file->move($destinationPath, $fileName);
+                    $business->$fileField = $fileName;
+                }
+            }
+        }
+
+        // Save the updated business to the database
+        $business->save();
+
+        // Redirect back on success
+        return redirect()
+            ->route('ownerListing')
+            ->with('success', 'Business details updated successfully.');
+    }
+
+    public function savePlace(Request $request)
+    {
+        $rules = [
+            'category' => 'required',
+            'placeType' => 'required',
+
+            'description' => 'required',
+            'price' => 'required',
+            'duration' => 'required',
+            'highlight' => 'required',
+            'highlight' => 'required',
             'city' => 'required',
             'placeAddress' => 'required',
             'email' => 'required',
@@ -252,29 +289,71 @@ class HomeController extends Controller
                 $rules[$fileField] = 'nullable|image|mimes:jpg,jpeg,png,svg,webp|max:2048';
             }
         }
+        $this->validate($request, $rules);
+        $editId = $request->input('editId');
+        $business = $editId ? BusinessList::findOrFail($editId) : new BusinessList();
 
-        // Now you have your dynamic rules array.
+        try {
+            $business->userId = Auth::id();
+            $business->category = $request->input('category');
+            $business->placeType = implode(',', $request->input('placeType'));
+            $business->description = $request->input('description');
+            $business->price = $request->input('price');
+            $business->duration = $request->input('duration');
+            $business->highlight = implode(',', $request->input('highlight'));
+            $business->city = $request->input('city');
+            $business->placeAddress = $request->input('placeAddress');
+            $business->email = $request->input('email');
+            $business->phoneNumber1 = $request->input('phoneNumber1');
+            $business->phoneNumber2 = $request->input('phoneNumber2');
+            $business->whatsappNo = $request->input('whatsappNo');
+            $business->websiteUrl = $request->input('websiteUrl');
+            $business->additionalFields = $request->input('additionalFields');
+            $business->facebook = $request->input('facebook');
+            $business->instagram = $request->input('instagram');
+            $business->twitter = $request->input('twitter');
+            $business->bookingType = $request->input('bookingType');
+            $business->bookingurl = $request->input('bookingurl');
+            $business->businessName = $request->input('businessName');
+            $business->youtube = $request->input('youtube');
+            $business->video = $request->input('video');
+            // dd($business->all());
 
-        return $this->validate($request, $rules);
-    }
+            $allowedExtensions = ['jpg', 'jpeg', 'png', 'svg', 'webp'];
+            $destinationPath = public_path('uploads');
 
-    protected function handleFileUpload(Request $request, BusinessList $business)
-    {
-        $allowedExtensions = ['jpg', 'jpeg', 'png', 'svg', 'webp'];
-        $destinationPath = public_path('uploads');
+            foreach (['coverImage', 'galleryImage', 'documentImage', 'logo'] as $fileField) {
+                if ($request->hasFile($fileField)) {
+                    $file = $request->file($fileField);
 
-        foreach (['coverImage', 'galleryImage', 'documentImage', 'logo'] as $fileField) {
-            if ($request->hasFile($fileField)) {
-                $file = $request->file($fileField);
+                    $extension = strtolower($file->getClientOriginalExtension());
 
-                $extension = strtolower($file->getClientOriginalExtension());
-
-                if (in_array($extension, $allowedExtensions) && $file->isValid()) {
-                    $fileName = time() . '.' . $extension;
-                    $file->move($destinationPath, $fileName);
-                    $business->$fileField = $fileName;
+                    if (in_array($extension, $allowedExtensions) && $file->isValid()) {
+                        $fileName = time() . '.' . $extension;
+                        $file->move($destinationPath, $fileName);
+                        $business->$fileField = $fileName;
+                    }
                 }
             }
+
+            // Save the model to the database
+            $business->save();
+
+            // Redirect back with a success message or do something else
+            return redirect()
+                ->route('ownerListing')
+                ->with('success', $editId ? 'Business updated successfully' : 'Business added successfully');
+        } catch (ValidationException $e) {
+            // Handle validation errors
+            return redirect()
+                ->back()
+                ->withErrors($e->validator->errors())
+                ->withInput();
+        } catch (\Exception $e) {
+            // Handle other errors, log them, or display an error message
+            return redirect()
+                ->back()
+                ->with('error', 'Error: ' . $e->getMessage());
         }
     }
 

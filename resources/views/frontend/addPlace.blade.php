@@ -62,14 +62,14 @@
                         @enderror
                     </div>
                     <div class="field-group field-select">
-                        <label for="type">Category</label>
-                        <select data-placeholder="Select Category" class="chosen-select" id="Category" name="Category">
+                        <label for="type">category</label>
+                        <select data-placeholder="Select category" class="chosen-select" id="category" name="category">
                             <option selected></option>
-                            @foreach ($Category as $value)
+                            @foreach ($category as $value)
                                 <option>{{ $value->title }}</option>
                             @endforeach
                         </select>
-                        @error('Category')
+                        @error('category')
                             <div class="has-error mt-2">{{ $message }}</div>
                         @enderror
                     </div>

@@ -106,9 +106,11 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::post('/add-business', 'HomeController@store')->name('business.store');
+Route::get('/ownerListing', [HomeController::class, 'ownerListing'])->name('ownerListing');
 
 Route::get('/addPlace', [HomeController::class, 'addPlace'])->name('addPlace');
+Route::post('/addPlace/savePlace', [HomeController::class, 'savePlace'])->name('savePlace');
+
 Route::get('/editPlace/{id}', [HomeController::class, 'editPlace'])->name('editPlace');
 
-Route::post('/addPlace/savePlace', [HomeController::class, 'savePlace'])->name('savePlace');
-Route::get('/ownerListing', [HomeController::class, 'ownerListing'])->name('ownerListing');
+Route::put('/editPlace/updatePlace/{id}', [HomeController::class, 'updatePlace'])->name('updatePlace');
