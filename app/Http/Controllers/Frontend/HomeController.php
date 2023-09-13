@@ -428,4 +428,14 @@ class HomeController extends Controller
     {
         return view('frontend.ownerLeads');
     }
+
+    public function ownerShop()
+    {
+        return view('frontend.ownerShop');
+    }
+    
+    public function searchFilter()
+    {
+        return view('frontend.searchFilter');
+    }
 }
