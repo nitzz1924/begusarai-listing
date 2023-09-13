@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 11, 2023 at 03:01 PM
+-- Generation Time: Sep 13, 2023 at 02:55 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.1
 
@@ -96,12 +96,13 @@ INSERT INTO `blogs` (`id`, `title`, `description`, `category`, `uploaded_by`, `f
 
 CREATE TABLE `businesslist` (
   `id` bigint(20) NOT NULL,
+  `userId` bigint(255) NOT NULL,
   `category` varchar(255) NOT NULL,
   `placeType` varchar(255) NOT NULL,
   `description` varchar(255) NOT NULL,
   `price` varchar(255) NOT NULL,
   `duration` varchar(255) NOT NULL,
-  `hightlights` varchar(255) NOT NULL,
+  `highlight` varchar(255) NOT NULL,
   `city` varchar(255) NOT NULL,
   `placeAddress` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
@@ -115,18 +116,29 @@ CREATE TABLE `businesslist` (
   `twitter` varchar(255) NOT NULL,
   `bookingType` varchar(255) NOT NULL,
   `bookingurl` varchar(255) NOT NULL,
-  `packageId` varchar(255) NOT NULL,
-  `expairyDate` varchar(255) NOT NULL,
+  `packageId` varchar(255) DEFAULT NULL,
+  `expairyDate` varchar(255) NOT NULL DEFAULT current_timestamp(),
   `businessName` varchar(255) NOT NULL,
   `youtube` varchar(255) NOT NULL,
-  `coverImage` varchar(255) NOT NULL,
-  `galleryImage` varchar(255) NOT NULL,
-  `documentImage` varchar(255) NOT NULL,
-  `logo` varchar(255) NOT NULL,
-  `video` varchar(255) NOT NULL,
+  `coverImage` varchar(255) DEFAULT NULL,
+  `galleryImage` varchar(255) DEFAULT NULL,
+  `documentImage` varchar(255) DEFAULT NULL,
+  `logo` varchar(255) DEFAULT NULL,
+  `video` varchar(255) DEFAULT NULL,
+  `status` enum('0','1','','') NOT NULL DEFAULT '0',
+  `planStatus` enum('0','1','2','') NOT NULL DEFAULT '0',
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `businesslist`
+--
+
+INSERT INTO `businesslist` (`id`, `userId`, `category`, `placeType`, `description`, `price`, `duration`, `highlight`, `city`, `placeAddress`, `email`, `phoneNumber1`, `phoneNumber2`, `whatsappNo`, `websiteUrl`, `additionalFields`, `facebook`, `instagram`, `twitter`, `bookingType`, `bookingurl`, `packageId`, `expairyDate`, `businessName`, `youtube`, `coverImage`, `galleryImage`, `documentImage`, `logo`, `video`, `status`, `planStatus`, `created_at`, `updated_at`) VALUES
+(1, 1, 'Hotel', 'Placetype 2,Placetype 1', 'This Is Description field', 'This Is A Price Field', 'This Is A Duration', 'Highlight 2,Highlight 1', 'Jodhpur City', 'Ajmer', 'adstestyuv@gmail.com', '12345667890', '12345667890', '12345667890', 'https://proaidirectory.com/', 'https://proaidirectory.com/', 'https://proaidirectory.com/', 'https://proaidirectory.com/', 'https://proaidirectory.com/', 'ty1', 'https://proaidirectory.com/', NULL, '2023-09-12 11:29:45', 'New Updated List 1', 'https://proaidirectory.com/', '1694588906.jpg', '1694586307.jpg', '1694586321.jpg', '1694586307.jpg', 'https://proaidirectory.com', '1', '1', '2023-09-12 11:59:45', '2023-09-13 12:45:44'),
+(11, 1, 'Hospital', 'Placetype 2', 'df', 'qwe', 'sd', 'Highlight 2', 'Ajmer City', 'Ajmer', 'adstestyuv@gmail.com', '01267897067', '09588871256', '43', 'https://junglebooktourism.com/our-packages', 'https://junglebooktourism.com/our-packages', 'https://junglebooktourism.com/our-packages', 'https://junglebooktourism.com/our-packages', 'https://junglebooktourism.com/our-packages', 'ty1', 'https://junglebooktourism.com/our-packages', NULL, '2023-09-13 10:41:10', 'TEST 123', 'https://junglebooktourism.com/our-packages', '1694588906.jpg', '1694581870.jpg', '1694581870.jpg', '1694588906.jpg', 'https://junglebooktourism.com/our-packages', '0', '0', '2023-09-13 11:11:10', '2023-09-13 12:52:29'),
+(12, 1, 'Hospital', 'Placetype 2,Placetype 1', '2', '2', '2', 'Highlight 2,Highlight 1', 'Ajmer City', 'Ajmer', 'rahulyuvmedia@gmail.com', '09588871256', '2', '2', 'https://proaidirectory.com/', 'https://proaidirectory.com/', 'https://proaidirectory.com/', 'https://proaidirectory.com/', 'https://proaidirectory.com/', 'ty1', 'https://proaidirectory.com/', NULL, '2023-09-13 12:31:28', '2', 'https://proaidirectory.com/', '1694588906.jpg', '1694588906.jpg', '1694588906.jpg', '1694588906.jpg', 'https://junglebooktourism.com/our-pa', '0', '0', '2023-09-13 13:01:28', '2023-09-13 13:08:26');
 
 -- --------------------------------------------------------
 
@@ -165,22 +177,21 @@ CREATE TABLE `master` (
 --
 
 INSERT INTO `master` (`id`, `type`, `title`, `value`, `logo`, `status`, `created_at`, `updated_at`) VALUES
-(2, 'Master', 'Category', 'Category', NULL, 'Active', '2023-09-07 07:13:17', '2023-09-11 10:07:44'),
+(2, 'Master', 'category', 'category', NULL, 'Active', '2023-09-07 07:13:17', '2023-09-13 06:44:44'),
 (5, 'Master', 'Placetype', 'Placetype', NULL, 'Active', '2023-09-11 10:04:45', '2023-09-11 10:13:00'),
-(7, 'Category', 'Hotel', 'Hotel', '1694425238.jpg', 'Active', '2023-09-11 10:10:38', '2023-09-11 10:10:38'),
-(8, 'Category', 'Hospital', 'Hospital', '1694425263.jpg', 'Active', '2023-09-11 10:11:03', '2023-09-11 10:11:03'),
+(7, 'category', 'Hotel', 'fa-solid fa-hotel', '1694425238.jpg', 'Active', '2023-09-11 10:10:38', '2023-09-11 10:10:38'),
+(8, 'category', 'Hospital', 'fa-solid fa-hospital', '1694425263.jpg', 'Active', '2023-09-11 10:11:03', '2023-09-11 10:11:03'),
 (9, 'Placetype', 'Placetype 1', 'Placetype 1', '1694425424.jpg', 'Active', '2023-09-11 10:13:44', '2023-09-11 10:13:44'),
 (10, 'Placetype', 'Placetype 2', 'Placetype 2', '1694425443.jpg', 'Active', '2023-09-11 10:14:03', '2023-09-11 10:14:03'),
 (11, 'Master', 'Highlight', 'Highlight', NULL, 'Active', '2023-09-11 10:53:07', '2023-09-11 10:53:07'),
 (16, 'Highlight', 'Highlight 1', 'Highlight 1', '1694427888.jpg', 'Active', '2023-09-11 10:54:48', '2023-09-11 10:54:48'),
 (17, 'Highlight', 'Highlight 2', 'Highlight 2', '1694427905.jpg', 'Active', '2023-09-11 10:55:05', '2023-09-11 10:55:05'),
 (18, 'Master', 'City', 'City', NULL, 'Active', '2023-09-11 11:07:15', '2023-09-11 11:07:15'),
-(20, 'City', 'Jodhpur City', 'Jodhpur City', NULL, 'Active', '2023-09-11 11:09:33', '2023-09-11 11:09:33'),
-(21, 'City', 'Ajmer City', 'Ajmer City', NULL, 'Active', '2023-09-11 11:09:53', '2023-09-11 11:09:53'),
-(22, 'Master', 'Booking_Type', 'Booking_Type', NULL, 'Active', '2023-09-11 13:00:52', '2023-09-11 13:01:22'),
-(23, 'Booking_Type', 'Type 1', 'Type 1', NULL, 'Active', '2023-09-11 13:02:01', '2023-09-11 13:02:01'),
-(24, 'Booking_Type', 'Type 2', 'Type 2', NULL, 'Active', '2023-09-11 13:02:12', '2023-09-11 13:02:12'),
-(25, 'Booking_Type', 'Type 3', 'Type 3', NULL, 'Active', '2023-09-11 13:02:26', '2023-09-11 13:02:26');
+(20, 'City', 'Jodhpur City', 'Jodhpur City', '1694427905.jpg', 'Active', '2023-09-11 11:09:33', '2023-09-11 11:09:33'),
+(21, 'City', 'Ajmer City', 'Ajmer City', '1694427888.jpg\r\n', 'Active', '2023-09-11 11:09:53', '2023-09-11 11:09:53'),
+(22, 'Master', 'bookingType', 'bookingType', NULL, 'Active', '2023-09-11 13:00:52', '2023-09-12 10:05:56'),
+(26, 'bookingType', 'ty1', 'ty1', '1694511866.jpg', 'Active', '2023-09-12 10:14:26', '2023-09-12 10:14:26'),
+(27, 'category', 'Gym', 'fa-solid fa-dumbbell', '1694604325.jpg', 'Active', '2023-09-13 11:55:25', '2023-09-13 11:55:25');
 
 -- --------------------------------------------------------
 
@@ -281,9 +292,11 @@ INSERT INTO `oauth_access_tokens` (`id`, `user_id`, `client_id`, `name`, `scopes
 ('40d949ec1e4005369183121030e1926d19f67fe76ce7880fd70cb61bb36f44f6e14ef01f91dac974', 1, 4, 'adminApiToken', '[]', 0, '2023-09-06 09:23:19', '2023-09-06 09:23:19', '2024-09-06 14:53:19'),
 ('4a58ac7d639bf5979575952f0d5462d4db0d68ce827b7a44263bf7de507763fda8771c1fc33e0b30', 1, 4, 'adminApiToken', '[]', 0, '2023-09-04 08:47:11', '2023-09-04 08:47:11', '2024-09-04 14:17:11'),
 ('55f9326aea22d0ad8a365398a81225484943154fc883b11343b25f69507062b24ff60635143e4925', 1, 4, 'adminApiToken', '[]', 0, '2023-09-07 06:56:15', '2023-09-07 06:56:15', '2024-09-07 12:26:15'),
+('625ab89581817b3f756b06203741d8ba93b184317cb986fb2c1c060a2c576bcfae06953fbcc79ef5', 1, 4, 'adminApiToken', '[]', 0, '2023-09-12 09:52:37', '2023-09-12 09:52:37', '2024-09-12 15:22:37'),
 ('67cba7b98c79510c5fac62493938fa857b1cf00da731c40c852ec4949f04be06e0dd476a84d94f8f', 1, 4, 'adminApiToken', '[]', 0, '2020-09-27 10:50:50', '2020-09-27 10:50:50', '2021-09-27 16:20:50'),
 ('6b2c2d1ba407c89557e9372a0f813bc070ba242cc5a60292e381f4899cb554eb4694c3429c184680', 1, 4, 'adminApiToken', '[]', 0, '2023-09-08 05:03:07', '2023-09-08 05:03:07', '2024-09-08 10:33:07'),
 ('6c499106b84461888f3563bc2ca0166ef9595da9e8b2a98ce92641c1d50f05c0e747bc11e1935daf', 1, 4, 'adminApiToken', '[]', 0, '2023-09-04 06:03:31', '2023-09-04 06:03:31', '2024-09-04 11:33:31'),
+('6d93297e379e0137a94655f3ddbfef983b2b38f225e618666a61bfeabc368b6112f75830566178b2', 1, 4, 'adminApiToken', '[]', 0, '2023-09-13 10:48:04', '2023-09-13 10:48:04', '2024-09-13 16:18:04'),
 ('6f8b1567811d785614a045204709d7d3166a2b76a1a1075d8a01c05951d6a64737aa1206ab8f81e5', 1, 4, 'adminApiToken', '[]', 0, '2023-09-08 04:54:33', '2023-09-08 04:54:33', '2024-09-08 10:24:33'),
 ('77e00bb4c445d82f6fa939489cc7ecf0a1f5203a5916b7946ef97816b41ae6703df53bfb679ccbef', 1, 4, 'adminApiToken', '[]', 0, '2023-09-07 05:05:11', '2023-09-07 05:05:11', '2024-09-07 10:35:11'),
 ('88cf5da31e2e53a53ea50c1307b5d6e50791db94cc3726f64d525b258d2f31baad5667cfe4c0f666', 1, 4, 'adminApiToken', '[]', 0, '2023-09-04 07:15:09', '2023-09-04 07:15:09', '2024-09-04 12:45:09'),
@@ -299,7 +312,8 @@ INSERT INTO `oauth_access_tokens` (`id`, `user_id`, `client_id`, `name`, `scopes
 ('d9f29ed0d6be329356ca4be84dcae7fa56eeb89df4efbf9fcbe1dfdc882d9befe5abdc2dd9373383', 1, 4, 'Admin', '[]', 0, '2020-09-27 11:42:30', '2020-09-27 11:42:30', '2021-09-27 17:12:30'),
 ('dcf24d9385de348f6322373538b210a7596b880aa7def6aeec7a63e917cd6b8a003a035c9e9e4947', 1, 4, 'adminApiToken', '[]', 0, '2020-09-27 11:50:34', '2020-09-27 11:50:34', '2021-09-27 17:20:34'),
 ('f1c13ea4834a3fbcf4928b97627a4c7c1355996866d29597cc2f098108ecf4755c12630485f2f73b', 1, 4, 'adminApiToken', '[]', 0, '2023-09-08 05:11:09', '2023-09-08 05:11:09', '2024-09-08 10:41:09'),
-('f8c55020a77d1c3f20cd488f9d962c581b5ee74ec8dc38b649ed10f2772ca432f6410d8718ca8fa0', 1, 4, 'adminApiToken', '[]', 0, '2023-09-09 10:20:10', '2023-09-09 10:20:10', '2024-09-09 15:50:10');
+('f8c55020a77d1c3f20cd488f9d962c581b5ee74ec8dc38b649ed10f2772ca432f6410d8718ca8fa0', 1, 4, 'adminApiToken', '[]', 0, '2023-09-09 10:20:10', '2023-09-09 10:20:10', '2024-09-09 15:50:10'),
+('fc72a42975d439b5b966786c3e18e78b7db0acfeba4ba12e70dd38dba6bd460206bf7c9182322ba8', 1, 4, 'adminApiToken', '[]', 0, '2023-09-13 06:44:25', '2023-09-13 06:44:25', '2024-09-13 12:14:25');
 
 -- --------------------------------------------------------
 
@@ -579,11 +593,7 @@ CREATE TABLE `users_login` (
 --
 
 INSERT INTO `users_login` (`id`, `type`, `name`, `mobileNumber`, `email`, `email_verified_at`, `verificationCode`, `password`, `file_path`, `status`, `remember_token`, `created_at`, `updated_at`) VALUES
-(3, 'Owner', 'Rahul Soni', '123', 'rahulyuvmedia@gmail.com', NULL, '123445', '123456', '1694407166.jpg', 1, NULL, '2023-09-04 06:04:55', '2023-09-11 05:09:26'),
-(71, 'Guest', 'Rahul Soni', '1111111111', NULL, NULL, '695354', '$2y$10$6pjVJeqf3gy9ZE7xh1Pg4eE7BFsXUYrBbuklNVH2jiOnQ8RBjjqdq', 'assets/images/users/user.png', 1, NULL, '2023-09-11 04:36:05', '2023-09-11 04:47:28'),
-(72, 'Guest', NULL, '1111111112', NULL, NULL, '746288', NULL, 'assets/images/users/default.png', 0, NULL, '2023-09-11 04:37:54', '2023-09-11 04:37:54'),
-(73, 'Guest', 'rahulsoni@admin.com', '1231231232', NULL, NULL, '868683', '$2y$10$YwjYlIxJVufiOihx2IZbuOuoxOOcaqHaR3veT5qbv/qvNDaf9M466', 'assets/images/users/default.png', 1, NULL, '2023-09-11 04:48:52', '2023-09-11 04:49:05'),
-(74, 'Owner', 'Rahul ', '1234567890', NULL, NULL, '513004', '$2y$10$emLAE2FYbUWv34Y1LPEnzuwGDstk3FZzyQ6pL1TV8PAlYvw4.jIle', 'assets/images/users/default.png', 1, NULL, '2023-09-11 06:17:50', '2023-09-11 06:18:02');
+(1, 'Owner', 'Rahul Soni', '1234567890', NULL, NULL, '242722', '$2y$10$tvSg7y5WvMIsEXkRocVWgOZo5Fr1.Gw0CE2ZgbcdSsOlqvc1486hS', 'assets/images/users/default.png', 1, NULL, '2023-09-12 06:07:43', '2023-09-12 06:07:58');
 
 --
 -- Indexes for dumped tables
@@ -742,7 +752,7 @@ ALTER TABLE `blogs`
 -- AUTO_INCREMENT for table `businesslist`
 --
 ALTER TABLE `businesslist`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -754,7 +764,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `master`
 --
 ALTER TABLE `master`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -802,7 +812,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `users_login`
 --
 ALTER TABLE `users_login`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables

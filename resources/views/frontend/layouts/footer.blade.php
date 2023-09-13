@@ -137,3 +137,4 @@
 <script src="{{ asset('/assets/frontend-assets/libs/waypoints/jquery.waypoints.min.js') }}"></script>
 <!-- orther script -->
 <script src="{{ asset('/assets/frontend-assets/js/main.js')}}"></script>
+<script src="https://kit.fontawesome.com/40bf30a2ca.js" crossorigin="anonymous"></script>

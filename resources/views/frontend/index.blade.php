@@ -6,137 +6,106 @@
         <div>
 
             <main id="main" class="site-main home-main business-main overflow">
-                
-                    <div class="site-banner bg_hero_02" style=" background-image: url('assets/images/home/hero-bg.webp'); ">
-                        {{-- <video class="overlay-video" autoplay="" muted="" playsinline="" loop=""
+
+                <div class="site-banner bg_hero_02" style=" background-image: url('assets/images/home/hero-bg.webp'); ">
+                    {{-- <video class="overlay-video" autoplay="" muted="" playsinline="" loop=""
                             src="{{ asset('https://getgolo.com/images/video3.mp4') }}"></video> --}}
-                        <div class="overlay overlay_2">
-                        </div>
-                            <div class="container">
-                                <div class="site-banner__content">
-                                    <h1 class="site-banner__title">Business Listing</h1>
-                                    <p>
-                                        <i>20</i> cities, <i>10</i> categories, <i>5662</i> listings.
-                                    </p>
-                                    <form action="#" class="site-banner__search layout-02">
-                                        <div class="field-input">
-                                            <label for="s">Find</label>
-                                            <input class="site-banner__search__input open-suggestion" id="s" type="text"
-                                                name="s" placeholder="Ex: fastfood, beer" autocomplete="off" />
-                                            <div class="search-suggestions name-suggestions">
-                                                <ul>
-                                                    <li>
-                                                        <a href="#"><i class="las la-utensils"></i><span>Restaurant</span></a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#"><i class="las la-spa"></i><span>Beauty</span></a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#"><i class="las la-dumbbell"></i><span>Fitness</span></a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#"><i class="las la-cocktail"></i><span>Nightlight</span></a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#"><i
-                                                                class="las la-shopping-bag"></i><span>Shopping</span></a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#"><i class="las la-film"></i><span>Cinema</span></a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <!-- .site-banner__search__input -->
-                                        <div class="field-input">
-                                            <label for="loca">Where</label>
-                                            <input class="site-banner__search__input open-suggestion" id="loca" type="text"
-                                                name="where" placeholder="Your city" autocomplete="off" />
-                                            <div class="search-suggestions location-suggestions">
-                                                <ul>
-                                                    <li>
-                                                        <a href="#"><i class="las la-location-arrow"></i><span>Current
-                                                                location</span></a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#"><span>San Francisco, CA</span></a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <!-- .site-banner__search__input -->
-                                        <div class="field-submit">
-                                            <button><i class="las la-search la-24-black"></i></button>
-                                        </div>
-                                    </form>
-                                    <!-- .site-banner__search -->
-                                </div>
-                                <!-- .site-banner__content -->
-                            </div>
-                        
+                    <div class="overlay overlay_2">
                     </div>
-                
+                    <div class="container">
+                        <div class="site-banner__content">
+                            <h1 class="site-banner__title">Business Listing</h1>
+                            <p>
+                                <i>20</i> cities, <i>10</i> categories, <i>5662</i> listings.
+                            </p>
+                            <form action="#" class="site-banner__search layout-02">
+                                <div class="field-input">
+                                    <label for="s">Find</label>
+                                    <input class="site-banner__search__input open-suggestion" id="s" type="text"
+                                        name="s" placeholder="Ex: fastfood, beer" autocomplete="off" />
+                                    <div class="search-suggestions name-suggestions">
+                                        <ul>
+                                            <li>
+                                                <a href="#"><i class="las la-utensils"></i><span>Restaurant</span></a>
+                                            </li>
+                                            <li>
+                                                <a href="#"><i class="las la-spa"></i><span>Beauty</span></a>
+                                            </li>
+                                            <li>
+                                                <a href="#"><i class="las la-dumbbell"></i><span>Fitness</span></a>
+                                            </li>
+                                            <li>
+                                                <a href="#"><i class="las la-cocktail"></i><span>Nightlight</span></a>
+                                            </li>
+                                            <li>
+                                                <a href="#"><i
+                                                        class="las la-shopping-bag"></i><span>Shopping</span></a>
+                                            </li>
+                                            <li>
+                                                <a href="#"><i class="las la-film"></i><span>Cinema</span></a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!-- .site-banner__search__input -->
+                                <div class="field-input">
+                                    <label for="loca">Where</label>
+                                    <input class="site-banner__search__input open-suggestion" id="loca" type="text"
+                                        name="where" placeholder="Your city" autocomplete="off" />
+                                    <div class="search-suggestions location-suggestions">
+                                        <ul>
+                                            <li>
+                                                <a href="#"><i class="las la-location-arrow"></i><span>Current
+                                                        location</span></a>
+                                            </li>
+                                            <li>
+                                                <a href="#"><span>San Francisco, CA</span></a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!-- .site-banner__search__input -->
+                                <div class="field-submit">
+                                    <button><i class="las la-search la-24-black"></i></button>
+                                </div>
+                            </form>
+                            <!-- .site-banner__search -->
+                        </div>
+                        <!-- .site-banner__content -->
+                    </div>
+
+                </div>
+
                 <!-- .site-banner -->
                 <div class="business-category">
                     <div class="container">
                         <h2 class="title title-border-bottom align-center offset-item">
                             Browse Businesses by Category
                         </h2>
+
+
                         <div class="slick-sliders offset-item">
+
                             <div class="slick-slider business-cat-slider slider-pd30" data-item="6" data-arrows="true"
                                 data-itemScroll="6" data-dots="true" data-centerPadding="50" data-tabletitem="3"
                                 data-tabletscroll="3" data-smallpcitem="4" data-smallpcscroll="4" data-mobileitem="2"
                                 data-mobilescroll="2" data-mobilearrows="false">
-                                <div class="bsn-cat-item rosy-pink">
-                                    <a href="ex-half-map-1.html">
-                                        <i class="las la-utensils"></i>
-                                        <span class="title">Restaurant</span>
-                                        <span class="place">12 Places</span>
-                                    </a>
-                                </div>
 
-                                {{-- <div class="bsn-cat-item purple">
-                                    <a href="ex-half-map-1.html">
-                                        <i class="las la-spa"></i>
-                                        <span class="title">Beauty</span>
-                                        <span class="place">8 Places</span>
-                                    </a>
-                                </div>
-                                <div class="bsn-cat-item blue">
-                                    <a href="ex-half-map-1.html">
-                                        <i class="las la-dumbbell"></i>
-                                        <span class="title">Fitness</span>
-                                        <span class="place">6 Places</span>
-                                    </a>
-                                </div>
-                                <div class="bsn-cat-item orange">
-                                    <a href="ex-half-map-1.html">
-                                        <i class="las la-cocktail"></i>
-                                        <span class="title">Nightlife</span>
-                                        <span class="place">10 Places</span>
-                                    </a>
-                                </div>
-                                <div class="bsn-cat-item charcoal-purple">
-                                    <a href="ex-half-map-1.html">
-                                        <i class="las la-shopping-bag"></i>
-                                        <span class="title">Shopping</span>
-                                        <span class="place">12 Places</span>
-                                    </a>
-                                </div>
-                                <div class="bsn-cat-item green">
-                                    <a href="ex-half-map-1.html">
-                                        <i class="las la-film"></i>
-                                        <span class="title">Cinema</span>
-                                        <span class="place">15 Places</span>
-                                    </a>
-                                </div>
-                                <div class="bsn-cat-item rosy-pink">
-                                    <a href="ex-half-map-1.html">
-                                        <i class="las la-utensils"></i>
-                                        <span class="title">Restaurant</span>
-                                        <span class="place">12 Places</span>
-                                    </a>
-                                </div> --}}
+                                @foreach ($submaster as $value)
+                                    <div class="bsn-cat-item rosy-pink">
+                                        <a href="ex-half-map-1.html">
+                                            {{-- <img class="img-thumbnail img-fluid tool-img-edit"
+                                                src="{{ URL::to('/uploads/' . $value->logo) }}"
+                                                style="height: 50px;
+                                                width: 50px;
+                                                margin: 0px auto;" /> --}}
+                                            <i class="{{ $value->value }}"></i>
+                                            <span class="title">{{ $value->title }}</span>
+                                            <span class="place">12 Places</span>
+                                        </a>
+                                    </div>
+                                @endforeach
+
 
                             </div>
                             <div class="place-slider__nav slick-nav">
@@ -165,234 +134,69 @@
                                 data-tabletscroll="2" data-smallpcscroll="3" data-smallpcitem="3" data-mobileitem="1"
                                 data-mobilescroll="1" data-mobilearrows="false">
 
-                                <div class="place-item layout-02 place-hover">
-                                    <div class="place-inner">
-                                        <div class="place-thumb hover-img">
-                                            <a class="entry-thumb" href="single-1.html"><img src="{{ asset('assets/images/home/hero-bg.webp')}}"
-                                                    alt="" /></a>
-                                            <a href="#" class="golo-add-to-wishlist btn-add-to-wishlist"
-                                                data-place-id="185">
-                                                <span class="icon-heart">
-                                                    <i class="la la-bookmark large"></i>
-                                                </span>
-                                            </a>
-                                            <a class="entry-category rosy-pink" href="#">
-                                                <i class="las la-utensils"></i><span>Restaurant</span>
-                                            </a>
-                                            <a href="#" class="author" title="Author"><img
-                                                    src="{{ asset('assets/images/reviews/male-1.jpg')}}" alt="Author" /></a>
-                                            <div class="feature">Featured</div>
-                                        </div>
-                                        <div class="entry-detail">
-                                            <div class="entry-head">
-                                                <div class="place-type list-item">
-                                                    <span>Restaurant</span>
-                                                </div>
-                                                <div class="place-city">
-                                                    <a href="#">Paris</a>
-                                                </div>
+                                @foreach ($businesses as $value)
+                                    <div class="place-item layout-02 place-hover">
+                                        <div class="place-inner">
+                                            <div class="place-thumb hover-img">
+                                                <a class="entry-thumb" href="single-1.html">
+
+                                                    <img src="{{ URL::to('uploads/' . $value->coverImage) }}" />
+
+
+                                                </a>
+                                                <a href="#" class="golo-add-to-wishlist btn-add-to-wishlist"
+                                                    data-place-id="185">
+                                                    <span class="icon-heart">
+                                                        <i class="la la-bookmark large"></i>
+                                                    </span>
+                                                </a>
+                                                <a class="entry-category rosy-pink" href="#">
+
+                                                    @foreach ($submaster as $subvalue)
+                                                        @if ($subvalue->title === $value->category)
+                                                            <i class="{{ $subvalue->value }}"></i>
+                                                        @endif
+                                                    @endforeach
+
+                                                    </i><span>{{ $value->category }}</span>
+                                                </a>
+                                                <a href="#" class="author" title="Author">
+                                                    <img src="{{ URL::to('uploads/' . $value->logo) }}"alt="Author" />
+
+                                                </a>
+                                                <div class="feature">Featured</div>
                                             </div>
-                                            <h3 class="place-title">
-                                                <a href="single-1.html">Mattone Restaurant</a>
-                                            </h3>
-                                            <div class="open-now">
-                                                <i class="las la-door-open"></i>Open now
-                                            </div>
-                                            <div class="entry-bottom">
-                                                <div class="place-preview">
-                                                    <div class="place-rating">
-                                                        <span>5.0</span>
-                                                        <i class="la la-star"></i>
+                                            <div class="entry-detail">
+                                                <div class="entry-head">
+                                                    <div class="place-type list-item">
+                                                        <span>Restaurant</span>
                                                     </div>
-                                                    <span class="count-reviews">(2 Reviews)</span>
-                                                </div>
-                                                <div class="place-price">
-                                                    <span>$$</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                {{-- <div class="place-item layout-02 place-hover">
-                                    <div class="place-inner">
-                                        <div class="place-thumb hover-img">
-                                            <a class="entry-thumb" href="single-1.html"><img src="images/listing/02.jpg"
-                                                    alt="" /></a>
-                                            <a href="#" class="golo-add-to-wishlist btn-add-to-wishlist"
-                                                data-place-id="185">
-                                                <span class="icon-heart">
-                                                    <i class="la la-bookmark large"></i>
-                                                </span>
-                                            </a>
-                                            <a class="entry-category blue" href="#">
-                                                <i class="las la-dumbbell"></i><span>Gym</span>
-                                            </a>
-                                            <a href="#" class="author" title="Author"><img
-                                                    src="images/avatars/male-2.jpg" alt="Author" /></a>
-                                        </div>
-                                        <div class="entry-detail">
-                                            <div class="entry-head">
-                                                <div class="place-type list-item">
-                                                    <span>Gym</span>
-                                                </div>
-                                                <div class="place-city">
-                                                    <a href="#">Bordeaux</a>
-                                                </div>
-                                            </div>
-                                            <h3 class="place-title">
-                                                <a href="single-1.html">Retro Fitness</a>
-                                            </h3>
-                                            <div class="open-now">
-                                                <i class="las la-door-open"></i>Open now
-                                            </div>
-                                            <div class="entry-bottom">
-                                                <div class="place-preview">
-                                                    <div class="place-rating">
-                                                        <span>5.0</span>
-                                                        <i class="la la-star"></i>
+                                                    <div class="place-city">
+                                                        <a href="#">Paris</a>
                                                     </div>
-                                                    <span class="count-reviews">(2 Reviews)</span>
                                                 </div>
-                                                <div class="place-price">
-                                                    <span>$$</span>
+                                                <h3 class="place-title">
+                                                    <a href="single-1.html">{{ $value->businessName }}</a>
+                                                </h3>
+                                                <div class="open-now">
+                                                    <i class="las la-door-open"></i>Open now
                                                 </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="place-item layout-02 place-hover">
-                                    <div class="place-inner">
-                                        <div class="place-thumb hover-img">
-                                            <a class="entry-thumb" href="single-1.html"><img src="images/listing/03.jpg"
-                                                    alt="" /></a>
-                                            <a href="#" class="golo-add-to-wishlist btn-add-to-wishlist"
-                                                data-place-id="185">
-                                                <span class="icon-heart">
-                                                    <i class="la la-bookmark large"></i>
-                                                </span>
-                                            </a>
-                                            <a class="entry-category purple" href="#">
-                                                <i class="las la-spa"></i><span>Massage</span>
-                                            </a>
-                                            <a href="#" class="author" title="Author"><img
-                                                    src="images/avatars/female-3.jpg" alt="Author" /></a>
-                                        </div>
-                                        <div class="entry-detail">
-                                            <div class="entry-head">
-                                                <div class="place-type list-item">
-                                                    <span>Massage</span>
-                                                </div>
-                                                <div class="place-city">
-                                                    <a href="#">Lyon</a>
-                                                </div>
-                                            </div>
-                                            <h3 class="place-title">
-                                                <a href="single-1.html">Renew Body Spa</a>
-                                            </h3>
-                                            <div class="close-now">
-                                                <i class="las la-door-closed"></i>Close now
-                                            </div>
-                                            <div class="entry-bottom">
-                                                <div class="place-preview">
-                                                    <div class="place-rating">
-                                                        <span>5.0</span>
-                                                        <i class="la la-star"></i>
+                                                <div class="entry-bottom">
+                                                    <div class="place-preview">
+                                                        <div class="place-rating">
+                                                            <span>5.0</span>
+                                                            <i class="la la-star"></i>
+                                                        </div>
+                                                        <span class="count-reviews">(2 Reviews)</span>
                                                     </div>
-                                                    <span class="count-reviews">(2 Reviews)</span>
-                                                </div>
-                                                <div class="place-price">
-                                                    <span>$$</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="place-item layout-02 place-hover">
-                                    <div class="place-inner">
-                                        <div class="place-thumb hover-img">
-                                            <a class="entry-thumb" href="single-1.html"><img src="images/listing/04.jpg"
-                                                    alt="" /></a>
-                                            <a href="#" class="golo-add-to-wishlist btn-add-to-wishlist"
-                                                data-place-id="185">
-                                                <span class="icon-heart">
-                                                    <i class="la la-bookmark large"></i>
-                                                </span>
-                                            </a>
-                                            <a class="entry-category charcoal-purple" href="#">
-                                                <i class="las la-shopping-bag"></i><span>Clothing Shop</span>
-                                            </a>
-                                            <a href="#" class="author" title="Author"><img
-                                                    src="images/avatars/male-4.jpg" alt="Author" /></a>
-                                        </div>
-                                        <div class="entry-detail">
-                                            <div class="entry-head">
-                                                <div class="place-type list-item">
-                                                    <span>Clothing Shop</span>
-                                                </div>
-                                                <div class="place-city">
-                                                    <a href="#">Nantes</a>
-                                                </div>
-                                            </div>
-                                            <h3 class="place-title">
-                                                <a href="single-1.html">Antoinette</a>
-                                            </h3>
-                                            <div class="close-now">
-                                                <i class="las la-door-closed"></i>Close now
-                                            </div>
-                                            <div class="entry-bottom">
-                                                <div class="place-preview">
-                                                    <span class="no-reviews">(no reviews)</span>
-                                                </div>
-                                                <div class="place-price">
-                                                    <span>$$$</span>
+                                                    <div class="place-price">
+                                                        <span>$$</span>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="place-item layout-02 place-hover">
-                                    <div class="place-inner">
-                                        <div class="place-thumb hover-img">
-                                            <a class="entry-thumb" href="single-1.html"><img src="images/listing/06.jpg"
-                                                    alt="" /></a>
-                                            <a href="#" class="golo-add-to-wishlist btn-add-to-wishlist"
-                                                data-place-id="185">
-                                                <span class="icon-heart">
-                                                    <i class="la la-bookmark large"></i>
-                                                </span>
-                                            </a>
-                                            <a class="entry-category green" href="#">
-                                                <i class="las la-film"></i><span>Cinema</span>
-                                            </a>
-                                            <a href="#" class="author" title="Author"><img
-                                                    src="images/avatars/female-3.jpg" alt="Author" /></a>
-                                        </div>
-                                        <div class="entry-detail">
-                                            <div class="entry-head">
-                                                <div class="place-type list-item">
-                                                    <span>Restaurant</span>
-                                                </div>
-                                                <div class="place-city">
-                                                    <a href="#">Paris</a>
-                                                </div>
-                                            </div>
-                                            <h3 class="place-title">
-                                                <a href="single-1.html">Kathay Cinema</a>
-                                            </h3>
-                                            <div class="close-now">
-                                                <i class="las la-door-closed"></i>Close now
-                                            </div>
-                                            <div class="entry-bottom">
-                                                <div class="place-preview">
-                                                    <span class="no-reviews">(no reviews)</span>
-                                                </div>
-                                                <div class="place-price">
-                                                    <span>$$</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> --}}
+                                @endforeach
 
                             </div>
                             <div class="place-slider__nav slick-nav">
@@ -420,82 +224,29 @@
                                 data-itemScroll="4" data-dots="true" data-centerPadding="30" data-tabletitem="2"
                                 data-tabletscroll="2" data-mobileitem="1" data-mobilescroll="1"
                                 data-mobilearrows="false">
-                                <div class="slick-item">
-                                    <div class="cities__item hover__box">
-                                        <div class="cities__thumb hover__box__thumb">
-                                            <a title="London" href="city-details-1.html">
-                                                <img src="{{ asset('assets/images/home/hero-bg.webp')}}" alt="London" />
-                                            </a>
-                                        </div>
-                                        <h4 class="cities__name">United States</h4>
-                                        <div class="cities__info">
-                                            <h3 class="cities__capital">New York</h3>
-                                            <p class="cities__number">80 places</p>
-                                        </div>
-                                    </div>
-                                    <!-- .cities__item -->
-                                </div>
 
-                                {{-- <div class="slick-item">
-                                    <div class="cities__item hover__box">
-                                        <div class="cities__thumb hover__box__thumb">
-                                            <a title="Rome" href="city-details-1.html">
-                                                <img src="images/city/barca.jpg" alt="Rome" />
-                                            </a>
+
+
+                                @foreach ($Mastercity as $value)
+                                    <div class="slick-item">
+                                        <div class="cities__item hover__box">
+                                            <div class="cities__thumb hover__box__thumb">
+                                                <a title="London" href="city-details-1.html">
+                                                    <img src="{{ URL::to('uploads/' . $value->logo) }}" alt="London" />
+
+                                                </a>
+                                            </div>
+                                            <h4 class="cities__name"></h4>
+                                            <div class="cities__info">
+                                                <h3 class="cities__capital">{{ $value->title }}</h3>
+                                                <p class="cities__number">80 places</p>
+                                            </div>
                                         </div>
-                                        <h4 class="cities__name">Spain</h4>
-                                        <div class="cities__info">
-                                            <h3 class="cities__capital">Barcelona</h3>
-                                            <p class="cities__number">92 places</p>
-                                        </div>
+                                        <!-- .cities__item -->
                                     </div>
-                                    <!-- .cities__item -->
-                                </div>
-                                <div class="slick-item">
-                                    <div class="cities__item hover__box">
-                                        <div class="cities__thumb hover__box__thumb">
-                                            <a title="San Fancisco" href="city-details-1.html">
-                                                <img src="images/city/angeles.jpg" alt="San Francisco" />
-                                            </a>
-                                        </div>
-                                        <h4 class="cities__name">United States</h4>
-                                        <div class="cities__info">
-                                            <h3 class="cities__capital">Los Angeles</h3>
-                                            <p class="cities__number">64 places</p>
-                                        </div>
-                                    </div>
-                                    <!-- .cities__item -->
-                                </div>
-                                <div class="slick-item">
-                                    <div class="cities__item hover__box">
-                                        <div class="cities__thumb hover__box__thumb">
-                                            <a title="Amsterdam" href="city-details-1.html">
-                                                <img src="images/city/amsterdam.jpg" alt="Amsterdam" />
-                                            </a>
-                                        </div>
-                                        <h4 class="cities__name">Netherlands</h4>
-                                        <div class="cities__info">
-                                            <h3 class="cities__capital">Amsterdam</h3>
-                                            <p class="cities__number">44 places</p>
-                                        </div>
-                                    </div>
-                                    <!-- .cities__item -->
-                                </div>
-                                <div class="slick-item">
-                                    <div class="cities__item hover__box">
-                                        <div class="cities__thumb hover__box__thumb">
-                                            <a title="Tokyo" href="city-details-1.html">
-                                                <img src="images/city/tokyo.jpg" alt="Tokyo" />
-                                            </a>
-                                        </div>
-                                        <h4 class="cities__name">Japan</h4>
-                                        <div class="cities__info">
-                                            <h3 class="cities__capital">Tokyo</h3>
-                                            <p class="cities__number">44 places</p>
-                                        </div>
-                                    </div>
-                                    <!-- .cities__item -->
-                                </div> --}}
+                                @endforeach
+
+
 
                             </div>
                             <div class="place-slider__nav slick-nav">
@@ -520,14 +271,22 @@
                                 <div class="business-about-info">
                                     <h2 class="offset-item">Who we are</h2>
                                     <p class="offset-item">
-                                        We are a specialised platform created to assist regional companies in Begusarai increase internet presence and connect with more customers. Our website provides a practical and efficient approach to highlight your products to potential clients in the neighbourhood, regardless of your business’s industry—restaurant, boutique, service provider, etc.
+                                        We are a specialised platform created to assist regional companies in Begusarai
+                                        increase internet presence and connect with more customers. Our website provides a
+                                        practical and efficient approach to highlight your products to potential clients in
+                                        the neighbourhood, regardless of your business’s industry—restaurant, boutique,
+                                        service provider, etc.
                                         <br>
-                                        You may include important facts like your company name, address, contact information, and a succinct description by listing your business on our site. This makes it much easier for people to find and interact with your company. Our website also gives you the option of enhancing your listing by using attractive images and videos that showcase the unique features of your goods or services
+                                        You may include important facts like your company name, address, contact
+                                        information, and a succinct description by listing your business on our site. This
+                                        makes it much easier for people to find and interact with your company. Our website
+                                        also gives you the option of enhancing your listing by using attractive images and
+                                        videos that showcase the unique features of your goods or services
                                     </p>
                                     <a href="#" class="btn offset-item">Read more</a>
                                 </div>
                             </div>
-                            
+
                         </div>
                     </div>
                 </div>
@@ -544,8 +303,9 @@
                                 data-mobilearrows="false">
                                 <div class="testimonial-item">
                                     <div class="avatar">
-                                        <img src="{{ asset('assets/images/reviews/male-1.jpg')}}" alt="Avatar" />
-                                        <img src="{{ asset('assets/images/reviews/quote-active.webp')}}" alt="Quote" class="quote" />
+                                        <img src="{{ asset('assets/images/reviews/male-1.jpg') }}" alt="Avatar" />
+                                        <img src="{{ asset('assets/images/reviews/quote-active.webp') }}" alt="Quote"
+                                            class="quote" />
                                     </div>
                                     <div class="testimonial-info">
                                         <p>
@@ -561,8 +321,9 @@
                                 </div>
                                 <div class="testimonial-item">
                                     <div class="avatar">
-                                        <img src="{{ asset('assets/images/reviews/male-1.jpg')}}" alt="Avatar" />
-                                        <img src="{{ asset('assets/images/reviews/quote-active.webp')}}" alt="Quote" class="quote" />
+                                        <img src="{{ asset('assets/images/reviews/male-1.jpg') }}" alt="Avatar" />
+                                        <img src="{{ asset('assets/images/reviews/quote-active.webp') }}" alt="Quote"
+                                            class="quote" />
                                     </div>
                                     <div class="testimonial-info">
                                         <p>
@@ -578,8 +339,9 @@
                                 </div>
                                 <div class="testimonial-item">
                                     <div class="avatar">
-                                        <img src="{{ asset('assets/images/reviews/male-1.jpg')}}" alt="Avatar" />
-                                        <img src="{{ asset('assets/images/reviews/quote-active.webp')}}" alt="Quote" class="quote" />
+                                        <img src="{{ asset('assets/images/reviews/male-1.jpg') }}" alt="Avatar" />
+                                        <img src="{{ asset('assets/images/reviews/quote-active.webp') }}" alt="Quote"
+                                            class="quote" />
                                     </div>
                                     <div class="testimonial-info">
                                         <p>
@@ -620,7 +382,8 @@
                                     <article class="post hover__box">
                                         <div class="post__thumb hover__box__thumb">
                                             <a title="The 8 Most Affordable Michelin Restaurants in Paris"
-                                                href="blog-detail.html"><img src="{{ asset('assets/images/home/hero-bg.webp')}}"
+                                                href="blog-detail.html"><img
+                                                    src="{{ asset('assets/images/home/hero-bg.webp') }}"
                                                     alt="The 8 Most Affordable Michelin Restaurants in Paris" /></a>
                                         </div>
                                         <div class="post__info">
@@ -638,7 +401,8 @@
                                     <article class="post hover__box">
                                         <div class="post__thumb hover__box__thumb">
                                             <a title="The 7 Best Restaurants to Try Kobe Beef in London"
-                                                href="blog-detail.html"><img src="{{ asset('assets/images/home/hero-bg.webp')}}"
+                                                href="blog-detail.html"><img
+                                                    src="{{ asset('assets/images/home/hero-bg.webp') }}"
                                                     alt="The 7 Best Restaurants to Try Kobe Beef in London" /></a>
                                         </div>
                                         <div class="post__info">
@@ -656,7 +420,8 @@
                                     <article class="post hover__box">
                                         <div class="post__thumb hover__box__thumb">
                                             <a title="The 8 Most Affordable Michelin Restaurants in Paris"
-                                                href="blog-detail.html"><img src="{{ asset('assets/images/home/hero-bg.webp')}}"
+                                                href="blog-detail.html"><img
+                                                    src="{{ asset('assets/images/home/hero-bg.webp') }}"
                                                     alt="The 8 Most Affordable Michelin Restaurants in Paris" /></a>
                                         </div>
                                         <div class="post__info">
@@ -680,7 +445,7 @@
                 <!-- .blogs -->
             </main>
             <!-- .site-main -->
-            
+
     </body>
 
 @endsection

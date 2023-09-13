@@ -48,3 +48,4 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('/assets/frontend-assets/css/style.css')}}" />
     <link rel="stylesheet" type="text/css" href="{{ asset('/assets/frontend-assets/css/responsive.css')}}" />
 
+    <script src="https://kit.fontawesome.com/40bf30a2ca.js" crossorigin="anonymous"></script>

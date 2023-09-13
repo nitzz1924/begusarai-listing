@@ -109,12 +109,14 @@ class HomeController extends Controller
 
     public function index()
     {
-        $latest_news = Blog::where('category', 'Latest News')
-            ->where('status', 1)
-            ->orderby('created_at', 'desc')
-            ->take(4)
+        $submaster = Master::orderBy('created_at', 'asc')
+            ->where('type', '=', 'category')
             ->get();
-        return View::make('frontend.index', compact('latest_news'));
+        $businesses = BusinessList::orderBy('created_at', 'desc')->get();
+        $Mastercity = Master::orderBy('created_at', 'asc')
+            ->where('type', '=', 'City')
+            ->get();
+        return View::make('frontend.index', compact('submaster', 'businesses', 'Mastercity'));
     }
 
     public function aboutUs()
