@@ -110,6 +110,12 @@ class HomeController extends Controller
 
     public function index()
     {
+
+
+        $blog = Blog::orderBy('created_at', 'asc')->get();
+
+
+        
         $TestimonialData = Testimonial::orderBy('created_at', 'asc')
             ->where('status', '=', '1')
             ->get();
@@ -121,7 +127,7 @@ class HomeController extends Controller
         $Mastercity = Master::orderBy('created_at', 'asc')
             ->where('type', '=', 'City')
             ->get();
-        return View::make('frontend.index', compact('submaster', 'businesses', 'Mastercity', 'TestimonialData'));
+        return View::make('frontend.index', compact('submaster', 'businesses', 'Mastercity', 'TestimonialData','blog'));
     }
 
     public function aboutUs()
@@ -424,6 +430,20 @@ class HomeController extends Controller
     }
 
     
+
+
+    
+    public function blogDetail(Request $request, $id)
+    {
+
+
+        $businesses = BusinessList::orderBy('created_at', 'desc')->get();
+        $businessesDetail = BusinessList::where('id', $id)->first();
+        $submaster = Master::orderBy('created_at', 'asc')
+        ->where('type', '=', 'category')
+        ->get();
+        return view('frontend.blogDetail',compact('businessesDetail','submaster','businesses'));
+    }
     public function ownerListing()
     {
         $businesses = BusinessList::all(); // Fetch all businesses from the database

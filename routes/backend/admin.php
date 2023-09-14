@@ -24,7 +24,6 @@ Route::patch('/change_password', 'AdminController@update_password')->name('chang
 /* ===== Blog Start =========== */
 
 // Blog Controller
-Route::resource('blogs', 'BlogController');
 Route::get('/allBlogs', 'BlogController@getAll')->name('allBlogs');
 
 /* ===== Blog End =========== */
@@ -80,3 +79,4 @@ Route::get('/testimonial/inactive/{id}', 'TestimonialController@inactive');
 
 // Sub-Master Routing
 Route::resource('submaster', 'SubMasterController');
+Route::resource('blog', 'BlogController');

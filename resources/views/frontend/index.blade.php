@@ -343,63 +343,32 @@
                         </h2>
                         <div class="news__content offset-item">
                             <div class="row">
+
+                            @foreach ($blog as $value)
                                 <div class="col-md-4">
                                     <article class="post hover__box">
                                         <div class="post__thumb hover__box__thumb">
                                             <a title="The 8 Most Affordable Michelin Restaurants in Paris"
-                                                href="blog-detail.html"><img
-                                                    src="{{ asset('assets/images/home/hero-bg.webp') }}"
+                                                href="{{ URL::to('blogDetails/' . $value->id) }}"><img
+                                                    src="{{ URL::to('/uploads/' . $value->image) }}"
                                                     alt="The 8 Most Affordable Michelin Restaurants in Paris" /></a>
+
+                                                    
+
+
                                         </div>
                                         <div class="post__info">
                                             <ul class="post__category">
-                                                <li><a title="Food" href="#">Food & Drink</a></li>
+                                                <li>{{ $value->type }}</li>
                                             </ul>
                                             <h3 class="post__title">
                                                 <a title="The 8 Most Affordable Michelin Restaurants in Paris"
-                                                    href="blog-detail.html">10 Best Classic Diners in Manhattan</a>
+                                                    href="{{ URL::to('blogDetails/' . $value->id) }}">{{ $value->title }}</a>
                                             </h3>
                                         </div>
                                     </article>
                                 </div>
-                                <div class="col-md-4">
-                                    <article class="post hover__box">
-                                        <div class="post__thumb hover__box__thumb">
-                                            <a title="The 7 Best Restaurants to Try Kobe Beef in London"
-                                                href="blog-detail.html"><img
-                                                    src="{{ asset('assets/images/home/hero-bg.webp') }}"
-                                                    alt="The 7 Best Restaurants to Try Kobe Beef in London" /></a>
-                                        </div>
-                                        <div class="post__info">
-                                            <ul class="post__category">
-                                                <li><a title="Art & Decor" href="#">Lifestyle</a></li>
-                                            </ul>
-                                            <h3 class="post__title">
-                                                <a title="The 7 Best Restaurants to Try Kobe Beef in London"
-                                                    href="blog-detail.html">The Stepping Razor Barbershop</a>
-                                            </h3>
-                                        </div>
-                                    </article>
-                                </div>
-                                <div class="col-md-4">
-                                    <article class="post hover__box">
-                                        <div class="post__thumb hover__box__thumb">
-                                            <a title="The 8 Most Affordable Michelin Restaurants in Paris"
-                                                href="blog-detail.html"><img
-                                                    src="{{ asset('assets/images/home/hero-bg.webp') }}"
-                                                    alt="The 8 Most Affordable Michelin Restaurants in Paris" /></a>
-                                        </div>
-                                        <div class="post__info">
-                                            <ul class="post__category">
-                                                <li><a title="Stay" href="#">Place to Stay</a></li>
-                                            </ul>
-                                            <h3 class="post__title">
-                                                <a title="The 8 Most Affordable Michelin Restaurants in Paris"
-                                                    href="blog-detail.html">The 9 Best Cheap Hotels in New York City</a>
-                                            </h3>
-                                        </div>
-                                    </article>
-                                </div>
+                                @endforeach
                             </div>
                             <div class="align-center button-wrap">
                                 <a href="/blogs" class="btn btn-border">View more</a>

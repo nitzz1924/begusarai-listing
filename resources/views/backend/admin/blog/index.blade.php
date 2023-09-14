@@ -1,40 +1,77 @@
 @extends('backend.layouts.master')
-@section('title', 'Blogs')
+@section('title', 'Addtools')
 @section('content')
     <div class="app-page-title">
         <div class="page-title-wrapper">
             <div class="page-title-heading">
                 <div class="page-title-icon">
-                    <i class="pe-7s-users icon-gradient bg-mean-fruit"> </i>
+                    <i class="bi bi-tags icon-gradient bg-mean-fruit"> </i>
                 </div>
-                <div>All BLogs</div>
-                <div class="d-inline-block ml-2">
-                    @can('blogs-create')
-                        <button class="btn btn-success" onclick="create()"><i
-                                class="glyphicon glyphicon-plus"></i>
-                            New Blogs
-                        </button>
-                    @endcan
+                <div>All Sub-Master</div>
+                <div class="d-inline-block ml-3 pb-3">
+
+                    <a href="{{ URL::to('admin/blog/create') }}" class="btn btn-success">
+                        <i class="bi bi-plus-lg"></i>
+                        Add Blogs
+                    </a>
+
                 </div>
             </div>
         </div>
     </div>
+
     <div class="row">
         <div class="col-md-12 col-sm-12">
             <div class="main-card mb-3 card">
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table id="manage_all"
-                               class="align-middle mb-0 table table-borderless table-striped table-hover">
-                            <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Image</th>
-                                <th>Title</th>
-                                <th>Status</th>
-                                <th>Action</th>
-                            </tr>
+
+                        <table id="example" class="table table-striped table-bordered" style="width:100%">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>#</th>
+
+                                    <th class="text-nowrap">Title</th>
+                                    <th class="text-nowrap">Blog Type</th>
+                                    <th class="">Image</th>
+                                    <th>Action</th>
+
+                                </tr>
                             </thead>
+
+                            <tbody>
+                                @foreach ($blog as $value)
+                                    <tr>
+
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $value->title }}</td>
+                                        <td>{{ $value->type }}</td>
+                                        <td style="  width: 58px;"><img class="img-thumbnail img-fluid tool-img-edit"
+                                                src="{{ URL::to('/uploads/' . $value->image) }}" /></td>
+                                        <td class="d-flex">
+                                            <a href="{{ Route('admin.blog.edit', $value->id) }}"class="btn fw-bold btn-primary text-nowrap"
+                                                data-mdb-ripple-color="dark">
+                                                <i class="metismenu-icon bi bi-gear-wide-connected"></i>
+                                                Edit
+                                            </a>
+                                            {{-- delete --}}
+                                            <form action="{{ route('admin.blog.destroy', $value->id) }}" method="POST"
+                                                id="deleteForm">
+                                                @method('DELETE')
+                                                @csrf
+                                                <button type="button" class="btn btn-danger ms-3 text-nowrap"
+                                                    onclick="confirmDelete(this)">
+
+                                                    <i class="metismenu-icon bi bi-trash3"></i>
+                                                </button>
+                                            </form>
+                                        </td>
+
+                                    </tr>
+                                @endforeach
+
+
+                            </tbody>
                         </table>
                     </div>
                 </div>
@@ -50,56 +87,22 @@
             }
         }
     </style>
+
+
+
     <script>
-        $(function () {
-            table = $('#manage_all').DataTable({
-                processing: true,
-                serverSide: true,
-                ajax: '/admin/allBlogs',
-                columns: [
-                    {data: 'DT_RowIndex', name: 'DT_RowIndex'},
-                    {data: 'file_path', name: 'file_path'},
-                    {data: 'title', name: 'title'},
-                    {data: 'status', name: 'status'},
-                    {data: 'action', name: 'action'}
-                ],
-                "columnDefs": [
-                    {"className": "", "targets": "_all"}
-                ],
-                "autoWidth": false,
-            });
-            $('.dataTables_filter input[type="search"]').attr('placeholder', 'Type here to search...').css({
-                'width': '220px',
-                'height': '30px'
-            });
-        });
-    </script>
-    <script type="text/javascript">
-        function create() {
-            ajax_submit_create('blogs');
+        function confirmDelete(button) {
+            if (confirm("Are you sure you want to delete this item?")) {
+                var form = button.parentElement; // Get the parent element of the button, which is the form
+                form.submit();
+            } else {
+                alert("Delete operation cancelled.");
+            }
         }
-
-        $(document).ready(function () {
-            // View Form
-            $("#manage_all").on("click", ".view", function () {
-                var id = $(this).attr('id');
-                ajax_submit_view('blogs', id)
-            });
-
-            // Edit Form
-            $("#manage_all").on("click", ".edit", function () {
-                var id = $(this).attr('id');
-                ajax_submit_edit('blogs', id)
-            });
-
-
-            // Delete
-            $("#manage_all").on("click", ".delete", function () {
-                var id = $(this).attr('id');
-                ajax_submit_delete('blogs', id)
-            });
-
-        });
-
     </script>
+
+    <script>
+        new DataTable('#example');
+    </script>
+
 @stop

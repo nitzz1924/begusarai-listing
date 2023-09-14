@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 13, 2023 at 02:55 PM
+-- Generation Time: Sep 14, 2023 at 01:37 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.1
 
@@ -57,10 +57,14 @@ CREATE TABLE `blogs` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `title` varchar(255) NOT NULL,
   `description` longtext NOT NULL,
-  `category` varchar(200) DEFAULT NULL,
+  `type` varchar(200) NOT NULL,
+  `keyword` varchar(255) NOT NULL,
+  `post` text NOT NULL,
   `uploaded_by` int(11) DEFAULT 1,
-  `file_path` varchar(255) DEFAULT 'assets/images/blog/default.png',
+  `image` varchar(255) DEFAULT 'assets/images/blog/default.png',
+  `videourl` varchar(255) NOT NULL,
   `status` tinyint(4) DEFAULT 1,
+  `postbyId` bigint(20) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -69,24 +73,10 @@ CREATE TABLE `blogs` (
 -- Dumping data for table `blogs`
 --
 
-INSERT INTO `blogs` (`id`, `title`, `description`, `category`, `uploaded_by`, `file_path`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'Velit consectetur saepe adipisci pariatur laboriosam sit. Dolores qui et expedita rerum earum quia. Optio cumque quia dolor et. Doloremque provident vero suscipit.', 'Doloremque et reprehenderit tempore natus a animi. Corrupti porro ea voluptatem id. Excepturi atque aut perferendis. Consequatur sapiente qui distinctio totam eligendi.', '1', 1, 'assets/images/blog/default_news_a.jpg', 1, '2020-07-13 09:38:13', '2020-07-13 09:38:13'),
-(2, 'Iste qui est ea facere quisquam rem. Magnam saepe qui consequatur qui iste delectus alias. Aliquam iusto quas voluptas commodi molestiae.', 'Et ipsum beatae consequatur. Ut provident id aliquam debitis enim. Cupiditate aliquam qui repellendus ad saepe. Voluptate alias qui fugiat nihil aut aspernatur. Laboriosam modi et quia nihil voluptate molestias porro.', '1', 1, 'assets/images/blog/default.png', 1, '2020-07-13 09:38:13', '2020-07-13 09:38:13'),
-(3, 'Eos voluptatem dolorem laudantium facere ipsa aut. Qui illo quaerat eos recusandae culpa. Molestias et voluptates fugit ab totam laboriosam. Rem libero maxime perferendis facilis hic architecto.', 'Accusamus minima in nulla aut eos consequuntur vitae est. Ad quod ab at quo dolores porro. Voluptatem molestiae dolorem a unde nobis laudantium totam.', '1', 1, 'assets/images/blog/default.png', 1, '2020-07-13 09:38:13', '2020-07-13 09:38:13'),
-(4, 'Reiciendis dolores in sunt illo. Repudiandae deleniti soluta tempore voluptatum consectetur voluptatem perspiciatis. Rerum qui eius aut adipisci.', 'Quam aut eos ullam. Dolor et vitae aut maxime. Ducimus qui harum voluptatum deserunt dolorum corporis tempore.', '1', 1, 'assets/images/blog/default.png', 1, '2020-07-13 09:38:13', '2020-07-13 09:38:13'),
-(5, 'Vel numquam non ipsam amet dicta doloremque eligendi. Nulla rerum aut reiciendis voluptas mollitia et. Atque iste dolor animi neque consequuntur labore doloribus.', 'Dolorem unde tempora eum. Velit eum velit quia in repudiandae natus et incidunt. Corrupti eum dolor nobis est quibusdam. Velit iusto consectetur reiciendis ex aut consequuntur odit. Excepturi laborum est occaecati fugiat voluptas.', '1', 1, 'assets/images/blog/default.png', 1, '2020-07-13 09:38:13', '2020-07-13 09:38:13'),
-(6, 'Sed qui inventore voluptas iste pariatur nihil fugiat. Laboriosam nam fugiat odit temporibus et. Porro omnis quaerat nobis voluptas et cupiditate nam. Ut id eum eos. Quas voluptatem nobis rem non.', 'Assumenda vel tenetur saepe repellendus amet. Quo qui placeat aut et laborum magnam. Corporis et velit quibusdam ipsa. Alias excepturi labore et hic necessitatibus dicta.', '1', 1, 'assets/images/blog/default.png', 1, '2020-07-13 09:38:13', '2020-07-13 09:38:13'),
-(7, 'Velit at magnam libero quibusdam cum. Accusantium modi porro excepturi sit sequi. Facilis nihil inventore a qui aut.', 'Quia est numquam dolor enim eum est. Amet voluptatem est architecto voluptatem vero vitae ut.', '1', 1, 'assets/images/blog/default.png', 1, '2020-07-13 09:38:13', '2020-07-13 09:38:13'),
-(8, 'Accusamus et sit saepe ut eum. Qui error ipsum dolor optio provident error aut. Et facilis corrupti saepe. Aliquam et omnis quibusdam hic dicta.', 'Ut dolorum aut labore corrupti occaecati ipsa dolores est. Officiis ipsam dolores tenetur sequi velit rerum dolor. Magni debitis pariatur asperiores nesciunt perferendis. Molestiae autem non est veritatis.', '1', 1, 'assets/images/blog/default.png', 1, '2020-07-13 09:38:13', '2020-07-13 09:38:13'),
-(9, 'Repudiandae id aperiam est et. Delectus possimus ipsam est accusamus.', 'Ad maxime et quam sed minima sint quia. Facilis odio et voluptas earum hic quas magnam numquam. Ut debitis cupiditate eos enim.', '1', 1, 'assets/images/blog/default.png', 1, '2020-07-13 09:38:13', '2020-07-13 09:38:13'),
-(10, 'Quis pariatur porro sint vel excepturi. Delectus facilis rerum sed molestiae.', 'Quos harum officia esse sunt in qui natus nihil. Est eligendi sint possimus aut. Quis et qui repellat inventore et. Ut ut ratione id accusamus vel.', '1', 1, 'assets/images/blog/default.png', 1, '2020-07-13 09:38:13', '2020-07-13 09:38:13'),
-(14, 'Quam accusamus molestias qui optio fugiat omnis autem. Reprehenderit adipisci accusantium qui iusto sapiente sed voluptatem quasi. Laboriosam voluptas blanditiis earum amet voluptas sit.', 'Quas laboriosam corporis dolorem id itaque et. Est aut illo alias aut sint. Eaque sunt impedit mollitia nihil impedit repellat architecto.', 'Latest News', 1, 'assets/images/blog/default_news_a.jpg', 1, '2020-07-13 09:41:03', '2020-09-28 06:48:49'),
-(15, 'Et deleniti maiores eum consectetur facere inventore. Enim praesentium quo quia praesentium. Est voluptatem qui molestiae voluptas harum. Ut inventore impedit sequi vitae fugit aut est repellat.', 'Adipisci expedita fuga consequatur nobis aut suscipit iusto blanditiis. Magnam accusamus necessitatibus numquam et repellendus aut culpa consectetur. Et quod accusamus ut harum adipisci ab. Vero debitis nobis veniam quia cupiditate voluptates. Pariatur est doloremque eum voluptas incidunt vero quas et.', 'Latest News', 1, 'assets/images/blog/default_news_a.jpg', 1, '2020-07-13 09:41:03', '2020-09-28 06:49:00'),
-(16, 'Animi dignissimos natus optio voluptatum officiis. Culpa aspernatur fugit nemo non officia.', 'Mollitia voluptatem est aut similique qui commodi vitae. Est in perspiciatis eligendi eveniet sunt. Quisquam error exercitationem odit aut.', 'Latest News', 1, 'assets/images/blog/default_news_a.jpg', 1, '2020-07-13 09:41:03', '2020-09-28 07:39:46'),
-(17, 'Et sit quia veniam qui optio. Ut dolorum illum nemo error neque repellendus. Expedita atque consectetur consequatur.', 'Quas est architecto natus. Non libero repellat tempore ut excepturi recusandae a. Officiis repellendus aut neque aliquam. Tenetur aut placeat iure.', '1', 1, 'assets/images/blog/default.png', 1, '2020-07-13 09:41:03', '2020-07-13 09:41:03'),
-(18, 'Dolor consequatur repudiandae molestias dolorum hic autem corrupti. Et dolores porro totam quidem sequi et. Ab voluptas soluta qui eum assumenda.', 'Dolor provident consequatur autem dicta qui aut. Est non assumenda provident ut. Eos maiores quos molestias alias maxime omnis nisi voluptatibus. Nisi vero quam incidunt ut nobis.', '1', 1, 'assets/images/blog/default.png', 1, '2020-07-13 09:41:03', '2020-07-13 09:41:03'),
-(19, 'Perspiciatis officia qui rerum enim sit non debitis. Omnis nesciunt voluptas saepe optio labore. Dolore voluptatum qui exercitationem optio eum exercitationem.', 'Et assumenda non rerum et. Quibusdam et nam eos qui quia minima sit rerum. Perspiciatis velit impedit fuga magni voluptas voluptas blanditiis eius.', '1', 1, 'assets/images/blog/default.png', 1, '2020-07-13 09:41:03', '2020-07-13 09:41:03'),
-(20, 'Sed eaque enim rerum sapiente dolorem porro aut. Rerum quae debitis deleniti quibusdam veniam. Delectus unde nulla rerum vel sed. Accusantium quae optio animi minus est sed.', 'Corporis est optio exercitationem nesciunt velit quos iste. Consectetur praesentium aliquid ipsa ducimus reiciendis.', '1', 1, 'assets/images/blog/default.png', 1, '2020-07-13 09:41:03', '2020-07-13 09:41:03');
+INSERT INTO `blogs` (`id`, `title`, `description`, `type`, `keyword`, `post`, `uploaded_by`, `image`, `videourl`, `status`, `postbyId`, `created_at`, `updated_at`) VALUES
+(1, '10 Best Classic Diners in Manhattan', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', 'begusarai Blog 1', 'A,B,C,D,F', 'Why do we use it?\r\nIt is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using \'Content here, content here\', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).\r\n\r\n\r\nWhere does it come from?\r\nContrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \"de Finibus Bonorum et Malorum\" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, \"Lorem ipsum dolor sit amet..\", comes from a line in section 1.10.32.\r\n\r\nThe standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \"de Finibus Bonorum et Malorum\" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.\r\n\r\nWhere can I get some?\r\nThere are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don\'t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn\'t anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.\r\n\r\n5\r\n	paragraphs\r\n	words\r\n	bytes\r\n	lists\r\n	Start with \'Lorem\r\nipsum dolor sit amet...\'', 1, '1694691226.jpg', 'https://www.lipsum.com/', 1, NULL, '2023-09-14 11:05:16', '2023-09-14 12:05:17'),
+(11, '10 Best Classic Diners in Manhattan', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', 'begusarai Blog 1', 'A,B,C,D,F', 'Why do we use it?\r\nIt is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using \'Content here, content here\', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).\r\n\r\n\r\nWhere does it come from?\r\nContrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \"de Finibus Bonorum et Malorum\" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, \"Lorem ipsum dolor sit amet..\", comes from a line in section 1.10.32.\r\n\r\nThe standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \"de Finibus Bonorum et Malorum\" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.\r\n\r\nWhere can I get some?\r\nThere are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don\'t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn\'t anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.\r\n\r\n5\r\n	paragraphs\r\n	words\r\n	bytes\r\n	lists\r\n	Start with \'Lorem\r\nipsum dolor sit amet...\'', 1, '1694691226.jpg', 'https://www.lipsum.com/', 1, NULL, '2023-09-14 11:05:16', '2023-09-14 12:05:17'),
+(12, '10 Best Classic Diners in Manhattan', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', 'begusarai Blog 1', 'A,B,C,D,F', 'Why do we use it?\r\nIt is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using \'Content here, content here\', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).\r\n\r\n\r\nWhere does it come from?\r\nContrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \"de Finibus Bonorum et Malorum\" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, \"Lorem ipsum dolor sit amet..\", comes from a line in section 1.10.32.\r\n\r\nThe standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \"de Finibus Bonorum et Malorum\" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.\r\n\r\nWhere can I get some?\r\nThere are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don\'t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn\'t anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.\r\n\r\n5\r\n	paragraphs\r\n	words\r\n	bytes\r\n	lists\r\n	Start with \'Lorem\r\nipsum dolor sit amet...\'', 1, '1694691226.jpg', 'https://www.lipsum.com/', 1, NULL, '2023-09-14 11:05:16', '2023-09-14 12:05:17');
 
 -- --------------------------------------------------------
 
@@ -99,7 +89,7 @@ CREATE TABLE `businesslist` (
   `userId` bigint(255) NOT NULL,
   `category` varchar(255) NOT NULL,
   `placeType` varchar(255) NOT NULL,
-  `description` varchar(255) NOT NULL,
+  `description` text NOT NULL,
   `price` varchar(255) NOT NULL,
   `duration` varchar(255) NOT NULL,
   `highlight` varchar(255) NOT NULL,
@@ -136,9 +126,9 @@ CREATE TABLE `businesslist` (
 --
 
 INSERT INTO `businesslist` (`id`, `userId`, `category`, `placeType`, `description`, `price`, `duration`, `highlight`, `city`, `placeAddress`, `email`, `phoneNumber1`, `phoneNumber2`, `whatsappNo`, `websiteUrl`, `additionalFields`, `facebook`, `instagram`, `twitter`, `bookingType`, `bookingurl`, `packageId`, `expairyDate`, `businessName`, `youtube`, `coverImage`, `galleryImage`, `documentImage`, `logo`, `video`, `status`, `planStatus`, `created_at`, `updated_at`) VALUES
-(1, 1, 'Hotel', 'Placetype 2,Placetype 1', 'This Is Description field', 'This Is A Price Field', 'This Is A Duration', 'Highlight 2,Highlight 1', 'Jodhpur City', 'Ajmer', 'adstestyuv@gmail.com', '12345667890', '12345667890', '12345667890', 'https://proaidirectory.com/', 'https://proaidirectory.com/', 'https://proaidirectory.com/', 'https://proaidirectory.com/', 'https://proaidirectory.com/', 'ty1', 'https://proaidirectory.com/', NULL, '2023-09-12 11:29:45', 'New Updated List 1', 'https://proaidirectory.com/', '1694588906.jpg', '1694586307.jpg', '1694586321.jpg', '1694586307.jpg', 'https://proaidirectory.com', '1', '1', '2023-09-12 11:59:45', '2023-09-13 12:45:44'),
-(11, 1, 'Hospital', 'Placetype 2', 'df', 'qwe', 'sd', 'Highlight 2', 'Ajmer City', 'Ajmer', 'adstestyuv@gmail.com', '01267897067', '09588871256', '43', 'https://junglebooktourism.com/our-packages', 'https://junglebooktourism.com/our-packages', 'https://junglebooktourism.com/our-packages', 'https://junglebooktourism.com/our-packages', 'https://junglebooktourism.com/our-packages', 'ty1', 'https://junglebooktourism.com/our-packages', NULL, '2023-09-13 10:41:10', 'TEST 123', 'https://junglebooktourism.com/our-packages', '1694588906.jpg', '1694581870.jpg', '1694581870.jpg', '1694588906.jpg', 'https://junglebooktourism.com/our-packages', '0', '0', '2023-09-13 11:11:10', '2023-09-13 12:52:29'),
-(12, 1, 'Hospital', 'Placetype 2,Placetype 1', '2', '2', '2', 'Highlight 2,Highlight 1', 'Ajmer City', 'Ajmer', 'rahulyuvmedia@gmail.com', '09588871256', '2', '2', 'https://proaidirectory.com/', 'https://proaidirectory.com/', 'https://proaidirectory.com/', 'https://proaidirectory.com/', 'https://proaidirectory.com/', 'ty1', 'https://proaidirectory.com/', NULL, '2023-09-13 12:31:28', '2', 'https://proaidirectory.com/', '1694588906.jpg', '1694588906.jpg', '1694588906.jpg', '1694588906.jpg', 'https://junglebooktourism.com/our-pa', '0', '0', '2023-09-13 13:01:28', '2023-09-13 13:08:26');
+(1, 1, 'Hotel', 'Placetype 2,Placetype 1', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', '500/-', '8:00 am - 10:00 pm', 'Highlight 2,Highlight 1', 'Jodhpur City', ' FJ6V+46C, Vinay Nagar, Pal Bhichala, Ajmer, Rajasthan 305001', 'adstestyuv@gmail.com', '12345667890', '12345667890', '12345667890', 'https://proaidirectory.com/', 'https://proaidirectory.com/', 'https://proaidirectory.com/', 'https://proaidirectory.com/', 'https://proaidirectory.com/', 'ty1', 'https://proaidirectory.com/', NULL, '2023-09-12 11:29:45', 'New Updated List 1', 'https://proaidirectory.com/', '1694588906.jpg', '1694586307.jpg', '1694586321.jpg', '1694586307.jpg', 'https://proaidirectory.com', '1', '1', '2023-09-12 11:59:45', '2023-09-13 12:45:44'),
+(11, 1, 'Hospital', 'Placetype 2', 'df', 'qwe', 'sd', 'Highlight 2', 'Ajmer City', ' FJ6V+46C, Vinay Nagar, Pal Bhichala, Ajmer, Rajasthan 305001', 'adstestyuv@gmail.com', '01267897067', '09588871256', '43', 'https://junglebooktourism.com/our-packages', 'https://junglebooktourism.com/our-packages', 'https://junglebooktourism.com/our-packages', 'https://junglebooktourism.com/our-packages', 'https://junglebooktourism.com/our-packages', 'ty1', 'https://junglebooktourism.com/our-packages', NULL, '2023-09-13 10:41:10', 'TEST 123', 'https://junglebooktourism.com/our-packages', '1694588906.jpg', '1694581870.jpg', '1694581870.jpg', '1694588906.jpg', 'https://junglebooktourism.com/our-packages', '0', '0', '2023-09-13 11:11:10', '2023-09-13 12:52:29'),
+(12, 1, 'Hospital', 'Placetype 2,Placetype 1', '2', '2', '8:00 am - 10:00 pm', 'Highlight 2,Highlight 1', 'Ajmer City', ' FJ6V+46C, Vinay Nagar, Pal Bhichala, Ajmer, Rajasthan 305001', 'rahulyuvmedia@gmail.com', '09588871256', '2', '2', 'https://proaidirectory.com/', 'https://proaidirectory.com/', 'https://proaidirectory.com/', 'https://proaidirectory.com/', 'https://proaidirectory.com/', 'ty1', 'https://proaidirectory.com/', NULL, '2023-09-13 12:31:28', '2', 'https://proaidirectory.com/', '1694588906.jpg', '1694588906.jpg', '1694588906.jpg', '1694588906.jpg', 'https://junglebooktourism.com/our-pa', '0', '0', '2023-09-13 13:01:28', '2023-09-13 13:08:26');
 
 -- --------------------------------------------------------
 
@@ -191,7 +181,9 @@ INSERT INTO `master` (`id`, `type`, `title`, `value`, `logo`, `status`, `created
 (21, 'City', 'Ajmer City', 'Ajmer City', '1694427888.jpg\r\n', 'Active', '2023-09-11 11:09:53', '2023-09-11 11:09:53'),
 (22, 'Master', 'bookingType', 'bookingType', NULL, 'Active', '2023-09-11 13:00:52', '2023-09-12 10:05:56'),
 (26, 'bookingType', 'ty1', 'ty1', '1694511866.jpg', 'Active', '2023-09-12 10:14:26', '2023-09-12 10:14:26'),
-(27, 'category', 'Gym', 'fa-solid fa-dumbbell', '1694604325.jpg', 'Active', '2023-09-13 11:55:25', '2023-09-13 11:55:25');
+(27, 'category', 'Gym', 'fa-solid fa-dumbbell', '1694604325.jpg', 'Active', '2023-09-13 11:55:25', '2023-09-13 11:55:25'),
+(28, 'Master', 'blog_type', 'blog_type', NULL, 'Active', '2023-09-14 10:46:22', '2023-09-14 10:46:22'),
+(29, 'blog_type', 'begusarai Blog 1', 'begusarai Blog 1', NULL, 'Active', '2023-09-14 10:46:55', '2023-09-14 10:46:55');
 
 -- --------------------------------------------------------
 
@@ -291,6 +283,7 @@ INSERT INTO `oauth_access_tokens` (`id`, `user_id`, `client_id`, `name`, `scopes
 ('37685fbe1d7f5a9520785fdb5fc643601241490e254dae8d749a918e595e3d687d8fe9342b0f5d74', 1, 4, 'adminApiToken', '[]', 0, '2023-09-11 04:50:18', '2023-09-11 04:50:18', '2024-09-11 10:20:18'),
 ('40d949ec1e4005369183121030e1926d19f67fe76ce7880fd70cb61bb36f44f6e14ef01f91dac974', 1, 4, 'adminApiToken', '[]', 0, '2023-09-06 09:23:19', '2023-09-06 09:23:19', '2024-09-06 14:53:19'),
 ('4a58ac7d639bf5979575952f0d5462d4db0d68ce827b7a44263bf7de507763fda8771c1fc33e0b30', 1, 4, 'adminApiToken', '[]', 0, '2023-09-04 08:47:11', '2023-09-04 08:47:11', '2024-09-04 14:17:11'),
+('4a78629efb0c66ea1e54c118b3766fd93ddbf027e2e9ad7ffd1aece705205bbac3c564565d8fe398', 1, 4, 'adminApiToken', '[]', 0, '2023-09-14 05:39:27', '2023-09-14 05:39:27', '2024-09-14 11:09:27'),
 ('55f9326aea22d0ad8a365398a81225484943154fc883b11343b25f69507062b24ff60635143e4925', 1, 4, 'adminApiToken', '[]', 0, '2023-09-07 06:56:15', '2023-09-07 06:56:15', '2024-09-07 12:26:15'),
 ('625ab89581817b3f756b06203741d8ba93b184317cb986fb2c1c060a2c576bcfae06953fbcc79ef5', 1, 4, 'adminApiToken', '[]', 0, '2023-09-12 09:52:37', '2023-09-12 09:52:37', '2024-09-12 15:22:37'),
 ('67cba7b98c79510c5fac62493938fa857b1cf00da731c40c852ec4949f04be06e0dd476a84d94f8f', 1, 4, 'adminApiToken', '[]', 0, '2020-09-27 10:50:50', '2020-09-27 10:50:50', '2021-09-27 16:20:50'),
@@ -539,6 +532,31 @@ INSERT INTO `settings` (`id`, `name`, `slogan`, `eiin`, `pabx`, `reg`, `stablish
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `testimonial`
+--
+
+CREATE TABLE `testimonial` (
+  `id` bigint(20) NOT NULL,
+  `user_id` bigint(20) NOT NULL,
+  `message` varchar(255) DEFAULT NULL,
+  `name` varchar(255) NOT NULL,
+  `status` enum('0','1') NOT NULL DEFAULT '0',
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `testimonial`
+--
+
+INSERT INTO `testimonial` (`id`, `user_id`, `message`, `name`, `status`, `created_at`, `updated_at`) VALUES
+(2, 1, ' \"Really useful app to find interesting things to see, do,\r\n                                            drink, and eat in new places. I\'ve been using it regularly\r\n                                            in my travels over the past few months.\"', 'Rahul Soni', '0', '2023-09-14 12:06:58', '2023-09-14 14:31:08'),
+(3, 1, ' \"Really useful app to find interesting things to see, do,\r\n                                            drink, and eat in new places. I\'ve been using it regularly\r\n                                            in my travels over the past few months.\"', 'Anshul Meena', '0', '2023-09-14 12:07:16', '2023-09-14 14:31:10'),
+(4, 1, ' \"Really useful app to find interesting things to see, do,\r\n                                            drink, and eat in new places. I\'ve been using it regularly\r\n                                            in my travels over the past few months.\"', 'Kisahn Gopal ', '0', '2023-09-14 12:07:47', '2023-09-14 14:31:12');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -717,6 +735,12 @@ ALTER TABLE `settings`
   ADD UNIQUE KEY `settings_email_unique` (`email`);
 
 --
+-- Indexes for table `testimonial`
+--
+ALTER TABLE `testimonial`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -746,7 +770,7 @@ ALTER TABLE `admins`
 -- AUTO_INCREMENT for table `blogs`
 --
 ALTER TABLE `blogs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `businesslist`
@@ -764,7 +788,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `master`
 --
 ALTER TABLE `master`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -801,6 +825,12 @@ ALTER TABLE `roles`
 --
 ALTER TABLE `settings`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `testimonial`
+--
+ALTER TABLE `testimonial`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `users`
