@@ -1,4 +1,3 @@
-
 <footer id="footer" class="footer">
     <div class="container">
         <div class="footer__top">
@@ -6,15 +5,16 @@
                 <div class="col-lg-5">
                     <div class="footer__top__info">
                         <a title="Logo" href="01_index_1.html" class="footer__top__info__logo"><img
-                                src="{{ asset('assets/images/begusarai-logo.png')}}" alt="Begusarai" /></a>
+                                src="{{ asset('assets/images/begusarai-logo.png') }}" alt="Begusarai" /></a>
                         <p class="footer__top__info__desc">
                             Discover amazing things to do everywhere you go.
                         </p>
                         <div class="footer__top__info__app">
                             <a title="App Store" href="#" class="banner-apps__download__iphone"><img
-                                    src="{{ asset('assets/images/footer/app-store-big-2.png')}}" alt="App Store" /></a>
+                                    src="{{ asset('assets/images/footer/app-store-big-2.png') }}" alt="App Store" /></a>
                             <a title="Google Play" href="#" class="banner-apps__download__android"><img
-                                    src="{{ asset('assets/images/footer/google-play-big-1.png')}}" alt="Google Play" /></a>
+                                    src="{{ asset('assets/images/footer/google-play-big-1.png') }}"
+                                    alt="Google Play" /></a>
                         </div>
                     </div>
                 </div>
@@ -49,10 +49,13 @@
                 <div class="col-lg-3">
                     <aside class="footer__top__nav footer__top__nav--contact">
                         <h3>Contact Us</h3>
+
+                        <p> <a title="" href="/testimonial">Testimonial</a></p>
+
+
                         <p>
                             Email:
-                            <a href="#"
-                                class="__cf_email__"
+                            <a href="#" class="__cf_email__"
                                 data-cfemail="b6c5c3c6c6d9c4c2f6d2d9dbd7dfd898d5d9db">contact@inbegusarai.com</a>
                         </p>
                         <p>Phone: 9693667887 / 06243-316290</p>
@@ -112,12 +115,13 @@
 
 </div>
 <!-- #wrapper -->
-<!-- <script data-cfasync="false" src="{{ asset('../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js') }}"></script> -->
+<!-- <script data-cfasync="false" src="{{ asset('../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js') }}">
+</script> -->
 <!-- SlimScroll -->
 <script src="{{ asset('assets/js/main.js') }}"></script>
 
 <script>
-    setTimeout(function () {
+    setTimeout(function() {
         $('.alert').fadeOut('slow');
     }, 5000); // <-- time in milliseconds
 </script>
@@ -136,5 +140,5 @@
 <script src="{{ asset('/assets/frontend-assets/libs/venobox/venobox.min.js') }}"></script>
 <script src="{{ asset('/assets/frontend-assets/libs/waypoints/jquery.waypoints.min.js') }}"></script>
 <!-- orther script -->
-<script src="{{ asset('/assets/frontend-assets/js/main.js')}}"></script>
+<script src="{{ asset('/assets/frontend-assets/js/main.js') }}"></script>
 <script src="https://kit.fontawesome.com/40bf30a2ca.js" crossorigin="anonymous"></script>

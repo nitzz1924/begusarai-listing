@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Cookie;
 
 use App\Models\BusinessList;
 use App\Models\Master;
+use App\Models\Testimonial;
 
 use View;
 
@@ -109,6 +110,10 @@ class HomeController extends Controller
 
     public function index()
     {
+        $TestimonialData = Testimonial::orderBy('created_at', 'asc')
+            ->where('status', '=', '1')
+            ->get();
+
         $submaster = Master::orderBy('created_at', 'asc')
             ->where('type', '=', 'category')
             ->get();
@@ -116,7 +121,7 @@ class HomeController extends Controller
         $Mastercity = Master::orderBy('created_at', 'asc')
             ->where('type', '=', 'City')
             ->get();
-        return View::make('frontend.index', compact('submaster', 'businesses', 'Mastercity'));
+        return View::make('frontend.index', compact('submaster', 'businesses', 'Mastercity', 'TestimonialData'));
     }
 
     public function aboutUs()
@@ -426,8 +431,30 @@ class HomeController extends Controller
         return view('frontend.ownerProfile');
     }
 
-    public function ownerLeads()
+    public function Testimonial()
     {
-        return view('frontend.ownerLeads');
+        return view('frontend.testimonial');
+    }
+
+    public function testimonialStore(Request $request)
+    {
+        $user = Auth::user();
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'message' => 'required|string',
+        ]);
+
+        // Create and save a new testimonial record in the database
+
+        $testimonial = new Testimonial([
+            'name' => $validatedData['name'],
+            'message' => $validatedData['message'],
+        ]);
+        $testimonial->user_id = $user->id;
+
+        $testimonial->save();
+        return redirect()
+            ->route('testimonial')
+            ->with('success', 'FeedBack submitted successfully!');
     }
 }

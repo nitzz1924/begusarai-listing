@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\Admin\MasterController ;
 use App\Http\Controllers\Backend\Admin\SubMasterController ;
 use App\Http\Controllers\Backend\Admin\UserController ;
+use App\Http\Controllers\Backend\Admin\TestimonialController ;
+
 
 
 
@@ -67,8 +69,14 @@ Route::get('/passport', 'AdminController@passport');
 
 // Master Routing
 Route::resource('master', 'MasterController');
+Route::resource('testimonial', 'TestimonialController');
 
 
+Route::get('/testimonial/active/{id}', 'TestimonialController@active');
+Route::get('/testimonial/inactive/{id}', 'TestimonialController@inactive');
+
+// Route::post('/testimonial/active/{id}', 'TestimonialController@active')->name('admin.testimonial.active');
+// Route::post('/testimonial/inactive/{id}', 'TestimonialController@inactive')->name('admin.testimonial.inactive');
 
 // Sub-Master Routing
 Route::resource('submaster', 'SubMasterController');

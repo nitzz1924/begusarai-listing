@@ -301,61 +301,26 @@
                                 data-arrows="true" data-itemScroll="2" data-dots="true" data-centerPadding="30"
                                 data-tabletitem="1" data-tabletscroll="1" data-mobileitem="1" data-mobilescroll="1"
                                 data-mobilearrows="false">
-                                <div class="testimonial-item">
-                                    <div class="avatar">
-                                        <img src="{{ asset('assets/images/reviews/male-1.jpg') }}" alt="Avatar" />
-                                        <img src="{{ asset('assets/images/reviews/quote-active.webp') }}" alt="Quote"
-                                            class="quote" />
-                                    </div>
-                                    <div class="testimonial-info">
-                                        <p>
-                                            Really useful app to find interesting things to see do,
-                                            drink and eat in new places. I’ve been using it regularly
-                                            in my travels over the past few months.
-                                        </p>
-                                        <div class="testimonial-meta">
-                                            <b>Kari Granleese</b>
-                                            <span>CEO Alididi</span>
+
+                                @foreach ($TestimonialData as $value)
+                                    <div class="testimonial-item">
+                                        <div class="">
+                                            <p>
+                                                {{ $value->message }}
+                                            </p>
+                                            <br>
+                                            <div class="testimonial-meta">
+                                                <b> {{ $value->name }}</b>
+                                                <span></span>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="testimonial-item">
-                                    <div class="avatar">
-                                        <img src="{{ asset('assets/images/reviews/male-1.jpg') }}" alt="Avatar" />
-                                        <img src="{{ asset('assets/images/reviews/quote-active.webp') }}" alt="Quote"
-                                            class="quote" />
-                                    </div>
-                                    <div class="testimonial-info">
-                                        <p>
-                                            Really useful app to find interesting things to see do,
-                                            drink and eat in new places. I’ve been using it regularly
-                                            in my travels over the past few months.
-                                        </p>
-                                        <div class="testimonial-meta">
-                                            <b>Kari Granleese</b>
-                                            <span>CEO Alididi</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="testimonial-item">
-                                    <div class="avatar">
-                                        <img src="{{ asset('assets/images/reviews/male-1.jpg') }}" alt="Avatar" />
-                                        <img src="{{ asset('assets/images/reviews/quote-active.webp') }}" alt="Quote"
-                                            class="quote" />
-                                    </div>
-                                    <div class="testimonial-info">
-                                        <p>
-                                            Really useful app to find interesting things to see do,
-                                            drink and eat in new places. I’ve been using it regularly
-                                            in my travels over the past few months.
-                                        </p>
-                                        <div class="testimonial-meta">
-                                            <b>Kari Granleese</b>
-                                            <span>CEO Alididi</span>
-                                        </div>
-                                    </div>
-                                </div>
+                                @endforeach
+
+                                <!-- Add more testimonial items as needed -->
+
                             </div>
+
                             <div class="place-slider__nav slick-nav">
                                 <div class="place-slider__prev slick-nav__prev">
                                     <i class="las la-angle-left"></i>

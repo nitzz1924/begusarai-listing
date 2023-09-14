@@ -114,3 +114,11 @@ Route::post('/addPlace/savePlace', [HomeController::class, 'savePlace'])->name('
 Route::get('/editPlace/{id}', [HomeController::class, 'editPlace'])->name('editPlace');
 
 Route::put('/editPlace/updatePlace/{id}', [HomeController::class, 'updatePlace'])->name('updatePlace');
+
+
+// Route::get('/testimonial', [HomeController::class, 'Testimonial'])->name('Testimonial');
+// Route::post('/testimonial', [HomeController::class, 'testimonialStore'])->name('testimonialStore');
+
+
+Route::get('/testimonial', [HomeController::class, 'Testimonial'])->name('testimonial');
+Route::post('/testimonial', [HomeController::class, 'testimonialStore'])->name('testimonialStore');
