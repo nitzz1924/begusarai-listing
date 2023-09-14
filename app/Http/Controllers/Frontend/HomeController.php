@@ -504,8 +504,5 @@ class HomeController extends Controller
     {
         return view('frontend.blogs');
     }
-    public function blogDetail()
-    {
-        return view('frontend.blogDetail');
-    }
+    
 }
