@@ -10,29 +10,21 @@
                     data-infinite="true" data-centermode="true" data-centerpadding="418px" data-tabletitem="1"
                     data-tabletscroll="1" data-tabletpadding="70px" data-mobileitem="1" data-mobilescroll="1"
                     data-mobilepadding="30px">
-                    <div class="place-slider__item bd"><a title="Place Slider Image" href="#"><img
-                                src="{{ asset('assets/frontend-assets/images/listing/gallery-01.jpg') }}"
-                                alt="slider-01"></a></div>
-                    <div class="place-slider__item bd"><a title="Place Slider Image" href="#"><img
-                                src="{{ asset('assets/frontend-assets/images/listing/gallery-02.jpg') }}"
-                                alt="slider-02"></a></div>
-                    <div class="place-slider__item bd"><a title="Place Slider Image" href="#"><img
-                                src="{{ asset('assets/frontend-assets/images/listing/gallery-03.jpg') }}"
-                                alt="slider-03"></a></div>
-                    <div class="place-slider__item bd"><a title="Place Slider Image" href="#"><img
-                                src="{{ asset('assets/frontend-assets/images/listing/gallery-05.jpg') }}"
-                                alt="slider-05"></a></div>
-                    <div class="place-slider__item bd"><a title="Place Slider Image" href="#"><img
-                                src="{{ asset('assets/frontend-assets/images/listing/gallery-06.jpg') }}"
-                                alt="slider-06"></a></div>
+
+                    <div class="place-slider__item bd">
+                        <a title="Place Slider Image" href="#">
+                            <img src="{{ URL::to('uploads/' . $businessesDetail->coverImage) }}" alt="slider-06">
+                        </a>
+                    </div>
+
                 </div><!-- .page-title -->
                 <div class="place-share">
-                    <a title="Save" href="#" class="add-wishlist">
+                    {{-- <a title="Save" href="#" class="add-wishlist">
                         <i class="la la-bookmark large"></i>
                     </a>
                     <a title="Share" href="#" class="share">
                         <i class="la la-share-square la-24"></i>
-                    </a>
+                    </a> --}}
                     <div class="social-share">
                         <div class="list-social-icon">
                             <a class="facebook"
@@ -63,13 +55,12 @@
                 <div class="row">
                     <div class="col-lg-8">
                         <div class="place__left">
-                            <ul class="place__breadcrumbs breadcrumbs">
-                                <li><a title="France" href="#">France</a></li>
-                                <li><a title="Paris" href="#">Paris</a></li>
-                                <li><a title="Eat & Drink" href="#">Eat & Drink</a></li>
+                            <ul class="place__breadcrumbs breadcrumbs mt-1">
+                                <li>{{ $businessesDetail->highlight }}
+
                             </ul><!-- .place__breadcrumbs -->
                             <div class="place__box place__box--npd">
-                                <h1>Mattone Restaurant and Bar</h1>
+                                <h1> {{ $businessesDetail->businessName }}</h1>
                                 <div class="place__meta">
                                     <div class="place__reviews reviews">
                                         <span class="place__reviews__number reviews__number">
@@ -78,36 +69,27 @@
                                         </span>
                                         <span class="place__places-item__count reviews_count">(3 reviews)</span>
                                     </div>
-                                    <div class="place__currency">$$</div>
+                                    <div class="place__currency"> {{ $businessesDetail->price }}</div>
                                     <div class="place__category">
-                                        <a title="Restaurant" href="#">Restaurant</a>
-                                        <a title="Bar" href="#">Bar</a>
+
+                                        <a title=" " href="#">{{ $businessesDetail->placeType }}</a>
                                     </div>
                                 </div><!-- .place__meta -->
                             </div><!-- .place__box -->
                             <div class="place__box place__box-hightlight">
                                 <div class="hightlight-grid">
                                     <div class="place__amenities">
-                                        <img src="{{ asset('assets/frontend-assets/images/icons/amenities/wf.svg') }}"
-                                            alt="Free wifi">
-                                        <span>Wifi</span>
+
+
+                                        @foreach ($submaster as $subvalue)
+                                            @if ($subvalue->title === $businessesDetail->category)
+                                                <i class="{{ $subvalue->value }}"></i>
+                                            @endif
+                                        @endforeach
+                                        <span>{{ $businessesDetail->category }}</span>
                                     </div>
-                                    <div class="place__amenities">
-                                        <img src="{{ asset('assets/frontend-assets/images/icons/amenities/cld.svg') }}"
-                                            alt="Reservations">
-                                        <span>Reservations</span>
-                                    </div>
-                                    <div class="place__amenities">
-                                        <img src="{{ asset('assets/frontend-assets/images/icons/amenities/card.svg') }}"
-                                            alt="Credit cards">
-                                        <span>Credit cards</span>
-                                    </div>
-                                    <div class="place__amenities">
-                                        <img src="{{ asset('assets/frontend-assets/images/icons/amenities/smk.svg') }}"
-                                            alt="Non smoking">
-                                        <span>Non smoking</span>
-                                    </div>
-                                    <a href="#book-now" title="More" class="hightlight-count open-popup">+(4)</a>
+
+
 
                                     <div class="popup-wrap" id="book-now">
                                         <div class="popup-bg popupbg-close"></div>
@@ -161,17 +143,7 @@
                             </div><!-- .place__box -->
                             <div class="place__box place__box-overview">
                                 <h3>Overview</h3>
-                                <div class="place__desc">The Grade I-listed British Library is the largest national library
-                                    in the world with over 150 million catalogued items held inside, some dating back as far
-                                    as 2000 BC. It’s home to 15th-century editions of Chaucer’s Canterbury Tales, original
-                                    song sheets penned by the Beatles and the memorandum written by Lord Nelson two days
-                                    before the Battle of Trafalgar. It also receives a copy of every single book published
-                                    in the UK and Ireland. The Grade I-listed British Library is the largest national
-                                    library in the world with over 150 million catalogued items held inside, some dating
-                                    back as far as 2000 BC. It’s home to 15th-century editions of Chaucer’s Canterbury
-                                    Tales, original song sheets penned by the Beatles and the memorandum written by Lord
-                                    Nelson two days before the Battle of Trafalgar. It also receives a copy of every single
-                                    book published in the UK and Ireland.</div><!-- .place__desc -->
+                                <div class="place__desc">{{ $businessesDetail->description }}</div><!-- .place__desc -->
                                 <a href="#" class="show-more" title="Show More">Show more</a>
                             </div>
                             <div class="place__box place__box-map">
@@ -183,8 +155,8 @@
                                 </div>
                                 <div class="address">
                                     <i class="la la-map-marker"></i>
-                                    1906 Market St San Francisco 94102
-                                    <a href="#" title="Direction">(Direction)</a>
+                                    {{ $businessesDetail->placeAddress }}
+                                    <a href="#" title="Direction">( {{ $businessesDetail->city }})</a>
                                 </div>
                             </div><!-- .place__box -->
                             <div class="place__box">
@@ -192,20 +164,31 @@
                                 <ul class="place__contact">
                                     <li>
                                         <i class="la la-phone"></i>
-                                        <a title="00 343 7859" href="tel:003437859">00 343 7859</a>
+                                        <a title=""
+                                            href="">{{ $businessesDetail->phoneNumber1 }},{{ $businessesDetail->phoneNumber2 }}</a>
+                                    </li>
+                                    <li>
+                                        <i class="la la-whatsapp"></i>
+                                        <a title="" href="">{{ $businessesDetail->whatsappNo }}</a>
                                     </li>
                                     <li>
                                         <i class="la la-globe"></i>
-                                        <a title="www.abcsite.com" href="www.abcsite.html">www.abcsite.com</a>
+                                        <a title="www.abcsite.com" href="">{{ $businessesDetail->websiteUrl }}</a>
                                     </li>
                                     <li>
                                         <i class="la la-facebook-f"></i>
-                                        <a title="fb.com/abc" href="fb.com/abc.html">facebook.com/getgolo</a>
+                                        <a title="fb.com/abc"
+                                            href="fb.com/abc.html">{{ $businessesDetail->facebook }}</a>
                                     </li>
                                     <li>
                                         <i class="la la-instagram"></i>
                                         <a title="instagram.com/abc"
-                                            href="instagram.com/abc.html">instagram.com/getgolo</a>
+                                            href="instagram.com/abc.html">{{ $businessesDetail->instagram }}</a>
+                                    </li>
+                                    <li>
+                                        <i class="la la-twitter"></i>
+                                        <a title="instagram.com/abc"
+                                            href="instagram.com/abc.html">{{ $businessesDetail->twitter }}</a>
                                     </li>
                                 </ul>
                             </div><!-- .place__box -->
@@ -216,33 +199,11 @@
                                 <table class="open-table">
                                     <tbody>
                                         <tr>
-                                            <td class="day">Monday</td>
-                                            <td class="time">8:00 am - 10:00 pm</td>
+
+                                            <td class="time">{{ $businessesDetail->duration }}</td>
                                         </tr>
-                                        <tr>
-                                            <td class="day">Tuesday</td>
-                                            <td class="time">8:00 am - 10:00 pm</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="day">Wednesday</td>
-                                            <td class="time">8:00 am - 10:00 pm</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="day">Thursday</td>
-                                            <td class="time">8:00 am - 10:00 pm</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="day">Friday</td>
-                                            <td class="time">8:00 am - 10:00 pm</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="day">Saturday</td>
-                                            <td class="time">8:00 am - 10:00 pm</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="day">Sunday</td>
-                                            <td class="time">Close</td>
-                                        </tr>
+
+
                                     </tbody>
                                 </table>
                             </div><!-- .place__box -->
@@ -257,27 +218,12 @@
                                             </p>
                                         </div>
                                     </li>
-                                    <li>
-                                        <h4>How far does free delivery extend to? To San Francisco?</h4>
-                                        <div class="desc">
-                                            <p>We are currently offering free shipping throughout Northern California on all
-                                                orders over $80. Peninsula to San Francisco can receive next day delivery.
-                                            </p>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <h4>How far does free delivery extend to? To San Francisco?</h4>
-                                        <div class="desc">
-                                            <p>We are currently offering free shipping throughout Northern California on all
-                                                orders over $80. Peninsula to San Francisco can receive next day delivery.
-                                            </p>
-                                        </div>
-                                    </li>
+
                                 </ul>
                             </div><!-- .place__box -->
                             <div class="place__box place__box--reviews">
                                 <h3 class="place__title--reviews">
-                                    Review (3)
+                                    Review
                                     <span class="place__reviews__number">
                                         4.2
                                         <i class="la la-star"></i>
@@ -316,78 +262,12 @@
                                                 is amazing and I am going next week.</p>
                                         </div>
                                         <a title="Reply" href="#" class="place__comments__reply">
-                                            <i class="la la-comment-dots"></i>
-                                            Reply
+
+
                                         </a>
-                                        <ul>
-                                            <li>
-                                                <div class="place__author">
-                                                    <div class="place__author__avatar">
-                                                        <a title="Chiemeka" href="#"><img
-                                                                src="{{ asset('assets/frontend-assets/images/avatars/male-2.jpg') }}"
-                                                                alt=""></a>
-                                                    </div>
-                                                    <div class="place__author__info">
-                                                        <a title="Chiemeka" href="#">Chiemeka</a>
-                                                        <div class="place__author__star">
-                                                            <i class="la la-star"></i>
-                                                            <i class="la la-star"></i>
-                                                            <i class="la la-star"></i>
-                                                            <i class="la la-star"></i>
-                                                            <i class="la la-star"></i>
-                                                            <span style="width: 72%">
-                                                                <i class="la la-star"></i>
-                                                                <i class="la la-star"></i>
-                                                                <i class="la la-star"></i>
-                                                                <i class="la la-star"></i>
-                                                                <i class="la la-star"></i>
-                                                            </span>
-                                                        </div>
-                                                        <span class="time">October 1, 2019</span>
-                                                    </div>
-                                                </div>
-                                                <div class="place__comments__content">
-                                                    <p>Thank you for your kind words.It was truly very nice to meet you. I
-                                                        am glad to read you enjoyed the area and the cottage.</p>
-                                                </div>
-                                            </li>
-                                        </ul>
+
                                     </li>
-                                    <li>
-                                        <div class="place__author">
-                                            <div class="place__author__avatar">
-                                                <a title="Nitithorn" href="#"><img
-                                                        src="{{ asset('assets/frontend-assets/images/avatars/female-4.jpg') }}"
-                                                        alt=""></a>
-                                            </div>
-                                            <div class="place__author__info">
-                                                <a title="Nitithorn" href="#">Nitithorn</a>
-                                                <div class="place__author__star">
-                                                    <i class="la la-star"></i>
-                                                    <i class="la la-star"></i>
-                                                    <i class="la la-star"></i>
-                                                    <i class="la la-star"></i>
-                                                    <i class="la la-star"></i>
-                                                    <span style="width: 72%">
-                                                        <i class="la la-star"></i>
-                                                        <i class="la la-star"></i>
-                                                        <i class="la la-star"></i>
-                                                        <i class="la la-star"></i>
-                                                        <i class="la la-star"></i>
-                                                    </span>
-                                                </div>
-                                                <span class="time">October 1, 2019</span>
-                                            </div>
-                                        </div>
-                                        <div class="place__comments__content">
-                                            <p>Went there last Saturday for the first time to watch my favorite djs (Kungs,
-                                                Sam Feldet and Watermat) and really had a great experience.</p>
-                                        </div>
-                                        <a title="Reply" href="#" class="place__comments__reply">
-                                            <i class="la la-comment-dots"></i>
-                                            Reply
-                                        </a>
-                                    </li>
+
                                 </ul>
                                 <div class="review-form">
                                     <h3>Write a review</h3>
@@ -551,7 +431,8 @@
                                 <div class="place-inner">
                                     <div class="place-thumb">
                                         <a class="entry-thumb" href="04_place-details-1.html"><img
-                                                src="{{ asset('assets/frontend-assets/images/listing/03.jpg')}}" alt=""></a>
+                                                src="{{ asset('assets/frontend-assets/images/listing/03.jpg') }}"
+                                                alt=""></a>
                                         <a href="#" class="golo-add-to-wishlist btn-add-to-wishlist "
                                             data-place-id="185">
                                             <span class="icon-heart">
@@ -562,7 +443,8 @@
                                             <i class="las la-spa"></i><span>Massage</span>
                                         </a>
                                         <a href="#" class="author" title="Author"><img
-                                                src="{{ asset('assets/frontend-assets/images/avatars/male-4.jpg')}}" alt="Author"></a>
+                                                src="{{ asset('assets/frontend-assets/images/avatars/male-4.jpg') }}"
+                                                alt="Author"></a>
                                     </div>
                                     <div class="entry-detail">
                                         <div class="entry-head">
@@ -591,137 +473,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-3 col-md-6">
-                            <div class="place-item layout-02 place-hover">
-                                <div class="place-inner">
-                                    <div class="place-thumb">
-                                        <a class="entry-thumb" href="04_place-details-1.html"><img
-                                                src="images/listing/07.jpg" alt=""></a>
-                                        <a href="#" class="golo-add-to-wishlist btn-add-to-wishlist "
-                                            data-place-id="185">
-                                            <span class="icon-heart">
-                                                <i class="la la-bookmark large"></i>
-                                            </span>
-                                        </a>
-                                        <a class="entry-category orange" href="#">
-                                            <i class="las la-cocktail"></i><span>Nightlife</span>
-                                        </a>
-                                        <a href="#" class="author" title="Author"><img
-                                                src="images/avatars/male-3.jpg" alt="Author"></a>
-                                    </div>
-                                    <div class="entry-detail">
-                                        <div class="entry-head">
-                                            <div class="place-type list-item">
-                                                <span>Nightlife</span>
-                                            </div>
-                                            <div class="place-city">
-                                                <a href="#">Bordeaux</a>
-                                            </div>
-                                        </div>
-                                        <h3 class="place-title"><a href="04_place-details-1.html">Jardin Club</a></h3>
-                                        <div class="open-now"><i class="las la-door-open"></i>Open now</div>
-                                        <div class="entry-bottom">
-                                            <div class="place-preview">
-                                                <div class="place-rating">
-                                                    <span>5.0</span>
-                                                    <i class="la la-star"></i>
-                                                </div>
-                                                <span class="count-reviews">(2 Reviews)</span>
-                                            </div>
-                                            <div class="place-price">
-                                                <span>$$</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6">
-                            <div class="place-item layout-02 place-hover">
-                                <div class="place-inner">
-                                    <div class="place-thumb">
-                                        <a class="entry-thumb" href="04_place-details-1.html"><img
-                                                src="images/listing/01.jpg" alt=""></a>
-                                        <a href="#" class="golo-add-to-wishlist btn-add-to-wishlist "
-                                            data-place-id="185">
-                                            <span class="icon-heart">
-                                                <i class="la la-bookmark large"></i>
-                                            </span>
-                                        </a>
-                                        <a class="entry-category rosy-pink" href="#">
-                                            <i class="las la-utensils"></i><span>Restaurant</span>
-                                        </a>
-                                        <a href="#" class="author" title="Author"><img
-                                                src="images/avatars/female-4.jpg" alt="Author"></a>
-                                    </div>
-                                    <div class="entry-detail">
-                                        <div class="entry-head">
-                                            <div class="place-type list-item">
-                                                <span>Restaurant</span>
-                                            </div>
-                                            <div class="place-city">
-                                                <a href="#">Paris</a>
-                                            </div>
-                                        </div>
-                                        <h3 class="place-title"><a href="04_place-details-1.html">Vago Restaurant</a></h3>
-                                        <div class="open-now"><i class="las la-door-open"></i>Open now</div>
-                                        <div class="entry-bottom">
-                                            <div class="place-preview">
-                                                <div class="place-rating">
-                                                    <span>5.0</span>
-                                                    <i class="la la-star"></i>
-                                                </div>
-                                                <span class="count-reviews">(2 Reviews)</span>
-                                            </div>
-                                            <div class="place-price">
-                                                <span>$$</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6">
-                            <div class="place-item layout-02 place-hover">
-                                <div class="place-inner">
-                                    <div class="place-thumb">
-                                        <a class="entry-thumb" href="04_place-details-1.html"><img
-                                                src="images/listing/04.jpg" alt=""></a>
-                                        <a href="#" class="golo-add-to-wishlist btn-add-to-wishlist "
-                                            data-place-id="185">
-                                            <span class="icon-heart">
-                                                <i class="la la-bookmark large"></i>
-                                            </span>
-                                        </a>
-                                        <a class="entry-category charcoal-purple" href="#">
-                                            <i class="las la-shopping-bag"></i><span>Shop</span>
-                                        </a>
-                                        <a href="#" class="author" title="Author"><img
-                                                src="images/avatars/male-2.jpg" alt="Author"></a>
-                                    </div>
-                                    <div class="entry-detail">
-                                        <div class="entry-head">
-                                            <div class="place-type list-item">
-                                                <span>Shopping</span>
-                                            </div>
-                                            <div class="place-city">
-                                                <a href="#">Paris</a>
-                                            </div>
-                                        </div>
-                                        <h3 class="place-title"><a href="04_place-details-1.html">Antoinette</a></h3>
-                                        <div class="open-now"><i class="las la-door-open"></i>Open now</div>
-                                        <div class="entry-bottom">
-                                            <div class="place-preview">
-                                                <span class="no-reviews">(no reviews)</span>
-                                            </div>
-                                            <div class="place-price">
-                                                <span>Free</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
                     </div>
                 </div>
             </div>

@@ -145,9 +145,9 @@
                                         <a title="Owner Dashboard" href="/ownerDashboard">Owner
                                             Dashboard</a>
                                     </li>
-                                    <li>
+                                    <!-- <li>
                                         <a title="Owner Single" href="/businessOwnerPage">Owner page</a>
-                                    </li>
+                                    </li> -->
                                     <li>
                                         <a title="Owner Shop" href="/ownerShop">Owner Shop</a>
                                     </li>

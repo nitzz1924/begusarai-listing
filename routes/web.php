@@ -26,7 +26,7 @@ Route::get('/searchFilter', [HomeController::class, 'searchFilter'])->name('sear
 
 // Business Owner routes - logged in
 Route::get('/ownerDashboard', [HomeController::class, 'ownerDashboard'])->name('ownerDashboard');
-Route::get('/businessOwnerPage', [HomeController::class, 'businessOwnerPage'])->name('businessOwnerPage');
+Route::get('/listingDetail/{id}', [HomeController::class, 'listingDetail'])->name('listingDetail');
 Route::get('/ownerWishlist', [HomeController::class, 'ownerWishlist'])->name('ownerWishlist');
 Route::get('/ownerProfile', [HomeController::class, 'ownerProfile'])->name('ownerProfile');
 Route::get('/ownerLeads', [HomeController::class, 'ownerLeads'])->name('ownerLeads');

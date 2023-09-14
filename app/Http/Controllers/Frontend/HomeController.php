@@ -410,11 +410,20 @@ class HomeController extends Controller
         return view('frontend.ownerDashboard');
     }
 
-    public function businessOwnerPage()
+
+    public function listingDetail(Request $request, $id)
     {
-        return view('frontend.businessOwnerPage');
+
+
+        $businesses = BusinessList::orderBy('created_at', 'desc')->get();
+        $businessesDetail = BusinessList::where('id', $id)->first();
+        $submaster = Master::orderBy('created_at', 'asc')
+        ->where('type', '=', 'category')
+        ->get();
+        return view('frontend.listingDetail',compact('businessesDetail','submaster','businesses'));
     }
 
+    
     public function ownerListing()
     {
         $businesses = BusinessList::all(); // Fetch all businesses from the database

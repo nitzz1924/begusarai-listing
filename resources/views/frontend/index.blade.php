@@ -138,7 +138,7 @@
                                     <div class="place-item layout-02 place-hover">
                                         <div class="place-inner">
                                             <div class="place-thumb hover-img">
-                                                <a class="entry-thumb" href="single-1.html">
+                                                <a class="entry-thumb" href="{{ URL::to('listingDetail/' . $value->id) }}">
 
                                                     <img src="{{ URL::to('uploads/' . $value->coverImage) }}" />
 
@@ -176,7 +176,7 @@
                                                     </div>
                                                 </div>
                                                 <h3 class="place-title">
-                                                    <a href="single-1.html">{{ $value->businessName }}</a>
+                                                    <a href="{{ URL::to('listingDetail/' . $value->id) }}">{{ $value->businessName }}</a>
                                                 </h3>
                                                 <div class="open-now">
                                                     <i class="las la-door-open"></i>Open now
