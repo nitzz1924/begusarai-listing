@@ -430,6 +430,20 @@ class HomeController extends Controller
     }
 
     
+
+
+    
+    public function blogDetail(Request $request, $id)
+    {
+
+
+        $businesses = BusinessList::orderBy('created_at', 'desc')->get();
+        $businessesDetail = BusinessList::where('id', $id)->first();
+        $submaster = Master::orderBy('created_at', 'asc')
+        ->where('type', '=', 'category')
+        ->get();
+        return view('frontend.blogDetail',compact('businessesDetail','submaster','businesses'));
+    }
     public function ownerListing()
     {
         $businesses = BusinessList::all(); // Fetch all businesses from the database

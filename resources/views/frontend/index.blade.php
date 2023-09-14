@@ -349,7 +349,7 @@
                                     <article class="post hover__box">
                                         <div class="post__thumb hover__box__thumb">
                                             <a title="The 8 Most Affordable Michelin Restaurants in Paris"
-                                                href="blog-detail.html"><img
+                                                href="{{ URL::to('blogDetails/' . $value->id) }}"><img
                                                     src="{{ URL::to('/uploads/' . $value->image) }}"
                                                     alt="The 8 Most Affordable Michelin Restaurants in Paris" /></a>
 
@@ -359,11 +359,11 @@
                                         </div>
                                         <div class="post__info">
                                             <ul class="post__category">
-                                                <li><a title="Food" href="#">{{ $value->type }}</a></li>
+                                                <li>{{ $value->type }}</li>
                                             </ul>
                                             <h3 class="post__title">
                                                 <a title="The 8 Most Affordable Michelin Restaurants in Paris"
-                                                    href="blog-detail.html">{{ $value->title }}</a>
+                                                    href="{{ URL::to('blogDetails/' . $value->id) }}">{{ $value->title }}</a>
                                             </h3>
                                         </div>
                                     </article>
