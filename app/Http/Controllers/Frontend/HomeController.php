@@ -457,4 +457,14 @@ class HomeController extends Controller
             ->route('testimonial')
             ->with('success', 'FeedBack submitted successfully!');
     }
+
+    public function ownerShop()
+    {
+        return view('frontend.ownerShop');
+    }
+    
+    public function searchFilter()
+    {
+        return view('frontend.searchFilter');
+    }
 }

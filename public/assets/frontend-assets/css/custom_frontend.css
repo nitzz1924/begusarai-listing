@@ -73,7 +73,7 @@ input::-webkit-inner-spin-button {
 
 /* Firefox */
 input[type="number"] {
-    -moz-appearance: textfield;
+    /* -moz-appearance: textfield; */
 }
 
 /* hero section banner */

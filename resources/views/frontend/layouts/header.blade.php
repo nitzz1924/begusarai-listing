@@ -148,13 +148,19 @@
                                     <li>
                                         <a title="Owner Single" href="/businessOwnerPage">Owner page</a>
                                     </li>
+                                    <li>
+                                        <a title="Owner Shop" href="/ownerShop">Owner Shop</a>
+                                    </li>
+                                    <li>
+                                        <a title="Search Filter" href="/searchFilter">Search Filter</a>
+                                    </li>
 
                                 </ul>
                             </li>
+
                             <?php 
                             if(Auth::user()){
 
-                       
                             if (Auth::user()->type=='Guest'){
                                 ?>
                             <li>
