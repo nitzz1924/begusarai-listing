@@ -44,7 +44,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ URL::to('/admin/blogs') }}">
+                    <a href="{{ URL::to('/admin/blog') }}">
                         <i class="metismenu-icon pe-7s-bookmarks"></i>
                         Blogs
                     </a>

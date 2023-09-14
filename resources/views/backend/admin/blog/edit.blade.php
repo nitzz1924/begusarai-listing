@@ -1,68 +1,105 @@
-<form id='edit' action="" enctype="multipart/form-data" method="post" accept-charset="utf-8">
-    <div id="status"></div>
-    {{method_field('PATCH')}}
-    <div class="form-row">
-        <div class="form-group col-md-9 col-sm-12">
-            <label for=""> Title </label>
-            <input type="text" class="form-control" id="title" name="title" value="{{ $blog->title }}"
-                   placeholder="" required>
-            <span id="error_title" class="has-error"></span>
-        </div>
-        <div class="form-group col-md-3 col-sm-12">
-            <label for=""> Category </label>
-            <select name="category" id="category" class="form-control" required>
-                <option value="{{ $blog->category }}">{{ $blog->category }}</option>
-                <option value="Notice Board">Notice Board</option>
-                <option value="Latest News">Latest News</option>
-                <option value="Job News">Job News</option>
-            </select>
-            <span id="error_category" class="has-error"></span>
-        </div>
-        <div class="clearfix"></div>
-        <div class="form-group col-md-12 col-sm-12">
-            <label for=""> Description </label>
-            <textarea type="text" class="form-control" id="description" name="description"
-                      placeholder="">{{ $blog->description }}</textarea>
-            <span id="error_description" class="has-error"></span>
-        </div>
-        <div class="form-group col-md-4">
-            <label for=""> Status </label><br/>
-            <input type="radio" name="status" class="flat-green"
-                   value="1" {{ ( $blog->status == 1 ) ? 'checked' : '' }} /> Active
-            <input type="radio" name="status" class="flat-green"
-                   value="0" {{ ( $blog->status == 0 ) ? 'checked' : '' }}/> In Active
-        </div>
-        <div class="col-md-8">
-            <label for="photo">Logo (File must be jpg, jpeg, png)</label>
-            <div class="input-group">
-                <input id="photo" type="file" name="photo" style="display:none">
-                <div class="input-group-prepend">
-                    <a class="btn btn-secondary text-white" onclick="$('input[id=photo]').click();">Browse</a>
-                </div>
-                <input type="text" name="SelectedFileName" class="form-control" id="SelectedFileName"
-                       value="{{$blog->file_path}}" readonly>
+@extends('backend.layouts.master')
+@section('title', 'Edit Blog Entry')
+@section('content')
+    <div class="container">
+        <h1>Edit Blog Entry</h1>
+
+        @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
             </div>
-            <script type="text/javascript">
-                $('input[id=photo]').change(function () {
-                    $('#SelectedFileName').val($(this).val());
-                });
-            </script>
-            <span id="error_photo" class="has-error"></span>
-        </div>
-        <div class="clearfix"></div>
-        <div class="form-group col-md-12 mb-3 mt-3">
-            <button type="submit" class="btn btn-success button-submit"
-                    data-loading-text="Loading..."><span class="fa fa-save fa-fw"></span> Save
-            </button>
-        </div>
+        @endif
+
+        <form method="POST" action="{{ route('admin.blog.update', $blog->id) }}" enctype="multipart/form-data">
+            @csrf
+            @method('PATCH')
+
+            <!-- Title -->
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input type="text" class="form-control" id="title" name="title"
+                    value="{{ old('title', $blog->title) }}" required>
+            </div>
+
+            <!-- Description -->
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea class="form-control" id="description" name="description" rows="4" required>{{ old('description', $blog->description) }}</textarea>
+            </div>
+
+
+            <div class="mb-3">
+                <label for="type" class="form-label">Blog Type:</label>
+                <select class="form-select form-control" id="type" name="type" aria-label="category-form-select">
+                    <option disabled>Select Category Type</option> <!-- Default selection -->
+                    @foreach ($submaster as $value)
+                        <option value="{{ $value->title }}"
+                            {{ old('type', $blog->type) == $value->title ? 'selected' : '' }}>
+                            {{ $value->title }}
+                        </option>
+                    @endforeach
+                </select>
+                @error('type')
+                    <div class="has-error mt-2">Please select a blog type</div>
+                @enderror
+            </div>
+
+
+
+
+            <div class="mb-3">
+                <label for="keyword" class="form-label">Keyword:</label>
+                <input type="text" class="form-control" name="keyword" id="keyword"
+                    value="{{ old('title', $blog->keyword) }}">
+                @error('keyword')
+                    <div class="has-error mt-2">{{ $message }}</div>
+                @enderror
+            </div>
+
+
+            <div class="mb-3">
+                <label for="post" class="form-label">Post:</label>
+                <textarea class="form-control" name="post" id="post">   value="{{ old('title', $blog->post) }}"</textarea>
+                @error('post')
+                    <div class="has-error mt-2">{{ $message }}</div>
+                @enderror
+            </div>
+
+
+            <!-- Current Image -->
+            @if ($blog->image)
+                <div class="form-group">
+                    <label for="current_image">Current Image</label><br>
+                    <img src="{{ asset('/uploads/' . $blog->image) }}" alt="Current Image" width="200">
+                </div>
+            @endif
+
+
+
+
+            <!-- Image Upload -->
+            <div class="form-group">
+                <label for="image">New Image</label>
+                <input type="file" class="form-control" id="image" name="image">
+                @if ($errors->has('image'))
+                    <span class="text-danger">{{ $errors->first('image') }}</span>
+                @endif
+            </div>
+
+            <div class="mb-3">
+                <label for="videourl" class="form-label">Video URL:</label>
+                <input type="text" class="form-control" name="videourl" id="videourl" value="videourl">
+                @error('videourl')
+                    <div class="has-error mt-2">{{ $message }}</div>
+                @enderror
+            </div>
+
+
+
+            <!-- Other fields -->
+            <!-- Add other fields and form elements as needed -->
+
+            <button type="submit" class="btn btn-primary">Update</button>
+        </form>
     </div>
-</form>
-<script>
-    $('input[type="radio"].flat-green').iCheck({
-        radioClass: 'iradio_flat-green'
-    });
-    $('.button-submit').click(function () {
-        // route name and record id
-        ajax_submit_update('blogs', "{{ $blog->id }}")
-    });
-</script>
+@stop

@@ -1,58 +1,101 @@
-<form id='create' action="" enctype="multipart/form-data" method="post" accept-charset="utf-8" class="needs-validation"
-      novalidate>
-    <div id="status"></div>
-    <div class="form-row">
-        <div class="form-group col-md-9 col-sm-12">
-            <label for=""> Title </label>
-            <input type="text" class="form-control" id="title" name="title" value=""
-                   placeholder="" required>
-            <span id="error_title" class="has-error"></span>
-        </div>
-        <div class="form-group col-md-3 col-sm-12">
-            <label for=""> Category </label>
-            <select name="category" id="category" class="form-control" required>
-                <option value="Notice Board">Notice Board</option>
-                <option value="Latest News">Latest News</option>
-                <option value="Job News">Job News</option>
-            </select>
-            <span id="error_category" class="has-error"></span>
-        </div>
-        <div class="clearfix"></div>
-        <div class="form-group col-md-12 col-sm-12">
-            <label for=""> Description </label>
-            <textarea type="text" class="form-control" id="description" name="description" value=""
-                      placeholder=""></textarea>
-            <span id="error_description" class="has-error"></span>
-        </div>
-        <div class="clearfix"></div>
-        <div class="col-md-12 mb-3">
-            <label for="photo">Logo (File must be jpg, jpeg, png)</label>
-            <div class="input-group">
-                <input id="photo" type="file" name="photo" style="display:none">
-                <div class="input-group-prepend">
-                    <a class="btn btn-secondary text-white" onclick="$('input[id=photo]').click();">Browse</a>
+@extends('backend.layouts.master')
+@section('title', 'SubMaster')
+@section('content')
+
+    @if (session('error'))
+        <section class="container">
+            <div class="row py-3 justify-content-center">
+                <div class="col-6 alert alert-danger text-center">
+                    {{ session('error') }}
                 </div>
-                <input type="text" name="SelectedFileName" class="form-control" id="SelectedFileName"
-                       value="" readonly>
             </div>
-            <script type="text/javascript">
-                $('input[id=photo]').change(function () {
-                    $('#SelectedFileName').val($(this).val());
-                });
-            </script>
-            <span id="error_photo" class="has-error"></span>
-        </div>
-        <div class="clearfix"></div>
-        <div class="form-group col-md-12">
-            <button type="submit" class="btn btn-success button-submit"
-                    data-loading-text="Loading..."><span class="fa fa-save fa-fw"></span> Save
-            </button>
+        </section>
+    @endif
+
+    <div class="card">
+        <h5 class="card-header">SubMaster</h5>
+        <div class="card-body">
+            <!-- Form -->
+            <form action="{{ route('admin.blog.store') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+
+
+
+                <!-- Other Fields -->
+                <div class="mb-3">
+                    <label for="title" class="form-label">Title:</label>
+                    <input type="text" class="form-control" name="title" id="title">
+                    @error('title')
+                        <div class="has-error mt-2">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="mb-3">
+                    <label for="description" class="form-label">Description:</label>
+                    <textarea class="form-control" name="description" id="description"></textarea>
+                    @error('description')
+                        <div class="has-error mt-2">{{ $message }}</div>
+                    @enderror
+                </div>
+
+
+
+
+
+
+                <div class="mb-3">
+                    <label for="type" class="form-label">Blog Type:</label>
+                    <select class="form-select form-control" id="type" name="type"
+                        aria-label="category-form-select">
+                        <option selected disabled>Select Category Type</option> <!-- Default selection -->
+                        @foreach ($submaster as $value)
+                            <option>{{ $value->title }}</option>
+                        @endforeach
+                    </select>
+                    @error('type')
+                        <div class="has-error mt-2">please select blog type</div>
+                    @enderror
+                </div>
+
+
+                <div class="mb-3">
+                    <label for="keyword" class="form-label">Keyword:</label>
+                    <input type="text" class="form-control" name="keyword" id="keyword">
+                    @error('keyword')
+                        <div class="has-error mt-2">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="mb-3">
+                    <label for="post" class="form-label">Post:</label>
+                    <textarea class="form-control" name="post" id="post"></textarea>
+                    @error('post')
+                        <div class="has-error mt-2">{{ $message }}</div>
+                    @enderror
+                </div> <!-- Image Upload -->
+                <div class="mb-3">
+                    <label for="image" class="form-label">Image:</label>
+                    <input type="file" class="form-control" name="image" id="image">
+                    @error('image')
+                        <div class="has-error mt-2">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <!-- Video URL -->
+                <div class="mb-3">
+                    <label for="videourl" class="form-label">Video URL:</label>
+                    <input type="text" class="form-control" name="videourl" id="videourl">
+                    @error('videourl')
+                        <div class="has-error mt-2">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+            <!-- End Form -->
         </div>
     </div>
-</form>
-<script>
-    $('.button-submit').click(function () {
-        // route name
-        ajax_submit_store('blogs')
-    });
-</script>
+
+@stop
