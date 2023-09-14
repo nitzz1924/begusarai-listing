@@ -110,6 +110,12 @@ class HomeController extends Controller
 
     public function index()
     {
+
+
+        $blog = Blog::orderBy('created_at', 'asc')->get();
+
+
+        
         $TestimonialData = Testimonial::orderBy('created_at', 'asc')
             ->where('status', '=', '1')
             ->get();
@@ -121,7 +127,7 @@ class HomeController extends Controller
         $Mastercity = Master::orderBy('created_at', 'asc')
             ->where('type', '=', 'City')
             ->get();
-        return View::make('frontend.index', compact('submaster', 'businesses', 'Mastercity', 'TestimonialData'));
+        return View::make('frontend.index', compact('submaster', 'businesses', 'Mastercity', 'TestimonialData','blog'));
     }
 
     public function aboutUs()
