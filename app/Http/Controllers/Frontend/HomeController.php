@@ -110,12 +110,10 @@ class HomeController extends Controller
 
     public function index()
     {
+        $blog = Blog::orderBy('created_at', 'desc')
+            ->take(3)
+            ->get();
 
-
-        $blog = Blog::orderBy('created_at', 'asc')->get();
-
-
-        
         $TestimonialData = Testimonial::orderBy('created_at', 'asc')
             ->where('status', '=', '1')
             ->get();
@@ -127,7 +125,7 @@ class HomeController extends Controller
         $Mastercity = Master::orderBy('created_at', 'asc')
             ->where('type', '=', 'City')
             ->get();
-        return View::make('frontend.index', compact('submaster', 'businesses', 'Mastercity', 'TestimonialData','blog'));
+        return View::make('frontend.index', compact('submaster', 'businesses', 'Mastercity', 'TestimonialData', 'blog'));
     }
 
     public function aboutUs()
@@ -416,33 +414,21 @@ class HomeController extends Controller
         return view('frontend.ownerDashboard');
     }
 
-
     public function listingDetail(Request $request, $id)
     {
-
-
         $businesses = BusinessList::orderBy('created_at', 'desc')->get();
         $businessesDetail = BusinessList::where('id', $id)->first();
         $submaster = Master::orderBy('created_at', 'asc')
-        ->where('type', '=', 'category')
-        ->get();
-        return view('frontend.listingDetail',compact('businessesDetail','submaster','businesses'));
+            ->where('type', '=', 'category')
+            ->get();
+        return view('frontend.listingDetail', compact('businessesDetail', 'submaster', 'businesses'));
     }
 
-    
-
-
-    
-    public function blogDetail(Request $request, $id)
+    public function blogDetails(Request $request, $id)
     {
+        $blog = Blog::where('id', $id)->first();
 
-
-        $businesses = BusinessList::orderBy('created_at', 'desc')->get();
-        $businessesDetail = BusinessList::where('id', $id)->first();
-        $submaster = Master::orderBy('created_at', 'asc')
-        ->where('type', '=', 'category')
-        ->get();
-        return view('frontend.blogDetail',compact('businessesDetail','submaster','businesses'));
+        return view('frontend.blogDetails', compact('blog'));
     }
     public function ownerListing()
     {
@@ -491,7 +477,7 @@ class HomeController extends Controller
     {
         return view('frontend.ownerShop');
     }
-    
+
     public function searchFilter()
     {
         return view('frontend.searchFilter');
@@ -502,7 +488,8 @@ class HomeController extends Controller
     }
     public function blogs()
     {
-        return view('frontend.blogs');
+        $blog = Blog::orderBy('created_at', 'desc')->paginate(3);
+        // $blog = Blog::orderBy('created_at', 'asc')->get();
+        return view('frontend.blogs', compact('blog'));
     }
-    
 }
