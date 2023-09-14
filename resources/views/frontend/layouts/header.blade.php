@@ -130,14 +130,10 @@
                                         <a title="Page" href="#">Blog</a>
                                         <ul class="sub-menu">
                                             <li>
-                                                <a title="Fullwidth" href="blog-fullwidth.html">Fullwidth</a>
+                                                <a title="Fullwidth" href="/blogs">Fullwidth</a>
                                             </li>
-                                            <li>
-                                                <a title="Right Sidebar" href="blog-right-sidebar.html">Right
-                                                    Sidebar</a>
-                                            </li>
-                                            <li>
-                                                <a title="Blog Detail" href="blog-detail.html">Blog Detail</a>
+                                                                                        <li>
+                                                <a title="Blog Detail" href="/blogDetail">Blog Detail</a>
                                             </li>
                                         </ul>
                                     </li>
@@ -145,12 +141,12 @@
                                         <a title="Owner Dashboard" href="/ownerDashboard">Owner
                                             Dashboard</a>
                                     </li>
-                                    <!-- <li>
-                                        <a title="Owner Single" href="/businessOwnerPage">Owner page</a>
-                                    </li> -->
                                     <li>
+                                        <a title="Owner Single" href="/businessOwnerPage">Owner page</a>
+                                    </li> 
+                                    {{-- <li>
                                         <a title="Owner Shop" href="/ownerShop">Owner Shop</a>
-                                    </li>
+                                    </li> --}}
                                     <li>
                                         <a title="Search Filter" href="/searchFilter">Search Filter</a>
                                     </li>

@@ -476,4 +476,16 @@ class HomeController extends Controller
     {
         return view('frontend.searchFilter');
     }
+    public function businessOwnerPage()
+    {
+        return view('frontend.businessOwnerPage');
+    }
+    public function blogs()
+    {
+        return view('frontend.blogs');
+    }
+    public function blogDetail()
+    {
+        return view('frontend.blogDetail');
+    }
 }

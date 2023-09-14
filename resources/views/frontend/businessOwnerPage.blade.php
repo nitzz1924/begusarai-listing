@@ -1,5 +1,5 @@
 @extends('frontend.layouts.master')
-@section('title', 'Owner Profile')
+@section('title', 'Owner Page')
 @section('content')
     
 

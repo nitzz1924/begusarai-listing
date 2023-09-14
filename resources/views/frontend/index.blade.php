@@ -402,7 +402,7 @@
                                 </div>
                             </div>
                             <div class="align-center button-wrap">
-                                <a href="blog-fullwidth.html" class="btn btn-border">View more</a>
+                                <a href="/blogs" class="btn btn-border">View more</a>
                             </div>
                         </div>
                     </div>
