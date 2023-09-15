@@ -155,6 +155,9 @@
 
 
                                                 </a>
+                                                <?php 
+                                                if(Auth::user()){
+                                                ?>
                                                 <a href="#" class="golo-add-to-wishlist btn-add-to-wishlist"
                                                     data-place-id="{{ $value->id }}"
                                                     data-business-id="{{ $value->id }}">
@@ -165,10 +168,27 @@
                                                         @else
                                                             <i class="la la-bookmark large"></i>
                                                         @endif
-
-
                                                     </span>
                                                 </a>
+                                                <?php 
+                                            }else{
+                                            ?>
+
+                                                <div class="login-container">
+                                                    <span class="login-message"> <a href="#"
+                                                            class=" btn-add-to-wishlist open-login test" data-place-id=""
+                                                            data-business-id="">
+                                                            <span class="icon-heart">
+
+                                                                <i class="la la-bookmark large"></i>
+
+                                                            </span>
+                                                        </a></span>
+
+                                                </div>
+
+                                                <?php }?>
+
 
                                                 <a class="entry-category rosy-pink" href="#">
 
@@ -192,8 +212,8 @@
                                                         <span>{{ $value->highlight }}</span>
                                                     </div>
                                                     <!-- <div class="place-city">
-                                                                                                                                                                                                                                                            <a href="#">Paris</a>
-                                                                                                                                                                                                                                                        </div> -->
+                                                                                                                                                                                                                                                                                                                                                        <a href="#">Paris</a>
+                                                                                                                                                                                                                                                                                                                                                    </div> -->
                                                 </div>
                                                 <h3 class="place-title">
                                                     <a
