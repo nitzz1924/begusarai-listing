@@ -15,6 +15,8 @@ use App\Models\BusinessList;
 use App\Models\Master;
 use App\Models\Testimonial;
 use App\Models\Bookmark;
+use App\Models\Career;
+
 use View;
 
 class HomeController extends Controller
@@ -604,6 +606,31 @@ class HomeController extends Controller
     public function career()
     {
         return view('frontend.career');
+    }
+    public function careerStore(Request $request)
+    {
+        $user = Auth::user();
+        $validatedData = $request->validate([
+            'name' => 'required',
+            'number' => 'required',
+            'message' => 'required',
+            'email' => 'required',
+        ]);
+
+        // Create and save a new testimonial record in the database
+
+        $career = new Career([
+            'name' => $validatedData['name'],
+            'message' => $validatedData['message'],
+            'number' => $validatedData['number'],
+            'email' => $validatedData['email'],
+        ]);
+        $career->user_id = $user->id;
+
+        $career->save();
+        return redirect()
+            ->route('career')
+            ->with('success', 'FeedBack submitted successfully!');
     }
     public function ownerLeads()
     {

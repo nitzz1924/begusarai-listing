@@ -38,7 +38,6 @@ Route::get('/ownerLeads', [HomeController::class, 'ownerLeads'])->name('ownerLea
 Route::get('/setPassword', [HomeController::class, 'setPassword'])->name('setPassword');
 Route::get('/ownerShop', [HomeController::class, 'ownerShop'])->name('ownerShop');
 Route::get('/businessOwnerPage', [HomeController::class, 'businessOwnerPage'])->name('businessOwnerPage');
-Route::get('/career', [HomeController::class, 'career'])->name('career');
 
 // guest user backend routes - logged in
 
@@ -132,6 +131,8 @@ Route::put('/editPlace/updatePlace/{id}', [HomeController::class, 'updatePlace']
 Route::get('/testimonial', [HomeController::class, 'Testimonial'])->name('testimonial');
 Route::post('/testimonial', [HomeController::class, 'testimonialStore'])->name('testimonialStore');
 
+Route::get('/career', [HomeController::class, 'career'])->name('career');
+Route::post('/career', [HomeController::class, 'careerStore'])->name('careerStore');
 
 
 //bookmark route 
