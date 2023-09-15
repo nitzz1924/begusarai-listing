@@ -166,3 +166,31 @@ svg {
     -moz-transform: translate3d(0, 0, 0);
     object-fit: cover;
 } */
+
+
+.login-container {
+    text-align: center;
+    /* Center the content horizontally */
+}
+
+.login-message {
+    display: block;
+    margin-bottom: 10px;
+    /* Add some space below the message */
+    font-weight: bold;
+    /* Make the message bold, adjust as needed */
+}
+
+.test {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.test:hover {
+    background-color: #0056b3;
+}

@@ -544,7 +544,7 @@ class HomeController extends Controller
     {
         return view('frontend.searchFilter');
     }
-    
+
     public function searchCity()
     {
         return view('frontend.searchCity');
@@ -558,6 +558,10 @@ class HomeController extends Controller
     public function checkoutPage()
     {
         return view('frontend.checkoutPage');
+    }
+    public function career()
+    {
+        return view('frontend.career');
     }
 
     public function blogs()
