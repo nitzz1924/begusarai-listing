@@ -10,8 +10,9 @@
     </div><!-- .blog-banner -->
     <div class="blog-content">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-9">
+            <div class="row 
+    justify-content-center">
+                <div class="col-lg-10">
                     <div class="blog-left">
                         <ul class="breadcrumbs">
                             <li> {{ $blog->type }}</li>
@@ -174,44 +175,7 @@
                         </div><!-- .place__box -->
                     </div><!-- .place__left -->
                 </div>
-                <div class="col-lg-3">
-                    <div class="sidebar sidebar--shop sidebar--border">
-                        <aside class="sidebar--shop__item widget">
-                            <h3 class="sidebar--shop__title">Best seller</h3>
-                            <div class="sidebar--shop__content">
-                                <div class="product-small">
-                                    <div class="product-small__thumb">
-                                        <a title="Mongolia" href="#"><img src="images/shop/product-07.jpg" alt="Mongolia"></a>
-                                    </div>
-                                    <div class="product-small__info">
-                                        <h3><a title="Monggolia Travel Guide" href="#">Monggolia Travel Guide</a></h3>
-                                        <div class="product-small__price">Price: <span>$59</span></div>
-                                    </div>
-                                </div>
-                                <div class="product-small">
-                                    <div class="product-small__thumb">
-                                        <a title="Turkey" href="#"><img src="images/shop/product-05.jpg" alt="Turkey"></a>
-                                    </div>
-                                    <div class="product-small__info">
-                                        <h3><a title="Vietnam Travel Guide" href="#">Vietnam Travel Guide</a></h3>
-                                        <div class="product-small__price">Price: <span>$44</span></div>
-                                    </div>
-                                </div>
-                                <div class="product-small">
-                                    <div class="product-small__thumb">
-                                        <a title="India" href="#"><img src="images/shop/product-02.jpg" alt="India"></a>
-                                    </div>
-                                    <div class="product-small__info">
-                                        <h3><a title="India Travel Guide" href="#">India Travel Guide</a></h3>
-                                        <div class="product-small__price">Price: <span>$35</span></div>
-                                    </div>
-                                </div>
-                                
-                            </div>
-                        </aside><!-- .sidebar--shop__item -->
-                        
-                    </div><!-- .sidebar -->
-                </div>
+               
             </div>
         </div>
     </div><!-- .blog-content -->

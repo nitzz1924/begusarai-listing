@@ -118,6 +118,12 @@
                     </a>
                 </li>
                 <li>
+                    <a href="{{ URL::to('/admin/career') }}">
+                        <i class="metismenu-icon pe-7s-bookmarks"></i>
+                    Careers
+                    </a>
+                </li>
+                <li>
                     <a href="{{ URL::to('/admin_login/logout') }}">
                         <i class="metismenu-icon pe-7s-upload"></i>
                         Logout
