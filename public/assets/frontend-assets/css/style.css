@@ -3195,7 +3195,7 @@ a.place__comments__reply i {
     z-index: 1;
 }
 .shop-details__quantity input[type="number"] {
-    -moz-appearance: textfield;
+    /* -moz-appearance: textfield; */
 }
 .shop-details__quantity input[type="number"]::-webkit-inner-spin-button {
     -webkit-appearance: none;
