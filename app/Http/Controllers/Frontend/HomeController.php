@@ -563,6 +563,10 @@ class HomeController extends Controller
     {
         return view('frontend.career');
     }
+    public function ownerLeads()
+    {
+        return view('frontend.ownerLeads');
+    }
 
     public function blogs()
     {

@@ -194,3 +194,26 @@ svg {
 .test:hover {
     background-color: #0056b3;
 }
+
+
+
+.pagination nav div div {
+    display: block ruby;
+    text-align: center;
+    padding: 10px 0;
+    /* visibility: hidden; */
+}
+.pagination nav .flex {
+    visibility: hidden;
+    margin-bottom: 10px;
+    text-align: center;
+}
+.pagination nav div div .inline-flex {
+    /* visibility: hidden; */
+    margin: 10px;
+    border-radius: 50px;
+    box-shadow: none !important;
+}
+.pagination nav div div svg {
+    width: 20px;
+}
