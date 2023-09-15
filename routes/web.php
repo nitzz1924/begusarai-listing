@@ -38,6 +38,7 @@ Route::get('/ownerLeads', [HomeController::class, 'ownerLeads'])->name('ownerLea
 Route::get('/setPassword', [HomeController::class, 'setPassword'])->name('setPassword');
 Route::get('/ownerShop', [HomeController::class, 'ownerShop'])->name('ownerShop');
 Route::get('/businessOwnerPage', [HomeController::class, 'businessOwnerPage'])->name('businessOwnerPage');
+Route::get('/career', [HomeController::class, 'career'])->name('career');
 
 // guest user backend routes - logged in
 
