@@ -252,7 +252,7 @@
                                     <div class="slick-item">
                                         <div class="cities__item hover__box">
                                             <div class="cities__thumb hover__box__thumb">
-                                                <a title="London" href="city-details-1.html">
+                                                <a title="London" href="/searchCity">
                                                     <img src="{{ URL::to('uploads/' . $value->logo) }}" alt="London" />
 
                                                 </a>

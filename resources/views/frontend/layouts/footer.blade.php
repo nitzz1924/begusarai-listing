@@ -20,38 +20,36 @@
                 </div>
                 <div class="col-lg-2">
                     <aside class="footer__top__nav">
-                        <h3>Company</h3>
+                        <h2 class="mb-3">Company</h2>
                         <ul>
                             <li>
-                                <a title="About Us" href="06_about-us.html">About Us</a>
+                                <a title="About Us" href="/aboutUs">About Us</a>
                             </li>
                             <li>
-                                <a title="Blog" href="07_blog-right-sidebar.html">Blog</a>
+                                <a title="Blog" href="/blogs">Blog</a>
                             </li>
-                            <li><a title="Faqs" href="15_faqs.html">Faqs</a></li>
-                            <li>
-                                <a title="Contact" href="09_contact-us.html">Contact</a>
+                                <a title="Contact" href="/contactUs">Contact</a>
                             </li>
+                            
                         </ul>
                     </aside>
                 </div>
                 <div class="col-lg-2">
                     <aside class="footer__top__nav">
-                        <h3>Support</h3>
+                        <h2 class="mb-3">Connact</h2>
                         <ul>
-                            <li><a title="Get in Touch" href="#">Get in Touch</a></li>
-                            <li><a title="Help Center" href="#">Help Center</a></li>
-                            <li><a title="Live chat" href="#">Live chat</a></li>
-                            <li><a title="How it works" href="#">How it works</a></li>
+                            <li>
+                                <a title="testimonial" href="/testimonial">Testimonial</a>
+                            </li>
+                            <li>
+                                <a title="Career" href="/career">Career</a>
+                            </li>
                         </ul>
                     </aside>
-                </div>
+                </div> 
                 <div class="col-lg-3">
                     <aside class="footer__top__nav footer__top__nav--contact">
-                        <h3>Contact Us</h3>
-
-                        <p> <a title="" href="/testimonial">Testimonial</a></p>
-
+                        <h2 class="mb-3">Contact Us</h2>
 
                         <p>
                             Email:

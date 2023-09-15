@@ -24,6 +24,8 @@ Route::get('/packages', [HomeController::class, 'packages'])->name('packages');
 Route::get('/registration', [HomeController::class, 'registration'])->name('registration');
 Route::get('/searchFilter', [HomeController::class, 'searchFilter'])->name('searchFilter');
 Route::get('/blogs', [HomeController::class, 'blogs'])->name('blogs');
+Route::get('/searchCity', [HomeController::class, 'searchCity'])->name('searchCity');
+Route::get('/checkoutPage', [HomeController::class, 'checkoutPage'])->name('checkoutPage');
 
 // Business Owner routes - logged in
 Route::get('/ownerDashboard', [HomeController::class, 'ownerDashboard'])->name('ownerDashboard');

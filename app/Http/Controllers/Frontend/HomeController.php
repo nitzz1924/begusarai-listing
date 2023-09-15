@@ -508,10 +508,22 @@ class HomeController extends Controller
     {
         return view('frontend.searchFilter');
     }
+    
+    public function searchCity()
+    {
+        return view('frontend.searchCity');
+    }
+
     public function businessOwnerPage()
     {
         return view('frontend.businessOwnerPage');
     }
+
+    public function checkoutPage()
+    {
+        return view('frontend.checkoutPage');
+    }
+
     public function blogs()
     {
         $blog = Blog::orderBy('created_at', 'desc')->paginate(3);

@@ -13,7 +13,27 @@
 
                     <div class="place-slider__item bd">
                         <a title="Place Slider Image" href="#">
-                            <img src="{{ URL::to('uploads/' . $businessesDetail->coverImage) }}" alt="slider-06">
+                            <img src="{{ URL::to('uploads/' . $businessesDetail->coverImage) }}" alt="slider-01">
+                        </a>
+                    </div>
+                    <div class="place-slider__item bd">
+                        <a title="Place Slider Image" href="#">
+                            <img src="{{ URL::to('uploads/' . $businessesDetail->coverImage) }}" alt="slider-02">
+                        </a>
+                    </div>
+                    <div class="place-slider__item bd">
+                        <a title="Place Slider Image" href="#">
+                            <img src="{{ URL::to('uploads/' . $businessesDetail->coverImage) }}" alt="slider-03">
+                        </a>
+                    </div>
+                    <div class="place-slider__item bd">
+                        <a title="Place Slider Image" href="#">
+                            <img src="{{ URL::to('uploads/' . $businessesDetail->coverImage) }}" alt="slider-04">
+                        </a>
+                    </div>
+                    <div class="place-slider__item bd">
+                        <a title="Place Slider Image" href="#">
+                            <img src="{{ URL::to('uploads/' . $businessesDetail->coverImage) }}" alt="slider-05">
                         </a>
                     </div>
 
@@ -208,19 +228,19 @@
                                 </table>
                             </div><!-- .place__box -->
                             <!-- <div class="place__box">
-                                                                            <h3>FAQ's</h3>
-                                                                            <ul class="faqs-accordion">
-                                                                                <li>
-                                                                                    <h4>What are the ingredients or taste profile for the signature sauce?</h4>
-                                                                                    <div class="desc">
-                                                                                        <p>We are currently offering free shipping throughout Northern California on all
-                                                                                            orders over $80. Peninsula to San Francisco can receive next day delivery.
-                                                                                        </p>
-                                                                                    </div>
-                                                                                </li>
+                                                                                    <h3>FAQ's</h3>
+                                                                                    <ul class="faqs-accordion">
+                                                                                        <li>
+                                                                                            <h4>What are the ingredients or taste profile for the signature sauce?</h4>
+                                                                                            <div class="desc">
+                                                                                                <p>We are currently offering free shipping throughout Northern California on all
+                                                                                                    orders over $80. Peninsula to San Francisco can receive next day delivery.
+                                                                                                </p>
+                                                                                            </div>
+                                                                                        </li>
 
-                                                                            </ul>
-                                                                        </div> -->
+                                                                                    </ul>
+                                                                                </div> -->
                             <!-- .place__box -->
                             <div class="place__box place__box--reviews">
                                 <h3 class="place__title--reviews">
@@ -310,113 +330,30 @@
                     <div class="col-lg-4">
                         <div class="sidebar sidebar--shop sidebar--border">
                             <div class="widget-reservation-mini">
-                                <h3>Make a reservation</h3>
-                                <a href="#" class="open-wg btn">Request</a>
+                                <h3>Send me a message</h3>
+                                <a href="#" class="open-wg btn">Send</a>
                             </div>
                             <aside class="widget widget-shadow widget-reservation">
-                                <h3>Make a reservation</h3>
+                                <h3>Send me a message</h3>
+
                                 <form action="#" method="POST" class="form-underline">
-                                    <div class="field-select has-sub field-guest">
-                                        <span class="sl-icon"><i class="la la-user-friends"></i></span>
-                                        <input type="text" placeholder="Guest" readonly>
-                                        <i class="la la-angle-down"></i>
-                                        <div class="field-sub">
-                                            <ul>
-                                                <li>
-                                                    <span>Adults</span>
-                                                    <div class="shop-details__quantity">
-                                                        <span class="minus">
-                                                            <i class="la la-minus"></i>
-                                                        </span>
-                                                        <input type="number" name="quantity" value="0"
-                                                            class="qty number_adults">
-                                                        <span class="plus">
-                                                            <i class="la la-plus"></i>
-                                                        </span>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <span>Childrens</span>
-                                                    <div class="shop-details__quantity">
-                                                        <span class="minus">
-                                                            <i class="la la-minus"></i>
-                                                        </span>
-                                                        <input type="number" name="quantity" value="0"
-                                                            class="qty number_childrens">
-                                                        <span class="plus">
-                                                            <i class="la la-plus"></i>
-                                                        </span>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        </div>
+                                    <div class="field-input">
+                                        <input type="text" placeholder="Your name" value="" name="your_name">
                                     </div>
-                                    <div class="field-select field-date">
-                                        <span class="sl-icon"><i class="la la-calendar-alt"></i></span>
-                                        <input type="text" placeholder="Date" class="datepicker">
-                                        <i class="la la-angle-down"></i>
+                                    <div class="field-input">
+                                        <input type="email" placeholder="Your email" value="" name="your_email">
                                     </div>
-                                    <div class="field-select has-sub field-time">
-                                        <span class="sl-icon"><i class="la la-clock"></i></span>
-                                        <input type="text" placeholder="Time" readonly>
-                                        <i class="la la-angle-down"></i>
-                                        <div class="field-sub">
-                                            <ul>
-                                                <li><a href="#">12:00 AM</a></li>
-                                                <li><a href="#">12:30 AM</a></li>
-                                                <li><a href="#">1:00 AM</a></li>
-                                                <li><a href="#">1:30 AM</a></li>
-                                                <li><a href="#">2:00 AM</a></li>
-                                                <li><a href="#">2:30 AM</a></li>
-                                                <li><a href="#">3:00 AM</a></li>
-                                                <li><a href="#">3:30 AM</a></li>
-                                                <li><a href="#">4:00 AM</a></li>
-                                                <li><a href="#">4:30 AM</a></li>
-                                                <li><a href="#">5:00 AM</a></li>
-                                                <li><a href="#">5:30 AM</a></li>
-                                                <li><a href="#">6:00 AM</a></li>
-                                                <li><a href="#">6:30 AM</a></li>
-                                                <li><a href="#">7:00 AM</a></li>
-                                                <li><a href="#">7:30 AM</a></li>
-                                                <li><a href="#">8:00 AM</a></li>
-                                                <li><a href="#">8:30 AM</a></li>
-                                                <li><a href="#">9:00 AM</a></li>
-                                                <li><a href="#">9:30 AM</a></li>
-                                                <li><a href="#">10:00 AM</a></li>
-                                                <li><a href="#">10:30 AM</a></li>
-                                                <li><a href="#">11:00 AM</a></li>
-                                                <li><a href="#">11:30 AM</a></li>
-                                                <li><a href="#">12:00 PM</a></li>
-                                                <li><a href="#">12:30 PM</a></li>
-                                                <li><a href="#">1:00 PM</a></li>
-                                                <li><a href="#">1:30 PM</a></li>
-                                                <li><a href="#">2:00 PM</a></li>
-                                                <li><a href="#">2:30 PM</a></li>
-                                                <li><a href="#">3:00 PM</a></li>
-                                                <li><a href="#">3:30 PM</a></li>
-                                                <li><a href="#">4:00 PM</a></li>
-                                                <li><a href="#">4:30 PM</a></li>
-                                                <li><a href="#">5:00 PM</a></li>
-                                                <li><a href="#">5:30 PM</a></li>
-                                                <li><a href="#">6:00 PM</a></li>
-                                                <li><a href="#">6:30 PM</a></li>
-                                                <li><a href="#">7:00 PM</a></li>
-                                                <li><a href="#">7:30 PM</a></li>
-                                                <li><a href="#">8:00 PM</a></li>
-                                                <li><a href="#">8:30 PM</a></li>
-                                                <li><a href="#">9:00 PM</a></li>
-                                                <li><a href="#">9:30 PM</a></li>
-                                                <li><a href="#">10:00 PM</a></li>
-                                                <li><a href="#">10:30 PM</a></li>
-                                                <li><a href="#">11:00 PM</a></li>
-                                                <li><a href="#">11:30 PM</a></li>
-                                            </ul>
-                                        </div>
+                                    <div class="field-input">
+                                        <input type="tel" placeholder="Your phone number" value=""
+                                            name="your_phone">
                                     </div>
-                                    <input type="submit" name="submit" value="Request a book">
-                                    <p class="note">You won't be charged yet</p>
+                                    <div class="field-input">
+                                        <textarea name="message" placeholder="Message"></textarea>
+                                    </div>
+                                    <input type="submit" value="Send a message">
                                 </form>
-                            </aside><!-- .widget-reservation -->
+
+                            </aside><!-- .widget-message -->
                         </div><!-- .sidebar -->
                     </div>
                 </div>

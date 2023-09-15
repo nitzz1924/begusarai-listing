@@ -23,136 +23,31 @@
                     <nav class="main-menu">
                         <ul>
 
-
                             <li>
                                 <a href="/" title="Home">Home</a>
-
-
                             </li>
+                            
                             <li>
-                                <a href="#" title="Listings">Listings</a>
-                                <ul class="sub-menu">
-                                    <li>
-                                        <a href="#" title="Search Layout">Search Layout</a>
-                                        <ul class="sub-menu">
-                                            <li>
-                                                <a href="ex-half-map-1.html" title="Half Map – Left Filter">Half
-                                                    Map – Left Filter</a>
-                                            </li>
-                                            <li>
-                                                <a href="ex-half-map-2.html" title="Half Map – Top Filter">Half
-                                                    Map – Top Filter</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="#" title="City Layout">City Layout</a>
-                                        <ul class="sub-menu">
-                                            <li>
-                                                <a href="city-details-1.html" title="Half Map – Left Filter">Half
-                                                    Map –
-                                                    Left Filter</a>
-                                            </li>
-                                            <li>
-                                                <a href="city-details-2.html" title="Half Map – Top Filter">Half
-                                                    Map – Top Filter</a>
-                                            </li>
-                                            <li>
-                                                <a href="city-details-3.html" title="Without Map">Without
-                                                    Map</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="#" title="Listing Detail">Single Layout</a>
-                                        <ul class="sub-menu">
-                                            <li>
-                                                <a href="single-1.html" title="Carousel">Default - Carousel</a>
-                                            </li>
-                                            <li>
-                                                <a href="single-2.html" title="Image">Default - Image</a>
-                                            </li>
-                                            <li>
-                                                <a href="single-3.html" title="Restaurant">Restaurant Type</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="#" title="Booking Type">Booking Type</a>
-                                        <ul class="sub-menu">
-                                            <li>
-                                                <a href="bk-booking-form.html" title="Appointment Booking">Appointment
-                                                    Booking</a>
-                                            </li>
-                                            <li>
-                                                <a href="bk-enquiry-form.html" title="Enquiry Form">Enquiry
-                                                    Form</a>
-                                            </li>
-                                            <li>
-                                                <a href="bk-affiliate-link.html" title="Affiliate Link">Affiliate
-                                                    Link</a>
-                                            </li>
-                                            <li>
-                                                <a href="bk-banner-ads.html" title="Affiliate Banner">Affiliate
-                                                    Banner</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                </ul>
+                                <a title="About" href="/aboutUs">About Us</a>
                             </li>
-
 
                             <li>
-                                <a title="Page" href="#">Page</a>
+                                <a title="Contacts" href="/contactUs">Contacts Us</a>
+                            </li>
+
+                            <li>
+                                <a title="Packages" href="/packages">Packages</a>
                                 <ul class="sub-menu">
                                     <li>
-                                        <a title="About" href="/aboutUs">About Us</a>
+                                        <a title="Pricing Plan Checkout" href="/checkoutPage">Checkout</a>
                                     </li>
-
-                                    <li>
-                                        <a title="Contacts" href="/contactUs">Contacts Us</a>
-                                    </li>
-
-                                    <li>
-                                        <a title="Packages" href="#">Packages</a>
-                                        <ul class="sub-menu">
-                                            <li>
-                                                <a title="Packages" href="/packages">Packages</a>
-                                            </li>
-                                            <li>
-                                                <a title="Pricing Plan Checkout" href="pricing-checkout.html">Pricing
-                                                    Checkout</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-
-                                    <li>
-                                        <a title="Page" href="#">Blog</a>
-                                        <ul class="sub-menu">
-                                            <li>
-                                                <a title="Fullwidth" href="/blogs">Fullwidth</a>
-                                            </li>
-                                                                                        <li>
-                                                <a title="Blog Detail" href="/blogDetail">Blog Detail</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a title="Owner Dashboard" href="/ownerDashboard">Owner
-                                            Dashboard</a>
-                                    </li>
-                                    <li>
-                                        <a title="Owner Single" href="/businessOwnerPage">Owner page</a>
-                                    </li> 
-                                    {{-- <li>
-                                        <a title="Owner Shop" href="/ownerShop">Owner Shop</a>
-                                    </li> --}}
-                                    <li>
-                                        <a title="Search Filter" href="/searchFilter">Search Filter</a>
-                                    </li>
-
-                                </ul>
+                                </ul> 
                             </li>
+
+                            <li>
+                                <a title="Page" href="/blogs">Blogs</a>
+                            </li>
+
 
                             <?php 
                             if(Auth::user()){
@@ -166,8 +61,8 @@
                                     <span>Guest</span>
                                 </a>
                                 <ul class="sub-menu">
-                                    <li class=""><a href="">Profile</a></li>
-                                    <li class="/ownerWishlist"><a href="">My Wishlist</a></li>
+                                    <li class=""><a href="/ownerProfile">Profile</a></li>
+                                    <li class=""><a href="/ownerWishlist">My Wishlist</a></li>
                                     <li>
                                         <a href="/logout">
                                             <span>Logout</span>
@@ -179,12 +74,10 @@
                         }     }
                         ?>
 
-
-
-                        </ul>
-                        </li>
+                        
+                        
                         <?php 
-                         if(Auth::user()){
+                            if(Auth::user()){
 
                         if (Auth::user()->type=='Owner'){
                         ?>
@@ -221,7 +114,8 @@
 
 
                             </ul>
-                    </nav>
+                        </ul>
+                        </nav>
 
                     <?php 
                     if (Auth::user()==null){
