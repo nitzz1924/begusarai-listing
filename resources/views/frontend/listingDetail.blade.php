@@ -207,20 +207,21 @@
                                     </tbody>
                                 </table>
                             </div><!-- .place__box -->
-                            <div class="place__box">
-                                <h3>FAQ's</h3>
-                                <ul class="faqs-accordion">
-                                    <li>
-                                        <h4>What are the ingredients or taste profile for the signature sauce?</h4>
-                                        <div class="desc">
-                                            <p>We are currently offering free shipping throughout Northern California on all
-                                                orders over $80. Peninsula to San Francisco can receive next day delivery.
-                                            </p>
-                                        </div>
-                                    </li>
+                            <!-- <div class="place__box">
+                                                                            <h3>FAQ's</h3>
+                                                                            <ul class="faqs-accordion">
+                                                                                <li>
+                                                                                    <h4>What are the ingredients or taste profile for the signature sauce?</h4>
+                                                                                    <div class="desc">
+                                                                                        <p>We are currently offering free shipping throughout Northern California on all
+                                                                                            orders over $80. Peninsula to San Francisco can receive next day delivery.
+                                                                                        </p>
+                                                                                    </div>
+                                                                                </li>
 
-                                </ul>
-                            </div><!-- .place__box -->
+                                                                            </ul>
+                                                                        </div> -->
+                            <!-- .place__box -->
                             <div class="place__box place__box--reviews">
                                 <h3 class="place__title--reviews">
                                     Review
@@ -426,54 +427,64 @@
                 <h2 class="similar-places__title title">Similar places</h2>
                 <div class="similar-places__content">
                     <div class="row">
-                        <div class="col-lg-3 col-md-6">
-                            <div class="place-item layout-02 place-hover">
-                                <div class="place-inner">
-                                    <div class="place-thumb">
-                                        <a class="entry-thumb" href="04_place-details-1.html"><img
-                                                src="{{ asset('assets/frontend-assets/images/listing/03.jpg') }}"
-                                                alt=""></a>
-                                        <a href="#" class="golo-add-to-wishlist btn-add-to-wishlist "
-                                            data-place-id="185">
-                                            <span class="icon-heart">
-                                                <i class="la la-bookmark large"></i>
-                                            </span>
-                                        </a>
-                                        <a class="entry-category purple" href="#">
-                                            <i class="las la-spa"></i><span>Massage</span>
-                                        </a>
-                                        <a href="#" class="author" title="Author"><img
-                                                src="{{ asset('assets/frontend-assets/images/avatars/male-4.jpg') }}"
-                                                alt="Author"></a>
-                                    </div>
-                                    <div class="entry-detail">
-                                        <div class="entry-head">
-                                            <div class="place-type list-item">
-                                                <span>Massage</span>
-                                            </div>
-                                            <div class="place-city">
-                                                <a href="#">Lyon</a>
-                                            </div>
+
+                        @foreach ($similer as $value)
+                            <div class="col-lg-3 col-md-6">
+                                <div class="place-item layout-02 place-hover">
+                                    <div class="place-inner">
+                                        <div class="place-thumb">
+                                            <a class="entry-thumb" href=""><img
+                                                    src="{{ URL::to('uploads/' . $value->coverImage) }}"
+                                                    alt=""></a>
+                                            <a href="#" class="golo-add-to-wishlist btn-add-to-wishlist "
+                                                data-place-id="185">
+                                                <span class="icon-heart">
+                                                    <i class="la la-bookmark large"></i>
+                                                </span>
+                                            </a>
+                                            <a class="entry-category purple" href="#">
+                                                @foreach ($submaster as $subvalue)
+                                                    @if ($subvalue->title === $value->category)
+                                                        <i class="{{ $subvalue->value }}"></i>
+                                                    @endif
+                                                @endforeach
+
+                                                </i><span>{{ $value->category }}</span>
+                                            </a>
+                                            <a href="#" class="author" title="Author"><img
+                                                    src="{{ URL::to('uploads/' . $value->logo) }}" alt="Author"></a>
                                         </div>
-                                        <h3 class="place-title"><a href="04_place-details-1.html">Vivi Body Spa</a></h3>
-                                        <div class="open-now"><i class="las la-door-open"></i>Open now</div>
-                                        <div class="entry-bottom">
-                                            <div class="place-preview">
-                                                <div class="place-rating">
-                                                    <span>5.0</span>
-                                                    <i class="la la-star"></i>
+                                        <div class="entry-detail">
+                                            <div class="entry-head">
+                                                <div class="place-type list-item">
+                                                    <span>{{ $value->highlight }}</span>
                                                 </div>
-                                                <span class="count-reviews">(2 Reviews)</span>
+                                                {{-- <div class="place-city">
+                                                    <a href="#">Lyon</a>
+                                                </div> --}}
                                             </div>
-                                            <div class="place-price">
-                                                <span>$$</span>
+                                            <h3 class="place-title">
+                                                <a
+                                                    href="{{ URL::to('listingDetail/' . $value->id) }}">{{ $value->businessName }}</a>
+                                            </h3>
+                                            <div class="open-now"><i class="las la-door-open"></i>Open now</div>
+                                            <div class="entry-bottom">
+                                                <div class="place-preview">
+                                                    <div class="place-rating">
+                                                        <span>5.0</span>
+                                                        <i class="la la-star"></i>
+                                                    </div>
+                                                    <span class="count-reviews">(2 Reviews)</span>
+                                                </div>
+                                                <div class="place-price">
+                                                    <span>{{ $value->price }}</span>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-
+                        @endforeach
                     </div>
                 </div>
             </div>

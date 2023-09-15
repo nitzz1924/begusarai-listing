@@ -27,7 +27,7 @@ Route::get('/blogs', [HomeController::class, 'blogs'])->name('blogs');
 
 // Business Owner routes - logged in
 Route::get('/ownerDashboard', [HomeController::class, 'ownerDashboard'])->name('ownerDashboard');
-Route::get('/listingDetail/{id}', [HomeController::class, 'listingDetail'])->name('listingDetail');
+Route::get('/listingDetail/{id}/{category}', [HomeController::class, 'listingDetail'])->name('listingDetail');
 Route::get('/blogDetails/{id}', [HomeController::class, 'blogDetails'])->name('blogDetails');
 
 Route::get('/ownerWishlist', [HomeController::class, 'ownerWishlist'])->name('ownerWishlist');

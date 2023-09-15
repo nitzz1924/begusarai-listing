@@ -138,7 +138,7 @@
                                     <div class="place-item layout-02 place-hover">
                                         <div class="place-inner">
                                             <div class="place-thumb hover-img">
-                                                <a class="entry-thumb" href="{{ URL::to('listingDetail/' . $value->id) }}">
+                                                <a class="entry-thumb" href="{{ URL::to('listingDetail/' . $value->id .'/'.$value->category) }}">
 
                                                     <img src="{{ URL::to('uploads/' . $value->coverImage) }}" />
 
@@ -164,16 +164,16 @@
                                                     <img src="{{ URL::to('uploads/' . $value->logo) }}"alt="Author" />
 
                                                 </a>
-                                                <div class="feature">Featured</div>
+                                                <!-- <div class="feature">Featured</div> -->
                                             </div>
                                             <div class="entry-detail">
                                                 <div class="entry-head">
                                                     <div class="place-type list-item">
-                                                        <span>Restaurant</span>
+                                                        <span>{{ $value->highlight }}</span>
                                                     </div>
-                                                    <div class="place-city">
+                                                    <!-- <div class="place-city">
                                                         <a href="#">Paris</a>
-                                                    </div>
+                                                    </div> -->
                                                 </div>
                                                 <h3 class="place-title">
                                                     <a href="{{ URL::to('listingDetail/' . $value->id) }}">{{ $value->businessName }}</a>
@@ -190,7 +190,7 @@
                                                         <span class="count-reviews">(2 Reviews)</span>
                                                     </div>
                                                     <div class="place-price">
-                                                        <span>$$</span>
+                                                        <span>{{ $value->price }}</span>
                                                     </div>
                                                 </div>
                                             </div>

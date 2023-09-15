@@ -414,14 +414,15 @@ class HomeController extends Controller
         return view('frontend.ownerDashboard');
     }
 
-    public function listingDetail(Request $request, $id)
+    public function listingDetail(Request $request, $id, $category)
     {
         $businesses = BusinessList::orderBy('created_at', 'desc')->get();
+        $similer = BusinessList::where('category', $category)->orderBy('created_at', 'desc')->get();
         $businessesDetail = BusinessList::where('id', $id)->first();
         $submaster = Master::orderBy('created_at', 'asc')
             ->where('type', '=', 'category')
             ->get();
-        return view('frontend.listingDetail', compact('businessesDetail', 'submaster', 'businesses'));
+        return view('frontend.listingDetail', compact('businessesDetail', 'submaster', 'businesses','similer'));
     }
 
     public function blogDetails(Request $request, $id)
