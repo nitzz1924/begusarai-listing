@@ -128,27 +128,63 @@ class HomeController extends Controller
         return View::make('frontend.index', compact('submaster', 'businesses', 'Mastercity', 'TestimonialData', 'blog'));
     }
 
+    // public function toggleBookmark(Request $request, $businessId)
+    // {
+    //     $user = auth()->user(); // Get the authenticated user
+    //     $bookmark = Bookmark::where('user_id', $user->id)
+    //         ->where('business_id', $businessId)
+    //         ->first();
+
+    //     if ($bookmark) {
+    //         // If the bookmark exists, remove it
+    //         $bookmark->delete();
+    //         $message = 'Bookmark removed.';
+    //     } else {
+    //         // If the bookmark doesn't exist, create it
+    //         Bookmark::create([
+    //             'user_id' => $user->id,
+    //             'business_id' => $businessId,
+    //         ]);
+    //         $message = 'Bookmark added.';
+    //     }
+
+    //     return response()->json(['message' => $message]);
+    // }
+
     public function toggleBookmark(Request $request, $businessId)
     {
-        $user = auth()->user(); // Get the authenticated user
-        $bookmark = Bookmark::where('user_id', $user->id)
-            ->where('business_id', $businessId)
-            ->first();
+        // Check if the user is authenticated
+        if (auth()->check()) {
+            $user = auth()->user(); // Get the authenticated user
 
-        if ($bookmark) {
-            // If the bookmark exists, remove it
-            $bookmark->delete();
-            $message = 'Bookmark removed.';
+            // Check if the business with the specified ID exists
+            $business = BusinessList::find($businessId);
+
+            if ($business) {
+                $bookmark = Bookmark::where('user_id', $user->id)
+                    ->where('business_id', $businessId)
+                    ->first(); // Use first() to get a single bookmark or null
+
+                if ($bookmark) {
+                    // If the bookmark exists, remove it
+                    $bookmark->delete();
+                    $message = 'Bookmark removed.';
+                } else {
+                    // If the bookmark doesn't exist, create it
+                    Bookmark::create([
+                        'user_id' => $user->id,
+                        'business_id' => $businessId,
+                    ]);
+                    $message = 'Bookmark added.';
+                }
+
+                return response()->json(['message' => $message]);
+            } else {
+                return response()->json(['message' => 'Business not found.'], 404);
+            }
         } else {
-            // If the bookmark doesn't exist, create it
-            Bookmark::create([
-                'user_id' => $user->id,
-                'business_id' => $businessId,
-            ]);
-            $message = 'Bookmark added.';
+            return response()->json(['message' => 'User not authenticated.'], 401);
         }
-
-        return response()->json(['message' => $message]);
     }
 
     public function aboutUs()
