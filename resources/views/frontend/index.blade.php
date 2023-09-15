@@ -2,6 +2,15 @@
 @section('title', 'Home')
 @section('content')
 
+
+
+    <style>
+        .bookmark-added {
+            color: #ffb429;
+            /* Set the desired color for the bookmark icon */
+        }
+    </style>
+
     <body>
         <div>
 
@@ -19,6 +28,7 @@
                                 <i>20</i> cities, <i>10</i> categories, <i>5662</i> listings.
                             </p>
                             <form action="#" class="site-banner__search layout-02">
+                                @csrf
                                 <div class="field-input">
                                     <label for="s">Find</label>
                                     <input class="site-banner__search__input open-suggestion" id="s" type="text"
@@ -138,18 +148,28 @@
                                     <div class="place-item layout-02 place-hover">
                                         <div class="place-inner">
                                             <div class="place-thumb hover-img">
-                                                <a class="entry-thumb" href="{{ URL::to('listingDetail/' . $value->id .'/'.$value->category) }}">
+                                                <a class="entry-thumb"
+                                                    href="{{ URL::to('listingDetail/' . $value->id . '/' . $value->category) }}">
 
                                                     <img src="{{ URL::to('uploads/' . $value->coverImage) }}" />
 
 
                                                 </a>
                                                 <a href="#" class="golo-add-to-wishlist btn-add-to-wishlist"
-                                                    data-place-id="185">
+                                                    data-place-id="{{ $value->id }}"
+                                                    data-business-id="{{ $value->id }}">
                                                     <span class="icon-heart">
-                                                        <i class="la la-bookmark large"></i>
+                                                        @if (auth()->check() &&
+                                                                auth()->user()->bookmarks->contains('business_id', $value->id))
+                                                            <i class="la la-bookmark large"></i>
+                                                        @else
+                                                            <i class="la la-bookmark large"></i>
+                                                        @endif
+
+
                                                     </span>
                                                 </a>
+
                                                 <a class="entry-category rosy-pink" href="#">
 
                                                     @foreach ($submaster as $subvalue)
@@ -172,11 +192,12 @@
                                                         <span>{{ $value->highlight }}</span>
                                                     </div>
                                                     <!-- <div class="place-city">
-                                                        <a href="#">Paris</a>
-                                                    </div> -->
+                                                                                                                                                                                                                                                            <a href="#">Paris</a>
+                                                                                                                                                                                                                                                        </div> -->
                                                 </div>
                                                 <h3 class="place-title">
-                                                    <a href="{{ URL::to('listingDetail/' . $value->id) }}">{{ $value->businessName }}</a>
+                                                    <a
+                                                        href="{{ URL::to('listingDetail/' . $value->id) }}">{{ $value->businessName }}</a>
                                                 </h3>
                                                 <div class="open-now">
                                                     <i class="las la-door-open"></i>Open now
@@ -344,30 +365,30 @@
                         <div class="news__content offset-item">
                             <div class="row">
 
-                            @foreach ($blog as $value)
-                                <div class="col-md-4">
-                                    <article class="post hover__box">
-                                        <div class="post__thumb hover__box__thumb">
-                                            <a title="The 8 Most Affordable Michelin Restaurants in Paris"
-                                                href="{{ URL::to('blogDetails/' . $value->id) }}"><img
-                                                    src="{{ URL::to('/uploads/' . $value->image) }}"
-                                                    alt="The 8 Most Affordable Michelin Restaurants in Paris" /></a>
-
-                                                    
-
-
-                                        </div>
-                                        <div class="post__info">
-                                            <ul class="post__category">
-                                                <li>{{ $value->type }}</li>
-                                            </ul>
-                                            <h3 class="post__title">
+                                @foreach ($blog as $value)
+                                    <div class="col-md-4">
+                                        <article class="post hover__box">
+                                            <div class="post__thumb hover__box__thumb">
                                                 <a title="The 8 Most Affordable Michelin Restaurants in Paris"
-                                                    href="{{ URL::to('blogDetails/' . $value->id) }}">{{ $value->title }}</a>
-                                            </h3>
-                                        </div>
-                                    </article>
-                                </div>
+                                                    href="{{ URL::to('blogDetails/' . $value->id) }}"><img
+                                                        src="{{ URL::to('/uploads/' . $value->image) }}"
+                                                        alt="The 8 Most Affordable Michelin Restaurants in Paris" /></a>
+
+
+
+
+                                            </div>
+                                            <div class="post__info">
+                                                <ul class="post__category">
+                                                    <li>{{ $value->type }}</li>
+                                                </ul>
+                                                <h3 class="post__title">
+                                                    <a title="The 8 Most Affordable Michelin Restaurants in Paris"
+                                                        href="{{ URL::to('blogDetails/' . $value->id) }}">{{ $value->title }}</a>
+                                                </h3>
+                                            </div>
+                                        </article>
+                                    </div>
                                 @endforeach
                             </div>
                             <div class="align-center button-wrap">
@@ -381,5 +402,115 @@
             <!-- .site-main -->
 
     </body>
+
+    <script>
+        // $(document).ready(function() {
+        //     $('.golo-add-to-wishlist').on('click', function(e) {
+        //         e.preventDefault();
+        //         var businessId = $(this).data('business-id');
+        //         var isBookmarked = $(this).hasClass(
+        //             'bookmark-added'); // Check if the bookmark is already added
+        //         var $element = $(this); // Store a reference to $(this)
+
+        //         $.ajax({
+        //             url: '/bookmark/' + businessId,
+        //             method: 'POST',
+        //             data: {
+        //                 _token: '{{ csrf_token() }}',
+        //                 businessId: businessId,
+        //                 isBookmarked: isBookmarked,
+        //             },
+        //             success: function(data) {
+        //                 if (isBookmarked) {
+        //                     $element.removeClass('bookmark-added'); // Remove the CSS class
+        //                 } else {
+        //                     $element.addClass(
+        //                         'bookmark-added'); // Add the CSS class to change the color
+        //                 }
+        //             }
+        //         });
+        //     });
+        // });
+        // ---------------------------------------------------
+        // $(document).ready(function() {
+        //     $('.golo-add-to-wishlist').each(function() {
+        //         var $element = $(this);
+        //         var businessId = $element.data('business-id');
+        //         var isBookmarked = localStorage.getItem('bookmark_' + businessId) === 'true';
+
+        //         if (isBookmarked) {
+        //             $element.addClass('bookmark-added');
+        //         }
+
+        //         $element.on('click', function(e) {
+        //             e.preventDefault();
+        //             isBookmarked = !isBookmarked; // Toggle bookmark state
+
+        //             $.ajax({
+        //                 url: '/bookmark/' + businessId,
+        //                 method: 'POST',
+        //                 data: {
+        //                     _token: '{{ csrf_token() }}',
+        //                     businessId: businessId,
+        //                     isBookmarked: isBookmarked,
+        //                 },
+        //                 success: function(data) {
+        //                     if (isBookmarked) {
+        //                         $element.addClass('bookmark-added');
+        //                     } else {
+        //                         $element.removeClass('bookmark-added');
+        //                     }
+
+        //                     // Store the bookmark state in localStorage
+        //                     localStorage.setItem('bookmark_' + businessId,
+        //                         isBookmarked);
+        //                 }
+        //             });
+        //         });
+        //     });
+        // });
+
+        $(document).ready(function() {
+            $('.golo-add-to-wishlist').each(function() {
+                var $element = $(this);
+                var businessId = $element.data('business-id');
+                var isBookmarked = localStorage.getItem('bookmark_' + businessId) === 'true';
+
+                if (!isBookmarked) {
+                    $element.addClass('bookmark-added');
+                }
+
+                $element.on('click', function(e) {
+                    e.preventDefault();
+                    isBookmarked = !isBookmarked; // Toggle bookmark state
+
+                    $.ajax({
+                        url: '/bookmark/' + businessId,
+                        method: 'POST',
+                        data: {
+                            _token: '{{ csrf_token() }}',
+                            businessId: businessId,
+                            isBookmarked: isBookmarked,
+                        },
+                        success: function(data) {
+                            if (isBookmarked) {
+                                $element.addClass('bookmark-added');
+                            } else {
+                                $element.removeClass('bookmark-added');
+                            }
+
+                            // Store the bookmark state in localStorage
+                            localStorage.setItem('bookmark_' + businessId,
+                                isBookmarked);
+
+                            // Reload the page after the bookmark state is updated
+                            window.location.reload();
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+
 
 @endsection

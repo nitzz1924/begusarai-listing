@@ -128,3 +128,11 @@ Route::put('/editPlace/updatePlace/{id}', [HomeController::class, 'updatePlace']
 
 Route::get('/testimonial', [HomeController::class, 'Testimonial'])->name('testimonial');
 Route::post('/testimonial', [HomeController::class, 'testimonialStore'])->name('testimonialStore');
+
+
+
+//bookmark route 
+Route::post('/bookmark/{businessId}', [HomeController::class, 'toggleBookmark'])->name('bookmark.toggle');
+// Route::post('/bookmark/{businessId}', [HomeController::class, 'toggleBookmark'])->name('bookmark.toggle');
+
+// Route::post('/bookmark/{businessId}', 'YourControllerName@toggleBookmark')->name('bookmark.toggle');

@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Cookie;
 use App\Models\BusinessList;
 use App\Models\Master;
 use App\Models\Testimonial;
-
+use App\Models\Bookmark;
 use View;
 
 class HomeController extends Controller
@@ -126,6 +126,29 @@ class HomeController extends Controller
             ->where('type', '=', 'City')
             ->get();
         return View::make('frontend.index', compact('submaster', 'businesses', 'Mastercity', 'TestimonialData', 'blog'));
+    }
+
+    public function toggleBookmark(Request $request, $businessId)
+    {
+        $user = auth()->user(); // Get the authenticated user
+        $bookmark = Bookmark::where('user_id', $user->id)
+            ->where('business_id', $businessId)
+            ->first();
+
+        if ($bookmark) {
+            // If the bookmark exists, remove it
+            $bookmark->delete();
+            $message = 'Bookmark removed.';
+        } else {
+            // If the bookmark doesn't exist, create it
+            Bookmark::create([
+                'user_id' => $user->id,
+                'business_id' => $businessId,
+            ]);
+            $message = 'Bookmark added.';
+        }
+
+        return response()->json(['message' => $message]);
     }
 
     public function aboutUs()
@@ -417,12 +440,14 @@ class HomeController extends Controller
     public function listingDetail(Request $request, $id, $category)
     {
         $businesses = BusinessList::orderBy('created_at', 'desc')->get();
-        $similer = BusinessList::where('category', $category)->orderBy('created_at', 'desc')->get();
+        $similer = BusinessList::where('category', $category)
+            ->orderBy('created_at', 'desc')
+            ->get();
         $businessesDetail = BusinessList::where('id', $id)->first();
         $submaster = Master::orderBy('created_at', 'asc')
             ->where('type', '=', 'category')
             ->get();
-        return view('frontend.listingDetail', compact('businessesDetail', 'submaster', 'businesses','similer'));
+        return view('frontend.listingDetail', compact('businessesDetail', 'submaster', 'businesses', 'similer'));
     }
 
     public function blogDetails(Request $request, $id)
