@@ -162,11 +162,11 @@
                                                     data-place-id="{{ $value->id }}"
                                                     data-business-id="{{ $value->id }}">
                                                     <span class="icon-heart">
-                                                        @if (auth()->check() &&
-                                                                auth()->user()->bookmarks->contains('business_id', $value->id))
-                                                            <i class="la la-bookmark large"></i>
+
+                                                        @if ($value->bookmark_status != null)
+                                                            <i class="la la-bookmark large" style="color: #ffb429;"></i>
                                                         @else
-                                                            <i class="la la-bookmark large"></i>
+                                                            <i class="la la-bookmark large" style="color:black"></i>
                                                         @endif
                                                     </span>
                                                 </a>
@@ -212,12 +212,14 @@
                                                         <span>{{ $value->highlight }}</span>
                                                     </div>
                                                     <!-- <div class="place-city">
-                                                                                                                                                                                                                                                                                                                                                        <a href="#">Paris</a>
-                                                                                                                                                                                                                                                                                                                                                    </div> -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <a href="#">Paris</a>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                </div> -->
                                                 </div>
                                                 <h3 class="place-title">
+
+
                                                     <a
-                                                        href="{{ URL::to('listingDetail/' . $value->id) }}">{{ $value->businessName }}</a>
+                                                        href="{{ URL::to('listingDetail/' . $value->id . '/' . $value->category) }}">{{ $value->businessName }}</a>
                                                 </h3>
                                                 <div class="open-now">
                                                     <i class="las la-door-open"></i>Open now
@@ -494,7 +496,7 @@
             $('.golo-add-to-wishlist').each(function() {
                 var $element = $(this);
                 var businessId = $element.data('business-id');
-                var isBookmarked = localStorage.getItem('bookmark_' + businessId) === 'true';
+                var isBookmarked = localStorage.getItem('bookmark_' + businessId) == 'true';
 
                 if (!isBookmarked) {
                     $element.addClass('bookmark-added');

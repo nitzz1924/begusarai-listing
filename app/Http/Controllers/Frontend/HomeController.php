@@ -110,6 +110,20 @@ class HomeController extends Controller
 
     public function index()
     {
+        // Get the authenticated user
+        $user = auth()->user();
+        if ($user) {
+            $businesses = BusinessList::leftJoin('bookmarks', function ($join) use ($user) {
+                $join->on('businesslist.id', '=', 'bookmarks.business_id')->where('bookmarks.user_id', '=', $user->id);
+            })
+                ->select('businesslist.*', 'bookmarks.id AS bookmark_status')
+                ->orderBy('businesslist.created_at', 'desc')
+                ->get();
+        } else {
+            $businesses = BusinessList::orderBy('created_at', 'desc')->get();
+        }
+        // Retrieve businesses with bookmark status for the user
+
         $blog = Blog::orderBy('created_at', 'desc')
             ->take(3)
             ->get();
@@ -121,7 +135,6 @@ class HomeController extends Controller
         $submaster = Master::orderBy('created_at', 'asc')
             ->where('type', '=', 'category')
             ->get();
-        $businesses = BusinessList::orderBy('created_at', 'desc')->get();
         $Mastercity = Master::orderBy('created_at', 'asc')
             ->where('type', '=', 'City')
             ->get();
@@ -500,8 +513,37 @@ class HomeController extends Controller
 
     public function ownerWishlist()
     {
-        return view('frontend.ownerWishlist');
+        // Get the authenticated user
+        $user = auth()->user();
+        if ($user) {
+            $bookmarkedBusinessIds = Bookmark::where('user_id', $user->id)->pluck('business_id');
+        }
+        // Get the bookmarked business IDs for the user
+
+        $submaster = Master::orderBy('created_at', 'asc')
+            ->where('type', '=', 'category')
+            ->get();
+        // Get the businesses that match the bookmarked IDs
+        $businesses = BusinessList::whereIn('id', $bookmarkedBusinessIds)
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        // You can also pass the list of bookmarked business IDs to the view if needed
+        return view('frontend.ownerWishlist', compact('businesses', 'submaster'));
     }
+
+    // public function listingDetail(Request $request, $id, $category)
+    // {
+    //     $businesses = BusinessList::orderBy('created_at', 'desc')->get();
+    //     $similer = BusinessList::where('category', $category)
+    //         ->orderBy('created_at', 'desc')
+    //         ->get();
+    //     $businessesDetail = BusinessList::where('id', $id)->first();
+    //     $submaster = Master::orderBy('created_at', 'asc')
+    //         ->where('type', '=', 'category')
+    //         ->get();
+    //     return view('frontend.listingDetail', compact('businessesDetail', 'submaster', 'businesses', 'similer'));
+    // }
 
     public function ownerProfile()
     {
@@ -544,7 +586,7 @@ class HomeController extends Controller
     {
         return view('frontend.searchFilter');
     }
-    
+
     public function searchCity()
     {
         return view('frontend.searchCity');
