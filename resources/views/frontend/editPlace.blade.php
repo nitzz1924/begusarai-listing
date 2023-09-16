@@ -313,10 +313,10 @@
                     </div>
                     <!-- Document Images -->
                     <div class="field-group field-file">
-                        <label for="documentImage">Document Images (optional)</label>
+                        <label for="documentImage">Document Images(Upload PDF)</label>
                         <label for="documentImage" class="preview">
                             <input type="file" name="documentImage" id="documentImage" class="upload-file"
-                                data-max-size="1024">
+                             accept=".pdf">
                             <img class="img_preview"
                                 src="{{ isset($business) && $business->documentImage ? asset('uploads/' . $business->documentImage) : asset('images/no-image.png') }}"
                                 alt="" />

@@ -243,8 +243,8 @@
                     <div class="field-group field-file">
                         <label for="galleryImage">Gallery Images (optional)</label>
                         <label for="galleryImage" class="preview">
-                            <input type="file" name="galleryImage" id="galleryImage" class="upload-file"
-                                data-max-size="1024">
+                            <input type="file" name="galleryImage[]" id="galleryImage" class="upload-file"
+                                data-max-size="1024" multiple>
                             <img class="img_preview" src="images/no-image.png" alt="" />
                             <i class="la la-cloud-upload-alt"></i>
                         </label>
