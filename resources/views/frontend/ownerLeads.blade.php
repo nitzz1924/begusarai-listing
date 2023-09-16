@@ -10,7 +10,7 @@
                 <ul>
                     <li ><a href="/ownerDashboard">Dashboard</a></li>
                     <li class="active"><a href="/ownerLeads">Leads</a></li>
-                    <li><a href="/ownerListing">Listings</a></li>
+                    <li><a href="/ownerListing">My places</a></li>
                     <li><a href="/ownerWishlist">Wishlist</a></li>
                     <li><a href="/ownerProfile">Profile</a></li>
 
@@ -21,7 +21,7 @@
             <div class="member-place-wrap">
                 <div class="member-wrap-top">
                     <h2>My Leads</h2>
-                    <p>You are current FREE plan. <a href="pricing-plan.html">Upgrade now</a></p>
+                    {{-- <p>You are current FREE plan. <a href="pricing-plan.html">Upgrade now</a></p> --}}
                 </div><!-- .member-wrap-top -->
                 <div class="member-filter">
                     <div class="mf-left">

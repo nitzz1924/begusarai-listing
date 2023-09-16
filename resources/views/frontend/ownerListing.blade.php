@@ -1,56 +1,7 @@
 @extends('frontend.layouts.master')
-@section('title', 'Listings')
+@section('title', 'My Listings')
 @section('content')
 
-    <style>
-        .payment-button {
-            background-color: #ffad2d;
-            color: white;
-            border: none;
-            padding: 5px 10px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .status-label {
-            color: green;
-            font-weight: bold;
-        }
-    </style>
-    <style>
-        /* Custom styles for success message */
-        .alert-success-custom {
-            background-color: #4CAF50;
-            /* Green background color */
-            color: white;
-            /* White text color */
-            padding: 15px;
-            /* Padding around the message */
-            border-radius: 5px;
-            /* Rounded corners */
-            font-size: 16px;
-            /* Font size */
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-            /* Box shadow for a subtle effect */
-            margin-bottom: 20px;
-            /* Spacing between messages, adjust as needed */
-        }
-
-        /* Optional: Add animation for a fade-in effect */
-        .alert-success-custom {
-            animation: fadeIn 0.5s ease-in-out;
-        }
-
-        @keyframes fadeIn {
-            0% {
-                opacity: 0;
-            }
-
-            100% {
-                opacity: 1;
-            }
-        }
-    </style>
     <main id="main" class="site-main">
 
         <div class="site-content owner-content">
@@ -59,7 +10,8 @@
                     <ul>
                         <li><a href="/ownerDashboard">Dashboard</a></li>
                         <li><a href="/ownerLeads">Leads</a></li>
-                        <li class="active"><a href="/ownerListing">Listings</a></li>
+                        <li class="active"><a href="/ownerListing">My places</a></li>
+
                         <li><a href="/ownerWishlist">Wishlist</a></li>
                         <li><a href="/ownerProfile">Profile</a></li>
 
@@ -78,7 +30,7 @@
                 <div class="member-place-wrap">
                     <div class="member-wrap-top">
                         <h2>My Listings</h2>
-                        <p>You are current FREE plan. <a href="pricing-plan.html">Upgrade now</a></p>
+                        {{-- <p>You are current FREE plan. <a href="pricing-plan.html">Upgrade now</a></p> --}}
                     </div><!-- .member-wrap-top -->
                     <div class="member-filter">
                         <div class="mf-left">

@@ -10,7 +10,7 @@
                         <ul>
                             <li ><a href="/ownerDashboard">Dashboard</a></li>
                             <li><a href="/ownerLeads">Leads</a></li>
-                            <li><a href="/ownerListing">Listings</a></li>
+                            <li><a href="/ownerListing">My places</a></li>
                             <li class="active"><a href="/ownerWishlist">Wishlist</a></li>
                             <li><a href="/ownerProfile">Profile</a></li>
                 </ul>
@@ -19,11 +19,11 @@
         <div class="container">
             <div class="member-wishlist-wrap">
                     <div class="member-wrap-top">
-                    <h2>Wishlish</h2>
-                    <p>You are current FREE plan. <a href="pricing-plan.html">Upgrade now</a></p>
+                    <h2>Wishlist</h2>
+                    {{-- <p>You are current FREE plan. <a href="pricing-plan.html">Upgrade now</a></p> --}}
                 </div><!-- .member-wrap-top -->
                 <div class="mw-box">
-                    <h2>Paris</h2>
+                    {{-- <h2>Paris</h2> --}}
                     <div class="row">
                     <div class="col-lg-3 col-md-6">
                         <div class="place-item layout-02 place-hover">

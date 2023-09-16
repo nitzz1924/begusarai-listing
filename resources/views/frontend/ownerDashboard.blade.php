@@ -10,7 +10,7 @@
                 <ul>
                     <li class="active"><a href="/ownerDashboard">Dashboard</a></li>
                     <li><a href="/ownerLeads">Leads</a></li>
-                    <li><a href="/ownerListing">Listings</a></li>
+                    <li><a href="/ownerListing">My places</a></li>
                     <li><a href="/ownerWishlist">Wishlist</a></li>
                     <li><a href="/ownerProfile">Profile</a></li>
                 </ul>
@@ -19,16 +19,18 @@
         <div class="container">
             <div class="member-wrap">
                 <div class="member-wrap-top">
-                    <h2>Welcome back! Kevin</h2>
-                    <p>You are current FREE plan. <a href="pricing-plan.html">Upgrade now</a></p>
+                    <h2>Welcome back!</h2>
+                    {{-- <p>You are current FREE plan. <a href="pricing-plan.html">Upgrade now</a></p> --}}
                 </div><!-- .member-wrap-top -->
+
                 <div class="upgrade-box">
                     <h1>Choose a plan to submit your place!</h1>
                     <p>Pay as you go service, cancel anytime.</p>
                     <a href="pricing-plan.html" class="btn" title="Upgrade now">Upgrade now</a>
-                    <img src="images/assets/img-people.svg" alt="Upgrade now">
+                    <img src="{{ asset('assets/frontend-assets/images/assets/img-people.svg')}}" alt="Upgrade now">
                     <a href="#" class="close" data-close="upgrade-box"><i class="las la-times"></i></a>
                 </div><!-- .upgrade-box -->
+
                 <div class="member-statistical">
                     <div class="row">
                         <div class="col-lg-3 col-6">
@@ -116,7 +118,7 @@
                                         <li>
                                             <div class="place__author">
                                                 <div class="place__author__avatar">
-                                                    <a title="Sebastian" href="#"><img src="images/avatars/male-2.jpg" alt=""></a>
+                                                    <a title="Sebastian" href="#"><img src="{{ asset('assets/frontend-assets/images/avatars/male-2.jpg')}}" alt=""></a>
                                                 </div>
                                                 <div class="place__author__info">
                                                         <a title="Sebastian" href="#">Sebastian</a>
@@ -145,7 +147,7 @@
                                         <li>
                                             <div class="place__author">
                                                 <div class="place__author__avatar">
-                                                    <a title="Sebastian" href="#"><img src="images/avatars/male-1.jpg" alt=""></a>
+                                                    <a title="Sebastian" href="#"><img src="{{ asset('assets/frontend-assets/images/avatars/male-1.jpg')}}" alt=""></a>
                                                 </div>
                                                 <div class="place__author__info">
                                                         <a title="Sebastian" href="#">Sebastian</a>
@@ -174,7 +176,7 @@
                                         <li>
                                             <div class="place__author">
                                                 <div class="place__author__avatar">
-                                                    <a title="Sebastian" href="#"><img src="images/avatars/female-1.jpg" alt=""></a>
+                                                    <a title="Sebastian" href="#"><img src="{{ asset('assets/frontend-assets/images/avatars/female-1.jpg')}}" alt=""></a>
                                                 </div>
                                                 <div class="place__author__info">
                                                         <a title="Sebastian" href="#">Sebastian</a>
