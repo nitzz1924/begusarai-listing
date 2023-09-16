@@ -16,18 +16,43 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="contact-text">
-                        <h2>Our Offices</h2>
+                        <h2>Our Head Quater</h2>
                         <div class="contact-box">
-                            <h3>London (HQ)</h3>
-                            <p>Unit TAP.E, 80 Long Lane, London, SE1 4GT</p>
-                            <p>+44 (0)34 5312 3505</p>
-                            <a href="#" title="Get Direction">Get Direction</a>
+                            <h3>Begusarai</h3>
+                            <div class="d-flex ">
+                                <i class="fa-regular fa-envelope me-1"></i>
+                                <h4>Email: contact@inbegusarai.com</h4>
+                            </div>
+                            <h4 class="my-3">Phone: 9693667887 / 06243-316290</h4>
+                            {{-- <a href="#" title="Get Direction">Get Direction</a> --}}
                         </div>
-                        <div class="contact-box">
+                        {{-- <div class="contact-box">
                             <h3>Paris</h3>
                             <p>Station F, 2 Parvis Alan Turing, 8742, Paris France</p>
                             <p>+44 (0)34 5312 3505</p>
                             <a href="#" title="Get Direction">Get Direction</a>
+                        </div> --}}
+                        <div class="d-flex ">
+                            <div class="facebook social-icon me-2">
+                                <a title="Facebook" href="https://www.facebook.com/inbegusarai">
+                                    <i class="text-white la la-facebook-f fs-3"></i>
+                                </a>
+                            </div>
+                            {{-- <div class="twitter social-icon me-2">
+                                <a title="Twitter" href="#">
+                                    <i class="text-white la la-twitter fs-3"></i>
+                                </a>
+                            </div>
+                            <div class="youtube social-icon me-2">
+                                <a title="Youtube" href="#">
+                                    <i class="text-white la la-youtube fs-3"></i>
+                                </a>
+                            </div> --}}
+                            <div class="instagram social-icon me-2">
+                                <a title="Instagram" href="https://instagram.com/in.begusarai">
+                                    <i class="text-white la la-instagram fs-3"></i>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>

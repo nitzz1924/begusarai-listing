@@ -567,6 +567,11 @@ class HomeController extends Controller
     {
         return view('frontend.ownerLeads');
     }
+    
+    public function privacyPolicy()
+    {
+        return view('frontend.privacyPolicy');
+    }
 
     public function blogs()
     {

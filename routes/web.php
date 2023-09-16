@@ -26,6 +26,7 @@ Route::get('/searchFilter', [HomeController::class, 'searchFilter'])->name('sear
 Route::get('/blogs', [HomeController::class, 'blogs'])->name('blogs');
 Route::get('/searchCity', [HomeController::class, 'searchCity'])->name('searchCity');
 Route::get('/checkoutPage', [HomeController::class, 'checkoutPage'])->name('checkoutPage');
+Route::get('/privacyPolicy', [HomeController::class, 'privacyPolicy'])->name('privacyPolicy');
 
 // Business Owner routes - logged in
 Route::get('/ownerDashboard', [HomeController::class, 'ownerDashboard'])->name('ownerDashboard');

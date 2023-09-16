@@ -26,26 +26,38 @@
                             <li>
                                 <a href="/" title="Home">Home</a>
                             </li>
-                            
-                            <li>
-                                <a title="About" href="/aboutUs">About Us</a>
-                            </li>
 
                             <li>
-                                <a title="Contacts" href="/contactUs">Contacts Us</a>
-                            </li>
-
-                            <li>
-                                <a title="Packages" href="/packages">Packages</a>
+                                <a title="Packages" href="#">Packages</a>
                                 <ul class="sub-menu">
+                                    <li>
+                                        <a title="Packages" href="/packages">Packages</a>
+                                    </li>
                                     <li>
                                         <a title="Pricing Plan Checkout" href="/checkoutPage">Checkout</a>
                                     </li>
                                 </ul> 
                             </li>
-
                             <li>
-                                <a title="Page" href="/blogs">Blogs</a>
+                                <a title="Destinations" href="#">Destinations</a>
+                                <ul class="sub-menu">
+                                    <li>
+                                        <a title="Begusarai" href="#">Begusarai</a>
+                                    </li>
+                                    <li>
+                                        <a title="Begusarai" href="#">Begusarai</a>
+                                    </li>
+                                    <li>
+                                        <a title="Begusarai" href="#">Begusarai</a>
+                                    </li>
+                                    <li>
+                                        <a title="Begusarai" href="#">Begusarai</a>
+                                    </li>
+                                    <li>
+                                        <a title="Begusarai" href="#">Begusarai</a>
+                                    </li>
+                                    
+                                </ul> 
                             </li>
 
 

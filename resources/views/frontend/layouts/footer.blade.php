@@ -26,9 +26,12 @@
                                 <a title="About Us" href="/aboutUs">About Us</a>
                             </li>
                             <li>
-                                <a title="Blog" href="/blogs">Blog</a>
+                                <a title="Blogs" href="/blogs">Blog</a>
                             </li>
-                                <a title="Contact" href="/contactUs">Contact</a>
+                                <a title="Contact" href="/contactUs">Contact Us</a>
+                            </li>
+                            <li>
+                                <a title="Privacy" href="/privacyPolicy">Privacy Policy</a>
                             </li>
                             
                         </ul>
@@ -36,7 +39,7 @@
                 </div>
                 <div class="col-lg-2">
                     <aside class="footer__top__nav">
-                        <h2 class="mb-3">Connact</h2>
+                        <h2 class="mb-3">Connact With Us</h2>
                         <ul>
                             <li>
                                 <a title="testimonial" href="/testimonial">Testimonial</a>
@@ -59,11 +62,11 @@
                         <p>Phone: 9693667887 / 06243-316290</p>
                         <ul>
                             <li class="facebook">
-                                <a title="Facebook" href="#">
+                                <a title="Facebook" href="https://www.facebook.com/inbegusarai">
                                     <i class="la la-facebook-f"></i>
                                 </a>
                             </li>
-                            <li class="twitter">
+                            {{-- <li class="twitter">
                                 <a title="Twitter" href="#">
                                     <i class="la la-twitter"></i>
                                 </a>
@@ -72,9 +75,9 @@
                                 <a title="Youtube" href="#">
                                     <i class="la la-youtube"></i>
                                 </a>
-                            </li>
+                            </li> --}}
                             <li class="instagram">
-                                <a title="Instagram" href="#">
+                                <a title="Instagram" href="https://instagram.com/in.begusarai">
                                     <i class="la la-instagram"></i>
                                 </a>
                             </li>

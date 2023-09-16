@@ -100,7 +100,7 @@ input[type="number"] {
 
 /* logged in menu */
 
-.avatar img{
+.avatar img {
     width: 40px;
     height: 40px;
     margin-right: 8px;
@@ -167,7 +167,6 @@ svg {
     object-fit: cover;
 } */
 
-
 .login-container {
     text-align: center;
     /* Center the content horizontally */
@@ -195,8 +194,6 @@ svg {
     background-color: #0056b3;
 }
 
-
-
 .pagination nav div div {
     display: block ruby;
     text-align: center;
@@ -216,4 +213,38 @@ svg {
 }
 .pagination nav div div svg {
     width: 20px;
+}
+
+.social-icon {
+    display: inline-block;
+    margin-right: 5px;
+    list-style: none;
+    margin-bottom: 10px;
+    display: block;
+    width: 36px;
+    height: 36px;
+    text-align: center;
+    line-height: 36px;
+    border-radius: 5px;
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+    color: #ffffff;
+}
+
+.facebook {
+    background-color: #3b5998;
+}
+
+.twitter {
+    background-color: #1da1f2; 
+}
+
+.youtube{
+    background-color: #cd201f;
+}
+
+.instagram {
+    background-color: #8d00cf;
 }
