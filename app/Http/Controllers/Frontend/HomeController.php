@@ -368,10 +368,15 @@ class HomeController extends Controller
             'video' => 'nullable',
         ];
 
-        foreach (['coverImage', 'galleryImage', 'documentImage', 'logo'] as $fileField) {
+        foreach (['coverImage', 'galleryImage',  'logo'] as $fileField) {
             if ($request->hasFile($fileField)) {
                 // Dynamically add validation rules for the file fields if they are present in the request.
                 $rules[$fileField] = 'nullable|image|mimes:jpg,jpeg,png,svg,webp|max:2048';
+            }
+        } foreach (['documentImage'] as $fileField) {
+            if ($request->hasFile($fileField)) {
+                $rules[$fileField] = 'nullable|mimes:pdf';
+
             }
         }
         $this->validate($request, $rules);
@@ -640,6 +645,7 @@ class HomeController extends Controller
     }
     public function searchFilter(Request $request, $category, $city, $highlight)
     {
+        $businesses = BusinessList::orderBy('created_at', 'desc')->get();
         if ($city == 'all' && $highlight == 'all' && $category != 'all') {
             $similer = BusinessList::where('category', $category)
                 ->orderBy('created_at', 'desc')
@@ -666,20 +672,6 @@ class HomeController extends Controller
             ->where('type', '=', 'highlight')
             ->get();
 
-        return view('frontend.searchFilter', compact('similer', 'submaster', 'submasterCategory', 'submasterHighlight'));
+        return view('frontend.searchFilter', compact('similer', 'submaster', 'submasterCategory', 'submasterHighlight', 'businesses'));
     }
-
-    public function updatePlaces(Request $request)
-{
-    $selectedCities = $request->input('cities');
-
-    // Retrieve and filter places based on selected cities
-    $filteredPlaces = Place::whereIn('city', $selectedCities)->get();
-
-    // Render the updated places list as HTML
-    $placesHTML = view('places', ['similer' => $filteredPlaces])->render();
-
-    return $placesHTML;
-}
-
 }
