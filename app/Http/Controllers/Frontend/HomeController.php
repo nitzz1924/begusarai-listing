@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Cookie;
 use App\Models\BusinessList;
 use App\Models\Master;
 use App\Models\Testimonial;
+use App\Models\Lead;
+
 use App\Models\Bookmark;
 use App\Models\Career;
 
@@ -368,15 +370,15 @@ class HomeController extends Controller
             'video' => 'nullable',
         ];
 
-        foreach (['coverImage', 'galleryImage',  'logo'] as $fileField) {
+        foreach (['coverImage', 'galleryImage', 'logo'] as $fileField) {
             if ($request->hasFile($fileField)) {
                 // Dynamically add validation rules for the file fields if they are present in the request.
                 $rules[$fileField] = 'nullable|image|mimes:jpg,jpeg,png,svg,webp|max:2048';
             }
-        } foreach (['documentImage'] as $fileField) {
+        }
+        foreach (['documentImage'] as $fileField) {
             if ($request->hasFile($fileField)) {
                 $rules[$fileField] = 'nullable|mimes:pdf';
-
             }
         }
         $this->validate($request, $rules);
@@ -584,6 +586,57 @@ class HomeController extends Controller
             ->with('success', 'FeedBack submitted successfully!');
     }
 
+    public function Lead()
+    {
+        return view('frontend.lead');
+    }
+    // public function LeadStore(Request $request)
+    // {
+    //     $user = Auth::user();
+    //     $validatedData = $request->validate([
+    //         'name' => 'required',
+    //         'number' => 'required',
+    //         'message' => 'required|string',
+    //     ]);
+
+    //     // Create and save a new testimonial record in the database
+
+    //     $lead = new Lead([
+    //         'name' => $validatedData['name'],
+    //         'number' => $validatedData['number'],
+    //         'message' => $validatedData['message'],
+    //     ]);
+    //     $lead->user_id = $user->id;
+
+    //     $lead->save();
+
+    //     return back()->with('success', 'Messsage submitted successfully!');
+    // }
+
+    public function LeadStore(Request $request, $businessId)
+    {
+        $business = BusinessList::where('business_id', $businessId);
+
+        $user = Auth::user();
+        $validatedData = $request->validate([
+            'name' => 'required',
+            'number' => 'required',
+            'message' => 'required|string',
+        ]);
+
+        // Create and save a new lead record in the database
+        $lead = new Lead([
+            'name' => $validatedData['name'],
+            'number' => $validatedData['number'],
+            'message' => $validatedData['message'],
+        ]);
+
+        $lead->user_id = $user->id; // Use $user here, not $user_id
+
+        $lead->save();
+        return back()->with('success', 'Message submitted successfully!');
+    }
+
     public function ownerShop()
     {
         return view('frontend.ownerShop');
@@ -636,7 +689,7 @@ class HomeController extends Controller
     {
         return view('frontend.ownerLeads');
     }
-    
+
     public function privacyPolicy()
     {
         return view('frontend.privacyPolicy');

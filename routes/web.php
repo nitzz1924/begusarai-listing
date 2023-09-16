@@ -131,6 +131,9 @@ Route::put('/editPlace/updatePlace/{id}', [HomeController::class, 'updatePlace']
 Route::get('/testimonial', [HomeController::class, 'Testimonial'])->name('testimonial');
 Route::post('/testimonial', [HomeController::class, 'testimonialStore'])->name('testimonialStore');
 
+Route::get('/lead', [HomeController::class, 'Lead'])->name('Lead');
+Route::post('/lead', [HomeController::class, 'LeadStore'])->name('LeadStore');
+
 Route::get('/career', [HomeController::class, 'career'])->name('career');
 Route::post('/career', [HomeController::class, 'careerStore'])->name('careerStore');
 

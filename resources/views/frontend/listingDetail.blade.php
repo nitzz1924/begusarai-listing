@@ -3,6 +3,45 @@
 @section('content')
 
 
+    <style>
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        input[type="tel"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+
     <main id="main" class="site-main single single-02">
         <div class="place">
             <div class="slick-sliders">
@@ -228,19 +267,19 @@
                                 </table>
                             </div><!-- .place__box -->
                             <!-- <div class="place__box">
-                                     <h3>FAQ's</h3>
-                                     <ul class="faqs-accordion">
-                                         <li>
-                                             <h4>What are the ingredients or taste profile for the signature sauce?</h4>
-                                             <div class="desc">
-                                                 <p>We are currently offering free shipping throughout Northern California on all
-                                                     orders over $80. Peninsula to San Francisco can receive next day delivery.
-                                                 </p>
-                                             </div>
-                                         </li>
+                                                                                                                     <h3>FAQ's</h3>
+                                                                                                                     <ul class="faqs-accordion">
+                                                                                                                         <li>
+                                                                                                                             <h4>What are the ingredients or taste profile for the signature sauce?</h4>
+                                                                                                                             <div class="desc">
+                                                                                                                                 <p>We are currently offering free shipping throughout Northern California on all
+                                                                                                                                     orders over $80. Peninsula to San Francisco can receive next day delivery.
+                                                                                                                                 </p>
+                                                                                                                             </div>
+                                                                                                                         </li>
 
-                                     </ul>
-                                      </div> -->
+                                                                                                                     </ul>
+                                                                                                                      </div> -->
                             <!-- .place__box -->
                             <div class="place__box place__box--reviews">
                                 <h3 class="place__title--reviews">
@@ -329,29 +368,70 @@
                     </div>
                     <div class="col-lg-4">
                         <div class="sidebar sidebar--shop sidebar--border">
-                            <div class="widget-reservation-mini">
-                                <h3>Send me a message</h3>
-                                <a href="#" class="open-wg btn">Send</a>
-                            </div>
+
                             <aside class="widget widget-shadow widget-reservation">
                                 <h3>Send me a message</h3>
 
-                                <form action="#" method="POST" class="form-underline">
-                                    <div class="field-input">
-                                        <input type="text" placeholder="Your name" value="" name="your_name">
+                                @if (session('success'))
+                                    <div class="alert alert-success alert-dismissible fade show custom-alert"
+                                        role="alert">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <span
+                                                    style="color:green;text-agline:center; ">{{ session('success') }}</span>
+                                            </div>
+                                            <button type="button" class="close" data-dismiss="alert"
+                                                aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
                                     </div>
-                                    <div class="field-input">
-                                        <input type="email" placeholder="Your email" value="" name="your_email">
+                                @endif
+
+
+
+                                <?php 
+                                if(Auth::user()){
+                                ?>
+
+
+                                <form method="POST" action="{{ route('LeadStore') }}">
+                                    @csrf
+
+                                    <div class="form-group">
+                                        <label for="name">Your Name</label>
+                                        <input type="text" id="name" name="name"
+                                            placeholder="Enter your name" required>
+                                        @error('name')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
-                                    <div class="field-input">
-                                        <input type="tel" placeholder="Your phone number" value=""
-                                            name="your_phone">
+
+                                    <div class="form-group">
+                                        <label for="number">Your Phone Number</label>
+                                        <input type="tel" id="number" name="number"
+                                            placeholder="Enter your phone number" required>
+                                        @error('number')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
-                                    <div class="field-input">
-                                        <textarea name="message" placeholder="Message"></textarea>
+
+                                    <div class="form-group">
+                                        <label for="message">Message</label>
+                                        <textarea class="form-control" id="message" name="message" rows="4" required>{{ old('message') }}</textarea>
                                     </div>
-                                    <input type="submit" value="Send a message">
+
+                                    <button type="submit">Send a Message</button>
                                 </form>
+                                <?php 
+                                  }else{
+                                  ?>
+                                <div class="login-container">
+                                    <span class="login-message">Please Login First</span>
+                                    <a title="Login" class="open-login test" href="#">Login</a>
+                                </div>
+
+                                <?php }?>
 
                             </aside><!-- .widget-message -->
                         </div><!-- .sidebar -->

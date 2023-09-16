@@ -1,3 +1,12 @@
+<?php
+use App\Models\Master;
+
+$Mastercity = Master::orderBy('created_at', 'asc')
+    ->where('type', '=', 'City')
+    ->get();
+
+?>
+
 <header id="header" class="site-header">
     <div class="container-fluid">
         <div class="row">
@@ -31,27 +40,26 @@
                                 <a title="Packages" href="/packages">Packages</a>
                             </li>
 
-                            
+
                             <li>
                                 <a title="Destinations" href="#">Destinations</a>
                                 <ul class="sub-menu">
-                                    <li>
-                                        <a title="Begusarai" href="#">Begusarai</a>
-                                    </li>
-                                    <li>
-                                        <a title="Begusarai" href="#">Begusarai</a>
-                                    </li>
-                                    <li>
-                                        <a title="Begusarai" href="#">Begusarai</a>
-                                    </li>
-                                    <li>
-                                        <a title="Begusarai" href="#">Begusarai</a>
-                                    </li>
-                                    <li>
-                                        <a title="Begusarai" href="#">Begusarai</a>
-                                    </li>
-                                    
-                                </ul> 
+
+
+
+
+
+                                    @foreach ($Mastercity as $value)
+                                        <li>
+                                            <a
+                                                href="{{ route('searchFilter', ['category' => 'all', 'city' => $value->title, 'highlight' => 'all']) }}">
+                                                {{ $value->title }}
+                                            </a>
+                                        </li>
+                                    @endforeach
+
+
+                                </ul>
                             </li>
 
 
@@ -80,48 +88,48 @@
                         }     }
                         ?>
 
-                        
-                        
-                        <?php 
+
+
+                            <?php 
                             if(Auth::user()){
 
                         if (Auth::user()->type=='Owner'){
                         ?>
-                        <li>
-                            <a class="avatar" href="">
-                                <img src="https://wp.getgolo.com/wp-content/uploads/sites/3/2022/06/customersupport-30x30.png"
-                                    title="Tho Minh" alt="Tho Minh">
-                                <span>Business Owner</span>
-                            </a>
-                            <ul class="sub-menu">
-                                <li class=""><a href="/ownerDashboard">Dashboard</a>
-                                </li>
-                                <li class=""><a href="/businessOwnerPage">My Page</a>
-                                </li>
-                                <li class=""><a href="/ownerListing">My Places</a>
-                                </li>
-                                <li class=""><a href="/ownerLeads">Leads</a>
-                                </li>
-                                <li class=""><a href="/ownerWishlist">My Wishlist</a>
-                                </li>
-                                {{-- <li class=""><a href="/">My Bookings</a>
+                            <li>
+                                <a class="avatar" href="">
+                                    <img src="https://wp.getgolo.com/wp-content/uploads/sites/3/2022/06/customersupport-30x30.png"
+                                        title="Tho Minh" alt="Tho Minh">
+                                    <span>Business Owner</span>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li class=""><a href="/ownerDashboard">Dashboard</a>
+                                    </li>
+                                    <li class=""><a href="/businessOwnerPage">My Page</a>
+                                    </li>
+                                    <li class=""><a href="/ownerListing">My Places</a>
+                                    </li>
+                                    <li class=""><a href="/ownerLeads">Leads</a>
+                                    </li>
+                                    <li class=""><a href="/ownerWishlist">My Wishlist</a>
+                                    </li>
+                                    {{-- <li class=""><a href="/">My Bookings</a>
                                     </li> --}}
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li>
-                                    <a href="/logout">
-                                        <span>Logout</span> </i>
-                                    </a>
-                                </li>
-                                <?php 
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <li>
+                                        <a href="/logout">
+                                            <span>Logout</span> </i>
+                                        </a>
+                                    </li>
+                                    <?php 
                                 }}
                                 ?>
 
 
-                            </ul>
+                                </ul>
                         </ul>
-                        </nav>
+                    </nav>
 
                     <?php 
                     if (Auth::user()==null){
