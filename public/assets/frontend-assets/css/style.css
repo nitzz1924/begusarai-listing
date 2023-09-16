@@ -3092,6 +3092,13 @@ a.place__comments__reply i {
     margin-left: -5px;
     margin-right: -5px;
 }
+@media (max-width: 767px) {
+    .pagination {
+        
+        margin-left: -207px;
+        
+    }
+}
 
 .pagination__numbers a {
     color: #5d5d5d;
