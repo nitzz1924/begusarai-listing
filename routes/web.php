@@ -22,7 +22,6 @@ Route::get('/contactUs', [HomeController::class, 'contactUs'])->name('contactUs'
 Route::get('/contactUs', [HomeController::class, 'contactUs'])->name('contactUs');
 Route::get('/packages', [HomeController::class, 'packages'])->name('packages');
 Route::get('/registration', [HomeController::class, 'registration'])->name('registration');
-Route::get('/searchFilter', [HomeController::class, 'searchFilter'])->name('searchFilter');
 Route::get('/blogs', [HomeController::class, 'blogs'])->name('blogs');
 Route::get('/searchCity', [HomeController::class, 'searchCity'])->name('searchCity');
 Route::get('/checkoutPage', [HomeController::class, 'checkoutPage'])->name('checkoutPage');
@@ -140,3 +139,8 @@ Route::post('/bookmark/{businessId}', [HomeController::class, 'toggleBookmark'])
 // Route::post('/bookmark/{businessId}', [HomeController::class, 'toggleBookmark'])->name('bookmark.toggle');
 
 // Route::post('/bookmark/{businessId}', 'YourControllerName@toggleBookmark')->name('bookmark.toggle');
+
+Route::get('/searchFilter/{category}/{city}/{highlight}', [HomeController::class, 'searchFilter'])->name('searchFilter');
+
+
+Route::get('/update-places', [HomeController::class, 'updatePlaces'])->name('updatePlaces');

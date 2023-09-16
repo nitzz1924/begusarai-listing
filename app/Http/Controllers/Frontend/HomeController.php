@@ -584,11 +584,6 @@ class HomeController extends Controller
         return view('frontend.ownerShop');
     }
 
-    public function searchFilter()
-    {
-        return view('frontend.searchFilter');
-    }
-
     public function searchCity()
     {
         return view('frontend.searchCity');
@@ -643,4 +638,48 @@ class HomeController extends Controller
         // $blog = Blog::orderBy('created_at', 'asc')->get();
         return view('frontend.blogs', compact('blog'));
     }
+    public function searchFilter(Request $request, $category, $city, $highlight)
+    {
+        if ($city == 'all' && $highlight == 'all' && $category != 'all') {
+            $similer = BusinessList::where('category', $category)
+                ->orderBy('created_at', 'desc')
+                ->get();
+        }
+        if ($city != 'all' && $highlight == 'all' && $category == 'all') {
+            $similer = BusinessList::where('city', $city)
+                ->orderBy('created_at', 'desc')
+                ->get();
+        }
+
+        if ($city == 'all' && $highlight == 'all' && $category == 'all') {
+            $similer = BusinessList::orderBy('created_at', 'desc')->get();
+        }
+        $submaster = Master::orderBy('created_at', 'asc')
+            ->where('type', '=', 'city')
+            ->get();
+
+        $submasterCategory = Master::orderBy('created_at', 'asc')
+            ->where('type', '=', 'category')
+            ->get();
+
+        $submasterHighlight = Master::orderBy('created_at', 'asc')
+            ->where('type', '=', 'highlight')
+            ->get();
+
+        return view('frontend.searchFilter', compact('similer', 'submaster', 'submasterCategory', 'submasterHighlight'));
+    }
+
+    public function updatePlaces(Request $request)
+{
+    $selectedCities = $request->input('cities');
+
+    // Retrieve and filter places based on selected cities
+    $filteredPlaces = Place::whereIn('city', $selectedCities)->get();
+
+    // Render the updated places list as HTML
+    $placesHTML = view('places', ['similer' => $filteredPlaces])->render();
+
+    return $placesHTML;
+}
+
 }
