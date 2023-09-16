@@ -195,9 +195,10 @@ svg {
 }
 
 .pagination nav div div {
-    display: block ruby;
+    display: inline-block;
     text-align: center;
     padding: 10px 0;
+    width: 320px;
     /* visibility: hidden; */
 }
 .pagination nav .flex {
