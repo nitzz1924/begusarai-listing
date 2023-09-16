@@ -98,7 +98,7 @@
                                 </li>
                                 <li class=""><a href="/businessOwnerPage">My Page</a>
                                 </li>
-                                <li class=""><a href="/ownerListing">Listings</a>
+                                <li class=""><a href="/ownerListing">My Places</a>
                                 </li>
                                 <li class=""><a href="/ownerLeads">Leads</a>
                                 </li>
