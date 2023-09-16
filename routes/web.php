@@ -22,7 +22,6 @@ Route::get('/contactUs', [HomeController::class, 'contactUs'])->name('contactUs'
 Route::get('/contactUs', [HomeController::class, 'contactUs'])->name('contactUs');
 Route::get('/packages', [HomeController::class, 'packages'])->name('packages');
 Route::get('/registration', [HomeController::class, 'registration'])->name('registration');
-Route::get('/searchFilter', [HomeController::class, 'searchFilter'])->name('searchFilter');
 Route::get('/blogs', [HomeController::class, 'blogs'])->name('blogs');
 Route::get('/searchCity', [HomeController::class, 'searchCity'])->name('searchCity');
 Route::get('/checkoutPage', [HomeController::class, 'checkoutPage'])->name('checkoutPage');
@@ -39,7 +38,6 @@ Route::get('/ownerLeads', [HomeController::class, 'ownerLeads'])->name('ownerLea
 Route::get('/setPassword', [HomeController::class, 'setPassword'])->name('setPassword');
 Route::get('/ownerShop', [HomeController::class, 'ownerShop'])->name('ownerShop');
 Route::get('/businessOwnerPage', [HomeController::class, 'businessOwnerPage'])->name('businessOwnerPage');
-Route::get('/career', [HomeController::class, 'career'])->name('career');
 
 // guest user backend routes - logged in
 
@@ -133,6 +131,8 @@ Route::put('/editPlace/updatePlace/{id}', [HomeController::class, 'updatePlace']
 Route::get('/testimonial', [HomeController::class, 'Testimonial'])->name('testimonial');
 Route::post('/testimonial', [HomeController::class, 'testimonialStore'])->name('testimonialStore');
 
+Route::get('/career', [HomeController::class, 'career'])->name('career');
+Route::post('/career', [HomeController::class, 'careerStore'])->name('careerStore');
 
 
 //bookmark route 
@@ -140,3 +140,8 @@ Route::post('/bookmark/{businessId}', [HomeController::class, 'toggleBookmark'])
 // Route::post('/bookmark/{businessId}', [HomeController::class, 'toggleBookmark'])->name('bookmark.toggle');
 
 // Route::post('/bookmark/{businessId}', 'YourControllerName@toggleBookmark')->name('bookmark.toggle');
+
+Route::get('/searchFilter/{category}/{city}/{highlight}', [HomeController::class, 'searchFilter'])->name('searchFilter');
+
+
+Route::get('/update-places', [HomeController::class, 'updatePlaces'])->name('updatePlaces');

@@ -254,18 +254,26 @@
                         <div class="field-note">Maximum file size: 1 MB.</div>
                     </div>
                     <div class="field-group field-file">
-                        <label for="documentImage">Document Images (optional)</label>
+                        <label for="documentImage">Document Images (Upload PDF)</label>
                         <label for="documentImage" class="preview">
                             <input type="file" name="documentImage" id="documentImage" class="upload-file"
-                                data-max-size="1024">
+                            accept=".pdf">
                             <img class="img_preview" src="images/no-image.png" alt="" />
                             <i class="la la-cloud-upload-alt"></i>
                         </label>
                         @error('documentImage')
                             <div class="has-error mt-2">{{ $message }}</div>
                         @enderror
-                        <div class="field-note">Maximum file size: 1 MB.</div>
                     </div>
+
+
+                
+
+
+
+
+
+
                     <div class="field-group field-file">
                         <label for="logo">Logo (optional)</label>
                         <label for="logo" class="preview">

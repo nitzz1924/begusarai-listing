@@ -228,19 +228,19 @@
                                 </table>
                             </div><!-- .place__box -->
                             <!-- <div class="place__box">
-                                                                                    <h3>FAQ's</h3>
-                                                                                    <ul class="faqs-accordion">
-                                                                                        <li>
-                                                                                            <h4>What are the ingredients or taste profile for the signature sauce?</h4>
-                                                                                            <div class="desc">
-                                                                                                <p>We are currently offering free shipping throughout Northern California on all
-                                                                                                    orders over $80. Peninsula to San Francisco can receive next day delivery.
-                                                                                                </p>
-                                                                                            </div>
-                                                                                        </li>
+                                     <h3>FAQ's</h3>
+                                     <ul class="faqs-accordion">
+                                         <li>
+                                             <h4>What are the ingredients or taste profile for the signature sauce?</h4>
+                                             <div class="desc">
+                                                 <p>We are currently offering free shipping throughout Northern California on all
+                                                     orders over $80. Peninsula to San Francisco can receive next day delivery.
+                                                 </p>
+                                             </div>
+                                         </li>
 
-                                                                                    </ul>
-                                                                                </div> -->
+                                     </ul>
+                                      </div> -->
                             <!-- .place__box -->
                             <div class="place__box place__box--reviews">
                                 <h3 class="place__title--reviews">

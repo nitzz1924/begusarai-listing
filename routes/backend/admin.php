@@ -69,6 +69,7 @@ Route::get('/passport', 'AdminController@passport');
 // Master Routing
 Route::resource('master', 'MasterController');
 Route::resource('testimonial', 'TestimonialController');
+Route::resource('career', 'CareerController');
 
 
 Route::get('/testimonial/active/{id}', 'TestimonialController@active');

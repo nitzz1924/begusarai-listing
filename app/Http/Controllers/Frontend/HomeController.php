@@ -15,6 +15,8 @@ use App\Models\BusinessList;
 use App\Models\Master;
 use App\Models\Testimonial;
 use App\Models\Bookmark;
+use App\Models\Career;
+
 use View;
 
 class HomeController extends Controller
@@ -110,6 +112,20 @@ class HomeController extends Controller
 
     public function index()
     {
+        // Get the authenticated user
+        $user = auth()->user();
+        if ($user) {
+            $businesses = BusinessList::leftJoin('bookmarks', function ($join) use ($user) {
+                $join->on('businesslist.id', '=', 'bookmarks.business_id')->where('bookmarks.user_id', '=', $user->id);
+            })
+                ->select('businesslist.*', 'bookmarks.id AS bookmark_status')
+                ->orderBy('businesslist.created_at', 'desc')
+                ->get();
+        } else {
+            $businesses = BusinessList::orderBy('created_at', 'desc')->get();
+        }
+        // Retrieve businesses with bookmark status for the user
+
         $blog = Blog::orderBy('created_at', 'desc')
             ->take(3)
             ->get();
@@ -121,7 +137,6 @@ class HomeController extends Controller
         $submaster = Master::orderBy('created_at', 'asc')
             ->where('type', '=', 'category')
             ->get();
-        $businesses = BusinessList::orderBy('created_at', 'desc')->get();
         $Mastercity = Master::orderBy('created_at', 'asc')
             ->where('type', '=', 'City')
             ->get();
@@ -353,10 +368,15 @@ class HomeController extends Controller
             'video' => 'nullable',
         ];
 
-        foreach (['coverImage', 'galleryImage', 'documentImage', 'logo'] as $fileField) {
+        foreach (['coverImage', 'galleryImage',  'logo'] as $fileField) {
             if ($request->hasFile($fileField)) {
                 // Dynamically add validation rules for the file fields if they are present in the request.
                 $rules[$fileField] = 'nullable|image|mimes:jpg,jpeg,png,svg,webp|max:2048';
+            }
+        } foreach (['documentImage'] as $fileField) {
+            if ($request->hasFile($fileField)) {
+                $rules[$fileField] = 'nullable|mimes:pdf';
+
             }
         }
         $this->validate($request, $rules);
@@ -500,8 +520,37 @@ class HomeController extends Controller
 
     public function ownerWishlist()
     {
-        return view('frontend.ownerWishlist');
+        // Get the authenticated user
+        $user = auth()->user();
+        if ($user) {
+            $bookmarkedBusinessIds = Bookmark::where('user_id', $user->id)->pluck('business_id');
+        }
+        // Get the bookmarked business IDs for the user
+
+        $submaster = Master::orderBy('created_at', 'asc')
+            ->where('type', '=', 'category')
+            ->get();
+        // Get the businesses that match the bookmarked IDs
+        $businesses = BusinessList::whereIn('id', $bookmarkedBusinessIds)
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        // You can also pass the list of bookmarked business IDs to the view if needed
+        return view('frontend.ownerWishlist', compact('businesses', 'submaster'));
     }
+
+    // public function listingDetail(Request $request, $id, $category)
+    // {
+    //     $businesses = BusinessList::orderBy('created_at', 'desc')->get();
+    //     $similer = BusinessList::where('category', $category)
+    //         ->orderBy('created_at', 'desc')
+    //         ->get();
+    //     $businessesDetail = BusinessList::where('id', $id)->first();
+    //     $submaster = Master::orderBy('created_at', 'asc')
+    //         ->where('type', '=', 'category')
+    //         ->get();
+    //     return view('frontend.listingDetail', compact('businessesDetail', 'submaster', 'businesses', 'similer'));
+    // }
 
     public function ownerProfile()
     {
@@ -540,11 +589,6 @@ class HomeController extends Controller
         return view('frontend.ownerShop');
     }
 
-    public function searchFilter()
-    {
-        return view('frontend.searchFilter');
-    }
-
     public function searchCity()
     {
         return view('frontend.searchCity');
@@ -563,6 +607,31 @@ class HomeController extends Controller
     {
         return view('frontend.career');
     }
+    public function careerStore(Request $request)
+    {
+        $user = Auth::user();
+        $validatedData = $request->validate([
+            'name' => 'required',
+            'number' => 'required',
+            'message' => 'required',
+            'email' => 'required',
+        ]);
+
+        // Create and save a new testimonial record in the database
+
+        $career = new Career([
+            'name' => $validatedData['name'],
+            'message' => $validatedData['message'],
+            'number' => $validatedData['number'],
+            'email' => $validatedData['email'],
+        ]);
+        $career->user_id = $user->id;
+
+        $career->save();
+        return redirect()
+            ->route('career')
+            ->with('success', 'FeedBack submitted successfully!');
+    }
     public function ownerLeads()
     {
         return view('frontend.ownerLeads');
@@ -578,5 +647,36 @@ class HomeController extends Controller
         $blog = Blog::orderBy('created_at', 'desc')->paginate(3);
         // $blog = Blog::orderBy('created_at', 'asc')->get();
         return view('frontend.blogs', compact('blog'));
+    }
+    public function searchFilter(Request $request, $category, $city, $highlight)
+    {
+        $businesses = BusinessList::orderBy('created_at', 'desc')->get();
+        if ($city == 'all' && $highlight == 'all' && $category != 'all') {
+            $similer = BusinessList::where('category', $category)
+                ->orderBy('created_at', 'desc')
+                ->get();
+        }
+        if ($city != 'all' && $highlight == 'all' && $category == 'all') {
+            $similer = BusinessList::where('city', $city)
+                ->orderBy('created_at', 'desc')
+                ->get();
+        }
+
+        if ($city == 'all' && $highlight == 'all' && $category == 'all') {
+            $similer = BusinessList::orderBy('created_at', 'desc')->get();
+        }
+        $submaster = Master::orderBy('created_at', 'asc')
+            ->where('type', '=', 'city')
+            ->get();
+
+        $submasterCategory = Master::orderBy('created_at', 'asc')
+            ->where('type', '=', 'category')
+            ->get();
+
+        $submasterHighlight = Master::orderBy('created_at', 'asc')
+            ->where('type', '=', 'highlight')
+            ->get();
+
+        return view('frontend.searchFilter', compact('similer', 'submaster', 'submasterCategory', 'submasterHighlight', 'businesses'));
     }
 }

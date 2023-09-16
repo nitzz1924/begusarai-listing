@@ -32,7 +32,7 @@
                             </div>
                         @endif
 
-                        <form method="POST" action="{{ route('testimonialStore') }}">
+                        <form method="POST" action="{{ route('careerStore') }}">
                             @csrf
                             <div class="form-group">
                                 <label for="name">Your Name</label>
