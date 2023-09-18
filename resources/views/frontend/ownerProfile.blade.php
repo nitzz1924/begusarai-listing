@@ -43,29 +43,16 @@
     
                             <h3>Basic Info</h3>
                             <div class="field-input">
-                                <label for="first_name">First name</label>
-                                <input type="text" name="first_name" placeholder="Invan" id="first_name">
+                                <label for="first_name"> Name</label>
+                                <input type="text" name="name" id="name" placeholder="Invan" id="first_name">
                             </div>
-                            <div class="field-input">
-                                <label for="last_name">Last name</label>
-                                <input type="text" name="last_name" placeholder="Robent" id="last_name">
-                            </div>
+                           
                             <div class="field-input">
                                 <label for="email">Email</label>
                                 <input type="email" name="email" placeholder="invan@gmail.com" id="email">
                             </div>
-                            <div class="field-input">
-                                <label for="phone">Phone</label>
-                                <input type="tel" name="phone" placeholder="00 2323 323" id="phone">
-                            </div>
-                            <div class="field-input">
-                                <label for="facebook">Facebook</label>
-                                <input type="text" name="facebook" placeholder="invantaa" id="facebook">
-                            </div>
-                            <div class="field-input">
-                                <label for="instagram">Instagram</label>
-                                <input type="text" name="instagram" placeholder="invantaa" id="instagram">
-                            </div>
+                           
+                            
                             <div class="field-submit">
                                 <input type="submit" value="Update">
                             </div>

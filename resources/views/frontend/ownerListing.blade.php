@@ -1,3 +1,11 @@
+<?php
+use App\Models\Master;
+
+$Mastercity = Master::orderBy('created_at', 'asc')
+    ->where('type', '=', 'City')
+    ->get();
+
+?>
 @extends('frontend.layouts.master')
 @section('title', 'My Listings')
 @section('content')
@@ -37,11 +45,29 @@
                             <form action="#" method="GET">
                                 <div class="field-select">
 
-
+                                    {{-- 
                                     <select name="place_cities">
-                                        <option value="0">All cities</option>
-
+                                        @foreach ($Mastercity as $value)
+                                            <option value="0">
+                                                <a
+                                                    href="{{ route('searchFilter', ['category' => 'all', 'city' => $value->title, 'highlight' => 'all']) }}">
+                                                    {{ $value->title }}
+                                                </a>
+                                            </option>
+                                        @endforeach
+                                    </select> --}}
+                                    <select name="place_cities" onchange="window.location.href=this.value;">
+                                        <option selected> All Cities</option>
+                                        @foreach ($Mastercity as $value)
+                                            <option
+                                                value="{{ route('searchFilter', ['category' => 'all', 'city' => $value->title, 'highlight' => 'all']) }}">
+                                                {{ $value->title }}
+                                            </option>
+                                        @endforeach
                                     </select>
+
+
+
                                     <i class="la la-angle-down"></i>
                                 </div>
                                 <div class="field-select">
@@ -77,7 +103,7 @@
                         <caption>List of Businesses</caption> <!-- Add a caption for the table -->
                         <thead>
                             <tr>
-                                 
+
                                 <th>ID</th>
                                 <th>Name</th>
                                 <th>City</th>
@@ -90,7 +116,7 @@
                         <tbody>
                             @foreach ($businesses as $business)
                                 <tr>
-                                     
+
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $business->businessName }}</td>
                                     <td>{{ $business->city }}</td>
@@ -122,8 +148,11 @@
                                         </a>
 
 
-                                        <a href="{{ route('listingDetail', ['id' => $business->id ,'category'=>$business->category]) }}" class="view" title="View"><i class="la la-eye"></i></a>
-                                        <a href="{{ route('ownerLeads', ['id' => $business->id]) }}" class="list" style="display: {{ $business->status == 0 ? 'none' : 'block' }}" title="list"><i class="la la-list"></i></a>
+                                        <a href="{{ route('listingDetail', ['id' => $business->id, 'category' => $business->category]) }}"
+                                            class="view" title="View"><i class="la la-eye"></i></a>
+                                        <a href="{{ route('ownerLeads', ['id' => $business->id]) }}" class="list"
+                                            style="display: {{ $business->status == 0 ? 'none' : 'block' }}"
+                                            title="list"><i class="la la-list"></i></a>
 
                                         <a href='#' class="delete" title="Delete"><i class="la la-trash-alt"></i></a>
                                     </td>
