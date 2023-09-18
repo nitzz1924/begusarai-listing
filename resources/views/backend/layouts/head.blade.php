@@ -14,6 +14,7 @@
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap.min.css">
 <!-- Favicons -->
 <link rel="shortcut icon" href="{{asset('/assets/images/favicon.png')}}">
+
 <link rel="stylesheet" type="text/css" href="{{ asset('/assets/frontend-assets/libs/bootstrap/css/bootstrap.min.css')}}" />
 
 
@@ -34,9 +35,9 @@
 </script>
 
 
-<script src="{{ asset('/frontend-assets/js/bootstrap.min.js') }}"></script> 
+{{-- <script src="{{ asset('/frontend-assets/js/bootstrap.min.js') }}"></script> 
 
-<link rel="stylesheet" href="frontend-assets/css/bootstrap.min.css"> 
+<link rel="stylesheet" href="frontend-assets/css/bootstrap.min.css">  --}}
 
 
 
