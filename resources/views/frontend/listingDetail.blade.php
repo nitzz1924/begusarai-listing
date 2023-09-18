@@ -267,19 +267,19 @@
                                 </table>
                             </div><!-- .place__box -->
                             <!-- <div class="place__box">
-                                                                                                                     <h3>FAQ's</h3>
-                                                                                                                     <ul class="faqs-accordion">
-                                                                                                                         <li>
-                                                                                                                             <h4>What are the ingredients or taste profile for the signature sauce?</h4>
-                                                                                                                             <div class="desc">
-                                                                                                                                 <p>We are currently offering free shipping throughout Northern California on all
-                                                                                                                                     orders over $80. Peninsula to San Francisco can receive next day delivery.
-                                                                                                                                 </p>
-                                                                                                                             </div>
-                                                                                                                         </li>
+                                                                                                                                                                                                             <h3>FAQ's</h3>
+                                                                                                                                                                                                             <ul class="faqs-accordion">
+                                                                                                                                                                                                                 <li>
+                                                                                                                                                                                                                     <h4>What are the ingredients or taste profile for the signature sauce?</h4>
+                                                                                                                                                                                                                     <div class="desc">
+                                                                                                                                                                                                                         <p>We are currently offering free shipping throughout Northern California on all
+                                                                                                                                                                                                                             orders over $80. Peninsula to San Francisco can receive next day delivery.
+                                                                                                                                                                                                                         </p>
+                                                                                                                                                                                                                     </div>
+                                                                                                                                                                                                                 </li>
 
-                                                                                                                     </ul>
-                                                                                                                      </div> -->
+                                                                                                                                                                                                             </ul>
+                                                                                                                                                                                                              </div> -->
                             <!-- .place__box -->
                             <div class="place__box place__box--reviews">
                                 <h3 class="place__title--reviews">
@@ -390,14 +390,12 @@
 
 
 
-                                <?php 
-                                if(Auth::user()){
-                                ?>
 
 
                                 <form method="POST" action="{{ route('LeadStore') }}">
                                     @csrf
 
+                                    <input type="hidden" name="business_id" value="{{ $businessesDetail->id }}">
                                     <div class="form-group">
                                         <label for="name">Your Name</label>
                                         <input type="text" id="name" name="name"
@@ -423,15 +421,7 @@
 
                                     <button type="submit">Send a Message</button>
                                 </form>
-                                <?php 
-                                  }else{
-                                  ?>
-                                <div class="login-container">
-                                    <span class="login-message">Please Login First</span>
-                                    <a title="Login" class="open-login test" href="#">Login</a>
-                                </div>
 
-                                <?php }?>
 
                             </aside><!-- .widget-message -->
                         </div><!-- .sidebar -->

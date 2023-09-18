@@ -133,6 +133,7 @@ Route::post('/testimonial', [HomeController::class, 'testimonialStore'])->name('
 
 Route::get('/lead', [HomeController::class, 'Lead'])->name('Lead');
 Route::post('/lead', [HomeController::class, 'LeadStore'])->name('LeadStore');
+// Route::post('/lead/{businessId}', 'Frontend\HomeController@LeadStore');
 
 Route::get('/career', [HomeController::class, 'career'])->name('career');
 Route::post('/career', [HomeController::class, 'careerStore'])->name('careerStore');
@@ -140,10 +141,7 @@ Route::post('/career', [HomeController::class, 'careerStore'])->name('careerStor
 
 //bookmark route 
 Route::post('/bookmark/{businessId}', [HomeController::class, 'toggleBookmark'])->name('bookmark.toggle');
-// Route::post('/bookmark/{businessId}', [HomeController::class, 'toggleBookmark'])->name('bookmark.toggle');
-
-// Route::post('/bookmark/{businessId}', 'YourControllerName@toggleBookmark')->name('bookmark.toggle');
-
+ 
 Route::get('/searchFilter/{category}/{city}/{highlight}', [HomeController::class, 'searchFilter'])->name('searchFilter');
 
 

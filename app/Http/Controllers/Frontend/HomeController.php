@@ -522,37 +522,20 @@ class HomeController extends Controller
 
     public function ownerWishlist()
     {
-        // Get the authenticated user
         $user = auth()->user();
         if ($user) {
             $bookmarkedBusinessIds = Bookmark::where('user_id', $user->id)->pluck('business_id');
         }
-        // Get the bookmarked business IDs for the user
 
         $submaster = Master::orderBy('created_at', 'asc')
             ->where('type', '=', 'category')
             ->get();
-        // Get the businesses that match the bookmarked IDs
         $businesses = BusinessList::whereIn('id', $bookmarkedBusinessIds)
             ->orderBy('created_at', 'desc')
             ->get();
 
-        // You can also pass the list of bookmarked business IDs to the view if needed
         return view('frontend.ownerWishlist', compact('businesses', 'submaster'));
     }
-
-    // public function listingDetail(Request $request, $id, $category)
-    // {
-    //     $businesses = BusinessList::orderBy('created_at', 'desc')->get();
-    //     $similer = BusinessList::where('category', $category)
-    //         ->orderBy('created_at', 'desc')
-    //         ->get();
-    //     $businessesDetail = BusinessList::where('id', $id)->first();
-    //     $submaster = Master::orderBy('created_at', 'asc')
-    //         ->where('type', '=', 'category')
-    //         ->get();
-    //     return view('frontend.listingDetail', compact('businessesDetail', 'submaster', 'businesses', 'similer'));
-    // }
 
     public function ownerProfile()
     {
@@ -590,48 +573,27 @@ class HomeController extends Controller
     {
         return view('frontend.lead');
     }
-    // public function LeadStore(Request $request)
-    // {
-    //     $user = Auth::user();
-    //     $validatedData = $request->validate([
-    //         'name' => 'required',
-    //         'number' => 'required',
-    //         'message' => 'required|string',
-    //     ]);
 
-    //     // Create and save a new testimonial record in the database
-
-    //     $lead = new Lead([
-    //         'name' => $validatedData['name'],
-    //         'number' => $validatedData['number'],
-    //         'message' => $validatedData['message'],
-    //     ]);
-    //     $lead->user_id = $user->id;
-
-    //     $lead->save();
-
-    //     return back()->with('success', 'Messsage submitted successfully!');
-    // }
-
-    public function LeadStore(Request $request, $businessId)
+    public function LeadStore(Request $request)
     {
-        $business = BusinessList::where('business_id', $businessId);
-
-        $user = Auth::user();
-        $validatedData = $request->validate([
-            'name' => 'required',
-            'number' => 'required',
-            'message' => 'required|string',
-        ]);
+        // Retrieve the business ID from the input data
+        $businessId = $request->input('business_id');
 
         // Create and save a new lead record in the database
-        $lead = new Lead([
-            'name' => $validatedData['name'],
-            'number' => $validatedData['number'],
-            'message' => $validatedData['message'],
-        ]);
+        $rules = [
+            'name' => 'required',
+            'number' => 'required',
+            'message' => 'required',
+        ];
 
-        $lead->user_id = $user->id; // Use $user here, not $user_id
+        // Validate the input data
+        $validatedData = $request->validate($rules);
+
+        $lead = new Lead();
+        $lead->name = $validatedData['name'];
+        $lead->number = $validatedData['number'];
+        $lead->message = $validatedData['message'];
+        $lead->business_id = $businessId;
 
         $lead->save();
         return back()->with('success', 'Message submitted successfully!');
