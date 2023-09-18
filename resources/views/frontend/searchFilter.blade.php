@@ -113,13 +113,12 @@
 
 
                     <div class="similar-places">
-                        <div class="container">
-                            <h2 class="similar-places__title title">All Results</h2>
-                            <div class="similar-places__content">
+                        <div class="container-fluid">
+                            <div class="similar-places__content p-5">
                                 <div class="row">
 
                                     @foreach ($similer as $value)
-                                        <div class="col-lg-3 col-md-6">
+                                        <div class="col-lg-2 col-md-6">
                                             <div class="place-item layout-02 place-hover">
                                                 <div class="place-inner">
                                                     <div class="place-thumb">
@@ -194,15 +193,7 @@
                     </div>
                 </div><!-- .main-primary -->
             </div><!-- .col-left -->
-            <div class="col-right">
-                <div class="filter-head">
-                    <h2>Maps</h2>
-                    <a href="#" class="close-maps">Close</a>
-                </div>
-                <div class="entry-map">
-                    <div id="place-map-filter"></div>
-                </div>
-            </div><!-- .col-right -->
+         
         </div><!-- .archive-city -->
     </main><!-- .site-main -->
 

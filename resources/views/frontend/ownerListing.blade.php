@@ -9,7 +9,7 @@
                 <div class="container">
                     <ul>
                         <li><a href="/ownerDashboard">Dashboard</a></li>
-                        <li><a href="/ownerLeads">Leads</a></li>
+                        <!-- <li><a href="/ownerLeads">Leads</a></li> -->
                         <li class="active"><a href="/ownerListing">My places</a></li>
 
                         <li><a href="/ownerWishlist">Wishlist</a></li>
