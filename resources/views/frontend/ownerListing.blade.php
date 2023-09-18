@@ -77,16 +77,7 @@
                         <caption>List of Businesses</caption> <!-- Add a caption for the table -->
                         <thead>
                             <tr>
-                                <th>
-                                    <div class="field-check">
-                                        <label for="all">
-                                            <input id="all" type="checkbox" value="all">
-                                            <span class="checkmark">
-                                                <i class="la la-check"></i>
-                                            </span>
-                                        </label>
-                                    </div>
-                                </th>
+                                 
                                 <th>ID</th>
                                 <th>Name</th>
                                 <th>City</th>
@@ -99,17 +90,7 @@
                         <tbody>
                             @foreach ($businesses as $business)
                                 <tr>
-                                    <td>
-                                        <div class="field-check">
-                                            <label for="place{{ $business->id }}">
-                                                <input id="place{{ $business->id }}" type="checkbox"
-                                                    value="{{ $business->id }}">
-                                                <span class="checkmark">
-                                                    <i class="la la-check"></i>
-                                                </span>
-                                            </label>
-                                        </div>
-                                    </td>
+                                     
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $business->businessName }}</td>
                                     <td>{{ $business->city }}</td>
@@ -119,9 +100,8 @@
                                     </td>
                                     <td>
                                         @if ($business->planStatus == 0)
-                                            <button href="#" class="payment-button"
-                                                style="background-color: #ffad2d; color: white;">
-                                                <i class="fas fa-money-bill" style="font-size: 20px; color:white;"></i> Pay
+                                            <button href="#" class="btn-sm btn-warning">
+                                                Pay
                                                 Now
                                             </button>
                                         @else
@@ -142,8 +122,10 @@
                                         </a>
 
 
-                                        <a href="#" class="view" title="View"><i class="la la-eye"></i></a>
-                                        <a href="#" class="delete" title="Delete"><i class="la la-trash-alt"></i></a>
+                                        <a href="{{ route('listingDetail', ['id' => $business->id ,'category'=>$business->category]) }}" class="view" title="View"><i class="la la-eye"></i></a>
+                                        <a href="{{ route('ownerLeads', ['id' => $business->id]) }}" class="list" style="display: {{ $business->status == 0 ? 'none' : 'block' }}" title="list"><i class="la la-list"></i></a>
+
+                                        <a href='#' class="delete" title="Delete"><i class="la la-trash-alt"></i></a>
                                     </td>
                                 </tr>
                             @endforeach

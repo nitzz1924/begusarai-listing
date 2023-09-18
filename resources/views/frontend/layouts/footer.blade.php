@@ -28,7 +28,7 @@
                             <li>
                                 <a title="Blogs" href="/blogs">Blog</a>
                             </li>
-                                <a title="Contact" href="/contactUs">Contact Us</a>
+                                <a title="Contact" href="/contact">Contact</a>
                             </li>
                             <li>
                                 <a title="Privacy" href="/privacyPolicy">Privacy Policy</a>

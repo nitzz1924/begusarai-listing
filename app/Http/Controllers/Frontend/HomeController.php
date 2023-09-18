@@ -18,6 +18,7 @@ use App\Models\Lead;
 
 use App\Models\Bookmark;
 use App\Models\Career;
+use App\Models\Contact;
 
 use View;
 
@@ -209,9 +210,38 @@ class HomeController extends Controller
         return view('frontend.aboutUs');
     }
 
-    public function contactUs()
+    public function contact()
     {
-        return view('frontend.contactUs');
+        return view('frontend.contact');
+    }
+
+    public function savecontact(Request $request)
+    {
+        try {
+            // Validate the form input
+            $request->validate([
+                'first_name' => 'required',
+                'last_name' => 'required',
+                'email' => 'required|email',
+                'cnumber' => 'required',
+                'message' => 'required',
+            ]);
+
+            // Create a new instance of the Contact model and set its properties
+            $contact = new Contact();
+            $contact->first_name = $request->input('first_name');
+            $contact->last_name = $request->input('last_name');
+            $contact->email = $request->input('email');
+            $contact->cnumber = $request->input('cnumber');
+            $contact->message = $request->input('message');
+            $contact->save();
+
+            // Redirect back with a success message
+            return back()->with('success', 'Message submitted successfully!');
+        } catch (\Exception $e) {
+            // Handle any exceptions that occur during the process
+            return back()->with('error', 'Error: ' . $e->getMessage());
+        }
     }
 
     public function addPlace()
@@ -647,11 +677,12 @@ class HomeController extends Controller
             ->route('career')
             ->with('success', 'FeedBack submitted successfully!');
     }
-    public function ownerLeads()
+    public function ownerLeads($id)
     {
         $lead = Lead::orderBy('created_at', 'asc')
+            ->where('business_id', '=', $id)
             ->where('status', '=', '1')
-            ->get(); // Fetch all businesses from the database
+            ->get();
 
         return view('frontend.ownerLeads', compact('lead'));
     }

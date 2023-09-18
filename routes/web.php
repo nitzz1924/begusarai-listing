@@ -18,8 +18,14 @@ Route::group(
 
 // Frontend user Routes - logged out
 Route::get('/aboutUs', [HomeController::class, 'aboutUs'])->name('aboutUs');
-Route::get('/contactUs', [HomeController::class, 'contactUs'])->name('contactUs');
-Route::get('/contactUs', [HomeController::class, 'contactUs'])->name('contactUs');
+
+
+ 
+
+
+Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
+Route::post('/savecontact', [HomeController::class, 'savecontact'])->name('savecontact');
+
 Route::get('/packages', [HomeController::class, 'packages'])->name('packages');
 Route::get('/registration', [HomeController::class, 'registration'])->name('registration');
 Route::get('/blogs', [HomeController::class, 'blogs'])->name('blogs');
@@ -34,7 +40,7 @@ Route::get('/blogDetails/{id}', [HomeController::class, 'blogDetails'])->name('b
 
 Route::get('/ownerWishlist', [HomeController::class, 'ownerWishlist'])->name('ownerWishlist');
 Route::get('/ownerProfile', [HomeController::class, 'ownerProfile'])->name('ownerProfile');
-Route::get('/ownerLeads', [HomeController::class, 'ownerLeads'])->name('ownerLeads');
+Route::get('/ownerLeads/{id}', [HomeController::class, 'ownerLeads'])->name('ownerLeads');
 Route::get('/setPassword', [HomeController::class, 'setPassword'])->name('setPassword');
 Route::get('/ownerShop', [HomeController::class, 'ownerShop'])->name('ownerShop');
 Route::get('/businessOwnerPage', [HomeController::class, 'businessOwnerPage'])->name('businessOwnerPage');
