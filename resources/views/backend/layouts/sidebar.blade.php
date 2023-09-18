@@ -117,6 +117,15 @@
                         Testimonial
                     </a>
                 </li>
+
+                <li>
+                    <a href="{{ URL::to('/admin/lead') }}">
+                        <i class="metismenu-icon pe-7s-bookmarks"></i>
+                        Leads
+                    </a>
+                </li>
+
+
                 <li>
                     <a href="{{ URL::to('/admin/career') }}">
                         <i class="metismenu-icon pe-7s-bookmarks"></i>

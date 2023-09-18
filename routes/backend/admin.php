@@ -6,6 +6,7 @@ use App\Http\Controllers\Backend\Admin\MasterController ;
 use App\Http\Controllers\Backend\Admin\SubMasterController ;
 use App\Http\Controllers\Backend\Admin\UserController ;
 use App\Http\Controllers\Backend\Admin\TestimonialController ;
+use App\Http\Controllers\Backend\Admin\LeadController ;
 
 
 
@@ -74,10 +75,12 @@ Route::resource('career', 'CareerController');
 
 Route::get('/testimonial/active/{id}', 'TestimonialController@active');
 Route::get('/testimonial/inactive/{id}', 'TestimonialController@inactive');
+ 
 
-// Route::post('/testimonial/active/{id}', 'TestimonialController@active')->name('admin.testimonial.active');
-// Route::post('/testimonial/inactive/{id}', 'TestimonialController@inactive')->name('admin.testimonial.inactive');
-
+Route::resource('lead', 'LeadController');
+Route::get('/lead/active/{id}', 'LeadController@active');
+Route::get('/lead/inactive/{id}', 'LeadController@inactive');
+ 
 // Sub-Master Routing
 Route::resource('submaster', 'SubMasterController');
 Route::resource('blog', 'BlogController');

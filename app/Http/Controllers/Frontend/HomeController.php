@@ -649,7 +649,11 @@ class HomeController extends Controller
     }
     public function ownerLeads()
     {
-        return view('frontend.ownerLeads');
+        $lead = Lead::orderBy('created_at', 'asc')
+            ->where('status', '=', '1')
+            ->get(); // Fetch all businesses from the database
+
+        return view('frontend.ownerLeads', compact('lead'));
     }
 
     public function privacyPolicy()
