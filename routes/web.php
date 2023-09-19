@@ -164,6 +164,7 @@ Route::get('/change-password-form', [HomeController::class, 'changePassword'])->
 Route::post('/change-password-form/savepassword', [HomeController::class, 'savepassword'])->name('savepassword');
 
 
-
+Route::get('/reviews', [HomeController::class, 'showReviews'])->name('showReviews');
+Route::post('/submit-review/{id}', [HomeController::class, 'reviewStore'])->name('reviewStore');
 
  // Example route definition

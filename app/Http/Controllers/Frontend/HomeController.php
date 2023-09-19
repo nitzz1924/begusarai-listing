@@ -19,6 +19,8 @@ use App\Models\Lead;
 use App\Models\Bookmark;
 use App\Models\Career;
 use App\Models\Contact;
+use App\Models\Review;
+use DB;
 
 use View;
 
@@ -535,7 +537,31 @@ class HomeController extends Controller
         $submaster = Master::orderBy('created_at', 'asc')
             ->where('type', '=', 'category')
             ->get();
-        return view('frontend.listingDetail', compact('businessesDetail', 'submaster', 'businesses', 'similer'));
+        // $reviews = Review::where('listing_id', $id)->get();
+        // \Log::info($reviews);
+
+        // $reviews = Review::leftJoin('users_login', function ($join) {
+        //     $join->on('reviews.user_id	', '=', 'users_login.id')->where('users_login.id', '=', $id);
+        // })
+        //     ->select('reviews.*', 'users_login.image AS image')
+        //     ->orderBy('reviews.created_at', 'desc')
+        //     ->get();
+
+        // $reviews = Review::leftJoin('users_login', function ($join) use ($id) {
+        //     $join->on('reviews.user_id', '=', 'users_login.id')->where('users_login.id', '=', $id);
+        // })
+        //     ->select('reviews.*', 'users_login.image')
+        //     ->orderBy('reviews.created_at', 'desc')
+        //     ->get();
+        $reviews = DB::table('reviews')
+            ->select('reviews.*', 'users_login.image')
+            ->leftJoin('users_login', 'reviews.user_id', '=', 'users_login.id')
+            ->orderBy('reviews.created_at', 'desc')
+            ->where('listing_id', $id)
+            ->get();
+
+        // dd($reviews);
+        return view('frontend.listingDetail', compact('businessesDetail', 'submaster', 'businesses', 'similer', 'reviews'));
     }
 
     public function blogDetails(Request $request, $id)
@@ -824,5 +850,55 @@ class HomeController extends Controller
             $request->session()->flash('error', 'Password does not match');
             return redirect()->route('ownerProfile');
         }
+    }
+
+    public function showReviews()
+    {
+        $reviews = Review::all(); // Replace with your actual logic to fetch reviews
+        return view('frontend.review', compact('reviews'));
+    }
+    public function showListingDetail($id, $category)
+    {
+        $reviews = Review::all(); // Replace with your actual logic to fetch reviews
+        return view('frontend.listingDetail', compact('reviews'));
+    }
+
+    public function reviews()
+    {
+        return $this->hasMany(Review::class, 'listing_id');
+    }
+
+    public function reviewStore(Request $request, $listing_id)
+    {
+        $this->validate($request, [
+            'rating' => 'required|integer|min:1|max:5',
+            'content' => 'required|string',
+        ]);
+
+        // Check if the user has already submitted a review for the same listing
+        $existingReview = Review::where('user_id', Auth::id())
+            ->where('listing_id', $listing_id)
+            ->first();
+
+        if ($existingReview) {
+            return redirect()
+                ->back()
+                ->with('error', 'You have already submitted a review for this listing.');
+        }
+
+        // Create a new review record
+        $review = new Review();
+        $review->user_id = Auth::id();
+        $review->author = auth()->user()->name; // Assuming you have user authentication
+        $review->rating = $request->input('rating');
+        $review->content = $request->input('content');
+        $review->avatar = 'default_avatar.jpg'; // You can set a default avatar path here
+        $review->listing_id = $listing_id;
+        $review->save();
+
+        // Redirect back to the listing detail page with a success message
+        return redirect()
+            ->back()
+            ->with('success', 'Review submitted successfully.');
     }
 }

@@ -1,9 +1,48 @@
 @extends('frontend.layouts.master')
 @section('title', 'Listing Details')
 @section('content')
-
+    <?php
+    
+    use App\Models\User_Login;
+    
+    ?>
 
     <style>
+        /* Define the filled-star class to set the yellow color */
+        .filled-star {
+            color: #23d3d3;
+        }
+
+        .star-rating {
+            display: inline-block;
+            font-size: 0;
+            /* Remove the default radio button text */
+        }
+
+        .star-rating input[type="radio"] {
+            display: none;
+            /* Hide the radio buttons */
+        }
+
+        .star-rating label {
+            font-size: 24px;
+            /* Adjust the size of the stars */
+            cursor: pointer;
+        }
+
+        .star-rating label:before {
+            content: '\2605';
+            /* Unicode character for a star */
+            color: #e1e1e1;
+            /* Default star color (empty) */
+        }
+
+        /* Style for filled stars */
+        .star-rating label.filled:before {
+            color: #f7d417;
+            /* Color of the selected stars */
+        }
+
         form {
             max-width: 400px;
             margin: 0 auto;
@@ -41,6 +80,7 @@
             background-color: #0056b3;
         }
     </style>
+
 
     <main id="main" class="site-main single single-02">
         <div class="place">
@@ -113,6 +153,28 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-8">
+
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+                        @if (session('error'))
+                            <div class="alert alert-danger">
+                                {{ session('error') }}
+                            </div>
+                        @endif
+
+
+                        @if (session('success'))
+                            <div class="alert alert-success" style="color:green">
+                                {{ session('success') }}
+                            </div>
+                        @endif
                         <div class="place__left">
                             <ul class="place__breadcrumbs breadcrumbs mt-1">
                                 <li>{{ $businessesDetail->highlight }}
@@ -123,10 +185,26 @@
                                 <div class="place__meta">
                                     <div class="place__reviews reviews">
                                         <span class="place__reviews__number reviews__number">
-                                            4.2
+                                            <span>
+
+                                                @php
+                                                    $totalRating = 0;
+                                                    $totalReviews = count($reviews);
+                                                    foreach ($reviews as $review) {
+                                                        $totalRating += $review->rating;
+                                                    }
+                                                    if ($totalReviews > 0) {
+                                                        $averageRating = $totalRating / $totalReviews;
+                                                        echo number_format($averageRating, 1); // Display average rating with 1 decimal place
+                                                    } else {
+                                                        echo '0'; // No reviews available
+                                                    }
+                                                @endphp
+                                            </span>
                                             <i class="la la-star"></i>
                                         </span>
-                                        <span class="place__places-item__count reviews_count">(3 reviews)</span>
+                                        <span class="place__places-item__count reviews_count">({{ count($reviews) }}
+                                            Reviews)</span>
                                     </div>
                                     <div class="place__currency"> {{ $businessesDetail->price }}</div>
                                     <div class="place__category">
@@ -207,11 +285,11 @@
                             </div>
                             <div class="place__box place__box-map">
                                 <h3 class="place__title--additional">
-                                    Location & Maps
+                                    Location
                                 </h3>
-                                <div class="maps">
+                                {{-- <div class="maps">
                                     <div id="map"></div>
-                                </div>
+                                </div> --}}
                                 <div class="address">
                                     <i class="la la-map-marker"></i>
                                     {{ $businessesDetail->placeAddress }}
@@ -266,105 +344,132 @@
                                     </tbody>
                                 </table>
                             </div><!-- .place__box -->
-                            <!-- <div class="place__box">
-                                                                                                                                                                                                             <h3>FAQ's</h3>
-                                                                                                                                                                                                             <ul class="faqs-accordion">
-                                                                                                                                                                                                                 <li>
-                                                                                                                                                                                                                     <h4>What are the ingredients or taste profile for the signature sauce?</h4>
-                                                                                                                                                                                                                     <div class="desc">
-                                                                                                                                                                                                                         <p>We are currently offering free shipping throughout Northern California on all
-                                                                                                                                                                                                                             orders over $80. Peninsula to San Francisco can receive next day delivery.
-                                                                                                                                                                                                                         </p>
-                                                                                                                                                                                                                     </div>
-                                                                                                                                                                                                                 </li>
 
-                                                                                                                                                                                                             </ul>
-                                                                                                                                                                                                              </div> -->
-                            <!-- .place__box -->
                             <div class="place__box place__box--reviews">
-                                <h3 class="place__title--reviews">
-                                    Review
-                                    <span class="place__reviews__number">
-                                        4.2
-                                        <i class="la la-star"></i>
+                                <h3 class="place__title--reviews">Reviews</h3>
+                                <h2>Total Rating:
+                                    <span style="color: #23d3d3ff; ">
+
+                                        @php
+                                            $totalRating = 0;
+                                            $totalReviews = count($reviews);
+                                            foreach ($reviews as $review) {
+                                                $totalRating += $review->rating;
+                                            }
+                                            if ($totalReviews > 0) {
+                                                $averageRating = $totalRating / $totalReviews;
+                                                echo number_format($averageRating, 1); // Display average rating with 1 decimal place
+                                            } else {
+                                                echo '0'; // No reviews available
+                                            }
+                                        @endphp
                                     </span>
-                                </h3>
+                                    Starts
+                                </h2>
+                                <br />
+
                                 <ul class="place__comments">
-                                    <li>
-                                        <div class="place__author">
-                                            <div class="place__author__avatar">
-                                                <a title="Sebastian" href="#"><img
-                                                        src="{{ asset('assets/frontend-assets/images/avatars/male-4.jpg') }}"
-                                                        alt=""></a>
-                                            </div>
-                                            <div class="place__author__info">
-                                                <a title="Sebastian" href="#">Sebastian</a>
-                                                <div class="place__author__star">
-                                                    <i class="la la-star"></i>
-                                                    <i class="la la-star"></i>
-                                                    <i class="la la-star"></i>
-                                                    <i class="la la-star"></i>
-                                                    <i class="la la-star"></i>
-                                                    <span style="width: 72%">
-                                                        <i class="la la-star"></i>
-                                                        <i class="la la-star"></i>
-                                                        <i class="la la-star"></i>
-                                                        <i class="la la-star"></i>
-                                                        <i class="la la-star"></i>
-                                                    </span>
+
+
+                                    @auth
+                                        <?php $user = User_Login::find(auth()->user()->id); ?>
+                                    @endauth
+                                    @foreach ($reviews as $review)
+                                        <li>
+                                            <div class="place__author">
+                                                <div class="place__author__avatar">
+                                                    <a title="{{ $review->author }}" href="#">
+                                                        @if ($review->image)
+                                                            <img src="{{ URL::to('/uploads/' . $review->image) }}"
+                                                                title="" alt="">
+                                                        @else
+                                                            <img src="https://wp.getgolo.com/country-guide/wp-content/themes/golo/assets/images/default-user-image.png"
+                                                                title="guest" alt="guest">
+                                                        @endif
+                                                    </a>
                                                 </div>
-                                                <span class="time">October 1, 2019</span>
+                                                <div class="place__author__info">
+                                                    <a title="{{ $review->author }}"
+                                                        href="#">{{ $review->author }}</a>
+                                                    <div class="place__author__star">
+                                                        @for ($i = 0; $i < $review->rating; $i++)
+                                                            <i class="la la-star filled-star"></i>
+                                                            <!-- Add a class for filled stars -->
+                                                        @endfor
+                                                        <span style="width: {{ $review->rating * 20 }}%;">
+                                                            @for ($i = 0; $i < 5 - $review->rating; $i++)
+                                                                <i class="la la-star"></i>
+                                                            @endfor
+                                                        </span>
+                                                    </div>
+                                                    <span
+                                                        class="time">{{ \Carbon\Carbon::parse($review->created_at)->format('F j, Y') }}</span>
+                                                </div>
+
+                                            </div>
+                                            <div class="place__comments__content">
+                                                <p>{{ $review->content }}</p>
+                                            </div>
+                                            <a title="Reply" href="#" class="place__comments__reply"></a>
+                                        </li>
+                                    @endforeach
+                                    <?php 
+                                                if(Auth::user()){
+                                                ?>
+                                    <form method="POST"
+                                        action="{{ route('reviewStore', ['id' => $businessesDetail->id]) }}">
+
+                                        @csrf
+                                        <div class="form-group">
+
+                                            <div class="star-rating"
+                                                style="
+                                            display: flex;
+                                        ">
+                                                <input type="radio" name="rating" id="star1" value="1" />
+                                                <label for="star1"></label>
+
+                                                <input type="radio" name="rating" id="star2" value="2" />
+                                                <label for="star2"></label>
+
+                                                <input type="radio" name="rating" id="star3" value="3" />
+                                                <label for="star3"></label>
+
+                                                <input type="radio" name="rating" id="star4" value="4" />
+                                                <label for="star4"></label>
+
+                                                <input type="radio" name="rating" id="star5" value="5" />
+                                                <label for="star5"></label>
                                             </div>
                                         </div>
-                                        <div class="place__comments__content">
-                                            <p>Went there last Saturday for the first time to watch my favorite djs (Kungs,
-                                                Sam Feldet and Watermat) and really had a great experience. The atmosphere
-                                                is amazing and I am going next week.</p>
-                                        </div>
-                                        <a title="Reply" href="#" class="place__comments__reply">
 
-
-                                        </a>
-
-                                    </li>
-
-                                </ul>
-                                <div class="review-form">
-                                    <h3>Write a review</h3>
-                                    <form action="#">
-                                        <div class="rate">
-                                            <span>Rate This Place</span>
-                                            <div class="stars">
-                                                <a href="#" title="star-1">
-                                                    <i class="la la-star"></i>
-                                                </a>
-                                                <a href="#" title="star-2">
-                                                    <i class="la la-star"></i>
-                                                </a>
-                                                <a href="#" title="star-3">
-                                                    <i class="la la-star"></i>
-                                                </a>
-                                                <a href="#" title="star-4">
-                                                    <i class="la la-star"></i>
-                                                </a>
-                                                <a href="#" title="star-5">
-                                                    <i class="la la-star"></i>
-                                                </a>
-                                            </div>
+                                        <div class="form-group">
+                                            <label for="content">Review:</label>
+                                            <textarea name="content" id="content" rows="4" required></textarea>
                                         </div>
-                                        <div class="field-textarea">
-                                            <img class="author-avatar"
-                                                src="{{ asset('assets/frontend-assets/images/avatars/male-1.jpg') }}"
-                                                alt="">
-                                            <textarea name="review_text" placeholder="Write a review"></textarea>
-                                        </div>
-                                        <div class="field-submit">
-                                            <input type="submit" class="btn" value="Submit" name="submit">
-                                        </div>
+                                        <button type="submit">Submit Review</button>
                                     </form>
-                                </div>
-                            </div><!-- .place__box -->
-                        </div><!-- .place__left -->
+                                    <?php 
+                                            }else{
+                                            ?>
+
+                                    <div class="login-container">
+                                        <span class="login-message"> <a href="#"
+                                                class=" btn-add-to-wishlist open-login test" data-place-id=""
+                                                data-business-id="">
+                                                <span>Please Login First </span>
+                                            </a></span>
+
+                                    </div>
+
+                                    <?php }?>
+                                </ul>
+                            </div>
+                            <div class="review-form">
+                                <!-- Review form goes here -->
+                            </div>
+
+                        </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="sidebar sidebar--shop sidebar--border">
@@ -423,12 +528,12 @@
                                 </form>
 
 
-                            </aside><!-- .widget-message -->
-                        </div><!-- .sidebar -->
+                            </aside>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div><!-- .place -->
+        </div>
         <div class="similar-places">
             <div class="container">
                 <h2 class="similar-places__title title">Similar places</h2>
@@ -498,5 +603,25 @@
         </div><!-- .similar-places -->
     </main><!-- .site-main -->
 
+    <script>
+        // Get all star rating inputs and labels
+        const starInputs = document.querySelectorAll('.star-rating input[type="radio"]');
+        const starLabels = document.querySelectorAll('.star-rating label');
+
+        // Add a click event listener to each star input
+        starInputs.forEach((input, index) => {
+            input.addEventListener('click', () => {
+                // Remove the "filled" class from all labels
+                starLabels.forEach(label => {
+                    label.classList.remove('filled');
+                });
+
+                // Add the "filled" class to labels up to the selected star
+                for (let i = 0; i <= index; i++) {
+                    starLabels[i].classList.add('filled');
+                }
+            });
+        });
+    </script>
 
 @endsection

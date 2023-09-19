@@ -2534,9 +2534,9 @@ a.site__menu__icon {
     display: inline-block;
     position: relative;
 }
-.place__author__info .place__author__star i {
+/* .place__author__info .place__author__star i {
     color: #5d5d5d;
-}
+} */
 .place__author__info .place__author__star span {
     position: absolute;
     left: 0;
