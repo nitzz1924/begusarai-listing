@@ -751,7 +751,6 @@ class HomeController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'mobileNumber' => 'required|numeric|digits:10',
-            'image' => 'required',
         ]);
 
         try {

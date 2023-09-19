@@ -40,9 +40,20 @@
                                         <td class="fw-bold">{{ $value->mobileNumber }}</td>
                                         <td class="fw-bold">{{ $value->verificationCode }}</td>
                                         <td class="fw-bold">{{ $value->password }}</td>
-                                        <td style="width: 58px;"> <img class="img-thumbnail img-fluid tool-img-edit"
-                                                style="width: 51px;" src="{{ asset('assets/images/users/default.png') }}" />
+                                        <td style="width: 58px;">
+                                            @if (!$value->image)
+                                                <img class="img-thumbnail img-fluid tool-img-edit" style="width: 51px;"
+                                                    src="    {{ asset('assets/images/users/default.png') }}" />
+                                            @else
+                                                <img class="img-thumbnail img-fluid tool-img-edit" style="width: 51px;"
+                                                    src="{{ URL::to('/uploads/' . $value->image) }}" />
+                                            @endif
                                         </td>
+
+
+
+
+
                                         <td class="fw-bold">
                                             @if ($value->status == 1)
                                                 <p class="badge badge-success">Active</p>
