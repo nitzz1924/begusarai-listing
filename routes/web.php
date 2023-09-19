@@ -39,7 +39,6 @@ Route::get('/listingDetail/{id}/{category}', [HomeController::class, 'listingDet
 Route::get('/blogDetails/{id}', [HomeController::class, 'blogDetails'])->name('blogDetails');
 
 Route::get('/ownerWishlist', [HomeController::class, 'ownerWishlist'])->name('ownerWishlist');
-Route::get('/ownerProfile', [HomeController::class, 'ownerProfile'])->name('ownerProfile');
 Route::get('/ownerLeads/{id}', [HomeController::class, 'ownerLeads'])->name('ownerLeads');
 Route::get('/setPassword', [HomeController::class, 'setPassword'])->name('setPassword');
 Route::get('/ownerShop', [HomeController::class, 'ownerShop'])->name('ownerShop');
@@ -152,3 +151,19 @@ Route::get('/searchFilter/{category}/{city}/{highlight}', [HomeController::class
 
 
 Route::get('/update-places', [HomeController::class, 'updatePlaces'])->name('updatePlaces');
+Route::get('/ownerProfile', [HomeController::class, 'ownerProfile'])->name('ownerProfile');
+
+Route::post('/ownerProfile/update-profile', [HomeController::class, 'updateprofile'])->name('updateprofile');
+
+
+
+
+ 
+Route::get('/change-password-form', [HomeController::class, 'changePassword'])->name('changePassword');
+ 
+Route::post('/change-password-form/savepassword', [HomeController::class, 'savepassword'])->name('savepassword');
+
+
+
+
+ // Example route definition

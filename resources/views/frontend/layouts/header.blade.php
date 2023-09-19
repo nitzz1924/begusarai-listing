@@ -1,5 +1,6 @@
 <?php
 use App\Models\Master;
+use App\Models\User_Login;
 
 $Mastercity = Master::orderBy('created_at', 'asc')
     ->where('type', '=', 'City')
@@ -61,7 +62,9 @@ $Mastercity = Master::orderBy('created_at', 'asc')
 
                                 </ul>
                             </li>
-
+                            @auth
+                                <?php $user = User_Login::find(auth()->user()->id); ?>
+                            @endauth
 
                             <?php 
                             if(Auth::user()){
@@ -70,9 +73,16 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                                 ?>
                             <li>
                                 <a class="avatar" href="">
-                                    <img src="https://wp.getgolo.com/country-guide/wp-content/themes/golo/assets/images/default-user-image.png"
-                                        title="guest" alt="guest">
-                                    <span>Guest</span>
+
+                                    @if ($user->image)
+                                        <img src="{{ URL::to('/uploads/' . $user->image) }}" title=""
+                                            alt="">
+
+                                        <span>Guest</span>
+                                    @else
+                                        <img src="https://wp.getgolo.com/country-guide/wp-content/themes/golo/assets/images/default-user-image.png"
+                                            title="guest" alt="guest">
+                                    @endif
                                 </a>
                                 <ul class="sub-menu">
                                     <li class=""><a href="/ownerProfile">Profile</a></li>
@@ -97,9 +107,15 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                         ?>
                             <li>
                                 <a class="avatar" href="">
-                                    <img src="https://wp.getgolo.com/wp-content/uploads/sites/3/2022/06/customersupport-30x30.png"
-                                        title="Tho Minh" alt="Tho Minh">
-                                    <span>Business Owner</span>
+                                    @if ($user->image)
+                                        <img src="{{ URL::to('/uploads/' . $user->image) }}" title=""
+                                            alt="">
+
+                                        <span> Business Owner</span>
+                                    @else
+                                        <img src="{{ asset('assets/images/users/default.png') }}" title="Default Avatar"
+                                            alt="Default Avatar">
+                                    @endif
                                 </a>
                                 <ul class="sub-menu">
                                     <li class=""><a href="/ownerDashboard">Dashboard</a>

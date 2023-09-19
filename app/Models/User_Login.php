@@ -69,14 +69,17 @@ use Illuminate\Database\Eloquent\Model;
 class User_Login extends Model implements Authenticatable
 {
     use AuthenticableTrait;
+    use HasFactory;
 
     protected $table = 'users_login';
-
+    protected $fillable = [
+        'password', // Add 'password' to the $fillable array
+    ];
     // Define the bookmarks relationship
     public function bookmarks()
     {
         return $this->hasMany(Bookmark::class, 'user_id');
     }
-
-    use HasFactory;
+    
+ 
 }

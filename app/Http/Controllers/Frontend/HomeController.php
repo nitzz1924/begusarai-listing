@@ -10,7 +10,7 @@ use App\Models\User_Login;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Cookie;
-
+use Illuminate\Support\Facades\Hash;
 use App\Models\BusinessList;
 use App\Models\Master;
 use App\Models\Testimonial;
@@ -546,17 +546,15 @@ class HomeController extends Controller
     }
     public function ownerListing()
     {
-
         $Mastercity = Master::orderBy('created_at', 'asc')
-        ->where('type', '=', 'City')
-        ->get();
+            ->where('type', '=', 'City')
+            ->get();
         $MasterCategory = Master::orderBy('created_at', 'asc')
-        ->where('type', '=', 'category')
-        ->get();
+            ->where('type', '=', 'category')
+            ->get();
         $businesses = BusinessList::all(); // Fetch all businesses from the database
 
-        
-        return view('frontend.ownerListing', compact('businesses','Mastercity','MasterCategory'));
+        return view('frontend.ownerListing', compact('businesses', 'Mastercity', 'MasterCategory'));
     }
 
     public function ownerWishlist()
@@ -574,11 +572,6 @@ class HomeController extends Controller
             ->get();
 
         return view('frontend.ownerWishlist', compact('businesses', 'submaster'));
-    }
-
-    public function ownerProfile()
-    {
-        return view('frontend.ownerProfile');
     }
 
     public function Testimonial()
@@ -737,5 +730,100 @@ class HomeController extends Controller
             ->get();
 
         return view('frontend.searchFilter', compact('similer', 'submaster', 'submasterCategory', 'submasterHighlight', 'businesses'));
+    }
+
+    // public function User()
+    // {
+
+    //    $user = User_Login::orderBy('created_at', 'asc')->get();
+
+    //    return view('backend.admin.user.index', compact('user'));
+    // }
+    public function ownerProfile()
+    {
+        $user = User_Login::find(auth()->user()->id);
+
+        return view('frontend.ownerProfile', compact('user'));
+    }
+
+    public function updateProfile(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'mobileNumber' => 'required|numeric|digits:10',
+            'image' => 'required',
+        ]);
+
+        try {
+            $id = $request->input('id'); // Get the user's ID from the form input
+            $user = User_Login::find($id);
+
+            if (!$user) {
+                return redirect()
+                    ->route('ownerProfile')
+                    ->with('error', 'User not found');
+            }
+
+            $user->name = $request->input('name');
+            $user->mobileNumber = $request->input('mobileNumber');
+
+            if ($request->hasFile('image')) {
+                $extension = strtolower($request->file('image')->getClientOriginalExtension());
+                if ($extension == 'jpg' || $extension == 'jpeg' || $extension == 'png' || $extension == 'svg' || $extension == 'webp') {
+                    if ($request->file('image')->isValid()) {
+                        $destinationPath = public_path('uploads'); // upload path
+                        $extension = $request->file('image')->getClientOriginalExtension(); // getting image extension
+                        $fileName = time() . '.' . $extension; // renameing image
+                        $request->file('image')->move($destinationPath, $fileName); // uploading file to given path
+                        $user->image = $fileName;
+                    }
+                }
+            }
+
+            // Update other fields as needed
+            $user->save();
+
+            return redirect()
+                ->route('ownerProfile')
+                ->with('success', 'Profile updated successfully');
+        } catch (\Exception $e) {
+            // Handle any exceptions here, e.g., log the error
+            return redirect()
+                ->route('ownerProfile')
+                ->with('error', 'An error occurred while updating the profile');
+        }
+    }
+
+    public function changePassword()
+    {
+        // Fetch the authenticated user
+        $user = auth()->user();
+
+        return view('frontend.ownerProfile', compact('user'));
+    }
+
+    public function savepassword(Request $request)
+    {
+        $this->validate($request, [
+            'password' => 'required',
+            'new_password' => 'required|string|min:6|confirmed',
+        ]);
+
+        // Fetch the authenticated user
+        $user = auth()->user();
+
+        if (Hash::check($request->password, $user->password)) {
+            $user
+                ->fill([
+                    'password' => Hash::make($request->new_password),
+                ])
+                ->save();
+
+            $request->session()->flash('success', 'Password changed successfully.');
+            return redirect()->route('ownerProfile');
+        } else {
+            $request->session()->flash('error', 'Password does not match');
+            return redirect()->route('ownerProfile');
+        }
     }
 }
