@@ -44,52 +44,50 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                         <div class="mf-left">
                             <form action="#" method="GET">
                                 <div class="field-select">
-
-                                    {{-- 
-                                    <select name="place_cities">
-                                        @foreach ($Mastercity as $value)
-                                            <option value="0">
-                                                <a
-                                                    href="{{ route('searchFilter', ['category' => 'all', 'city' => $value->title, 'highlight' => 'all']) }}">
-                                                    {{ $value->title }}
-                                                </a>
-                                            </option>
-                                        @endforeach
-                                    </select> --}}
-                                    <select name="place_cities" onchange="window.location.href=this.value;">
+                                    <select id="cityFilter" name="place_cities">
                                         <option selected> All Cities</option>
-                                        @foreach ($Mastercity as $value)
-                                            <option
-                                                value="{{ route('searchFilter', ['category' => 'all', 'city' => $value->title, 'highlight' => 'all']) }}">
-                                                {{ $value->title }}
+                                        @foreach ($Mastercity as $business)
+                                            <option>
+                                                {{ $business->title }}
                                             </option>
                                         @endforeach
                                     </select>
-
-
-
                                     <i class="la la-angle-down"></i>
                                 </div>
-                                <div class="field-select">
-                                    <select name="place_cities">
-                                        <option value="0">All categories</option>
 
+                                <div class="field-select">
+                                    <select id="categoryFilter" name="place_category">
+                                        <option selected>All categories</option>
+                                        @foreach ($MasterCategory as $category)
+                                            <option>
+                                                {{ $category->title }}
+                                            </option>
+                                        @endforeach
                                     </select>
                                     <i class="la la-angle-down"></i>
                                 </div>
+
+
+
                             </form>
-                        </div><!-- .mf-left -->
+                        </div>
+
                         <div class="mf-right">
                             <form action="#" class="site__search__form" method="GET">
                                 <div class="site__search__field">
                                     <span class="site__search__icon">
                                         <i class="la la-search"></i>
-                                    </span><!-- .site__search__icon -->
-                                    <input class="site__search__input" type="text" name="s" placeholder="Search">
-                                </div><!-- .search__input -->
-                            </form><!-- .search__form -->
-                        </div><!-- .mf-right -->
-                    </div><!-- .member-filter -->
+                                    </span>
+                                    <input id="searchInput" class="site__search__input" type="text" name="s"
+                                        placeholder="Search">
+                                </div>
+                            </form>
+                        </div>
+
+
+
+
+                    </div>
 
 
 
@@ -162,10 +160,61 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                     </table>
 
 
-                </div><!-- .member-place-wrap -->
+                </div>
             </div>
-        </div><!-- .site-content -->
-    </main><!-- .site-main -->
+        </div>
+    </main>
+    {{--  ---------------------------------------Filter By City And Category  -------------------------------------- --}}
+
+
+
+
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Get references to the select elements, search input, and table rows
+            var cityFilter = document.getElementById("cityFilter");
+            var categoryFilter = document.getElementById("categoryFilter");
+            var searchInput = document.getElementById("searchInput");
+            var tableRows = document.querySelectorAll(".member-place-list tbody tr");
+
+            // Add event listeners to select elements and search input
+            cityFilter.addEventListener("change", filterTable);
+            categoryFilter.addEventListener("change", filterTable);
+            searchInput.addEventListener("input", filterTable);
+
+            function filterTable() {
+                var selectedCity = cityFilter.value;
+                var selectedCategory = categoryFilter.value;
+                var searchText = searchInput.value.toLowerCase();
+
+                // Loop through table rows and hide/show based on selected city, category, and search text
+                tableRows.forEach(function(row) {
+                    var cityColumn = row.querySelector(
+                        "td:nth-child(3)"); // Assuming city is the 3rd column
+                    var categoryColumn = row.querySelector(
+                        "td:nth-child(4)"); // Assuming category is the 4th column
+                    var nameColumn = row.querySelector(
+                        "td:nth-child(2)"); // Assuming name is the 2nd column
+
+                    var cityMatch = selectedCity === "All Cities" || cityColumn.textContent.trim() ===
+                        selectedCity;
+                    var categoryMatch = selectedCategory === "All categories" || categoryColumn.textContent
+                        .trim() === selectedCategory;
+                    var nameMatch = nameColumn.textContent.toLowerCase().includes(searchText);
+
+                    if (cityMatch && categoryMatch && nameMatch) {
+                        row.style.display = "table-row";
+                    } else {
+                        row.style.display = "none";
+                    }
+                });
+            }
+        });
+    </script>
+
+
 
 
 @endsection

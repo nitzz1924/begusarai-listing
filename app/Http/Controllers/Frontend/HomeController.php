@@ -550,8 +550,13 @@ class HomeController extends Controller
         $Mastercity = Master::orderBy('created_at', 'asc')
         ->where('type', '=', 'City')
         ->get();
+        $MasterCategory = Master::orderBy('created_at', 'asc')
+        ->where('type', '=', 'category')
+        ->get();
         $businesses = BusinessList::all(); // Fetch all businesses from the database
-        return view('frontend.ownerListing', compact('businesses','Mastercity'));
+
+        
+        return view('frontend.ownerListing', compact('businesses','Mastercity','MasterCategory'));
     }
 
     public function ownerWishlist()
