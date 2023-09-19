@@ -115,3 +115,8 @@
     z-index: 2;
     position: relative;
 }
+
+
+.site__brand__logo img{
+    width: 150px;
+}

@@ -8922,8 +8922,8 @@ button,
     transition: width 0.2s;
 }
 .app-header__logo .logo-src {
-    height: 23px;
-    width: 97px;
+    height: 53px;
+    width: 200px;
     background: url(../images/logo-inverse.png);
 }
 .app-header__menu,

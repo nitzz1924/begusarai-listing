@@ -16,12 +16,12 @@
     </div>
     <div class="row">
         <div class="col-md-12 col-sm-12">
-            <div class="card">
+            <div class="main-card mb-3 card">
                 <div class="card-body">
                     <div class="table-responsive">
                         <table id="example" class="table table-striped table-bordered" style="width:100%">
-                            <thead>
-                                <tr class="table-dark">
+                            <thead class="table-dark">
+                                <tr >
                                     <th>#</th>
                                     <th>User Name</th>
                                     <th>Mo. Number</th>

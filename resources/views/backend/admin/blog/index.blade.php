@@ -1,6 +1,7 @@
 @extends('backend.layouts.master')
-@section('title', 'Addtools')
+@section('title', 'All Blogs')
 @section('content')
+
     <div class="app-page-title">
         <div class="page-title-wrapper">
             <div class="page-title-heading">
