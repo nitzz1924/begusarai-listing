@@ -3,14 +3,6 @@
 @section('content')
 
 
-
-    <style>
-        .bookmark-added {
-            color: #ffb429;
-            /* Set the desired color for the bookmark icon */
-        }
-    </style>
-
     <body>
         <div>
 
@@ -95,11 +87,7 @@
                                 @foreach ($submaster as $value)
                                     <div class="bsn-cat-item rosy-pink">
 
-                                        <a
-                                            href="{{ route('searchFilter', ['category' => $value->title, 'city' => 'all', 'highlight' => 'all']) }}">
-
-
-
+                                        <a href="{{ route('searchFilter', ['category' => $value->title, 'city' => 'all', 'highlight' => 'all']) }}">
 
                                             <i class="{{ $value->value }}"></i>
                                             <span class="title">{{ $value->title }}</span>
@@ -179,17 +167,18 @@
 
                                                 <?php }?>
 
-
-                                                <a class="entry-category rosy-pink" href="#">
+                                                
+                                                <a class="entry-category rosy-pink" href="{{ route('searchFilter', ['category' => $value->category, 'city' => 'all', 'highlight' => 'all']) }}">
 
                                                     @foreach ($submaster as $subvalue)
                                                         @if ($subvalue->title === $value->category)
                                                             <i class="{{ $subvalue->value }}"></i>
                                                         @endif
-                                                    @endforeach
+                                                    @endforeach 
 
-                                                    </i><span>{{ $value->category }}</span>
+                                                    <span>{{ $value->category }}</span>
                                                 </a>
+                                                
                                                 <a href="#" class="author" title="Author">
                                                     <img src="{{ URL::to('uploads/' . $value->logo) }}"alt="Author" />
 
@@ -202,8 +191,8 @@
                                                         <span>{{ $value->highlight }}</span>
                                                     </div>
                                                     <!-- <div class="place-city">
-                                                                                                                                                       <a href="#">Paris</a>
-                                                                                                                                                   </div> -->
+                                                        <a href="#">Paris</a>
+                                                        </div> -->
                                                 </div>
                                                 <h3 class="place-title">
 

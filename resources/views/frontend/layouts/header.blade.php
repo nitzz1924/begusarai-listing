@@ -124,6 +124,8 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                                     </li> -->
                                     <li class=""><a href="/ownerWishlist">My Wishlist</a>
                                     </li>
+                                    <li class=""><a href="/businessOwnerPage">Author Listing</a>
+                                    </li>
                                     {{-- <li class=""><a href="/">My Bookings</a>
                                     </li> --}}
                                     <li>
@@ -229,8 +231,9 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                                         </div>
 
                                         <div>
-                                            <button type="button" name="submit-otp" class="OTP-btn1" value="Send OTP"
-                                                style="width: 100px;" id="sendOTPButton" >Send OTP</button>
+                                            <button type="button" name="submit-otp" class="OTP-btn1"
+                                                value="Send OTP" style="width: 100px;" id="sendOTPButton">Send
+                                                OTP</button>
                                         </div>
                                     </div>
 
@@ -299,7 +302,8 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                                             class="has-error">{{ $message }}</span>
                                     @enderror
                                 </div>
-                                <a title="Forgot password" class="forgot_pass" href="/resetPassword">Forgot password</a>
+                                <a title="Forgot password" class="forgot_pass" href="/resetPassword">Forgot
+                                    password</a>
                                 <input type="submit" name="submit" value="Login" id="loginSubmit" />
                             </form>
 

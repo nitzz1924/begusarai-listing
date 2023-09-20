@@ -337,3 +337,8 @@ input[type="tel"]:focus {
 .OTP-btn:hover {
     background-color: #00b4b4;
 }
+
+.bookmark-added {
+    color: #ffb429;
+    /* Set the desired color for the bookmark icon */
+}

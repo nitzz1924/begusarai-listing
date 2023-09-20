@@ -2,12 +2,6 @@
 @section('title', 'Wishlist')
 @section('content')
 
-    <style>
-        .bookmark-added {
-            color: #ffb429;
-            /* Set the desired color for the bookmark icon */
-        }
-    </style>
 
 
     <main id="main" class="site-main">

@@ -609,7 +609,7 @@ class HomeController extends Controller
             ->where('type', '=', 'category')
             ->get();
         
-       
+
         $reviews = DB::table('reviews')
             ->select('reviews.*', 'users_login.image')
             ->leftJoin('users_login', 'reviews.user_id', '=', 'users_login.id')

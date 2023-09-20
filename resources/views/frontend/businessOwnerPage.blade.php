@@ -45,7 +45,7 @@
                                 <div class="entry-head">
                                     <div class="place-type list-item">
                                         <span>Restaurant</span>
-                                       </div>
+                                    </div>
                                     <div class="place-city">
                                         <a href="#">Paris</a>
                                     </div>

@@ -6,14 +6,7 @@
     use App\Models\User_Login;
     
     ?>
-    <style>
-        .bookmark-added {
-            color: #ffb429;
-            /* Set the desired color for the bookmark icon */
-        }
-    </style>
-
-
+    
     <style>
         /* Define the filled-star class to set the yellow color */
         .filled-star {
@@ -572,7 +565,7 @@
                                                         data-business-id="">
                                                         <span class="icon-heart">
 
-                                                            <i class="la la-bookmark large"></i>
+                                                            <i class="la la-bookmark large" style="color:black"></i>
 
                                                         </span>
                                                     </a></span>
@@ -589,8 +582,8 @@
                                                         <i class="{{ $subvalue->value }}"></i>
                                                     @endif
                                                 @endforeach
-
-                                                </i><span>{{ $value->category }}</span>
+                                                
+                                                <span>{{ $value->category }}</span>
                                             </a>
                                             <a href="#" class="author" title="Author">
                                                 <img src="{{ URL::to('uploads/' . $value->logo) }}"alt="Author" />
@@ -604,8 +597,8 @@
                                                     <span>{{ $value->highlight }}</span>
                                                 </div>
                                                 <!-- <div class="place-city">
-                                                                                                                                                           <a href="#">Paris</a>
-                                                                                                                                                       </div> -->
+                                                    <a href="#">Paris</a>
+                                                </div> -->
                                             </div>
                                             <h3 class="place-title">
 
@@ -703,6 +696,9 @@
                 }
             });
         });
+
+        
     </script>
+    <script src="https://kit.fontawesome.com/40bf30a2ca.js" crossorigin="anonymous"></script>
 
 @endsection
