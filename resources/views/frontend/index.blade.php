@@ -35,25 +35,15 @@
                                         name="s" placeholder="Ex: fastfood, beer" autocomplete="off" />
                                     <div class="search-suggestions name-suggestions">
                                         <ul>
-                                            <li>
-                                                <a href="#"><i class="las la-utensils"></i><span>Restaurant</span></a>
-                                            </li>
-                                            <li>
-                                                <a href="#"><i class="las la-spa"></i><span>Beauty</span></a>
-                                            </li>
-                                            <li>
-                                                <a href="#"><i class="las la-dumbbell"></i><span>Fitness</span></a>
-                                            </li>
-                                            <li>
-                                                <a href="#"><i class="las la-cocktail"></i><span>Nightlight</span></a>
-                                            </li>
-                                            <li>
-                                                <a href="#"><i
-                                                        class="las la-shopping-bag"></i><span>Shopping</span></a>
-                                            </li>
-                                            <li>
-                                                <a href="#"><i class="las la-film"></i><span>Cinema</span></a>
-                                            </li>
+                                            @foreach ($submaster as $value)
+                                                <li>
+                                                    <a href="{{ route('searchFilter', ['category' => $value->title, 'city' => 'all', 'highlight' => 'all']) }}"
+                                                        data-category="{{ $value->title }}">
+                                                        <i class="{{ $value->value }}"></i>
+                                                        <span>{{ $value->title }}</span>
+                                                    </a>
+                                                </li>
+                                            @endforeach
                                         </ul>
                                     </div>
                                 </div>
@@ -64,13 +54,14 @@
                                         name="where" placeholder="Your city" autocomplete="off" />
                                     <div class="search-suggestions location-suggestions">
                                         <ul>
-                                            <li>
-                                                <a href="#"><i class="las la-location-arrow"></i><span>Current
-                                                        location</span></a>
-                                            </li>
-                                            <li>
-                                                <a href="#"><span>San Francisco, CA</span></a>
-                                            </li>
+                                            @foreach ($Mastercity as $value)
+                                                <li>
+                                                    <a href="{{ route('searchFilter', ['category' => 'all', 'city' => $value->title, 'highlight' => 'all']) }}"
+                                                        data-city="{{ $value->title }}">
+                                                        <span>{{ $value->title }}</span>
+                                                    </a>
+                                                </li>
+                                            @endforeach
                                         </ul>
                                     </div>
                                 </div>
@@ -103,12 +94,13 @@
 
                                 @foreach ($submaster as $value)
                                     <div class="bsn-cat-item rosy-pink">
-                                       
-                                    <a href="{{ route('searchFilter', ['category' => $value->title ,'city' => 'all','highlight' => 'all' ]) }}">
+
+                                        <a
+                                            href="{{ route('searchFilter', ['category' => $value->title, 'city' => 'all', 'highlight' => 'all']) }}">
 
 
-                                    
-                                        
+
+
                                             <i class="{{ $value->value }}"></i>
                                             <span class="title">{{ $value->title }}</span>
                                             <span class="place">12 Places</span>
@@ -212,8 +204,8 @@
                                                         <span>{{ $value->highlight }}</span>
                                                     </div>
                                                     <!-- <div class="place-city">
-                                                   <a href="#">Paris</a>
-                                               </div> -->
+                                                                                       <a href="#">Paris</a>
+                                                                                   </div> -->
                                                 </div>
                                                 <h3 class="place-title">
 
@@ -274,7 +266,8 @@
                                     <div class="slick-item">
                                         <div class="cities__item hover__box">
                                             <div class="cities__thumb hover__box__thumb">
-                                            <a href="{{ route('searchFilter', ['category' => 'all' ,'city' => $value->title,'highlight' => 'all' ]) }}">
+                                                <a
+                                                    href="{{ route('searchFilter', ['category' => 'all', 'city' => $value->title, 'highlight' => 'all']) }}">
                                                     <img src="{{ URL::to('uploads/' . $value->logo) }}" alt="London" />
 
                                                 </a>
@@ -426,72 +419,6 @@
     </body>
 
     <script>
-        // $(document).ready(function() {
-        //     $('.golo-add-to-wishlist').on('click', function(e) {
-        //         e.preventDefault();
-        //         var businessId = $(this).data('business-id');
-        //         var isBookmarked = $(this).hasClass(
-        //             'bookmark-added'); // Check if the bookmark is already added
-        //         var $element = $(this); // Store a reference to $(this)
-
-        //         $.ajax({
-        //             url: '/bookmark/' + businessId,
-        //             method: 'POST',
-        //             data: {
-        //                 _token: '{{ csrf_token() }}',
-        //                 businessId: businessId,
-        //                 isBookmarked: isBookmarked,
-        //             },
-        //             success: function(data) {
-        //                 if (isBookmarked) {
-        //                     $element.removeClass('bookmark-added'); // Remove the CSS class
-        //                 } else {
-        //                     $element.addClass(
-        //                         'bookmark-added'); // Add the CSS class to change the color
-        //                 }
-        //             }
-        //         });
-        //     });
-        // });
-        // ---------------------------------------------------
-        // $(document).ready(function() {
-        //     $('.golo-add-to-wishlist').each(function() {
-        //         var $element = $(this);
-        //         var businessId = $element.data('business-id');
-        //         var isBookmarked = localStorage.getItem('bookmark_' + businessId) === 'true';
-
-        //         if (isBookmarked) {
-        //             $element.addClass('bookmark-added');
-        //         }
-
-        //         $element.on('click', function(e) {
-        //             e.preventDefault();
-        //             isBookmarked = !isBookmarked; // Toggle bookmark state
-
-        //             $.ajax({
-        //                 url: '/bookmark/' + businessId,
-        //                 method: 'POST',
-        //                 data: {
-        //                     _token: '{{ csrf_token() }}',
-        //                     businessId: businessId,
-        //                     isBookmarked: isBookmarked,
-        //                 },
-        //                 success: function(data) {
-        //                     if (isBookmarked) {
-        //                         $element.addClass('bookmark-added');
-        //                     } else {
-        //                         $element.removeClass('bookmark-added');
-        //                     }
-
-        //                     // Store the bookmark state in localStorage
-        //                     localStorage.setItem('bookmark_' + businessId,
-        //                         isBookmarked);
-        //                 }
-        //             });
-        //         });
-        //     });
-        // });
-
         $(document).ready(function() {
             $('.golo-add-to-wishlist').each(function() {
                 var $element = $(this);
@@ -533,6 +460,61 @@
             });
         });
     </script>
+    {{-- -------------------------------------------------1 Search Filter --}}
+    <script>
+        // JavaScript to handle dynamic filtering based on user input and click events
+        const input = document.getElementById('s');
+        const listItems = document.querySelectorAll('.search-suggestions.name-suggestions li');
 
+        input.addEventListener('input', () => {
+            const searchTerm = input.value.toLowerCase();
 
+            listItems.forEach((li) => {
+                const category = li.querySelector('a').getAttribute('data-category').toLowerCase();
+                if (category.includes(searchTerm)) {
+                    li.style.display = 'block';
+                } else {
+                    li.style.display = 'none';
+                }
+            });
+        });
+
+        listItems.forEach((li) => {
+            li.addEventListener('click', () => {
+                const link = li.querySelector('a');
+                if (link) {
+                    window.location.href = link.getAttribute('href');
+                }
+            });
+        });
+    </script>
+    {{-- -------------------------------------------------2 Search Filter --}}
+
+    <script>
+        // JavaScript to handle dynamic filtering based on user input and click events for the "Where" input field
+        const locaInput = document.getElementById('loca');
+        const locationItems = document.querySelectorAll('.search-suggestions.location-suggestions li');
+
+        locaInput.addEventListener('input', () => {
+            const searchLocation = locaInput.value.toLowerCase();
+
+            locationItems.forEach((li) => {
+                const city = li.querySelector('a').getAttribute('data-city').toLowerCase();
+                if (city.includes(searchLocation)) {
+                    li.style.display = 'block';
+                } else {
+                    li.style.display = 'none';
+                }
+            });
+        });
+
+        locationItems.forEach((li) => {
+            li.addEventListener('click', () => {
+                const locationLink = li.querySelector('a');
+                if (locationLink) {
+                    window.location.href = locationLink.getAttribute('href');
+                }
+            });
+        });
+    </script>
 @endsection
