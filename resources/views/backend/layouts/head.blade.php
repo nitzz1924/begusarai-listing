@@ -2,7 +2,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta http-equiv="Content-Language" content="en">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<title> @yield('title') | {{ config('app.name') }}</title>
+<title> @yield('title') | InBegusarai</title>
 <meta name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no"/>
 <meta name="description" content="laravel, laravel-boilerplate">
@@ -13,7 +13,7 @@
 
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap.min.css">
 <!-- Favicons -->
-<link rel="shortcut icon" href="{{asset('/assets/images/favicon.png')}}">
+<link rel="shortcut icon" href="{{asset('/assets/images/begusarai-logo-favicon.png')}}">
 
 <link rel="stylesheet" type="text/css" href="{{ asset('/assets/frontend-assets/libs/bootstrap/css/bootstrap.min.css')}}" />
 

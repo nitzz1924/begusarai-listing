@@ -84,81 +84,73 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                             </form>
                         </div>
 
-
-
-
                     </div>
 
+                    <div class="table-responsive">
 
+                        <table class="member-place-list table-responsive">
 
-
-
-
-
-
-
-                    <table class="member-place-list table-responsive">
-                        <caption>List of Businesses</caption> <!-- Add a caption for the table -->
-                        <thead>
-                            <tr>
-
-                                <th>ID</th>
-                                <th>Name</th>
-                                <th>City</th>
-                                <th>Category</th>
-                                <th>Status</th>
-                                <th>Payment</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($businesses as $business)
+                            <thead>
                                 <tr>
-
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $business->businessName }}</td>
-                                    <td>{{ $business->city }}</td>
-                                    <td>{{ $business->category }}</td>
-                                    <td style="color: {{ $business->status == 0 ? '#ffad2d' : 'green' }}">
-                                        {{ $business->status == 0 ? 'Pending' : 'Approved' }}
-                                    </td>
-                                    <td>
-                                        @if ($business->planStatus == 0)
-                                            <button href="#" class="btn-sm btn-warning">
-                                                Pay
-                                                Now
-                                            </button>
-                                        @else
-                                            <span class="status-label" style="color: green;">
-                                                <i class="fas fa-check-circle " style="font-size: 20px;"></i>
-                                                Done
-                                            </span>
-                                        @endif
-                                    </td>
-
-
-
-
-                                    <td class="place-action">
-                                        <a href="{{ route('editPlace', ['id' => $business->id]) }}" class="edit"
-                                            title="Edit">
-                                            <i class="las la-edit"></i>
-                                        </a>
-
-
-                                        <a href="{{ route('listingDetail', ['id' => $business->id, 'category' => $business->category]) }}"
-                                            class="view" title="View"><i class="la la-eye"></i></a>
-                                        <a href="{{ route('ownerLeads', ['id' => $business->id]) }}" class="list"
-                                            style="display: {{ $business->status == 0 ? 'none' : 'block' }}"
-                                            title="list"><i class="la la-list"></i></a>
-
-                                        <a href='#' class="delete" title="Delete"><i class="la la-trash-alt"></i></a>
-                                    </td>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>City</th>
+                                    <th>Category</th>
+                                    <th>Status</th>
+                                    <th>Payment</th>
+                                    <th>Action</th>
                                 </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                            </thead>
 
+                            <tbody>
+                                @foreach ($businesses as $business)
+                                    <tr>
+
+                                        <td data-title="ID">{{ $loop->iteration }}</td>
+                                        <td data-title="Name">{{ $business->businessName }}</td>
+                                        <td data-title="City">{{ $business->city }}</td>
+                                        <td data-title="Category">{{ $business->category }}</td>
+                                        <td data-title="Status" style="color: {{ $business->status == 0 ? '#ffad2d' : 'green' }}">
+                                            {{ $business->status == 0 ? 'Pending' : 'Approved' }}
+                                        </td>
+                                        <td data-title="Payment">
+                                            @if ($business->planStatus == 0)
+                                                <button href="#" class="btn-sm btn-warning">
+                                                    Pay
+                                                    Now
+                                                </button>
+                                            @else
+                                                <span class="status-label" style="color: green;">
+                                                    <i class="fas fa-check-circle " style="font-size: 20px;"></i>
+                                                    Done
+                                                </span>
+                                            @endif
+                                        </td>
+
+
+
+
+                                        <td data-title="Action" class="place-action d-flex action-btn">
+                                            <a href="{{ route('editPlace', ['id' => $business->id]) }}" class="edit"
+                                                title="Edit">
+                                                <i class="las la-edit"></i>
+                                            </a>
+
+
+                                            <a href="{{ route('listingDetail', ['id' => $business->id, 'category' => $business->category]) }}"
+                                                class="view" title="View"><i class="la la-eye"></i></a>
+                                            <a href="{{ route('ownerLeads', ['id' => $business->id]) }}" class="list"
+                                                style="display: {{ $business->status == 0 ? 'none' : 'block' }}"
+                                                title="list"><i class="la la-list"></i></a>
+
+                                            <a href='#' class="delete" title="Delete"><i
+                                                    class="la la-trash-alt"></i></a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
 
                 </div>
             </div>

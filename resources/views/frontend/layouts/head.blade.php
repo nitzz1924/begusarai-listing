@@ -1,14 +1,14 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title> @yield('title') | {{ config('app.name') }} </title>
-<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+<title> @yield('title') | InBegusarai </title>
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no user-scalable=no" name="viewport">
 <meta name="Description" lang="en" content="ADD SITE DESCRIPTION">
 <meta name="author" content="ADD AUTHOR INFORMATION">
 <meta name="robots" content="index, follow">
 <meta name="csrf-token" content="{{ csrf_token() }}">
 
 <!-- Favicons -->
-<link rel="shortcut icon" href="{{asset('/assets/images/favicon.png')}}">
+<link rel="shortcut icon" href="{{asset('/assets/images/begusarai-logo-favicon.png')}}">
 
 
 <link rel="stylesheet" href="{{ asset('/assets/frontend-assets/css/custom_frontend.css') }}">

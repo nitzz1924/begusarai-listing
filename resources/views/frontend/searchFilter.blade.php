@@ -87,13 +87,13 @@
                     </form>
                 </div><!-- .archive-fillter -->
                 <div class="main-primary">
-                    <div class="filter-mobile">
-                        <ul>
+                    <div class="filter-mobile justify-content-center    ">
+                        <ul class="">
                             <li><a class="mb-filter mb-open" href="#filterForm">Filter</a></li>
                             <li><a class="mb-sort mb-open" href="#sortForm">Sort</a></li>
                         </ul>
-                        <div class="mb-maps"><a class="mb-maps" href="#"><i class="las la-map-marked-alt"></i></a>
-                        </div>
+                        {{-- <div class="mb-maps"><a class="mb-maps" href="#"><i class="las la-map-marked-alt"></i></a>
+                        </div> --}}
                     </div>
                     <div class="top-area top-area-filter">
                         <div class="filter-left">

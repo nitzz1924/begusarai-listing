@@ -38,7 +38,6 @@
 
 .form-account label.radio-field input:checked ~ span:hover {
     background-color: #00b4b4;
-    
 }
 
 .form-account label.radio-field span {
@@ -295,7 +294,6 @@ svg {
     }
 }
 
-
 input[type="tel"]:focus {
     outline: none; /* Remove the default focus outline */
     /* You can also set other styles here, like border or box-shadow */
@@ -341,4 +339,17 @@ input[type="tel"]:focus {
 .bookmark-added {
     color: #ffb429;
     /* Set the desired color for the bookmark icon */
+}
+
+@media only screen and (max-width: 767px) {
+    .action-btn {
+        justify-content: flex-end;
+    }
+}
+
+/* Reset the alignment for larger screens */
+@media (min-width: 768px) {
+    .action-btn {
+        justify-content: start;
+    }
 }
