@@ -3,7 +3,7 @@
 @section('content')
 
 
-<style>
+    <style>
         .bookmark-added {
             color: #ffb429;
             /* Set the desired color for the bookmark icon */
@@ -102,20 +102,32 @@
                     </div>
                     <div class="top-area top-area-filter">
                         <div class="filter-left">
-                            <span class="result-count"><span class="count">24</span> results</span>
+                            <span class="result-count">
+                                @if (count($Result) == 0)
+                                    Result not found
+                                @else
+                                    <span class="count">{{ count($Result) }}</span> Results found
+                                @endif
+                            </span>
+
+                            @foreach ($Result as $value)
+                                <!-- Loop content goes here -->
+                                <div class="result-item">
+                                    <!-- Content for each result item goes here -->
+                                </div>
+                            @endforeach
                             <a href="#" class="clear">Clear filter</a>
                         </div>
                         <div class="filter-center">
-
+                            <!-- Content for filter-center goes here -->
                         </div>
                         <div class="filter-right">
                             <div class="select-box">
-
+                                <!-- Content for select-box goes here -->
                             </div>
-
-
                         </div>
                     </div>
+
 
 
                     <div class="similar-places">
@@ -123,107 +135,112 @@
                             <div class="similar-places__content p-5">
                                 <div class="row">
 
-                                @foreach ($Result as $value)
-                            <div class="col-md-3">
-                                <div class="place-item layout-02 place-hover">
-                                    <div class="place-inner">
-                                        <div class="place-thumb hover-img">
-                                            <a class="entry-thumb"
-                                                href="{{ URL::to('listingDetail/' . $value->id . '/' . $value->category) }}">
+                                    @foreach ($Result as $value)
+                                        <div class="col-md-3">
+                                            <div class="place-item layout-02 place-hover">
+                                                <div class="place-inner">
+                                                    <div class="place-thumb hover-img">
+                                                        <a class="entry-thumb"
+                                                            href="{{ URL::to('listingDetail/' . $value->id . '/' . $value->category) }}">
 
-                                                <img src="{{ URL::to('uploads/' . $value->coverImage) }}" />
+                                                            <img src="{{ URL::to('uploads/' . $value->coverImage) }}" />
 
 
-                                            </a>
-                                            <?php 
+                                                        </a>
+                                                        <?php 
                                                 if(Auth::user()){
                                                 ?>
-                                            <a href="#" class="golo-add-to-wishlist btn-add-to-wishlist"
-                                                data-place-id="{{ $value->id }}" data-business-id="{{ $value->id }}">
-                                                <span class="icon-heart">
+                                                        <a href="#" class="golo-add-to-wishlist btn-add-to-wishlist"
+                                                            data-place-id="{{ $value->id }}"
+                                                            data-business-id="{{ $value->id }}">
+                                                            <span class="icon-heart">
 
-                                                    @if ($value->bookmark_status != null)
-                                                        <i class="la la-bookmark large" style="color: #ffb429;"></i>
-                                                    @else
-                                                        <i class="la la-bookmark large" style="color:black"></i>
-                                                    @endif
-                                                </span>
-                                            </a>
-                                            <?php 
+                                                                @if ($value->bookmark_status != null)
+                                                                    <i class="la la-bookmark large"
+                                                                        style="color: #ffb429;"></i>
+                                                                @else
+                                                                    <i class="la la-bookmark large"
+                                                                        style="color:black"></i>
+                                                                @endif
+                                                            </span>
+                                                        </a>
+                                                        <?php 
                                             }else{
                                             ?>
 
-                                            <div class="login-container">
-                                                <span class="login-message"> <a href="#"
-                                                        class=" btn-add-to-wishlist open-login test" data-place-id=""
-                                                        data-business-id="">
-                                                        <span class="icon-heart">
+                                                        <div class="login-container">
+                                                            <span class="login-message"> <a href="#"
+                                                                    class=" btn-add-to-wishlist open-login test"
+                                                                    data-place-id="" data-business-id="">
+                                                                    <span class="icon-heart">
 
-                                                            <i class="la la-bookmark large"></i>
+                                                                        <i class="la la-bookmark large"></i>
 
-                                                        </span>
-                                                    </a></span>
+                                                                    </span>
+                                                                </a></span>
 
-                                            </div>
+                                                        </div>
 
-                                            <?php }?>
-
-
-                                            <a class="entry-category rosy-pink" href="#">
-
-                                                @foreach ($submaster as $subvalue)
-                                                    @if ($subvalue->title === $value->category)
-                                                        <i class="{{ $subvalue->value }}"></i>
-                                                    @endif
-                                                @endforeach
-
-                                                </i><span>{{ $value->category }}</span>
-                                            </a>
-                                            <a href="#" class="author" title="Author">
-                                                <img src="{{ URL::to('uploads/' . $value->logo) }}"alt="Author" />
-
-                                            </a>
-                                            <!-- <div class="feature">Featured</div> -->
-                                        </div>
-                                        <div class="entry-detail">
-                                            <div class="entry-head">
-                                                <div class="place-type list-item">
-                                                    <span>{{ $value->highlight }}</span>
-                                                </div>
-                                                <!-- <div class="place-city">
-                                                                                                                                                                   <a href="#">Paris</a>
-                                                                                                                                                               </div> -->
-                                            </div>
-                                            <h3 class="place-title">
+                                                        <?php }?>
 
 
-                                                <a
-                                                    href="{{ URL::to('listingDetail/' . $value->id . '/' . $value->category) }}">{{ $value->businessName }}</a>
-                                            </h3>
-                                            <div class="open-now">
-                                                <i class="las la-door-open"></i>Open now
-                                            </div>
-                                            <div class="entry-bottom">
-                                                <div class="place-preview">
-                                                    <div class="place-rating">
+                                                        <a class="entry-category rosy-pink" href="#">
 
+                                                            @foreach ($submaster as $subvalue)
+                                                                @if ($subvalue->title === $value->category)
+                                                                    <i class="{{ $subvalue->value }}"></i>
+                                                                @endif
+                                                            @endforeach
 
+                                                            </i><span>{{ $value->category }}</span>
+                                                        </a>
+                                                        <a href="#" class="author" title="Author">
+                                                            <img
+                                                                src="{{ URL::to('uploads/' . $value->logo) }}"alt="Author" />
 
-
-                                                        <span>{{ $value->rating }}</span>
-                                                        <i class="la la-star"></i>
+                                                        </a>
+                                                        <!-- <div class="feature">Featured</div> -->
                                                     </div>
-                                                    <span class="count-reviews">({{ $value->count }} Reviews)</span>
-                                                </div>
-                                                <div class="place-price">
-                                                    <span>{{ $value->price }}</span>
+                                                    <div class="entry-detail">
+                                                        <div class="entry-head">
+                                                            <div class="place-type list-item">
+                                                                <span>{{ $value->highlight }}</span>
+                                                            </div>
+                                                            <!-- <div class="place-city">
+                                                                                                                                                                                                                                                           <a href="#">Paris</a>
+                                                                                                                                                                                                                                                       </div> -->
+                                                        </div>
+                                                        <h3 class="place-title">
+
+
+                                                            <a
+                                                                href="{{ URL::to('listingDetail/' . $value->id . '/' . $value->category) }}">{{ $value->businessName }}</a>
+                                                        </h3>
+                                                        <div class="open-now">
+                                                            <i class="las la-door-open"></i>Open now
+                                                        </div>
+                                                        <div class="entry-bottom">
+                                                            <div class="place-preview">
+                                                                <div class="place-rating">
+
+
+
+
+                                                                    <span>{{ $value->rating }}</span>
+                                                                    <i class="la la-star"></i>
+                                                                </div>
+                                                                <span class="count-reviews">({{ $value->count }}
+                                                                    Reviews)</span>
+                                                            </div>
+                                                            <div class="place-price">
+                                                                <span>{{ $value->price }}</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
-                        @endforeach
+                                    @endforeach
                                 </div>
                             </div>
                         </div>
@@ -240,7 +257,7 @@
                     </div>
                 </div><!-- .main-primary -->
             </div><!-- .col-left -->
-         
+
         </div><!-- .archive-city -->
     </main><!-- .site-main -->
 
