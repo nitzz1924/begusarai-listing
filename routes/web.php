@@ -41,6 +41,7 @@ Route::get('/blogDetails/{id}', [HomeController::class, 'blogDetails'])->name('b
 Route::get('/ownerWishlist', [HomeController::class, 'ownerWishlist'])->name('ownerWishlist');
 Route::get('/ownerLeads/{id}', [HomeController::class, 'ownerLeads'])->name('ownerLeads');
 Route::get('/setPassword', [HomeController::class, 'setPassword'])->name('setPassword');
+Route::get('/resetPassword', [HomeController::class, 'resetPassword'])->name('resetPassword');
 Route::get('/ownerShop', [HomeController::class, 'ownerShop'])->name('ownerShop');
 Route::get('/businessOwnerPage', [HomeController::class, 'businessOwnerPage'])->name('businessOwnerPage');
 

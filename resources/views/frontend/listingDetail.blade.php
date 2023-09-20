@@ -74,7 +74,7 @@
         }
 
         button {
-            background-color: #007BFF;
+            background-color: #23d3d3;
             color: #fff;
             border: none;
             padding: 10px 20px;
@@ -84,7 +84,7 @@
         }
 
         button:hover {
-            background-color: #0056b3;
+            background-color: #2790ff;
         }
     </style>
 
@@ -104,24 +104,10 @@
                     </div>
                     <div class="place-slider__item bd">
                         <a title="Place Slider Image" href="#">
-                            <img src="{{ URL::to('uploads/' . $businessesDetail->coverImage) }}" alt="slider-02">
+                            <img src="{{ URL::to('uploads/' . $businessesDetail->coverImage) }}" alt="slider-01">
                         </a>
                     </div>
-                    <div class="place-slider__item bd">
-                        <a title="Place Slider Image" href="#">
-                            <img src="{{ URL::to('uploads/' . $businessesDetail->coverImage) }}" alt="slider-03">
-                        </a>
-                    </div>
-                    <div class="place-slider__item bd">
-                        <a title="Place Slider Image" href="#">
-                            <img src="{{ URL::to('uploads/' . $businessesDetail->coverImage) }}" alt="slider-04">
-                        </a>
-                    </div>
-                    <div class="place-slider__item bd">
-                        <a title="Place Slider Image" href="#">
-                            <img src="{{ URL::to('uploads/' . $businessesDetail->coverImage) }}" alt="slider-05">
-                        </a>
-                    </div>
+
 
                 </div><!-- .page-title -->
                 <div class="place-share">
@@ -456,11 +442,13 @@
                                             ?>
 
                                     <div class="login-container">
-                                        <span class="login-message"> <a href="#"
+                                        <span class="login-message"> 
+                                            <a href="#"
                                                 class=" btn-add-to-wishlist open-login test" data-place-id=""
                                                 data-business-id="">
                                                 <span>Please Login First </span>
-                                            </a></span>
+                                            </a>
+                                        </span>
 
                                     </div>
 
@@ -476,8 +464,11 @@
                     <div class="col-lg-4">
                         <div class="sidebar sidebar--shop sidebar--border">
 
-                            <aside class="widget widget-shadow widget-reservation">
-                                <h3>Send me a message</h3>
+                            <aside class="widget widget-shadow widget-reservation ">
+                                <div class="text-center">
+
+                                    <h3>Send me a message</h3>
+                                </div>
 
                                 @if (session('success'))
                                     <div class="alert alert-success alert-dismissible fade show custom-alert"
@@ -525,8 +516,11 @@
                                         <label for="message">Message</label>
                                         <textarea class="form-control" id="message" name="message" rows="4" required>{{ old('message') }}</textarea>
                                     </div>
+                                    
+                                    <div class="text-center">
 
-                                    <button type="submit">Send a Message</button>
+                                        <button type="submit">Send a Message</button>
+                                    </div>
                                 </form>
 
 

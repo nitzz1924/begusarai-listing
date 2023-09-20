@@ -8,7 +8,7 @@ $Mastercity = Master::orderBy('created_at', 'asc')
 
 ?>
 
-<header id="header" class="site-header">
+<header id="header" class="site-header" style="border-bottom: 1px solid #eeeeee;">
     <div class="container-fluid">
         <div class="row">
             <div class="col-xl-6 col-5">
@@ -45,10 +45,6 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                             <li>
                                 <a title="Destinations" href="#">Destinations</a>
                                 <ul class="sub-menu">
-
-
-
-
 
                                     @foreach ($Mastercity as $value)
                                         <li>
@@ -222,9 +218,9 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                                 <div class="">
                                     <div class="field-inline">
                                         <div class="field-input-number">
-                                            <input type="number" placeholder="Phone Number"
-                                                value=""id="mobileNumber" name="mobileNumber"
-                                                pattern="[0-9]{10}" required />
+                                            <input type="tel" placeholder="Phone Number" value=""
+                                                id="mobileNumber" name="mobileNumber" pattern="[0-9]{10}"
+                                                maxlength="10" minlength="10" required />
                                             @error('mobileNumber')
                                                 <span id="error_description_mobileNumber"
                                                     class="has-error">{{ $message }}</span>
@@ -233,16 +229,15 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                                         </div>
 
                                         <div>
-                                            <input type="button" name="submit-otp" value="Send OTP"
-                                                style="width: 100px;" id="sendOTPButton" />
+                                            <button type="button" name="submit-otp" class="OTP-btn1" value="Send OTP"
+                                                style="width: 100px;" id="sendOTPButton" >Send OTP</button>
                                         </div>
                                     </div>
 
-
-
                                     <div class="field-input">
-                                        <input type="number" id="verificationCode" placeholder="OTP" value=""
-                                            name="verificationCode" pattern="[0-9]{6}" required readonly />
+                                        <input type="tel" id="verificationCode" placeholder="OTP" value=""
+                                            name="verificationCode" pattern="[0-9]{6}" maxlength="6" minlength="6"
+                                            required readonly />
                                         <input type="hidden" id="generatedOTP" placeholder="OTP" value=""
                                             name="generatedOTP" />
                                         @error('verificationCode')
@@ -288,7 +283,7 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                                 id="login">
                                 @csrf
                                 <div class="field-input">
-                                    <input type="number" placeholder="Phone Number" value=""
+                                    <input type="tel" placeholder="Enter Phone Number" value=""
                                         name="mobileNumber" pattern="[0-9]{10}" minlength="10" maxlength="10"
                                         id="mobileNumber" required />
                                     @error('mobileNumber')
@@ -304,7 +299,7 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                                             class="has-error">{{ $message }}</span>
                                     @enderror
                                 </div>
-                                <a title="Forgot password" class="forgot_pass" href="#">Forgot password</a>
+                                <a title="Forgot password" class="forgot_pass" href="/resetPassword">Forgot password</a>
                                 <input type="submit" name="submit" value="Login" id="loginSubmit" />
                             </form>
 

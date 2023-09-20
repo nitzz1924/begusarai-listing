@@ -810,6 +810,7 @@ class HomeController extends Controller
     {
         return view('frontend.privacyPolicy');
     }
+    
 
     public function blogs()
     {
@@ -1026,5 +1027,12 @@ class HomeController extends Controller
         return redirect()
             ->back()
             ->with('success', 'Review submitted successfully.');
+    }
+
+    public function resetPassword(Request $request)
+    {
+        $User_id = $request->user;
+
+        return view('frontend.resetPassword', compact('User_id'));
     }
 }

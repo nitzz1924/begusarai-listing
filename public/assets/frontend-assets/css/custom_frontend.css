@@ -36,6 +36,11 @@
     color: #fff;
 }
 
+.form-account label.radio-field input:checked ~ span:hover {
+    background-color: #00b4b4;
+    
+}
+
 .form-account label.radio-field span {
     height: 48px;
     line-height: 48px;
@@ -183,7 +188,7 @@ svg {
 .test {
     display: inline-block;
     padding: 10px 20px;
-    background-color: #007bff;
+    background-color: #23d3d3;
     color: #fff;
     text-decoration: none;
     border-radius: 5px;
@@ -192,6 +197,7 @@ svg {
 
 .test:hover {
     background-color: #0056b3;
+    color: white;
 }
 
 .pagination nav div div {
@@ -287,4 +293,47 @@ svg {
     100% {
         opacity: 1;
     }
+}
+
+
+input[type="tel"]:focus {
+    outline: none; /* Remove the default focus outline */
+    /* You can also set other styles here, like border or box-shadow */
+    border-bottom: 2px solid #23d3d3;
+}
+
+.OTP-btn1 {
+    border-radius: 20px;
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+    background-color: #23d3d3;
+    color: #ffffff;
+    margin-bottom: 0;
+    cursor: pointer;
+    border: 0;
+    /* padding: 10  px; */
+}
+
+.OTP-btn1:hover {
+    background-color: #00b4b4;
+}
+
+.OTP-btn {
+    border-radius: 20px;
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+    background-color: #23d3d3;
+    color: #ffffff;
+    margin-bottom: 0;
+    cursor: pointer;
+    border: 0;
+    padding: 10px;
+}
+
+.OTP-btn:hover {
+    background-color: #00b4b4;
 }

@@ -142,11 +142,9 @@
                                             <div class="place-thumb hover-img">
                                                 <a class="entry-thumb"
                                                     href="{{ URL::to('listingDetail/' . $value->id . '/' . $value->category) }}">
-
                                                     <img src="{{ URL::to('uploads/' . $value->coverImage) }}" />
-
-
                                                 </a>
+
                                                 <?php 
                                                 if(Auth::user()){
                                                 ?>
@@ -172,7 +170,7 @@
                                                             data-business-id="">
                                                             <span class="icon-heart">
 
-                                                                <i class="la la-bookmark large"></i>
+                                                                <i class="la la-bookmark large" style="color:black"></i>
 
                                                             </span>
                                                         </a></span>

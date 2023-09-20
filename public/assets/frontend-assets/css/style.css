@@ -3918,6 +3918,12 @@ a.place__comments__reply i {
     cursor: pointer;
     border: 0;
 }
+
+.popup-form input[type="submit"]:hover {
+    
+    background-color: #00b4b4;
+    
+}
 .popup-form input[type="checkbox"] {
     width: auto;
     line-height: normal;
@@ -5861,7 +5867,7 @@ a.place__comments__reply i {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    margin-left: -15px;
+    /* margin-left: -15px; */
     margin-right: -15px;
 }
 .form-underline .field-inline .field-input {
@@ -5951,6 +5957,12 @@ a.place__comments__reply i {
     margin-bottom: 0;
     cursor: pointer;
     border: 0;
+}
+
+.form-underline input[type="submit"]:hover {
+    
+    background-color: #00b4b4;
+    
 }
 .form-underline input[type="checkbox"] {
     width: auto;
@@ -6955,7 +6967,7 @@ a.place__comments__reply i {
 }
 
 .widget-shadow {
-    text-align: center;
+    /* text-align: center; */
     padding: 30px;
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.1);
 }
