@@ -548,6 +548,9 @@
                                                     <i class="la la-bookmark large"></i>
                                                 </span>
                                             </a>
+
+
+                                            
                                             <a class="entry-category purple" href="#">
                                                 @foreach ($submaster as $subvalue)
                                                     @if ($subvalue->title === $value->category)
