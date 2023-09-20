@@ -38,6 +38,12 @@
                     </a>
                 </li>
                 <li>
+                    <a href="{{ URL::to('/admin/package') }}">
+                        <i class="metismenu-icon pe-7s-users"></i>
+                        Packages
+                    </a>
+                </li>
+                <li>
                     <a href="{{ URL::to('/admin/users') }}">
                         <i class="metismenu-icon pe-7s-users"></i>
                         Users
