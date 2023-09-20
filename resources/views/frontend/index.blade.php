@@ -136,7 +136,7 @@
                                 data-tabletscroll="2" data-smallpcscroll="3" data-smallpcitem="3" data-mobileitem="1"
                                 data-mobilescroll="1" data-mobilearrows="false">
 
-                                @foreach ($businesses as $value)
+                                @foreach ($Result as $value)
                                     <div class="place-item layout-02 place-hover">
                                         <div class="place-inner">
                                             <div class="place-thumb hover-img">
@@ -204,8 +204,8 @@
                                                         <span>{{ $value->highlight }}</span>
                                                     </div>
                                                     <!-- <div class="place-city">
-                                                                                       <a href="#">Paris</a>
-                                                                                   </div> -->
+                                                                                                                                                       <a href="#">Paris</a>
+                                                                                                                                                   </div> -->
                                                 </div>
                                                 <h3 class="place-title">
 
@@ -219,10 +219,14 @@
                                                 <div class="entry-bottom">
                                                     <div class="place-preview">
                                                         <div class="place-rating">
-                                                            <span>5.0</span>
+
+
+
+
+                                                            <span>{{ $value->rating }}</span>
                                                             <i class="la la-star"></i>
                                                         </div>
-                                                        <span class="count-reviews">(2 Reviews)</span>
+                                                        <span class="count-reviews">({{ $value->count }} Reviews)</span>
                                                     </div>
                                                     <div class="place-price">
                                                         <span>{{ $value->price }}</span>

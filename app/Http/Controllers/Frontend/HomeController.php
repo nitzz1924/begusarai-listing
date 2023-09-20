@@ -119,6 +119,7 @@ class HomeController extends Controller
     {
         // Get the authenticated user
         $user = auth()->user();
+
         if ($user) {
             $businesses = BusinessList::leftJoin('bookmarks', function ($join) use ($user) {
                 $join->on('businesslist.id', '=', 'bookmarks.business_id')->where('bookmarks.user_id', '=', $user->id);
@@ -129,6 +130,37 @@ class HomeController extends Controller
         } else {
             $businesses = BusinessList::orderBy('created_at', 'desc')->get();
         }
+        $Result = [];
+
+        foreach ($businesses as $value) {
+            $reviews = DB::table('reviews')
+                ->select('reviews.*', 'users_login.image')
+                ->leftJoin('users_login', 'reviews.user_id', '=', 'users_login.id')
+                ->orderBy('reviews.created_at', 'desc')
+                ->where('listing_id', $value->id)
+                ->get();
+
+            $totalRating = 0;
+            $totalReviews = count($reviews);
+
+            foreach ($reviews as $review) {
+                $totalRating += $review->rating;
+            }
+
+            if ($totalReviews > 0) {
+                $averageRating = $totalRating / $totalReviews;
+                $averageRating = number_format($averageRating, 1); // Display average rating with 1 decimal place
+            } else {
+                $averageRating = 0; // No reviews available
+            }
+
+            // Merge the average rating into the business data
+            $value->rating = $averageRating;
+            $value->count = count($reviews);
+            $Result[] = $value;
+
+        }
+
         // Retrieve businesses with bookmark status for the user
 
         $blog = Blog::orderBy('created_at', 'desc')
@@ -145,7 +177,7 @@ class HomeController extends Controller
         $Mastercity = Master::orderBy('created_at', 'asc')
             ->where('type', '=', 'City')
             ->get();
-        return View::make('frontend.index', compact('submaster', 'businesses', 'Mastercity', 'TestimonialData', 'blog'));
+        return View::make('frontend.index', compact('submaster', 'businesses', 'Mastercity', 'TestimonialData', 'blog', 'Result'));
     }
 
     // public function toggleBookmark(Request $request, $businessId)
@@ -530,29 +562,54 @@ class HomeController extends Controller
     public function listingDetail(Request $request, $id, $category)
     {
         $businesses = BusinessList::orderBy('created_at', 'desc')->get();
+
+
         $similer = BusinessList::where('category', $category)
             ->orderBy('created_at', 'desc')
             ->get();
+
+
+
+
+    $Result = [];
+
+        foreach ($similer as $value) {
+            $reviews = DB::table('reviews')
+                ->select('reviews.*', 'users_login.image')
+                ->leftJoin('users_login', 'reviews.user_id', '=', 'users_login.id')
+                ->orderBy('reviews.created_at', 'desc')
+                ->where('listing_id', $value->id)
+                ->get();
+
+            $totalRating = 0;
+            $totalReviews = count($reviews);
+
+            foreach ($reviews as $review) {
+                $totalRating += $review->rating;
+            }
+
+            if ($totalReviews > 0) {
+                $averageRating = $totalRating / $totalReviews;
+                $averageRating = number_format($averageRating, 1); // Display average rating with 1 decimal place
+            } else {
+                $averageRating = 0; // No reviews available
+            }
+
+            // Merge the average rating into the business data
+            $value->rating = $averageRating;
+            $value->count = count($reviews);
+            $Result[] = $value;
+
+        }
+
+
+
         $businessesDetail = BusinessList::where('id', $id)->first();
         $submaster = Master::orderBy('created_at', 'asc')
             ->where('type', '=', 'category')
             ->get();
-        // $reviews = Review::where('listing_id', $id)->get();
-        // \Log::info($reviews);
-
-        // $reviews = Review::leftJoin('users_login', function ($join) {
-        //     $join->on('reviews.user_id	', '=', 'users_login.id')->where('users_login.id', '=', $id);
-        // })
-        //     ->select('reviews.*', 'users_login.image AS image')
-        //     ->orderBy('reviews.created_at', 'desc')
-        //     ->get();
-
-        // $reviews = Review::leftJoin('users_login', function ($join) use ($id) {
-        //     $join->on('reviews.user_id', '=', 'users_login.id')->where('users_login.id', '=', $id);
-        // })
-        //     ->select('reviews.*', 'users_login.image')
-        //     ->orderBy('reviews.created_at', 'desc')
-        //     ->get();
+        
+       
         $reviews = DB::table('reviews')
             ->select('reviews.*', 'users_login.image')
             ->leftJoin('users_login', 'reviews.user_id', '=', 'users_login.id')
@@ -560,8 +617,7 @@ class HomeController extends Controller
             ->where('listing_id', $id)
             ->get();
 
-        // dd($reviews);
-        return view('frontend.listingDetail', compact('businessesDetail', 'submaster', 'businesses', 'similer', 'reviews'));
+        return view('frontend.listingDetail', compact('businessesDetail', 'submaster', 'businesses', 'Result', 'reviews'));
     }
 
     public function blogDetails(Request $request, $id)
@@ -590,6 +646,9 @@ class HomeController extends Controller
             $bookmarkedBusinessIds = Bookmark::where('user_id', $user->id)->pluck('business_id');
         }
 
+
+     
+
         $submaster = Master::orderBy('created_at', 'asc')
             ->where('type', '=', 'category')
             ->get();
@@ -597,7 +656,39 @@ class HomeController extends Controller
             ->orderBy('created_at', 'desc')
             ->get();
 
-        return view('frontend.ownerWishlist', compact('businesses', 'submaster'));
+            $Result = [];
+
+            foreach ($businesses as $value) {
+                $reviews = DB::table('reviews')
+                    ->select('reviews.*', 'users_login.image')
+                    ->leftJoin('users_login', 'reviews.user_id', '=', 'users_login.id')
+                    ->orderBy('reviews.created_at', 'desc')
+                    ->where('listing_id', $value->id)
+                    ->get();
+    
+                $totalRating = 0;
+                $totalReviews = count($reviews);
+    
+                foreach ($reviews as $review) {
+                    $totalRating += $review->rating;
+                }
+    
+                if ($totalReviews > 0) {
+                    $averageRating = $totalRating / $totalReviews;
+                    $averageRating = number_format($averageRating, 1); // Display average rating with 1 decimal place
+                } else {
+                    $averageRating = 0; // No reviews available
+                }
+    
+                // Merge the average rating into the business data
+                $value->rating = $averageRating;
+                $value->count = count($reviews);
+                $Result[] = $value;
+    
+            }
+    
+
+        return view('frontend.ownerWishlist', compact('Result', 'submaster'));
     }
 
     public function Testimonial()
@@ -755,7 +846,42 @@ class HomeController extends Controller
             ->where('type', '=', 'highlight')
             ->get();
 
-        return view('frontend.searchFilter', compact('similer', 'submaster', 'submasterCategory', 'submasterHighlight', 'businesses'));
+
+
+
+
+            $Result = [];
+
+        foreach ($similer as $value) {
+            $reviews = DB::table('reviews')
+                ->select('reviews.*', 'users_login.image')
+                ->leftJoin('users_login', 'reviews.user_id', '=', 'users_login.id')
+                ->orderBy('reviews.created_at', 'desc')
+                ->where('listing_id', $value->id)
+                ->get();
+
+            $totalRating = 0;
+            $totalReviews = count($reviews);
+
+            foreach ($reviews as $review) {
+                $totalRating += $review->rating;
+            }
+
+            if ($totalReviews > 0) {
+                $averageRating = $totalRating / $totalReviews;
+                $averageRating = number_format($averageRating, 1); // Display average rating with 1 decimal place
+            } else {
+                $averageRating = 0; // No reviews available
+            }
+
+            // Merge the average rating into the business data
+            $value->rating = $averageRating;
+            $value->count = count($reviews);
+            $Result[] = $value;
+
+        }
+
+        return view('frontend.searchFilter', compact('Result', 'submaster', 'submasterCategory', 'submasterHighlight', 'businesses'));
     }
 
     // public function User()
