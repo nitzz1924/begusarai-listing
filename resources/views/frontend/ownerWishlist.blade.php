@@ -23,19 +23,17 @@
                         <h2>Wishlist</h2>
                         {{-- <p>You are current FREE plan. <a href="pricing-plan.html">Upgrade now</a></p> --}}
                     </div><!-- .member-wrap-top -->
-                    <div class="mw-box">
+                    <div class="mw-box ">
 
+                        <div class="row">
                         @foreach ($Result as $value)
-                            <div class="col-md-3">
+                            <div class="col-md-6 col-lg-3">
                                 <div class="place-item layout-02 place-hover">
                                     <div class="place-inner">
                                         <div class="place-thumb hover-img">
                                             <a class="entry-thumb"
                                                 href="{{ URL::to('listingDetail/' . $value->id . '/' . $value->category) }}">
-
                                                 <img src="{{ URL::to('uploads/' . $value->coverImage) }}" />
-
-
                                             </a>
                                             <?php 
                                                 if(Auth::user()){
@@ -56,15 +54,15 @@
                                             ?>
 
                                             <div class="login-container">
-                                                <span class="login-message"> <a href="#"
+                                                <span class="login-message"> 
+                                                    <a href="#"
                                                         class=" btn-add-to-wishlist open-login test" data-place-id=""
                                                         data-business-id="">
                                                         <span class="icon-heart">
-
-                                                            <i class="la la-bookmark large"></i>
-
+                                                            <i class="la la-bookmark large" style="color:black"></i>
                                                         </span>
-                                                    </a></span>
+                                                    </a>
+                                                </span>
 
                                             </div>
 
@@ -93,8 +91,8 @@
                                                     <span>{{ $value->highlight }}</span>
                                                 </div>
                                                 <!-- <div class="place-city">
-                                                                                                                                                                   <a href="#">Paris</a>
-                                                                                                                                                               </div> -->
+                                                    <a href="#">Paris</a>
+                                                </div> -->
                                             </div>
                                             <h3 class="place-title">
 
@@ -125,7 +123,8 @@
                                     </div>
                                 </div>
                             </div>
-                        @endforeach
+                            @endforeach
+                        </div>
 
                     </div>
                 </div><!-- .mw-box -->
