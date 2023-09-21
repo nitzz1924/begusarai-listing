@@ -97,20 +97,32 @@
                     </div>
                     <div class="top-area top-area-filter">
                         <div class="filter-left">
-                            <span class="result-count"><span class="count">24</span> results</span>
+                            <span class="result-count">
+                                @if (count($Result) == 0)
+                                    Result not found
+                                @else
+                                    <span class="count">{{ count($Result) }}</span> Results found
+                                @endif
+                            </span>
+
+                            @foreach ($Result as $value)
+                                <!-- Loop content goes here -->
+                                <div class="result-item">
+                                    <!-- Content for each result item goes here -->
+                                </div>
+                            @endforeach
                             <a href="#" class="clear">Clear filter</a>
                         </div>
                         <div class="filter-center">
-
+                            <!-- Content for filter-center goes here -->
                         </div>
                         <div class="filter-right">
                             <div class="select-box">
-
+                                <!-- Content for select-box goes here -->
                             </div>
-
-
                         </div>
                     </div>
+
 
 
                     <div class="similar-places">
@@ -172,7 +184,7 @@
 
                                                             @foreach ($submaster as $subvalue)
                                                                 @if ($subvalue->title === $value->category)
-                                                                    <i class="{{ $subvalue->id }}">12</i>
+                                                                    <i class="{{ $subvalue->value }}"></i>
                                                                 @endif
                                                             @endforeach
 
