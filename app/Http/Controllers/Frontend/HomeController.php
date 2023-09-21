@@ -563,10 +563,7 @@ class HomeController extends Controller
             ->with('success', 'Thank you For Creating Account.');
     }
 
-    public function ownerDashboard()
-    {
-        return view('frontend.ownerDashboard');
-    }
+ 
 
     public function listingDetail(Request $request, $id, $category)
     {
@@ -629,15 +626,49 @@ class HomeController extends Controller
     }
     public function ownerListing()
     {
+        $user = auth()->user();
         $Mastercity = Master::orderBy('created_at', 'asc')
             ->where('type', '=', 'City')
             ->get();
         $MasterCategory = Master::orderBy('created_at', 'asc')
             ->where('type', '=', 'category')
             ->get();
-        $businesses = BusinessList::all(); // Fetch all businesses from the database
+        $businesses = BusinessList::where('userId', $user->id)->get(); // Fetch all businesses from the database
+        
 
         return view('frontend.ownerListing', compact('businesses', 'Mastercity', 'MasterCategory'));
+    }
+
+
+
+    public function ownerDashboard()
+    {
+
+//         $user = auth()->user();
+
+
+//         $result = DB::table('user_login')->where('id', $user->id)
+//         ->select(
+//             DB::raw('COUNT(DISTINCT businesslist.id) AS businesslist_count'),
+//             DB::raw('COUNT(DISTINCT businesslist.id) AS busineslisting_count'),
+//             DB::raw('COUNT(DISTINCT reviews.id) AS review_count'),
+//             DB::raw('COUNT(DISTINCT lead.id) AS lead_count')
+//         )
+//         ->leftJoin('businesslist', 'user_login.id', '=', 'businesslist.userId')
+//         ->leftJoin('businesslist', 'businesslist.id', '=', 'businesslist.business_id')
+//         ->leftJoin('reviews', 'businesslist.id', '=', 'review.listing_id')
+//         ->leftJoin('lead', 'businesslist.id', '=', 'lead.business_id')
+//         ->groupBy('user_login.id')
+//         ->first();
+// dd($result);
+//     return $result;
+
+
+
+
+
+
+        return view('frontend.ownerDashboard');
     }
 
     public function ownerWishlist()

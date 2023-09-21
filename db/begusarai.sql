@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 20, 2023 at 02:46 PM
+-- Generation Time: Sep 21, 2023 at 01:47 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.1
 
@@ -155,8 +155,9 @@ CREATE TABLE `businesslist` (
 
 INSERT INTO `businesslist` (`id`, `userId`, `category`, `placeType`, `description`, `price`, `duration`, `highlight`, `city`, `placeAddress`, `email`, `phoneNumber1`, `phoneNumber2`, `whatsappNo`, `websiteUrl`, `additionalFields`, `facebook`, `instagram`, `twitter`, `bookingType`, `bookingurl`, `packageId`, `expairyDate`, `businessName`, `youtube`, `coverImage`, `galleryImage`, `documentImage`, `logo`, `video`, `status`, `planStatus`, `created_at`, `updated_at`) VALUES
 (1, 1, 'Hotel', 'Placetype 2,Placetype 1', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', '500/-', '8:00 am - 10:00 pm', 'Highlight 2,Highlight 1', 'Jodhpur City', ' FJ6V+46C, Vinay Nagar, Pal Bhichala, Ajmer, Rajasthan 305001', 'adstestyuv@gmail.com', '12345667890', '12345667890', '12345667890', 'https://proaidirectory.com/', 'https://proaidirectory.com/', 'https://proaidirectory.com/', 'https://proaidirectory.com/', 'https://proaidirectory.com/', 'ty1', 'https://proaidirectory.com/', NULL, '2023-09-12 11:29:45', 'New Updated List 1', 'https://proaidirectory.com/', '1694588906.jpg', '1694586307.jpg', '1694586321.jpg', '1694586307.jpg', 'https://proaidirectory.com', '1', '1', '2023-09-12 11:59:45', '2023-09-13 12:45:44'),
-(11, 1, 'Hospital', 'Placetype 2', 'df', '1000/-', 'sd', 'Highlight 2', 'Ajmer City', ' FJ6V+46C, Vinay Nagar, Pal Bhichala, Ajmer, Rajasthan 305001', 'adstestyuv@gmail.com', '01267897067', '09588871256', '43', 'https://junglebooktourism.com/our-packages', 'https://junglebooktourism.com/our-packages', 'https://junglebooktourism.com/our-packages', 'https://junglebooktourism.com/our-packages', 'https://junglebooktourism.com/our-packages', 'ty1', 'https://junglebooktourism.com/our-packages', NULL, '2023-09-13 10:41:10', 'TEST 123', 'https://junglebooktourism.com/our-packages', '1694588906.jpg', '1694581870.jpg', '1694581870.jpg', '1694588906.jpg', 'https://junglebooktourism.com/our-packages', '0', '0', '2023-09-13 11:11:10', '2023-09-13 12:52:29'),
-(12, 1, 'Hospital', 'Placetype 2,Placetype 1', '2', '360/-', '8:00 am - 10:00 pm', 'Highlight 2', 'Jodhpur City', ' FJ6V+46C, Vinay Nagar, Pal Bhichala, Ajmer, Rajasthan 305001', 'rahulyuvmedia@gmail.com', '09588871256', '2', '2', 'https://proaidirectory.com/', 'https://proaidirectory.com/', 'https://proaidirectory.com/', 'https://proaidirectory.com/', 'https://proaidirectory.com/', 'ty1', 'https://proaidirectory.com/', NULL, '2023-09-13 12:31:28', 'business1', 'https://proaidirectory.com/', '1694588906.jpg', '1694588906.jpg', '1694588906.jpg', '1694588906.jpg', 'https://junglebooktourism.com/our-pa', '0', '0', '2023-09-13 13:01:28', '2023-09-13 13:08:26');
+(11, 1, 'Hospital', 'Placetype 2', 'df', '1000/-', 'sd', 'Highlight 2', 'Ajmer City', 'FJ6V+46C, Vinay Nagar, Pal Bhichala, Ajmer, Rajasthan 305001', 'adstestyuv@gmail.com', '01267897067', '09588871256', '43', 'https://junglebooktourism.com/our-packages', 'https://junglebooktourism.com/our-packages', 'https://junglebooktourism.com/our-packages', 'https://junglebooktourism.com/our-packages', 'https://junglebooktourism.com/our-packages', 'ty1', 'https://junglebooktourism.com/our-packages', NULL, '2023-09-13 10:41:10', 'TEST 123', 'https://junglebooktourism.com/our-packages', '1694588906.jpg', '1694581870.jpg', '1694581870.jpg', '1694588906.jpg', 'https://junglebooktourism.com/our-packages', '1', '0', '2023-09-13 11:11:10', '2023-09-21 14:16:51'),
+(12, 1, 'Hospital', 'Placetype 2,Placetype 1', '2', '360/-', '8:00 am - 10:00 pm', 'Highlight 2', 'Jodhpur City', ' FJ6V+46C, Vinay Nagar, Pal Bhichala, Ajmer, Rajasthan 305001', 'rahulyuvmedia@gmail.com', '09588871256', '2', '2', 'https://proaidirectory.com/', 'https://proaidirectory.com/', 'https://proaidirectory.com/', 'https://proaidirectory.com/', 'https://proaidirectory.com/', 'ty1', 'https://proaidirectory.com/', NULL, '2023-09-13 12:31:28', 'business1', 'https://proaidirectory.com/', '1694588906.jpg', '1694588906.jpg', '1694588906.jpg', '1694588906.jpg', 'https://junglebooktourism.com/our-pa', '1', '0', '2023-09-13 13:01:28', '2023-09-13 13:08:26'),
+(13, 2, 'Hospital', 'Placetype 2', 'df', '1000/-', 'sd', 'Highlight 2', 'Ajmer City', 'FJ6V+46C, Vinay Nagar, Pal Bhichala, Ajmer, Rajasthan 305001', 'adstestyuv@gmail.com', '01267897067', '09588871256', '43', 'https://junglebooktourism.com/our-packages', 'https://junglebooktourism.com/our-packages', 'https://junglebooktourism.com/our-packages', 'https://junglebooktourism.com/our-packages', 'https://junglebooktourism.com/our-packages', 'ty1', 'https://junglebooktourism.com/our-packages', NULL, '2023-09-13 10:41:10', 'TEST 123', 'https://junglebooktourism.com/our-packages', '1694588906.jpg', '1694581870.jpg', '1694581870.jpg', '1694588906.jpg', 'https://junglebooktourism.com/our-packages', '0', '0', '2023-09-13 11:11:10', '2023-09-21 14:16:51');
 
 -- --------------------------------------------------------
 
@@ -238,9 +239,11 @@ CREATE TABLE `lead` (
 --
 
 INSERT INTO `lead` (`id`, `user_id`, `business_id`, `name`, `number`, `message`, `status`, `created_at`, `updated_at`) VALUES
-(4, NULL, 1, 'Rahul Soni', '9588871256', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.', '1', '2023-09-18 11:16:56', '2023-09-18 14:39:27'),
-(5, NULL, 12, 'dsfsdf', 'sdf', 'sd', '1', '2023-09-18 12:35:07', '2023-09-18 14:51:48'),
-(6, NULL, 12, 'dfsdf', 'sdffs', 'ew', '0', '2023-09-19 18:39:58', '2023-09-19 18:39:58');
+(3, NULL, 12, 'et', 'ertre', 'tert', '1', '2023-09-21 14:39:55', '2023-09-21 14:41:15'),
+(4, NULL, 12, 'Rahul Soni', '09588871256', 'asd', '0', '2023-09-21 14:42:05', '2023-09-21 14:42:05'),
+(5, NULL, 1, 'jsdhfdsjfhjdhf', 'vjfdshsjdfhvdsj', 'fhvdsjfv', '1', '2023-09-21 14:42:43', '2023-09-21 14:43:10'),
+(6, NULL, 12, 'dasda', 'sdasd', 'sa', '0', '2023-09-21 17:43:49', '2023-09-21 17:43:49'),
+(7, NULL, 1, 'sa', 'dasd', 'sa', '0', '2023-09-21 17:44:17', '2023-09-21 17:44:17');
 
 -- --------------------------------------------------------
 
@@ -281,7 +284,11 @@ INSERT INTO `master` (`id`, `type`, `title`, `value`, `logo`, `status`, `created
 (27, 'category', 'Gym', 'fa-solid fa-dumbbell', '1694604325.jpg', 'Active', '2023-09-13 11:55:25', '2023-09-13 11:55:25'),
 (28, 'Master', 'blog_type', 'blog_type', NULL, 'Active', '2023-09-14 10:46:22', '2023-09-14 10:46:22'),
 (29, 'blog_type', 'begusarai Blog 1', 'begusarai Blog 1', NULL, 'Active', '2023-09-14 10:46:55', '2023-09-14 10:46:55'),
-(30, 'City', 'Jaipur', 'Jaipur', '1694780649.jpg', 'Active', '2023-09-15 12:54:09', '2023-09-15 12:54:09');
+(30, 'City', 'Jaipur', 'Jaipur', '1694780649.jpg', 'Active', '2023-09-15 12:54:09', '2023-09-15 12:54:09'),
+(31, 'Master', 'Package', 'Package', NULL, 'Active', '2023-09-20 13:29:37', '2023-09-20 13:29:37'),
+(34, 'Package', 'BUSINESS LISTING', 'BUSINESS LISTING', '1695272331.jpg', 'Active', '2023-09-21 05:28:51', '2023-09-21 05:28:51'),
+(35, 'Package', 'FEATURED LISTING', 'FEATURED LISTING', '1695272350.jpg', 'Active', '2023-09-21 05:29:10', '2023-09-21 05:29:10'),
+(36, 'Package', 'Ranking', 'Ranking', '1695277137.jpg', 'Active', '2023-09-21 06:48:57', '2023-09-21 06:48:57');
 
 -- --------------------------------------------------------
 
@@ -379,12 +386,14 @@ INSERT INTO `oauth_access_tokens` (`id`, `user_id`, `client_id`, `name`, `scopes
 ('30157c3e8deccfa62315c7148854169a64c3920c97a4b545e2f6be06b5309a7564de8e9d76d699a2', 1, 4, 'adminApiToken', '[]', 0, '2023-09-07 04:38:09', '2023-09-07 04:38:09', '2024-09-07 10:08:09'),
 ('3133e099ade8d81d2a353709415e323e6592c3af42f775ad80c7a769c40ed14ed720b0182172c528', 1, 4, 'adminApiToken', '[]', 0, '2023-09-19 05:42:59', '2023-09-19 05:42:59', '2024-09-19 11:12:59'),
 ('313fcbd98202b2ddb797cde21785740199f828cbfdea01a4ffa90a3b6523be68472d4b336eb9824d', 1, 4, 'adminApiToken', '[]', 0, '2023-09-04 09:46:21', '2023-09-04 09:46:21', '2024-09-04 15:16:21'),
+('3330711e1b347c4b44f47f93b6adec20e9a72babb8ba981279c872fc38abf059251834eed679eca7', 1, 4, 'adminApiToken', '[]', 0, '2023-09-21 05:15:18', '2023-09-21 05:15:18', '2024-09-21 10:45:18'),
 ('34cfca8b577333694edb5d4a43e45503ca2478f916462fe0c4d3c64a66dfb59f222dc11b06849cf7', 2, 1, 'userApiToken', '[]', 0, '2020-07-18 11:47:50', '2020-07-18 11:47:50', '2021-07-18 17:17:50'),
 ('352d7c649da24b327a050b7b509d159b08bac25d60b9bd3816e734d99a5d56598a67742ecb115cf1', 1, 4, 'adminApiToken', '[]', 0, '2023-09-20 04:42:53', '2023-09-20 04:42:53', '2024-09-20 10:12:53'),
 ('37685fbe1d7f5a9520785fdb5fc643601241490e254dae8d749a918e595e3d687d8fe9342b0f5d74', 1, 4, 'adminApiToken', '[]', 0, '2023-09-11 04:50:18', '2023-09-11 04:50:18', '2024-09-11 10:20:18'),
 ('40d949ec1e4005369183121030e1926d19f67fe76ce7880fd70cb61bb36f44f6e14ef01f91dac974', 1, 4, 'adminApiToken', '[]', 0, '2023-09-06 09:23:19', '2023-09-06 09:23:19', '2024-09-06 14:53:19'),
 ('4a58ac7d639bf5979575952f0d5462d4db0d68ce827b7a44263bf7de507763fda8771c1fc33e0b30', 1, 4, 'adminApiToken', '[]', 0, '2023-09-04 08:47:11', '2023-09-04 08:47:11', '2024-09-04 14:17:11'),
 ('4a78629efb0c66ea1e54c118b3766fd93ddbf027e2e9ad7ffd1aece705205bbac3c564565d8fe398', 1, 4, 'adminApiToken', '[]', 0, '2023-09-14 05:39:27', '2023-09-14 05:39:27', '2024-09-14 11:09:27'),
+('5469be33227863d9056ec0d8508bc70b22ea0b3ae16da2500fb9dfa3db1f8377e512f07a967f7186', 1, 4, 'adminApiToken', '[]', 0, '2023-09-21 08:48:07', '2023-09-21 08:48:07', '2024-09-21 14:18:07'),
 ('55f9326aea22d0ad8a365398a81225484943154fc883b11343b25f69507062b24ff60635143e4925', 1, 4, 'adminApiToken', '[]', 0, '2023-09-07 06:56:15', '2023-09-07 06:56:15', '2024-09-07 12:26:15'),
 ('625ab89581817b3f756b06203741d8ba93b184317cb986fb2c1c060a2c576bcfae06953fbcc79ef5', 1, 4, 'adminApiToken', '[]', 0, '2023-09-12 09:52:37', '2023-09-12 09:52:37', '2024-09-12 15:22:37'),
 ('67cba7b98c79510c5fac62493938fa857b1cf00da731c40c852ec4949f04be06e0dd476a84d94f8f', 1, 4, 'adminApiToken', '[]', 0, '2020-09-27 10:50:50', '2020-09-27 10:50:50', '2021-09-27 16:20:50'),
@@ -406,6 +415,7 @@ INSERT INTO `oauth_access_tokens` (`id`, `user_id`, `client_id`, `name`, `scopes
 ('a63a5ed742a080a9d8cf1379aa60e1ba0b0fbc087ffea1e858144bf92f87931119eedd334ace7ffb', 1, 4, 'adminApiToken', '[]', 0, '2020-10-15 05:50:50', '2020-10-15 05:50:50', '2021-10-15 11:20:50'),
 ('ab09563fd805d57dc698103035caa419b87a8872d5058901a99919a6770865ef4d1eb0030b7a0f7c', 1, 1, 'userApiToken', '[]', 0, '2020-07-18 11:43:13', '2020-07-18 11:43:13', '2021-07-18 17:13:13'),
 ('bb42f06a00a887377a917efd4b8cc381c39b9a18d9d55ea457976b6deaab1b50a18f8545d407ddab', 1, 4, 'adminApiToken', '[]', 0, '2020-09-27 11:51:14', '2020-09-27 11:51:14', '2021-09-27 17:21:14'),
+('c1cbc1015139db38749db88f3343942ad768f3d891dd754f6626b8c56ee8bb25a86b7ea21f0ba4cd', 1, 4, 'adminApiToken', '[]', 0, '2023-09-21 04:32:21', '2023-09-21 04:32:21', '2024-09-21 10:02:21'),
 ('c5c185e8fc4966c499ab6006086184b47a2b2cabe0c862a5d848a9a6c96252a6d80e9485e740d843', 1, 4, 'adminApiToken', '[]', 0, '2023-09-11 12:37:32', '2023-09-11 12:37:32', '2024-09-11 18:07:32'),
 ('d9f29ed0d6be329356ca4be84dcae7fa56eeb89df4efbf9fcbe1dfdc882d9befe5abdc2dd9373383', 1, 4, 'Admin', '[]', 0, '2020-09-27 11:42:30', '2020-09-27 11:42:30', '2021-09-27 17:12:30'),
 ('dbd05b1031b1f3346573015a911322dfde9a892dd534e0516366ccd4e933c043036f02555c7ff965', 1, 4, 'adminApiToken', '[]', 0, '2023-09-18 12:38:28', '2023-09-18 12:38:28', '2024-09-18 18:08:28'),
@@ -511,7 +521,7 @@ CREATE TABLE `package` (
   `off` varchar(255) NOT NULL,
   `noOfPlace` varchar(255) NOT NULL,
   `featuredListings` varchar(255) NOT NULL,
-  `featuredType` enum('home_featured','city_listing','category_listing') NOT NULL,
+  `featuredType` enum('home_featured','city_listing','category_listing','search_ results') NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `discount` decimal(10,2) NOT NULL DEFAULT 0.00,
@@ -523,8 +533,9 @@ CREATE TABLE `package` (
 --
 
 INSERT INTO `package` (`id`, `type`, `title`, `duration`, `duration_type`, `durationMY`, `price`, `off`, `noOfPlace`, `featuredListings`, `featuredType`, `created_at`, `updated_at`, `discount`, `places`) VALUES
-(2, 'sd', 'fsdfs', 3, 0, '0', 'fsd', 'fdsfdsf', 'sdfsdfsdfsdf', 'sdfdsfdsf', 'city_listing', '2023-09-20 13:14:23', '2023-09-20 13:14:23', '0.00', 0),
-(3, 'das', 'dasdasd', 3, 0, '1', 'dasdas', 'asda', 'dasd', 'asdasd', 'home_featured', '2023-09-20 13:14:41', '2023-09-20 13:14:41', '0.00', 0);
+(4, 'FEATURED LISTING', 'New', 2, 0, '0', '3000', '3500', '4', '444', 'city_listing', '2023-09-20 13:20:27', '2023-09-21 06:29:02', '0.00', 0),
+(6, 'BUSINESS LISTING', 'Best Deal', 1, 0, '0', '2000', '2500', '1', '1', 'search_ results', '2023-09-21 05:38:52', '2023-09-21 06:29:22', '0.00', 0),
+(7, 'Ranking', 'Category', 1, 0, '0', '250', '0', '0', '3', 'home_featured', '2023-09-21 07:03:27', '2023-09-21 07:11:04', '0.00', 0);
 
 -- --------------------------------------------------------
 
@@ -779,7 +790,9 @@ CREATE TABLE `users_login` (
 
 INSERT INTO `users_login` (`id`, `type`, `name`, `mobileNumber`, `email`, `email_verified_at`, `verificationCode`, `password`, `image`, `status`, `remember_token`, `created_at`, `updated_at`) VALUES
 (1, 'Owner', 'Rahul Soni', '1234567890', NULL, NULL, '242722', '$2y$10$OPGfsC3aV/XnkEg5BcAuU.ZVmIWFP5bufbnxas2VSuK3/OV6VcBZG', '', 1, NULL, '2023-09-12 06:07:43', '2023-09-19 08:36:08'),
-(2, 'Owner', 'Harshit Soni', '1234567899', NULL, NULL, '242722', '$2y$10$OPGfsC3aV/XnkEg5BcAuU.ZVmIWFP5bufbnxas2VSuK3/OV6VcBZG', '1695115758.jpg', 1, NULL, '2023-09-12 06:07:43', '2023-09-19 10:00:39');
+(2, 'Owner', 'Harshit Soni', '1234567899', NULL, NULL, '242722', '$2y$10$OPGfsC3aV/XnkEg5BcAuU.ZVmIWFP5bufbnxas2VSuK3/OV6VcBZG', '1695115758.jpg', 1, NULL, '2023-09-12 06:07:43', '2023-09-19 10:00:39'),
+(3, 'Guest', 'user', '1111111111', NULL, NULL, '532841', '$2y$10$OPGfsC3aV/XnkEg5BcAuU.ZVmIWFP5bufbnxas2VSuK3/OV6VcBZG', NULL, 1, NULL, '2023-09-20 13:44:48', '2023-09-20 13:44:48'),
+(4, 'Guest', 'user2', '1111111112', NULL, NULL, '817990', '$2y$10$6.NVw1ac6Tz51NMtX4FZAeJx1xnsRrZTMVGcHad6d7hxbokSZmxl6', NULL, 1, NULL, '2023-09-21 04:40:54', '2023-09-21 04:41:31');
 
 --
 -- Indexes for dumped tables
@@ -986,7 +999,7 @@ ALTER TABLE `bookmarks`
 -- AUTO_INCREMENT for table `businesslist`
 --
 ALTER TABLE `businesslist`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `career`
@@ -1010,13 +1023,13 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `lead`
 --
 ALTER TABLE `lead`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `master`
 --
 ALTER TABLE `master`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -1040,7 +1053,7 @@ ALTER TABLE `oauth_personal_access_clients`
 -- AUTO_INCREMENT for table `package`
 --
 ALTER TABLE `package`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `permissions`
@@ -1082,7 +1095,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `users_login`
 --
 ALTER TABLE `users_login`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables
