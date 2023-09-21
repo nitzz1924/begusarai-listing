@@ -363,6 +363,7 @@
                                         <?php $user = User_Login::find(auth()->user()->id); ?>
                                     @endauth
                                     @foreach ($reviews as $review)
+                                    
                                         <li>
                                             <div class="place__author">
                                                 <div class="place__author__avatar">
@@ -536,6 +537,7 @@
                 <div class="similar-places__content">
                     <div class="row">
                         @foreach ($Result as $value)
+                        @if ($value->status == 1)
                             <div class="col-md-3">
                                 <div class="place-item layout-02 place-hover">
                                     <div class="place-inner">
@@ -636,6 +638,7 @@
                                     </div>
                                 </div>
                             </div>
+                            @endif
                         @endforeach
                     </div>
                 </div>

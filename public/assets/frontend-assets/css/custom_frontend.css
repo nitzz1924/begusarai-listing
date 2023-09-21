@@ -12,6 +12,12 @@
     /* position: static; */
     display: block;
 }
+
+.modal-backdrop {
+    /* position: static; */
+    z-index: 0!important;
+}
+/* 
 /* 
 .form-account{
     display: block!important;
