@@ -13,7 +13,7 @@
                             src="{{ asset('https://getgolo.com/images/video3.mp4') }}"></video> --}}
                     <div class="overlay overlay_2">
                     </div>
-                    <div class="container pt-5">
+                    <div class="container pt-5 d-grid align-content-center">
                         <div class="site-banner__content">
                             <h1 class="site-banner__title">Business Listing</h1>
                             <p>
@@ -180,8 +180,7 @@
                                                 </a>
                                                 
                                                 <a href="#" class="author" title="Author">
-                                                    <img src="{{ URL::to('uploads/' . $value->logo) }}"alt="Author" />
-
+                                                        <img src="{{ URL::to('uploads/' . $value->logo) }}"alt="Author" />
                                                 </a>
                                                 <!-- <div class="feature">Featured</div> -->
                                             </div>

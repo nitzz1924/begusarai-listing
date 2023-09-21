@@ -7701,7 +7701,10 @@ a.place__comments__reply i {
     -webkit-transform: translate3d(0, 0, 0);
     -moz-transform: translate3d(0, 0, 0);
     border: 2px solid #ffffff;
-    display: block;
+    /* display: block; */
+    display: flex; /* Use flexbox to center the image */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
     position: absolute;
     bottom: -18px;
     right: 20px;

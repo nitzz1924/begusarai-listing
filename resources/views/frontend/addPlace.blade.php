@@ -6,8 +6,14 @@
         <div class="listing-nav">
             <div class="listing-menu nav-scroll">
                 <ul>
-                    <li class="active"><a href="#genaral" title="Genaral"><span class="icon"><i
-                                    class="la la-cog"></i></span><span>Genaral</span></a></li>
+                    <li class="active">
+                        <a href="#genaral" title="Genaral">
+                            <span class="icon">
+                                <i class="la la-cog"></i>
+                            </span>
+                            <span>Genaral</span>
+                        </a>
+                    </li>
                     <li><a href="#hightlight" title="Hightlight"><span class="icon"><i
                                     class="la la-wifi"></i></span><span>Hightlight</span></a></li>
                     <li><a href="#location" title="Location"><span class="icon"><i
@@ -28,7 +34,7 @@
             <form action="{{ route('savePlace') }}" method="POST" class="upload-form" enctype="multipart/form-data">
                 @csrf
 
-                <div class="listing-box">
+                <div id="genaral" class="listing-box">
                     <h3>General</h3>
                     <div class="field-inline">
                         <div class="field-group field-input">
@@ -49,7 +55,7 @@
                     </div>
                     <div class="field-group">
                         <label for="description">Description</label>
-                        <textarea placeholder="Description" id="description" name="description"></textarea>
+                        <textarea placeholder="Description" id="description" name="description" rows="4" cols="65"></textarea>
                         @error('description')
                             <div class="has-error mt-2">{{ $message }}</div>
                         @enderror
@@ -61,9 +67,10 @@
                             <div class="has-error mt-2">{{ $message }}</div>
                         @enderror
                     </div>
+
                     <div class="field-group field-select">
-                        <label for="type">category</label>
-                        <select data-placeholder="Select category" class="chosen-select" id="category" name="category">
+                        <label for="category">Category</label>
+                        <select data-placeholder="Select Category" class="chosen-select" id="category" name="category">
                             <option selected></option>
                             @foreach ($category as $value)
                                 <option>{{ $value->title }}</option>
@@ -73,6 +80,7 @@
                             <div class="has-error mt-2">{{ $message }}</div>
                         @enderror
                     </div>
+
                     <div class="field-group field-select">
                         <label for="placeType">Place Type</label>
                         <select data-placeholder="Select Place Type" multiple class="chosen-select" id="placeType"
@@ -87,7 +95,8 @@
                         @enderror
                     </div>
                 </div>
-                <div class="listing-box">
+
+                <div id="hightlight" class="listing-box">
                     <h3>Highlight</h3>
                     <div class="field-group field-check">
                         @foreach ($Highlight as $value)
@@ -105,7 +114,8 @@
                         @enderror
                     </div>
                 </div>
-                <div class="listing-box">
+
+                <div id="location" class="listing-box">
                     <h3>Location</h3>
                     <div class="field-group field-select">
                         <label for="city">City</label>
@@ -128,7 +138,8 @@
                     </div>
                     <!-- Additional location fields can be added here -->
                 </div>
-                <div class="listing-box">
+
+                <div id="contact" class="listing-box">
                     <h3>Contact Info</h3>
                     <div class="field-group">
                         <label for="email">Email</label>
@@ -171,7 +182,8 @@
                         @enderror
                     </div>
                 </div><!-- .listing-box -->
-                <div class="listing-box">
+
+                <div id="social" class="listing-box">
                     <h3>Social Networks</h3>
                     <div class="field-group">
                         <label for="youtube">Youtube URL</label>
@@ -202,7 +214,8 @@
                         @enderror
                     </div>
                 </div><!-- .listing-box -->
-                <div class="listing-box">
+
+                <div id="open" class="listing-box">
                     <h3>Opening Hours</h3>
                     <div class="field-group field-select">
                         <label for="bookingType">Booking Type</label>
@@ -225,7 +238,8 @@
                         @enderror
                     </div>
                 </div><!-- .listing-box -->
-                <div class="listing-box">
+
+                <div id="media" class="listing-box">
                     <h3>Media</h3>
                     <div class="field-group field-file">
                         <label for="coverImage">Cover image</label>
@@ -257,7 +271,7 @@
                         <label for="documentImage">Document Images (Upload PDF)</label>
                         <label for="documentImage" class="preview">
                             <input type="file" name="documentImage" id="documentImage" class="upload-file"
-                            accept=".pdf">
+                                accept=".pdf">
                             <img class="img_preview" src="images/no-image.png" alt="" />
                             <i class="la la-cloud-upload-alt"></i>
                         </label>
@@ -267,7 +281,7 @@
                     </div>
 
 
-                
+
 
 
 
@@ -295,6 +309,7 @@
                         @enderror
                     </div>
                 </div><!-- .listing-box -->
+                
                 <div class="field-group field-submit">
                     <input type="submit" name="submit" value="Submit" class="btn">
                 </div>

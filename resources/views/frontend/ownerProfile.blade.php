@@ -70,16 +70,16 @@
                                 <div class="field-input">
                                     <label for="first_name"> Name</label>
                                     <input type="text" name="name" id="name" value="{{ $user->name }}"
-                                        placeholder="Invan">
+                                        placeholder="Nirmal">
                                     @error('name')
                                         <div class="text-danger">{{ $message }}</div>
                                     @enderror
                                 </div>
 
                                 <div class="field-input">
-                                    <label for="mobileNumber">Number</label>
-                                    <input type="mobileNumber" name="mobileNumber" value="{{ $user->mobileNumber }}"
-                                        placeholder="invan@gmail.com" id="mobileNumber">
+                                    <label for="mobileNumber">Phone Number</label>
+                                    <input type="tel" name="mobileNumber" value="{{ $user->mobileNumber }}"
+                                        placeholder="9876543210" id="mobileNumber">
                                     @error('mobileNumber')
                                         <div class="text-danger">{{ $message }}</div>
                                     @enderror
