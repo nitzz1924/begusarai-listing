@@ -121,16 +121,16 @@ class HomeController extends Controller
     {
         // Get the authenticated user
         $user = auth()->user();
-
+        $businessesCount = BusinessList::count();
         if ($user) {
             $businesses = BusinessList::leftJoin('bookmarks', function ($join) use ($user) {
                 $join->on('businesslist.id', '=', 'bookmarks.business_id')->where('bookmarks.user_id', '=', $user->id);
             })
                 ->select('businesslist.*', 'bookmarks.id AS bookmark_status')
                 ->orderBy('businesslist.created_at', 'desc')
-                ->get();
+                ->take(4)->get();
         } else {
-            $businesses = BusinessList::orderBy('created_at', 'desc')->get();
+            $businesses = BusinessList::orderBy('created_at', 'desc')->take(4)->get();
         }
         $Result = [];
 
@@ -178,7 +178,11 @@ class HomeController extends Controller
         $Mastercity = Master::orderBy('created_at', 'asc')
             ->where('type', '=', 'City')
             ->get();
-        return View::make('frontend.index', compact('submaster', 'businesses', 'Mastercity', 'TestimonialData', 'blog', 'Result'));
+
+            $popup = Master::orderBy('created_at', 'asc')
+            ->where('type', '=', 'Homepage_popup')
+            ->first(); 
+        return View::make('frontend.index', compact('submaster', 'businesses', 'Mastercity', 'TestimonialData', 'blog', 'Result','popup','businessesCount'));
     }
 
     // public function toggleBookmark(Request $request, $businessId)

@@ -17,7 +17,8 @@
                         <div class="site-banner__content">
                             <h1 class="site-banner__title">Business Listing</h1>
                             <p>
-                                <i>20</i> cities, <i>10</i> categories, <i>5662</i> listings.
+                                <i>{{count($Mastercity)}}</i> cities, <i>{{count($submaster)}}</i> categories, <i>{{$businessesCount}}</i> listings.
+                         
                             </p>
                             <form action="#" class="site-banner__search layout-02">
                                 @csrf
