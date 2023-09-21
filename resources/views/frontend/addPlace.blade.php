@@ -40,59 +40,65 @@
                         <div class="field-group field-input">
                             <label for="businessName">Business Name</label>
                             <input type="text" placeholder="What is the name of the place" name="businessName"
-                                id="businessName">
-                            @error('businessName')
+                                id="businessName" class="form-control @error('businessName') is-invalid @enderror">
+                            {{-- @error('businessName')
                                 <div class="has-error mt-2">{{ $message }}</div>
-                            @enderror
+                            @enderror --}}
                         </div>
                         <div class="field-group field-input">
                             <label for="price">Price</label>
-                            <input type="text" placeholder="Price" name="price" id="price">
-                            @error('price')
+                            <input type="text" placeholder="Price" name="price" id="price"
+                                class="form-control @error('price') is-invalid @enderror">
+                            {{-- @error('price')
                                 <div class="has-error mt-2">{{ $message }}</div>
-                            @enderror
+                            @enderror --}}
                         </div>
                     </div>
                     <div class="field-group">
                         <label for="description">Description</label>
-                        <textarea placeholder="Description" id="description" name="description" rows="4" cols="65"></textarea>
-                        @error('description')
+                        <textarea placeholder="Description" id="description" name="description" rows="4" cols="65"
+                            class="form-control @error('description') is-invalid @enderror"></textarea>
+                        {{-- @error('description')
                             <div class="has-error mt-2">{{ $message }}</div>
-                        @enderror
+                        @enderror --}}
                     </div>
                     <div class="field-group">
                         <label for="duration">Duration</label>
-                        <input type="text" placeholder="Duration" id="duration" name="duration">
-                        @error('duration')
+                        <input type="text" placeholder="Duration" id="duration" name="duration"
+                            class="form-control @error('duration') is-invalid @enderror">
+                        {{-- @error('duration')
                             <div class="has-error mt-2">{{ $message }}</div>
-                        @enderror
+                        @enderror --}}
                     </div>
 
                     <div class="field-group field-select">
                         <label for="category">Category</label>
-                        <select data-placeholder="Select Category" class="chosen-select" id="category" name="category">
+                        <select data-placeholder="Select Category"
+                            class="chosen-select form-control @error('category') is-invalid @enderror" id="category"
+                            name="category">
                             <option selected></option>
                             @foreach ($category as $value)
                                 <option>{{ $value->title }}</option>
                             @endforeach
                         </select>
-                        @error('category')
+                        {{-- @error('category')
                             <div class="has-error mt-2">{{ $message }}</div>
-                        @enderror
+                        @enderror --}}
                     </div>
 
                     <div class="field-group field-select">
                         <label for="placeType">Place Type</label>
-                        <select data-placeholder="Select Place Type" multiple class="chosen-select" id="placeType"
+                        <select data-placeholder="Select Place Type" multiple
+                            class="chosen-select form-control @error('placeType') is-invalid @enderror" id="placeType"
                             name="placeType[]">
                             <option disabled>Select</option>
                             @foreach ($Placetype as $value)
                                 <option>{{ $value->title }}</option>
                             @endforeach
                         </select>
-                        @error('placeType')
+                        {{-- @error('placeType')
                             <div class="has-error mt-2">{{ $message }}</div>
-                        @enderror
+                        @enderror --}}
                     </div>
                 </div>
 
@@ -119,22 +125,25 @@
                     <h3>Location</h3>
                     <div class="field-group field-select">
                         <label for="city">City</label>
-                        <select data-placeholder="Select City" class="chosen-select" id="city" name="city">
+                        <select data-placeholder="Select City"
+                            class="chosen-select form-control @error('city') is-invalid @enderror" id="city"
+                            name="city">
                             <option selected></option>
                             @foreach ($City as $value)
                                 <option>{{ $value->title }}</option>
                             @endforeach
                         </select>
-                        @error('city')
+                        {{-- @error('city')
                             <div class="has-error mt-2">{{ $message }}</div>
-                        @enderror
+                        @enderror --}}
                     </div>
                     <div class="field-group">
                         <label for="placeAddress">Place Address</label>
-                        <input type="text" placeholder="Full Address" id="placeAddress" name="placeAddress">
-                        @error('placeAddress')
+                        <input type="text" placeholder="Full Address" id="placeAddress" name="placeAddress"
+                            class="form-control @error('placeAddress') is-invalid @enderror">
+                        {{-- @error('placeAddress')
                             <div class="has-error mt-2">{{ $message }}</div>
-                        @enderror
+                        @enderror --}}
                     </div>
                     <!-- Additional location fields can be added here -->
                 </div>
@@ -143,43 +152,46 @@
                     <h3>Contact Info</h3>
                     <div class="field-group">
                         <label for="email">Email</label>
-                        <input type="email" placeholder="Your email address" id="email" name="email">
-                        @error('email')
+                        <input type="email" placeholder="Your email address" id="email" name="email"
+                            class="form-control @error('email') is-invalid @enderror">
+                        {{-- @error('email')
                             <div class="has-error mt-2">{{ $message }}</div>
-                        @enderror
+                        @enderror --}}
                     </div>
                     <div class="field-group">
                         <label for="phoneNumber1">Phone number</label>
-                        <input type="tel" placeholder="Your phone number" name="phoneNumber1" id="phoneNumber1">
-                        @error('phoneNumber1')
+                        <input type="tel" placeholder="Your phone number" name="phoneNumber1" id="phoneNumber1"
+                            class="form-control @error('phoneNumber1') is-invalid @enderror">
+                        {{-- @error('phoneNumber1')
                             <div class="has-error mt-2">{{ $message }}</div>
-                        @enderror
+                        @enderror --}}
                     </div>
                     <div class="field-group">
                         <label for="phoneNumber2">Phone number 2 (optional)</label>
                         <input type="tel" placeholder="Your phone number" name="phoneNumber2" id="phoneNumber2">
                     </div>
                     <div class="field-group">
-                        <label for="whatsappNo">WhatsApp No</label>
-                        <input type="tel" placeholder="Your WhatsApp number" name="whatsappNo" id="whatsappNo">
-                        @error('whatsappNo')
+                        <label for="whatsappNo">WhatsApp Number</label>
+                        <input type="tel" placeholder="Your WhatsApp number" name="whatsappNo" id="whatsappNo" class="form-control @error('whatsappNo') is-invalid @enderror">
+                        {{-- @error('whatsappNo')
                             <div class="has-error mt-2">{{ $message }}</div>
-                        @enderror
+                        @enderror --}}
                     </div>
                     <div class="field-group">
                         <label for="websiteUrl">Website</label>
-                        <input type="url" placeholder="Your website url" name="websiteUrl" id="websiteUrl">
-                        @error('websiteUrl')
+                        <input type="url" placeholder="Your website url" name="websiteUrl" id="websiteUrl"
+                            class="form-control @error('websiteUrl') is-invalid @enderror">
+                        {{-- @error('websiteUrl')
                             <div class="has-error mt-2">{{ $message }}</div>
-                        @enderror
+                        @enderror --}}
                     </div>
                     <div class="field-group">
                         <label for="additionalFields">Additional Fields</label>
                         <input type="url" placeholder="Your additional fields url" name="additionalFields"
-                            id="additionalFields">
-                        @error('additionalFields')
+                            id="additionalFields" class="form-control @error('additionalFields') is-invalid @enderror">
+                        {{-- @error('additionalFields')
                             <div class="has-error mt-2">{{ $message }}</div>
-                        @enderror
+                        @enderror --}}
                     </div>
                 </div><!-- .listing-box -->
 
@@ -187,31 +199,35 @@
                     <h3>Social Networks</h3>
                     <div class="field-group">
                         <label for="youtube">Youtube URL</label>
-                        <input type="url" placeholder="Your YouTube URL" name="youtube" id="youtube">
-                        @error('youtube')
+                        <input type="url" placeholder="Your YouTube URL" name="youtube" id="youtube"
+                            class="form-control @error('youtube') is-invalid @enderror">
+                        {{-- @error('youtube')
                             <div class="has-error mt-2">{{ $message }}</div>
-                        @enderror
+                        @enderror --}}
                     </div>
                     <div class="field-group">
                         <label for="twitter">Twitter URL</label>
-                        <input type="url" placeholder="Your Twitter URL" name="twitter" id="twitter">
-                        @error('twitter')
+                        <input type="url" placeholder="Your Twitter URL" name="twitter" id="twitter"
+                            class="form-control @error('twitter') is-invalid @enderror">
+                        {{-- @error('twitter')
                             <div class="has-error mt-2">{{ $message }}</div>
-                        @enderror
+                        @enderror --}}
                     </div>
                     <div class="field-group">
                         <label for="instagram">Instagram URL</label>
-                        <input type="url" placeholder="Your Instagram URL" name="instagram" id="instagram">
-                        @error('instagram')
+                        <input type="url" placeholder="Your Instagram URL" name="instagram" id="instagram"
+                            class="form-control @error('instagram') is-invalid @enderror">
+                        {{-- @error('instagram')
                             <div class="has-error mt-2">{{ $message }}</div>
-                        @enderror
+                        @enderror --}}
                     </div>
                     <div class="field-group">
                         <label for="facebook">Facebook URL</label>
-                        <input type="url" placeholder="Your Facebook URL" name="facebook" id="facebook">
-                        @error('facebook')
+                        <input type="url" placeholder="Your Facebook URL" name="facebook" id="facebook"
+                            class="form-control @error('facebook') is-invalid @enderror">
+                        {{-- @error('facebook')
                             <div class="has-error mt-2">{{ $message }}</div>
-                        @enderror
+                        @enderror --}}
                     </div>
                 </div><!-- .listing-box -->
 
@@ -219,7 +235,7 @@
                     <h3>Opening Hours</h3>
                     <div class="field-group field-select">
                         <label for="bookingType">Booking Type</label>
-                        <select data-placeholder="Select Booking Type" class="chosen-select" id="bookingType"
+                        <select data-placeholder="Select Booking Type" class="chosen-select form-control @error('bookingType') is-invalid @enderror" id="bookingType"
                             name="bookingType">
                             <option selected></option>
                             @foreach ($bookingType as $value)
@@ -232,10 +248,10 @@
                     </div>
                     <div class="field-group">
                         <label for="bookingurl">Booking URL</label>
-                        <input type="url" placeholder="Your booking URL" name="bookingurl" id="bookingurl">
-                        @error('bookingurl')
+                        <input type="url" placeholder="Your booking URL" name="bookingurl" id="bookingurl" class="form-control @error('bookingurl') is-invalid @enderror">
+                        {{-- @error('bookingurl')
                             <div class="has-error mt-2">{{ $message }}</div>
-                        @enderror
+                        @enderror --}}
                     </div>
                 </div><!-- .listing-box -->
 
@@ -254,8 +270,9 @@
                         @enderror
                         <div class="field-note">Maximum file size: 1 MB.</div>
                     </div>
+
                     <div class="field-group field-file">
-                        <label for="galleryImage">Gallery Images (optional)</label>
+                        <label for="galleryImage">Gallery Images </label>
                         <label for="galleryImage" class="preview">
                             <input type="file" name="galleryImage[]" id="galleryImage" class="upload-file"
                                 data-max-size="1024" multiple>
@@ -267,6 +284,7 @@
                         @enderror
                         <div class="field-note">Maximum file size: 1 MB.</div>
                     </div>
+
                     <div class="field-group field-file">
                         <label for="documentImage">Document Images (Upload PDF)</label>
                         <label for="documentImage" class="preview">
@@ -289,7 +307,7 @@
 
 
                     <div class="field-group field-file">
-                        <label for="logo">Logo (optional)</label>
+                        <label for="logo">Author </label>
                         <label for="logo" class="preview">
                             <input type="file" name="logo" id="logo" class="upload-file"
                                 data-max-size="1024">
@@ -309,7 +327,7 @@
                         @enderror
                     </div>
                 </div><!-- .listing-box -->
-                
+
                 <div class="field-group field-submit">
                     <input type="submit" name="submit" value="Submit" class="btn">
                 </div>

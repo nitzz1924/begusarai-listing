@@ -46,23 +46,23 @@
                                 </option>
                             @endforeach
                         </select>
-                        @error('type')
+                        {{-- @error('type')
                             <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
+                        @enderror --}}
                     </div>
 
 
                     <div class="form-group col-md-6">
                         <label for="title"> Offer Title:</label>
-                        <input type="text" id="title" name="title" class="form-control"
+                        <input type="text" id="title" name="title" class="form-control @error('title') is-invalid @enderror"
                             value="{{ old('title', $package->title) }}" required>
-                        @error('title')
+                        {{-- @error('title')
                             <div class="text-danger">{{ $message }}</div>
-                        @enderror
+                        @enderror --}}
                     </div>
                     <div class="form-group col-md-6">
                         <label for="duration">Duration (in months/years):</label>
-                        <select id="duration" name="duration" class="form-control custom-select" required>
+                        <select id="duration" name="duration" class="form-control custom-select @error('duration') is-invalid @enderror" required>
                             <option value="" selected>Select</option>
                             @for ($i = 1; $i <= 10; $i++)
                                 <option value="{{ $i }}"
@@ -70,13 +70,13 @@
                                     {{ $i }}</option>
                             @endfor
                         </select>
-                        @error('duration')
+                        {{-- @error('duration')
                             <div class="text-danger">{{ $message }}</div>
-                        @enderror
+                        @enderror --}}
                     </div>
                     <div class="form-group col-md-6">
                         <label for="durationMY">Duration Type:</label>
-                        <select id="durationMY" name="durationMY" class="form-control custom-select" required>
+                        <select id="durationMY" name="durationMY" class="form-control custom-select @error('durationMY') is-invalid @enderror" required>
                             <option value="" selected>Select</option>
                             <option value="0" {{ old('durationMY', $package->durationMY) == '0' ? 'selected' : '' }}>
                                 months
@@ -85,45 +85,45 @@
                                 years
                             </option>
                         </select>
-                        @error('durationMY')
+                        {{-- @error('durationMY')
                             <div class="text-danger">{{ $message }}</div>
-                        @enderror
+                        @enderror --}}
                     </div>
                     <div class="form-group col-md-6">
                         <label for="price">Price:</label>
-                        <input type="text" id="price" name="price" class="form-control"
+                        <input type="text" id="price" name="price" class="form-control @error('price') is-invalid @enderror"
                             value="{{ old('price', $package->price) }}" required>
-                        @error('price')
+                        {{-- @error('price')
                             <div class="text-danger">{{ $message }}</div>
-                        @enderror
+                        @enderror --}}
                     </div>
                     <div class="form-group col-md-6">
                         <label for="off">High Price:</label>
-                        <input type="text" id="off" name="off" class="form-control"
+                        <input type="text" id="off" name="off" class="form-control @error('off') is-invalid @enderror"
                             value="{{ old('off', $package->off) }}" required>
-                        @error('off')
+                        {{-- @error('off')
                             <div class="text-danger">{{ $message }}</div>
-                        @enderror
+                        @enderror --}}
                     </div>
                     <div class="form-group col-md-6">
                         <label for="noOfPlace">Number of Places:</label>
-                        <input type="text" id="noOfPlace" name="noOfPlace" class="form-control"
+                        <input type="text" id="noOfPlace" name="noOfPlace" class="form-control @error('noOfPlace') is-invalid @enderror"
                             value="{{ old('noOfPlace', $package->noOfPlace) }}" required>
-                        @error('noOfPlace')
+                        {{-- @error('noOfPlace')
                             <div class="text-danger">{{ $message }}</div>
-                        @enderror
+                        @enderror --}}
                     </div>
                     <div class="form-group col-md-6">
                         <label for="featuredListings">Featured Listings:</label>
-                        <input type="text" id="featuredListings" name="featuredListings" class="form-control"
+                        <input type="text" id="featuredListings" name="featuredListings" class="form-control @error('featuredListings') is-invalid @enderror"
                             value="{{ old('featuredListings', $package->featuredListings) }}" required>
-                        @error('featuredListings')
+                        {{-- @error('featuredListings')
                             <div class="text-danger">{{ $message }}</div>
-                        @enderror
+                        @enderror --}}
                     </div>
                     <div class="form-group col-md-6">
                         <label for="featuredType">Featured Type:</label>
-                        <select id="featuredType" name="featuredType" class="form-control" required>
+                        <select id="featuredType" name="featuredType" class="form-control @error('featuredType') is-invalid @enderror" required>
                             <option value="home_featured"
                                 {{ old('featuredType', $package->featuredType) == 'home_featured' ? 'selected' : '' }}>
                                 Home Featured</option>
@@ -137,9 +137,9 @@
                                 {{ old('featuredType', $package->featuredType) == 'search_ results' ? 'selected' : '' }}>
                                 Search Results </option>
                         </select>
-                        @error('featuredType')
+                        {{-- @error('featuredType')
                             <div class="text-danger">{{ $message }}</div>
-                        @enderror
+                        @enderror --}}
                     </div>
                 </div>
                 <div class="form-group col-md-12 text-center">

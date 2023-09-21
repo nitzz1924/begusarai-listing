@@ -25,108 +25,107 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                                 <i class="las la-times la-24-black"></i>
                             </a><!-- .popup__close -->
 
-                            <div class="popup__menu popup__box">    
+                            <div class="popup__menu popup__box">
 
-                            <div class="site__brand">
-                                <a title="Logo" href="/" class="site__brand__logo"><img
-                                        src="{{ asset('assets/images/begusarai-logo.png') }}" alt="Begusarai" /></a>
-                            </div>
+                                <div class="site__brand">
+                                    <a title="Logo" href="/" class="site__brand__logo"><img
+                                            src="{{ asset('assets/images/begusarai-logo.png') }}" alt="Begusarai" /></a>
+                                </div>
                             </div>
 
                             <div class="popup__content">
                             <?php 
                             if (Auth::user()==null){
-                                ?>
+                            ?>
                                 <div class="popup__user popup__box open-form">
                                     <a title="Login" href="#" class="open-login">Login</a>
                                 </div><!-- .popup__user -->
-                                
-                                
-                                <?php 
+
+                            <?php 
                             }
                             ?>
 
-
-                            <div class="popup__menu popup__box">    
-                                <ul class="sub-menu">
-                                    @auth
-                                        <?php $user = User_Login::find(auth()->user()->id); ?>
-                                    @endauth
+                                @auth
+                                    <?php $user = User_Login::find(auth()->user()->id); ?>
+                                @endauth
+                                <div class="popup__menu popup__box">
+                                    <ul class="sub-menu">
 
                                     <?php 
                                     if(Auth::user()){
 
                                     if (Auth::user()->type=='Guest'){
                                         ?>
-                                    <li>
-                                        <a class="avatar" href="">
+                                        <li>
+                                            <a class="avatar" href="">
 
-                                            @if ($user->image)
-                                                <img src="{{ URL::to('/uploads/' . $user->image) }}" title=""
-                                                    alt="">
+                                                @if ($user->image)
+                                                    <img src="{{ URL::to('/uploads/' . $user->image) }}" title=""
+                                                        alt="">
 
-                                                <span>Guest</span>
-                                            @else
-                                                <img src="https://wp.getgolo.com/country-guide/wp-content/themes/golo/assets/images/default-user-image.png"
-                                                    title="guest" alt="guest">
-                                            @endif
-                                        </a>
-                                        <ul class="sub-menu">
-                                            <li class=""><a href="/ownerProfile">Profile</a></li>
-                                            <li class=""><a href="/ownerWishlist">My Wishlist</a></li>
-                                            <li>
-                                                <a href="/logout">
-                                                    <span>Logout</span>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <?php 
+                                                    <span>Guest</span>
+                                                @else
+                                                    <img src="https://wp.getgolo.com/country-guide/wp-content/themes/golo/assets/images/default-user-image.png"
+                                                        title="guest" alt="guest">
+                                                @endif
+                                            </a>
+                                            <ul class="sub-menu">
+                                                <li class=""><a href="/ownerProfile">Profile</a></li>
+                                                <li class=""><a href="/ownerWishlist">My Wishlist</a></li>
+                                                <li>
+                                                    <a href="/logout">
+                                                        <span>Logout</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <?php 
                                     }}
                                     ?>
 
 
                                     <?php 
-                                if(Auth::user()){
+                                    if(Auth::user()){
 
-                                if (Auth::user()->type=='Owner'){
-                                ?>
-                                    <li>
-                                        <a class="avatar" href="">
-                                            @if ($user->image)
-                                                <img src="{{ URL::to('/uploads/' . $user->image) }}" title=""
-                                                    alt="">
+                                    if (Auth::user()->type=='Owner'){
+                                    ?>
+                                        <li>
+                                            <a class="avatar" href="">
+                                                @if ($user->image)
+                                                    <img src="{{ URL::to('/uploads/' . $user->image) }}" title=""
+                                                        alt="">
 
-                                                <span> Business Owner</span>
-                                            @else
-                                                <img src="{{ asset('assets/images/users/default.png') }}"
-                                                    title="Default Avatar" alt="Default Avatar">
-                                            @endif
-                                        </a>
-                                        <ul class="sub-menu">
-                                            <li class=""><a href="/ownerDashboard">Dashboard</a>
-                                            </li>
-                                            <li class=""><a href="/ownerListing">My Places</a>
-                                            </li>
-                                            <li class=""><a href="/ownerWishlist">My Wishlist</a>
-                                            </li>
-                                            <li class=""><a href="/businessOwnerPage">Author Listing</a>
-                                            </li>
-                                            <li>
-                                                <hr class="dropdown-divider">
-                                            </li>
-                                            <li>
-                                                <a href="/logout">
-                                                    <span>Logout</span> </i>
-                                                </a>
-                                            </li>
-                                    </li>
+                                                    <span> Business Owner</span>
+                                                @else
+                                                    <img src="{{ asset('assets/images/users/default.png') }}"
+                                                        title="Default Avatar" alt="Default Avatar">
+                                                @endif
+                                            </a>
+                                            <ul class="sub-menu">
+                                                <li class=""><a href="/ownerDashboard">Dashboard</a>
+                                                </li>
+                                                <li class=""><a href="/ownerListing">My Places</a>
+                                                </li>
+                                                <li class=""><a href="/ownerWishlist">My Wishlist</a>
+                                                </li>
+                                                <li class=""><a href="/businessOwnerPage">Author Listing</a>
+                                                </li>
+                                                <li>
+                                                    <hr class="dropdown-divider">
+                                                </li>
+                                                <li>
+                                                    <a href="/logout">
+                                                        <span>Logout</span> </i>
+                                                    </a>
+                                                </li>
+                                        </li>
                                     <?php 
                                     }}
                                     ?>
-                                </ul>
-                                </ul>
-                            </div><!-- .popup__menu -->
+
+                                    </ul>
+                                    </ul>
+                                </div><!-- .popup__menu -->
 
                                 {{-- Navigation tabs --}}
                                 <div class="popup__menu popup__box">
