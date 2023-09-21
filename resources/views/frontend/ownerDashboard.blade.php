@@ -42,7 +42,7 @@
                         </div>
                         <div class="col-lg-3 col-6">
                             <div class="item green">
-                                <h3>Bookings Made</h3>
+                                <h3>Total Leads</h3>
                                 <span class="number">12</span>
                                 <span class="line"></span>
                             </div>
@@ -68,8 +68,8 @@
                         <div class="col-lg-4">
                             <div class="ob-item">
                                 <div class="ob-head">
-                                    <h3>Recent Bookings</h3>
-                                    <a href="#" class="view-all" title="View All">View all</a>
+                                    <h3>Recent Leads</h3>
+                                    <a href="/leads" class="view-all" title="View All">View all</a>
                                 </div>
                                 <div class="ob-content">
                                     <ul>
@@ -209,7 +209,7 @@
                         <div class="col-lg-4">
                             <div class="ob-item">
                                 <div class="ob-head">
-                                    <h3>Notifications <span>(5)</span></h3>
+                                    <h3>New Visitors <span>(5)</span></h3>
                                     <a href="#" class="clear-all" title="Clear All">Clear all</a>
                                 </div>
                                 <div class="ob-content">

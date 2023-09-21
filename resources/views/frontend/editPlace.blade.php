@@ -5,10 +5,29 @@
     <main class="site-main listing-main">
         <div class="listing-nav">
             <!-- Your navigation menu here -->
+            <div class="listing-menu nav-scroll">
+                <ul>
+                    <li class="active"> <a href="#genaral" title="Genaral"><span class="icon">
+                                <i class="la la-cog"></i></span><span>Genaral</span></a>
+                    </li>
+                    <li><a href="#hightlight" title="Hightlight"><span class="icon"><i
+                                    class="la la-wifi"></i></span><span>Hightlight</span></a></li>
+                    <li><a href="#location" title="Location"><span class="icon"><i
+                                    class="la la-map-marker"></i></span><span>Location</span></a></li>
+                    <li><a href="#contact" title="Contact info"><span class="icon"><i
+                                    class="la la-phone"></i></span><span>Contact info</span></a></li>
+                    <li><a href="#social" title="Social network"><span class="icon"><i
+                                    class="la la-link"></i></span><span>Social network</span></a></li>
+                    <li><a href="#open" title="Open hourses"><span class="icon"><i
+                                    class="la la-business-time"></i></span><span>Open hourses</span></a></li>
+                    <li><a href="#media" title="Media"><span class="icon"><i
+                                    class="la la-image"></i></span><span>Media</span></a></li>
+                </ul>
+            </div>
         </div><!-- .listing-nav -->
-        <div class="listing-content">
-            <h2>Add/Edit Place</h2>
 
+        <div class="listing-content">
+            <h2>Edit Place</h2>
             <form action="{{ route('updatePlace', ['id' => $business->id]) }}" method="POST" class="upload-form"
                 enctype="multipart/form-data">
                 @csrf
@@ -19,32 +38,32 @@
                 @endif --}}
 
                 <!-- General Information -->
-                <div class="listing-box">
+                <div id="genaral" class="listing-box">
                     <h3>General</h3>
                     <input type="hidden" name="editId" value="{{ $business->id }}" {{-- value="{{ isset($business) ? $business->id : 0 }}" --}} />
                     <!-- Business Name -->
                     <div class="field-group field-input">
                         <label for="businessName">Business Name</label>
                         <input type="text" placeholder="What is the name of the place" name="businessName"
-                            id="businessName"
+                            id="businessName" class="form-control @error('businessName') is-invalid @enderror"
                             value="{{ isset($business) ? $business->businessName : old('businessName') }}">
-                        @error('businessName')
+                        {{-- @error('businessName')
                             <div class="has-error mt-2">{{ $message }}</div>
-                        @enderror
+                        @enderror --}}
                     </div>
                     <!-- Price -->
                     <div class="field-group field-input">
                         <label for="price">Price</label>
-                        <input type="text" placeholder="Price" name="price" id="price"
+                        <input type="text" placeholder="Price" name="price" id="price" class="form-control @error('price') is-invalid @enderror"
                             value="{{ isset($business) ? $business->price : old('price') }}">
-                        @error('price')
+                        {{-- @error('price')
                             <div class="has-error mt-2">{{ $message }}</div>
-                        @enderror
+                        @enderror --}}
                     </div>
                     <!-- Description -->
                     <div class="field-group">
                         <label for="description">Description</label>
-                        <textarea placeholder="Description" id="description" name="description">{{ isset($business) ? $business->description : old('description') }}</textarea>
+                        <textarea placeholder="Description" id="description" name="description" rows="6" cols="65" class="form-control @error('description') is-invalid @enderror">{{ isset($business) ? $business->description : old('description') }}</textarea>
                         @error('description')
                             <div class="has-error mt-2">{{ $message }}</div>
                         @enderror
@@ -53,15 +72,15 @@
                     <div class="field-group">
                         <label for="duration">Duration</label>
                         <input type="text" placeholder="Duration" id="duration" name="duration"
-                            value="{{ isset($business) ? $business->duration : old('duration') }}">
+                            value="{{ isset($business) ? $business->duration : old('duration') }}" class="form-control @error('duration') is-invalid @enderror">
                         @error('duration')
                             <div class="has-error mt-2">{{ $message }}</div>
                         @enderror
                     </div>
                     <!-- category -->
                     <div class="field-group field-select">
-                        <label for="category">category</label>
-                        <select data-placeholder="Select category" class="chosen-select" id="category" name="category">
+                        <label for="category">Category</label>
+                        <select data-placeholder="Select category" class="chosen-select" id="category" name="category" >
                             <option selected></option>
                             @foreach ($data['category'] as $value)
                                 <option {{ isset($business) && $business->category == $value->title ? 'selected' : '' }}>
@@ -95,7 +114,7 @@
 
                 <!-- Highlight -->
                 <!-- Highlight -->
-                <div class="listing-box">
+                <div id="hightlight" class="listing-box">
                     <h3>Highlight</h3>
                     <div class="field-group field-check">
                         @foreach ($data['Highlight'] as $value)
@@ -115,10 +134,8 @@
                     </div>
                 </div>
 
-
-
                 <!-- Location -->
-                <div class="listing-box">
+                <div id="location" class="listing-box">
                     <h3>Location</h3>
                     <!-- City -->
                     <div class="field-group field-select">
@@ -130,42 +147,42 @@
                                     {{ $value->title }}</option>
                             @endforeach
                         </select>
-                        @error('city')
+                        {{-- @error('city')
                             <div class="has-error mt-2">{{ $message }}</div>
-                        @enderror
+                        @enderror --}}
                     </div>
                     <!-- Place Address -->
                     <div class="field-group">
                         <label for="placeAddress">Place Address</label>
-                        <input type="text" placeholder="Full Address" id="placeAddress" name="placeAddress"
+                        <input type="text" placeholder="Full Address" id="placeAddress" name="placeAddress" class="form-control @error('placeAddress') is-invalid @enderror"
                             value="{{ isset($business) ? $business->placeAddress : old('placeAddress') }}">
-                        @error('placeAddress')
+                        {{-- @error('placeAddress')
                             <div class="has-error mt-2">{{ $message }}</div>
-                        @enderror
+                        @enderror --}}
                     </div>
                     <!-- Additional location fields can be added here -->
                 </div>
 
                 <!-- Contact Info -->
-                <div class="listing-box">
+                <div id="contact" class="listing-box">
                     <h3>Contact Info</h3>
                     <!-- Email -->
                     <div class="field-group">
                         <label for="email">Email</label>
-                        <input type="email" placeholder="Your email address" id="email" name="email"
+                        <input type="email" placeholder="Your email address" id="email" name="email" class="form-control @error('email') is-invalid @enderror"
                             value="{{ isset($business) ? $business->email : old('email') }}">
-                        @error('email')
+                        {{-- @error('email')
                             <div class="has-error mt-2">{{ $message }}</div>
-                        @enderror
+                        @enderror --}}
                     </div>
                     <!-- Phone Number 1 -->
                     <div class="field-group">
                         <label for="phoneNumber1">Phone number</label>
-                        <input type="tel" placeholder="Your phone number" name="phoneNumber1" id="phoneNumber1"
+                        <input type="tel" placeholder="Your phone number" name="phoneNumber1" id="phoneNumber1" class="form-control @error('phoneNumber1') is-invalid @enderror"
                             value="{{ isset($business) ? $business->phoneNumber1 : old('phoneNumber1') }}">
-                        @error('phoneNumber1')
+                        {{-- @error('phoneNumber1')
                             <div class="has-error mt-2">{{ $message }}</div>
-                        @enderror
+                        @enderror --}}
                     </div>
                     <!-- Phone Number 2 (optional) -->
                     <div class="field-group">
@@ -176,11 +193,11 @@
                     <!-- WhatsApp No -->
                     <div class="field-group">
                         <label for="whatsappNo">WhatsApp No</label>
-                        <input type="tel" placeholder="Your WhatsApp number" name="whatsappNo" id="whatsappNo"
+                        <input type="tel" placeholder="Your WhatsApp number" name="whatsappNo" id="whatsappNo" class="form-control @error('whatsappNo') is-invalid @enderror"
                             value="{{ isset($business) ? $business->whatsappNo : old('whatsappNo') }}">
-                        @error('whatsappNo')
+                        {{-- @error('whatsappNo')
                             <div class="has-error mt-2">{{ $message }}</div>
-                        @enderror
+                        @enderror --}}
                     </div>
                     <!-- Website -->
                     <div class="field-group">
@@ -204,7 +221,7 @@
                 </div><!-- .listing-box -->
 
                 <!-- Social Networks -->
-                <div class="listing-box">
+                <div id="social" class="listing-box">
                     <h3>Social Networks</h3>
                     <!-- Youtube URL -->
                     <div class="field-group">
@@ -245,7 +262,7 @@
                 </div><!-- .listing-box -->
 
                 <!-- Opening Hours -->
-                <div class="listing-box">
+                <div id="open" class="listing-box">
                     <h3>Opening Hours</h3>
                     <!-- Booking Type -->
                     <div class="field-group field-select">
@@ -277,7 +294,7 @@
                 </div><!-- .listing-box -->
 
                 <!-- Media -->
-                <div class="listing-box">
+                <div id="media" class="listing-box">
                     <h3>Media</h3>
                     <!-- Cover Image -->
                     <div class="field-group field-file">

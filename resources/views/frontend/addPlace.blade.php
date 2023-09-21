@@ -81,9 +81,9 @@
                                 <option>{{ $value->title }}</option>
                             @endforeach
                         </select>
-                        {{-- @error('category')
+                        @error('category')
                             <div class="has-error mt-2">{{ $message }}</div>
-                        @enderror --}}
+                        @enderror
                     </div>
 
                     <div class="field-group field-select">
