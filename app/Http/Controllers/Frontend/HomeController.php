@@ -20,6 +20,8 @@ use App\Models\Bookmark;
 use App\Models\Career;
 use App\Models\Contact;
 use App\Models\Review;
+use App\Models\Package;
+
 use DB;
 
 use View;
@@ -515,7 +517,16 @@ class HomeController extends Controller
 
     public function packages()
     {
-        return view('frontend.packages');
+
+        $ranking = Package::orderBy('created_at', 'asc')
+        ->where('type', '=', 'Ranking')
+        ->get();
+        // $packages = Package::orderBy('created_at', 'desc')->get();
+        $packages = Package::orderBy('created_at', 'desc')
+        ->orWhere('type', '!=', 'Ranking')
+        ->get();
+    
+        return view('frontend.packages', compact('packages','ranking'));
     }
 
     public function setPassword(Request $request)

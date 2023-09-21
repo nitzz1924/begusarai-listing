@@ -56,12 +56,13 @@ public function index()
         $request->validate([
             'type' => 'required',
             'title' => 'required',
-            'duration' => 'required ', 
+            'duration' => 'required',
+
             'durationMY' => 'required ', 
-            'price' => 'required ', 
-            'off' => 'required ', 
-            'noOfPlace' => 'required ', 
-            'featuredListings' => 'required', 
+            'price' => 'required|numeric ', 
+            'off' => 'required|numeric ', 
+            'noOfPlace' => 'required|numeric ', 
+            'featuredListings' => 'required|numeric', 
             'featuredType' => 'required', 
         ]);
     
@@ -118,8 +119,9 @@ public function index()
      */
     public function edit($id)
     {
+        $master = Master::orderBy('created_at', 'asc')->where('type','=','Package')->get();
         $package = Package::where('id', $id)->first();
-        return view('backend.admin.package.edit', compact('package'));
+        return view('backend.admin.package.edit', compact('package','master'));
     }
 
     /**
@@ -136,10 +138,10 @@ public function index()
             'title' => 'required',
             'duration' => 'required',
             'durationMY' => 'required',
-            'price' => 'required',
-            'off' => 'required',
-            'noOfPlace' => 'required',
-            'featuredListings' => 'required',
+            'price' => 'required|numeric',
+            'off' => 'required|numeric',
+            'noOfPlace' => 'required|numeric',
+            'featuredListings' => 'required|numeric',
             'featuredType' => 'required',
         ]);
     

@@ -6,10 +6,7 @@
         <div class="member-wrap d-grid justify-content-center">
             <div class="member-wrap-top mt-5 h-100">
 
-                <?php 
-
-            if(Auth::user()){
-                ?>
+              
                 <h2>Setup Your Password</h2>
             </div>
             <!-- .member-wrap-top -->
@@ -56,20 +53,8 @@
                     <input type="submit" value="Set password">
                 </div>
             </form>
-            <?php 
-            }
-            ?>
+           
             
-            <div class="login-container my-5">
-                <span class="login-message"> 
-                    <a href="#"
-                        class=" btn-add-to-wishlist open-login test" data-place-id=""
-                        data-business-id="">
-                        <span>Please Login First </span>
-                    </a>
-                </span>
-
-            </div>
 
             
 

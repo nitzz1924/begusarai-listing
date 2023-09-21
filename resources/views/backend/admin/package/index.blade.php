@@ -49,7 +49,7 @@
                                     <th>Duration</th>
                                     <th>Duration Type</th>
                                     <th>Price</th>
-                                    <th>Discount</th>
+                                    <th>High Price</th>
                                     <th>Number of Places</th>
                                     <th>Featured Listings</th>
                                     <th>Featured Type</th>

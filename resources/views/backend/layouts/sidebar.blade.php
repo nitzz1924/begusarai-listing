@@ -55,7 +55,7 @@
                         Blogs
                     </a>
                 </li>
-                <li>
+                <!-- <li>
                     <a href="#">
                         <i class="metismenu-icon pe-7s-menu"></i>
                         Examples
@@ -68,9 +68,9 @@
                             </a>
                         </li>
                     </ul>
-                </li>
+                </li> -->
 
-                <li>
+                <!-- <li>
                     <a href="#">
                         <i class="metismenu-icon pe-7s-diamond"></i>
                         Admin Settings
@@ -101,7 +101,7 @@
                             </a>
                         </li>
                     </ul>
-                </li>
+                </li> -->
 
 
                 <li>
