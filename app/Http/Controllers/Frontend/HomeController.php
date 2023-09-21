@@ -331,7 +331,7 @@ class HomeController extends Controller
             'phoneNumber1' => 'required',
             'phoneNumber2' => 'nullable',
             'whatsappNo' => 'nullable',
-            'websiteUrl' => 'nullable',
+            'websiteUrl' => 'required',
             'additionalFields' => 'nullable',
             'facebook' => 'nullable',
             'instagram' => 'nullable',
@@ -346,7 +346,7 @@ class HomeController extends Controller
         foreach (['coverImage', 'galleryImage', 'documentImage', 'logo'] as $fileField) {
             if ($request->hasFile($fileField)) {
                 // Dynamically add validation rules for the file fields if they are present in the request.
-                $rules[$fileField] = 'nullable|image|mimes:jpg,jpeg,png,svg,webp|max:2048';
+                $rules[$fileField] = 'required|image|mimes:jpg,jpeg,png,svg,webp|max:2048';
             }
         }
 
@@ -416,14 +416,14 @@ class HomeController extends Controller
             'description' => 'required',
             'price' => 'required',
             'duration' => 'required',
-            'highlight' => 'required',
+            // 'highlight' => 'required',
             'highlight' => 'required',
             'city' => 'required',
             'placeAddress' => 'required',
             'email' => 'required',
             'phoneNumber1' => 'required',
             'phoneNumber2' => 'nullable',
-            'whatsappNo' => 'nullable',
+            'whatsappNo' => 'required',
             'websiteUrl' => 'nullable ',
             'additionalFields' => 'nullable',
             'facebook' => 'nullable',
@@ -439,7 +439,7 @@ class HomeController extends Controller
         foreach (['coverImage', 'galleryImage', 'logo'] as $fileField) {
             if ($request->hasFile($fileField)) {
                 // Dynamically add validation rules for the file fields if they are present in the request.
-                $rules[$fileField] = 'nullable|image|mimes:jpg,jpeg,png,svg,webp|max:2048';
+                $rules[$fileField] = 'required|image|mimes:jpg,jpeg,png,svg,webp|max:2048';
             }
         }
         foreach (['documentImage'] as $fileField) {

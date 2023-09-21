@@ -54,7 +54,7 @@
                                         <td class="fw-bold">{{ $business->message }}</td>
                                         <td class="d-flex">
 
-                                            {{-- <form action="{{ route('admin.lead.destroy', $value->id) }}" method="POST"
+                                            <form action="{{ route('admin.lead.destroy',$business->id)}}" method="POST"
                                                 id="deleteForm">
                                                 @method('DELETE')
                                                 @csrf
@@ -63,11 +63,9 @@
 
                                                     <i class="metismenu-icon bi bi-trash3"></i>
                                                 </button>
-                                            </form> --}}
+                                            </form> 
 
-                                            <button type="button" class="btn btn-danger ms-3 text-nowrap"
-                                                onclick="confirmDelete({{ $business->lead ? $business->lead->id : '' }})">
-
+                                       
 
                                         </td>
                                         <td class="fw-bold">
@@ -106,8 +104,7 @@
     </style>
 
 
-
-    {{-- <script>
+<script>
         function confirmDelete(button) {
             if (confirm("Are you sure you want to delete this item?")) {
                 var form = button.parentElement; // Get the parent element of the button, which is the form
@@ -116,32 +113,7 @@
                 alert("Delete operation cancelled.");
             }
         }
-    </script> --}}
-
-
-    <script>
-        function confirmDelete(leadId) {
-            if (confirm('Are you sure you want to delete this record?')) {
-                // Send an AJAX request to delete the record
-                $.ajax({
-                    url: `/admin/lead/${leadId}`,
-                    type: 'DELETE',
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
-                    success: function(response) {
-                        // Handle success, e.g., remove the row from the table
-                        alert('Record deleted successfully');
-                        // You can add additional logic here to update the UI as needed
-                    },
-                    error: function(xhr) {
-                        // Handle error, e.g., display an error message
-                        alert('Error deleting record');
-                    }
-                });
-            }
-        }
-    </script>
+    </script> 
 
     <script>
         new DataTable('#example');

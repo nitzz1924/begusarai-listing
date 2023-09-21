@@ -110,11 +110,12 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                                         <td data-title="Name">{{ $business->businessName }}</td>
                                         <td data-title="City">{{ $business->city }}</td>
                                         <td data-title="Category">{{ $business->category }}</td>
-                                        <td data-title="Status" style="color: {{ $business->status == 0 ? '#ffad2d' : 'green' }}">
+                                        <td data-title="Status"
+                                            style="color: {{ $business->status == 0 ? '#ffad2d' : 'green' }}">
                                             {{ $business->status == 0 ? 'Pending' : 'Approved' }}
                                         </td>
                                         <td data-title="Payment">
-                                            @if ($business->planStatus == 0)
+                                            @if ($business->status == 0)
                                                 <button href="#" class="btn-sm btn-warning">
                                                     Pay
                                                     Now

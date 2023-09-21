@@ -45,7 +45,7 @@ class LeadController extends Controller
 
     public function index(Request $request)
     {
-        $businesses = BusinessList::leftJoin('lead', function ($join) {
+        $businesses = Lead::leftJoin('businesslist', function ($join) {
             $join->on('lead.business_id', '=', 'businesslist.id');
         })
             ->select('lead.*', 'businesslist.businessName AS businessName1')
@@ -172,10 +172,10 @@ class LeadController extends Controller
             $lead->delete();
 
             // Return a success response, e.g., JSON response
-            return response()->json(['message' => 'Record deleted successfully']);
+        
         } catch (\Exception $e) {
             // Handle any exceptions or errors that occur during deletion
-            return response()->json(['error' => 'Error deleting record'], 500);
+            return redirect()->route('admin.lead.index');
         }
     }
 

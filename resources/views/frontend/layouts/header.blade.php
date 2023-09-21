@@ -65,10 +65,11 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                                                 <img src="{{ URL::to('/uploads/' . $user->image) }}" title=""
                                                     alt="">
 
-                                                <span>Guest</span>
+                                                <span>{{$user->name}}</span>
                                             @else
                                                 <img src="https://wp.getgolo.com/country-guide/wp-content/themes/golo/assets/images/default-user-image.png"
                                                     title="guest" alt="guest">
+                                                    <span>{{$user->name}}</span>
                                             @endif
                                         </a>
                                         <ul class="sub-menu">
@@ -97,10 +98,15 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                                                 <img src="{{ URL::to('/uploads/' . $user->image) }}" title=""
                                                     alt="">
 
-                                                <span> Business Owner</span>
+                                                   <span>
+                                                   {{$user->name}}
+                                                   </span>
                                             @else
                                                 <img src="{{ asset('assets/images/users/default.png') }}"
                                                     title="Default Avatar" alt="Default Avatar">
+                                                    <span>
+                                                   {{$user->name}}
+                                                   </span>
                                             @endif
                                         </a>
                                         <ul class="sub-menu">
@@ -243,10 +249,15 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                                         <img src="{{ URL::to('/uploads/' . $user->image) }}" title=""
                                             alt="">
 
-                                        <span>Guest</span>
+                                            <span>
+                                                   {{$user->name}}
+                                                   </span>
                                     @else
                                         <img src="https://wp.getgolo.com/country-guide/wp-content/themes/golo/assets/images/default-user-image.png"
                                             title="guest" alt="guest">
+                                            <span>
+                                                   {{$user->name}}
+                                                   </span>
                                     @endif
                                 </a>
                                 <ul class="sub-menu">
@@ -276,10 +287,15 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                                         <img src="{{ URL::to('/uploads/' . $user->image) }}" title=""
                                             alt="">
 
-                                        <span> Business Owner</span>
+                                            <span>
+                                                   {{$user->name}}
+                                                   </span>
                                     @else
                                         <img src="{{ asset('assets/images/users/default.png') }}"
                                             title="Default Avatar" alt="Default Avatar">
+                                            <span>
+                                                   {{$user->name}}
+                                                   </span>
                                     @endif
                                 </a>
                                 <ul class="sub-menu">
