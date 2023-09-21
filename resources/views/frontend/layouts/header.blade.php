@@ -25,114 +25,112 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                                 <i class="las la-times la-24-black"></i>
                             </a><!-- .popup__close -->
 
-                            <div class="popup__menu popup__box">    
+                            <div class="popup__menu popup__box">
 
-                            <div class="site__brand">
-                                <a title="Logo" href="/" class="site__brand__logo"><img
-                                        src="{{ asset('assets/images/begusarai-logo.png') }}" alt="Begusarai" /></a>
-                            </div>
+                                <div class="site__brand">
+                                    <a title="Logo" href="/" class="site__brand__logo"><img
+                                            src="{{ asset('assets/images/begusarai-logo.png') }}" alt="Begusarai" /></a>
+                                </div>
                             </div>
 
                             <div class="popup__content">
-                            <?php 
+                                <?php 
                             if (Auth::user()==null){
-                                ?>
+                            ?>
                                 <div class="popup__user popup__box open-form">
                                     <a title="Login" href="#" class="open-login">Login</a>
                                 </div><!-- .popup__user -->
-                                
-                                
+
                                 <?php 
                             }
                             ?>
 
+                                @auth
+                                    <?php $user = User_Login::find(auth()->user()->id); ?>
+                                @endauth
+                                <div class="popup__menu popup__box">
+                                    <ul class="sub-menu">
 
-                            <div class="popup__menu popup__box">    
-                                <ul class="sub-menu">
-                                    @auth
-                                        <?php $user = User_Login::find(auth()->user()->id); ?>
-                                    @endauth
-
-                                    <?php 
+                                        <?php 
                                     if(Auth::user()){
 
                                     if (Auth::user()->type=='Guest'){
                                         ?>
-                                    <li>
-                                        <a class="avatar" href="">
+                                        <li>
+                                            <a class="avatar" href="">
 
-                                            @if ($user->image)
-                                                <img src="{{ URL::to('/uploads/' . $user->image) }}" title=""
-                                                    alt="">
+                                                @if ($user->image)
+                                                    <img src="{{ URL::to('/uploads/' . $user->image) }}" title=""
+                                                        alt="">
 
-                                                <span>{{$user->name}}</span>
-                                            @else
-                                                <img src="https://wp.getgolo.com/country-guide/wp-content/themes/golo/assets/images/default-user-image.png"
-                                                    title="guest" alt="guest">
-                                                    <span>{{$user->name}}</span>
-                                            @endif
-                                        </a>
-                                        <ul class="sub-menu">
-                                            <li class=""><a href="/ownerProfile">Profile</a></li>
-                                            <li class=""><a href="/ownerWishlist">My Wishlist</a></li>
-                                            <li>
-                                                <a href="/logout">
-                                                    <span>Logout</span>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <?php 
+                                                    <span>{{ $user->name }}</span>
+                                                @else
+                                                    <img src="https://wp.getgolo.com/country-guide/wp-content/themes/golo/assets/images/default-user-image.png"
+                                                        title="guest" alt="guest">
+                                                    <span>{{ $user->name }}</span>
+                                                @endif
+                                            </a>
+                                            <ul class="sub-menu">
+                                                <li class=""><a href="/ownerProfile">Profile</a></li>
+                                                <li class=""><a href="/ownerWishlist">My Wishlist</a></li>
+                                                <li>
+                                                    <a href="/logout">
+                                                        <span>Logout</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <?php 
                                     }}
                                     ?>
 
+                                        <?php 
+                                    if(Auth::user()){
 
-                                    <?php 
-                                if(Auth::user()){
+                                    if (Auth::user()->type=='Owner'){
+                                    ?>
+                                        <li>
+                                            <a class="avatar" href="">
+                                                @if ($user->image)
+                                                    <img src="{{ URL::to('/uploads/' . $user->image) }}" title=""
+                                                        alt="">
 
-                                if (Auth::user()->type=='Owner'){
-                                ?>
-                                    <li>
-                                        <a class="avatar" href="">
-                                            @if ($user->image)
-                                                <img src="{{ URL::to('/uploads/' . $user->image) }}" title=""
-                                                    alt="">
-
-                                                   <span>
-                                                   {{$user->name}}
-                                                   </span>
-                                            @else
-                                                <img src="{{ asset('assets/images/users/default.png') }}"
-                                                    title="Default Avatar" alt="Default Avatar">
                                                     <span>
-                                                   {{$user->name}}
-                                                   </span>
-                                            @endif
-                                        </a>
-                                        <ul class="sub-menu">
-                                            <li class=""><a href="/ownerDashboard">Dashboard</a>
-                                            </li>
-                                            <li class=""><a href="/ownerListing">My Places</a>
-                                            </li>
-                                            <li class=""><a href="/ownerWishlist">My Wishlist</a>
-                                            </li>
-                                            <li class=""><a href="/businessOwnerPage">Author Listing</a>
-                                            </li>
-                                            <li>
-                                                <hr class="dropdown-divider">
-                                            </li>
-                                            <li>
-                                                <a href="/logout">
-                                                    <span>Logout</span> </i>
-                                                </a>
-                                            </li>
-                                    </li>
-                                    <?php 
+                                                        {{ $user->name }}
+                                                    </span>
+                                                @else
+                                                    <img src="{{ asset('assets/images/users/default.png') }}"
+                                                        title="Default Avatar" alt="Default Avatar">
+                                                    <span>
+                                                        {{ $user->name }}
+                                                    </span>
+                                                @endif
+                                            </a>
+                                            <ul class="sub-menu">
+                                                <li class=""><a href="/ownerDashboard">Dashboard</a>
+                                                </li>
+                                                <li class=""><a href="/ownerListing">My Places</a>
+                                                </li>
+                                                <li class=""><a href="/ownerWishlist">My Wishlist</a>
+                                                </li>
+                                                <li class=""><a href="/businessOwnerPage">Author Listing</a>
+                                                </li>
+                                                <li>
+                                                    <hr class="dropdown-divider">
+                                                </li>
+                                                <li>
+                                                    <a href="/logout">
+                                                        <span>Logout</span> </i>
+                                                    </a>
+                                                </li>
+                                        </li>
+                                        <?php 
                                     }}
                                     ?>
-                                </ul>
-                                </ul>
-                            </div><!-- .popup__menu -->
+
+                                    </ul>
+                                    </ul>
+                                </div><!-- .popup__menu -->
 
                                 {{-- Navigation tabs --}}
                                 <div class="popup__menu popup__box">
@@ -186,7 +184,6 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                         }}
                         ?>
 
-
                         </div><!-- .popup -->
                     </div><!-- .site__menu -->
 
@@ -215,7 +212,6 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                                 <a title="Packages" href="/packages">Packages</a>
                             </li>
 
-
                             <li>
                                 <a title="Destinations" href="#">Destinations</a>
                                 <ul class="sub-menu">
@@ -228,7 +224,6 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                                             </a>
                                         </li>
                                     @endforeach
-
 
                                 </ul>
                             </li>
@@ -249,15 +244,15 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                                         <img src="{{ URL::to('/uploads/' . $user->image) }}" title=""
                                             alt="">
 
-                                            <span>
-                                                   {{$user->name}}
-                                                   </span>
+                                        <span>
+                                            {{ $user->name }}
+                                        </span>
                                     @else
                                         <img src="https://wp.getgolo.com/country-guide/wp-content/themes/golo/assets/images/default-user-image.png"
                                             title="guest" alt="guest">
-                                            <span>
-                                                   {{$user->name}}
-                                                   </span>
+                                        <span>
+                                            {{ $user->name }}
+                                        </span>
                                     @endif
                                 </a>
                                 <ul class="sub-menu">
@@ -274,8 +269,6 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                         }     }
                         ?>
 
-
-
                             <?php 
                             if(Auth::user()){
 
@@ -287,15 +280,15 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                                         <img src="{{ URL::to('/uploads/' . $user->image) }}" title=""
                                             alt="">
 
-                                            <span>
-                                                   {{$user->name}}
-                                                   </span>
+                                        <span>
+                                            {{ $user->name }}
+                                        </span>
                                     @else
                                         <img src="{{ asset('assets/images/users/default.png') }}"
                                             title="Default Avatar" alt="Default Avatar">
-                                            <span>
-                                                   {{$user->name}}
-                                                   </span>
+                                        <span>
+                                            {{ $user->name }}
+                                        </span>
                                     @endif
                                 </a>
                                 <ul class="sub-menu">
@@ -326,7 +319,6 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                                 }}
                                 ?>
 
-
                         </ul>
                         </ul>
                     </nav>
@@ -344,9 +336,7 @@ $Mastercity = Master::orderBy('created_at', 'asc')
 
                     </nav>
 
-
                     <!-- .right-header__login -->
-
 
                     {{-- sign pop form starts here --}}
                     <div class="popup popup-form">
@@ -367,7 +357,6 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                                 class="form-sign form-content form-account" id="signup">
 
                                 @csrf
-
 
                                 <!-- Radio buttons for account type -->
                                 <div class="field-inline mb-3" style="justify-content: center;">
@@ -450,15 +439,10 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                                         @enderror
                                     </label>
 
-
                                 </div>
-
 
                                 <input type="submit" name="submit" value="Verify" />
                             </form>
-
-
-
 
                             @error('type')
                                 <span id="error_description_type" class="has-error">{{ $message }}</span>
@@ -489,10 +473,8 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                                 <input type="submit" name="submit" value="Login" id="loginSubmit" />
                             </form>
 
-
                         </div>
                     </div>
-
 
                     <?php 
                         if(Auth::user()){
@@ -510,7 +492,6 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                     <?php 
                     }}
                     ?>
-
 
                     <!-- .right-header__button -->
                 </div>
@@ -594,6 +575,5 @@ $Mastercity = Master::orderBy('created_at', 'asc')
         });
     });
 </script>
-
 
 {{-- -----------------------------------------------Login form ------------------------------------------ --}}

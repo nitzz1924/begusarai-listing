@@ -28,7 +28,7 @@ $Mastercity = Master::orderBy('created_at', 'asc')
             </div>
             <div>
                 @if (session('success'))
-                    <div class="alert alert-success-custom">
+                    <div class="alert alert-success-custom p-3">
                         {{ session('success') }}
                     </div>
                 @endif
@@ -67,8 +67,6 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                                     <i class="la la-angle-down"></i>
                                 </div>
 
-
-
                             </form>
                         </div>
 
@@ -96,6 +94,7 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                                     <th>Name</th>
                                     <th>City</th>
                                     <th>Category</th>
+                                    <th>Leads</th>
                                     <th>Status</th>
                                     <th>Payment</th>
                                     <th>Action</th>
@@ -110,6 +109,13 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                                         <td data-title="Name">{{ $business->businessName }}</td>
                                         <td data-title="City">{{ $business->city }}</td>
                                         <td data-title="Category">{{ $business->category }}</td>
+                                        <td data-title="Leads">
+                                            <a href="{{ route('ownerLeads', ['id' => $business->id]) }}" class="list"
+                                                style="display: {{ $business->status == 0 ? 'none' : 'block' }}"
+                                                title="Leads    ">
+                                                <button class="btn">Check</button>
+                                            </a>
+                                        </td>
                                         <td data-title="Status"
                                             style="color: {{ $business->status == 0 ? '#ffad2d' : 'green' }}">
                                             {{ $business->status == 0 ? 'Pending' : 'Approved' }}
@@ -123,13 +129,10 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                                             @else
                                                 <span class="status-label" style="color: green;">
                                                     <i class="fas fa-check-circle " style="font-size: 20px;"></i>
-                                                    Done
+                                                    Paid
                                                 </span>
                                             @endif
                                         </td>
-
-
-
 
                                         <td data-title="Action" class="place-action d-flex action-btn">
                                             <a href="{{ route('editPlace', ['id' => $business->id]) }}" class="edit"
@@ -137,12 +140,11 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                                                 <i class="las la-edit"></i>
                                             </a>
 
-
                                             <a href="{{ route('listingDetail', ['id' => $business->id, 'category' => $business->category]) }}"
                                                 class="view" title="View"><i class="la la-eye"></i></a>
-                                            <a href="{{ route('ownerLeads', ['id' => $business->id]) }}" class="list"
+                                            {{-- <a href="{{ route('ownerLeads', ['id' => $business->id]) }}" class="list"
                                                 style="display: {{ $business->status == 0 ? 'none' : 'block' }}"
-                                                title="list"><i class="la la-list"></i></a>
+                                                title="list"><i class="la la-list"></i></a> --}}
 
                                             <a href='#' class="delete" title="Delete"><i
                                                     class="la la-trash-alt"></i></a>
@@ -158,11 +160,6 @@ $Mastercity = Master::orderBy('created_at', 'asc')
         </div>
     </main>
     {{--  ---------------------------------------Filter By City And Category  -------------------------------------- --}}
-
-
-
-
-
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
@@ -206,8 +203,5 @@ $Mastercity = Master::orderBy('created_at', 'asc')
             }
         });
     </script>
-
-
-
 
 @endsection

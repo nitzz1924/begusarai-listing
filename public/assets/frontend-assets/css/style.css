@@ -6746,7 +6746,7 @@ a.place__comments__reply i {
     width: 12%;
 }
 .member-place-list td:nth-child(4) {
-    width: 30%;
+    /* width: 30%; */
 }
 .member-place-list td b {
     font-size: 16px;
@@ -7704,7 +7704,7 @@ a.place__comments__reply i {
     /* display: block; */
     display: flex; /* Use flexbox to center the image */
     justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
+    /* align-items: center; Center vertically */
     position: absolute;
     bottom: -18px;
     right: 20px;

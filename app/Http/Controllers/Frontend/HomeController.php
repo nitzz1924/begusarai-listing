@@ -160,7 +160,6 @@ class HomeController extends Controller
             $value->rating = $averageRating;
             $value->count = count($reviews);
             $Result[] = $value;
-
         }
 
         // Retrieve businesses with bookmark status for the user
@@ -330,8 +329,8 @@ class HomeController extends Controller
             'email' => 'required',
             'phoneNumber1' => 'required',
             'phoneNumber2' => 'nullable',
-            'whatsappNo' => 'nullable',
-            'websiteUrl' => 'required',
+            'whatsappNo' => 'required',
+            'websiteUrl' => 'nullable',
             'additionalFields' => 'nullable',
             'facebook' => 'nullable',
             'instagram' => 'nullable',
@@ -517,16 +516,15 @@ class HomeController extends Controller
 
     public function packages()
     {
-
         $ranking = Package::orderBy('created_at', 'asc')
-        ->where('type', '=', 'Ranking')
-        ->get();
+            ->where('type', '=', 'Ranking')
+            ->get();
         // $packages = Package::orderBy('created_at', 'desc')->get();
         $packages = Package::orderBy('created_at', 'desc')
-        ->orWhere('type', '!=', 'Ranking')
-        ->get();
-    
-        return view('frontend.packages', compact('packages','ranking'));
+            ->orWhere('type', '!=', 'Ranking')
+            ->get();
+
+        return view('frontend.packages', compact('packages', 'ranking'));
     }
 
     public function setPassword(Request $request)
@@ -574,15 +572,11 @@ class HomeController extends Controller
     {
         $businesses = BusinessList::orderBy('created_at', 'desc')->get();
 
-
         $similer = BusinessList::where('category', $category)
             ->orderBy('created_at', 'desc')
             ->get();
 
-
-
-
-    $Result = [];
+        $Result = [];
 
         foreach ($similer as $value) {
             $reviews = DB::table('reviews')
@@ -610,16 +604,12 @@ class HomeController extends Controller
             $value->rating = $averageRating;
             $value->count = count($reviews);
             $Result[] = $value;
-
         }
-
-
 
         $businessesDetail = BusinessList::where('id', $id)->first();
         $submaster = Master::orderBy('created_at', 'asc')
             ->where('type', '=', 'category')
             ->get();
-        
 
         $reviews = DB::table('reviews')
             ->select('reviews.*', 'users_login.image')
@@ -657,9 +647,6 @@ class HomeController extends Controller
             $bookmarkedBusinessIds = Bookmark::where('user_id', $user->id)->pluck('business_id');
         }
 
-
-     
-
         $submaster = Master::orderBy('created_at', 'asc')
             ->where('type', '=', 'category')
             ->get();
@@ -667,37 +654,35 @@ class HomeController extends Controller
             ->orderBy('created_at', 'desc')
             ->get();
 
-            $Result = [];
+        $Result = [];
 
-            foreach ($businesses as $value) {
-                $reviews = DB::table('reviews')
-                    ->select('reviews.*', 'users_login.image')
-                    ->leftJoin('users_login', 'reviews.user_id', '=', 'users_login.id')
-                    ->orderBy('reviews.created_at', 'desc')
-                    ->where('listing_id', $value->id)
-                    ->get();
-    
-                $totalRating = 0;
-                $totalReviews = count($reviews);
-    
-                foreach ($reviews as $review) {
-                    $totalRating += $review->rating;
-                }
-    
-                if ($totalReviews > 0) {
-                    $averageRating = $totalRating / $totalReviews;
-                    $averageRating = number_format($averageRating, 1); // Display average rating with 1 decimal place
-                } else {
-                    $averageRating = 0; // No reviews available
-                }
-    
-                // Merge the average rating into the business data
-                $value->rating = $averageRating;
-                $value->count = count($reviews);
-                $Result[] = $value;
-    
+        foreach ($businesses as $value) {
+            $reviews = DB::table('reviews')
+                ->select('reviews.*', 'users_login.image')
+                ->leftJoin('users_login', 'reviews.user_id', '=', 'users_login.id')
+                ->orderBy('reviews.created_at', 'desc')
+                ->where('listing_id', $value->id)
+                ->get();
+
+            $totalRating = 0;
+            $totalReviews = count($reviews);
+
+            foreach ($reviews as $review) {
+                $totalRating += $review->rating;
             }
-    
+
+            if ($totalReviews > 0) {
+                $averageRating = $totalRating / $totalReviews;
+                $averageRating = number_format($averageRating, 1); // Display average rating with 1 decimal place
+            } else {
+                $averageRating = 0; // No reviews available
+            }
+
+            // Merge the average rating into the business data
+            $value->rating = $averageRating;
+            $value->count = count($reviews);
+            $Result[] = $value;
+        }
 
         return view('frontend.ownerWishlist', compact('Result', 'submaster'));
     }
@@ -821,7 +806,6 @@ class HomeController extends Controller
     {
         return view('frontend.privacyPolicy');
     }
-    
 
     public function blogs()
     {
@@ -858,11 +842,7 @@ class HomeController extends Controller
             ->where('type', '=', 'highlight')
             ->get();
 
-
-
-
-
-            $Result = [];
+        $Result = [];
 
         foreach ($similer as $value) {
             $reviews = DB::table('reviews')
@@ -890,7 +870,6 @@ class HomeController extends Controller
             $value->rating = $averageRating;
             $value->count = count($reviews);
             $Result[] = $value;
-
         }
 
         return view('frontend.searchFilter', compact('Result', 'submaster', 'submasterCategory', 'submasterHighlight', 'businesses'));
