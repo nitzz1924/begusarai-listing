@@ -78,6 +78,8 @@
                         Launch Promo banner
                     </button>
 
+                    <!-- Custom overlay -->
+                    <div class="custom-overlay"></div>
                     <!-- Modal -->
                     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                         aria-hidden="true">
@@ -86,18 +88,18 @@
 
                                 <div class="modal-header">
                                     <h1 class="modal-title fs-5" id="exampleModalLabel"></h1>
-                                    <button type="button" class="btn-close popup-close-btn"
-                                        data-bs-dismiss="modal" aria-label="Close"></button>
+                                    <button type="button" class="btn-close popup-close-btn" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
                                 </div>
 
                                 <div class="modal-body bg-image overlay p-0">
-                                    <img src="{{ asset('assets/images/home/hero-bg.webp') }}"
-                                        alt="Promo banner">
+                                    <img src="{{ asset('assets/images/home/hero-bg.webp') }}" alt="Promo banner">
                                 </div>
 
                             </div>
                         </div>
                     </div>
+
                 </div>
 
                 <div class="business-category">
@@ -226,8 +228,8 @@
                                                             <span>{{ $value->highlight }}</span>
                                                         </div>
                                                         <!-- <div class="place-city">
-                                                                                                                        <a href="#">Paris</a>
-                                                                                                                        </div> -->
+                                                                                                                            <a href="#">Paris</a>
+                                                                                                                            </div> -->
                                                     </div>
                                                     <h3 class="place-title">
 
@@ -329,7 +331,7 @@
                 </div>
                 <!-- .featured-cities -->
                 <div class="business-about" style="background-image: url(assets/images/home/hero-bg.webp)">
-                    <div class="container">
+                    <div class="container" style="z-index: 9;position: relative;">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="business-about-info">
