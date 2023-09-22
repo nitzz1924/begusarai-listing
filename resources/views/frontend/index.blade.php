@@ -17,8 +17,8 @@
                         <div class="site-banner__content">
                             <h1 class="site-banner__title">Business Listing</h1>
                             <p>
-                                <i>{{count($Mastercity)}}</i> cities, <i>{{count($submaster)}}</i> categories, <i>{{$businessesCount}}</i> listings.
-                         
+                                <i>{{ count($Mastercity) }}</i> cities, <i>{{ count($submaster) }}</i> categories,
+                                <i>{{ $businessesCount }}</i> listings.
                             </p>
                             <form action="#" class="site-banner__search layout-02">
                                 @csrf
@@ -71,6 +71,35 @@
                 </div>
 
                 <!-- .site-banner -->
+                {{-- popup modal box --}}
+                <div class="d-grid justify-content-center my-3">
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn " data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        Launch Promo banner
+                    </button>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog  modal-dialog-centered">
+                            <div class="modal-content">
+
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel"></h1>
+                                    <button type="button" class="btn-close popup-close-btn"
+                                        data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+
+                                <div class="modal-body bg-image overlay p-0">
+                                    <img src="{{ asset('assets/images/home/hero-bg.webp') }}"
+                                        alt="Promo banner">
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="business-category">
                     <div class="container">
                         <h2 class="title title-border-bottom align-center offset-item">
@@ -145,7 +174,8 @@
                                                         <span class="icon-heart">
 
                                                             @if ($value->bookmark_status != null)
-                                                                <i class="la la-bookmark large" style="color: #ffb429;"></i>
+                                                                <i class="la la-bookmark large"
+                                                                    style="color: #ffb429;"></i>
                                                             @else
                                                                 <i class="la la-bookmark large" style="color:black"></i>
                                                             @endif
@@ -196,8 +226,8 @@
                                                             <span>{{ $value->highlight }}</span>
                                                         </div>
                                                         <!-- <div class="place-city">
-                                                                                                                    <a href="#">Paris</a>
-                                                                                                                    </div> -->
+                                                                                                                        <a href="#">Paris</a>
+                                                                                                                        </div> -->
                                                     </div>
                                                     <h3 class="place-title">
 
@@ -409,8 +439,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <!-- .blogs -->
+                </div><!-- .blogs -->
             </main>
             <!-- .site-main -->
 
