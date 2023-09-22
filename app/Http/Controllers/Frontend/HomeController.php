@@ -128,9 +128,12 @@ class HomeController extends Controller
             })
                 ->select('businesslist.*', 'bookmarks.id AS bookmark_status')
                 ->orderBy('businesslist.created_at', 'desc')
-                ->take(4)->get();
+                ->take(4)
+                ->get();
         } else {
-            $businesses = BusinessList::orderBy('created_at', 'desc')->take(4)->get();
+            $businesses = BusinessList::orderBy('created_at', 'desc')
+                ->take(4)
+                ->get();
         }
         $Result = [];
 
@@ -179,10 +182,10 @@ class HomeController extends Controller
             ->where('type', '=', 'City')
             ->get();
 
-            $popup = Master::orderBy('created_at', 'asc')
+        $popup = Master::orderBy('created_at', 'asc')
             ->where('type', '=', 'Homepage_popup')
-            ->first(); 
-        return View::make('frontend.index', compact('submaster', 'businesses', 'Mastercity', 'TestimonialData', 'blog', 'Result','popup','businessesCount'));
+            ->first();
+        return View::make('frontend.index', compact('submaster', 'businesses', 'Mastercity', 'TestimonialData', 'blog', 'Result', 'popup', 'businessesCount'));
     }
 
     // public function toggleBookmark(Request $request, $businessId)
@@ -411,112 +414,106 @@ class HomeController extends Controller
     }
 
     public function savePlace(Request $request)
-    {
-        $rules = [
-            'category' => 'required',
-            'placeType' => 'required',
+{
+    $rules = [
+        'category' => 'nullable',
+        'placeType' => 'nullable',
+        'description' => 'nullable',
+        'price' => 'nullable',
+        'duration' => 'nullable',
+        'highlight' => 'nullable',
+        'city' => 'nullable',
+        'placeAddress' => 'nullable',
+        'email' => 'nullable',
+        'phoneNumber1' => 'nullable',
+        'phoneNumber2' => 'nullable',
+        'whatsappNo' => 'nullable',
+        'websiteUrl' => 'nullable|url', // Changed to validate as a URL
+        'additionalFields' => 'nullable|url', // Changed to validate as a URL
+        'facebook' => 'nullable|url', // Changed to validate as a URL
+        'instagram' => 'nullable|url', // Changed to validate as a URL
+        'twitter' => 'nullable|url',
+        'bookingType' => 'nullable',
+        'bookingurl' => 'nullable|url', // Changed to validate as a URL
+        'businessName' => 'nullable',
+        'youtube' => 'nullable|url', // Changed to validate as a URL
+        'video' => 'nullable',
+        'documentImage' => 'nullable|mimes:pdf', // Validate PDF
+    ];
 
-            'description' => 'required',
-            'price' => 'required',
-            'duration' => 'required',
-            // 'highlight' => 'required',
-            'highlight' => 'required',
-            'city' => 'required',
-            'placeAddress' => 'required',
-            'email' => 'required',
-            'phoneNumber1' => 'required',
-            'phoneNumber2' => 'nullable',
-            'whatsappNo' => 'required',
-            'websiteUrl' => 'nullable ',
-            'additionalFields' => 'nullable',
-            'facebook' => 'nullable',
-            'instagram' => 'nullable',
-            'twitter' => 'nullable|url',
-            'bookingType' => 'required',
-            'bookingurl' => 'nullable',
-            'businessName' => 'required',
-            'youtube' => 'nullable|url',
-            'video' => 'nullable',
-        ];
-
-        foreach (['coverImage', 'galleryImage', 'logo'] as $fileField) {
-            if ($request->hasFile($fileField)) {
-                // Dynamically add validation rules for the file fields if they are present in the request.
-                $rules[$fileField] = 'required|image|mimes:jpg,jpeg,png,svg,webp|max:2048';
-            }
-        }
-        foreach (['documentImage'] as $fileField) {
-            if ($request->hasFile($fileField)) {
-                $rules[$fileField] = 'nullable|mimes:pdf';
-            }
-        }
-        $this->validate($request, $rules);
-        $editId = $request->input('editId');
-        $business = $editId ? BusinessList::findOrFail($editId) : new BusinessList();
-
-        try {
-            $business->userId = Auth::id();
-            $business->category = $request->input('category');
-            $business->placeType = implode(',', $request->input('placeType'));
-            $business->description = $request->input('description');
-            $business->price = $request->input('price');
-            $business->duration = $request->input('duration');
-            $business->highlight = implode(',', $request->input('highlight'));
-            $business->city = $request->input('city');
-            $business->placeAddress = $request->input('placeAddress');
-            $business->email = $request->input('email');
-            $business->phoneNumber1 = $request->input('phoneNumber1');
-            $business->phoneNumber2 = $request->input('phoneNumber2');
-            $business->whatsappNo = $request->input('whatsappNo');
-            $business->websiteUrl = $request->input('websiteUrl');
-            $business->additionalFields = $request->input('additionalFields');
-            $business->facebook = $request->input('facebook');
-            $business->instagram = $request->input('instagram');
-            $business->twitter = $request->input('twitter');
-            $business->bookingType = $request->input('bookingType');
-            $business->bookingurl = $request->input('bookingurl');
-            $business->businessName = $request->input('businessName');
-            $business->youtube = $request->input('youtube');
-            $business->video = $request->input('video');
-            // dd($business->all());
-
-            $allowedExtensions = ['jpg', 'jpeg', 'png', 'svg', 'webp'];
-            $destinationPath = public_path('uploads');
-
-            foreach (['coverImage', 'galleryImage', 'documentImage', 'logo'] as $fileField) {
-                if ($request->hasFile($fileField)) {
-                    $file = $request->file($fileField);
-
-                    $extension = strtolower($file->getClientOriginalExtension());
-
-                    if (in_array($extension, $allowedExtensions) && $file->isValid()) {
-                        $fileName = time() . '.' . $extension;
-                        $file->move($destinationPath, $fileName);
-                        $business->$fileField = $fileName;
-                    }
-                }
-            }
-
-            // Save the model to the database
-            $business->save();
-
-            // Redirect back with a success message or do something else
-            return redirect()
-                ->route('ownerListing')
-                ->with('success', $editId ? 'Business updated successfully' : 'Business added successfully');
-        } catch (ValidationException $e) {
-            // Handle validation errors
-            return redirect()
-                ->back()
-                ->withErrors($e->validator->errors())
-                ->withInput();
-        } catch (\Exception $e) {
-            // Handle other errors, log them, or display an error message
-            return redirect()
-                ->back()
-                ->with('error', 'Error: ' . $e->getMessage());
+    foreach (['coverImage', 'galleryImage', 'logo'] as $fileField) {
+        if ($request->hasFile($fileField)) {
+            // Dynamically add validation rules for the file fields if they are present in the request.
+            $rules[$fileField] = 'required|image|mimes:jpg,jpeg,png,svg,webp';
         }
     }
+
+    $this->validate($request, $rules);
+
+    $editId = $request->input('editId');
+    $business = $editId ? BusinessList::findOrFail($editId) : new BusinessList();
+
+    try {
+        $business->userId = Auth::id();
+        $business->category = $request->input('category');
+        $business->placeType = implode(',', $request->input('placeType'));
+        $business->description = $request->input('description');
+        $business->price = $request->input('price');
+        $business->duration = $request->input('duration');
+        $business->highlight = implode(',', $request->input('highlight'));
+        $business->city = $request->input('city');
+        $business->placeAddress = $request->input('placeAddress');
+        $business->email = $request->input('email');
+        $business->phoneNumber1 = $request->input('phoneNumber1');
+        $business->phoneNumber2 = $request->input('phoneNumber2');
+        $business->whatsappNo = $request->input('whatsappNo');
+        $business->websiteUrl = $request->input('websiteUrl');
+        $business->additionalFields = $request->input('additionalFields');
+        $business->facebook = $request->input('facebook');
+        $business->instagram = $request->input('instagram');
+        $business->twitter = $request->input('twitter');
+        $business->bookingType = $request->input('bookingType');
+        $business->bookingurl = $request->input('bookingurl');
+        $business->businessName = $request->input('businessName');
+        $business->youtube = $request->input('youtube');
+        $business->video = $request->input('video');
+
+        $allowedExtensions = ['jpg', 'jpeg', 'png', 'svg', 'webp', 'pdf'];
+        $destinationPath = public_path('uploads');
+
+        foreach (['coverImage', 'galleryImage', 'documentImage', 'logo'] as $fileField) {
+            if ($request->hasFile($fileField)) {
+                $file = $request->file($fileField);
+                $extension = strtolower($file->getClientOriginalExtension());
+
+                if (in_array($extension, $allowedExtensions) && $file->isValid()) {
+                    $fileName = time() . '.' . $extension;
+                    $file->move($destinationPath, $fileName);
+                    $business->$fileField = $fileName;
+                }
+            }
+        }
+
+        // Save the model to the database
+        $business->save();
+
+        // Redirect back with a success message or do something else
+        return redirect()
+            ->route('ownerListing')
+            ->with('success', $editId ? 'Business updated successfully' : 'Business added successfully');
+    } catch (ValidationException $e) {
+        // Handle validation errors
+        return redirect()
+            ->back()
+            ->withErrors($e->validator->errors())
+            ->withInput();
+    } catch (\Exception $e) {
+        // Handle other errors, log them, or display an error message
+        return redirect()
+            ->back()
+            ->with('error', 'Error: ' . $e->getMessage());
+    }
+}
 
     public function packages()
     {
@@ -566,8 +563,6 @@ class HomeController extends Controller
             ->route('index')
             ->with('success', 'Thank you For Creating Account.');
     }
-
- 
 
     public function listingDetail(Request $request, $id, $category)
     {
@@ -638,41 +633,22 @@ class HomeController extends Controller
             ->where('type', '=', 'category')
             ->get();
         $businesses = BusinessList::where('userId', $user->id)->get(); // Fetch all businesses from the database
-        
 
         return view('frontend.ownerListing', compact('businesses', 'Mastercity', 'MasterCategory'));
     }
 
-
-
     public function ownerDashboard()
     {
+        $user = auth()->user();
+        $businesses = BusinessList::where('status', '=', '1')
+            ->where('userId', $user->id)
+            ->get();
 
-//         $user = auth()->user();
+        $lead = Lead::where('status', '=', '1')
+            ->where('business_id', $user->usreId)
+            ->get();
 
-
-//         $result = DB::table('user_login')->where('id', $user->id)
-//         ->select(
-//             DB::raw('COUNT(DISTINCT businesslist.id) AS businesslist_count'),
-//             DB::raw('COUNT(DISTINCT businesslist.id) AS busineslisting_count'),
-//             DB::raw('COUNT(DISTINCT reviews.id) AS review_count'),
-//             DB::raw('COUNT(DISTINCT lead.id) AS lead_count')
-//         )
-//         ->leftJoin('businesslist', 'user_login.id', '=', 'businesslist.userId')
-//         ->leftJoin('businesslist', 'businesslist.id', '=', 'businesslist.business_id')
-//         ->leftJoin('reviews', 'businesslist.id', '=', 'review.listing_id')
-//         ->leftJoin('lead', 'businesslist.id', '=', 'lead.business_id')
-//         ->groupBy('user_login.id')
-//         ->first();
-// dd($result);
-//     return $result;
-
-
-
-
-
-
-        return view('frontend.ownerDashboard');
+        return view('frontend.ownerDashboard', compact('businesses', 'lead'));
     }
 
     public function ownerWishlist()

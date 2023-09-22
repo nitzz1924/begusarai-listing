@@ -36,7 +36,8 @@
                                 <div class="item blue">
                                     <h3>Active Places</h3>
                                     <span class="number">
-                                        0
+                                    {{ $businesses->count() }}
+
                                     </span>
                                     <span class="line"></span>
                                 </div>
@@ -44,7 +45,7 @@
                             <div class="col-lg-3 col-6">
                                 <div class="item green">
                                     <h3>Total Leads</h3>
-                                    <span class="number">12</span>
+                                    <span class="number">{{ $lead->count() }}</span>
                                     <span class="line"></span>
                                 </div>
                             </div>
