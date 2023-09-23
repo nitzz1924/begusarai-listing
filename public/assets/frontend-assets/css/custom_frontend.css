@@ -338,3 +338,8 @@ body.modal-open .modal-backdrop {
 body.modal-open .custom-overlay {
     display: block; /* Show the custom overlay when a modal is open */
 }
+
+.btn-close-bg {
+    background-color: rgba(255, 255, 255, 0.405);
+    border-radius: 5px;
+}

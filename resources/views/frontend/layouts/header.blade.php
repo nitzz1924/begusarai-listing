@@ -11,9 +11,15 @@ $Mastercity = Master::orderBy('created_at', 'asc')
 <header id="header" class="site-header" style="border-bottom: 1px solid #eeeeee;">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-xl-6 col-sm-5">
+            <div class="col-xl-6 col-sm-5 d-flex align-items-center justify-content-between">
                 <div class="site">
 
+                    <div class="site__brand">
+                        <a title="Logo" href="/" class="site__brand__logo"><img
+                                src="{{ asset('assets/images/begusarai-logo.png') }}" alt="Begusarai" /></a>
+                    </div>
+                    <!-- .site__brand -->
+                </div>
                     <div class="site__menu">
                         <a title="Menu Icon" href="#" class="site__menu__icon">
                             <i class="las la-bars la-24-black"></i>
@@ -48,14 +54,14 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                                 @auth
                                     <?php $user = User_Login::find(auth()->user()->id); ?>
                                 @endauth
+
+                                <?php 
+                                    if(Auth::user()){
+                                        
+                                        if (Auth::user()->type=='Guest'){
+                                            ?>
                                 <div class="popup__menu popup__box">
                                     <ul class="sub-menu">
-
-                                        <?php 
-                                    if(Auth::user()){
-
-                                    if (Auth::user()->type=='Guest'){
-                                        ?>
                                         <li>
                                             <a class="avatar" href="">
 
@@ -188,12 +194,8 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                     </div><!-- .site__menu -->
 
                     {{-- desktop navigation --}}
-                    <div class="site__brand">
-                        <a title="Logo" href="/" class="site__brand__logo"><img
-                                src="{{ asset('assets/images/begusarai-logo.png') }}" alt="Begusarai" /></a>
-                    </div>
-                    <!-- .site__brand -->
-                </div>
+                
+                    
                 <!-- .site -->
             </div>
             <!-- .col-md-6 -->

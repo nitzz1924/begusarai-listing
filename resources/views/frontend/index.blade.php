@@ -78,16 +78,24 @@
                     <div class="custom-overlay"></div>
                         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                             aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-dialog modal-lg modal-dialog-centered">
                                 <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="btn-close popup-close-btn" data-bs-dismiss="modal"
+                                    {{-- <div class="modal-header">
+                                        <div >
+
+                                            <button type="button" class="btn-close popup-close-btn" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
-                                    </div>
+                                        </div>
+                                    </div> --}}
                                     <!-- Check if the user is not logged in -->
-                                    <div class="modal-body bg-image overlay p-0">
+                                    <div class="position-relative modal-body border-warning rounded border bg-image overlay p-0">
+                                        <div class="position-absolute top-0 end-0 btn-close-bg px-1 pb-1 m-1">
+                                            <button type="button" class="btn-close popup-close-btn " data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                        </div>
+                                        
                                         <img src="{{ URL::to('uploads/' . $popup->logo) }}" alt="Promo banner"
-                                            class="img-fluid">
+                                            class="img-fluid rounded-3">
                                     </div>
                                 </div>
                             </div>

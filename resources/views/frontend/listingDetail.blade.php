@@ -576,7 +576,7 @@
                                                         data-business-id="">
                                                         <span class="icon-heart">
 
-                                                            <i class="la la-bookmark large"></i>
+                                                            <i class="la la-bookmark large" style="color:black"></i>
 
                                                         </span>
                                                     </a></span>
