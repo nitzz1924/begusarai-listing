@@ -17,8 +17,9 @@
                         <div class="site-banner__content">
                             <h1 class="site-banner__title">Business Listing</h1>
                             <p>
-                                <i>{{count($Mastercity)}}</i> cities, <i>{{count($submaster)}}</i> categories, <i>{{$businessesCount}}</i> listings.
-                         
+                                <i>{{ count($Mastercity) }}</i> cities, <i>{{ count($submaster) }}</i> categories,
+                                <i>{{ $businessesCount }}</i> listings.
+
                             </p>
                             <form action="#" class="site-banner__search layout-02">
                                 @csrf
@@ -196,8 +197,8 @@
                                                             <span>{{ $value->highlight }}</span>
                                                         </div>
                                                         <!-- <div class="place-city">
-                                                                                                                    <a href="#">Paris</a>
-                                                                                                                    </div> -->
+                                                                                                                        <a href="#">Paris</a>
+                                                                                                                        </div> -->
                                                     </div>
                                                     <h3 class="place-title">
 

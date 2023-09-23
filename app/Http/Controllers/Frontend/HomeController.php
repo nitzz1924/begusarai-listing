@@ -21,7 +21,7 @@ use App\Models\Career;
 use App\Models\Contact;
 use App\Models\Review;
 use App\Models\Package;
-
+use Razorpay\Api\Api;
 use DB;
 
 use View;
@@ -518,8 +518,11 @@ class HomeController extends Controller
         }
     }
 
-    public function packages()
+    public function packages($id)
     {
+        $user = auth()->user();
+        $userId=$user?$user->id:0;
+        $businessId=$id;
         $ranking = Package::orderBy('created_at', 'asc')
             ->where('type', '=', 'Ranking')
             ->get();
@@ -528,7 +531,7 @@ class HomeController extends Controller
             ->orWhere('type', '!=', 'Ranking')
             ->get();
 
-        return view('frontend.packages', compact('packages', 'ranking'));
+        return view('frontend.packages', compact('packages', 'ranking','businessId','userId'));
     }
 
     public function setPassword(Request $request)
@@ -566,9 +569,6 @@ class HomeController extends Controller
             ->route('index')
             ->with('success', 'Thank you For Creating Account.');
     }
-
- 
-
     public function listingDetail(Request $request, $id, $category)
     {
         $businesses = BusinessList::orderBy('created_at', 'desc')->get();
@@ -621,11 +621,9 @@ class HomeController extends Controller
 
         return view('frontend.listingDetail', compact('businessesDetail', 'submaster', 'businesses', 'Result', 'reviews'));
     }
-
     public function blogDetails(Request $request, $id)
     {
         $blog = Blog::where('id', $id)->first();
-
         return view('frontend.blogDetails', compact('blog'));
     }
     public function ownerListing()
@@ -793,10 +791,32 @@ class HomeController extends Controller
     {
         return view('frontend.businessOwnerPage');
     }
-
-    public function checkoutPage()
+    public function checkoutPage($businessId,$userid,$planId)
     {
-        return view('frontend.checkoutPage');
+        $planidv=$planId;
+       $businessData = BusinessList::where('id', $businessId)->first();
+$userData = User_login::where('id', $userid)->first();
+$planData = Package::where('id', $planId)->first();
+
+if ($businessData || $userData || $planData) {
+        $api = new Api(env('RAZORPAY_KEY_ID'), env('RAZORPAY_KEY_SECRET'));
+        // Create a Razorpay order
+        $order = $api->order->create([
+        'amount' => ($planData->price)!=null?($planData->price)*100:0,
+        'currency' => 'INR',
+        'receipt' => 'order_rcptid_'.$businessId,
+        'notes' => [
+            'plan_number' => $planId,
+            'businessId' => $businessId,
+            'userId'=>$userid,
+        ],
+        ]); 
+        $orderId=$order->id;
+        return view('frontend.checkoutPage',compact('businessData','userData','planData','planidv','orderId'));
+}else{
+    return view('frontend.index');
+}
+        
     }
     public function career()
     {

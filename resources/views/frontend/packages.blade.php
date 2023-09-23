@@ -36,7 +36,6 @@
                     <h2 class="title align-center">Find the plan that’s right for you</h2>
                     <div class="pricing-inner">
                         <div class="row">
-
                             @foreach ($packages as $package)
                                 <div class="col-lg-4">
                                     <div class="pricing-item shadow">
@@ -44,23 +43,25 @@
                                         <img src="{{ asset('assets\images\packages\Feature-Listing.png') }}"
                                             class="rounded-3 shadow" alt="Featured Listing">
                                         <h3>{{ $package->type }}</h3>
-
-
                                         <div class="price-container">
                                             <div class="price">
                                                 <span class="currency">₹</span>{{ $package->price }}
                                             </div>
                                             <div class="strike">₹{{ $package->off }}</div>
                                         </div>
-
-                                        <a href="/checkoutPage" class="btn" title="Get Started">Get Started</a>
+                                        @if ($businessId == 0)
+                                            <a href="javascript:void(0);" class="btn" title="Get Started"
+                                                onclick="alert('Go to Owner List for Activite Plan')">Get Started</a>
+                                        @else
+                                            <a href="/checkoutPage/{{ $businessId }}/{{ $userId }}/{{ $package->id }}"
+                                                class="btn" title="Get Started">Get Started</a>
+                                        @endif
                                         <ul>
                                             <li>{{ $package->duration }} Expiration Date </li>
                                             <li>{{ $package->noOfPlace }} Place Listing </li>
                                             <li>{{ $package->featuredListings }} Featured Listings </li>
                                             {{-- <li>{{ $package->featuredType }}</li> --}}
                                             <li>{{ ucwords(str_replace('_', ' ', $package->featuredType)) }}</li>
-
                                         </ul>
                                     </div>
                                 </div>
@@ -75,9 +76,6 @@
                     <h2 class="title align-center">Rank on Selected Category</h2>
                     <div class="pricing-inner">
                         <div class="row">
-
-
-
 
                             @foreach ($ranking as $value)
                                 <div class="col-lg-4">
