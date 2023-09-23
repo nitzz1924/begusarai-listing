@@ -25,27 +25,7 @@
                     </div><!-- .member-wrap-top -->
                     <div class="member-filter">
                         <div class="mf-left">
-                            <!-- <form action="#" method="GET">
-                                                                                    <div class="field-select">
-                                                                                        <select name="place_cities">
-                                                                                            <option value="0">All cities</option>
-                                                                                            <option value="newyork">Paris</option>
-                                                                                            <option value="newyork">New York</option>
-                                                                                            <option value="chicago">Chicago</option>
-                                                                                        </select>
-                                                                                        <i class="la la-angle-down"></i>
-                                                                                    </div>
-                                                                                    <div class="field-select">
-                                                                                        <select name="place_cities">
-                                                                                            <option value="0">All categories</option>
-                                                                                            <option value="Restaurant">Restaurant</option>
-                                                                                            <option value="Gym">Gym</option>
-                                                                                            <option value="Beaty">Beaty & Spa</option>
-                                                                                            <option value="Shopping">Shopping</option>
-                                                                                        </select>
-                                                                                        <i class="la la-angle-down"></i>
-                                                                                    </div>
-                                                                                </form> -->
+                             
                         </div><!-- .mf-left -->
                         <div class="mf-right">
                             <form action="#" class="site__search__form" method="GET">

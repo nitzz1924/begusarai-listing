@@ -61,7 +61,7 @@
         }
 
         input[type="text"],
-        input[type="tel"],
+        input[type="number"],
         textarea {
             width: 100%;
             padding: 10px;
@@ -192,13 +192,19 @@
                                         <span class="place__places-item__count reviews_count">({{ count($reviews) }}
                                             Reviews)</span>
                                     </div>
+
+                               
                                     <div class="place__currency"> {{ $businessesDetail->price }}</div>
                                     <div class="place__category">
 
                                         <a title=" " href="#">{{ $businessesDetail->placeType }}</a>
                                     </div>
                                 </div><!-- .place__meta -->
-                            </div><!-- .place__box -->
+                            </div>
+                            <!-- .place__box -->
+                            <div>
+                            Total Visits: {{$VisitCount}}
+                            </div>
                             <div class="place__box place__box-hightlight">
                                 <div class="hightlight-grid">
                                     <div class="place__amenities">
@@ -504,7 +510,7 @@
 
                                     <div class="form-group">
                                         <label for="number">Your Phone Number</label>
-                                        <input type="tel" id="number" name="number"
+                                        <input type="number" id="number" name="number"
                                             placeholder="Enter your phone number" required>
                                         @error('number')
                                             <div class="text-danger">{{ $message }}</div>
