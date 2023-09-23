@@ -49,7 +49,6 @@
                 </div><!-- .isotope__grid -->
 
                 <div class="container">
-
                     <div class="row justify-content-center " style="display: grid;">
                         <div class="">
                             <div class="col-xl-6 col-sm-3  d-flex mt-5 pagination">

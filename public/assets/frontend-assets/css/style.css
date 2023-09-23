@@ -6740,7 +6740,7 @@ a.place__comments__reply i {
     width: 5%;
 }
 .member-place-list td:nth-child(2) {
-    width: 5%;
+    width: 15%;
 }
 .member-place-list td:nth-child(3) {
     width: 12%;
@@ -7138,7 +7138,7 @@ a.place__comments__reply i {
 }
 .home-main .site-banner:after {
     content: "";
-    background-image: url('assets/images/home/hero-bg.webp');
+    background-image: url('');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -7565,7 +7565,7 @@ a.place__comments__reply i {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-    margin-bottom: 5px;
+    margin-bottom: 15px;
 }
 .place-item.layout-02 .entry-head .place-city {
     position: relative;
@@ -7591,7 +7591,7 @@ a.place__comments__reply i {
     font-size: 20px;
     font-weight: 500;
     line-height: 1.4;
-    margin-bottom: 25px;
+    margin-bottom: 5px;
 }
 .place-item.layout-02 .entry-bottom {
     font-weight: 500;

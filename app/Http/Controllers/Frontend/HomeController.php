@@ -165,6 +165,7 @@ class HomeController extends Controller
             $Result[] = $value;
         }
 
+        // dd($businesses);
         // Retrieve businesses with bookmark status for the user
 
         $blog = Blog::orderBy('created_at', 'desc')
@@ -911,38 +912,42 @@ class HomeController extends Controller
         // $blog = Blog::orderBy('created_at', 'asc')->get();
         return view('frontend.blogs', compact('blog'));
     }
-    
+
     public function searchFilter(Request $request, $category, $city, $highlight)
     {
+        
         $businesses = BusinessList::orderBy('created_at', 'desc')->get();
+        
         if ($city == 'all' && $highlight == 'all' && $category != 'all') {
             $similer = BusinessList::where('category', $category)
                 ->orderBy('created_at', 'desc')
                 ->get();
         }
+        
         if ($city != 'all' && $highlight == 'all' && $category == 'all') {
             $similer = BusinessList::where('city', $city)
                 ->orderBy('created_at', 'desc')
                 ->get();
         }
-
+        
         if ($city == 'all' && $highlight == 'all' && $category == 'all') {
             $similer = BusinessList::orderBy('created_at', 'desc')->get();
         }
+        
         $submaster = Master::orderBy('created_at', 'asc')
             ->where('type', '=', 'city')
             ->get();
-
+        
         $submasterCategory = Master::orderBy('created_at', 'asc')
             ->where('type', '=', 'category')
             ->get();
-
+        
         $submasterHighlight = Master::orderBy('created_at', 'asc')
             ->where('type', '=', 'highlight')
             ->get();
-
+        
         $Result = [];
-
+        
         foreach ($similer as $value) {
             $reviews = DB::table('reviews')
                 ->select('reviews.*', 'users_login.image')
@@ -950,29 +955,50 @@ class HomeController extends Controller
                 ->orderBy('reviews.created_at', 'desc')
                 ->where('listing_id', $value->id)
                 ->get();
-
+            
             $totalRating = 0;
             $totalReviews = count($reviews);
-
+            
             foreach ($reviews as $review) {
                 $totalRating += $review->rating;
             }
-
+            
             if ($totalReviews > 0) {
                 $averageRating = $totalRating / $totalReviews;
                 $averageRating = number_format($averageRating, 1); // Display average rating with 1 decimal place
             } else {
                 $averageRating = 0; // No reviews available
             }
-
+            
             // Merge the average rating into the business data
             $value->rating = $averageRating;
             $value->count = count($reviews);
             $Result[] = $value;
+            // Debugging statements
+        // dd($subvalue->title, $value->category, $subvalue->value);
         }
+        
+        // Query to retrieve data
+        $query = BusinessList::orderBy('created_at', 'desc');
+        
+        if ($city == 'all' && $highlight == 'all' && $category != 'all') {
+            $query->where('category', $category);
+        }
+        
+        if ($city != 'all' && $highlight == 'all' && $category == 'all') {
+            $query->where('city', $city);
+        }
+        
+        // Add more conditions as needed
+        
+        // Paginate the results (e.g., 10 items per page)
+        $businesses = $query->paginate(10);
+        
 
+        // Return the view with the paginated $businesses
         return view('frontend.searchFilter', compact('Result', 'submaster', 'submasterCategory', 'submasterHighlight', 'businesses'));
     }
+
 
     // public function User()
     // {
@@ -981,6 +1007,7 @@ class HomeController extends Controller
 
     //    return view('backend.admin.user.index', compact('user'));
     // }
+
     public function ownerProfile()
     {
         $user = User_Login::find(auth()->user()->id);

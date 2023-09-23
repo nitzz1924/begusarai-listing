@@ -138,10 +138,7 @@
                                                     <div class="place-thumb hover-img">
                                                         <a class="entry-thumb"
                                                             href="{{ URL::to('listingDetail/' . $value->id . '/' . $value->category) }}">
-
                                                             <img src="{{ URL::to('uploads/' . $value->coverImage) }}" />
-
-
                                                         </a>
                                                         <?php 
                                                 if(Auth::user()){
@@ -184,11 +181,10 @@
                                                         <a class="entry-category rosy-pink" href="{{ route('searchFilter', ['category' => $value->category, 'city' => 'all', 'highlight' => 'all']) }}">
 
                                                             @foreach ($submaster as $subvalue)
+                                                            <i class="{{ $subvalue->value ?? 'fa fa-question' }}"></i>
                                                                 @if ($subvalue->title === $value->category)
-                                                                    <i class="{{ $subvalue->value }}"></i>
                                                                 @endif
                                                             @endforeach
-
                                                             
                                                             <span>{{ $value->category }}</span>
                                                         </a>
@@ -200,16 +196,17 @@
                                                     </div>
                                                     <div class="entry-detail">
                                                         <div class="entry-head">
+                                                            <h3 class="place-title">
+                                                                <a href="{{ URL::to('listingDetail/' . $value->id . '/' . $value->category) }}">{{ $value->businessName }}</a>
+                                                            </h3>
                                                             <div class="place-type list-item">
                                                                 <span>{{ $value->highlight }}</span>
                                                             </div>
-                                                            <!-- <div class="place-city">
-                                                                    <a href="#">Paris</a>                                                                                                               </div> -->
+                                                            <div class="place-city">
+                                                                <a href="{{ route('searchFilter', ['category' => 'all', 'city' => $value->city, 'highlight' => 'all']) }}">{{ $value->city }}</a>  
+                                                                </div>
                                                         </div>
-                                                        <h3 class="place-title">
-                                                            <a
-                                                                href="{{ URL::to('listingDetail/' . $value->id . '/' . $value->category) }}">{{ $value->businessName }}</a>
-                                                        </h3>
+                                                        
                                                         <div class="open-now">
                                                             <i class="las la-door-open"></i>Open now
                                                         </div>
@@ -249,7 +246,17 @@
                         </div>
                     </div>
 
-                    <div class="pagination my-3">
+                    <div class="container">
+                        <div class="row justify-content-center " style="display: grid;">
+                            <div class="">
+                                <div class="col-xl-6 col-sm-3  d-flex mt-5 pagination">
+                                    {{ $businesses->links() }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {{-- <div class="pagination my-3">
                         <div class="pagination__numbers">
                             <span>1</span>
                             <a title="2" href="#">2</a>
@@ -258,7 +265,7 @@
                                 <i class="la la-angle-right"></i>
                             </a>
                         </div>
-                    </div>
+                    </div> --}}
                 </div><!-- .main-primary -->
             </div><!-- .col-left -->
 

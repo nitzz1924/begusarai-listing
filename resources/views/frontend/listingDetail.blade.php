@@ -50,11 +50,7 @@
             /* Color of the selected stars */
         }
 
-        form {
-            max-width: 400px;
-            margin: 0 auto;
-        }
-
+        
         .form-group {
             margin-bottom: 20px;
         }

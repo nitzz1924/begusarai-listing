@@ -69,7 +69,7 @@
                                             <?php }?>
 
 
-                                            <a class="entry-category rosy-pink" href="#">
+                                            <a class="entry-category rosy-pink" href="{{ route('searchFilter', ['category' => $value->category, 'city' => 'all', 'highlight' => 'all']) }}">
 
                                                 @foreach ($submaster as $subvalue)
                                                     @if ($subvalue->title === $value->category)
@@ -86,20 +86,20 @@
                                             <!-- <div class="feature">Featured</div> -->
                                         </div>
                                         <div class="entry-detail">
+                                            
+                                            <h3 class="place-title">
+                                                <a href="{{ URL::to('listingDetail/' . $value->id . '/' . $value->category) }}">{{ $value->businessName }}</a>
+                                            </h3>
+
                                             <div class="entry-head">
                                                 <div class="place-type list-item">
                                                     <span>{{ $value->highlight }}</span>
                                                 </div>
-                                                <!-- <div class="place-city">
-                                                    <a href="#">Paris</a>
-                                                </div> -->
+                                                <div class="place-city">
+                                                    <a href="{{ route('searchFilter', ['category' => 'all', 'city' => $value->city, 'highlight' => 'all']) }}">{{ $value->city }}</a>
+                                                </div> 
                                             </div>
-                                            <h3 class="place-title">
-
-
-                                                <a
-                                                    href="{{ URL::to('listingDetail/' . $value->id . '/' . $value->category) }}">{{ $value->businessName }}</a>
-                                            </h3>
+                                            
                                             <div class="open-now">
                                                 <i class="las la-door-open"></i>Open now
                                             </div>
