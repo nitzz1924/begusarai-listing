@@ -62,8 +62,8 @@
                                                     value="{{ $value->title }}">
 
                                                 {{ $value->title }}
+                                            </li>
                                         @endforeach
-                                        </li>
                                     </ul>
                                 </div>
                                 <a href="#" class="more open-more" data-close="Close" data-more="More">More</a>
@@ -181,7 +181,7 @@
                                                         <?php }?>
 
 
-                                                        <a class="entry-category rosy-pink" href="#">
+                                                        <a class="entry-category rosy-pink" href="{{ route('searchFilter', ['category' => $value->category, 'city' => 'all', 'highlight' => 'all']) }}">
 
                                                             @foreach ($submaster as $subvalue)
                                                                 @if ($subvalue->title === $value->category)

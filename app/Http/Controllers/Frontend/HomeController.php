@@ -851,6 +851,7 @@ class HomeController extends Controller
         // $blog = Blog::orderBy('created_at', 'asc')->get();
         return view('frontend.blogs', compact('blog'));
     }
+    
     public function searchFilter(Request $request, $category, $city, $highlight)
     {
         $businesses = BusinessList::orderBy('created_at', 'desc')->get();

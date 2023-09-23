@@ -1006,7 +1006,7 @@ textarea:focus {
     transform: rotate(180deg);
 }
 .popup__box li .sub-menu {
-    padding-left: 22px;
+    padding-left: 0px;
     margin-top: 25px;
     display: none;
 }
@@ -8732,8 +8732,8 @@ a.place__comments__reply i {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    margin-left: -30px;
-    margin-right: -30px;
+    /* margin-left: -30px;
+    margin-right: -30px; */
 }
 .archive-city .col-left.no-maps {
     flex: inherit;
