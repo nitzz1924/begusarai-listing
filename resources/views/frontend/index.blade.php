@@ -58,7 +58,7 @@
                                 </div>
                                 <!-- .site-banner__search__input -->
                                 <div class="field-submit">
-                                    <button><i class="las la-search la-24-black"></i></button>
+                                <button disable><i class="las la-search la-24-black"></i></button>
                                 </div>
                             </form>
                             <!-- .site-banner__search -->
@@ -112,16 +112,16 @@
 
                                 @foreach ($submaster as $value)
                                     <div class="bsn-cat-item rosy-pink">
-
-                                        <a
-                                            href="{{ route('searchFilter', ['category' => $value->title, 'city' => 'all', 'highlight' => 'all']) }}">
-
+                                        <a href="{{ route('searchFilter', ['category' => $value->title, 'city' => 'all', 'highlight' => 'all']) }}">
                                             <i class="{{ $value->value }}"></i>
                                             <span class="title">{{ $value->title }}</span>
-                                            <span class="place">12 Places</span>
+                                            <span class="place">{{ $categoryCount[$value->title]}}</span>
                                         </a>
                                     </div>
                                 @endforeach
+
+
+                                
 
                             </div>
                             <div class="place-slider__nav slick-nav">
@@ -292,7 +292,8 @@
                                             <h4 class="cities__name"></h4>
                                             <div class="cities__info">
                                                 <h3 class="cities__capital">{{ $value->title }}</h3>
-                                                <p class="cities__number">80 places</p>
+                                                <p class="cities__number">{{ $cityCount[$value->title]}} places</p>
+                               
                                             </div>
                                         </div>
                                         <!-- .cities__item -->

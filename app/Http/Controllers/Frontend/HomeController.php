@@ -179,14 +179,23 @@ class HomeController extends Controller
         $submaster = Master::orderBy('created_at', 'asc')
             ->where('type', '=', 'category')
             ->get();
+        $categoryCount;    
+        foreach($submaster as $list){
+            $count = BusinessList::where('category', '=', $list->title)->where('status', '=', '1')->count();
+            $categoryCount[$list->title] = $count;
+        }
         $Mastercity = Master::orderBy('created_at', 'asc')
             ->where('type', '=', 'City')
             ->get();
-
+            $cityCount;    
+            foreach($Mastercity as $list){
+                $count = BusinessList::where('city', '=', $list->title)->where('status', '=', '1')->count();
+                $cityCount[$list->title] = $count;
+            }
         $popup = Master::orderBy('created_at', 'asc')
             ->where('type', '=', 'Homepage_popup')
             ->first();
-        return View::make('frontend.index', compact('submaster', 'businesses', 'Mastercity', 'TestimonialData', 'blog', 'Result', 'popup', 'businessesCount'));
+        return View::make('frontend.index', compact('submaster', 'businesses', 'Mastercity', 'TestimonialData', 'blog', 'Result', 'popup', 'businessesCount','categoryCount','cityCount'));
     }
 
     // public function toggleBookmark(Request $request, $businessId)
@@ -982,10 +991,7 @@ class HomeController extends Controller
             $similer = BusinessList::orderBy('created_at', 'desc')->get();
         }
         
-        $submaster = Master::orderBy('created_at', 'asc')
-            ->where('type', '=', 'city')
-            ->get();
-        
+      
         $submasterCategory = Master::orderBy('created_at', 'asc')
             ->where('type', '=', 'category')
             ->get();
@@ -1042,7 +1048,10 @@ class HomeController extends Controller
         // Paginate the results (e.g., 10 items per page)
         $businesses = $query->paginate(10);
         
-
+        $submaster = Master::orderBy('created_at', 'asc')
+        ->where('type', '=', 'city')
+        ->get();
+    
         // Return the view with the paginated $businesses
         return view('frontend.searchFilter', compact('Result', 'submaster', 'submasterCategory', 'submasterHighlight', 'businesses'));
     }

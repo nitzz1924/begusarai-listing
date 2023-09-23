@@ -177,17 +177,18 @@
 
                                                         <?php }?>
 
-
+                                                        <!-- @foreach ($submaster as $subvalue)
                                                         <a class="entry-category rosy-pink" href="{{ route('searchFilter', ['category' => $value->category, 'city' => 'all', 'highlight' => 'all']) }}">
 
-                                                            @foreach ($submaster as $subvalue)
+                                                           
+                                                            @if ($subvalue->title === $value->category)
                                                             <i class="{{ $subvalue->value ?? 'fa fa-question' }}"></i>
-                                                                @if ($subvalue->title === $value->category)
                                                                 @endif
-                                                            @endforeach
+                                                         
                                                             
                                                             <span>{{ $value->category }}</span>
                                                         </a>
+                                                        @endforeach -->
                                                         <a href="#" class="author" title="Author">
                                                             <img
                                                                 src="{{ URL::to('uploads/' . $value->logo) }}"alt="Author" />
