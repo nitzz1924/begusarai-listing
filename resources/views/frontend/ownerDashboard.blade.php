@@ -36,7 +36,7 @@
                                 <div class="item blue">
                                     <h3>Active Places</h3>
                                     <span class="number">
-                                    {{ $businesses->count() }}
+                                    {{ $ActivePlaces }}
 
                                     </span>
                                     <span class="line"></span>
@@ -45,16 +45,19 @@
                             <div class="col-lg-3 col-6">
                                 <div class="item green">
                                     <h3>Total Leads</h3>
-                                    <span class="number">{{ $lead->count() }}</span>
+                                    <span class="number">{{ $VisitCount }}</span>
                                     <span class="line"></span>
                                 </div>
                             </div>
                             <div class="col-lg-3 col-6">
                                 <div class="item yellow">
                                     <h3>Total Reviews</h3>
-                                    <span class="number">6</span>
+                                    <span class="number">  @foreach($Result as $value)  {{ $value->count }}   @endforeach  </span>
                                     <span class="line"></span>
-                                </div>
+                                 </div>
+
+                                   
+                               
                             </div>
                             <div class="col-lg-3 col-6">
                                 <div class="item purple">

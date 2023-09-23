@@ -731,16 +731,42 @@ class HomeController extends Controller
 
     public function ownerDashboard()
     {
+        $businesses = BusinessList::orderBy('created_at', 'desc')->get();
         $user = auth()->user();
-        $businesses = BusinessList::where('status', '=', '1')
-            ->where('userId', $user->id)
-            ->get();
+        $ActivePlaces = BusinessList::where('status', '=', '1') ->where('userId', $user->id)->count();
+        $VisitCount = Lead::where('status', '=', '1')->where('business_id', $user->id)->count();
+        $Result = [];
 
-        $lead = Lead::where('status', '=', '1')
-            ->where('business_id', $user->usreId)
-            ->get();
+        foreach ($businesses as $value) {
+            $reviews = DB::table('reviews')
+                ->select('reviews.*', 'users_login.image')
+                ->leftJoin('users_login', 'reviews.user_id', '=', 'users_login.id')
+                ->orderBy('reviews.created_at', 'desc')
+                ->where('listing_id', $value->id)
+                ->get();
 
-        return view('frontend.ownerDashboard', compact('businesses', 'lead'));
+            $totalRating = 0;
+            $totalReviews = count($reviews);
+
+            foreach ($reviews as $review) {
+                $totalRating += $review->rating;
+            }
+
+            if ($totalReviews > 0) {
+                $averageRating = $totalRating / $totalReviews;
+                $averageRating = number_format($averageRating, 1); // Display average rating with 1 decimal place
+            } else {
+                $averageRating = 0; // No reviews available
+            }
+
+            // Merge the average rating into the business data
+            $value->rating = $averageRating;
+            $value->count = count($reviews);
+            $Result[] = $value;
+        }
+         
+
+        return view('frontend.ownerDashboard', compact('ActivePlaces' ,'VisitCount','Result'));
     }
 
     public function ownerWishlist()
