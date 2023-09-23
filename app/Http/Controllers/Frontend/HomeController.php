@@ -323,44 +323,52 @@ class HomeController extends Controller
         // dd($id);
         // Validation rules (same as savePlace)
         $rules = [
-            'category' => 'required',
-            'placeType' => 'required',
-
-            'description' => 'required',
-            'price' => 'required',
-            'duration' => 'required',
-            'highlight' => 'required',
-
-            'city' => 'required',
-            'placeAddress' => 'required',
-            'email' => 'required',
-            'phoneNumber1' => 'required',
+            'category' => 'nullable',
+            'placeType' => 'nullable',
+            'description' => 'nullable',
+            'price' => 'nullable',
+            'duration' => 'nullable',
+            'highlight' => 'nullable',
+            'city' => 'nullable',
+            'placeAddress' => 'nullable',
+            'email' => 'nullable',
+            'phoneNumber1' => 'nullable',
             'phoneNumber2' => 'nullable',
-            'whatsappNo' => 'required',
-            'websiteUrl' => 'nullable',
-            'additionalFields' => 'nullable',
-            'facebook' => 'nullable',
-            'instagram' => 'nullable',
+            'whatsappNo' => 'nullable',
+            'websiteUrl' => 'nullable|url', // Changed to validate as a URL
+            'additionalFields' => 'nullable|url', // Changed to validate as a URL
+            'facebook' => 'nullable|url', // Changed to validate as a URL
+            'instagram' => 'nullable|url', // Changed to validate as a URL
             'twitter' => 'nullable|url',
-            'bookingType' => 'required',
-            'bookingurl' => 'nullable',
-            'businessName' => 'required',
-            'youtube' => 'nullable|url',
+            'bookingType' => 'nullable',
+            'bookingurl' => 'nullable|url', // Changed to validate as a URL
+            'businessName' => 'nullable',
+            'youtube' => 'nullable|url', // Changed to validate as a URL
             'video' => 'nullable',
+            'documentImage' => 'nullable|mimes:pdf', // Validate PDF
         ];
 
-        foreach (['coverImage', 'galleryImage', 'documentImage', 'logo'] as $fileField) {
+        foreach (['coverImage', 'logo'] as $fileField) {
             if ($request->hasFile($fileField)) {
                 // Dynamically add validation rules for the file fields if they are present in the request.
-                $rules[$fileField] = 'required|image|mimes:jpg,jpeg,png,svg,webp|max:2048';
+                $rules[$fileField] = 'required|image|mimes:jpg,jpeg,png,svg,webp';
             }
         }
+        $galleryImages = $request->file('galleryImage');
+        if (!empty($galleryImages)) {
+            foreach ($galleryImages as $key => $file) {
+                $rules["galleryImage.{$key}"] = 'nullable|image|mimes:jpg,jpeg,png,svg,webp';
+            }
+        }
+       
 
         $this->validate($request, $rules);
+        $this->validate($request, $rules);
+        
 
         // Find the existing business by ID
         $business = BusinessList::findOrFail($id);
-
+        try {
         // Update business properties
         $business->userId = Auth::id();
         $business->category = $request->input('category');
@@ -387,32 +395,61 @@ class HomeController extends Controller
         $business->video = $request->input('video');
 
         // Handle file uploads (same as savePlace)
-        $allowedExtensions = ['jpg', 'jpeg', 'png', 'svg', 'webp'];
+        $allowedExtensions = ['jpg', 'jpeg', 'png', 'svg', 'webp', 'pdf'];
         $destinationPath = public_path('uploads');
 
-        foreach (['coverImage', 'galleryImage', 'documentImage', 'logo'] as $fileField) {
+        foreach (['coverImage', 'documentImage', 'logo'] as $fileField) {
             if ($request->hasFile($fileField)) {
                 $file = $request->file($fileField);
-
                 $extension = strtolower($file->getClientOriginalExtension());
 
                 if (in_array($extension, $allowedExtensions) && $file->isValid()) {
                     $fileName = time() . '.' . $extension;
                     $file->move($destinationPath, $fileName);
                     $business->$fileField = $fileName;
+                } else {
+                    // Handle invalid files for coverImage, documentImage, and logo
                 }
             }
         }
+        if (!empty($galleryImages)) {
+            $filePaths = [];
 
+            foreach ($galleryImages as $file) {
+                $extension = strtolower($file->getClientOriginalExtension());
+
+                if (in_array($extension, $allowedExtensions) && $file->isValid()) {
+                    $fileName = time() . '_' . uniqid() . '.' . $extension;
+                    $file->move($destinationPath, $fileName);
+                    $filePaths[] = $fileName;
+                } else {
+                    // Handle invalid files for galleryImage
+                }
+            }
+
+            // Store the file paths in the database as a JSON array
+            $business->galleryImage = json_encode($filePaths);
+        }
         // Save the updated business to the database
         $business->save();
 
         // Redirect back on success
         return redirect()
             ->route('ownerListing')
-            ->with('success', 'Business details updated successfully.');
+            ->with('success', $editId ? 'Business updated successfully' : 'Business added successfully');
+    } catch (ValidationException $e) {
+        // Handle validation errors
+        return redirect()
+        ->route('ownerListing')
+            ->withErrors($e->validator->errors())
+            ->withInput();
+    } catch (\Exception $e) {
+        // Handle other errors, log them, or display an error message
+        return redirect()
+        ->route('ownerListing')
+            ->with('error', 'Error: ' . $e->getMessage());
     }
-
+    }
     public function savePlace(Request $request)
 {
     $rules = [
@@ -659,7 +696,7 @@ class HomeController extends Controller
         $MasterCategory = Master::orderBy('created_at', 'asc')
             ->where('type', '=', 'category')
             ->get();
-        $businesses = BusinessList::where('userId')->get(); // Fetch all businesses from the database
+        $businesses = BusinessList::where('userId', $user->id)->get(); // Fetch all businesses from the database
 
         return view('frontend.ownerListing', compact('businesses', 'Mastercity', 'MasterCategory'));
     }
