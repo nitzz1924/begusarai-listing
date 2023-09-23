@@ -1,144 +1,209 @@
 @extends('frontend.layouts.master')
 @section('title', 'Check Out')
 @section('content')
-    
-<main id="main" class="site-main">
-    <div class="page-title page-title--small align-left" style="background-image: url(images/bg/bg-checkout.png);">
-        <div class="container">
-            <div class="page-title__content">
-                <h1 class="page-title__name">Payment</h1>
-            </div>
-        </div>	
-    </div><!-- .page-title -->
-    <div class="site-content">
-        <div class="checkout-area">
+
+    <main id="main" class="site-main">
+        <div class="page-title page-title--small align-left" style="background-image: url(images/bg/bg-checkout.png);">
             <div class="container">
-                <div class="row">
-                    <div class="col-lg-8">
-                        <div class="billing-form">
-                            <h2>Billing Detail</h2>
-                            <form action="#" class="billingForm">
+                <div class="page-title__content">
+                    <h1 class="page-title__name">Payment</h1>
+                </div>
+            </div>
+        </div><!-- .page-title -->
+        <div class="site-content">
+            <div class="checkout-area">
+                <div class="container">
+                    <p class="success-message"></p>
+                    @if ($message = Session::get('error'))
+                        <div class="alert alert-danger alert-dismissible fade in" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                            <strong>Error!</strong> {{ $message }}
+                        </div>
+                    @endif
+                    @if ($message = Session::get('success'))
+                        <div class="alert alert-info alert-dismissible fade in" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                            <strong>Success!</strong> {{ $message }}
+                        </div>
+                    @endif
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <div class="billing-form">
+                                <h2>Billing Detail</h2>
                                 <div class="field-group">
                                     <h3>Your info</h3>
+                                    <input type="hidden" value="{{ $orderId }}" name="orderId" id="orderId" />
+
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="field-input">
-                                                <label for="first_name">First name <span class="required">*</span></label>
-                                                <input type="text" placeholder="Enter your first name" value="" name="first_name" id="first_name">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="field-input">
-                                                <label for="last_name">Last name <span class="required">*</span></label>
-                                                <input type="text" placeholder="Enter your last name" value="" name="last_name" id="last_name">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="field-input">
-                                                <label for="email">Email <span class="required">*</span></label>
-                                                <input type="email" placeholder="Enter your email" value="" name="email" id="email">
+                                                <label for="first_name">Full name <span class="required">*</span></label>
+                                                <input type="text" placeholder="Enter your first name"
+                                                    value="{{ $userData->name }}" name="first_name" id="first_name">
+                                                <input type="hidden" value="{{ $userData->id }}" required name="userId"
+                                                    id="userId">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="field-input">
                                                 <label for="phone">Phone <span class="required">*</span></label>
-                                                <input type="text" placeholder="Enter your phone number" value="" name="phone" id="phone">
+                                                <input type="text" placeholder="Enter your phone number"
+                                                    value="{{ $userData->mobileNumber }}" required name="phone"
+                                                    id="phone">
                                             </div>
                                         </div>
                                     </div>
-                                </div><!-- .field-group -->
-                                <div class="field-group">
-                                    <h3>Pay with</h3>
-                                    <div class="field-select">
-                                        <div id="select-box">
-                                            <input type="checkbox" id="options-view-button" value="">
-                                            <div id="select-button" class="brd">
-                                                    <div id="selected-value">
-                                                        <img src="#" alt=""><span>Select method</span>
-                                                    </div>
-                                                    <div id="chevrons">
-                                                        <i class="las la-angle-down"></i>
-                                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="field-input">
+                                                <label for="businessName">Business name<span
+                                                        class="required">*</span></label>
+                                                <input type="text" placeholder="Enter your first name"
+                                                    value="{{ $businessData->businessName }}" required name="businessName"
+                                                    id="businessName">
+                                                <input type="hidden" value="{{ $businessData->id }}" name="businessId"
+                                                    id="businessId">
                                             </div>
-                                            <div id="options">
-                                                <div class="option o-paypal">
-                                                    <input class="s-c" type="radio" name="method" value="paypal">
-                                                    <img src="images/assets/paypal.png" alt="">
-                                                    <span class="label"><span>Paypal</span></span>
-                                                    <span class="opt-val"><img src="images/assets/paypal.png" alt=""><span>Paypal</span></span>
-                                                </div>
-                                                <div class="option o-stripe">
-                                                    <input class="s-c" type="radio" name="method" value="stripe">
-                                                    <img src="images/assets/stripe.png" alt="">
-                                                    <span class="label"><span>Stripe</span></span>
-                                                    <span class="opt-val"><img src="images/assets/stripe.png" alt=""><span>Stripe</span></span>
-                                                </div>
-                                                <div class="option o-skrill">
-                                                    <input class="s-c" type="radio" name="method" value="skrill">
-                                                    <img src="images/assets/skrill.png" alt="">
-                                                    <span class="label"><span>Skrill</span></span>
-                                                    <span class="opt-val"><img src="images/assets/skrill.png" alt=""><span>Skrill</span></span>
-                                                </div>
-                                                <div class="option o-master">
-                                                    <input class="s-c" type="radio" name="method" value="master-card">
-                                                    <img src="images/assets/master-card.png" alt="">
-                                                    <span class="label"><span>Master Card</span></span>
-                                                    <span class="opt-val"><img src="images/assets/master-card.png" alt=""><span>Master Card</span></span>
-                                                </div>
-                                                <div id="option-bg"></div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="field-input">
+                                                <label for="phone">Business Phone <span class="required">*</span></label>
+                                                <input type="text" placeholder="Enter your phone number"
+                                                    value="{{ $businessData->phoneNumber1 }}" required name="bussinessphone"
+                                                    id="bussinessphone">
                                             </div>
                                         </div>
                                     </div>
-                                </div><!-- .field-group -->
-                                <div class="field-group">
-                                    <h3>Paypal detail</h3>
-                                    <div class="field-input">
-                                        <label for="paypal_email">PayPal Email <span class="required">*</span></label>
-                                        <input type="text" placeholder="Enter your PayPal Email" value="" name="paypal_email" id="paypal_email">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="field-input">
+                                                <label for="first_name">Plan Name<span class="required">*</span></label>
+                                                <input type="text" value="{{ $planData->title }}" required
+                                                    name="planName" id="planName">
+                                                <input type="hidden" value="{{ $planData->id }}" name="planId"
+                                                    id="planId">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="field-input">
+                                                <label for="phone">Pay Amount<span class="required">*</span></label>
+                                                <input type="text" value="{{ $planData->price }}" required
+                                                    name="amount" id="amount">
+                                            </div>
+                                        </div>
                                     </div>
-                                </div><!-- .field-group -->
+                                    <input type="hidden" value="{{ $planidv }}" name="planId" id="planId">
+                                </div>
                                 <div class="field-group">
                                     <div class="field-check">
                                         <label for="pp">
-                                            <input type="checkbox" id="pp" value="">
-                                            I have read and accept the <a title="Privacy Policy" href="#">Privacy Policy</a>
-                                            <span class="checkmark">												
+                                            <input type="checkbox" id="pp" value="" required>
+                                            I have read and accept the <a title="Privacy Policy"
+                                                href="/privacyPolicy">Privacy Policy</a>
+                                            <span class="checkmark">
                                                 <i class="la la-check"></i>
                                             </span>
                                         </label>
                                     </div>
                                 </div>
-                                <div class="field-submit">
-                                    <input type="submit" name="submit" value="Pay Now" class="btn">
+
+                            </div><!-- .checkout-form -->
+                            <button id="rzp-button1" class="btn btn-success btn-lg">Pay</button>
+
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="pricing-item shadow">
+                                <div class="best-deal">{{ $planData->title }}</div>
+                                <img src="{{ asset('assets\images\packages\Feature-Listing.png') }}"
+                                    class="rounded-3 shadow" alt="Featured Listing">
+                                <h3>{{ $planData->type }}</h3>
+                                <div class="price-container">
+                                    <div class="price">
+                                        <span class="currency">₹</span>{{ $planData->price }}
+                                    </div>
+                                    <div class="strike">₹{{ $planData->off }}</div>
                                 </div>
-                            </form><!-- .billingForm -->
-                        </div><!-- .checkout-form -->
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="package-review">
-                            <h2>Selected Package</h2>
-                            <div class="pricing-item">
-                                <img src="images/illustrations/plan-2.png" alt="Basic">
-                                <h3>Standard</h3>
                                 <ul>
-                                    <li>100 Places Post</li>
-                                    <li>Featured Places</li>
-                                    <li>Edit Your Place</li>
-                                    <li>Add Booking</li>
+                                    <li>{{ $planData->duration }} Expiration Date </li>
+                                    <li>{{ $planData->noOfPlace }} Place Listing </li>
+                                    <li>{{ $planData->featuredListings }} Featured Listings </li>
+                                    <li>{{ ucwords(str_replace('_', ' ', $planData->featuredType)) }}</li>
                                 </ul>
-                                <div class="total">
-                                    <h4>Total</h4>
-                                    <span>$5.99</span>
-                                </div>
-                                <a href="#" class="btn btn-change" title="Change Package">Change Package</a>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div><!-- .checkout-area -->
-    </div><!-- .site-content -->
-</main><!-- .site-main -->
+            </div><!-- .checkout-area -->
+        </div><!-- .site-content -->
+    </main><!-- .site-main -->
 
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js" type="text/javascript"></script>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+
+    <script>
+        // Wait for the document to be ready before attaching the click event
+        $(document).ready(function() {
+            $("#rzp-button1").click(function() {
+                var userId = document.getElementById('userId').value;
+                var businessId = document.getElementById('businessId').value;
+                var planId = document.getElementById('planId').value;
+                var amount = document.getElementById('amount').value;
+                var orderId = document.getElementById('orderId').value;
+                var phone = document.getElementById('phone').value;
+                var fullname = document.getElementById('first_name').value;
+                var total_amount = amount * 100;
+                var options = {
+                    "key": "{{ env('RAZOR_KEY') }}",
+                    "amount": total_amount,
+                    "currency": "INR",
+                    "name": "Inbegusarai",
+                    "description": "Business Listing",
+                    "image": "https://www.nicesnippets.com/image/imgpsh_fullsize.png",
+                    "order_id": orderId,
+                    "handler": function(response) {
+                        $.ajax({
+                            type: 'POST',
+                            url: "{{ route('handlePayment') }}",
+                            data: {
+                                razorpay_payment_id: response.razorpay_payment_id,
+                                amount: amount,
+                                bId: businessId,
+                                uId: userId,
+                                pId: planId
+                            },
+                            success: function(data) {
+                                var paymentStatus = 'success';
+                                window.location.href =
+                                    "{{ route('paymentresult') }}" + "?uId=" + userId +
+                                    "&pId=" + planId + "&bId=" + businessId +
+                                    "&status=" +
+                                    paymentStatus;
+                            }
+                        });
+                    },
+                    "prefill": {
+                        "name": fullname,
+                        "contact": phone
+                    },
+                    "notes": {
+                        "address": "test test"
+                    },
+                    "theme": {
+                        "color": "#F37254"
+                    }
+                };
+
+                var rzp1 = new Razorpay(options);
+                rzp1.open();
+
+            });
+        });
+    </script>
 
 @endsection

@@ -14,6 +14,183 @@ $Mastercity = Master::orderBy('created_at', 'asc')
             <div class="col-xl-6 col-sm-5 d-flex align-items-center justify-content-between">
                 <div class="site">
 
+<<<<<<< HEAD
+=======
+                    <div class="site__menu">
+                        <a title="Menu Icon" href="#" class="site__menu__icon">
+                            <i class="las la-bars la-24-black"></i>
+                        </a>
+                        <div class="popup-background"></div>
+
+                        <div class="popup popup--left">
+                            <a title="Close" href="#" class="popup__close">
+                                <i class="las la-times la-24-black"></i>
+                            </a><!-- .popup__close -->
+
+                            <div class="popup__menu popup__box">
+
+                                <div class="site__brand">
+                                    <a title="Logo" href="/" class="site__brand__logo"><img
+                                            src="{{ asset('assets/images/begusarai-logo.png') }}" alt="Begusarai" /></a>
+                                </div>
+                            </div>
+
+                            <div class="popup__content">
+                                <?php 
+                            if (Auth::user()==null){
+                            ?>
+                                <div class="popup__user popup__box open-form">
+                                    <a title="Login" href="#" class="open-login">Login</a>
+                                </div><!-- .popup__user -->
+
+                                <?php 
+                            }
+                            ?>
+
+                                @auth
+                                    <?php $user = User_Login::find(auth()->user()->id); ?>
+                                @endauth
+                                <div class="popup__menu popup__box">
+                                    <ul class="sub-menu">
+
+                                        <?php 
+                                    if(Auth::user()){
+
+                                    if (Auth::user()->type=='Guest'){
+                                        ?>
+                                        <li>
+                                            <a class="avatar" href="">
+
+                                                @if ($user->image)
+                                                    <img src="{{ URL::to('/uploads/' . $user->image) }}" title=""
+                                                        alt="">
+
+                                                    <span>{{ $user->name }}</span>
+                                                @else
+                                                    <img src="https://wp.getgolo.com/country-guide/wp-content/themes/golo/assets/images/default-user-image.png"
+                                                        title="guest" alt="guest">
+                                                    <span>{{ $user->name }}</span>
+                                                @endif
+                                            </a>
+                                            <ul class="sub-menu">
+                                                <li class=""><a href="/ownerProfile">Profile</a></li>
+                                                <li class=""><a href="/ownerWishlist">My Wishlist</a></li>
+                                                <li>
+                                                    <a href="/logout">
+                                                        <span>Logout</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <?php 
+                                    }}
+                                    ?>
+
+                                        <?php 
+                                    if(Auth::user()){
+
+                                    if (Auth::user()->type=='Owner'){
+                                    ?>
+                                        <li>
+                                            <a class="avatar" href="">
+                                                @if ($user->image)
+                                                    <img src="{{ URL::to('/uploads/' . $user->image) }}" title=""
+                                                        alt="">
+
+                                                    <span>
+                                                        {{ $user->name }}
+                                                    </span>
+                                                @else
+                                                    <img src="{{ asset('assets/images/users/default.png') }}"
+                                                        title="Default Avatar" alt="Default Avatar">
+                                                    <span>
+                                                        {{ $user->name }}
+                                                    </span>
+                                                @endif
+                                            </a>
+                                            <ul class="sub-menu">
+                                                <li class=""><a href="/ownerDashboard">Dashboard</a>
+                                                </li>
+                                                <li class=""><a href="/ownerListing">My Places</a>
+                                                </li>
+                                                <li class=""><a href="/ownerWishlist">My Wishlist</a>
+                                                </li>
+                                                <li class=""><a href="/businessOwnerPage">Author Listing</a>
+                                                </li>
+                                                <li>
+                                                    <hr class="dropdown-divider">
+                                                </li>
+                                                <li>
+                                                    <a href="/logout">
+                                                        <span>Logout</span> </i>
+                                                    </a>
+                                                </li>
+                                        </li>
+                                        <?php 
+                                    }}
+                                    ?>
+
+                                    </ul>
+                                    </ul>
+                                </div><!-- .popup__menu -->
+
+                                {{-- Navigation tabs --}}
+                                <div class="popup__menu popup__box">
+                                    <ul class="menu-arrow">
+                                        <li>
+                                            <a title="Packages" href="/packages/0">Packages</a>
+                                        </li>
+                                        <li>
+                                            <a title="AboutUs" href="/aboutUs">About Us</a>
+                                        </li>
+                                        <li>
+                                            <a title="Contact" href="/contact">Contact Us</a>
+                                        </li>
+                                    </ul>
+                                </div><!-- .popup__menu -->
+
+                                <div class="popup__destinations popup__box">
+                                    <ul class="menu-arrow">
+                                        <li>
+                                            <a title="Destinations" href="#">Destinations </a>
+                                            <ul class="sub-menu">
+                                                @foreach ($Mastercity as $value)
+                                                    <li>
+                                                        <a
+                                                            href="{{ route('searchFilter', ['category' => 'all', 'city' => $value->title, 'highlight' => 'all']) }}">
+                                                            {{ $value->title }}
+                                                        </a>
+                                                    </li>
+                                                @endforeach
+                                            </ul>
+                                        </li>
+                                    </ul>
+
+                                </div>
+
+                            </div><!-- .popup__content -->
+
+                            <?php 
+                        if(Auth::user()){
+
+                        if (Auth::user()->type=='Owner'){
+                        ?>
+                            <div class="popup__button popup__box">
+                                <a title="Add place" href="add-place.html" class="btn">
+                                    <i class="la la-plus"></i>
+                                    <span>Add place</span>
+                                </a>
+                            </div><!-- .popup__button -->
+
+                            <?php 
+                        }}
+                        ?>
+
+                        </div><!-- .popup -->
+                    </div><!-- .site__menu -->
+
+                    {{-- desktop navigation --}}
+>>>>>>> kishan/main
                     <div class="site__brand">
                         <a title="Logo" href="/" class="site__brand__logo"><img
                                 src="{{ asset('assets/images/begusarai-logo.png') }}" alt="Begusarai" /></a>
@@ -159,15 +336,12 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                 <div class="right-header align-right">
                     <nav class="main-menu">
                         <ul>
-
                             <li>
                                 <a href="/" title="Home">Home</a>
                             </li>
-
                             <li>
-                                <a title="Packages" href="/packages">Packages</a>
+                                <a title="Packages" href="/packages/0">Packages</a>
                             </li>
-
                             <li>
                                 <a title="Destinations" href="#">Destinations</a>
                                 <ul class="sub-menu">

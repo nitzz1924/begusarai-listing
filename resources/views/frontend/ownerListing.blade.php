@@ -122,10 +122,9 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                                         </td>
                                         <td data-title="Payment">
                                             @if ($business->status == 0)
-                                                <button href="#" class="btn-sm btn-warning">
-                                                    Pay
-                                                    Now
-                                                </button>
+                                                <a href="/packages/{{ $business->id }}" class="btn-sm btn-warning">
+                                                    Activate Plan
+                                                </a>
                                             @else
                                                 <span class="status-label" style="color: green;">
                                                     <i class="fas fa-check-circle " style="font-size: 20px;"></i>

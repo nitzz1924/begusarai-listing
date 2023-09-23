@@ -18,21 +18,15 @@ Route::group(
 
 // Frontend user Routes - logged out
 Route::get('/aboutUs', [HomeController::class, 'aboutUs'])->name('aboutUs');
-
-
- 
-
-
 Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
 Route::post('/savecontact', [HomeController::class, 'savecontact'])->name('savecontact');
 
-Route::get('/packages', [HomeController::class, 'packages'])->name('packages');
+Route::get('/packages/{id}', [HomeController::class, 'packages'])->name('packages');
 Route::get('/registration', [HomeController::class, 'registration'])->name('registration');
 Route::get('/blogs', [HomeController::class, 'blogs'])->name('blogs');
 Route::get('/searchCity', [HomeController::class, 'searchCity'])->name('searchCity');
-Route::get('/checkoutPage', [HomeController::class, 'checkoutPage'])->name('checkoutPage');
+Route::get('/checkoutPage/{businessid}/{userId}/{planId}', [HomeController::class, 'checkoutPage'])->name('checkoutPage');
 Route::get('/privacyPolicy', [HomeController::class, 'privacyPolicy'])->name('privacyPolicy');
-
 // Business Owner routes - logged in
 Route::get('/ownerDashboard', [HomeController::class, 'ownerDashboard'])->name('ownerDashboard');
 Route::get('/listingDetail/{id}/{category}', [HomeController::class, 'listingDetail'])->name('listingDetail');
@@ -147,25 +141,15 @@ Route::post('/career', [HomeController::class, 'careerStore'])->name('careerStor
 
 //bookmark route 
 Route::post('/bookmark/{businessId}', [HomeController::class, 'toggleBookmark'])->name('bookmark.toggle');
- 
 Route::get('/searchFilter/{category}/{city}/{highlight}', [HomeController::class, 'searchFilter'])->name('searchFilter');
-
-
 Route::get('/update-places', [HomeController::class, 'updatePlaces'])->name('updatePlaces');
 Route::get('/ownerProfile', [HomeController::class, 'ownerProfile'])->name('ownerProfile');
-
 Route::post('/ownerProfile/update-profile', [HomeController::class, 'updateprofile'])->name('updateprofile');
-
-
-
-
- 
 Route::get('/change-password-form', [HomeController::class, 'changePassword'])->name('changePassword');
- 
 Route::post('/change-password-form/savepassword', [HomeController::class, 'savepassword'])->name('savepassword');
-
-
 Route::get('/reviews', [HomeController::class, 'showReviews'])->name('showReviews');
 Route::post('/submit-review/{id}', [HomeController::class, 'reviewStore'])->name('reviewStore');
-
+Route::get('/payment', 'RazorpayController@payment')->name('payment');
+Route::post('/handlePayment', 'RazorpayController@handlePayment')->name('handlePayment');
+Route::get('/paymentresult', 'RazorpayController@paymentresult')->name('paymentresult');
  // Example route definition
