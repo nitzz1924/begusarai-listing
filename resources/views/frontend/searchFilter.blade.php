@@ -178,13 +178,13 @@
                                                         <?php }?>
 
 
-                                                        <a class="entry-category rosy-pink" href="{{ route('searchFilter', ['category' => $value->category, 'city' => 'all', 'highlight' => 'all']) }}">
+                                                        <a class=" search-category rosy-pink" href="{{ route('searchFilter', ['category' => $value->category, 'city' => 'all', 'highlight' => 'all']) }}">
 
-                                                            @foreach ($submaster as $subvalue)
-                                                            <i class="{{ $subvalue->value ?? 'fa fa-question' }}"></i>
+                                                            {{-- @foreach ($submaster as $subvalue)
                                                                 @if ($subvalue->title === $value->category)
+                                                                    <i class="{{ $subvalue->value ?? 'fa fa-question' }}"></i>
                                                                 @endif
-                                                            @endforeach
+                                                            @endforeach --}}
                                                             
                                                             <span>{{ $value->category }}</span>
                                                         </a>

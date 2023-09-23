@@ -193,11 +193,11 @@
                                             Reviews)</span>
                                     </div>
 
-                               
+                            
                                     <div class="place__currency"> {{ $businessesDetail->price }}</div>
                                     <div class="place__category">
 
-                                        <a title=" " href="#">{{ $businessesDetail->placeType }}</a>
+                                        <a title=" " href="#">{{ $businessesDetail->category }}</a>
                                     </div>
                                 </div><!-- .place__meta -->
                             </div>
