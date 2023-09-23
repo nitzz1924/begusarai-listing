@@ -4,7 +4,7 @@
             <div class="row">
                 <div class="col-lg-5">
                     <div class="footer__top__info">
-                        <a title="Logo" href="01_index_1.html" class="footer__top__info__logo"><img
+                        <a title="Logo" href="/" class="footer__top__info__logo"><img
                                 src="{{ asset('assets/images/begusarai-logo.png') }}" alt="Begusarai" /></a>
                         <p class="footer__top__info__desc">
                             Discover amazing things to do everywhere you go.

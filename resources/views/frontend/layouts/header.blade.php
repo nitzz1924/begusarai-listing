@@ -83,7 +83,7 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                                             <li class=""><a href="/ownerDashboard">Dashboard</a></li>
                                             <li class=""><a href="/ownerListing">My Places</a></li>
                                             <li class=""><a href="/ownerWishlist">My Wishlist</a></li>
-                                            <li class=""><a href="/businessOwnerPage">Author Listing</a></li>
+                                            {{-- <li class=""><a href="/businessOwnerPage">Author Listing</a></li> --}}
                                             <li>
                                                 <hr class="dropdown-divider">
                                             </li>
@@ -258,8 +258,8 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                                     </li> -->
                                     <li class=""><a href="/ownerWishlist">My Wishlist</a>
                                     </li>
-                                    <li class=""><a href="/businessOwnerPage">Author Listing</a>
-                                    </li>
+                                    {{-- <li class=""><a href="/businessOwnerPage">Author Listing</a>
+                                    </li> --}}
                                     {{-- <li class=""><a href="/">My Bookings</a>
                                     </li> --}}
                                     <li>

@@ -352,3 +352,13 @@ body.modal-open .custom-overlay {
     height: 100%;
     z-index: -1; /* Place it behind other content */
 }
+
+.place-item.layout-02 .place-thumb .search-category {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background-color: #f0626c;
+    padding: 3px 10px;
+    border-radius: 50px;
+    color: white;
+}
