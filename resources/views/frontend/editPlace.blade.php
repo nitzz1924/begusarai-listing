@@ -47,9 +47,9 @@
                         <input type="text" placeholder="What is the name of the place" name="businessName"
                             id="businessName" class="form-control @error('businessName') is-invalid @enderror"
                             value="{{ isset($business) ? $business->businessName : old('businessName') }}">
-                        {{-- @error('businessName')
+                         @error('businessName')
                             <div class="has-error mt-2">{{ $message }}</div>
-                        @enderror --}}
+                        @enderror  
                     </div>
                     <!-- Price -->
                     <div class="field-group field-input">
@@ -314,20 +314,18 @@
                     </div>
                     <!-- Gallery Images -->
                     <div class="field-group field-file">
-                        <label for="galleryImage">Gallery Images (optional)</label>
-                        <label for="galleryImage" class="preview">
-                            <input type="file" name="galleryImage" id="galleryImage" class="upload-file"
-                                data-max-size="1024">
-                            <img class="img_preview"
-                                src="{{ isset($business) && $business->galleryImage ? asset('uploads/' . $business->galleryImage) : asset('images/no-image.png') }}"
-                                alt="" />
-                            <i class="la la-cloud-upload-alt"></i>
-                        </label>
-                        @error('galleryImage')
-                            <div class="has-error mt-2">{{ $message }}</div>
-                        @enderror
-                        <div class="field-note">Maximum file size: 1 MB.</div>
-                    </div>
+        <label for="galleryImage">Gallery Images</label>
+        <label for="galleryImage" class="preview">
+            <input type="file" name="galleryImage[]" id="galleryImage" class="upload-file" data-max-size="1024" multiple accept="image/*">
+            <input type="hidden" name="galleryImageCount" id="galleryImageCount" value="{{ count(json_decode($business->galleryImage)) }}"> <!-- Store the initial count -->
+            <div class="selected-files-count">{{ count(json_decode($business->galleryImage)) }} images selected</div>
+            <i class="la la-cloud-upload-alt"></i>
+        </label>
+        @error('galleryImage')
+        <div class="has-error mt-2">{{ $message }}</div>
+        @enderror
+        <div class="field-note">Maximum file size: 1 MB.</div>
+    </div>
                     <!-- Document Images -->
                     <div class="field-group field-file">
                         <label for="documentImage">Document Images(Upload PDF)</label>
@@ -379,5 +377,41 @@
             </form>
         </div><!-- .listing-content -->
     </main><!-- .site-main -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const dropArea = document.getElementById("drop-area");
+        const galleryImageInput = document.getElementById("galleryImage");
+        const galleryImageCountInput = document.getElementById("galleryImageCount");
 
+        ["dragenter", "dragover", "dragleave", "drop"].forEach((eventName) => {
+            dropArea.addEventListener(eventName, preventDefault, false);
+        });
+
+        function preventDefault(e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+
+        dropArea.addEventListener("drop", handleDrop, false);
+        galleryImageInput.addEventListener("change", updateGalleryImageCount);
+
+        function handleDrop(e) {
+            const files = e.dataTransfer.files;
+            const inputElement = galleryImageInput;
+            inputElement.files = files;
+
+            // Update label text to show the number of files dropped
+            const label = dropArea.querySelector("label");
+            label.textContent = files.length === 1 ? "1 file selected" : `${files.length} files selected`;
+
+            // Update the hidden input field with the count
+            galleryImageCountInput.value = files.length;
+        }
+
+        function updateGalleryImageCount() {
+            const files = galleryImageInput.files;
+            galleryImageCountInput.value = files.length;
+        }
+    });
+</script>
 @endsection
