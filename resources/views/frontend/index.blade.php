@@ -92,7 +92,8 @@
                                 </div>
                             </div>
                         </div>
-                    @endif
+                        @endif
+                    </div>
 
                     <div class="business-category">
                         <div class="container">
