@@ -257,7 +257,7 @@
 
                 <div id="media" class="listing-box">
                     <h3>Media</h3>
-                    <div class="field-group field-file">
+                      <div class="field-group field-file">
                         <label for="coverImage">Cover image</label>
                         <label for="coverImage" class="preview">
                             <input type="file" name="coverImage" id="coverImage" class="upload-file"
@@ -274,8 +274,8 @@
                     <div class="field-group field-file">
                         <label for="galleryImage">Gallery Images </label>
                         <label for="galleryImage" class="preview">
-                            <input type="file" name="galleryImage[]" id="galleryImage" class="upload-file"
-                                data-max-size="1024" multiple>
+                            <input type="file" name="galleryImage" id="galleryImage" class="upload-file"
+                                data-max-size="1024" >
                             <img class="img_preview" src="images/no-image.png" alt="" />
                             <i class="la la-cloud-upload-alt"></i>
                         </label>
@@ -285,18 +285,7 @@
                         <div class="field-note">Maximum file size: 1 MB.</div>
                     </div>
 
-                    <div class="field-group field-file">
-                        <label for="documentImage">Document Images (Upload PDF)</label>
-                        <label for="documentImage" class="preview">
-                            <input type="file" name="documentImage" id="documentImage" class="upload-file"
-                                accept=".pdf">
-                            <img class="img_preview" src="images/no-image.png" alt="" />
-                            <i class="la la-cloud-upload-alt"></i>
-                        </label>
-                        @error('documentImage')
-                            <div class="has-error mt-2">{{ $message }}</div>
-                        @enderror
-                    </div>
+                   
 
 
 
@@ -318,6 +307,19 @@
                             <div class="has-error mt-2">{{ $message }}</div>
                         @enderror
                         <div class="field-note">Maximum file size: 1 MB.</div>
+                    </div>  
+                    <div class="field-group field-file">
+                        <label for="documentImage">Document Images (Upload PDF)</label>
+                        <label for="documentImage" class="preview">
+                            
+                            <input type="file" name="documentImage" id="documentImage" class="upload-file"
+                                accept=".pdf">
+                            <img class="img_preview" src="images/no-image.png" alt="" />
+                            <i class="la la-cloud-upload-alt"></i>
+                        </label>
+                        @error('documentImage')
+                            <div class="has-error mt-2">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="field-group">
                         <label for="video">Video (optional)</label>
@@ -326,8 +328,7 @@
                             <div class="has-error mt-2">{{ $message }}</div>
                         @enderror
                     </div>
-                </div><!-- .listing-box -->
-
+                </div> 
                 <div class="field-group field-submit">
                     <input type="submit" name="submit" value="Submit" class="btn">
                 </div>

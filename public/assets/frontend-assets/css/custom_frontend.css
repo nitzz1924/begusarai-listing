@@ -312,6 +312,50 @@ input[type="tel"]:focus {
     border-radius: 50%; /* Keep the circular shape */
 }
 
+/* Override Bootstrap modal backdrop  */
+body.modal-open .modal-backdrop {
+    z-index: 0 !important;
+}
+
+
+/* Style for the custom overlay */
+.custom-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* You can adjust the background color and opacity */
+    z-index: 10; /* Place it behind other elements */
+    display: none; /* Initially hidden */
+}
+
+/* Override Bootstrap modal styles to make it visible */
+.modal {
+    z-index: 1; /* Ensure modal is on top of the custom overlay */
+}
+/* Override Bootstrap modal backdrop */
+body.modal-open .modal-backdrop {
+    z-index: 0 !important;
+}
+
+
+/* Style for the  custom overlay */
+.custom-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* You can adjust the background color and opacity */
+    z-index: 10; /* Place it behind other elements */
+    display: none; /* Initially hidden */
+}
+
+/* Override Bootstrap modal styles to make it visible */
+.modal {
+    z-index: 1; /* Ensure modal is on top of the custom overlay */
+}
 /* Override Bootstrap modal backdrop */
 body.modal-open .modal-backdrop {
     z-index: 0 !important;
@@ -333,6 +377,10 @@ body.modal-open .modal-backdrop {
 /* Override Bootstrap modal styles to make it visible */
 .modal {
     z-index: 1; /* Ensure modal is on top of the custom overlay */
+}
+
+body.modal-open .custom-overlay {
+    display: block; /* Show the custom overlay when a modal is open */
 }
 
 body.modal-open .custom-overlay {
