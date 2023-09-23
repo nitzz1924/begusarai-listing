@@ -14,8 +14,6 @@ $Mastercity = Master::orderBy('created_at', 'asc')
             <div class="col-xl-6 col-sm-5 d-flex align-items-center justify-content-between">
                 <div class="site">
 
-<<<<<<< HEAD
-=======
                     <div class="site__menu">
                         <a title="Menu Icon" href="#" class="site__menu__icon">
                             <i class="las la-bars la-24-black"></i>
@@ -190,7 +188,6 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                     </div><!-- .site__menu -->
 
                     {{-- desktop navigation --}}
->>>>>>> kishan/main
                     <div class="site__brand">
                         <a title="Logo" href="/" class="site__brand__logo"><img
                                 src="{{ asset('assets/images/begusarai-logo.png') }}" alt="Begusarai" /></a>
