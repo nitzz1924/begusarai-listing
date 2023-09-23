@@ -653,6 +653,10 @@ class HomeController extends Controller
                 
             }
         }
+        
+        // $VisitCount = Lead:: where('business_id')  ->get();
+        $VisitCount = Lead::where('business_id', $id)->count();
+
 
         $businesses = BusinessList::orderBy('created_at', 'desc')->get();
 
@@ -702,7 +706,7 @@ class HomeController extends Controller
             ->where('listing_id', $id)
             ->get();
 
-        return view('frontend.listingDetail', compact('businessesDetail', 'submaster', 'businesses', 'Result', 'reviews'));
+        return view('frontend.listingDetail', compact('businessesDetail', 'submaster', 'businesses', 'Result', 'reviews','VisitCount'));
     }
 
     public function blogDetails(Request $request, $id)
@@ -838,9 +842,7 @@ class HomeController extends Controller
         // Validate the input data
         $validatedData = $request->validate($rules);
 
-        $lead = new Lead();
-        $lead->user_id = $user->id;
-
+        $lead = new Lead(); 
         $lead->name = $validatedData['name'];
         $lead->number = $validatedData['number'];
         $lead->message = $validatedData['message'];
