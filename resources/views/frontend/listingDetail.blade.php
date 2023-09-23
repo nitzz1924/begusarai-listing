@@ -97,16 +97,18 @@
                     data-tabletscroll="1" data-tabletpadding="70px" data-mobileitem="1" data-mobilescroll="1"
                     data-mobilepadding="30px">
 
-                    <div class="place-slider__item bd">
-                        <a title="Place Slider Image" href="#">
-                            <img src="{{ URL::to('uploads/' . $businessesDetail->coverImage) }}" alt="slider-01">
-                        </a>
-                    </div>
-                    <div class="place-slider__item bd">
-                        <a title="Place Slider Image" href="#">
-                            <img src="{{ URL::to('uploads/' . $businessesDetail->coverImage) }}" alt="slider-01">
-                        </a>
-                    </div>
+                
+                   
+                        @if ($businessesDetail->galleryImage)
+                            @foreach (json_decode($businessesDetail->galleryImage) as $image)
+                            <div class="place-slider__item bd">
+                                <a title="Place Slider Image" href="#">
+                                    <img src="{{ URL::to('uploads/' . $image) }}" alt="slider-01">
+                                </a>
+                            </div>
+                            @endforeach
+                        @endif
+
 
 
                 </div><!-- .page-title -->

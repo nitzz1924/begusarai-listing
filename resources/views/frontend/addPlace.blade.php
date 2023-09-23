@@ -1,7 +1,88 @@
 @extends('frontend.layouts.master')
 @section('title', 'Add Place')
 @section('content')
+<style>
+        .upload-area {
+            border: 2px dashed #999;
+            background-color: #f9f9f9;
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: box-shadow 0.3s;
+        }
 
+        .upload-area:hover {
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .file-upload {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            background-color: #ffffff;
+            border-radius: 5px;
+            padding: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .file-upload:hover {
+            background-color: #f9f9f9;
+        }
+
+        .file-input {
+            display: none;
+        }
+
+        .file-label {
+            color: #333;
+            font-size: 16px;
+            margin-top: 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            transition: color 0.3s;
+        }
+
+        .file-label:hover {
+            color: #555;
+        }
+
+        .upload-btn {
+            margin-top: 1rem;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+
+        .upload-btn:hover {
+            transform: translateY(-5px);
+        }
+
+        .upload-btn span {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(255, 255, 255, 0.2), transparent);
+            animation: lighting 1.5s infinite linear;
+        }
+
+        @keyframes lighting {
+            0% {
+                transform: translateX(-100%);
+            }
+
+            100% {
+                transform: translateX(100%);
+            }
+        }
+    </style>
     <main class="site-main listing-main">
         <div class="listing-nav">
             <div class="listing-menu nav-scroll">
@@ -172,7 +253,8 @@
                     </div>
                     <div class="field-group">
                         <label for="whatsappNo">WhatsApp Number</label>
-                        <input type="tel" placeholder="Your WhatsApp number" name="whatsappNo" id="whatsappNo" class="form-control @error('whatsappNo') is-invalid @enderror">
+                        <input type="tel" placeholder="Your WhatsApp number" name="whatsappNo" id="whatsappNo"
+                            class="form-control @error('whatsappNo') is-invalid @enderror">
                         {{-- @error('whatsappNo')
                             <div class="has-error mt-2">{{ $message }}</div>
                         @enderror --}}
@@ -235,8 +317,9 @@
                     <h3>Opening Hours</h3>
                     <div class="field-group field-select">
                         <label for="bookingType">Booking Type</label>
-                        <select data-placeholder="Select Booking Type" class="chosen-select form-control @error('bookingType') is-invalid @enderror" id="bookingType"
-                            name="bookingType">
+                        <select data-placeholder="Select Booking Type"
+                            class="chosen-select form-control @error('bookingType') is-invalid @enderror"
+                            id="bookingType" name="bookingType">
                             <option selected></option>
                             @foreach ($bookingType as $value)
                                 <option>{{ $value->title }}</option>
@@ -248,7 +331,8 @@
                     </div>
                     <div class="field-group">
                         <label for="bookingurl">Booking URL</label>
-                        <input type="url" placeholder="Your booking URL" name="bookingurl" id="bookingurl" class="form-control @error('bookingurl') is-invalid @enderror">
+                        <input type="url" placeholder="Your booking URL" name="bookingurl" id="bookingurl"
+                            class="form-control @error('bookingurl') is-invalid @enderror">
                         {{-- @error('bookingurl')
                             <div class="has-error mt-2">{{ $message }}</div>
                         @enderror --}}
@@ -257,7 +341,7 @@
 
                 <div id="media" class="listing-box">
                     <h3>Media</h3>
-                      <div class="field-group field-file">
+                    <div class="field-group field-file">
                         <label for="coverImage">Cover image</label>
                         <label for="coverImage" class="preview">
                             <input type="file" name="coverImage" id="coverImage" class="upload-file"
@@ -271,27 +355,24 @@
                         <div class="field-note">Maximum file size: 1 MB.</div>
                     </div>
 
+               
+
                     <div class="field-group field-file">
-                        <label for="galleryImage">Gallery Images </label>
-                        <label for="galleryImage" class="preview">
-                            <input type="file" name="galleryImage" id="galleryImage" class="upload-file"
-                                data-max-size="1024" >
-                            <img class="img_preview" src="images/no-image.png" alt="" />
-                            <i class="la la-cloud-upload-alt"></i>
-                        </label>
-                        @error('galleryImage')
-                            <div class="has-error mt-2">{{ $message }}</div>
-                        @enderror
-                        <div class="field-note">Maximum file size: 1 MB.</div>
-                    </div>
-
-                   
-
-
-
-
-
-
+        <label for="galleryImage">Gallery Images</label>
+        <label for="galleryImage" class="preview">
+            <div class="mb-3 upload-area" id="drop-area">
+                <label for="image" class="form-label">Drag & Drop Images Here</label>
+            </div>
+            <input type="file" name="galleryImage[]" id="galleryImage" class="upload-file" data-max-size="1024" multiple accept="image/*">
+            <input type="hidden" name="galleryImageCount" id="galleryImageCount" value="0"> <!-- Add this hidden input -->
+            <div class="selected-files-count"></div>
+            <i class="la la-cloud-upload-alt"></i>
+        </label>
+        @error('galleryImage')
+        <div class="has-error mt-2">{{ $message }}</div>
+        @enderror
+        <div class="field-note">Maximum file size: 1 MB.</div>
+    </div>
 
 
 
@@ -307,11 +388,11 @@
                             <div class="has-error mt-2">{{ $message }}</div>
                         @enderror
                         <div class="field-note">Maximum file size: 1 MB.</div>
-                    </div>  
+                    </div>
                     <div class="field-group field-file">
                         <label for="documentImage">Document Images (Upload PDF)</label>
                         <label for="documentImage" class="preview">
-                            
+
                             <input type="file" name="documentImage" id="documentImage" class="upload-file"
                                 accept=".pdf">
                             <img class="img_preview" src="images/no-image.png" alt="" />
@@ -328,14 +409,53 @@
                             <div class="has-error mt-2">{{ $message }}</div>
                         @enderror
                     </div>
-                </div> 
+                </div>
                 <div class="field-group field-submit">
-                    <input type="submit" name="submit" value="Submit" class="btn">
+                    <input type="submit" name="submit" value="Submit" class="btn" id="upload-btn">
                 </div>
             </form>
 
         </div><!-- .listing-content -->
     </main><!-- .site-main -->
+
+ 
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const dropArea = document.getElementById("drop-area");
+        const galleryImageInput = document.getElementById("galleryImage");
+        const galleryImageCountInput = document.getElementById("galleryImageCount");
+
+        ["dragenter", "dragover", "dragleave", "drop"].forEach((eventName) => {
+            dropArea.addEventListener(eventName, preventDefault, false);
+        });
+
+        function preventDefault(e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+
+        dropArea.addEventListener("drop", handleDrop, false);
+        galleryImageInput.addEventListener("change", updateGalleryImageCount);
+
+        function handleDrop(e) {
+            const files = e.dataTransfer.files;
+            const inputElement = galleryImageInput;
+            inputElement.files = files;
+
+            // Update label text to show the number of files dropped
+            const label = dropArea.querySelector("label");
+            label.textContent = files.length === 1 ? "1 file selected" : `${files.length} files selected`;
+
+            // Update the hidden input field with the count
+            galleryImageCountInput.value = files.length;
+        }
+
+        function updateGalleryImageCount() {
+            const files = galleryImageInput.files;
+            galleryImageCountInput.value = files.length;
+        }
+    });
+</script>
 
 
 @endsection

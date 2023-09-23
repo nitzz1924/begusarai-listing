@@ -441,15 +441,21 @@ class HomeController extends Controller
         'documentImage' => 'nullable|mimes:pdf', // Validate PDF
     ];
 
-    foreach (['coverImage', 'galleryImage', 'logo'] as $fileField) {
+    foreach (['coverImage', 'logo'] as $fileField) {
         if ($request->hasFile($fileField)) {
             // Dynamically add validation rules for the file fields if they are present in the request.
             $rules[$fileField] = 'required|image|mimes:jpg,jpeg,png,svg,webp';
         }
     }
-
+    $galleryImages = $request->file('galleryImage');
+    if (!empty($galleryImages)) {
+        foreach ($galleryImages as $key => $file) {
+            $rules["galleryImage.{$key}"] = 'nullable|image|mimes:jpg,jpeg,png,svg,webp';
+        }
+    }
+   
     $this->validate($request, $rules);
-
+    $this->validate($request, $rules);
     $editId = $request->input('editId');
     $business = $editId ? BusinessList::findOrFail($editId) : new BusinessList();
 
@@ -481,7 +487,7 @@ class HomeController extends Controller
         $allowedExtensions = ['jpg', 'jpeg', 'png', 'svg', 'webp', 'pdf'];
         $destinationPath = public_path('uploads');
 
-        foreach (['coverImage', 'galleryImage', 'documentImage', 'logo'] as $fileField) {
+        foreach (['coverImage', 'documentImage', 'logo'] as $fileField) {
             if ($request->hasFile($fileField)) {
                 $file = $request->file($fileField);
                 $extension = strtolower($file->getClientOriginalExtension());
@@ -490,9 +496,30 @@ class HomeController extends Controller
                     $fileName = time() . '.' . $extension;
                     $file->move($destinationPath, $fileName);
                     $business->$fileField = $fileName;
+                } else {
+                    // Handle invalid files for coverImage, documentImage, and logo
                 }
             }
         }
+        if (!empty($galleryImages)) {
+            $filePaths = [];
+
+            foreach ($galleryImages as $file) {
+                $extension = strtolower($file->getClientOriginalExtension());
+
+                if (in_array($extension, $allowedExtensions) && $file->isValid()) {
+                    $fileName = time() . '_' . uniqid() . '.' . $extension;
+                    $file->move($destinationPath, $fileName);
+                    $filePaths[] = $fileName;
+                } else {
+                    // Handle invalid files for galleryImage
+                }
+            }
+
+            // Store the file paths in the database as a JSON array
+            $business->galleryImage = json_encode($filePaths);
+        }
+
 
         // Save the model to the database
         $business->save();
@@ -632,7 +659,7 @@ class HomeController extends Controller
         $MasterCategory = Master::orderBy('created_at', 'asc')
             ->where('type', '=', 'category')
             ->get();
-        $businesses = BusinessList::where('userId', $user->id)->get(); // Fetch all businesses from the database
+        $businesses = BusinessList::where('userId')->get(); // Fetch all businesses from the database
 
         return view('frontend.ownerListing', compact('businesses', 'Mastercity', 'MasterCategory'));
     }
