@@ -2,6 +2,79 @@
 @section('title', 'Owner Dashboard')
 @section('content')
 
+    <style>
+        /* Define the filled-star class to set the yellow color */
+        .filled-star {
+            color: #23d3d3;
+        }
+
+        .star-rating {
+            display: inline-block;
+            font-size: 0;
+            /* Remove the default radio button text */
+        }
+
+        .star-rating input[type="radio"] {
+            display: none;
+            /* Hide the radio buttons */
+        }
+
+        .star-rating label {
+            font-size: 24px;
+            /* Adjust the size of the stars */
+            cursor: pointer;
+        }
+
+        .star-rating label:before {
+            content: '\2605';
+            /* Unicode character for a star */
+            color: #e1e1e1;
+            /* Default star color (empty) */
+        }
+
+        /* Style for filled stars */
+        .star-rating label.filled:before {
+            color: #f7d417;
+            /* Color of the selected stars */
+        }
+
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #23d3d3;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background-color: #2790ff;
+        }
+    </style>
     <main id="main" class="site-main">
         <div class="site-content owner-content">
             <div class="member-menu">
@@ -36,7 +109,7 @@
                                 <div class="item blue">
                                     <h3>Active Places</h3>
                                     <span class="number">
-                                    {{ $ActivePlaces }}
+                                        {{ count($ActivePlaces) }}
 
                                     </span>
                                     <span class="line"></span>
@@ -45,24 +118,26 @@
                             <div class="col-lg-3 col-6">
                                 <div class="item green">
                                     <h3>Total Leads</h3>
-                                    <span class="number">{{ $VisitCount }}</span>
+                                    <span class="number">{{ count($VisitCount) }}</span>
                                     <span class="line"></span>
                                 </div>
                             </div>
                             <div class="col-lg-3 col-6">
                                 <div class="item yellow">
                                     <h3>Total Reviews</h3>
-                                    <span class="number">  @foreach($Result as $value)  {{ $value->count }}   @endforeach  </span>
+                                    <span class="number">
+                                        @foreach ($ReviewsCount as $value)
+                                            {{ $value->count }}
+                                        @endforeach
+                                    </span>
                                     <span class="line"></span>
-                                 </div>
+                                </div>
 
-                                   
-                               
                             </div>
                             <div class="col-lg-3 col-6">
                                 <div class="item purple">
                                     <h3>Total Views</h3>
-                                    <span class="number">145</span>
+                                    <span class="number">{{ count($VisitCount) }}</span>
                                     <span class="line"></span>
                                 </div>
                             </div>
@@ -74,45 +149,27 @@
                                 <div class="ob-item">
                                     <div class="ob-head">
                                         <h3>Recent Leads</h3>
-                                        <a href="/leads" class="view-all" title="View All">View all</a>
+                                        @foreach ($businesses as $business)
+                                            <a href="{{ route('ownerLeads', ['id' => $business->id]) }}" class="view-all"
+                                                title="View All">View all</a>
+                                        @endforeach
                                     </div>
                                     <div class="ob-content">
                                         <ul>
-                                            <li class="pending">
-                                                <p class="date"><b>Date:</b>March 15, 2020</p>
-                                                <p class="place"><b>Place:</b>Bamboo Hotel Paris</p>
-                                                <p class="status"><b>Status:</b><span>Pending</span></p>
-                                                <a href="#" title="More" class="more"><i
-                                                        class="las la-angle-right"></i></a>
-                                            </li>
-                                            <li class="approve">
-                                                <p class="date"><b>Date:</b>March 15, 2020</p>
-                                                <p class="place"><b>Place:</b>Bamboo Hotel Paris</p>
-                                                <p class="status"><b>Status:</b><span>Approve</span></p>
-                                                <a href="#" title="More" class="more"><i
-                                                        class="las la-angle-right"></i></a>
-                                            </li>
-                                            <li class="cancel">
-                                                <p class="date"><b>Date:</b>March 15, 2020</p>
-                                                <p class="place"><b>Place:</b>Bamboo Hotel Paris</p>
-                                                <p class="status"><b>Status:</b><span>Cancel</span></p>
-                                                <a href="#" title="More" class="more"><i
-                                                        class="las la-angle-right"></i></a>
-                                            </li>
-                                            <li class="pending">
-                                                <p class="date"><b>Date:</b>March 15, 2020</p>
-                                                <p class="place"><b>Place:</b>Bamboo Hotel Paris</p>
-                                                <p class="status"><b>Status:</b><span>Pending</span></p>
-                                                <a href="#" title="More" class="more"><i
-                                                        class="las la-angle-right"></i></a>
-                                            </li>
-                                            <li class="approve">
-                                                <p class="date"><b>Date:</b>March 15, 2020</p>
-                                                <p class="place"><b>Place:</b>Bamboo Hotel Paris</p>
-                                                <p class="status"><b>Status:</b><span>Approve</span></p>
-                                                <a href="#" title="More" class="more"><i
-                                                        class="las la-angle-right"></i></a>
-                                            </li>
+                                            @foreach ($lead as $value)
+                                                <li class="pending">
+
+                                                    <p class="date"><b>Date:</b>
+                                                        {{ date('F j, Y', strtotime($value->created_at)) }}</p>
+
+                                                    <p class="place"><b>Name:</b>{{ $value->name }}</p>
+                                                    <p class="status"><b>Status:</b><span
+                                                            style="color:green">Approved</span></p>
+                                                    <a href="#" title="More" class="more"><i
+                                                            class="las la-angle-right"></i></a>
+                                                </li>
+                                            @endforeach
+
                                         </ul>
                                     </div>
                                 </div>
@@ -121,109 +178,52 @@
                                 <div class="ob-item">
                                     <div class="ob-head">
                                         <h3>New Reviews</h3>
-                                        <a href="#" class="view-all" title="View All">View all</a>
+                                        @foreach ($businesses as $business)
+                                            <a href="{{ route('ownerListing', ['id' => $business->id]) }}" class="view-all"
+                                                title="View All">View all</a>
+                                        @endforeach
                                     </div>
                                     <div class="ob-content">
                                         <ul class="place__comments">
-                                            <li>
-                                                <div class="place__author">
-                                                    <div class="place__author__avatar">
-                                                        <a title="Sebastian" href="#"><img
-                                                                src="{{ asset('assets/frontend-assets/images/avatars/male-2.jpg') }}"
-                                                                alt=""></a>
-                                                    </div>
-                                                    <div class="place__author__info">
-                                                        <a title="Sebastian" href="#">Sebastian</a>
-                                                        <div class="place__author__star">
-                                                            <i class="la la-star"></i>
-                                                            <i class="la la-star"></i>
-                                                            <i class="la la-star"></i>
-                                                            <i class="la la-star"></i>
-                                                            <i class="la la-star"></i>
-                                                            <span style="width: 72%">
-                                                                <i class="la la-star"></i>
-                                                                <i class="la la-star"></i>
-                                                                <i class="la la-star"></i>
-                                                                <i class="la la-star"></i>
-                                                                <i class="la la-star"></i>
-                                                            </span>
+
+                                            @foreach ($reviews as $review)
+                                                <li>
+                                                    <div class="place__author">
+                                                        <div class="place__author__avatar">
+                                                            <a title="Sebastian" href="#">
+                                                                @if ($review->image)
+                                                                    <img src="{{ URL::to('/uploads/' . $review->image) }}"
+                                                                        title="" alt="">
+                                                                @else
+                                                                    <img src="https://wp.getgolo.com/country-guide/wp-content/themes/golo/assets/images/default-user-image.png"
+                                                                        title="guest" alt="guest">
+                                                                @endif
+                                                            </a>
                                                         </div>
-                                                        <span class="time">October 1, 2019</span>
-                                                    </div>
-                                                </div>
-                                                <div class="place__comments__content">
-                                                    <p>Went there last Saturday for the first time to watch my favorite djs
-                                                        (Kungs, Sam Feldet and Watermat) and really had a great experience.
-                                                    </p>
-                                                </div>
-                                                <p class="place"><b>Place:</b>Vago Restaurant</p>
-                                            </li>
-                                            <li>
-                                                <div class="place__author">
-                                                    <div class="place__author__avatar">
-                                                        <a title="Sebastian" href="#"><img
-                                                                src="{{ asset('assets/frontend-assets/images/avatars/male-1.jpg') }}"
-                                                                alt=""></a>
-                                                    </div>
-                                                    <div class="place__author__info">
-                                                        <a title="Sebastian" href="#">Sebastian</a>
-                                                        <div class="place__author__star">
-                                                            <i class="la la-star"></i>
-                                                            <i class="la la-star"></i>
-                                                            <i class="la la-star"></i>
-                                                            <i class="la la-star"></i>
-                                                            <i class="la la-star"></i>
-                                                            <span style="width: 72%">
-                                                                <i class="la la-star"></i>
-                                                                <i class="la la-star"></i>
-                                                                <i class="la la-star"></i>
-                                                                <i class="la la-star"></i>
-                                                                <i class="la la-star"></i>
-                                                            </span>
+                                                        <div class="place__author__info">
+                                                            <a title="Sebastian" href="#">{{ $review->author }}</a>
+                                                            <div class="place__author__star">
+                                                                @for ($i = 0; $i < $review->rating; $i++)
+                                                                    <i class="la la-star filled-star"></i>
+                                                                    <!-- Add a class for filled stars -->
+                                                                @endfor
+                                                                <span style="width: 72%">
+                                                                    @for ($i = 0; $i < 5 - $review->rating; $i++)
+                                                                        <i class="la la-star"></i>
+                                                                    @endfor
+                                                                </span>
+                                                            </div>
+                                                            <span
+                                                                class="time">{{ \Carbon\Carbon::parse($review->created_at)->format('F j, Y') }}</span>
                                                         </div>
-                                                        <span class="time">October 1, 2019</span>
                                                     </div>
-                                                </div>
-                                                <div class="place__comments__content">
-                                                    <p>Went there last Saturday for the first time to watch my favorite djs
-                                                        (Kungs, Sam Feldet and Watermat) and really had a great experience.
-                                                    </p>
-                                                </div>
-                                                <p class="place"><b>Place:</b>Renew Body Spa</p>
-                                            </li>
-                                            <li>
-                                                <div class="place__author">
-                                                    <div class="place__author__avatar">
-                                                        <a title="Sebastian" href="#"><img
-                                                                src="{{ asset('assets/frontend-assets/images/avatars/female-1.jpg') }}"
-                                                                alt=""></a>
+                                                    <div class="place__comments__content">
+                                                        <p>{{ $review->content }}
+                                                        </p>
                                                     </div>
-                                                    <div class="place__author__info">
-                                                        <a title="Sebastian" href="#">Sebastian</a>
-                                                        <div class="place__author__star">
-                                                            <i class="la la-star"></i>
-                                                            <i class="la la-star"></i>
-                                                            <i class="la la-star"></i>
-                                                            <i class="la la-star"></i>
-                                                            <i class="la la-star"></i>
-                                                            <span style="width: 72%">
-                                                                <i class="la la-star"></i>
-                                                                <i class="la la-star"></i>
-                                                                <i class="la la-star"></i>
-                                                                <i class="la la-star"></i>
-                                                                <i class="la la-star"></i>
-                                                            </span>
-                                                        </div>
-                                                        <span class="time">October 1, 2019</span>
-                                                    </div>
-                                                </div>
-                                                <div class="place__comments__content">
-                                                    <p>Went there last Saturday for the first time to watch my favorite djs
-                                                        (Kungs, Sam Feldet and Watermat) and really had a great experience.
-                                                    </p>
-                                                </div>
-                                                <p class="place"><b>Place:</b>Bamboo Hotel Paris</p>
-                                            </li>
+
+                                                </li>
+                                            @endforeach
                                         </ul>
                                     </div>
                                 </div>
@@ -231,36 +231,24 @@
                             <div class="col-lg-4">
                                 <div class="ob-item">
                                     <div class="ob-head">
-                                        <h3>New Visitors <span>(5)</span></h3>
-                                        <a href="#" class="clear-all" title="Clear All">Clear all</a>
+                                        <h3>New Visitors </h3>
+                                        @foreach ($businesses as $business)
+                                            <a href="{{ route('ownerLeads', ['id' => $business->id]) }}" class="view-all"
+                                                title="View All">View all</a>
+                                        @endforeach
                                     </div>
                                     <div class="ob-content">
                                         <ul>
-                                            <li class="noti-item unread">
-                                                <p>You have got a new booking <br> Booking ID: #123434</p>
-                                                <span>1d ago</span><a href="#" class="delete-noti"
-                                                    title="Delete">Delete</a>
-                                            </li>
-                                            <li class="noti-item read">
-                                                <p>You have got a new booking <br> Booking ID: #123434</p>
-                                                <span>1d ago</span><a href="#" class="delete-noti"
-                                                    title="Delete">Delete</a>
-                                            </li>
-                                            <li class="noti-item read">
-                                                <p>You have got a new booking <br> Booking ID: #123434</p>
-                                                <span>1d ago</span><a href="#" class="delete-noti"
-                                                    title="Delete">Delete</a>
-                                            </li>
-                                            <li class="noti-item read">
-                                                <p>You have got a new booking <br> Booking ID: #123434</p>
-                                                <span>1d ago</span><a href="#" class="delete-noti"
-                                                    title="Delete">Delete</a>
-                                            </li>
-                                            <li class="noti-item read">
-                                                <p>You have got a new booking <br> Booking ID: #123434</p>
-                                                <span>1d ago</span><a href="#" class="delete-noti"
-                                                    title="Delete">Delete</a>
-                                            </li>
+                                            @foreach ($lead as $value)
+                                                <li class="noti-item unread">
+                                                    <p>{{ $value->name }} <br> User Number: {{ $value->number }}</p>
+                                                    <p>{{ $value->message }} </p>
+                                                    <span> {{ date('F j, Y', strtotime($value->created_at)) }}</span><a
+                                                        href="#" title="Delete"> </a>
+
+                                                </li>
+                                            @endforeach
+
                                         </ul>
                                     </div>
                                 </div>

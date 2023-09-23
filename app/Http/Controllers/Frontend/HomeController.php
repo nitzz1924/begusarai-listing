@@ -21,7 +21,7 @@ use App\Models\Career;
 use App\Models\Contact;
 use App\Models\Review;
 use App\Models\Package;
-
+use Carbon\Carbon;
 use DB;
 
 use View;
@@ -635,28 +635,25 @@ class HomeController extends Controller
             $existingLead = Lead::where([
                 'user_id' => $user->id,
                 'business_id' => $id,
-                'created_at' => now()->toDateString(),  
+                'created_at' => now()->toDateString(),
             ])->first();
-          
+
             if (!$existingLead) {
-               
                 $lead = new Lead();
                 $lead->user_id = $user->id;
                 $lead->name = $user->name;
-                $lead->number = $user->mobileNumber;  
+                $lead->number = $user->mobileNumber;
                 $lead->message = 'They explored your business profile !';
-                
-                $lead->created_at = now()->toDateString();  
-                $lead->business_id = $id;  
+
+                $lead->created_at = now()->toDateString();
+                $lead->business_id = $id;
 
                 $lead->save();
-                
             }
         }
-        
+
         // $VisitCount = Lead:: where('business_id')  ->get();
         $VisitCount = Lead::where('business_id', $id)->count();
-
 
         $businesses = BusinessList::orderBy('created_at', 'desc')->get();
 
@@ -706,7 +703,7 @@ class HomeController extends Controller
             ->where('listing_id', $id)
             ->get();
 
-        return view('frontend.listingDetail', compact('businessesDetail', 'submaster', 'businesses', 'Result', 'reviews','VisitCount'));
+        return view('frontend.listingDetail', compact('businessesDetail', 'submaster', 'businesses', 'Result', 'reviews', 'VisitCount'));
     }
 
     public function blogDetails(Request $request, $id)
@@ -733,16 +730,21 @@ class HomeController extends Controller
     {
         $businesses = BusinessList::orderBy('created_at', 'desc')->get();
         $user = auth()->user();
-        $ActivePlaces = BusinessList::where('status', '=', '1') ->where('userId', $user->id)->count();
-        $VisitCount = Lead::where('status', '=', '1')->where('business_id', $user->id)->count();
-        $Result = [];
+        $ActivePlaces = BusinessList::where('status', '=', '1')
+            ->where('userId', $user->id)
+            ->get();
+        $VisitCount = Lead::orderBy('created_at', 'asc')
+            ->where('status', '=', '1')
+            ->where('business_id', $user->id)
+            ->get();
 
+        $ReviewsCount = [];
         foreach ($businesses as $value) {
             $reviews = DB::table('reviews')
                 ->select('reviews.*', 'users_login.image')
                 ->leftJoin('users_login', 'reviews.user_id', '=', 'users_login.id')
                 ->orderBy('reviews.created_at', 'desc')
-                ->where('listing_id', $value->id)
+                ->where('listing_id', $user->id)
                 ->get();
 
             $totalRating = 0;
@@ -762,11 +764,29 @@ class HomeController extends Controller
             // Merge the average rating into the business data
             $value->rating = $averageRating;
             $value->count = count($reviews);
-            $Result[] = $value;
+            $ReviewsCount[] = $value;
         }
-         
+        $currentDate = Carbon::now()->format('Y-m-d');
+        $lead = Lead::where('status', '1')
+            ->where('business_id', $user->id)
+            ->whereDate('created_at', $currentDate)
+            ->get();
 
-        return view('frontend.ownerDashboard', compact('ActivePlaces' ,'VisitCount','Result'));
+        $VisitCount = Lead::orderBy('created_at', 'asc')
+            ->where('business_id', '=', $user->id)
+            ->where('status', '=', '1')
+            ->get();
+        $businesses = BusinessList::where('userId', $user->id)->get();
+
+        $reviews = DB::table('reviews')
+            ->select('reviews.*', 'users_login.image')
+            ->leftJoin('users_login', 'reviews.user_id', '=', 'users_login.id')
+            ->orderBy('reviews.created_at', 'desc')
+            ->where('reviews.listing_id', $user->id) // Specify the table name for 'listing_id'
+            ->whereDate('reviews.created_at', $currentDate) // Specify the table name for 'created_at'
+            ->get();
+
+        return view('frontend.ownerDashboard', compact('ActivePlaces', 'VisitCount', 'ReviewsCount', 'lead', 'businesses', 'reviews'));
     }
 
     public function ownerWishlist()
@@ -868,7 +888,7 @@ class HomeController extends Controller
         // Validate the input data
         $validatedData = $request->validate($rules);
 
-        $lead = new Lead(); 
+        $lead = new Lead();
         $lead->name = $validatedData['name'];
         $lead->number = $validatedData['number'];
         $lead->message = $validatedData['message'];
