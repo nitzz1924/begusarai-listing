@@ -21,7 +21,6 @@ Route::get('/aboutUs', [HomeController::class, 'aboutUs'])->name('aboutUs');
 Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
 Route::post('/savecontact', [HomeController::class, 'savecontact'])->name('savecontact');
 
-Route::get('/packages/{id}', [HomeController::class, 'packages'])->name('packages');
 Route::get('/registration', [HomeController::class, 'registration'])->name('registration');
 Route::get('/blogs', [HomeController::class, 'blogs'])->name('blogs');
 Route::get('/searchCity', [HomeController::class, 'searchCity'])->name('searchCity');
@@ -152,4 +151,7 @@ Route::post('/submit-review/{id}', [HomeController::class, 'reviewStore'])->name
 Route::get('/payment', 'RazorpayController@payment')->name('payment');
 Route::post('/handlePayment', 'RazorpayController@handlePayment')->name('handlePayment');
 Route::get('/paymentresult', 'RazorpayController@paymentresult')->name('paymentresult');
+Route::get('/packages/{id}', [HomeController::class, 'packages'])->name('packages');
+Route::get('/category/{id}', [HomeController::class, 'category'])->name('category');
+
  // Example route definition

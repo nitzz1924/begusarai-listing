@@ -601,6 +601,20 @@ class HomeController extends Controller
 
         return view('frontend.packages', compact('packages', 'ranking','businessId','userId'));
     }
+    public function category($id)
+    {
+        $user = auth()->user();
+        $userId=$user?$user->id:0;
+        $businessId=$id;
+        $ranking = Package::orderBy('created_at', 'asc')
+            ->where('type', '=', 'Ranking')
+            ->get();
+        $packages = Package::orderBy('created_at', 'desc')
+            ->orWhere('type', '!=', 'Ranking')
+            ->get();
+            $businesses = BusinessList::where('id', $id)->where('status', '=', '1')->first();
+        return view('frontend.category', compact('packages', 'ranking','businessId','userId','businesses'));
+    }
 
     public function setPassword(Request $request)
     {
@@ -996,23 +1010,23 @@ if ($businessData || $userData || $planData) {
 
     public function searchFilter(Request $request, $category, $city, $highlight)
     {
-        
-        $businesses = BusinessList::orderBy('created_at', 'desc')->get();
-        
+      
         if ($city == 'all' && $highlight == 'all' && $category != 'all') {
             $similer = BusinessList::where('category', $category)
-                ->orderBy('created_at', 'desc')
-                ->get();
+            ->where('status', '1')
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
         }
         
         if ($city != 'all' && $highlight == 'all' && $category == 'all') {
             $similer = BusinessList::where('city', $city)
-                ->orderBy('created_at', 'desc')
-                ->get();
+            ->where('status', '1')
+                ->orderBy('city_ranking', 'asc')
+                ->paginate(10);
         }
         
         if ($city == 'all' && $highlight == 'all' && $category == 'all') {
-            $similer = BusinessList::orderBy('created_at', 'desc')->get();
+            $similer = BusinessList::where('status', '1')->orderBy('created_at', 'desc')->paginate(10);
         }
         
       
@@ -1055,29 +1069,14 @@ if ($businessData || $userData || $planData) {
             // Debugging statements
         // dd($subvalue->title, $value->category, $subvalue->value);
         }
-        
-        // Query to retrieve data
-        $query = BusinessList::orderBy('created_at', 'desc');
-        
-        if ($city == 'all' && $highlight == 'all' && $category != 'all') {
-            $query->where('category', $category);
-        }
-        
-        if ($city != 'all' && $highlight == 'all' && $category == 'all') {
-            $query->where('city', $city);
-        }
-        
-        // Add more conditions as needed
-        
-        // Paginate the results (e.g., 10 items per page)
-        $businesses = $query->paginate(10);
-        
+
+
         $submaster = Master::orderBy('created_at', 'asc')
         ->where('type', '=', 'city')
         ->get();
     
         // Return the view with the paginated $businesses
-        return view('frontend.searchFilter', compact('Result', 'submaster', 'submasterCategory', 'submasterHighlight', 'businesses'));
+        return view('frontend.searchFilter', compact('Result', 'submaster', 'submasterCategory', 'submasterHighlight','similer'));
     }
 
 

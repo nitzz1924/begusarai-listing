@@ -96,7 +96,8 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                                     <th>Category</th>
                                     <th>Leads</th>
                                     <th>Status</th>
-                                    <th>Payment</th>
+                                    <th> Payment</th>
+                                    <th style="display:table-footer-group">Ranking Plans</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -132,6 +133,21 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                                                 </span>
                                             @endif
                                         </td>
+
+                                        <td data-title="category">
+                                            @if ($business->status != 0)
+                                                <a href="/category/{{ $business->id }}" class="btn-sm btn-warning">
+                                                    Activate Plan
+                                                </a>
+                                            @else
+                                                <span class="status-label" style="color: red;">
+                                                    <i class="fas fa-check-circle " style="font-size: 20px;"></i>
+                                                    Not Verifid
+                                                </span>
+                                            @endif
+                                        </td>
+
+
 
                                         <td data-title="Action" class="place-action d-flex action-btn">
                                             <a href="{{ route('editPlace', ['id' => $business->id]) }}" class="edit"
