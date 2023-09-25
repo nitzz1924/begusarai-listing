@@ -1,77 +1,87 @@
 @extends('frontend.layouts.master')
 @section('title', 'Blog Detail')
 @section('content')
-    
-<main id="main" class="site-main">
-    <div class="blog-banner">
 
-    
-        <img src="{{ URL::to('uploads/' . $blog->image) }}">
-    </div><!-- .blog-banner -->
-    <div class="blog-content">
-        <div class="container">
-            <div class="row 
+    <main id="main" class="site-main">
+        <div class="blog-banner">
+
+
+            <img src="{{ URL::to('uploads/' . $blog->image) }}">
+        </div><!-- .blog-banner -->
+        <div class="blog-content">
+            <div class="container">
+                <div class="row 
     justify-content-center">
-                <div class="col-lg-10">
-                    <div class="blog-left">
-                        <ul class="breadcrumbs">
-                            <li> {{ $blog->type }}</li>
-                        </ul><!-- .breadcrumbs -->
-                        <div class="entry-content">
-                            <h1>  {{ $blog->title }}</h1>
-                            <ul class="entry-meta">
-                                <li>
-                                    by <a title="Ben Cobb" href="#">Ben Cobb</a>
-                                </li>
-                                <li>22 July 2019</li>
-                                <li>3 comments</li>
-                            </ul>
-                            <div class="entry-desc">
-                           <P>
-                           {{ $blog->description }}
-                           </P> 
-                           
-                            </div>
-                            <div>
-                            <P>
-                                
-                           {{ $blog->post }}
-                           </P> <iframe width="560" height="315" src="{{ $blog->videourl }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                            </div>
-                            <!-- .entry-desc -->
-                            <div class="entry-author">
-                                <img src="images/avatars/male-1.jpg" alt="Bangkok">
-                                <div class="author-info">
-                                    <div class="author-title">
-                                        <a title="Nitithorn" href="#">Nitithorn</a>
-                                        <ul class="author-social">
-                                            <li>
-                                                <a href="#">
-                                                    <i class="la la-facebook-f"></i>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    <i class="la la-twitter"></i>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">	
-                                                    <i class="la la-youtube"></i>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">	
-                                                    <i class="la la-instagram"></i>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="author-desc"><p>I'm a beauty and travel blogger based in Paris. I have two dogs and love drinking coffee in the middle of night.</p></div>
+                    <div class="col-lg-10">
+                        <div class="blog-left">
+                            <ul class="breadcrumbs">
+                                <li> {{ $blog->type }}</li>
+                            </ul><!-- .breadcrumbs -->
+                            <div class="entry-content">
+                                <h1> {{ $blog->title }}</h1>
+                                <ul class="entry-meta">
+                                    <li>
+                                        by <a title="Ben Cobb" href="#">Ben Cobb</a>
+                                    </li>
+                                    <li>22 July 2019</li>
+                                    <li>3 comments</li>
+                                </ul>
+                                <div class="entry-desc">
+                                    <P>
+                                        {{ $blog->description }}
+                                    </P>
+
                                 </div>
-                            </div><!-- .entry-author -->
-                        </div><!-- .entry-content -->
-                        <div class="related-post">
+                                <div>
+                                    <P>
+                                        {{ $blog->post }}
+                                    </P> 
+                                    <div class="my-3">
+
+                                        <iframe width="560" height="315" src="{{ $blog->videourl }}"
+                                            title="YouTube video player" frameborder="0"
+                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                            allowfullscreen>
+                                        </iframe>
+                                    </div>
+                                </div>
+                                <!-- .entry-desc -->
+                                <div class="entry-author">
+                                    <img src="https://wp.getgolo.com/country-guide/wp-content/themes/golo/assets/images/default-user-image.png" alt="Bangkok">
+                                    <div class="author-info">
+                                        <div class="author-title">
+                                            <a title="Ben Cobb" href="#">Ben Cobb</a>
+                                            <ul class="author-social">
+                                                <li>
+                                                    <a href="#">
+                                                        <i class="la la-facebook-f"></i>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">
+                                                        <i class="la la-twitter"></i>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">
+                                                        <i class="la la-youtube"></i>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">
+                                                        <i class="la la-instagram"></i>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="author-desc">
+                                            <p>I'm a beauty and travel blogger based in Paris. I have two dogs and love
+                                                drinking coffee in the middle of night.</p>
+                                        </div>
+                                    </div>
+                                </div><!-- .entry-author -->
+                            </div><!-- .entry-content -->
+                            {{-- <div class="related-post">
                             <h2>Related Articles</h2>
                             <div class="related-grid columns-3">
                                 <article class="hover__box post">
@@ -108,8 +118,9 @@
                                     </div>
                                 </article>
                             </div>
-                        </div><!-- .related-post -->
-                        <div class="place__box place__box--reviews entry-comment">
+                        </div> --}}
+                            <!-- .related-post -->
+                            {{-- <div class="place__box place__box--reviews entry-comment">
                             <h3 class="place__title--reviews">3 Comments</h3>
                             <ul class="place__comments">
                                 <li>
@@ -172,14 +183,15 @@
                                 </li>
                             </ul>
                             <p class="place__login"><a title="Login" href="#">Login </a>to reviews</p>
-                        </div><!-- .place__box -->
-                    </div><!-- .place__left -->
+                        </div> --}}
+                            <!-- .place__box -->
+                        </div><!-- .place__left -->
+                    </div>
+
                 </div>
-               
             </div>
-        </div>
-    </div><!-- .blog-content -->
-</main><!-- .site-main -->
+        </div><!-- .blog-content -->
+    </main><!-- .site-main -->
 
 
 @endsection
