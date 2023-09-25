@@ -1842,7 +1842,7 @@
         display: none;
     }
     .main-primary .top-area-filter {
-        justify-content: flex-end;
+        justify-content: center;
     }
     .archive-city .filter-mobile {
         margin-bottom: 20px;
