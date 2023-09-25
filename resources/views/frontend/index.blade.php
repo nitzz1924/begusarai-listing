@@ -337,7 +337,7 @@
                                         also gives you the option of enhancing your listing by using attractive images and
                                         videos that showcase the unique features of your goods or services
                                     </p>
-                                    <a href="#" class="btn offset-item">Read more</a>
+                                    <a href="/aboutUs" class="btn offset-item">Read more</a>
                                 </div>
                             </div>
 
