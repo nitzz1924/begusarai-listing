@@ -17,6 +17,7 @@
         "laravel/tinker": "^2.0",
         "laravel/ui": "^3.0",
         "laravelcollective/html": "^6.2.0",
+        "nesbot/carbon": "^2.70",
         "razorpay/razorpay": "^2.8",
         "spatie/laravel-backup": "^6.11.2",
         "spatie/laravel-permission": "^3.13",

@@ -50,8 +50,8 @@
                                             <div class="strike">₹{{ $package->off }}</div>
                                         </div>
                                         @if ($businessId == 0)
-                                            <a href="javascript:void(0);" class="btn" title="Get Started"
-                                                onclick="alert('Go to Owner List for Activite Plan')">Get Started</a>
+                                            <a href="/ownerListing" class="btn" title="Get Started"
+                                               >Get Started</a>
                                         @else
                                             <a href="/checkoutPage/{{ $businessId }}/{{ $userId }}/{{ $package->id }}"
                                                 class="btn" title="Get Started">Get Started</a>

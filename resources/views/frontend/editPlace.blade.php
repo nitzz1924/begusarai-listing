@@ -45,25 +45,26 @@
                     <div class="field-group field-input">
                         <label for="businessName">Business Name</label>
                         <input type="text" placeholder="What is the name of the place" name="businessName"
-                            id="businessName" class="form-control @error('businessName') is-invalid @enderror"
+                            id="businessName" class="form-control "
                             value="{{ isset($business) ? $business->businessName : old('businessName') }}">
-                         @error('businessName')
+                        @error('businessName')
                             <div class="has-error mt-2">{{ $message }}</div>
-                        @enderror  
+                        @enderror
                     </div>
                     <!-- Price -->
                     <div class="field-group field-input">
                         <label for="price">Price</label>
-                        <input type="text" placeholder="Price" name="price" id="price" class="form-control @error('price') is-invalid @enderror"
+                        <input type="text" placeholder="Price" name="price" id="price" class="form-control"
                             value="{{ isset($business) ? $business->price : old('price') }}">
-                        {{-- @error('price')
+                        @error('price')
                             <div class="has-error mt-2">{{ $message }}</div>
-                        @enderror --}}
+                        @enderror
                     </div>
                     <!-- Description -->
                     <div class="field-group">
                         <label for="description">Description</label>
-                        <textarea placeholder="Description" id="description" name="description" rows="6" cols="65" class="form-control @error('description') is-invalid @enderror">{{ isset($business) ? $business->description : old('description') }}</textarea>
+                        <textarea placeholder="Description" id="description" name="description" rows="6" cols="65"
+                            class="form-control ">{{ isset($business) ? $business->description : old('description') }}</textarea>
                         @error('description')
                             <div class="has-error mt-2">{{ $message }}</div>
                         @enderror
@@ -72,7 +73,7 @@
                     <div class="field-group">
                         <label for="duration">Duration</label>
                         <input type="text" placeholder="Duration" id="duration" name="duration"
-                            value="{{ isset($business) ? $business->duration : old('duration') }}" class="form-control @error('duration') is-invalid @enderror">
+                            value="{{ isset($business) ? $business->duration : old('duration') }}" class="form-control  ">
                         @error('duration')
                             <div class="has-error mt-2">{{ $message }}</div>
                         @enderror
@@ -80,7 +81,7 @@
                     <!-- category -->
                     <div class="field-group field-select">
                         <label for="category">Category</label>
-                        <select data-placeholder="Select category" class="chosen-select" id="category" name="category" >
+                        <select data-placeholder="Select category" class="chosen-select" id="category" name="category">
                             <option selected></option>
                             @foreach ($data['category'] as $value)
                                 <option {{ isset($business) && $business->category == $value->title ? 'selected' : '' }}>
@@ -91,8 +92,6 @@
                             <div class="has-error mt-2">{{ $message }}</div>
                         @enderror
                     </div>
-
-
 
                     <!-- Place Type -->
                     <div class="field-group field-select">
@@ -147,18 +146,19 @@
                                     {{ $value->title }}</option>
                             @endforeach
                         </select>
-                        {{-- @error('city')
+                        @error('city')
                             <div class="has-error mt-2">{{ $message }}</div>
-                        @enderror --}}
+                        @enderror
                     </div>
                     <!-- Place Address -->
                     <div class="field-group">
                         <label for="placeAddress">Place Address</label>
-                        <input type="text" placeholder="Full Address" id="placeAddress" name="placeAddress" class="form-control @error('placeAddress') is-invalid @enderror"
+                        <input type="text" placeholder="Full Address" id="placeAddress" name="placeAddress"
+                            class="form-control "
                             value="{{ isset($business) ? $business->placeAddress : old('placeAddress') }}">
-                        {{-- @error('placeAddress')
+                        @error('placeAddress')
                             <div class="has-error mt-2">{{ $message }}</div>
-                        @enderror --}}
+                        @enderror
                     </div>
                     <!-- Additional location fields can be added here -->
                 </div>
@@ -169,31 +169,36 @@
                     <!-- Email -->
                     <div class="field-group">
                         <label for="email">Email</label>
-                        <input type="email" placeholder="Your email address" id="email" name="email" class="form-control @error('email') is-invalid @enderror"
-                            value="{{ isset($business) ? $business->email : old('email') }}">
-                        {{-- @error('email')
+                        <input type="email" placeholder="Your email address" id="email" name="email"
+                            class="form-control" value="{{ isset($business) ? $business->email : old('email') }}">
+                        @error('email')
                             <div class="has-error mt-2">{{ $message }}</div>
-                        @enderror --}}
+                        @enderror
                     </div>
                     <!-- Phone Number 1 -->
                     <div class="field-group">
                         <label for="phoneNumber1">Phone number</label>
-                        <input type="tel" placeholder="Your phone number" name="phoneNumber1" id="phoneNumber1" class="form-control @error('phoneNumber1') is-invalid @enderror"
+                        <input type="tel" placeholder="Your phone number" name="phoneNumber1" id="phoneNumber1"
+                            class="form-control  "
                             value="{{ isset($business) ? $business->phoneNumber1 : old('phoneNumber1') }}">
-                        {{-- @error('phoneNumber1')
+                        @error('phoneNumber1')
                             <div class="has-error mt-2">{{ $message }}</div>
-                        @enderror --}}
+                        @enderror
                     </div>
                     <!-- Phone Number 2 (optional) -->
                     <div class="field-group">
                         <label for="phoneNumber2">Phone number 2 (optional)</label>
                         <input type="tel" placeholder="Your phone number" name="phoneNumber2" id="phoneNumber2"
                             value="{{ isset($business) ? $business->phoneNumber2 : old('phoneNumber2') }}">
+                        @error('phoneNumber2')
+                            <div class="has-error mt-2">{{ $message }}</div>
+                        @enderror
                     </div>
                     <!-- WhatsApp No -->
                     <div class="field-group">
                         <label for="whatsappNo">WhatsApp No</label>
-                        <input type="tel" placeholder="Your WhatsApp number" name="whatsappNo" id="whatsappNo" class="form-control @error('whatsappNo') is-invalid @enderror"
+                        <input type="tel" placeholder="Your WhatsApp number" name="whatsappNo" id="whatsappNo"
+                            class="form-control"
                             value="{{ isset($business) ? $business->whatsappNo : old('whatsappNo') }}">
                         {{-- @error('whatsappNo')
                             <div class="has-error mt-2">{{ $message }}</div>
@@ -214,9 +219,7 @@
                         <input type="url" placeholder="Your additional fields url" name="additionalFields"
                             id="additionalFields"
                             value="{{ isset($business) ? $business->additionalFields : old('additionalFields') }}">
-                        @error('additionalFields')
-                            <div class="has-error mt-2">{{ $message }}</div>
-                        @enderror
+
                     </div>
                 </div><!-- .listing-box -->
 
@@ -228,36 +231,28 @@
                         <label for="youtube">Youtube URL</label>
                         <input type="url" placeholder="Your YouTube URL" name="youtube" id="youtube"
                             value="{{ isset($business) ? $business->youtube : old('youtube') }}">
-                        @error('youtube')
-                            <div class="has-error mt-2">{{ $message }}</div>
-                        @enderror
+
                     </div>
                     <!-- Twitter URL -->
                     <div class="field-group">
                         <label for="twitter">Twitter URL</label>
                         <input type="url" placeholder="Your Twitter URL" name="twitter" id="twitter"
                             value="{{ isset($business) ? $business->twitter : old('twitter') }}">
-                        @error('twitter')
-                            <div class="has-error mt-2">{{ $message }}</div>
-                        @enderror
+
                     </div>
                     <!-- Instagram URL -->
                     <div class="field-group">
                         <label for="instagram">Instagram URL</label>
                         <input type="url" placeholder="Your Instagram URL" name="instagram" id="instagram"
                             value="{{ isset($business) ? $business->instagram : old('instagram') }}">
-                        @error('instagram')
-                            <div class="has-error mt-2">{{ $message }}</div>
-                        @enderror
+
                     </div>
                     <!-- Facebook URL -->
                     <div class="field-group">
                         <label for="facebook">Facebook URL</label>
                         <input type="url" placeholder="Your Facebook URL" name="facebook" id="facebook"
                             value="{{ isset($business) ? $business->facebook : old('facebook') }}">
-                        @error('facebook')
-                            <div class="has-error mt-2">{{ $message }}</div>
-                        @enderror
+
                     </div>
                 </div><!-- .listing-box -->
 
@@ -314,24 +309,29 @@
                     </div>
                     <!-- Gallery Images -->
                     <div class="field-group field-file">
-        <label for="galleryImage">Gallery Images</label>
-        <label for="galleryImage" class="preview">
-            <input type="file" name="galleryImage[]" id="galleryImage" class="upload-file" data-max-size="1024" multiple accept="image/*">
-            <input type="hidden" name="galleryImageCount" id="galleryImageCount" value="{{ count(json_decode($business->galleryImage)) }}"> <!-- Store the initial count -->
-            <div class="selected-files-count">{{ count(json_decode($business->galleryImage)) }} images selected</div>
-            <i class="la la-cloud-upload-alt"></i>
-        </label>
-        @error('galleryImage')
-        <div class="has-error mt-2">{{ $message }}</div>
-        @enderror
-        <div class="field-note">Maximum file size: 1 MB.</div>
-    </div>
+                        <label for="galleryImage">Gallery Images</label>
+                        <label for="galleryImage" class="preview">
+                            <input type="file" name="galleryImage[]" id="galleryImage" class="upload-file"
+                                data-max-size="1024" multiple accept="image/*">
+                            <input type="hidden" name="galleryImageCount" id="galleryImageCount"
+                                value="{{ count(json_decode($business->galleryImage)) }}">
+                            <!-- Store the initial count -->
+                            <div class="selected-files-count">{{ count(json_decode($business->galleryImage)) }} images
+                                selected</div>
+                            <i class="la la-cloud-upload-alt"></i>
+                        </label>
+                        @error('galleryImage')
+                            <div class="has-error mt-2">{{ $message }}</div>
+                        @enderror
+                        <div class="field-note">Maximum file size: 1 MB.</div>
+                    </div>
                     <!-- Document Images -->
                     <div class="field-group field-file">
                         <label for="documentImage">Document Images(Upload PDF)</label>
                         <label for="documentImage" class="preview">
                             <input type="file" name="documentImage" id="documentImage" class="upload-file"
-                             accept=".pdf">
+                                accept=".pdf"
+                                value="{{ isset($business) && $business->documentImage ? $business->documentImage : '' }}">
                             <img class="img_preview"
                                 src="{{ isset($business) && $business->documentImage ? asset('uploads/' . $business->documentImage) : asset('images/no-image.png') }}"
                                 alt="" />
@@ -341,7 +341,13 @@
                             <div class="has-error mt-2">{{ $message }}</div>
                         @enderror
                         <div class="field-note">Maximum file size: 1 MB.</div>
+
+                        <!-- Add a "Change File" button -->
+                        <div class="mt-2">
+                            <button type="button" id="changeFileBtn">Change File</button>
+                        </div>
                     </div>
+
                     <!-- Logo -->
                     <div class="field-group field-file">
                         <label for="logo">Logo (optional)</label>
@@ -377,41 +383,47 @@
             </form>
         </div><!-- .listing-content -->
     </main><!-- .site-main -->
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const dropArea = document.getElementById("drop-area");
-        const galleryImageInput = document.getElementById("galleryImage");
-        const galleryImageCountInput = document.getElementById("galleryImageCount");
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const dropArea = document.getElementById("drop-area");
+            const galleryImageInput = document.getElementById("galleryImage");
+            const galleryImageCountInput = document.getElementById("galleryImageCount");
 
-        ["dragenter", "dragover", "dragleave", "drop"].forEach((eventName) => {
-            dropArea.addEventListener(eventName, preventDefault, false);
+            ["dragenter", "dragover", "dragleave", "drop"].forEach((eventName) => {
+                dropArea.addEventListener(eventName, preventDefault, false);
+            });
+
+            function preventDefault(e) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+
+            dropArea.addEventListener("drop", handleDrop, false);
+            galleryImageInput.addEventListener("change", updateGalleryImageCount);
+
+            function handleDrop(e) {
+                const files = e.dataTransfer.files;
+                const inputElement = galleryImageInput;
+                inputElement.files = files;
+
+                // Update label text to show the number of files dropped
+                const label = dropArea.querySelector("label");
+                label.textContent = files.length === 1 ? "1 file selected" : `${files.length} files selected`;
+
+                // Update the hidden input field with the count
+                galleryImageCountInput.value = files.length;
+            }
+
+            function updateGalleryImageCount() {
+                const files = galleryImageInput.files;
+                galleryImageCountInput.value = files.length;
+            }
         });
+    </script>
+    <script>
+        document.getElementById('changeFileBtn').addEventListener('click', function() {
+            document.getElementById('documentImage').click();
+        });
+    </script>
 
-        function preventDefault(e) {
-            e.preventDefault();
-            e.stopPropagation();
-        }
-
-        dropArea.addEventListener("drop", handleDrop, false);
-        galleryImageInput.addEventListener("change", updateGalleryImageCount);
-
-        function handleDrop(e) {
-            const files = e.dataTransfer.files;
-            const inputElement = galleryImageInput;
-            inputElement.files = files;
-
-            // Update label text to show the number of files dropped
-            const label = dropArea.querySelector("label");
-            label.textContent = files.length === 1 ? "1 file selected" : `${files.length} files selected`;
-
-            // Update the hidden input field with the count
-            galleryImageCountInput.value = files.length;
-        }
-
-        function updateGalleryImageCount() {
-            const files = galleryImageInput.files;
-            galleryImageCountInput.value = files.length;
-        }
-    });
-</script>
 @endsection

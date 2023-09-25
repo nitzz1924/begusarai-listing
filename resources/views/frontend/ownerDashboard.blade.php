@@ -118,7 +118,11 @@
                             <div class="col-lg-3 col-6">
                                 <div class="item green">
                                     <h3>Total Leads</h3>
-                                    <span class="number">{{ count($VisitCount) }}</span>
+                                    <span class="number">
+                                        
+                                    
+                                    {{ count($VisitCount) }}</span>
+                                                                        
                                     <span class="line"></span>
                                 </div>
                             </div>
@@ -126,14 +130,24 @@
                                 <div class="item yellow">
                                     <h3>Total Reviews</h3>
                                     <span class="number">
+                                        @php
+                                            $totalReviewsCount = 0; // Initialize the total count variable
+                                        @endphp
+                                
                                         @foreach ($ReviewsCount as $value)
-                                            {{ $value->count }}
+                                            @php
+                                                $totalReviewsCount += $value['count']; // Accumulate the count
+                                            @endphp
                                         @endforeach
+                                
+                                        {{ $totalReviewsCount }} <!-- Display the total count -->
                                     </span>
                                     <span class="line"></span>
                                 </div>
-
                             </div>
+
+
+                            
                             <div class="col-lg-3 col-6">
                                 <div class="item purple">
                                     <h3>Total Views</h3>
@@ -147,13 +161,16 @@
                         <div class="row">
                             <div class="col-lg-4">
                                 <div class="ob-item">
+                                   
                                     <div class="ob-head">
                                         <h3>Recent Leads</h3>
-                                        @foreach ($businesses as $business)
-                                            <a href="{{ route('ownerLeads', ['id' => $business->id]) }}" class="view-all"
-                                                title="View All">View all</a>
-                                        @endforeach
+                                        @if (count($businesses) > 0)
+                                            <a href="{{ route('ownerLeads', ['id' => $businesses[0]->id]) }}" class="view-all" title="View All">View all</a>
+                                        @endif
                                     </div>
+
+
+
                                     <div class="ob-content">
                                         <ul>
                                             @foreach ($lead as $value)
@@ -178,10 +195,10 @@
                                 <div class="ob-item">
                                     <div class="ob-head">
                                         <h3>New Reviews</h3>
-                                        @foreach ($businesses as $business)
-                                            <a href="{{ route('ownerListing', ['id' => $business->id]) }}" class="view-all"
-                                                title="View All">View all</a>
-                                        @endforeach
+                                    
+                                        @if (count($businesses) > 0)
+                                            <a href="{{ route('ownerListing', ['id' => $businesses[0]->id]) }}" class="view-all" title="View All">View all</a>
+                                        @endif
                                     </div>
                                     <div class="ob-content">
                                         <ul class="place__comments">
@@ -231,11 +248,14 @@
                             <div class="col-lg-4">
                                 <div class="ob-item">
                                     <div class="ob-head">
-                                        <h3>New Visitors </h3>
-                                        @foreach ($businesses as $business)
-                                            <a href="{{ route('ownerLeads', ['id' => $business->id]) }}" class="view-all"
-                                                title="View All">View all</a>
-                                        @endforeach
+                                    <h3>New Visitors</h3>
+                                    @if (count($businesses) > 0)
+                                        <a href="{{ route('ownerLeads', ['id' => $businesses[0]->id]) }}" class="view-all" title="View All">View all</a>
+                                    @endif
+
+
+ 
+                                        
                                     </div>
                                     <div class="ob-content">
                                         <ul>

@@ -1,7 +1,7 @@
 @extends('frontend.layouts.master')
 @section('title', 'Add Place')
 @section('content')
-<style>
+    <style>
         .upload-area {
             border: 2px dashed #999;
             background-color: #f9f9f9;
@@ -121,41 +121,38 @@
                         <div class="field-group field-input">
                             <label for="businessName">Business Name</label>
                             <input type="text" placeholder="What is the name of the place" name="businessName"
-                                id="businessName" class="form-control @error('businessName') is-invalid @enderror">
-                            {{-- @error('businessName')
+                                id="businessName" class="form-control  ">
+                            @error('businessName')
                                 <div class="has-error mt-2">{{ $message }}</div>
-                            @enderror --}}
+                            @enderror
                         </div>
                         <div class="field-group field-input">
                             <label for="price">Price</label>
-                            <input type="text" placeholder="Price" name="price" id="price"
-                                class="form-control @error('price') is-invalid @enderror">
-                            {{-- @error('price')
+                            <input type="text" placeholder="Price" name="price" id="price" class="form-control">
+                            @error('price')
                                 <div class="has-error mt-2">{{ $message }}</div>
-                            @enderror --}}
+                            @enderror
                         </div>
                     </div>
                     <div class="field-group">
                         <label for="description">Description</label>
                         <textarea placeholder="Description" id="description" name="description" rows="4" cols="65"
-                            class="form-control @error('description') is-invalid @enderror"></textarea>
-                        {{-- @error('description')
+                            class="form-control "></textarea>
+                        @error('description')
                             <div class="has-error mt-2">{{ $message }}</div>
-                        @enderror --}}
+                        @enderror
                     </div>
                     <div class="field-group">
                         <label for="duration">Duration</label>
-                        <input type="text" placeholder="Duration" id="duration" name="duration"
-                            class="form-control @error('duration') is-invalid @enderror">
-                        {{-- @error('duration')
+                        <input type="text" placeholder="Duration" id="duration" name="duration" class="form-control  ">
+                        @error('duration')
                             <div class="has-error mt-2">{{ $message }}</div>
-                        @enderror --}}
+                        @enderror
                     </div>
 
                     <div class="field-group field-select">
                         <label for="category">Category</label>
-                        <select data-placeholder="Select Category"
-                            class="chosen-select form-control @error('category') is-invalid @enderror" id="category"
+                        <select data-placeholder="Select Category" class="chosen-select form-control  " id="category"
                             name="category">
                             <option selected></option>
                             @foreach ($category as $value)
@@ -169,17 +166,16 @@
 
                     <div class="field-group field-select">
                         <label for="placeType">Place Type</label>
-                        <select data-placeholder="Select Place Type" multiple
-                            class="chosen-select form-control @error('placeType') is-invalid @enderror" id="placeType"
-                            name="placeType[]">
+                        <select data-placeholder="Select Place Type" multiple class="chosen-select form-control "
+                            id="placeType" name="placeType[]">
                             <option disabled>Select</option>
                             @foreach ($Placetype as $value)
                                 <option>{{ $value->title }}</option>
                             @endforeach
                         </select>
-                        {{-- @error('placeType')
+                        @error('placeType')
                             <div class="has-error mt-2">{{ $message }}</div>
-                        @enderror --}}
+                        @enderror
                     </div>
                 </div>
 
@@ -196,35 +192,35 @@
                                 </span>
                             </label>
                         @endforeach
-                        @error('highlight')
-                            <div class="has-error mt-2">{{ $message }}</div>
-                        @enderror
+                        
                     </div>
+                    @error('highlight')
+                        <div class="has-error mt-2">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <div id="location" class="listing-box">
                     <h3>Location</h3>
                     <div class="field-group field-select">
                         <label for="city">City</label>
-                        <select data-placeholder="Select City"
-                            class="chosen-select form-control @error('city') is-invalid @enderror" id="city"
+                        <select data-placeholder="Select City" class="chosen-select form-control " id="city"
                             name="city">
                             <option selected></option>
                             @foreach ($City as $value)
                                 <option>{{ $value->title }}</option>
                             @endforeach
                         </select>
-                        {{-- @error('city')
+                        @error('city')
                             <div class="has-error mt-2">{{ $message }}</div>
-                        @enderror --}}
+                        @enderror
                     </div>
                     <div class="field-group">
                         <label for="placeAddress">Place Address</label>
                         <input type="text" placeholder="Full Address" id="placeAddress" name="placeAddress"
-                            class="form-control @error('placeAddress') is-invalid @enderror">
-                        {{-- @error('placeAddress')
+                            class="form-control  ">
+                        @error('placeAddress')
                             <div class="has-error mt-2">{{ $message }}</div>
-                        @enderror --}}
+                        @enderror
                     </div>
                     <!-- Additional location fields can be added here -->
                 </div>
@@ -234,27 +230,30 @@
                     <div class="field-group">
                         <label for="email">Email</label>
                         <input type="email" placeholder="Your email address" id="email" name="email"
-                            class="form-control @error('email') is-invalid @enderror">
-                        {{-- @error('email')
+                            class="form-control ">
+                        @error('email')
                             <div class="has-error mt-2">{{ $message }}</div>
-                        @enderror --}}
+                        @enderror
                     </div>
                     <div class="field-group">
                         <label for="phoneNumber1">Phone number</label>
                         <input type="tel" placeholder="Your phone number" name="phoneNumber1" id="phoneNumber1"
-                            class="form-control @error('phoneNumber1') is-invalid @enderror">
-                        {{-- @error('phoneNumber1')
+                            class="form-control ">
+                        @error('phoneNumber1')
                             <div class="has-error mt-2">{{ $message }}</div>
-                        @enderror --}}
+                        @enderror
                     </div>
                     <div class="field-group">
                         <label for="phoneNumber2">Phone number 2 (optional)</label>
                         <input type="tel" placeholder="Your phone number" name="phoneNumber2" id="phoneNumber2">
+                        @error('phoneNumber2')
+                            <div class="has-error mt-2">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="field-group">
                         <label for="whatsappNo">WhatsApp Number</label>
                         <input type="tel" placeholder="Your WhatsApp number" name="whatsappNo" id="whatsappNo"
-                            class="form-control @error('whatsappNo') is-invalid @enderror">
+                            class="form-control ">
                         {{-- @error('whatsappNo')
                             <div class="has-error mt-2">{{ $message }}</div>
                         @enderror --}}
@@ -262,15 +261,15 @@
                     <div class="field-group">
                         <label for="websiteUrl">Website</label>
                         <input type="url" placeholder="Your website url" name="websiteUrl" id="websiteUrl"
-                            class="form-control @error('websiteUrl') is-invalid @enderror">
-                        {{-- @error('websiteUrl')
+                            class="form-control ">
+                        @error('websiteUrl')
                             <div class="has-error mt-2">{{ $message }}</div>
-                        @enderror --}}
+                        @enderror
                     </div>
                     <div class="field-group">
                         <label for="additionalFields">Additional Fields</label>
                         <input type="url" placeholder="Your additional fields url" name="additionalFields"
-                            id="additionalFields" class="form-control @error('additionalFields') is-invalid @enderror">
+                            id="additionalFields" class="form-control ">
                         {{-- @error('additionalFields')
                             <div class="has-error mt-2">{{ $message }}</div>
                         @enderror --}}
@@ -282,7 +281,7 @@
                     <div class="field-group">
                         <label for="youtube">Youtube URL</label>
                         <input type="url" placeholder="Your YouTube URL" name="youtube" id="youtube"
-                            class="form-control @error('youtube') is-invalid @enderror">
+                            class="form-control ">
                         {{-- @error('youtube')
                             <div class="has-error mt-2">{{ $message }}</div>
                         @enderror --}}
@@ -290,7 +289,7 @@
                     <div class="field-group">
                         <label for="twitter">Twitter URL</label>
                         <input type="url" placeholder="Your Twitter URL" name="twitter" id="twitter"
-                            class="form-control @error('twitter') is-invalid @enderror">
+                            class="form-control ">
                         {{-- @error('twitter')
                             <div class="has-error mt-2">{{ $message }}</div>
                         @enderror --}}
@@ -298,7 +297,7 @@
                     <div class="field-group">
                         <label for="instagram">Instagram URL</label>
                         <input type="url" placeholder="Your Instagram URL" name="instagram" id="instagram"
-                            class="form-control @error('instagram') is-invalid @enderror">
+                            class="form-control ">
                         {{-- @error('instagram')
                             <div class="has-error mt-2">{{ $message }}</div>
                         @enderror --}}
@@ -306,7 +305,7 @@
                     <div class="field-group">
                         <label for="facebook">Facebook URL</label>
                         <input type="url" placeholder="Your Facebook URL" name="facebook" id="facebook"
-                            class="form-control @error('facebook') is-invalid @enderror">
+                            class="form-control ">
                         {{-- @error('facebook')
                             <div class="has-error mt-2">{{ $message }}</div>
                         @enderror --}}
@@ -317,8 +316,7 @@
                     <h3>Opening Hours</h3>
                     <div class="field-group field-select">
                         <label for="bookingType">Booking Type</label>
-                        <select data-placeholder="Select Booking Type"
-                            class="chosen-select form-control @error('bookingType') is-invalid @enderror"
+                        <select data-placeholder="Select Booking Type" class="chosen-select form-control "
                             id="bookingType" name="bookingType">
                             <option selected></option>
                             @foreach ($bookingType as $value)
@@ -332,10 +330,10 @@
                     <div class="field-group">
                         <label for="bookingurl">Booking URL</label>
                         <input type="url" placeholder="Your booking URL" name="bookingurl" id="bookingurl"
-                            class="form-control @error('bookingurl') is-invalid @enderror">
-                        {{-- @error('bookingurl')
+                            class="form-control ">
+                        @error('bookingurl')
                             <div class="has-error mt-2">{{ $message }}</div>
-                        @enderror --}}
+                        @enderror
                     </div>
                 </div><!-- .listing-box -->
 
@@ -355,26 +353,24 @@
                         <div class="field-note">Maximum file size: 1 MB.</div>
                     </div>
 
-               
-
                     <div class="field-group field-file">
-        <label for="galleryImage">Gallery Images</label>
-        <label for="galleryImage" class="preview">
-            <div class="mb-3 upload-area" id="drop-area">
-                <label for="image" class="form-label">Drag & Drop Images Here</label>
-            </div>
-            <input type="file" name="galleryImage[]" id="galleryImage" class="upload-file" data-max-size="1024" multiple accept="image/*">
-            <input type="hidden" name="galleryImageCount" id="galleryImageCount" value="0"> <!-- Add this hidden input -->
-            <div class="selected-files-count"></div>
-            <i class="la la-cloud-upload-alt"></i>
-        </label>
-        @error('galleryImage')
-        <div class="has-error mt-2">{{ $message }}</div>
-        @enderror
-        <div class="field-note">Maximum file size: 1 MB.</div>
-    </div>
-
-
+                        <label for="galleryImage">Gallery Images</label>
+                        <label for="galleryImage" class="preview">
+                            <div class="mb-3 upload-area" id="drop-area">
+                                <label for="image" class="form-label">Drag & Drop Images Here</label>
+                            </div>
+                            <input type="file" name="galleryImage[]" id="galleryImage" class="upload-file"
+                                data-max-size="1024" multiple accept="image/*">
+                            <input type="hidden" name="galleryImageCount" id="galleryImageCount" value="0">
+                            <!-- Add this hidden input -->
+                            <div class="selected-files-count"></div>
+                            <i class="la la-cloud-upload-alt"></i>
+                        </label>
+                        @error('galleryImage')
+                            <div class="has-error mt-2">{{ $message }}</div>
+                        @enderror
+                        <div class="field-note">Maximum file size: 1 MB.</div>
+                    </div>
 
                     <div class="field-group field-file">
                         <label for="logo">Author </label>
@@ -390,24 +386,21 @@
                         <div class="field-note">Maximum file size: 1 MB.</div>
                     </div>
                     <div class="field-group field-file">
-                        <label for="documentImage">Document Images (Upload PDF)</label>
-                        <label for="documentImage" class="preview">
+    <label for="documentImage">Document Images (Upload PDF)</label>
+    <label for="documentImage" class="preview">
+        <input type="file" name="documentImage" id="documentImage" class="upload-file" accept=".pdf">
+        <img class="img_preview" src="images/no-image.png" alt="" id="pdfPreview">
+        <i class="la la-cloud-upload-alt"></i>
+    </label>
+    @error('documentImage')
+        <div class="has-error mt-2">{{ $message }}</div>
+    @enderror
+</div>
 
-                            <input type="file" name="documentImage" id="documentImage" class="upload-file"
-                                accept=".pdf">
-                            <img class="img_preview" src="images/no-image.png" alt="" />
-                            <i class="la la-cloud-upload-alt"></i>
-                        </label>
-                        @error('documentImage')
-                            <div class="has-error mt-2">{{ $message }}</div>
-                        @enderror
-                    </div>
                     <div class="field-group">
                         <label for="video">Video (optional)</label>
                         <input type="url" placeholder="Your video URL" name="video" id="video">
-                        @error('video')
-                            <div class="has-error mt-2">{{ $message }}</div>
-                        @enderror
+
                     </div>
                 </div>
                 <div class="field-group field-submit">
@@ -418,44 +411,77 @@
         </div><!-- .listing-content -->
     </main><!-- .site-main -->
 
- 
     <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const dropArea = document.getElementById("drop-area");
-        const galleryImageInput = document.getElementById("galleryImage");
-        const galleryImageCountInput = document.getElementById("galleryImageCount");
+        document.addEventListener("DOMContentLoaded", function() {
+            const dropArea = document.getElementById("drop-area");
+            const galleryImageInput = document.getElementById("galleryImage");
+            const galleryImageCountInput = document.getElementById("galleryImageCount");
 
-        ["dragenter", "dragover", "dragleave", "drop"].forEach((eventName) => {
-            dropArea.addEventListener(eventName, preventDefault, false);
+            ["dragenter", "dragover", "dragleave", "drop"].forEach((eventName) => {
+                dropArea.addEventListener(eventName, preventDefault, false);
+            });
+
+            function preventDefault(e) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+
+            dropArea.addEventListener("drop", handleDrop, false);
+            galleryImageInput.addEventListener("change", updateGalleryImageCount);
+
+            function handleDrop(e) {
+                const files = e.dataTransfer.files;
+                const inputElement = galleryImageInput;
+                inputElement.files = files;
+
+                // Update label text to show the number of files dropped
+                const label = dropArea.querySelector("label");
+                label.textContent = files.length === 1 ? "1 file selected" : `${files.length} files selected`;
+
+                // Update the hidden input field with the count
+                galleryImageCountInput.value = files.length;
+            }
+
+            function updateGalleryImageCount() {
+                const files = galleryImageInput.files;
+                galleryImageCountInput.value = files.length;
+            }
         });
+        document.getElementById('documentImage').addEventListener('change', function (e) {
+    const file = e.target.files[0];
+    const pdfPreview = document.getElementById('pdfPreview');
 
-        function preventDefault(e) {
-            e.preventDefault();
-            e.stopPropagation();
-        }
+    if (file && file.type === 'application/pdf') {
+        const reader = new FileReader();
 
-        dropArea.addEventListener("drop", handleDrop, false);
-        galleryImageInput.addEventListener("change", updateGalleryImageCount);
+        reader.onload = function (e) {
+            const pdfData = new Uint8Array(e.target.result);
 
-        function handleDrop(e) {
-            const files = e.dataTransfer.files;
-            const inputElement = galleryImageInput;
-            inputElement.files = files;
+            // Initialize PDF.js
+            pdfjsLib.getDocument({ data: pdfData }).promise.then(function (pdf) {
+                pdf.getPage(1).then(function (page) {
+                    const canvas = document.createElement('canvas');
+                    const context = canvas.getContext('2d');
+                    const viewport = page.getViewport({ scale: 0.5 });
 
-            // Update label text to show the number of files dropped
-            const label = dropArea.querySelector("label");
-            label.textContent = files.length === 1 ? "1 file selected" : `${files.length} files selected`;
+                    canvas.height = viewport.height;
+                    canvas.width = viewport.width;
 
-            // Update the hidden input field with the count
-            galleryImageCountInput.value = files.length;
-        }
+                    page.render({ canvasContext: context, viewport: viewport }).promise.then(function () {
+                        const imageData = canvas.toDataURL();
+                        pdfPreview.src = imageData;
+                    });
+                });
+            });
+        };
 
-        function updateGalleryImageCount() {
-            const files = galleryImageInput.files;
-            galleryImageCountInput.value = files.length;
-        }
-    });
-</script>
+        reader.readAsArrayBuffer(file);
+    } else {
+        // Handle cases where the selected file is not a PDF
+        pdfPreview.src = 'images/no-image.png'; // Display a default image
+    }
+});
+    </script>
 
 
 @endsection
