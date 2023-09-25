@@ -333,29 +333,29 @@ class HomeController extends Controller
         // dd($id);
         // Validation rules (same as savePlace)
         $rules = [
-            'category' => 'nullable',
-            'placeType' => 'nullable',
-            'description' => 'nullable',
+            'category' => 'required',
+            'placeType' => 'required',
+            'description' => 'required',
             'price' => 'nullable',
-            'duration' => 'nullable',
-            'highlight' => 'nullable',
-            'city' => 'nullable',
-            'placeAddress' => 'nullable',
-            'email' => 'nullable',
-            'phoneNumber1' => 'nullable',
-            'phoneNumber2' => 'nullable',
+            'duration' => 'required',
+            'highlight' => 'required',
+            'city' => 'required',
+            'placeAddress' => 'required',
+            'email' => 'required',
+            'phoneNumber1' => 'required',
+            'phoneNumber2' => 'required',
             'whatsappNo' => 'nullable',
-            'websiteUrl' => 'nullable|url', // Changed to validate as a URL
-            'additionalFields' => 'nullable|url', // Changed to validate as a URL
-            'facebook' => 'nullable|url', // Changed to validate as a URL
-            'instagram' => 'nullable|url', // Changed to validate as a URL
-            'twitter' => 'nullable|url',
-            'bookingType' => 'nullable',
-            'bookingurl' => 'nullable|url', // Changed to validate as a URL
-            'businessName' => 'nullable',
-            'youtube' => 'nullable|url', // Changed to validate as a URL
+            'websiteUrl' => 'required|url', // Changed to validate as a URL
+            'additionalFields' => 'nullable', // Changed to validate as a URL
+            'facebook' => 'nullable', // Changed to validate as a URL
+            'instagram' => 'nullable', // Changed to validate as a URL
+            'twitter' => 'nullable',
+            'bookingType' => 'required',
+            'bookingurl' => 'required|url', // Changed to validate as a URL
+            'businessName' => 'required',
+            'youtube' => 'nullable', // Changed to validate as a URL
             'video' => 'nullable',
-            'documentImage' => 'nullable|mimes:pdf', // Validate PDF
+            'documentImage' => 'required|mimes:pdf', // Validate PDF
         ];
 
         foreach (['coverImage', 'logo'] as $fileField) {
@@ -461,29 +461,29 @@ class HomeController extends Controller
     public function savePlace(Request $request)
     {
         $rules = [
-            'category' => 'nullable',
-            'placeType' => 'nullable',
-            'description' => 'nullable',
+            'category' => 'required',
+            'placeType' => 'required',
+            'description' => 'required',
             'price' => 'nullable',
-            'duration' => 'nullable',
-            'highlight' => 'nullable',
-            'city' => 'nullable',
-            'placeAddress' => 'nullable',
-            'email' => 'nullable',
-            'phoneNumber1' => 'nullable',
-            'phoneNumber2' => 'nullable',
+            'duration' => 'required',
+            'highlight' => 'required',
+            'city' => 'required',
+            'placeAddress' => 'required',
+            'email' => 'required',
+            'phoneNumber1' => 'required',
+            'phoneNumber2' => 'required',
             'whatsappNo' => 'nullable',
-            'websiteUrl' => 'nullable|url', // Changed to validate as a URL
-            'additionalFields' => 'nullable|url', // Changed to validate as a URL
-            'facebook' => 'nullable|url', // Changed to validate as a URL
-            'instagram' => 'nullable|url', // Changed to validate as a URL
-            'twitter' => 'nullable|url',
-            'bookingType' => 'nullable',
-            'bookingurl' => 'nullable|url', // Changed to validate as a URL
-            'businessName' => 'nullable',
-            'youtube' => 'nullable|url', // Changed to validate as a URL
+            'websiteUrl' => 'required|url', // Changed to validate as a URL
+            'additionalFields' => 'nullable', // Changed to validate as a URL
+            'facebook' => 'nullable', // Changed to validate as a URL
+            'instagram' => 'nullable', // Changed to validate as a URL
+            'twitter' => 'nullable',
+            'bookingType' => 'required',
+            'bookingurl' => 'required|url', // Changed to validate as a URL
+            'businessName' => 'required',
+            'youtube' => 'nullable', // Changed to validate as a URL
             'video' => 'nullable',
-            'documentImage' => 'nullable|mimes:pdf', // Validate PDF
+            'documentImage' => 'required|mimes:pdf', // Validate PDF
         ];
 
         foreach (['coverImage', 'logo'] as $fileField) {
@@ -755,27 +755,25 @@ class HomeController extends Controller
                 ->select('reviews.*', 'users_login.image')
                 ->leftJoin('users_login', 'reviews.user_id', '=', 'users_login.id')
                 ->orderBy('reviews.created_at', 'desc')
-                ->where('listing_id', $user->id)
+                ->where('listing_id', $value->id)
                 ->get();
 
-            $totalRating = 0;
             $totalReviews = count($reviews);
+            $totalRating = 0;
 
             foreach ($reviews as $review) {
                 $totalRating += $review->rating;
             }
 
-            if ($totalReviews > 0) {
-                $averageRating = $totalRating / $totalReviews;
-                $averageRating = number_format($averageRating, 1); // Display average rating with 1 decimal place
-            } else {
-                $averageRating = 0; // No reviews available
-            }
+            $averageRating = $totalReviews > 0 ? number_format($totalRating / $totalReviews, 1) : 0;
 
-            // Merge the average rating into the business data
-            $value->rating = $averageRating;
-            $value->count = count($reviews);
-            $ReviewsCount[] = $value;
+
+             // Store the data in an array
+    $ReviewsCount[] = [
+        'business_id' => $value->id,
+        'count' => $totalReviews,
+        'average_rating' => $averageRating,
+    ];
         }
         $currentDate = Carbon::now()->format('Y-m-d');
         $lead = Lead::where('status', '1')

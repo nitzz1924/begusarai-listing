@@ -276,7 +276,7 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                             <div class="popup__menu popup__box">
                                 <ul class="menu-arrow">
                                     <li>
-                                        <a title="Packages" href="/packages">Packages</a>
+                                        <a title="Packages" href="/packages/0">Packages</a>
                                     </li>
                                     <li>
                                         <a title="AboutUs" href="/aboutUs">About Us</a>
