@@ -72,7 +72,7 @@
 
                 </div>
 
-                <div class="container">
+                <!-- <div class="container">
                     <h2 class="title align-center">Rank on Selected Category</h2>
                     <div class="pricing-inner">
                         <div class="row">
@@ -94,7 +94,7 @@
                                 </div>
                             @endforeach
                         </div>
-                    </div><!-- .pricing-inner -->
+                    </div>
                     <div class="payment-method">
 
                         <p>Our business listing packages help small and medium businesses get seen online and attract more
@@ -102,15 +102,15 @@
                             online bookings, you can choose the package that best fits your budget and needs. Our support
                             team is available to help with any issues. Get the boost your business needs with our packages
                             today. </p>
-                    </div><!-- .payment-method -->
-                </div>
+                    </div>
+                </div> -->
 
 
-            </div><!-- .pricing-area -->
+            </div>
 
-        </div><!-- .site-content -->
+        </div>
 
-    </main><!-- .site-main -->
+    </main>
 
 
 @endsection

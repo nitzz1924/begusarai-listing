@@ -116,7 +116,7 @@
                             <option value="category_listing"
                                 {{ old('featuredType') == 'category_listing' ? 'selected' : '' }}>Category Listing</option>
                             <option value="search_ results"
-                                {{ old('featuredType') == 'search_ results' ? 'selected' : '' }}>Search Results</option>
+                                {{ old('featuredType') == 'search_results' ? 'selected' : '' }}>Search Results</option>
                         </select>
                         @error('featuredType')
                             <div class="text-danger">{{ $message }}</div>
