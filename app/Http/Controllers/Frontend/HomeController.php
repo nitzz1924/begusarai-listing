@@ -739,8 +739,46 @@ class HomeController extends Controller
 
     public function ownerDashboard()
     {
-        $businesses = BusinessList::orderBy('created_at', 'desc')->get();
         $user = auth()->user();
+        $countReview=0;
+        $countReviewlist=[];
+        $countLeadlist=[];
+        $countLead=0;
+        $countView=0;
+        $businesses = BusinessList::where('userId', $user->id)->where('status', '=', '1')->get(); // Fetch all businesses from the database
+        foreach($businesses as $list){ 
+            $currentDate = now()->format('Y-m-d');
+            $listR=[];
+            $listL=[];
+            $listR = DB::table('reviews')
+            ->select('reviews.*', 'users_login.image')
+            ->leftJoin('users_login', 'reviews.user_id', '=', 'users_login.id')
+            ->orderBy('reviews.created_at', 'desc')
+            ->where('listing_id',$list->id)
+            ->whereDate('reviews.created_at', $currentDate)
+            ->get();
+            $arrayListR = json_decode(json_encode($listR), true);
+            $countReviewlist = array_merge($countReviewlist, $arrayListR);
+
+
+            $listL = DB::table('lead')
+            ->select('lead.*', 'users_login.image')
+            ->leftJoin('users_login', 'lead.user_id', '=', 'users_login.id')
+            ->orderBy('lead.created_at', 'desc')
+            ->where('business_id',$list->id)
+            ->where('lead.status','1')
+            ->whereDate('lead.created_at', $currentDate)
+            ->get();
+
+            $arrayListL = json_decode(json_encode($listL), true);
+            $countLeadlist = array_merge($countLeadlist, $arrayListL);
+            $countReview =$countReview + review::where('listing_id', '=', $list->id)->count();
+            $countLead =$countLead +Lead::where('status', '=', '1')->where('business_id', '=', $list->id)->count();
+            $countView =$countView +Lead::where('business_id', '=', $list->id)->count();
+
+        }
+     
+        //dd($countReviewlist);
         $ActivePlaces = BusinessList::where('status', '=', '1')
             ->where('userId', $user->id)
             ->get();
@@ -748,33 +786,6 @@ class HomeController extends Controller
             ->where('status', '=', '1')
             ->where('business_id', $user->id)
             ->get();
-
-        $ReviewsCount = [];
-        foreach ($businesses as $value) {
-            $reviews = DB::table('reviews')
-                ->select('reviews.*', 'users_login.image')
-                ->leftJoin('users_login', 'reviews.user_id', '=', 'users_login.id')
-                ->orderBy('reviews.created_at', 'desc')
-                ->where('listing_id', $value->id)
-                ->get();
-
-            $totalReviews = count($reviews);
-            $totalRating = 0;
-
-            foreach ($reviews as $review) {
-                $totalRating += $review->rating;
-            }
-
-            $averageRating = $totalReviews > 0 ? number_format($totalRating / $totalReviews, 1) : 0;
-
-
-             // Store the data in an array
-    $ReviewsCount[] = [
-        'business_id' => $value->id,
-        'count' => $totalReviews,
-        'average_rating' => $averageRating,
-    ];
-        }
         $currentDate = Carbon::now()->format('Y-m-d');
         $lead = Lead::where('status', '1')
             ->where('business_id', $user->id)
@@ -785,17 +796,9 @@ class HomeController extends Controller
             ->where('business_id', '=', $user->id)
             ->where('status', '=', '1')
             ->get();
-        $businesses = BusinessList::where('userId', $user->id)->get();
+        $ActivePlaces = BusinessList::where('userId', $user->id)->where('status', '=', '1')->count();
 
-        $reviews = DB::table('reviews')
-            ->select('reviews.*', 'users_login.image')
-            ->leftJoin('users_login', 'reviews.user_id', '=', 'users_login.id')
-            ->orderBy('reviews.created_at', 'desc')
-            ->where('reviews.listing_id', $user->id) // Specify the table name for 'listing_id'
-            ->whereDate('reviews.created_at', $currentDate) // Specify the table name for 'created_at'
-            ->get();
-
-        return view('frontend.ownerDashboard', compact('ActivePlaces', 'VisitCount', 'ReviewsCount', 'lead', 'businesses', 'reviews'));
+        return view('frontend.ownerDashboard', compact('ActivePlaces', 'countLead', 'countReview', 'countLeadlist', 'businesses','countView','countReviewlist'));
     }
 
     public function ownerWishlist()

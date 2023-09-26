@@ -98,7 +98,7 @@
                     <div class="upgrade-box">
                         <h1>Choose a plan to submit your place!</h1>
                         <p>Pay as you go service, cancel anytime.</p>
-                        <a href="/packages" class="btn" title="Upgrade now">Upgrade now</a>
+                        <a href="/packages/0" class="btn" title="Upgrade now">Upgrade now</a>
                         <img src="{{ asset('assets/frontend-assets/images/assets/img-people.svg') }}" alt="Upgrade now">
                         <a href="#" class="close" data-close="upgrade-box"><i class="las la-times"></i></a>
                     </div><!-- .upgrade-box -->
@@ -109,7 +109,7 @@
                                 <div class="item blue">
                                     <h3>Active Places</h3>
                                     <span class="number">
-                                        {{ count($ActivePlaces) }}
+                                        {{ $ActivePlaces}}
 
                                     </span>
                                     <span class="line"></span>
@@ -121,7 +121,7 @@
                                     <span class="number">
                                         
                                     
-                                    {{ count($VisitCount) }}</span>
+                                    {{ $countLead }}</span>
                                                                         
                                     <span class="line"></span>
                                 </div>
@@ -130,17 +130,7 @@
                                 <div class="item yellow">
                                     <h3>Total Reviews</h3>
                                     <span class="number">
-                                        @php
-                                            $totalReviewsCount = 0; // Initialize the total count variable
-                                        @endphp
-                                
-                                        @foreach ($ReviewsCount as $value)
-                                            @php
-                                                $totalReviewsCount += $value['count']; // Accumulate the count
-                                            @endphp
-                                        @endforeach
-                                
-                                        {{ $totalReviewsCount }} <!-- Display the total count -->
+                                       {{$countReview}}
                                     </span>
                                     <span class="line"></span>
                                 </div>
@@ -151,7 +141,7 @@
                             <div class="col-lg-3 col-6">
                                 <div class="item purple">
                                     <h3>Total Views</h3>
-                                    <span class="number">{{ count($VisitCount) }}</span>
+                                    <span class="number">{{ $countView }}</span>
                                     <span class="line"></span>
                                 </div>
                             </div>
@@ -159,7 +149,7 @@
                     </div><!-- .member-statistical -->
                     <div class="owner-box">
                         <div class="row">
-                            <div class="col-lg-4">
+                            <div class="col-lg-6">
                                 <div class="ob-item">
                                    
                                     <div class="ob-head">
@@ -173,13 +163,13 @@
 
                                     <div class="ob-content">
                                         <ul>
-                                            @foreach ($lead as $value)
+                                            @foreach ($countLeadlist as $value)
                                                 <li class="pending">
 
                                                     <p class="date"><b>Date:</b>
-                                                        {{ date('F j, Y', strtotime($value->created_at)) }}</p>
+                                                        {{ date('F j, Y', strtotime($value['created_at'])) }}</p>
 
-                                                    <p class="place"><b>Name:</b>{{ $value->name }}</p>
+                                                    <p class="place"><b>Name:</b>{{ $value['name'] }}</p>
                                                     <p class="status"><b>Status:</b><span
                                                             style="color:green">Approved</span></p>
                                                     <a href="#" title="More" class="more"><i
@@ -191,7 +181,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-4">
+                            <div class="col-lg-6">
                                 <div class="ob-item">
                                     <div class="ob-head">
                                         <h3>New Reviews</h3>
@@ -203,13 +193,13 @@
                                     <div class="ob-content">
                                         <ul class="place__comments">
 
-                                            @foreach ($reviews as $review)
+                                            @foreach($countReviewlist as $review)
                                                 <li>
                                                     <div class="place__author">
                                                         <div class="place__author__avatar">
                                                             <a title="Sebastian" href="#">
-                                                                @if ($review->image)
-                                                                    <img src="{{ URL::to('/uploads/' . $review->image) }}"
+                                                                @if ($review['image'])
+                                                                    <img src="{{ URL::to('/uploads/' . $review['image']) }}"
                                                                         title="" alt="">
                                                                 @else
                                                                     <img src="https://wp.getgolo.com/country-guide/wp-content/themes/golo/assets/images/default-user-image.png"
@@ -218,24 +208,24 @@
                                                             </a>
                                                         </div>
                                                         <div class="place__author__info">
-                                                            <a title="Sebastian" href="#">{{ $review->author }}</a>
+                                                            <a title="Sebastian" href="#">{{ $review['author'] }}</a>
                                                             <div class="place__author__star">
-                                                                @for ($i = 0; $i < $review->rating; $i++)
+                                                                @for ($i = 0; $i < $review['rating']; $i++)
                                                                     <i class="la la-star filled-star"></i>
                                                                     <!-- Add a class for filled stars -->
                                                                 @endfor
                                                                 <span style="width: 72%">
-                                                                    @for ($i = 0; $i < 5 - $review->rating; $i++)
+                                                                    @for ($i = 0; $i < 5 - $review['rating']; $i++)
                                                                         <i class="la la-star"></i>
                                                                     @endfor
                                                                 </span>
                                                             </div>
                                                             <span
-                                                                class="time">{{ \Carbon\Carbon::parse($review->created_at)->format('F j, Y') }}</span>
+                                                                class="time">{{ \Carbon\Carbon::parse($review['created_at'])->format('F j, Y') }}</span>
                                                         </div>
                                                     </div>
                                                     <div class="place__comments__content">
-                                                        <p>{{ $review->content }}
+                                                        <p>{{ $review['content']}}
                                                         </p>
                                                     </div>
 
@@ -245,34 +235,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-4">
-                                <div class="ob-item">
-                                    <div class="ob-head">
-                                    <h3>New Visitors</h3>
-                                    @if (count($businesses) > 0)
-                                        <a href="{{ route('ownerLeads', ['id' => $businesses[0]->id]) }}" class="view-all" title="View All">View all</a>
-                                    @endif
-
-
- 
-                                        
-                                    </div>
-                                    <div class="ob-content">
-                                        <ul>
-                                            @foreach ($lead as $value)
-                                                <li class="noti-item unread">
-                                                    <p>{{ $value->name }} <br> User Number: {{ $value->number }}</p>
-                                                    <p>{{ $value->message }} </p>
-                                                    <span> {{ date('F j, Y', strtotime($value->created_at)) }}</span><a
-                                                        href="#" title="Delete"> </a>
-
-                                                </li>
-                                            @endforeach
-
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
+                     
                         </div>
                     </div><!-- .owner-box -->
                 </div><!-- .member-wrap -->
