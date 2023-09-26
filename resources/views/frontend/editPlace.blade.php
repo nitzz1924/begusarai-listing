@@ -344,7 +344,7 @@
 
                         <!-- Add a "Change File" button -->
                         <div class="mt-2">
-                            <button type="button" id="changeFileBtn">Change File</button>
+                            <button class="btn" type="button" id="changeFileBtn">Change File</button>
                         </div>
                     </div>
 
