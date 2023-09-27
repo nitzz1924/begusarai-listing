@@ -196,16 +196,20 @@
                                                         <!-- <div class="feature">Featured</div> -->
                                                     </div>
                                                     <div class="entry-detail">
-                                                        <div class="entry-head">
+                                                        <div class="">
                                                             <h3 class="place-title">
                                                                 <a href="{{ URL::to('listingDetail/' . $value->id . '/' . $value->category) }}">{{ $value->businessName }}</a>
+                                                               
                                                             </h3>
+                                                            
                                                             <div class="place-type list-item">
                                                                 <span>{{ $value->highlight }}</span>
                                                             </div>
+                                                            
                                                             <div class="place-city">
-                                                                <a href="{{ route('searchFilter', ['category' => 'all', 'city' => $value->city, 'highlight' => 'all']) }}">{{ $value->city }}</a>  
+                                                                <a  href="{{ route('searchFilter', ['category' => 'all', 'city' => $value->city, 'highlight' => 'all']) }}" >{{ $value->city }}</a>  
                                                                 </div>
+                                                              
                                                         </div>
                                                         
                                                         <div class="open-now">

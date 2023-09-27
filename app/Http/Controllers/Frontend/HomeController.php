@@ -127,11 +127,11 @@ class HomeController extends Controller
                 $join->on('businesslist.id', '=', 'bookmarks.business_id')->where('bookmarks.user_id', '=', $user->id);
             })
                 ->select('businesslist.*', 'bookmarks.id AS bookmark_status')
-                ->orderBy('businesslist.created_at', 'desc')
+                ->orderBy('businesslist.home_featured', 'asc')
                 ->take(4)
                 ->get();
         } else {
-            $businesses = BusinessList::orderBy('created_at', 'desc')
+            $businesses = BusinessList::orderBy('home_featured', 'asc')
                 ->take(4)
                 ->get();
         }
@@ -1015,7 +1015,7 @@ if ($businessData || $userData || $planData) {
         if ($city == 'all' && $highlight == 'all' && $category != 'all') {
             $similer = BusinessList::where('category', $category)
             ->where('status', '1')
-            ->orderBy('created_at', 'desc')
+            ->orderBy('category_ranking', 'asc')
             ->paginate(10);
         }
         

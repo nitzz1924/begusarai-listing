@@ -105,14 +105,38 @@
                             <div class="text-danger">{{ $message }}</div>
                         @enderror --}}
                     </div>
+                  
+
+
+
                     <div class="form-group col-md-6">
                         <label for="noOfPlace">Number of Places:</label>
-                        <input type="text" id="noOfPlace" name="noOfPlace" class="form-control @error('noOfPlace') is-invalid @enderror"
-                            value="{{ old('noOfPlace', $package->noOfPlace) }}" required>
-                        {{-- @error('noOfPlace')
+                        <select id="noOfPlace" name="noOfPlace" class="form-control" required>
+                            <option  value="{{ old('noOfPlace', $package->noOfPlace) }}">{{ old('noOfPlace', $package->noOfPlace) }} </option> <!-- Default placeholder -->
+                            
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+
+                        </select>
+                        @error('noOfPlace')
                             <div class="text-danger">{{ $message }}</div>
-                        @enderror --}}
+                        @enderror
                     </div>
+
+
+
+
+
+
+
                     <div class="form-group col-md-6">
                         <label for="featuredListings">Featured Listings:</label>
                         <input type="text" id="featuredListings" name="featuredListings" class="form-control @error('featuredListings') is-invalid @enderror"
