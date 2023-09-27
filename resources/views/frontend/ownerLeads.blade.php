@@ -63,7 +63,7 @@
                         </tbody>
                     </table>
 
-                    <div class="pagination align-left">
+                    {{-- <div class="pagination align-left">
                         <div class="pagination__numbers">
                             <span>1</span>
                             <a title="2" href="#">2</a>
@@ -72,7 +72,7 @@
                                 <i class="la la-angle-right"></i>
                             </a>
                         </div>
-                    </div><!-- .pagination -->
+                    </div><!-- .pagination --> --}}
                 </div><!-- .member-place-wrap -->
             </div>
         </div><!-- .site-content -->

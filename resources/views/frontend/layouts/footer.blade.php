@@ -20,7 +20,7 @@
                 </div>
                 <div class="col-lg-2">
                     <aside class="footer__top__nav">
-                        <h2 class="mb-3">Company</h2>
+                        <h2 class="mb-3">Quick Links</h2>
                         <ul>
                             <li>
                                 <a title="About Us" href="/aboutUs">About Us</a>
@@ -34,6 +34,12 @@
                             </li>
                             <li>
                                 <a title="Privacy" href="/privacyPolicy">Privacy Policy</a>
+                            </li>
+                            <li>
+                                <a title="Privacy" href="/termsAndConditions">Terms and Conditions </a>
+                            </li>
+                            <li>
+                                <a title="Privacy" href="/returnsPolicy">Refund and Returns Policy </a>
                             </li>
                             
                         </ul>

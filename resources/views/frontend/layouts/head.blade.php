@@ -31,7 +31,7 @@
 <meta name="keywords" content="" />
 <meta name="description" content="" />
 <!-- favicons -->
-<link rel="shortcut icon" href="images/favicon.ico" />
+{{-- <link rel="shortcut icon" href="images/favicon.ico" /> --}}
 <!-- Style CSS -->
 <link rel="stylesheet" type="text/css" href="{{ asset('/assets/frontend-assets/fonts/jost/stylesheet.css') }}" />
 <link rel="stylesheet" type="text/css"

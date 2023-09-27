@@ -592,7 +592,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="pagination">
+                    {{-- <div class="pagination">
                         <div class="pagination__numbers">
                             <span>1</span>
                             <a title="2" href="#">2</a>
@@ -601,7 +601,7 @@
                                 <i class="la la-angle-right"></i>
                             </a>
                         </div>
-                    </div>
+                    </div> --}}
                 </div><!-- .main-primary -->
             </div><!-- .col-left -->
             <div class="col-right">
