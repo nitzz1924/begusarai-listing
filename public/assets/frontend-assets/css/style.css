@@ -6163,7 +6163,7 @@ a.place__comments__reply i {
 }
 
 .accordion {
-    max-width: 600px;
+    max-width: 80%;
     margin: 0 auto 60px;
 }
 .accordion li {
@@ -6175,7 +6175,7 @@ a.place__comments__reply i {
     position: relative;
     padding-right: 30px;
 }
-.accordion a:after {
+/* .accordion a:after {
     content: "\f067";
     display: block;
     width: 16px;
@@ -6185,7 +6185,7 @@ a.place__comments__reply i {
     right: 0;
     margin-top: -4px;
     font-family: "Font Awesome 5 Pro";
-}
+} */
 .accordion li.open a:after {
     content: "\f068";
 }

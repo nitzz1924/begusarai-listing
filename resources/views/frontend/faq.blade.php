@@ -4,13 +4,9 @@
 
 
 <div class="container-fluid">
-    <!-- Navigation bar (if needed) -->
-    <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Your Logo</a>
-    </nav> -->
 
     <div class="row">
-        <div class="col-md-8 offset-md-2 mt-5">
+        <div class="col-md-12 mt-5">
             <h1 class="text-center">Frequently Asked Questions</h1>
             <div class="accordion" id="faqAccordion">
 
@@ -18,9 +14,9 @@
                 <div class="card">
                     <div class="card-header" id="faqHeading{{$index}}">
                         <h5 class="mb-0">
-                            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#faqCollapse{{$index}}" aria-expanded="false" aria-controls="faqCollapse{{$index}}">
+                            <a   href="#" data-toggle="collapse" data-target="#faqCollapse{{$index}}" aria-expanded="false" aria-controls="faqCollapse{{$index}}">
                                 {{$faq->title}}
-                            </button>
+                            </a>
                         </h5>
                     </div>
                     <div id="faqCollapse{{$index}}" class="collapse" aria-labelledby="faqHeading{{$index}}" data-parent="#faqAccordion">
