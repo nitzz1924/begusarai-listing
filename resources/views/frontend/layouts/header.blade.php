@@ -164,7 +164,10 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                                 <a href="/" title="Home">Home</a>
                             </li>
                             <li>
-                                <a title="Packages" href="/packages/0">Packages</a>
+                                <a title="Packages" href="/packages/0">Pricing </a>
+                            </li>
+                            <li>
+                                <a title="Packages" href="/category/0">Ranking </a>
                             </li>
                             <li>
                                 <a title="Destinations" href="#">Destinations</a>

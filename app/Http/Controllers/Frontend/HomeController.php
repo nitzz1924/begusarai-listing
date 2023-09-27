@@ -601,6 +601,7 @@ class HomeController extends Controller
 
         return view('frontend.packages', compact('packages', 'ranking','businessId','userId'));
     }
+    
     public function category($id)
     {
         $user = auth()->user();
@@ -613,7 +614,7 @@ class HomeController extends Controller
             ->orWhere('type', '!=', 'Ranking')
             ->get();
             $businesses = BusinessList::where('id', $id)->where('status', '=', '1')->first();
-        return view('frontend.category', compact('packages', 'ranking','businessId','userId','businesses'));
+        return view('frontend.category', compact('packages', 'ranking','businessId','userId','businesses', 'id'));
     }
 
     public function setPassword(Request $request)

@@ -24,7 +24,7 @@
         <div class="page-title page-title--small align-left" style="background-image: url(images/bg/bg-checkout.png);">
             <div class="container">
                 <div class="page-title__content">
-                    <h1 class="page-title__name">Our Packages</h1>
+                    <h1 class="page-title__name">Our Pricing</h1>
                 </div>
             </div>
         </div><!-- .page-title -->
@@ -75,38 +75,7 @@
 
                 </div>
 
-                <!-- <div class="container">
-                            <h2 class="title align-center">Rank on Selected Category</h2>
-                            <div class="pricing-inner">
-                                <div class="row">
-
-                                    @foreach ($ranking as $value)
-    <div class="col-lg-4">
-                                            <div class="pricing-item">
-                                                {{-- <img src="{{ asset('assets\images\packages\Category-Listing.png') }}"
-                                        class="rounded-3 shadow" alt="category ranking"> --}}
-                                                <h3>{{ $value->title }}</h3>
-                                                <p>{{ $value->featuredListings }} For Rank </p>
-
-                                                <div class="price"><span class="currency">₹</span>{{ $value->price }}<span
-                                                        class="time">{{ $package->durationMY == 0 ? 'Monthly' : 'Yearly' }}</span>
-                                                </div>
-                                                <a href="/checkoutPage" class="btn" title="Get Started">Get Started</a>
-
-                                            </div>
-                                        </div>
-    @endforeach
-                                </div>
-                            </div>
-                            <div class="payment-method">
-
-                                <p>Our business listing packages help small and medium businesses get seen online and attract more
-                                    customers. With customizable profiles, linking to social media accounts, customer reviews and
-                                    online bookings, you can choose the package that best fits your budget and needs. Our support
-                                    team is available to help with any issues. Get the boost your business needs with our packages
-                                    today. </p>
-                            </div>
-                        </div> -->
+             
 
 
             </div>

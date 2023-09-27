@@ -51,29 +51,40 @@
 
                                         @php
                                             $isActive = false;
+                                            if ($businesses) {
+                                                switch ($value->featuredType) {
+                                                    case 'city_listing':
+                                                        $isActive = $businesses->city_ranking == '11';
                                             
-                                            switch ($value->featuredType) {
-                                                case 'city_listing':
-                                                    $isActive = $businesses->city_ranking == '11';
-                                                    break;
-                                                case 'category_listing':
-                                                    $isActive = $businesses->category_ranking == '11';
-                                                    break;
-                                                case 'home_featured':
-                                                    $isActive = $businesses->home_featured == '11';
-                                                    break;
-                                                case 'search_results':
-                                                    $isActive = $businesses->search_results == '11';
-                                                    break;
+                                                        break;
+                                                    case 'category_listing':
+                                                        $isActive = $businesses->category_ranking == '11';
+                                                        break;
+                                                    case 'home_featured':
+                                                        $isActive = $businesses->home_featured == '11';
+                                                        break;
+                                                    case 'search_results':
+                                                        $isActive = $businesses->search_results == '11';
+                                                        break;
+                                                }
                                             }
                                         @endphp
 
-                                        @if ($isActive)
-                                            <a href="/checkoutPage/{{ $businessId }}/{{ $userId }}/{{ $value->id }}"
-                                                class="btn" title="Get Started">Get Started</a>
+                                        @if ($id == 0)
+                                            <a href="/ownerListing" class="btn" title="Get Started">Get Started</a>
                                         @else
-                                            <a href="#" class="btn" style="background-color:gray" title="Get Started">Already Racking Plan
-                                                Active</a>
+                                            @if ($isActive)
+                                                @if (auth()->user() != null)
+                                                    <a href="/checkoutPage/{{ $businessId }}/{{ $userId }}/{{ $value->id }}"
+                                                        class="btn" title="Get Started">Get Started</a>
+                                                @else
+                                                    <a href="#" class="btn open-login" title="Get Started">Login</a>
+                                                @endif
+                                            @else
+                                                <a href="#" class="btn" style="background-color:gray"
+                                                    title="Get Started">Already Racking Plan
+                                                    Active</a>
+                                            @endif
                                         @endif
                                     </div>
                                 </div>
