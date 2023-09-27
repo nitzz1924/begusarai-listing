@@ -884,7 +884,7 @@
     }
     .listing-main .listing-nav {
         position: -webkit-sticky;
-        position: -webkit-sticky;
+        position: sticky;
         top: 0;
         padding: 10px;
         flex: 0 0 40px;
@@ -1410,11 +1410,11 @@
     .popup-wrap .popup-middle {
         top: 30px;
         bottom: 30px;
-        transform: inherit;
         -moz-transform: inherit;
         -ms-transform: inherit;
         -webkit-transform: inherit;
         -o-transform: inherit;
+        transform: inherit;
         overflow-y: auto;
         overflow-x: hidden;
     }
@@ -1842,7 +1842,7 @@
         display: none;
     }
     .main-primary .top-area-filter {
-        justify-content: flex-end;
+        justify-content: center;
     }
     .archive-city .filter-mobile {
         margin-bottom: 20px;

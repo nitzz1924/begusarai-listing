@@ -50,8 +50,11 @@
                                             <div class="strike">₹{{ $package->off }}</div>
                                         </div>
                                         @if ($businessId == 0)
-                                            <a href="/ownerListing" class="btn" title="Get Started"
-                                               >Get Started</a>
+                                            @if (auth()->user() != null)
+                                                <a href="/ownerListing" class="btn" title="Get Started">Get Started</a>
+                                            @else
+                                                <a href="#" class="btn open-login" title="Get Started">Login</a>
+                                            @endif
                                         @else
                                             <a href="/checkoutPage/{{ $businessId }}/{{ $userId }}/{{ $package->id }}"
                                                 class="btn" title="Get Started">Get Started</a>
@@ -73,37 +76,37 @@
                 </div>
 
                 <!-- <div class="container">
-                    <h2 class="title align-center">Rank on Selected Category</h2>
-                    <div class="pricing-inner">
-                        <div class="row">
+                            <h2 class="title align-center">Rank on Selected Category</h2>
+                            <div class="pricing-inner">
+                                <div class="row">
 
-                            @foreach ($ranking as $value)
-                                <div class="col-lg-4">
-                                    <div class="pricing-item">
-                                        {{-- <img src="{{ asset('assets\images\packages\Category-Listing.png') }}"
+                                    @foreach ($ranking as $value)
+    <div class="col-lg-4">
+                                            <div class="pricing-item">
+                                                {{-- <img src="{{ asset('assets\images\packages\Category-Listing.png') }}"
                                         class="rounded-3 shadow" alt="category ranking"> --}}
-                                        <h3>{{ $value->title }}</h3>
-                                        <p>{{ $value->featuredListings }} For Rank </p>
+                                                <h3>{{ $value->title }}</h3>
+                                                <p>{{ $value->featuredListings }} For Rank </p>
 
-                                        <div class="price"><span class="currency">₹</span>{{ $value->price }}<span
-                                                class="time">{{ $package->durationMY == 0 ? 'Monthly' : 'Yearly' }}</span>
+                                                <div class="price"><span class="currency">₹</span>{{ $value->price }}<span
+                                                        class="time">{{ $package->durationMY == 0 ? 'Monthly' : 'Yearly' }}</span>
+                                                </div>
+                                                <a href="/checkoutPage" class="btn" title="Get Started">Get Started</a>
+
+                                            </div>
                                         </div>
-                                        <a href="/checkoutPage" class="btn" title="Get Started">Get Started</a>
-
-                                    </div>
+    @endforeach
                                 </div>
-                            @endforeach
-                        </div>
-                    </div>
-                    <div class="payment-method">
+                            </div>
+                            <div class="payment-method">
 
-                        <p>Our business listing packages help small and medium businesses get seen online and attract more
-                            customers. With customizable profiles, linking to social media accounts, customer reviews and
-                            online bookings, you can choose the package that best fits your budget and needs. Our support
-                            team is available to help with any issues. Get the boost your business needs with our packages
-                            today. </p>
-                    </div>
-                </div> -->
+                                <p>Our business listing packages help small and medium businesses get seen online and attract more
+                                    customers. With customizable profiles, linking to social media accounts, customer reviews and
+                                    online bookings, you can choose the package that best fits your budget and needs. Our support
+                                    team is available to help with any issues. Get the boost your business needs with our packages
+                                    today. </p>
+                            </div>
+                        </div> -->
 
 
             </div>

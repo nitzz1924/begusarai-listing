@@ -133,7 +133,7 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                             @auth
                             @if (Auth::user()->type == 'Owner')
                             <div class="popup__button popup__box">
-                                <a title="Add place" href="add-place.html" class="btn">
+                                <a title="Add place" href="/addPlace" class="btn">
                                     <i class="la la-plus"></i>
                                     <span>Add place</span>
                                 </a>
