@@ -1231,4 +1231,13 @@ if ($businessData || $userData || $planData) {
 
         return view('frontend.resetPassword', compact('User_id'));
     }
+    public function Faq()
+    {
+
+        $faqs = Master::orderBy('created_at', 'asc')
+        ->where('type', '=', 'FAQ')
+        ->get();
+
+        return view('frontend.faq', compact('faqs') );
+    }
 }

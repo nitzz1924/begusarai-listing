@@ -153,5 +153,6 @@ Route::post('/handlePayment', 'RazorpayController@handlePayment')->name('handleP
 Route::get('/paymentresult', 'RazorpayController@paymentresult')->name('paymentresult');
 Route::get('/packages/{id}', [HomeController::class, 'packages'])->name('packages');
 Route::get('/category/{id}', [HomeController::class, 'category'])->name('category');
+Route::get('/faq', [HomeController::class, 'Faq'])->name('Faq');
 
  // Example route definition

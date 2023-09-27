@@ -31,10 +31,24 @@
     <div class="scrollbar-sidebar">
         <div class="app-sidebar__inner">
             <ul class="vertical-nav-menu">
+                
                 <li>
                     <a href="{{ URL::to('/admin/dashboard') }}">
                         <i class="metismenu-icon pe-7s-rocket"></i>
                         Dashboard
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ URL::to('/admin/master') }}" Style="color:red">
+                        <i class="metismenu-icon pe-7s-bookmarks"></i>
+                        Master
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{ URL::to('/admin/submaster') }} "Style="color:red">
+                        <i class="metismenu-icon pe-7s-bookmarks"></i>
+                        Sub Master
                     </a>
                 </li>
                 <li>
@@ -104,19 +118,7 @@
                 </li> -->
 
 
-                <li>
-                    <a href="{{ URL::to('/admin/master') }}">
-                        <i class="metismenu-icon pe-7s-bookmarks"></i>
-                        Master
-                    </a>
-                </li>
-
-                <li>
-                    <a href="{{ URL::to('/admin/submaster') }}">
-                        <i class="metismenu-icon pe-7s-bookmarks"></i>
-                        Sub Master
-                    </a>
-                </li>
+               
                 <li>
                     <a href="{{ URL::to('/admin/testimonial') }}">
                         <i class="metismenu-icon pe-7s-bookmarks"></i>

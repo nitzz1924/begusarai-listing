@@ -49,6 +49,9 @@
                             <li>
                                 <a title="Career" href="/career">Career</a>
                             </li>
+                            <li>
+                                <a title="Career" href="/faq">Faqs</a>
+                            </li>
                         </ul>
                     </aside>
                 </div> 

@@ -72,7 +72,7 @@
                                             <a href="/checkoutPage/{{ $businessId }}/{{ $userId }}/{{ $value->id }}"
                                                 class="btn" title="Get Started">Get Started</a>
                                         @else
-                                            <a href="#" class="btn" style="background-color:#00800040" title="Get Started">Already Racking Plan
+                                            <a href="#" class="btn" style="background-color:gray" title="Get Started">Already Racking Plan
                                                 Active</a>
                                         @endif
                                     </div>
