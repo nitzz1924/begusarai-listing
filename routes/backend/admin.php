@@ -88,3 +88,4 @@ Route::resource('submaster', 'SubMasterController');
 Route::resource('blog', 'BlogController');
 Route::resource('package', 'PackageController');
 Route::get('packages/{id}/edit', 'PackageController@edit')->name('packages.edit');
+Route::resource('view', 'ViewController');

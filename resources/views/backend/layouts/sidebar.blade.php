@@ -33,7 +33,7 @@
             <ul class="vertical-nav-menu">
                 
                 <li>
-                    <a href="{{ URL::to('/admin/dashboard') }}">
+                    <a href="{{ URL::to('/admin/view') }}">
                         <i class="metismenu-icon pe-7s-rocket"></i>
                         Dashboard
                     </a>
