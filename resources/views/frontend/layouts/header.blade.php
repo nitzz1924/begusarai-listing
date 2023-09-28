@@ -343,9 +343,7 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                                         </div>
                                     </div>
                                 </div>
-                                @error('type')
-                                    <span id="error_description_type" class="has-error">{{ $message }}</span>
-                                @enderror
+                                 
 
                                 <!-- Phone number and OTP input fields -->
                                 <div class="">
@@ -354,10 +352,7 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                                             <input type="tel" placeholder="Phone Number" value=""
                                                 id="mobileNumber" name="mobileNumber" pattern="[0-9]{10}"
                                                 maxlength="10" minlength="10" required />
-                                            @error('mobileNumber')
-                                                <span id="error_description_mobileNumber"
-                                                    class="has-error">{{ $message }}</span>
-                                            @enderror
+                                            
 
                                         </div>
 
@@ -374,10 +369,7 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                                             required readonly />
                                         <input type="hidden" id="generatedOTP" placeholder="OTP" value=""
                                             name="generatedOTP" />
-                                        @error('verificationCode')
-                                            <span id="error_description_verificationCode"
-                                                class="has-error">{{ $message }}</span>
-                                        @enderror
+                                        
                                     </div>
 
                                 </div>
@@ -386,17 +378,14 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                                 <div class="field-check">
                                     <label for="accept">
                                         <input type="checkbox" id="accept" value="1" name="accept"
-                                            class="form-check-input @error('accept') is-invalid @enderror" required>
+                                            class="form-check-input  " required>
                                         @csrf
                                         Accept the <a title="Terms" href="#">Terms</a> and <a
                                             title="Privacy Policy" href="#">Privacy Policy</a>
                                         <span class="checkmark">
                                             <i class="la la-check"></i>
                                         </span>
-                                        @error('accept')
-                                            <div id="error_description_accept" class="invalid-feedback">
-                                                {{ $message }}</div>
-                                        @enderror
+                                        
                                     </label>
 
                                 </div>
@@ -404,9 +393,7 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                                 <input type="submit" name="submit" value="Verify" />
                             </form>
 
-                            @error('type')
-                                <span id="error_description_type" class="has-error">{{ $message }}</span>
-                            @enderror
+                            
 
                             <form action="{{ route('loginForm') }}" method="POST" class="form-log form-content"
                                 id="login">
@@ -415,18 +402,12 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                                     <input type="tel" placeholder="Enter Phone Number" value=""
                                         name="mobileNumber" pattern="[0-9]{10}" minlength="10" maxlength="10"
                                         id="mobileNumber" required />
-                                    @error('mobileNumber')
-                                        <span id="error_description_mobileNumber"
-                                            class="has-error">{{ $message }}</span>
-                                    @enderror
+                                     
                                 </div>
                                 <div class="field-input">
                                     <input type="password" placeholder="Password" value="" name="password"
                                         id="password" required />
-                                    @error('Password')
-                                        <span id="error_description_mobileNumber"
-                                            class="has-error">{{ $message }}</span>
-                                    @enderror
+                                    
                                 </div>
                                 <a title="Forgot password" class="forgot_pass" href="/resetPassword">Forgot
                                     password</a>
