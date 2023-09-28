@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use App\Models\Master;
 use App\Models\BusinessList;
 use App\Models\Lead;
+use App\Models\User_Login;
+use Carbon\Carbon; // Import the Carbon library for date manipulation
 
 use DB;
 use Exception;
@@ -48,11 +50,11 @@ class ViewController extends Controller
             $Result[] = $value;
         }
         $category = Master::orderBy('created_at', 'asc')
-        ->where('type', '=', 'category')
-        ->get();
+            ->where('type', '=', 'category')
+            ->get();
         $city = Master::orderBy('created_at', 'asc')
-        ->where('type', '=', 'category')
-        ->get();
+            ->where('type', '=', 'category')
+            ->get();
 
         $lead = Lead::leftJoin('businesslist', function ($join) {
             $join->on('lead.business_id', '=', 'businesslist.id');
@@ -60,24 +62,32 @@ class ViewController extends Controller
             ->select('lead.*', 'businesslist.businessName AS businessName1')
             ->orderBy('lead.created_at', 'desc')
             ->get();
-         
 
+        $currentDate = now(); // Get the current date and time
 
+        $Todayleads = Lead::leftJoin('businesslist', function ($join) {
+            $join->on('lead.business_id', '=', 'businesslist.id');
+        })
+            ->select('lead.*', 'businesslist.businessName AS businessName1')
+            ->whereDate('lead.created_at', '=', $currentDate->toDateString()) // Filter by the current date
+            ->orderBy('lead.created_at', 'desc')
+            ->get();
 
-            $currentDate = now(); // Get the current date and time
+        
+        $userCount = User_Login::orderBy('created_at', 'asc')->count();
+        
+       
+        // Get the current date in the format 'Y-m-d'
+        $currentDate = Carbon::now()->toDateString();
+        
+        // Query the User_Login table to count users registered on the current date
+        $CurrentUserCount = User_Login::whereDate('created_at', $currentDate)->count();
+        $activePlans = BusinessList::orderBy('created_at', 'desc')->where('status', '1')->count();
+        
+        $CurrentActivePlan = BusinessList::whereDate('created_at', $currentDate)->where('status', '1')->count();
 
-            $Todayleads = Lead::leftJoin('businesslist', function ($join) {
-                    $join->on('lead.business_id', '=', 'businesslist.id');
-                })
-                ->select('lead.*', 'businesslist.businessName AS businessName1')
-                ->whereDate('lead.created_at', '=', $currentDate->toDateString()) // Filter by the current date
-                ->orderBy('lead.created_at', 'desc')
-                ->get();
-            
-
-        return view('backend.admin.view.index', compact('Result','category','city','lead','Todayleads'));
+        return view('backend.admin.view.index', compact('Result', 'category', 'city', 'lead', 'Todayleads', 'userCount','activePlans','CurrentUserCount','CurrentActivePlan'));
     }
-    
 
     /**
      * Show the form for creating a new resource.
