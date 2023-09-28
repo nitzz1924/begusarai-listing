@@ -60,7 +60,22 @@ class ViewController extends Controller
             ->select('lead.*', 'businesslist.businessName AS businessName1')
             ->orderBy('lead.created_at', 'desc')
             ->get();
-        return view('backend.admin.view.index', compact('Result','category','city','lead'));
+         
+
+
+
+            $currentDate = now(); // Get the current date and time
+
+            $Todayleads = Lead::leftJoin('businesslist', function ($join) {
+                    $join->on('lead.business_id', '=', 'businesslist.id');
+                })
+                ->select('lead.*', 'businesslist.businessName AS businessName1')
+                ->whereDate('lead.created_at', '=', $currentDate->toDateString()) // Filter by the current date
+                ->orderBy('lead.created_at', 'desc')
+                ->get();
+            
+
+        return view('backend.admin.view.index', compact('Result','category','city','lead','Todayleads'));
     }
     
 

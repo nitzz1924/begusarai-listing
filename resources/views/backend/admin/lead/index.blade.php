@@ -11,9 +11,9 @@
                 <div class="d-inline-block ml-3 pb-3">
 
                     <!-- <a href="{{ URL::to('admin/master/create') }}" class="btn btn-success">
-                                                                                                          <i class="bi bi-plus-lg"></i>
-                                                                                                          Add lead
-                                                                                                      </a> -->
+                                                                                                              <i class="bi bi-plus-lg"></i>
+                                                                                                              Add lead
+                                                                                                          </a> -->
 
                 </div>
             </div>
@@ -54,7 +54,7 @@
                                         <td class="fw-bold">{{ $business->message }}</td>
                                         <td class="d-flex">
 
-                                            <form action="{{ route('admin.lead.destroy',$business->id)}}" method="POST"
+                                            <form action="{{ route('admin.lead.destroy', $business->id) }}" method="POST"
                                                 id="deleteForm">
                                                 @method('DELETE')
                                                 @csrf
@@ -63,9 +63,7 @@
 
                                                     <i class="metismenu-icon bi bi-trash3"></i>
                                                 </button>
-                                            </form> 
-
-                                       
+                                            </form>
 
                                         </td>
                                         <td class="fw-bold">
@@ -79,8 +77,6 @@
                                                 Unknown
                                             @endif
                                             <br />
-
-
 
                                         </td>
                                     </tr>
@@ -103,8 +99,7 @@
         }
     </style>
 
-
-<script>
+    <script>
         function confirmDelete(button) {
             if (confirm("Are you sure you want to delete this item?")) {
                 var form = button.parentElement; // Get the parent element of the button, which is the form
@@ -113,7 +108,7 @@
                 alert("Delete operation cancelled.");
             }
         }
-    </script> 
+    </script>
 
     <script>
         new DataTable('#example');
