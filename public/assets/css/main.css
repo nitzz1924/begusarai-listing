@@ -8924,7 +8924,7 @@ button,
 .app-header__logo .logo-src {
     height: 53px;
     width: 200px;
-    background: url(../images/logo-inverse.png);
+    /* background: url(../images/logo-inverse.png); */
 }
 .app-header__menu,
 .app-header__mobile-menu {
@@ -9208,7 +9208,7 @@ button,
     background: rgba(0, 0, 0, 0.8);
 }
 .app-header.header-text-dark .app-header__logo .logo-src {
-    background: url(../images/logo-inverse.png);
+    /* background: url(../images/logo-inverse.png); */
 }
 .app-sidebar {
     width: 220px;

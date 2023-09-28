@@ -120,3 +120,35 @@
 .site__brand__logo img{
     width: 150px;
 }
+
+.zoom-on-hover {
+    transition: transform 0.3s ease;
+    /* Add a smooth transition effect */
+}
+
+.zoom-on-hover:hover {
+    transform: scale(1.05);
+    /* Zoom in slightly on hover */
+}
+
+/* Custom gradient class */
+.gradient-bg {
+    background: linear-gradient(45deg, #46aef7, #006cba);
+    animation: changeColor 5s linear infinite;
+}
+
+.main-card {
+    border: 1px solid #e4e6ef;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 20px 0;
+}
+
+.badge-warning {
+    background-color: #ffc107;
+}
+
+.badge-success {
+    background-color: #28a745;
+    color: #fff;
+}
