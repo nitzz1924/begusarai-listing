@@ -10,10 +10,7 @@
                 <div>All Lead</div>
                 <div class="d-inline-block ml-3 pb-3">
 
-                    <!-- <a href="{{ URL::to('admin/master/create') }}" class="btn btn-success">
-                                                                                                          <i class="bi bi-plus-lg"></i>
-                                                                                                          Add lead
-                                                                                                      </a> -->
+                  
 
                 </div>
             </div>
@@ -33,8 +30,8 @@
 
                                     <th class="text-nowrap">Name</th>
                                     <th class="text-nowrap">Number</th>
-                                    <th class="text-nowrap">Business Name</th>
-                                    <th class="text-nowrap">Message</th>
+                                    <th class="text-nowrap">Email</th>
+                                    <th class="text-nowrap">Address</th>
 
                                     <th>Action </th>
                                     <th>Status </th>
@@ -47,18 +44,18 @@
                                     <tr>
                                         <td class="serial-number">{{ $loop->iteration }}</td>
 
-                                        <td class="fw-bold text-nowrap ">{{ $business->name }}</td>
-                                        <td class="fw-bold text-nowrap ">{{ $business->number }}</td>
-                                        <td class="fw-bold">{{ $business->businessName1 }}</td>
+                                        <td class="fw-bold text-nowrap ">{{ $business->businessName }}</td>
+                                        <td class="fw-bold text-nowrap ">{{ $business->phoneNumber1 }}</td>
+                                        <td class="fw-bold">{{ $business->email }}</td>
 
-                                        <td class="fw-bold">{{ $business->message }}</td>
+                                        <td class="fw-bold">{{ $business->placeAddress }}</td>
                                         <td class="d-flex">
 
-                                            <form action="{{ route('admin.lead.destroy',$business->id)}}" method="POST"
+                                            <form action="{{ route('admin.listing.destroy',$business->id)}}" method="POST"
                                                 id="deleteForm">
                                                 @method('DELETE')
                                                 @csrf
-                                                <button type="button" class="btn btn-danger ms-3 text-nowrap"
+                                                <button type="submit" class="btn btn-danger ms-3 text-nowrap"
                                                     onclick="confirmDelete(this)">
 
                                                     <i class="metismenu-icon bi bi-trash3"></i>
@@ -67,14 +64,15 @@
 
                                        
 
+
                                         </td>
                                         <td class="fw-bold">
                                             @if ($business->status == 1)
                                                 <a class="fw-bold  btn btn-success"
-                                                    href="{{ URL::to('admin/lead/active', $business->id) }}">Active</a>
+                                                    href=" ">Active</a>
                                             @elseif ($business->status == 0)
                                                 <a class="fw-bold btn btn-danger"
-                                                    href="{{ URL::to('admin/lead/inactive', $business->id) }}">Inactive</a>
+                                                    href=" ">Inactive</a>
                                             @else
                                                 Unknown
                                             @endif

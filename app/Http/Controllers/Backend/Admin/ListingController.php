@@ -11,47 +11,14 @@ use App\Models\BusinessList;
 
 use Exception;
 
-class LeadController extends Controller
+class ListingController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    // public function index()
-    // {
-    //     $master = Master::orderby('created_at', 'desc')->get();
-    //   return view('backend.admin.master.index',compact("master"));
-    // }
-
-    //     public function index(Request $request)
-    // {
-
-    //     $businessId = $request->input('business_id');
-    //     if ($businessId) {
-    //         $businesses = BusinessList::leftJoin('lead', function ($join) use ($businessId) {
-    //             $join->on('lead.id', '=', 'businesslist.id')->where('businesslist.id', '=', $businessId->id);
-    //         })
-    //             ->select('businesslist.*', 'businesslist.id AS business_status')
-    //             ->orderBy('businesslist.created_at', 'desc')
-    //             ->get();
-    //     } else {
-    //         $businesses = BusinessList::orderBy('created_at', 'desc')->get();
-    //     }
-
-    //     $lead = Lead::orderBy('created_at', 'asc')->get();
-    //     return view('backend.admin.lead.index', compact('lead'));
-    // }
-
+  
     public function index(Request $request)
     {
-        $businesses = Lead::leftJoin('businesslist', function ($join) {
-            $join->on('lead.business_id', '=', 'businesslist.id');
-        })
-            ->select('lead.*', 'businesslist.businessName AS businessName1')
-            ->orderBy('lead.created_at', 'desc')
-            ->get();
-        return view('backend.admin.lead.index', compact('businesses'));
+        $businesses = BusinessList::orderBy('created_at', 'desc')->get();
+ 
+        return view('backend.admin.listing.index', compact('businesses'));
     }
 
     /**
@@ -164,39 +131,40 @@ class LeadController extends Controller
     //     return back();
     // }
 
-    // public function destroy($lead)
+    // public function destroy($id)
     // {
     //     try {
     //         // Find the lead record by ID and delete it
-    //         $lead = Lead::findOrFail($lead);
-    //         $lead->delete();
+    //         $business = BusinessList::findOrFail($id);
+    //         $business->delete();
 
     //         // Return a success response, e.g., JSON response
         
     //     } catch (\Exception $e) {
     //         // Handle any exceptions or errors that occur during deletion
-    //         return redirect()->route('admin.lead.index');
+    //         return redirect()->route('admin.listing.index')->with('error', 'Failed to delete business.');
     //     }
     // }
     public function destroy($id)
     {
-        $lead = Lead::where(['id' => $id])->delete();
+        $business = BusinessList::where(['id' => $id])->delete();
         return back();
     }
+    
 
     public function active($id)
     {
         // dd('Active method called with ID: ' . $id);
-        Lead::where('id', $id)->update(['status' => '0']);
-        return redirect()->route('admin.lead.index');
+        BusinessList::where('id', $id)->update(['status' => '0']);
+        return redirect()->route('admin.listing.index');
     }
 
     public function inactive($id)
     {
         // dd('Inactive method called with ID: ' . $id);
         try {
-            Lead::where('id', $id)->update(['status' => '1']);
-            return redirect()->route('admin.lead.index');
+            BusinessList::where('id', $id)->update(['status' => '1']);
+            return redirect()->route('admin.listing.index');
         } catch (\Exception $e) {
             print_r($e->getMessage());
             die();

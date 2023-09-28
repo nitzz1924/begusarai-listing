@@ -82,6 +82,7 @@ Route::get('/testimonial/inactive/{id}', 'TestimonialController@inactive');
 Route::resource('lead', 'LeadController');
 Route::get('/lead/active/{id}', 'LeadController@active');
 Route::get('/lead/inactive/{id}', 'LeadController@inactive');
+Route::resource('listing', 'ListingController');
  
 // Sub-Master Routing
 Route::resource('submaster', 'SubMasterController');

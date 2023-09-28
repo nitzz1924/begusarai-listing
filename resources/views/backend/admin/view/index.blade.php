@@ -3,6 +3,16 @@
 @section('content')
 
     <style>
+        .zoom-on-hover {
+            transition: transform 0.3s ease;
+            /* Add a smooth transition effect */
+        }
+
+        .zoom-on-hover:hover {
+            transform: scale(1.05);
+            /* Zoom in slightly on hover */
+        }
+
         /* Custom gradient class */
         .gradient-bg {
             background: linear-gradient(45deg, #46aef7, #46aef7);
@@ -78,80 +88,92 @@
 
         /* Add more custom styles as needed */
     </style>
- <div class="app-page-title bg-light">
-    <div class="page-title-wrapper">
-        <div class="page-title-heading">
-            <div class="page-title-icon">
-                <i class="pe-7s-graph2 icon-gradient bg-success"></i>
-            </div>
-            <div class="page-title-content">
-                <h5 class="page-title"><b>Dashboard Data</b></h5>
-                <h6 class="page-subtitle">Explore important statistics and insights</h6>
+    <div class="app-page-title bg-light">
+        <div class="page-title-wrapper">
+            <div class="page-title-heading">
+                <div class="page-title-icon">
+                    <i class="pe-7s-graph2 icon-gradient bg-success"></i>
+                </div>
+                <div class="page-title-content">
+                    <h5 class="page-title"><b>Dashboard Data</b></h5>
+                    <h6 class="page-subtitle">Explore important statistics and insights</h6>
+                </div>
             </div>
         </div>
     </div>
-</div>
-
 
     <div class="widget-heading"><b>All Entries</b></div>
     <div class="d-flex">
         <div class="col-md-6 col-xl-3">
-            <div class="card mb-3 widget-content bg-primary">
-                <div class="widget-content-wrapper text-white">
-                    <div class="widget-content-left">
-                        <div class="widget-heading">Total Listings</div>
-                    </div>
-                    <div class="widget-content-right">
-                        <div class="widget-numbers text-white">{{ count($Result) }}</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6 col-xl-3">
-            <div class="card mb-3 widget-content bg-success">
-                <div class="widget-content-wrapper text-white">
-                    <div class="widget-content-left">
-                        <div class="widget-heading">Total Active Plans</div>
-                    </div>
-                    <div class="widget-content-right">
-                        <div class="widget-numbers text-white">{{ $activePlans }}</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6 col-xl-3">
-            <div class="card mb-3 widget-content" style="background-color: slategray;">
-
-                <div class="widget-content-wrapper text-white">
-                    <div class="widget-content-left">
-                        <div class="widget-heading">Total Users</div>
-                    </div>
-                    <div class="widget-content-right">
-                        <div class="widget-numbers text-white">{{ $userCount }}</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6 col-xl-3">
-            <div class="card mb-3 widget-content bg-info">
-                <div class="widget-content-outer">
-                    <div class="widget-content-wrapper">
+            <a class="text-decoration-none" href="{{ route('admin.listing.index') }}">
+                <div class="card mb-3 widget-content bg-primary zoom-on-hover">
+                    <div class="widget-content-wrapper text-white">
                         <div class="widget-content-left">
-                            <div class="widget-heading">Total Leads</div>
+                            <div class="widget-heading">Total Listings</div>
                         </div>
                         <div class="widget-content-right">
-                            <div class="widget-numbers text-white">{{ count($lead) }}</div>
+                            <div class="widget-numbers text-white">{{ count($Result) }}</div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </a>
+
+        </div>
+        <div class="col-md-6 col-xl-3">
+
+            <a class="text-decoration-none" href="{{ route('admin.listing.index') }}">
+
+                <div class="card mb-3 widget-content bg-success zoom-on-hover">
+                    <div class="widget-content-wrapper text-white">
+                        <div class="widget-content-left">
+                            <div class="widget-heading">Total Active Plans</div>
+                        </div>
+                        <div class="widget-content-right">
+                            <div class="widget-numbers text-white">{{ $activePlans }}</div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-6 col-xl-3">
+
+            <a class="text-decoration-none" href="{{ route('admin.users.index') }}">
+                <div class="card mb-3 widget-content zoom-on-hover" style="background-color: currentcolor;">
+
+                    <div class="widget-content-wrapper text-white">
+                        <div class="widget-content-left">
+                            <div class="widget-heading">Total Users</div>
+                        </div>
+                        <div class="widget-content-right">
+                            <div class="widget-numbers text-white">{{ $userCount }}</div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-6 col-xl-3">
+
+            <a class="text-decoration-none" href="{{ route('admin.lead.index') }}">
+                <div class="card mb-3 widget-content  zoom-on-hover" style="background-color: #b69171;">
+                    <div class="widget-content-outer">
+                        <div class="widget-content-wrapper">
+                            <div class="widget-content-left">
+                                <div class="widget-heading text-white">Total Leads</div>
+                            </div>
+                            <div class="widget-content-right">
+                                <div class="widget-numbers text-white">{{ count($lead) }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
         </div>
     </div>
 
     <div class="widget-heading"><b>Today's New Entry</b></div>
     <div class="d-flex">
         <div class="col-md-6 col-xl-3">
-            <div class="card mb-3 widget-content gradient-bg">
+            <div class="card mb-3 widget-content zoom-on-hover gradient-bg">
                 <div class="widget-content-wrapper text-white">
                     <div class="widget-content-left">
                         <div class="widget-heading">Today's Listings</div>
@@ -176,7 +198,7 @@
             </div>
         </div>
         <div class="col-md-6 col-xl-3">
-            <div class="card mb-3 widget-content gradient-bg">
+            <div class="card mb-3 widget-content zoom-on-hover gradient-bg">
                 <div class="widget-content-wrapper text-white">
                     <div class="widget-content-left">
                         <div class="widget-heading">Today's Leads</div>
@@ -201,40 +223,41 @@
             </div>
         </div>
         <div class="col-md-6 col-xl-3">
-            <div class="card mb-3 widget-content gradient-bg">
+            <div class="card mb-3 widget-content gradient-bg zoom-on-hover">
                 <div class="widget-content-wrapper text-white">
                     <div class="widget-content-left">
                         <div class="widget-heading">Today's new User</div>
                     </div>
                     <div class="widget-content-right">
                         <div class="widget-numbers text-white">
-                            {{$CurrentUserCount}}
+                            {{ $CurrentUserCount }}
                         </div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="col-md-6 col-xl-3">
-            <div class="card mb-3 widget-content gradient-bg">
+            <div class="card mb-3 widget-content gradient-bg zoom-on-hover">
                 <div class="widget-content-wrapper text-white">
                     <div class="widget-content-left">
                         <div class="widget-heading">Today's new Active Plan</div>
                     </div>
                     <div class="widget-content-right">
                         <div class="widget-numbers text-white">
-                            {{$CurrentActivePlan}}
+                            {{ $CurrentActivePlan }}
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
     </div>
 
     <div class="row">
         <div class="col-md-6">
             <div class="main-card mb-3 card px-2 py-3">
                 <div class="table-responsive">
-                    <table id="example" class="table table-striped table-bordered" style="width:100%">
+                    <table id="example" class="table table-striped table-bordered " style="width:100%">
                         <thead>
                             <tr>
                                 <th class="text-center">#</th>
@@ -300,10 +323,10 @@
 
         <!-- Lead -->
 
-        <div class="col-md-6">
+        <div class="col-md-6 ">
             <div class="main-card mb-3 card px-2 py-3">
                 <div class="table-responsive">
-                    <table id="example2" class="table table-striped table-bordered" style="width:100%">
+                    <table id="example2" class="table table-striped table-bordered " style="width:100%">
                         <thead class="table-dark">
                             <tr>
                                 <th>#</th>
@@ -361,7 +384,6 @@
 
     </div>
 
-    
     <script>
         $(document).ready(function() {
             $('#example').DataTable();

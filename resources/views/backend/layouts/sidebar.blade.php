@@ -1,75 +1,87 @@
-<div class="app-sidebar sidebar-shadow">
-    <div class="app-header__logo">
-        <div class="header__pane ml-auto">
-            <div>
-                <button type="button" class="hamburger close-sidebar-btn hamburger--elastic" data-class="closed-sidebar">
-                    <span class="hamburger-box">
-                        <span class="hamburger-inner"></span>
-                    </span>
-                </button>
-            </div>
-        </div>
-    </div>
-    <div class="app-header__mobile-menu">
-        <div>
-            <button type="button" class="hamburger hamburger--elastic mobile-toggle-nav">
-                <span class="hamburger-box">
-                    <span class="hamburger-inner"></span>
-                </span>
-            </button>
-        </div>
-    </div>
-    <div class="app-header__menu">
-        <span>
-            <button type="button" class="btn-icon btn-icon-only btn btn-primary btn-sm mobile-toggle-header-nav">
-                <span class="btn-icon-wrapper">
-                    <i class="fa fa-ellipsis-v fa-w-6"></i>
-                </span>
-            </button>
-        </span>
-    </div>
-    <div class="scrollbar-sidebar">
-        <div class="app-sidebar__inner">
-            <ul class="vertical-nav-menu">
-                
-                <li>
-                    <a href="{{ URL::to('/admin/view') }}">
-                        <i class="metismenu-icon pe-7s-rocket"></i>
-                        Dashboard
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ URL::to('/admin/master') }}" Style="color:red">
-                        <i class="metismenu-icon pe-7s-bookmarks"></i>
-                        Master
-                    </a>
-                </li>
+ <style>
+     .zoom-on-hover {
+         transition: transform 0.3s ease;
+         /* Add a smooth transition effect */
+     }
 
-                <li>
-                    <a href="{{ URL::to('/admin/submaster') }} "Style="color:red">
-                        <i class="metismenu-icon pe-7s-bookmarks"></i>
-                        Sub Master
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ URL::to('/admin/package') }}">
-                        <i class="metismenu-icon pe-7s-users"></i>
-                        Packages
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ URL::to('/admin/users') }}">
-                        <i class="metismenu-icon pe-7s-users"></i>
-                        Users
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ URL::to('/admin/blog') }}">
-                        <i class="metismenu-icon pe-7s-bookmarks"></i>
-                        Blogs
-                    </a>
-                </li>
-                <!-- <li>
+     .zoom-on-hover:hover {
+         transform: scale(1.05);
+         /* Zoom in slightly on hover */
+     }
+ </style>
+
+ <div class="app-sidebar sidebar-shadow">
+     <div class="app-header__logo">
+         <div class="header__pane ml-auto">
+             <div>
+                 <button type="button" class="hamburger close-sidebar-btn hamburger--elastic" data-class="closed-sidebar">
+                     <span class="hamburger-box">
+                         <span class="hamburger-inner"></span>
+                     </span>
+                 </button>
+             </div>
+         </div>
+     </div>
+     <div class="app-header__mobile-menu">
+         <div>
+             <button type="button" class="hamburger hamburger--elastic mobile-toggle-nav">
+                 <span class="hamburger-box">
+                     <span class="hamburger-inner"></span>
+                 </span>
+             </button>
+         </div>
+     </div>
+     <div class="app-header__menu">
+         <span>
+             <button type="button" class="btn-icon btn-icon-only btn btn-primary btn-sm mobile-toggle-header-nav">
+                 <span class="btn-icon-wrapper">
+                     <i class="fa fa-ellipsis-v fa-w-6"></i>
+                 </span>
+             </button>
+         </span>
+     </div>
+     <div class="scrollbar-sidebar">
+         <div class="app-sidebar__inner">
+             <ul class="vertical-nav-menu">
+
+                 <li class='zoom-on-hover'>
+                     <a href="{{ URL::to('/admin/view') }}">
+                         <i class="metismenu-icon pe-7s-rocket"></i>
+                         Dashboard
+                     </a>
+                 </li>
+                 <li  class='zoom-on-hover'>
+                     <a href="{{ URL::to('/admin/master') }}" Style="color:red">
+                         <i class="metismenu-icon pe-7s-bookmarks"></i>
+                         Master
+                     </a>
+                 </li>
+
+                 <li  class='zoom-on-hover'>
+                     <a href="{{ URL::to('/admin/submaster') }} "Style="color:red">
+                         <i class="metismenu-icon pe-7s-bookmarks"></i>
+                         Sub Master
+                     </a>
+                 </li>
+                 <li  class='zoom-on-hover'>
+                     <a href="{{ URL::to('/admin/package') }}">
+                         <i class="metismenu-icon pe-7s-users"></i>
+                         Packages
+                     </a>
+                 </li>
+                 <li  class='zoom-on-hover'>
+                     <a href="{{ URL::to('/admin/users') }}">
+                         <i class="metismenu-icon pe-7s-users"></i>
+                         Users
+                     </a>
+                 </li>
+                 <li  class='zoom-on-hover'>
+                     <a href="{{ URL::to('/admin/blog') }}">
+                         <i class="metismenu-icon pe-7s-bookmarks"></i>
+                         Blogs
+                     </a>
+                 </li>
+                 <!-- <li  class='zoom-on-hover'>
                     <a href="#">
                         <i class="metismenu-icon pe-7s-menu"></i>
                         Examples
@@ -84,26 +96,26 @@
                     </ul>
                 </li> -->
 
-                <!-- <li>
+                 <!-- <li  class='zoom-on-hover'>
                     <a href="#">
                         <i class="metismenu-icon pe-7s-diamond"></i>
                         Admin Settings
                         <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
                     </a>
                     <ul>
-                        <li>
+                        <li  class='zoom-on-hover'>
                             <a href="{{ URL::to('/admin/roles') }}">
                                 <i class="metismenu-icon"></i>
                                 Roles
                             </a>
                         </li>
-                        <li>
+                        <li  class='zoom-on-hover'>
                             <a href="{{ URL::to('/admin/permissions') }}">
                                 <i class="metismenu-icon"></i>
                                 Permission
                             </a>
                         </li>
-                        <li>
+                        <li  class='zoom-on-hover'>
                             <a href="{{ URL::to('/admin/settings') }}">
                                 <i class="metismenu-icon pe-7s-tools"></i>
                                 Settings
@@ -117,56 +129,59 @@
                     </ul>
                 </li> -->
 
+                 <li  class='zoom-on-hover'>
+                     <a href="{{ URL::to('/admin/testimonial') }}">
+                         <i class="metismenu-icon pe-7s-bookmarks"></i>
+                         Testimonial
+                     </a>
+                 </li>
 
-               
-                <li>
-                    <a href="{{ URL::to('/admin/testimonial') }}">
-                        <i class="metismenu-icon pe-7s-bookmarks"></i>
-                        Testimonial
-                    </a>
-                </li>
+                 <li  class='zoom-on-hover'>
+                     <a href="{{ URL::to('/admin/listing') }}">
+                         <i class="metismenu-icon pe-7s-bookmarks"></i>
+                         All Listing
+                     </a>
+                 </li>
 
-                <li>
-                    <a href="{{ URL::to('/admin/lead') }}">
-                        <i class="metismenu-icon pe-7s-bookmarks"></i>
-                        Leads
-                    </a>
-                </li>
+                 <li  class='zoom-on-hover'>
+                     <a href="{{ URL::to('/admin/lead') }}">
+                         <i class="metismenu-icon pe-7s-bookmarks"></i>
+                         All Leads
+                     </a>
+                 </li>
 
+                 <li  class='zoom-on-hover'>
+                     <a href="{{ URL::to('/admin/career') }}">
+                         <i class="metismenu-icon pe-7s-bookmarks"></i>
+                         Careers
+                     </a>
+                 </li>
+                 <li  class='zoom-on-hover'>
+                     <a href="{{ URL::to('/admin/contact') }}">
+                         <i class="metismenu-icon pe-7s-bookmarks"></i>
+                         Contact
+                     </a>
+                 </li>
 
-                <li>
-                    <a href="{{ URL::to('/admin/career') }}">
-                        <i class="metismenu-icon pe-7s-bookmarks"></i>
-                    Careers
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ URL::to('/admin/contact') }}">
-                        <i class="metismenu-icon pe-7s-bookmarks"></i>
-                    Contact
-                    </a>
-                </li>
+                 <li  class='zoom-on-hover'>
+                     <a href="{{ URL::to('/admin_login/logout') }}">
+                         <i class="metismenu-icon pe-7s-upload"></i>
+                         Logout
+                     </a>
+                 </li>
+             </ul>
+         </div>
+     </div>
+ </div>
 
-
-                <li>
-                    <a href="{{ URL::to('/admin_login/logout') }}">
-                        <i class="metismenu-icon pe-7s-upload"></i>
-                        Logout
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</div>
-
-<!-- /.sidebar -->
-<script type="text/javascript">
-    $(document).ready(function() {
-        $('.app-sidebar__inner ul li').each(function() {
-            if (window.location.href.indexOf($(this).find('a:first').attr('href')) > -1) {
-                $(this).closest('ul').closest('li').attr('class', 'mm-active');
-                $(this).addClass('mm-active').siblings().removeClass('mm-active');
-            }
-        });
-    });
-</script>
+ <!-- /.sidebar -->
+ <script type="text/javascript">
+     $(document).ready(function() {
+         $('.app-sidebar__inner ul li').each(function() {
+             if (window.location.href.indexOf($(this).find('a:first').attr('href')) > -1) {
+                 $(this).closest('ul').closest('li').attr('class', 'mm-active');
+                 $(this).addClass('mm-active').siblings().removeClass('mm-active');
+             }
+         });
+     });
+ </script>
