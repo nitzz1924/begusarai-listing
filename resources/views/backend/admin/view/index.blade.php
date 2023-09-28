@@ -101,7 +101,7 @@
             </div>
         </div>
     </div>
-
+    <div id="donut-chart"></div>
     <div class="widget-heading"><b>All Entries</b></div>
     <div class="d-flex">
         <div class="col-md-6 col-xl-3">
@@ -383,6 +383,44 @@
         </div>
 
     </div>
+    <!-- Add this code to your HTML file -->
+
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/billboard.js/dist/billboard.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/billboard.js/dist/billboard.min.css" />
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Sample data
+            let chartData = [
+                ["Total Listings", {{ count($Result) }}],
+                ["Total Active Plans", {{ $activePlans }}],
+                ["Total Users", {{ $userCount }}],
+                ["Total Leads", {{ count($lead) }}],
+            ];
+            let totalValue = chartData.reduce((sum, dataPoint) => sum + dataPoint[1], 0);
+
+            let chart = bb.generate({
+                data: {
+                    columns: chartData,
+                    type: "donut",
+                    onclick: function(d, i) {
+                        console.log("onclick", d, i);
+                    },
+                    onover: function(d, i) {
+                        console.log("onover", d, i);
+                    },
+                    onout: function(d, i) {
+                        console.log("onout", d, i);
+                    },
+                },
+                donut: {
+                    title: totalValue.toString(), // Set the total value as the title
+                },
+                bindto: "#donut-chart",
+            });
+        });
+    </script>
 
     <script>
         $(document).ready(function() {
