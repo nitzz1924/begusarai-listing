@@ -4902,8 +4902,8 @@ a.place__comments__reply i {
 
 .field-file .preview {
     display: block;
-    width: 151px;
-    height: 151px;
+    width: 600px;
+    height: 300px;
     border: dashed 1px #979797;
     background-color: #f9f9f9;
     margin-bottom: 0;

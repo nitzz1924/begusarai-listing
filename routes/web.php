@@ -26,6 +26,11 @@ Route::get('/blogs', [HomeController::class, 'blogs'])->name('blogs');
 Route::get('/searchCity', [HomeController::class, 'searchCity'])->name('searchCity');
 Route::get('/checkoutPage/{businessid}/{userId}/{planId}', [HomeController::class, 'checkoutPage'])->name('checkoutPage');
 Route::get('/privacyPolicy', [HomeController::class, 'privacyPolicy'])->name('privacyPolicy');
+Route::get('/pageNotFound', [HomeController::class, 'pageNotFound'])->name('pageNotFound');
+Route::get('/termsAndConditions', [HomeController::class, 'termsAndConditions'])->name('termsAndConditions');
+Route::get('/returnsPolicy ', [HomeController::class, 'returnsPolicy'])->name('returnsPolicy');
+
+
 // Business Owner routes - logged in
 Route::get('/ownerDashboard', [HomeController::class, 'ownerDashboard'])->name('ownerDashboard');
 Route::get('/listingDetail/{id}/{category}', [HomeController::class, 'listingDetail'])->name('listingDetail');

@@ -1001,6 +1001,18 @@ if ($businessData || $userData || $planData) {
     {
         return view('frontend.privacyPolicy');
     }
+    public function returnsPolicy()
+    {
+        return view('frontend.returnsPolicy');
+    }
+    public function termsAndConditions()
+    {
+        return view('frontend.termsAndConditions');
+    }
+    public function pageNotFound()
+    {
+        return view('frontend.pageNotFound');
+    }
 
     public function blogs()
     {

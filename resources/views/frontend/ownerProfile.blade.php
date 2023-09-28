@@ -56,7 +56,7 @@
                                 <div class="member-avatar">
                                     @if ($user->image)
                                         <img id="member_avatar" src="{{ URL::to('/uploads/' . $user->image) }}"
-                                            alt="Member Avatar">
+                                            alt="Member Avatar" >
                                     @endif
                                     <label for="image_upload" style="cursor: pointer;">Upload new image</label>
                                     <input id="image_upload" type="file" name="image" style="display: none;">
