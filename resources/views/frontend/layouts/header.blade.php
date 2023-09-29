@@ -42,62 +42,66 @@ $Mastercity = Master::orderBy('created_at', 'asc')
 
                         <div class="popup__content">
                             @guest
-                            <div class="popup__user popup__box open-form">
-                                <a title="Login" href="#" class="open-login">Login</a>
-                            </div><!-- .popup__user -->
+                                <div class="popup__user popup__box open-form">
+                                    <a title="Login" href="#" class="open-login">Login</a>
+                                </div><!-- .popup__user -->
                             @else
-                            <div class="popup__menu popup__box">
-                                <ul class="sub-menu">
-                                    <?php $user = User_Login::find(auth()->user()->id); ?>
-                        
-                                    @if (Auth::user()->type == 'Guest')
-                                    <li>
-                                        <a class="avatar" href="">
-                                            @if ($user->image)
-                                            <img src="{{ URL::to('/uploads/' . $user->image) }}" title="" alt="">
-                                            @else
-                                            <img src="https://wp.getgolo.com/country-guide/wp-content/themes/golo/assets/images/default-user-image.png" title="guest" alt="guest">
-                                            @endif
-                                            <span>{{ $user->name }}</span>
-                                        </a>
-                                        <ul class="sub-menu">
-                                            <li class=""><a href="/ownerProfile">Profile</a></li>
-                                            <li class=""><a href="/ownerWishlist">My Wishlist</a></li>
+                                <div class="popup__menu popup__box">
+                                    <ul class="sub-menu">
+                                        <?php $user = User_Login::find(auth()->user()->id); ?>
+
+                                        @if (Auth::user()->type == 'Guest')
                                             <li>
-                                                <a href="/logout">
-                                                    <span>Logout</span>
+                                                <a class="avatar" href="">
+                                                    @if ($user->image)
+                                                        <img src="{{ URL::to('/uploads/' . $user->image) }}" title=""
+                                                            alt="">
+                                                    @else
+                                                        <img src="https://wp.getgolo.com/country-guide/wp-content/themes/golo/assets/images/default-user-image.png"
+                                                            title="guest" alt="guest">
+                                                    @endif
+                                                    <span>{{ $user->name }}</span>
                                                 </a>
+                                                <ul class="sub-menu">
+                                                    <li class=""><a href="/ownerProfile">Profile</a></li>
+                                                    <li class=""><a href="/ownerWishlist">My Wishlist</a></li>
+                                                    <li>
+                                                        <a href="/logout">
+                                                            <span>Logout</span>
+                                                        </a>
+                                                    </li>
+                                                </ul>
                                             </li>
-                                        </ul>
-                                    </li>
-                                    @elseif (Auth::user()->type == 'Owner')
-                                    <li>
-                                        <a class="avatar" href="">
-                                            @if ($user->image)
-                                            <img src="{{ URL::to('/uploads/' . $user->image) }}" title="" alt="">
-                                            @else
-                                            <img src="{{ asset('assets/images/users/default.png') }}" title="Default Avatar" alt="Default Avatar">
-                                            @endif
-                                            <span>{{ $user->name }}</span>
-                                        </a>
-                                        <ul class="sub-menu">
-                                            <li class=""><a href="/ownerDashboard">Dashboard</a></li>
-                                            <li class=""><a href="/ownerListing">My Places</a></li>
-                                            <li class=""><a href="/ownerWishlist">My Wishlist</a></li>
-                                            {{-- <li class=""><a href="/businessOwnerPage">Author Listing</a></li> --}}
+                                        @elseif (Auth::user()->type == 'Owner')
                                             <li>
-                                                <hr class="dropdown-divider">
-                                            </li>
-                                            <li>
-                                                <a href="/logout">
-                                                    <span>Logout</span>
+                                                <a class="avatar" href="">
+                                                    @if ($user->image)
+                                                        <img src="{{ URL::to('/uploads/' . $user->image) }}" title=""
+                                                            alt="">
+                                                    @else
+                                                        <img src="{{ asset('assets/images/users/default.png') }}"
+                                                            title="Default Avatar" alt="Default Avatar">
+                                                    @endif
+                                                    <span>{{ $user->name }}</span>
                                                 </a>
+                                                <ul class="sub-menu">
+                                                    <li class=""><a href="/ownerDashboard">Dashboard</a></li>
+                                                    <li class=""><a href="/ownerListing">My Places</a></li>
+                                                    <li class=""><a href="/ownerWishlist">My Wishlist</a></li>
+                                                    {{-- <li class=""><a href="/businessOwnerPage">Author Listing</a></li> --}}
+                                                    <li>
+                                                        <hr class="dropdown-divider">
+                                                    </li>
+                                                    <li>
+                                                        <a href="/logout">
+                                                            <span>Logout</span>
+                                                        </a>
+                                                    </li>
+                                                </ul>
                                             </li>
-                                        </ul>
-                                    </li>
-                                    @endif
-                                </ul>
-                            </div><!-- .popup__menu -->
+                                        @endif
+                                    </ul>
+                                </div><!-- .popup__menu -->
                             @endguest
                             {{-- Navigation tabs --}}
                             <div class="popup__menu popup__box">
@@ -116,43 +120,40 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                                     </li>
                                 </ul>
                             </div><!-- .popup__menu -->
-                        
+
                             <div class="popup__destinations popup__box">
                                 <ul class="menu-arrow">
                                     <li>
                                         <a title="Destinations" href="#">Destinations </a>
                                         <ul class="sub-menu">
                                             @foreach ($Mastercity as $value)
-                                            <li>
-                                                <a href="{{ route('searchFilter', ['category' => 'all', 'city' => $value->title, 'highlight' => 'all']) }}">
-                                                    {{ $value->title }}
-                                                </a>
-                                            </li>
+                                                <li>
+                                                    <a
+                                                        href="{{ route('searchFilter', ['category' => 'all', 'city' => $value->title, 'highlight' => 'all']) }}">
+                                                        {{ $value->title }}
+                                                    </a>
+                                                </li>
                                             @endforeach
                                         </ul>
                                     </li>
                                 </ul>
                             </div>
                             @auth
-                            @if (Auth::user()->type == 'Owner')
-                            <div class="popup__button popup__box">
-                                <a title="Add place" href="/addPlace" class="btn">
-                                    <i class="la la-plus"></i>
-                                    <span>Add place</span>
-                                </a>
-                            </div><!-- .popup__button -->
-                            @endif
+                                @if (Auth::user()->type == 'Owner')
+                                    <div class="popup__button popup__box">
+                                        <a title="Add place" href="/addPlace" class="btn">
+                                            <i class="la la-plus"></i>
+                                            <span>Add place</span>
+                                        </a>
+                                    </div><!-- .popup__button -->
+                                @endif
                             @endauth
                         </div><!-- .popup__content -->
-                        
-                        
-
 
                     </div><!-- .popup -->
                 </div><!-- .site__menu -->
 
                 {{-- desktop navigation --}}
-
 
                 <!-- .site -->
             </div>
@@ -343,7 +344,6 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                                         </div>
                                     </div>
                                 </div>
-                                 
 
                                 <!-- Phone number and OTP input fields -->
                                 <div class="">
@@ -352,7 +352,6 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                                             <input type="tel" placeholder="Phone Number" value=""
                                                 id="mobileNumber" name="mobileNumber" pattern="[0-9]{10}"
                                                 maxlength="10" minlength="10" required />
-                                            
 
                                         </div>
 
@@ -369,7 +368,7 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                                             required readonly />
                                         <input type="hidden" id="generatedOTP" placeholder="OTP" value=""
                                             name="generatedOTP" />
-                                        
+
                                     </div>
 
                                 </div>
@@ -385,17 +384,15 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                                         <span class="checkmark">
                                             <i class="la la-check"></i>
                                         </span>
-                                        
+
                                     </label>
 
                                 </div>
 
                                 <input type="submit" name="submit" value="Verify" />
                             </form>
-
-                            
-
-                            <form action="{{ route('loginForm') }}" method="POST" class="form-log form-content"
+<!-- Without Validation Error Form -->
+                            <!-- <form action="{{ route('loginForm') }}" method="POST" class="form-log form-content"
                                 id="login">
                                 @csrf
                                 <div class="field-input">
@@ -412,8 +409,29 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                                 <a title="Forgot password" class="forgot_pass" href="/resetPassword">Forgot
                                     password</a>
                                 <input type="submit" name="submit" value="Login" id="loginSubmit" />
-                            </form>
+                            </form> -->
+<!-- display error message in login Form  -->
+                          
 
+
+                            <form action="{{ route('loginForm') }}" method="POST" class="form-log form-content"
+                                id="login">
+                                @csrf
+                                <span> <div id="error-message" style="color: red; text-align: center; margin-top: 10px;"></div></span>
+                                <div class="field-input">
+                                    <input type="tel" placeholder="Enter Phone Number" value=""
+                                        name="mobileNumber" pattern="[0-9]{10}" minlength="10" maxlength="10"
+                                        id="mobileNumber" required />
+                                </div>
+                                <div class="field-input">
+                                    <input type="password" placeholder="Password" value="" name="password"
+                                        id="password" required />
+                                </div>
+                                <a title="Forgot password" class="forgot_pass" href="/resetPassword">Forgot
+                                    password</a>
+                                <input type="submit" name="submit" value="Login" id="loginSubmit" />
+                            </form>
+                            
                         </div>
                     </div>
 
@@ -517,4 +535,28 @@ $Mastercity = Master::orderBy('created_at', 'asc')
     });
 </script>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#login').on('submit', function(e) {
+            e.preventDefault();
+
+            $.ajax({
+                type: 'POST',
+                url: $(this).attr('action'),
+                data: $(this).serialize(),
+                success: function(response) {
+                    if (response.success) {
+                        window.location.href = response.redirect;
+                    } else {
+                        $('#error-message').text(response.message);
+                    }
+                },
+                error: function(xhr, textStatus, errorThrown) {
+                    console.error(xhr.responseText);
+                }
+            });
+        });
+    });
+</script>
 {{-- -----------------------------------------------Login form ------------------------------------------ --}}

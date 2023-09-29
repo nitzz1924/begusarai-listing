@@ -18,11 +18,15 @@
                     </ul>
                 </div>
             @endif
-
-            <form action="{{ route('SubmitPassword') }}" method="POST" class="member-profile form-underline">
+            <div class="alert alert-success">
+                @if (session('success'))
+                    <div style="color:green">
+                        {{ session('success') }}
+                    </div>
+                @endif
+            </div>
+            <form action="{{ route('submitResetPassword') }}" method="POST" class="member-profile form-underline">
                 @csrf
-                <h3>Set Your New Password</h3>
-                <input type="hidden" name="mobileNumber" placeholder="" value="{{ $User_id }}" id="mobileNumber">
 
                 <div class="field-inline align-items-center">
                     <div class="field-input-number">
@@ -32,20 +36,27 @@
                     </div>
 
                     <div>
-                        <button type="button" name="submit-otp" value="Send OTP" class="OTP-btn" style="width: 100px;" id="sendOTPButton" >Send OTP</button>
+                        <button type="button" name="submit-otp" value="Send OTP" class="OTP-btn send-otp-button"
+                            style="width: 100px;" id="sendOTPButton">Send OTP</button>
                     </div>
                 </div>
 
-
                 <div class="field-input">
-                    <label for="new_password">New password</label>
-                    <input type="password" name="new_password" placeholder="Enter new password" id="new_password" required>
+                    <input type="tel" id="RverificationCode" placeholder="OTP" value="" name="RverificationCode"
+                        pattern="[0-9]{6}" maxlength="6" minlength="6" required />
+                    <input type="hidden" id="RgeneratedOTP" placeholder="OTP" value="" name="RgeneratedOTP" />
                 </div>
 
                 <div class="field-input">
-                    <label for="re_new">Re-enter new password</label>
+                    <label for="new_password">New password</label>
+                    <input type="password" name="new_password" placeholder="Enter new password" id="new_password" required
+                        autocomplete="new-password">
+                </div>
+
+                <div class="field-input">
+                    <label for="new_password_confirmation">Re-enter new password</label>
                     <input type="password" name="new_password_confirmation" placeholder="Re-enter new password" required
-                        id="re_new">
+                        id="new_password_confirmation" autocomplete="new-password">
                 </div>
 
                 <div class="field-submit">
@@ -53,11 +64,38 @@
                 </div>
             </form>
 
-
         </div><!-- .member-wrap -->
     </div>
 
-    </main><!-- .site-main -->
-
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelector('.send-otp-button').addEventListener('click', function(event) {
+                event.preventDefault();
+                var randomOTP = Math.floor(100000 + Math.random() * 900000);
+                document.getElementById('RverificationCode').value =
+                    randomOTP; // Set the OTP in the RverificationCode input
+                document.getElementById('RgeneratedOTP').value =
+                    randomOTP; // Set the same OTP in the hidden generatedOTP input
+                document.getElementById('RverificationCode').removeAttribute(
+                    'readonly'); // Enable the input field
+                console.log('Generated OTP:', randomOTP);
+            });
+        });
+    </script>
+    <!-- <script>
+        $(document).ready(function() {
+            $('.send-otp-button').on('click', function(event) {
+                event.preventDefault();
+                var randomOTP = Math.floor(100000 + Math.random() * 900000);
+                $('#verificationCode').removeAttr('readonly');
+                document.getElementById('verificationCode').value = randomOTP;
+                $('#generatedOTP').val(randomOTP); // Set the same OTP in the hidden generatedOTP input
+                $('#verificationCode').val(randomOTP); // Set the OTP in the verificationCode input
+                // Enable the input field
+                console.log('Generated OTP:', randomOTP);
+            });
+        });
+    </script> -->
 
 @endsection

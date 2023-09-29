@@ -21,7 +21,8 @@ use App\Models\Career;
 use App\Models\Contact;
 use App\Models\Review;
 use App\Models\Package;
-use Carbon\Carbon;use Razorpay\Api\Api;
+use Carbon\Carbon;
+use Razorpay\Api\Api;
 use DB;
 
 use View;
@@ -35,24 +36,41 @@ class HomeController extends Controller
         return view('auth.login');
     }
 
+    // public function loginForm(Request $request)
+    // {
+    //     $request->validate([
+    //         'mobileNumber' => 'required|numeric|digits:10',
+    //         'password' => 'required',
+    //     ]);
+
+    //     $credentials = $request->only('mobileNumber', 'password');
+
+    //     if (Auth::guard('user')->attempt($credentials)) {
+    //         // Authentication passed
+    //         return redirect()->intended('/'); // Redirect to the dashboard or any other page after login
+    //     }
+
+    //     // If authentication fails, you can optionally add a message here
+    //     return back()->withErrors(['password' => 'Invalid credentials']);
+    // }
+
     public function loginForm(Request $request)
-    {
-        $request->validate([
-            'mobileNumber' => 'required|numeric|digits:10',
-            'password' => 'required',
-        ]);
+{
+    $request->validate([
+        'mobileNumber' => 'required|numeric|digits:10',
+        'password' => 'required',
+    ]);
 
-        $credentials = $request->only('mobileNumber', 'password');
+    $credentials = $request->only('mobileNumber', 'password');
 
-        if (Auth::guard('user')->attempt($credentials)) {
-            // Authentication passed
-            return redirect()->intended('/'); // Redirect to the dashboard or any other page after login
-        }
-
-        // If authentication fails, you can optionally add a message here
-        return back()->withErrors(['password' => 'Invalid credentials']);
+    if (Auth::guard('user')->attempt($credentials)) {
+        // Authentication passed
+        return response()->json(['success' => true, 'redirect' => '/']);
     }
 
+    // If authentication fails, return an error message
+    return response()->json(['success' => false, 'message' => " Oops!  Try again with the right info"]);
+}
     public function logout()
     {
         Auth::guard('user')->logout();
@@ -179,23 +197,27 @@ class HomeController extends Controller
         $submaster = Master::orderBy('created_at', 'asc')
             ->where('type', '=', 'category')
             ->get();
-        $categoryCount;    
-        foreach($submaster as $list){
-            $count = BusinessList::where('category', '=', $list->title)->where('status', '=', '1')->count();
+        $categoryCount;
+        foreach ($submaster as $list) {
+            $count = BusinessList::where('category', '=', $list->title)
+                ->where('status', '=', '1')
+                ->count();
             $categoryCount[$list->title] = $count;
         }
         $Mastercity = Master::orderBy('created_at', 'asc')
             ->where('type', '=', 'City')
             ->get();
-            $cityCount;    
-            foreach($Mastercity as $list){
-                $count = BusinessList::where('city', '=', $list->title)->where('status', '=', '1')->count();
-                $cityCount[$list->title] = $count;
-            }
+        $cityCount;
+        foreach ($Mastercity as $list) {
+            $count = BusinessList::where('city', '=', $list->title)
+                ->where('status', '=', '1')
+                ->count();
+            $cityCount[$list->title] = $count;
+        }
         $popup = Master::orderBy('created_at', 'asc')
             ->where('type', '=', 'Homepage_popup')
             ->first();
-        return View::make('frontend.index', compact('submaster', 'businesses', 'Mastercity', 'TestimonialData', 'blog', 'Result', 'popup', 'businessesCount','categoryCount','cityCount'));
+        return View::make('frontend.index', compact('submaster', 'businesses', 'Mastercity', 'TestimonialData', 'blog', 'Result', 'popup', 'businessesCount', 'categoryCount', 'cityCount'));
     }
 
     // public function toggleBookmark(Request $request, $businessId)
@@ -589,8 +611,8 @@ class HomeController extends Controller
     public function packages($id)
     {
         $user = auth()->user();
-        $userId=$user?$user->id:0;
-        $businessId=$id;
+        $userId = $user ? $user->id : 0;
+        $businessId = $id;
         $ranking = Package::orderBy('created_at', 'asc')
             ->where('type', '=', 'Ranking')
             ->get();
@@ -599,22 +621,24 @@ class HomeController extends Controller
             ->orWhere('type', '!=', 'Ranking')
             ->get();
 
-        return view('frontend.packages', compact('packages', 'ranking','businessId','userId'));
+        return view('frontend.packages', compact('packages', 'ranking', 'businessId', 'userId'));
     }
-    
+
     public function category($id)
     {
         $user = auth()->user();
-        $userId=$user?$user->id:0;
-        $businessId=$id;
+        $userId = $user ? $user->id : 0;
+        $businessId = $id;
         $ranking = Package::orderBy('created_at', 'asc')
             ->where('type', '=', 'Ranking')
             ->get();
         $packages = Package::orderBy('created_at', 'desc')
             ->orWhere('type', '!=', 'Ranking')
             ->get();
-            $businesses = BusinessList::where('id', $id)->where('status', '=', '1')->first();
-        return view('frontend.category', compact('packages', 'ranking','businessId','userId','businesses', 'id'));
+        $businesses = BusinessList::where('id', $id)
+            ->where('status', '=', '1')
+            ->first();
+        return view('frontend.category', compact('packages', 'ranking', 'businessId', 'userId', 'businesses', 'id'));
     }
 
     public function setPassword(Request $request)
@@ -755,44 +779,48 @@ class HomeController extends Controller
     public function ownerDashboard()
     {
         $user = auth()->user();
-        $countReview=0;
-        $countReviewlist=[];
-        $countLeadlist=[];
-        $countLead=0;
-        $countView=0;
-        $businesses = BusinessList::where('userId', $user->id)->where('status', '=', '1')->get(); // Fetch all businesses from the database
-        foreach($businesses as $list){ 
+        $countReview = 0;
+        $countReviewlist = [];
+        $countLeadlist = [];
+        $countLead = 0;
+        $countView = 0;
+        $businesses = BusinessList::where('userId', $user->id)
+            ->where('status', '=', '1')
+            ->get(); // Fetch all businesses from the database
+        foreach ($businesses as $list) {
             $currentDate = now()->format('Y-m-d');
-            $listR=[];
-            $listL=[];
+            $listR = [];
+            $listL = [];
             $listR = DB::table('reviews')
-            ->select('reviews.*', 'users_login.image')
-            ->leftJoin('users_login', 'reviews.user_id', '=', 'users_login.id')
-            ->orderBy('reviews.created_at', 'desc')
-            ->where('listing_id',$list->id)
-            ->whereDate('reviews.created_at', $currentDate)
-            ->get();
+                ->select('reviews.*', 'users_login.image')
+                ->leftJoin('users_login', 'reviews.user_id', '=', 'users_login.id')
+                ->orderBy('reviews.created_at', 'desc')
+                ->where('listing_id', $list->id)
+                ->whereDate('reviews.created_at', $currentDate)
+                ->get();
             $arrayListR = json_decode(json_encode($listR), true);
             $countReviewlist = array_merge($countReviewlist, $arrayListR);
 
-
             $listL = DB::table('lead')
-            ->select('lead.*', 'users_login.image')
-            ->leftJoin('users_login', 'lead.user_id', '=', 'users_login.id')
-            ->orderBy('lead.created_at', 'desc')
-            ->where('business_id',$list->id)
-            ->where('lead.status','1')
-            ->whereDate('lead.created_at', $currentDate)
-            ->get();
+                ->select('lead.*', 'users_login.image')
+                ->leftJoin('users_login', 'lead.user_id', '=', 'users_login.id')
+                ->orderBy('lead.created_at', 'desc')
+                ->where('business_id', $list->id)
+                ->where('lead.status', '1')
+                ->whereDate('lead.created_at', $currentDate)
+                ->get();
 
             $arrayListL = json_decode(json_encode($listL), true);
             $countLeadlist = array_merge($countLeadlist, $arrayListL);
-            $countReview =$countReview + review::where('listing_id', '=', $list->id)->count();
-            $countLead =$countLead +Lead::where('status', '=', '1')->where('business_id', '=', $list->id)->count();
-            $countView =$countView +Lead::where('business_id', '=', $list->id)->count();
-
+            $countReview = $countReview + review::where('listing_id', '=', $list->id)->count();
+            $countLead =
+                $countLead +
+                Lead::where('status', '=', '1')
+                    ->where('business_id', '=', $list->id)
+                    ->count();
+            $countView = $countView + Lead::where('business_id', '=', $list->id)->count();
         }
-     
+
         //dd($countReviewlist);
         $ActivePlaces = BusinessList::where('status', '=', '1')
             ->where('userId', $user->id)
@@ -811,9 +839,11 @@ class HomeController extends Controller
             ->where('business_id', '=', $user->id)
             ->where('status', '=', '1')
             ->get();
-        $ActivePlaces = BusinessList::where('userId', $user->id)->where('status', '=', '1')->count();
+        $ActivePlaces = BusinessList::where('userId', $user->id)
+            ->where('status', '=', '1')
+            ->count();
 
-        return view('frontend.ownerDashboard', compact('ActivePlaces', 'countLead', 'countReview', 'countLeadlist', 'businesses','countView','countReviewlist'));
+        return view('frontend.ownerDashboard', compact('ActivePlaces', 'countLead', 'countReview', 'countLeadlist', 'businesses', 'countView', 'countReviewlist'));
     }
 
     public function ownerWishlist()
@@ -940,32 +970,31 @@ class HomeController extends Controller
     {
         return view('frontend.businessOwnerPage');
     }
-    public function checkoutPage($businessId,$userid,$planId)
+    public function checkoutPage($businessId, $userid, $planId)
     {
-        $planidv=$planId;
-       $businessData = BusinessList::where('id', $businessId)->first();
-$userData = User_login::where('id', $userid)->first();
-$planData = Package::where('id', $planId)->first();
+        $planidv = $planId;
+        $businessData = BusinessList::where('id', $businessId)->first();
+        $userData = User_login::where('id', $userid)->first();
+        $planData = Package::where('id', $planId)->first();
 
-if ($businessData || $userData || $planData) {
-        $api = new Api(env('RAZORPAY_KEY_ID'), env('RAZORPAY_KEY_SECRET'));
-        // Create a Razorpay order
-        $order = $api->order->create([
-        'amount' => ($planData->price)!=null?($planData->price)*100:0,
-        'currency' => 'INR',
-        'receipt' => 'order_rcptid_'.$businessId,
-        'notes' => [
-            'plan_number' => $planId,
-            'businessId' => $businessId,
-            'userId'=>$userid,
-        ],
-        ]); 
-        $orderId=$order->id;
-        return view('frontend.checkoutPage',compact('businessData','userData','planData','planidv','orderId'));
-}else{
-    return view('frontend.index');
-}
-        
+        if ($businessData || $userData || $planData) {
+            $api = new Api(env('RAZORPAY_KEY_ID'), env('RAZORPAY_KEY_SECRET'));
+            // Create a Razorpay order
+            $order = $api->order->create([
+                'amount' => $planData->price != null ? $planData->price * 100 : 0,
+                'currency' => 'INR',
+                'receipt' => 'order_rcptid_' . $businessId,
+                'notes' => [
+                    'plan_number' => $planId,
+                    'businessId' => $businessId,
+                    'userId' => $userid,
+                ],
+            ]);
+            $orderId = $order->id;
+            return view('frontend.checkoutPage', compact('businessData', 'userData', 'planData', 'planidv', 'orderId'));
+        } else {
+            return view('frontend.index');
+        }
     }
     public function career()
     {
@@ -1023,36 +1052,36 @@ if ($businessData || $userData || $planData) {
 
     public function searchFilter(Request $request, $category, $city, $highlight)
     {
-      
         if ($city == 'all' && $highlight == 'all' && $category != 'all') {
             $similer = BusinessList::where('category', $category)
-            ->where('status', '1')
-            ->orderBy('category_ranking', 'asc')
-            ->paginate(10);
+                ->where('status', '1')
+                ->orderBy('category_ranking', 'asc')
+                ->paginate(10);
         }
-        
+
         if ($city != 'all' && $highlight == 'all' && $category == 'all') {
             $similer = BusinessList::where('city', $city)
-            ->where('status', '1')
+                ->where('status', '1')
                 ->orderBy('city_ranking', 'asc')
                 ->paginate(10);
         }
-        
+
         if ($city == 'all' && $highlight == 'all' && $category == 'all') {
-            $similer = BusinessList::where('status', '1')->orderBy('created_at', 'desc')->paginate(10);
+            $similer = BusinessList::where('status', '1')
+                ->orderBy('created_at', 'desc')
+                ->paginate(10);
         }
-        
-      
+
         $submasterCategory = Master::orderBy('created_at', 'asc')
             ->where('type', '=', 'category')
             ->get();
-        
+
         $submasterHighlight = Master::orderBy('created_at', 'asc')
             ->where('type', '=', 'highlight')
             ->get();
-        
+
         $Result = [];
-        
+
         foreach ($similer as $value) {
             $reviews = DB::table('reviews')
                 ->select('reviews.*', 'users_login.image')
@@ -1060,38 +1089,36 @@ if ($businessData || $userData || $planData) {
                 ->orderBy('reviews.created_at', 'desc')
                 ->where('listing_id', $value->id)
                 ->get();
-            
+
             $totalRating = 0;
             $totalReviews = count($reviews);
-            
+
             foreach ($reviews as $review) {
                 $totalRating += $review->rating;
             }
-            
+
             if ($totalReviews > 0) {
                 $averageRating = $totalRating / $totalReviews;
                 $averageRating = number_format($averageRating, 1); // Display average rating with 1 decimal place
             } else {
                 $averageRating = 0; // No reviews available
             }
-            
+
             // Merge the average rating into the business data
             $value->rating = $averageRating;
             $value->count = count($reviews);
             $Result[] = $value;
             // Debugging statements
-        // dd($subvalue->title, $value->category, $subvalue->value);
+            // dd($subvalue->title, $value->category, $subvalue->value);
         }
 
-
         $submaster = Master::orderBy('created_at', 'asc')
-        ->where('type', '=', 'city')
-        ->get();
-    
-        // Return the view with the paginated $businesses
-        return view('frontend.searchFilter', compact('Result', 'submaster', 'submasterCategory', 'submasterHighlight','similer'));
-    }
+            ->where('type', '=', 'city')
+            ->get();
 
+        // Return the view with the paginated $businesses
+        return view('frontend.searchFilter', compact('Result', 'submaster', 'submasterCategory', 'submasterHighlight', 'similer'));
+    }
 
     // public function User()
     // {
@@ -1237,20 +1264,63 @@ if ($businessData || $userData || $planData) {
             ->back()
             ->with('success', 'Review submitted successfully.');
     }
+    public function Faq()
+    {
+        $faqs = Master::orderBy('created_at', 'asc')
+            ->where('type', '=', 'FAQ')
+            ->get();
+
+        return view('frontend.faq', compact('faqs'));
+    }
 
     public function resetPassword(Request $request)
     {
-        $User_id = $request->user;
-
-        return view('frontend.resetPassword', compact('User_id'));
+        return view('frontend.resetPassword');
     }
-    public function Faq()
+    public function showResetPasswordForm(Request $request)
     {
+        return view('frontend.resetPassword');
+    }
 
-        $faqs = Master::orderBy('created_at', 'asc')
-        ->where('type', '=', 'FAQ')
-        ->get();
+    public function submitResetPasswordForm(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'phone_number' => 'required|digits:10',
+            'RverificationCode' => 'required|digits:6',
+            'new_password' => 'required|confirmed|min:6',
+        ]);
 
-        return view('frontend.faq', compact('faqs') );
+        if ($validator->fails()) {
+            return redirect()
+                ->route('resetPassword')
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $user = User_Login::where('mobileNumber', $request->input('phone_number'))->first();
+
+        if (!$user) {
+            return redirect()
+                ->route('resetPassword')
+                ->withErrors(['phone_number' => 'This number is not registered, Please sign up first!'])
+                ->withInput();
+        }
+
+        $generatedOTP = $request->input('RgeneratedOTP');
+        $verificationCode = $request->input('RverificationCode');
+
+        if ($generatedOTP != $verificationCode) {
+            return redirect()
+                ->route('resetPassword')
+                ->withErrors(['RverificationCode' => 'The OTP is invalid.'])
+                ->withInput();
+        }
+
+        $user->password = bcrypt($request->input('new_password'));
+        $user->save();
+
+        return redirect()
+            ->route('resetPassword')
+            ->with('success', 'Password reset successfully.');
     }
 }
