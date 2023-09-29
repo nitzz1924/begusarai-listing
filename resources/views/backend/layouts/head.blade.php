@@ -46,3 +46,6 @@
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 <link rel="stylesheet" type="text/css"
     href="{{ asset('/assets/frontend-assets/libs/line-awesome/css/line-awesome.min.css') }}" />
+    <link rel="stylesheet" type="text/css"
+    href="{{ asset('/assets/frontend-assets/libs/fontawesome-pro/css/fontawesome.css') }}" />
+<script src="https://kit.fontawesome.com/40bf30a2ca.js" crossorigin="anonymous"></script>

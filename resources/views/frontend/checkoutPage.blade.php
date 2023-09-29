@@ -3,7 +3,9 @@
 @section('content')
 
     <main id="main" class="site-main">
-        <div class="page-title page-title--small align-left" style="background-image: url(images/bg/bg-checkout.png);">
+           
+         
+        <div class="page-title page-title--small align-left" style="background-image: url({{ asset('assets/images/bg-checkout.png') }});">
             <div class="container">
                 <div class="page-title__content">
                     <h1 class="page-title__name">Payment</h1>

@@ -198,10 +198,10 @@
                             <thead class="table-dark">
                                 <tr>
                                     <th class="text-center">#</th>
-                                    <th class="text-center">Business Name</th>
+                                    <th class="text-center">B. Name</th>
                                     <th class="text-center">Email</th>
-                                    <th class="text-center">Phone Number</th>
-                                    <th class="text-center">Category</th>
+                                    <th class="text-center">PH Number</th>
+                               
                                     <th class="text-center">City</th>
                                     <th class="text-center">Status</th>
                                     <th class="text-center">View</th>
@@ -235,7 +235,7 @@
                                         </td>
                                         <td class="text-center">{{ $value->email }}</td>
                                         <td class="text-center">{{ $value->phoneNumber1 }}</td>
-                                        <td class="text-center">{{ $value->category }}</td>
+                                     
                                         <td class="text-center">{{ $value->city }}</td>
                                         <td data-title="Payment" class="text-center">
                                             @if ($value->status == 0)
