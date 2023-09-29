@@ -21,6 +21,8 @@ use App\Models\Career;
 use App\Models\Contact;
 use App\Models\Review;
 use App\Models\Package;
+use App\Models\BuyPlan;
+
 use Carbon\Carbon;
 use Razorpay\Api\Api;
 use DB;
@@ -55,22 +57,22 @@ class HomeController extends Controller
     // }
 
     public function loginForm(Request $request)
-{
-    $request->validate([
-        'mobileNumber' => 'required|numeric|digits:10',
-        'password' => 'required',
-    ]);
+    {
+        $request->validate([
+            'mobileNumber' => 'required|numeric|digits:10',
+            'password' => 'required',
+        ]);
 
-    $credentials = $request->only('mobileNumber', 'password');
+        $credentials = $request->only('mobileNumber', 'password');
 
-    if (Auth::guard('user')->attempt($credentials)) {
-        // Authentication passed
-        return response()->json(['success' => true, 'redirect' => '/']);
+        if (Auth::guard('user')->attempt($credentials)) {
+            // Authentication passed
+            return response()->json(['success' => true, 'redirect' => '/']);
+        }
+
+        // If authentication fails, return an error message
+        return response()->json(['success' => false, 'message' => ' Oops!  Try again with the right info']);
     }
-
-    // If authentication fails, return an error message
-    return response()->json(['success' => false, 'message' => " Oops!  Try again with the right info"]);
-}
     public function logout()
     {
         Auth::guard('user')->logout();
@@ -217,6 +219,41 @@ class HomeController extends Controller
         $popup = Master::orderBy('created_at', 'asc')
             ->where('type', '=', 'Homepage_popup')
             ->first();
+
+        // Update expair plans --------------------------------------------------------------------------------------------------------------------------------
+        $currentDate = now();
+        $expairPlanData = BuyPlan::whereDate('expair_at', '=', $currentDate->toDateString())->get();
+        foreach ($expairPlanData as $expairPlanItem) {
+            $plan = Package::orderBy('created_at', 'asc')
+                ->where('id', '=', $expairPlanItem['planId'])
+                ->first();
+            $resource = BusinessList::find($expairPlanItem['businessId']);
+            if (!$resource) {
+                // Handle the case where the resource is not found
+                return response()->json(['message' => 'Resource not found'], 404);
+            }
+            if ($plan->type == 'BUSINESS LISTING') {
+                $resource->status = '0';
+                $resource->planStatus = '0';
+            } elseif ($plan->type == 'FEATURED LISTING') {
+                $resource->featured_ranking = 11;
+            } elseif ($plan->type == 'Ranking') {
+                if ($plan->featuredType == 'city_listing') {
+                    $resource->city_ranking = 11;
+                }
+                if ($plan->featuredType == 'home_featured') {
+                    $resource->home_featured = 11;
+                }
+                if ($plan->featuredType == 'category_listing') {
+                    $resource->category_ranking = 11;
+                }
+                if ($plan->featuredType == 'search_results') {
+                    $resource->search_results = 11;
+                }
+            }
+            $resource->save();
+        }
+
         return View::make('frontend.index', compact('submaster', 'businesses', 'Mastercity', 'TestimonialData', 'blog', 'Result', 'popup', 'businessesCount', 'categoryCount', 'cityCount'));
     }
 

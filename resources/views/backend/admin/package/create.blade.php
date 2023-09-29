@@ -64,10 +64,10 @@
                     </div>
                     <div class="form-group col-md-6">
                         <label for="durationMY">Duration Type:</label>
-                        <select id="durationMY" name="durationMY" class="form-control custom-select" required>
-                            <option value="" selected>Select</option>
-                            <option value="0" {{ old('durationMY') == '0' ? 'selected' : '' }}>months</option>
-                            <option value="1" {{ old('durationMY') == '1' ? 'selected' : '' }}>years</option>
+                        <select  id="durationMY" name="durationMY" class="form-control custom-select" required>
+                            <option  value="" selected>Select</option>
+                            <option  value="0" {{ old('durationMY') == '0' ? 'selected' : '' }}>months</option>
+                          
                         </select>
                         @error('durationMY')
                             <div class="text-danger">{{ $message }}</div>

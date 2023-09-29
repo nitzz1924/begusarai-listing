@@ -43,15 +43,14 @@ class RazorpayController extends Controller
     }
     public function paymentresult(Request $request)
     {
-        $currentDate = Carbon::now();
-        $nextMonth = $currentDate->addMonth(1);
-        $formattedDate = $nextMonth->toDateTimeString();
-        $data = $request->all();
-        $id = $data['bId'];
         $plan = Package::orderBy('created_at', 'asc')
             ->where('id', '=', $data['pId'])
             ->first();
-
+        $currentDate = Carbon::now();
+        $nextMonth = $currentDate->addMonth($plan->duration);
+        $formattedDate = $nextMonth->toDateTimeString();
+        $data = $request->all();
+        $id = $data['bId'];
         $resource = BusinessList::find($id);
         if (!$resource) {
             // Handle the case where the resource is not found
