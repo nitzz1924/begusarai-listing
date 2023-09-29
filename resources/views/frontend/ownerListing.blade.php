@@ -9,6 +9,56 @@ $Mastercity = Master::orderBy('created_at', 'asc')
 @extends('frontend.layouts.master')
 @section('title', 'My Listings')
 @section('content')
+    <style>
+        /* Custom styles for the delete modal */
+        .modal-content {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            animation: fadeInUp 0.3s ease;
+        }
+
+        .modal-header {
+            background-color: #dc3545;
+            color: #fff;
+            border-bottom: none;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+        }
+
+        .modal-body {
+            padding: 20px;
+        }
+
+        .modal-footer {
+            border-top: none;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+            border-color: #dc3545;
+        }
+
+        .btn-danger:hover {
+            background-color: #c82333;
+            border-color: #bd2130;
+        }
+
+        /* Animation keyframes */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
 
     <main id="main" class="site-main">
 
@@ -147,8 +197,6 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                                             @endif
                                         </td>
 
-
-
                                         <td data-title="Action" class="place-action d-flex action-btn">
                                             <a href="{{ route('editPlace', ['id' => $business->id]) }}" class="edit"
                                                 title="Edit">
@@ -157,15 +205,60 @@ $Mastercity = Master::orderBy('created_at', 'asc')
 
                                             <a href="{{ route('listingDetail', ['id' => $business->id, 'category' => $business->category]) }}"
                                                 class="view" title="View"><i class="la la-eye"></i></a>
+
                                             {{-- <a href="{{ route('ownerLeads', ['id' => $business->id]) }}" class="list"
                                                 style="display: {{ $business->status == 0 ? 'none' : 'block' }}"
                                                 title="list"><i class="la la-list"></i></a> --}}
 
-                                            <a href='#' class="delete" title="Delete"><i
-                                                    class="la la-trash-alt"></i></a>
+                                            <!-- <a href='#' class="delete" title="Delete"><i
+                                                                                class="la la-trash-alt"></i></a> -->
+
+                                            <!-- <form method="POST" action="{{ route('delete', ['id' => $business->id]) }}"
+                                                        method="POST"id="deleteForm">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <a type="button" onclick="confirmDelete(this)" data-toggle="modal">
+                                                            <i class="la la-trash-alt"></i>
+                                                        </a>
+                                                    </form> -->
+                                            <form method="POST" action="{{ route('delete', ['id' => $business->id]) }}"
+                                                id="deleteForm">
+                                                @csrf
+                                                @method('DELETE')
+                                                <a type="button" class=" " data-toggle="modal"
+                                                    data-target="#deleteModal">
+                                                    <i class="la la-trash-alt"></i>
+                                                </a>
+                                            </form>
+
                                         </td>
                                     </tr>
                                 @endforeach
+                                <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog"
+                                    aria-labelledby="deleteModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="deleteModalLabel" style="color:white">Confirm
+                                                    Deletion</h5>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                Are you sure you want to delete this item?
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-dismiss="modal">Cancel</button>
+                                                <button type="submit" form="deleteForm"
+                                                    class="btn btn-danger">Delete</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </tbody>
                         </table>
                     </div>
@@ -176,6 +269,27 @@ $Mastercity = Master::orderBy('created_at', 'asc')
     </main>
     {{--  ---------------------------------------Filter By City And Category  -------------------------------------- --}}
 
+    <!-- <script>
+        function confirmDelete(button) {
+            if (confirm("Are you sure you want to delete this item?")) {
+                var form = button.parentElement; // Get the parent element of the button, which is the form
+                form.submit();
+            } else {
+                alert("Delete operation cancelled.");
+            }
+        }
+    </script> -->
+    <script>
+        $(document).ready(function() {
+            $('#deleteModal').on('show.bs.modal', function() {
+                $(this).css('transition', 'none'); // Disable transition on modal show
+            });
+
+            $('#deleteModal').on('shown.bs.modal', function() {
+                $(this).css('transition', '0.3s'); // Enable transition on modal shown
+            });
+        });
+    </script>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             // Get references to the select elements, search input, and table rows

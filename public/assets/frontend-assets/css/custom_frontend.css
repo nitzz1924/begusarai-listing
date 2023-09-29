@@ -154,7 +154,7 @@ input[type="number"] {
     display: inline-block;
     text-align: center;
     padding: 10px 0;
-    width: 320px;
+    width: 100%;
     /* visibility: hidden; */
 }
 .pagination nav .flex {

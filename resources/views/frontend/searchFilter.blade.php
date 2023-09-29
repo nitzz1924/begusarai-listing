@@ -132,7 +132,7 @@
 
                                     @foreach ($Result as $value)
                                     @if ($value->status == 1)
-                                        <div class="col-md-3">
+                                        <div class="col-md-3 mb-3">
                                             <div class="place-item layout-02 place-hover">
                                                 <div class="place-inner">
                                                     <div class="place-thumb hover-img">
@@ -239,38 +239,18 @@
                             </div>
                         </div>
                     </div><!-- .similar-places -->
-
-                    <div class="container">
-
-                        <div class="row justify-content-center " style="display: grid;">
-                            <div class="">
-                                <div class="col-xl-6 col-sm-3  d-flex mt-5 pagination">
-                                    {{-- {{ $value->links() }} --}}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+ 
 
                     <div class="container">
                         <div class="row justify-content-center " style="display: grid;">
-                            <div class="">
-                                <div class="col-xl-6 col-sm-3  d-flex mt-5 pagination">
+                                <div class="col-md-12 d-flex mt-5 pagination">
                                     {{ $similer->links() }}
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    {{-- <div class="pagination my-3">
-                        <div class="pagination__numbers">
-                            <span>1</span>
-                            <a title="2" href="#">2</a>
-                            <a title="3" href="#">3</a>
-                            <a title="Next" href="#">
-                                <i class="la la-angle-right"></i>
-                            </a>
-                        </div>
-                    </div> --}}
+                
                 </div><!-- .main-primary -->
             </div><!-- .col-left -->
 

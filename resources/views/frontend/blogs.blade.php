@@ -51,20 +51,14 @@
                 <div class="container">
                     <div class="row justify-content-center " style="display: grid;">
                         <div class="">
-                            <div class="col-xl-6 col-sm-3  d-flex mt-5 pagination">
+                            <div class="col-md-12 d-flex mt-5 pagination">
                                 {{ $blog->links() }}
                             </div>
                         </div>
                     </div>
                 </div>
 
-                {{-- <div class="pagination">
-                    <div class="pagination__numbers">
-                        <div class="pagination">
-                            {{ $blog->links() }}
-                        </div>
-                    </div>
-                </div><!-- .pagination --> --}}
+               
 
             </div>
         </div>

@@ -45,8 +45,9 @@
                                         </iframe>
                                     </div>
                                 </div>
+                                <hr>
                                 <!-- .entry-desc -->
-                                <div class="entry-author">
+                                <!-- <div class="entry-author">
                                     <img src="https://wp.getgolo.com/country-guide/wp-content/themes/golo/assets/images/default-user-image.png" alt="Bangkok">
                                     <div class="author-info">
                                         <div class="author-title">
@@ -79,7 +80,7 @@
                                                 drinking coffee in the middle of night.</p>
                                         </div>
                                     </div>
-                                </div><!-- .entry-author -->
+                                </div>  -->
                             </div><!-- .entry-content -->
                             {{-- <div class="related-post">
                             <h2>Related Articles</h2>

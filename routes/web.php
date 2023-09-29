@@ -30,7 +30,6 @@ Route::get('/pageNotFound', [HomeController::class, 'pageNotFound'])->name('page
 Route::get('/termsAndConditions', [HomeController::class, 'termsAndConditions'])->name('termsAndConditions');
 Route::get('/returnsPolicy ', [HomeController::class, 'returnsPolicy'])->name('returnsPolicy');
 
-
 // Business Owner routes - logged in
 Route::get('/ownerDashboard', [HomeController::class, 'ownerDashboard'])->name('ownerDashboard');
 Route::get('/listingDetail/{id}/{category}', [HomeController::class, 'listingDetail'])->name('listingDetail');
@@ -119,6 +118,10 @@ Route::middleware(['auth'])->group(function () {
 Route::post('/add-business', 'HomeController@store')->name('business.store');
 Route::get('/ownerListing', [HomeController::class, 'ownerListing'])->name('ownerListing');
 
+ 
+Route::delete('/business/delete/{id}', 'Frontend\HomeController@delete')->name('delete');
+
+
 Route::get('/addPlace', [HomeController::class, 'addPlace'])->name('addPlace');
 Route::post('/addPlace/savePlace', [HomeController::class, 'savePlace'])->name('savePlace');
 
@@ -126,10 +129,8 @@ Route::get('/editPlace/{id}', [HomeController::class, 'editPlace'])->name('editP
 
 Route::put('/editPlace/updatePlace/{id}', [HomeController::class, 'updatePlace'])->name('updatePlace');
 
-
 // Route::get('/testimonial', [HomeController::class, 'Testimonial'])->name('Testimonial');
 // Route::post('/testimonial', [HomeController::class, 'testimonialStore'])->name('testimonialStore');
-
 
 Route::get('/testimonial', [HomeController::class, 'Testimonial'])->name('testimonial');
 Route::post('/testimonial', [HomeController::class, 'testimonialStore'])->name('testimonialStore');
@@ -141,8 +142,7 @@ Route::post('/lead', [HomeController::class, 'LeadStore'])->name('LeadStore');
 Route::get('/career', [HomeController::class, 'career'])->name('career');
 Route::post('/career', [HomeController::class, 'careerStore'])->name('careerStore');
 
-
-//bookmark route 
+//bookmark route
 Route::post('/bookmark/{businessId}', [HomeController::class, 'toggleBookmark'])->name('bookmark.toggle');
 Route::get('/searchFilter/{category}/{city}/{highlight}', [HomeController::class, 'searchFilter'])->name('searchFilter');
 Route::get('/update-places', [HomeController::class, 'updatePlaces'])->name('updatePlaces');
@@ -159,10 +159,10 @@ Route::get('/packages/{id}', [HomeController::class, 'packages'])->name('package
 Route::get('/category/{id}', [HomeController::class, 'category'])->name('category');
 Route::get('/faq', [HomeController::class, 'Faq'])->name('Faq');
 
- // Example route definition 
+// Example route definition
 
 // Route::get('/resetPassword', [HomeController::class, 'showResetPasswordForm'])->name('resetPassword');
 // Route::get('/resetPassword', [HomeController::class, 'submitResetPasswordForm'])->name('submitResetPassword');
 
- Route::get('/resetPassword', [HomeController::class, 'showResetPasswordForm'])->name('resetPassword');
+Route::get('/resetPassword', [HomeController::class, 'showResetPasswordForm'])->name('resetPassword');
 Route::post('/submitResetPassword', [HomeController::class, 'submitResetPasswordForm'])->name('submitResetPassword');

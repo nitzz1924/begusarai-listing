@@ -27,7 +27,7 @@
 
                         <div class="row">
                         @foreach ($Result as $value)
-                            <div class="col-md-6 col-lg-3">
+                            <div class="col-md-6 col-lg-3 mb-3" >
                                 <div class="place-item layout-02 place-hover">
                                     <div class="place-inner">
                                         <div class="place-thumb hover-img">

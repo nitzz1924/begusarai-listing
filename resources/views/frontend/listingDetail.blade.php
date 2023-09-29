@@ -539,10 +539,10 @@
             <div class="container">
                 <h2 class="similar-places__title title">Similar places</h2>
                 <div class="similar-places__content">
-                    <div class="row">
+                    <div class="row" >
                         @foreach ($Result as $value)
                         @if ($value->status == 1)
-                            <div class="col-md-3">
+                            <div class="col-md-3  mb-3">
                                 <div class="place-item layout-02 place-hover">
                                     <div class="place-inner">
                                         <div class="place-thumb hover-img">

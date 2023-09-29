@@ -229,29 +229,28 @@ class HomeController extends Controller
                 ->first();
             $resource = BusinessList::find($expairPlanItem['businessId']);
             if (!$resource) {
-                // Handle the case where the resource is not found
-                return response()->json(['message' => 'Resource not found'], 404);
+            } else {
+                if ($plan->type == 'BUSINESS LISTING') {
+                    $resource->status = '0';
+                    $resource->planStatus = '0';
+                } elseif ($plan->type == 'FEATURED LISTING') {
+                    $resource->featured_ranking = 11;
+                } elseif ($plan->type == 'Ranking') {
+                    if ($plan->featuredType == 'city_listing') {
+                        $resource->city_ranking = 11;
+                    }
+                    if ($plan->featuredType == 'home_featured') {
+                        $resource->home_featured = 11;
+                    }
+                    if ($plan->featuredType == 'category_listing') {
+                        $resource->category_ranking = 11;
+                    }
+                    if ($plan->featuredType == 'search_results') {
+                        $resource->search_results = 11;
+                    }
+                }
+                $resource->save();
             }
-            if ($plan->type == 'BUSINESS LISTING') {
-                $resource->status = '0';
-                $resource->planStatus = '0';
-            } elseif ($plan->type == 'FEATURED LISTING') {
-                $resource->featured_ranking = 11;
-            } elseif ($plan->type == 'Ranking') {
-                if ($plan->featuredType == 'city_listing') {
-                    $resource->city_ranking = 11;
-                }
-                if ($plan->featuredType == 'home_featured') {
-                    $resource->home_featured = 11;
-                }
-                if ($plan->featuredType == 'category_listing') {
-                    $resource->category_ranking = 11;
-                }
-                if ($plan->featuredType == 'search_results') {
-                    $resource->search_results = 11;
-                }
-            }
-            $resource->save();
         }
 
         return View::make('frontend.index', compact('submaster', 'businesses', 'Mastercity', 'TestimonialData', 'blog', 'Result', 'popup', 'businessesCount', 'categoryCount', 'cityCount'));
@@ -517,6 +516,30 @@ class HomeController extends Controller
                 ->with('error', 'Error: ' . $e->getMessage());
         }
     }
+
+    public function delete($id)
+    {
+        try {
+            // Find the existing business by ID
+            $business = BusinessList::findOrFail($id);
+
+            // Delete the business record from the database
+            $business->delete();
+
+            // Optionally, you can delete associated files (cover image, gallery images, etc.) here
+
+            // Redirect back on success
+            return redirect()
+                ->route('ownerListing')
+                ->with('success', 'Business deleted successfully');
+        } catch (\Exception $e) {
+            // Handle errors and display an error message
+            return redirect()
+                ->route('ownerListing')
+                ->with('error', 'Error: ' . $e->getMessage());
+        }
+    }
+
     public function savePlace(Request $request)
     {
         $rules = [
@@ -747,7 +770,7 @@ class HomeController extends Controller
         $businesses = BusinessList::orderBy('created_at', 'desc')->get();
 
         $similer = BusinessList::where('category', $category)
-            ->orderBy('created_at', 'desc')
+            ->orderBy('created_at', 'desc')->take(4)
             ->get();
 
         $Result = [];
