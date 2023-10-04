@@ -26,7 +26,7 @@ use App\Models\BuyPlan;
 use Carbon\Carbon;
 use Razorpay\Api\Api;
 use DB;
-
+use Log;
 use View;
 
 class HomeController extends Controller
@@ -388,7 +388,7 @@ class HomeController extends Controller
     }
     public function updatePlace(Request $request, $id)
     {
-        // dd($id);
+        
         // Validation rules (same as savePlace)
         $rules = [
             'category' => 'required',
@@ -415,6 +415,8 @@ class HomeController extends Controller
             'youtube' => 'nullable', // Changed to validate as a URL
             'video' => 'nullable',
             'documentImage' => 'required|mimes:pdf', // Validate PDF
+            'dType' => 'nullable', // dType field
+            'dNumber' => 'nullable', // CIN field
         ];
 
         foreach (['coverImage', 'logo'] as $fileField) {
@@ -461,6 +463,8 @@ class HomeController extends Controller
             $business->businessName = $request->input('businessName');
             $business->youtube = $request->input('youtube');
             $business->video = $request->input('video');
+            $business->dType  = $request->input('dType'); // Update dType field
+            $business->dNumber  = $request->input('dNumber'); // Update CIN field
 
             // Handle file uploads (same as savePlace)
             $allowedExtensions = ['jpg', 'jpeg', 'png', 'svg', 'webp', 'pdf'];
@@ -591,6 +595,8 @@ class HomeController extends Controller
 
     public function savePlace(Request $request)
     {
+        //  dd($request->all()); 
+        //  dd($request->input('cin'));
         $rules = [
             'category' => 'required',
             'placeType' => 'required',
@@ -616,6 +622,8 @@ class HomeController extends Controller
             'youtube' => 'nullable', // Changed to validate as a URL
             'video' => 'nullable',
             'documentImage' => 'required|mimes:pdf', // Validate PDF
+            'dType' => 'nullable|string|max:255', // Adjust the validation rules as needed
+            'dNumber' => 'nullable|string|max:255',
         ];
 
         foreach (['coverImage', 'logo'] as $fileField) {
@@ -661,7 +669,9 @@ class HomeController extends Controller
             $business->businessName = $request->input('businessName');
             $business->youtube = $request->input('youtube');
             $business->video = $request->input('video');
-
+            $business->dType = $request->input('dType');
+            $business->dNumber = $request->input('dNumber');
+ 
             $allowedExtensions = ['jpg', 'jpeg', 'png', 'svg', 'webp', 'pdf'];
             $destinationPath = public_path('uploads');
 
@@ -696,8 +706,7 @@ class HomeController extends Controller
 
                 // Store the file paths in the database as a JSON array
                 $business->galleryImage = json_encode($filePaths);
-            }
-
+            } 
             // Save the model to the database
             $business->save();
 

@@ -170,7 +170,8 @@
                     <div class="field-group">
                         <label for="ownerName">Owner Name</label>
                         <input type="text" placeholder="Owner Name" id="ownerName" name="ownerName"
-                            class="form-control" value="{{ isset($business) ? $business->ownerName : old('ownerName') }}">
+                            class="form-control"
+                            value="{{ isset($business) ? $business->ownerName : old('ownerName') }}">
                         @error('ownerName')
                             <div class="has-error mt-2">{{ $message }}</div>
                         @enderror
@@ -335,6 +336,40 @@
                         <div class="field-note">Maximum file size: 1 MB.</div>
                     </div>
                     <!-- Document Images -->
+
+                    <div>
+                        <label for="selectField">Select an option:</label>
+                        <select id="dType" name="dType" onchange="showTextBox()" class="mb-3">
+                            <option value="none">Select an option</option>
+                            <option value="gst" @if ($business->dType === 'gst') selected @endif>GST (optional)
+                            </option>
+                            <option value="cin" @if ($business->dType === 'cin') selected @endif>CIN (optional)
+                            </option>
+                        </select>
+
+                        <div id="textBoxContainer" style="display: <?php $business->dNumber != ''?'block':'none'?>"  class="mb-3">
+                            <label for="textBox">Enter the details:</label>
+                            <input type="text" id="dNumber" value="{{ isset($business) ? $business->dNumber : old('dNumber') }}" name="dNumber" placeholder="Enter GST or CIN">
+                        </div>
+                    </div>
+
+                    <!-- <div>
+                             
+                            <select id="selectField" name="selectField" onchange="showTextBox()" class="mb-3">
+                                <option value="none">Select an option</option>
+                                <option value="gst" name="gst" @if ($business->gst === 'gst') selected @endif>GST
+                                    (optional)</option>
+                                <option value="cin" name="cin" @if ($business->selectField === 'cin') selected @endif>CIN
+                                    (optional)</option>
+                            </select>
+
+                            <div id="textBoxContainer" style="display: none;" class="mb-3">
+                                <label for="textBox">Enter the details:</label>
+                                <input type="text" id="textBox" name="textBoxValue" value="{{ $business->textBoxValue }}">
+                            </div>
+                        </div>
+     -->
+
                     <div class="field-group field-file">
                         <label for="documentImage">Document Images(Upload PDF)</label>
                         <label for="documentImage" class="preview">
@@ -429,10 +464,31 @@
             }
         });
     </script>
+
     <script>
+        showTextBox();
         document.getElementById('changeFileBtn').addEventListener('click', function() {
             document.getElementById('documentImage').click();
         });
+    </script>
+
+    <script>
+        function showTextBox() {
+            console.log('open Extra Filed')
+            var selectField = document.getElementById("dType");
+            var textBoxContainer = document.getElementById("textBoxContainer");
+
+            if (selectField.value === "gst") {
+
+                textBoxContainer.style.display = "block";
+            } else if (selectField.value === "cin") {
+
+                textBoxContainer.style.display = "block";
+            } else {
+
+                textBoxContainer.style.display = "none";
+            }
+        }
     </script>
 
 @endsection

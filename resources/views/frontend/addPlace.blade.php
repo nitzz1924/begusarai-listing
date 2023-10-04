@@ -146,7 +146,7 @@
 
                 <div id="contact" class="listing-box">
                     <h3>Contact Info</h3>
-                      <div class="field-group">
+                    <div class="field-group">
                         <label for="ownerName">Owner Name</label>
                         <input type="text" placeholder="Owner Name" id="ownerName" name="ownerName"
                             class="form-control ">
@@ -312,8 +312,23 @@
                         @enderror
                         <div class="field-note">Maximum file size: 1 MB.</div>
                     </div>
+
+                    <div>
+                        <label for="selectField">Select an option:</label>
+                        <select id="dType" name="dType" onchange="showTextBox()" class="mb-3">
+                            <option value="none">Select an option</option>
+                            <option value="gst">GST (optional)</option>
+                            <option value="cin">CIN (optional)</option>
+                        </select>
+
+                        <div id="textBoxContainer" style="display: none;" class="mb-3">
+                            <label for="textBox">Enter the details:</label>
+                            <input type="text" id="dNumber" name="dNumber" placeholder="Enter GST or CIN">
+                        </div>
+                    </div>
+
                     <div class="field-group field-file">
-                        <label for="documentImage">Business Ownership Proof  (Upload PDF)</label>
+                        <label for="documentImage">Business Ownership Proof (Upload PDF)</label>
                         <label for="documentImage" class="preview">
                             <input type="file" name="documentImage" id="documentImage" class="upload-file"
                                 accept=".pdf">
@@ -330,6 +345,7 @@
                         <input type="url" placeholder="Your video URL" name="video" id="video">
 
                     </div>
+
                 </div>
                 <div class="field-group field-submit">
                     <input type="submit" name="submit" value="Submit" class="btn" id="upload-btn">
@@ -338,6 +354,25 @@
 
         </div><!-- .listing-content -->
     </main><!-- .site-main -->
+
+    <script>
+        function showTextBox() {
+            console.log('open Extra Filed')
+            var selectField = document.getElementById("dType");
+            var textBoxContainer = document.getElementById("textBoxContainer");
+
+            if (selectField.value === "gst") {
+                
+                textBoxContainer.style.display = "block";
+            } else if (selectField.value === "cin") {
+                
+                textBoxContainer.style.display = "block";
+            } else {
+                
+                textBoxContainer.style.display = "none";
+            }
+        }
+    </script>
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
