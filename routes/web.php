@@ -29,6 +29,7 @@ Route::get('/privacyPolicy', [HomeController::class, 'privacyPolicy'])->name('pr
 Route::get('/pageNotFound', [HomeController::class, 'pageNotFound'])->name('pageNotFound');
 Route::get('/termsAndConditions', [HomeController::class, 'termsAndConditions'])->name('termsAndConditions');
 Route::get('/returnsPolicy ', [HomeController::class, 'returnsPolicy'])->name('returnsPolicy');
+Route::get('/allCategories ', [HomeController::class, 'allCategories'])->name('allCategories');
 
 // Business Owner routes - logged in
 Route::get('/ownerDashboard', [HomeController::class, 'ownerDashboard'])->name('ownerDashboard');

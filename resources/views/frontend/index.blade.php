@@ -166,8 +166,8 @@
                             @endforeach
 
                             <!-- Display the "See More" button after the first 11 categories -->
-                            <div class="bsn-cat-item rosy-pink see-more">
-                                <a href="">
+                            <div class="bsn-cat-item green p-0">
+                                <a href="/allCategories" class="see-more">
                                     <span class="title">See More</span>
                                 </a>
                             </div>
@@ -182,17 +182,18 @@
                         {{-- <h2 class="title title-border-bottom align-center offset-item">
                             Featured
                         </h2> --}}
-                
+
                         <div id="sliderAutoplaying" class="carousel slide" data-bs-ride="carousel">
                             <div class="carousel-inner">
                                 <div class="carousel-item active" data-bs-interval="3000">
                                     <div class="embed-responsive embed-responsive-16by9">
-                                        <video class="embed-responsive-item elVideo" loop="loop" autoplay playsinline muted
+                                        <video class="embed-responsive-item elVideo" loop="loop" autoplay playsinline
+                                            muted
                                             src="https://video.wixstatic.com/video/2b2e29_67857aa3bb16417ea7909ddc8d01b6e0/720p/mp4/file.mp4"
                                             id="video-slider-1"></video>
                                     </div>
                                 </div>
-                
+
                                 <div class="carousel-item" data-bs-interval="3000">
                                     <div class="embed-responsive embed-responsive-16by9">
                                         <iframe class="embed-responsive-item"
@@ -202,7 +203,8 @@
                                 </div>
                                 <div class="carousel-item" data-bs-interval="3000">
                                     <div class="embed-responsive embed-responsive-16by9">
-                                        <video class="embed-responsive-item elVideo" loop="loop" autoplay playsinline muted
+                                        <video class="embed-responsive-item elVideo" loop="loop" autoplay playsinline
+                                            muted
                                             src="https://video.wixstatic.com/video/2b2e29_67857aa3bb16417ea7909ddc8d01b6e0/720p/mp4/file.mp4"
                                             id="video-slider-2"></video>
                                     </div>
@@ -211,7 +213,7 @@
                         </div>
                     </div>
                 </div>
-                
+
 
 
 

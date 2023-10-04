@@ -447,7 +447,7 @@ body.modal-open .custom-overlay {
 
 .grid-container {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(6, 1fr);
     grid-gap: 10px;
     padding: 10px;
 }
@@ -462,16 +462,49 @@ body.modal-open .custom-overlay {
 }
 
 .see-more {
-    
-    /* align-content: center;
-    text-align: center;
-    display: grid; */
+    display: grid !important;
+    align-content: center;
+    padding: 0 !important;
 }
 
 /* CSS for Desktop View */
 @media (max-width: 767px) {
     .desktop-view {
         display: none;
+    }
+
+    .business-category {
+        padding: 0 0 !important;
+    }
+    .grid-container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-gap: 10px;
+        padding: 10px;
+    }
+    .bsn-cat-item span.place {
+        display: none;
+    }
+
+    .page-title--small {
+        /* margin-bottom: 20 !important; */
+        height: 70px !important;
+    }
+
+    .page-title--small .page-title__content h1 {
+        font-size: 30px !important;
+        text-align: center !important;
+    }
+    .page-title--small .page-title__content p {
+        text-align: center !important;
+    }
+    
+    .site-header {
+        padding: 10px 0 !important;
+        position: -webkit-sticky !important;
+        position: sticky !important;
+        top: 0 !important;
+        z-index: 1020 !important;
     }
 }
 
@@ -480,6 +513,7 @@ body.modal-open .custom-overlay {
     .mobile-view {
         display: none;
     }
+    
 }
 
 
@@ -507,8 +541,9 @@ body.modal-open .custom-overlay {
 
     height: 70px;
 
-    box-shadow: 0 -2px 5px -2px #333;
+    /* box-shadow: 0 -2px 5px -2px #23D3D3; */
     background-color: #fff;
+    border-top: 1px solid #23D3D3;
 }
 
 .mobile-bottom-nav__item {
@@ -529,4 +564,5 @@ body.modal-open .custom-overlay {
 .mobile-bottom-nav__item-content {
     display: flex;
     flex-direction: column;
+    font-weight: 600;
 }

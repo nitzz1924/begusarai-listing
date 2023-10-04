@@ -472,7 +472,7 @@ $Mastercity = Master::orderBy('created_at', 'asc')
             <div class="mobile-bottom-nav__item mobile-bottom-nav__item--active">
                 <a href="/">
                     <div class="mobile-bottom-nav__item-content">
-                        <i class="fa-solid fa-house"></i>
+                        <i class="fa-solid fa-house fs-4 pb-1" style="color: #C6E2E9"></i>
                         HOME
                     </div>
                 </a>
@@ -481,7 +481,7 @@ $Mastercity = Master::orderBy('created_at', 'asc')
             <div class="mobile-bottom-nav__item">
                 <a href="">
                     <div class="mobile-bottom-nav__item-content">
-                        <i class="fa-solid fa-briefcase"></i>
+                        <i class="fa-solid fa-briefcase fs-4 pb-1" style="color: #FEC868"></i>
                         JOB
                     </div>
                 </a>
@@ -490,7 +490,7 @@ $Mastercity = Master::orderBy('created_at', 'asc')
             <div class="mobile-bottom-nav__item">
                 <a href="/blogs">
                     <div class="mobile-bottom-nav__item-content">
-                        <i class="fa-solid fa-square-rss"></i>
+                        <i class="fa-solid fa-square-rss fs-4 pb-1" style="color: #FFCAAF"></i>
                         BLOG
                     </div>
                 </a>
@@ -499,7 +499,7 @@ $Mastercity = Master::orderBy('created_at', 'asc')
             <div class="mobile-bottom-nav__item">
                 <a href="">
                     <div class="mobile-bottom-nav__item-content">
-                        <i class="fa-solid fa-newspaper"></i>
+                        <i class="fa-solid fa-newspaper fs-4 pb-1" style="color: #DAB894"></i>
                         NEWS
                     </div>
                 </a>
@@ -508,7 +508,7 @@ $Mastercity = Master::orderBy('created_at', 'asc')
             <div class="mobile-bottom-nav__item">
                 <a href="">
                     <div class="mobile-bottom-nav__item-content">
-                        <i class="fa-solid fa-square-poll-horizontal"></i>
+                        <i class="fa-solid fa-square-poll-horizontal fs-4 pb-1" style="color: #A7BED3"></i>
                         OPINION
                     </div>
                 </a>
