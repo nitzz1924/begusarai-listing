@@ -10076,7 +10076,7 @@ a.place__comments__reply i {
 .bsn-cat-item a {
     width: 150px;
     height: 150px;
-    border-radius: 50%;
+    border-radius: 10px;
     -webkit-backface-visibility: hidden;
     -moz-backface-visibility: hidden;
     -webkit-transform: translate3d(0, 0, 0);
@@ -10145,7 +10145,7 @@ a.place__comments__reply i {
 }
 
 .business-category {
-    padding: 60px 0;
+    padding: 30px 0;
     position: relative;
     z-index: 2;
     background-color: #fff;

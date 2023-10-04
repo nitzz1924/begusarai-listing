@@ -58,7 +58,7 @@
                                 </div>
                                 <!-- .site-banner__search__input -->
                                 <div class="field-submit">
-                                <button disable><i class="las la-search la-24-black"></i></button>
+                                    <button disable><i class="las la-search la-24-black"></i></button>
                                 </div>
                             </form>
                             <!-- .site-banner__search -->
@@ -97,7 +97,9 @@
                     @endif
                 </div>
 
-                <div class="business-category">
+
+                {{-- Desktop categories --}}
+                <div class="business-category desktop-view">
                     <div class="container">
                         <h2 class="title title-border-bottom align-center offset-item">
                             Browse Businesses by Category
@@ -107,21 +109,19 @@
 
                             <div class="slick-slider business-cat-slider slider-pd30" data-item="6" data-arrows="true"
                                 data-itemScroll="6" data-dots="true" data-centerPadding="50" data-tabletitem="3"
-                                data-tabletscroll="3" data-smallpcitem="4" data-smallpcscroll="4" data-mobileitem="2"
+                                data-tabletscroll="3" data-smallpcitem="4" data-smallpcscroll="4" data-mobileitem="3"
                                 data-mobilescroll="2" data-mobilearrows="false">
 
                                 @foreach ($submaster as $value)
                                     <div class="bsn-cat-item rosy-pink">
-                                        <a href="{{ route('searchFilter', ['category' => $value->title, 'city' => 'all', 'highlight' => 'all']) }}">
+                                        <a
+                                            href="{{ route('searchFilter', ['category' => $value->title, 'city' => 'all', 'highlight' => 'all']) }}">
                                             <i class="{{ $value->value }}"></i>
                                             <span class="title">{{ $value->title }}</span>
-                                            <span class="place">{{ $categoryCount[$value->title]}}</span>
+                                            <span class="place">{{ $categoryCount[$value->title] }}</span>
                                         </a>
                                     </div>
                                 @endforeach
-
-
-                                
 
                             </div>
                             <div class="place-slider__nav slick-nav">
@@ -136,8 +136,85 @@
                             </div>
                             <!-- .place-slider__nav -->
                         </div>
+
+
+
                     </div>
                 </div>
+
+                {{-- Mobile categories --}}
+
+                <div class="business-category mobile-view">
+                    <div class="container">
+                        <h2 class="title title-border-bottom align-center offset-item">
+                            Browse Businesses by Category
+                        </h2>
+
+                        <div class="grid-container">
+                            @foreach ($submaster as $index => $value)
+                                @if ($index < 11)
+                                    <!-- Display the first 11 category items -->
+                                    <div class="bsn-cat-item rosy-pink">
+                                        <a
+                                            href="{{ route('searchFilter', ['category' => $value->title, 'city' => 'all', 'highlight' => 'all']) }}">
+                                            <i class="{{ $value->value }}"></i>
+                                            <span class="title">{{ $value->title }}</span>
+                                            {{-- <span class="place">{{ $categoryCount[$value->title] }}</span> --}}
+                                        </a>
+                                    </div>
+                                @endif
+                            @endforeach
+
+                            <!-- Display the "See More" button after the first 11 categories -->
+                            <div class="bsn-cat-item rosy-pink see-more">
+                                <a href="">
+                                    <span class="title">See More</span>
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                {{-- Featured Slider container --}}
+                <div class="slider-container">
+                    <div class="container">
+                        {{-- <h2 class="title title-border-bottom align-center offset-item">
+                            Featured
+                        </h2> --}}
+                
+                        <div id="sliderAutoplaying" class="carousel slide" data-bs-ride="carousel">
+                            <div class="carousel-inner">
+                                <div class="carousel-item active" data-bs-interval="3000">
+                                    <div class="embed-responsive embed-responsive-16by9">
+                                        <video class="embed-responsive-item elVideo" loop="loop" autoplay playsinline muted
+                                            src="https://video.wixstatic.com/video/2b2e29_67857aa3bb16417ea7909ddc8d01b6e0/720p/mp4/file.mp4"
+                                            id="video-slider-1"></video>
+                                    </div>
+                                </div>
+                
+                                <div class="carousel-item" data-bs-interval="3000">
+                                    <div class="embed-responsive embed-responsive-16by9">
+                                        <iframe class="embed-responsive-item"
+                                            src="https://www.youtube.com/embed/YOUR_VIDEO_ID" frameborder="0"
+                                            allowfullscreen></iframe>
+                                    </div>
+                                </div>
+                                <div class="carousel-item" data-bs-interval="3000">
+                                    <div class="embed-responsive embed-responsive-16by9">
+                                        <video class="embed-responsive-item elVideo" loop="loop" autoplay playsinline muted
+                                            src="https://video.wixstatic.com/video/2b2e29_67857aa3bb16417ea7909ddc8d01b6e0/720p/mp4/file.mp4"
+                                            id="video-slider-2"></video>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+
+
+
                 <!-- .business-category -->
                 <div class="trending trending-business">
                     <div class="container">
@@ -217,7 +294,8 @@
                                                 </div>
                                                 <div class="entry-detail">
                                                     <h3 class="place-title">
-                                                        <a href="{{ URL::to('listingDetail/' . $value->id . '/' . $value->category) }}">{{ $value->businessName }}</a>
+                                                        <a
+                                                            href="{{ URL::to('listingDetail/' . $value->id . '/' . $value->category) }}">{{ $value->businessName }}</a>
                                                     </h3>
 
                                                     <div class="entry-head">
@@ -227,7 +305,8 @@
                                                         </div>
 
                                                         <div class="place-city">
-                                                            <a href="{{ route('searchFilter', ['category' => 'all', 'city' => $value->city, 'highlight' => 'all']) }}">{{ $value->city }}</a>
+                                                            <a
+                                                                href="{{ route('searchFilter', ['category' => 'all', 'city' => $value->city, 'highlight' => 'all']) }}">{{ $value->city }}</a>
                                                         </div>
                                                     </div>
 
@@ -285,15 +364,16 @@
                                     <div class="slick-item">
                                         <div class="cities__item hover__box">
                                             <div class="cities__thumb hover__box__thumb">
-                                                <a href="{{ route('searchFilter', ['category' => 'all', 'city' => $value->title, 'highlight' => 'all']) }}">
+                                                <a
+                                                    href="{{ route('searchFilter', ['category' => 'all', 'city' => $value->title, 'highlight' => 'all']) }}">
                                                     <img src="{{ URL::to('uploads/' . $value->logo) }}" alt="London" />
                                                 </a>
                                             </div>
                                             <h4 class="cities__name"></h4>
                                             <div class="cities__info">
                                                 <h3 class="cities__capital">{{ $value->title }}</h3>
-                                                <p class="cities__number">{{ $cityCount[$value->title]}} places</p>
-                               
+                                                <p class="cities__number">{{ $cityCount[$value->title] }} places</p>
+
                                             </div>
                                         </div>
                                         <!-- .cities__item -->

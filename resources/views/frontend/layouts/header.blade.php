@@ -171,7 +171,7 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                                 <a title="Packages" href="/packages/0">Pricing </a>
                             </li>
                             <li>
-                                <a title="Packages" href="/category/0">Ranking </a>
+                                <a title="Ranking" href="/category/0">Ranking </a>
                             </li>
                             <li>
                                 <a title="Destinations" href="#">Destinations</a>
@@ -391,7 +391,7 @@ $Mastercity = Master::orderBy('created_at', 'asc')
 
                                 <input type="submit" name="submit" value="Verify" />
                             </form>
-<!-- Without Validation Error Form -->
+                            <!-- Without Validation Error Form -->
                             <!-- <form action="{{ route('loginForm') }}" method="POST" class="form-log form-content"
                                 id="login">
                                 @csrf
@@ -410,14 +410,17 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                                     password</a>
                                 <input type="submit" name="submit" value="Login" id="loginSubmit" />
                             </form> -->
-<!-- display error message in login Form  -->
-                          
+                            <!-- display error message in login Form  -->
+
 
 
                             <form action="{{ route('loginForm') }}" method="POST" class="form-log form-content"
                                 id="login">
                                 @csrf
-                                <span> <div id="error-message" style="color: red; text-align: center; margin-top: 10px;"></div></span>
+                                <span>
+                                    <div id="error-message" style="color: red; text-align: center; margin-top: 10px;">
+                                    </div>
+                                </span>
                                 <div class="field-input">
                                     <input type="tel" placeholder="Enter Phone Number" value=""
                                         name="mobileNumber" pattern="[0-9]{10}" minlength="10" maxlength="10"
@@ -431,7 +434,7 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                                     password</a>
                                 <input type="submit" name="submit" value="Login" id="loginSubmit" />
                             </form>
-                            
+
                         </div>
                     </div>
 
@@ -461,6 +464,58 @@ $Mastercity = Master::orderBy('created_at', 'asc')
         <!-- .row -->
     </div>
     <!-- .container-fluid -->
+
+    <div class="mobile-view">
+        {{-- mobile navigation --}}
+        <nav class="mobile-bottom-nav">
+
+            <div class="mobile-bottom-nav__item mobile-bottom-nav__item--active">
+                <a href="/">
+                    <div class="mobile-bottom-nav__item-content">
+                        <i class="fa-solid fa-house"></i>
+                        HOME
+                    </div>
+                </a>
+            </div>
+
+            <div class="mobile-bottom-nav__item">
+                <a href="">
+                    <div class="mobile-bottom-nav__item-content">
+                        <i class="fa-solid fa-briefcase"></i>
+                        JOB
+                    </div>
+                </a>
+            </div>
+
+            <div class="mobile-bottom-nav__item">
+                <a href="/blogs">
+                    <div class="mobile-bottom-nav__item-content">
+                        <i class="fa-solid fa-square-rss"></i>
+                        BLOG
+                    </div>
+                </a>
+            </div>
+
+            <div class="mobile-bottom-nav__item">
+                <a href="">
+                    <div class="mobile-bottom-nav__item-content">
+                        <i class="fa-solid fa-newspaper"></i>
+                        NEWS
+                    </div>
+                </a>
+            </div>
+
+            <div class="mobile-bottom-nav__item">
+                <a href="">
+                    <div class="mobile-bottom-nav__item-content">
+                        <i class="fa-solid fa-square-poll-horizontal"></i>
+                        OPINION
+                    </div>
+                </a>
+            </div>
+
+        </nav>
+    </div>  
 </header>
 {{-- -----------------------------------------------reguster form ------------------------------------------ --}}
 <script>
@@ -556,6 +611,19 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                     console.error(xhr.responseText);
                 }
             });
+        });
+    });
+</script>
+
+
+<script>
+    var navItems = document.querySelectorAll(".mobile-bottom-nav__item");
+    navItems.forEach(function(e, i) {
+        e.addEventListener("click", function(e) {
+            navItems.forEach(function(e2, i2) {
+                e2.classList.remove("mobile-bottom-nav__item--active");
+            })
+            this.classList.add("mobile-bottom-nav__item--active");
         });
     });
 </script>

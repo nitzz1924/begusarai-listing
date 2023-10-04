@@ -523,7 +523,17 @@
     }
     .bsn-cat-item a {
         padding-top: 25px;
+        width: 100px;
+        height: 100px;
+        border-radius: 10px;
+        margin-bottom: 15px;
     }
+
+    .bsn-cat-item i {
+        font-size: 25px;
+        margin-bottom: 3px;
+    }
+
     .site__search.layout-02.open {
         max-width: 100%;
         padding: 14px 60px 14px 30px;
@@ -1353,6 +1363,9 @@
     }
     .cities__info .cities__capital {
         font-size: 18px;
+    }
+    .home-main .site-banner {
+        height: 40vh;
     }
     .home-main .site-banner:after {
         height: 40px;
