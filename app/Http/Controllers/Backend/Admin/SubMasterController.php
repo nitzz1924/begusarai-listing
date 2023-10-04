@@ -10,7 +10,6 @@ use Illuminate\Http\Request;
 use App\Models\Master;
 use Exception;
 
-
 class SubMasterController extends Controller
 {
     /**
@@ -24,14 +23,13 @@ class SubMasterController extends Controller
     //   return view('backend.admin.submaster.index',compact("submaster"));
     // }
 
-   
-
     public function index(Request $request)
-{
-    $submaster = Master::orderBy('created_at', 'asc')->where('type','<>','Master')->get();
-    return view('backend.admin.submaster.index', compact('submaster'));
-}
-
+    {
+        $submaster = Master::orderBy('created_at', 'asc')
+            ->where('type', '<>', 'Master')
+            ->get();
+        return view('backend.admin.submaster.index', compact('submaster'));
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -40,7 +38,9 @@ class SubMasterController extends Controller
      */
     public function create()
     {
-        $master = Master::orderby('created_at', 'desc')->where('type','=','Master')->get();
+        $master = Master::orderby('created_at', 'desc')
+            ->where('type', '=', 'Master')
+            ->get();
         return view('backend.admin.submaster.create', compact('master'));
     }
 
@@ -56,13 +56,9 @@ class SubMasterController extends Controller
             'title' => 'required',
             'value' => 'required',
             'type' => 'required',
-           
-
-
         ]);
         try {
             $submaster = new Master();
-           
 
             $submaster->title = $request->input('title');
             $submaster->value = $request->input('value');
@@ -73,27 +69,24 @@ class SubMasterController extends Controller
                 $extension = strtolower($request->file('logo')->getClientOriginalExtension());
                 if ($extension == 'jpg' || $extension == 'jpeg' || $extension == 'png' || $extension == 'svg' || $extension == 'webp') {
                     if ($request->file('logo')->isValid()) {
-                        $destinationPath = public_path('uploads'); 
-                        $extension = $request->file('logo')->getClientOriginalExtension(); 
+                        $destinationPath = public_path('uploads');
+                        $extension = $request->file('logo')->getClientOriginalExtension();
                         $fileName = time() . '.' . $extension; // renameing logo
-                        $request->file('logo')->move($destinationPath, $fileName); 
+                        $request->file('logo')->move($destinationPath, $fileName);
                         $submaster->logo = $fileName;
                     }
                 }
             }
 
-
-
             $submaster->save(); //
             return redirect()->route('admin.submaster.index');
-        }  catch (Exception $e) {
+        } catch (Exception $e) {
             Log::error($e);
-                session()->flash('error', 'An error occurred while saving the record.');
-          
+            session()->flash('error', 'An error occurred while saving the record.');
+
             return back();
         }
     }
-
 
     // catch (Exception $e) {
     //     session()->flash('sticky_error', $e->getMessage());
@@ -155,18 +148,40 @@ class SubMasterController extends Controller
      */
     public function destroy($id)
     {
-        $submaster = Master::where(['id' => $id])->delete();
-        return back();
+        try {
+            // Find the Master record by ID
+            $submaster = Master::find($id);
+
+            if (!$submaster) {
+                return back()->with('error', 'Record not found.');
+            }
+
+            // Delete the Master record from the database
+            $submaster->delete();
+
+            // Delete the associated logo file from storage if it exists
+            if ($submaster->logo) {
+                $logoPath = public_path('uploads') . '/' . $submaster->logo;
+
+                // Check if the file exists before attempting to delete it
+                if (file_exists($logoPath)) {
+                    unlink($logoPath);
+                }
+            }
+
+            return back()->with('success', 'Record and associated logo deleted successfully');
+        } catch (\Exception $e) {
+            // Handle any exceptions that may occur during deletion
+            return back()->with('error', 'Error: ' . $e->getMessage());
+        }
     }
 }
 
-    // ------------------->>  Print Error Message  
+// ------------------->>  Print Error Message
 
-    // catch (Exception $e) {
-    //     session()->flash('sticky_error', $e->getMessage());
-    //     print_r($e->getMessage());
-    //     die();
-    //     return back();
-    // }
-
-    
+// catch (Exception $e) {
+//     session()->flash('sticky_error', $e->getMessage());
+//     print_r($e->getMessage());
+//     die();
+//     return back();
+// }

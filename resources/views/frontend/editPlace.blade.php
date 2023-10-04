@@ -168,6 +168,15 @@
                     <h3>Contact Info</h3>
                     <!-- Email -->
                     <div class="field-group">
+                        <label for="ownerName">Owner Name</label>
+                        <input type="text" placeholder="Owner Name" id="ownerName" name="ownerName"
+                            class="form-control" value="{{ isset($business) ? $business->ownerName : old('ownerName') }}">
+                        @error('ownerName')
+                            <div class="has-error mt-2">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="field-group">
                         <label for="email">Email</label>
                         <input type="email" placeholder="Your email address" id="email" name="email"
                             class="form-control" value="{{ isset($business) ? $business->email : old('email') }}">

@@ -1,7 +1,6 @@
 @extends('frontend.layouts.master')
 @section('title', 'Add Place')
 @section('content')
-    
 
     <main class="site-main listing-main">
         <div class="listing-nav">
@@ -55,7 +54,7 @@
                         </div>
                     </div>
                     <div class="field-group">
-                        <label for="description">Description</label>
+                        <label for="description">Business Description</label>
                         <textarea placeholder="Description" id="description" name="description" rows="4" cols="65"
                             class="form-control "></textarea>
                         @error('description')
@@ -112,7 +111,7 @@
                                 </span>
                             </label>
                         @endforeach
-                        
+
                     </div>
                     @error('highlight')
                         <div class="has-error mt-2">{{ $message }}</div>
@@ -135,7 +134,7 @@
                         @enderror
                     </div>
                     <div class="field-group">
-                        <label for="placeAddress">Place Address</label>
+                        <label for="placeAddress">Business Address</label>
                         <input type="text" placeholder="Full Address" id="placeAddress" name="placeAddress"
                             class="form-control  ">
                         @error('placeAddress')
@@ -147,6 +146,14 @@
 
                 <div id="contact" class="listing-box">
                     <h3>Contact Info</h3>
+                      <div class="field-group">
+                        <label for="ownerName">Owner Name</label>
+                        <input type="text" placeholder="Owner Name" id="ownerName" name="ownerName"
+                            class="form-control ">
+                        @error('ownerName')
+                            <div class="has-error mt-2">{{ $message }}</div>
+                        @enderror
+                    </div>
                     <div class="field-group">
                         <label for="email">Email</label>
                         <input type="email" placeholder="Your email address" id="email" name="email"
@@ -156,7 +163,7 @@
                         @enderror
                     </div>
                     <div class="field-group">
-                        <label for="phoneNumber1">Phone number</label>
+                        <label for="phoneNumber1">Business Number </label>
                         <input type="tel" placeholder="Your phone number" name="phoneNumber1" id="phoneNumber1"
                             class="form-control ">
                         @error('phoneNumber1')
@@ -171,7 +178,7 @@
                         @enderror
                     </div>
                     <div class="field-group">
-                        <label for="whatsappNo">WhatsApp Number</label>
+                        <label for="whatsappNo">Business Whatsapp</label>
                         <input type="tel" placeholder="Your WhatsApp number" name="whatsappNo" id="whatsappNo"
                             class="form-control ">
                         {{-- @error('whatsappNo')
@@ -274,7 +281,7 @@
                     </div>
 
                     <div class="field-group field-file">
-                        <label for="galleryImage">Gallery Images</label>
+                        <label for="galleryImage">Business Photos</label>
                         <label for="galleryImage" class="preview">
                             <div class="mb-3 upload-area" id="drop-area">
                                 <label for="image" class="form-label">Drag & Drop Images Here</label>
@@ -306,19 +313,20 @@
                         <div class="field-note">Maximum file size: 1 MB.</div>
                     </div>
                     <div class="field-group field-file">
-    <label for="documentImage">Document Images (Upload PDF)</label>
-    <label for="documentImage" class="preview">
-        <input type="file" name="documentImage" id="documentImage" class="upload-file" accept=".pdf">
-        <img class="img_preview" src="images/no-image.png" alt="" id="pdfPreview">
-        <i class="la la-cloud-upload-alt"></i>
-    </label>
-    @error('documentImage')
-        <div class="has-error mt-2">{{ $message }}</div>
-    @enderror
-</div>
+                        <label for="documentImage">Business Ownership Proof  (Upload PDF)</label>
+                        <label for="documentImage" class="preview">
+                            <input type="file" name="documentImage" id="documentImage" class="upload-file"
+                                accept=".pdf">
+                            <img class="img_preview" src="images/no-image.png" alt="" id="pdfPreview">
+                            <i class="la la-cloud-upload-alt"></i>
+                        </label>
+                        @error('documentImage')
+                            <div class="has-error mt-2">{{ $message }}</div>
+                        @enderror
+                    </div>
 
                     <div class="field-group">
-                        <label for="video">Video (optional)</label>
+                        <label for="video">Business Video (Youtube Link)</label>
                         <input type="url" placeholder="Your video URL" name="video" id="video">
 
                     </div>
@@ -367,41 +375,47 @@
                 galleryImageCountInput.value = files.length;
             }
         });
-        document.getElementById('documentImage').addEventListener('change', function (e) {
-    const file = e.target.files[0];
-    const pdfPreview = document.getElementById('pdfPreview');
+        document.getElementById('documentImage').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            const pdfPreview = document.getElementById('pdfPreview');
 
-    if (file && file.type === 'application/pdf') {
-        const reader = new FileReader();
+            if (file && file.type === 'application/pdf') {
+                const reader = new FileReader();
 
-        reader.onload = function (e) {
-            const pdfData = new Uint8Array(e.target.result);
+                reader.onload = function(e) {
+                    const pdfData = new Uint8Array(e.target.result);
 
-            // Initialize PDF.js
-            pdfjsLib.getDocument({ data: pdfData }).promise.then(function (pdf) {
-                pdf.getPage(1).then(function (page) {
-                    const canvas = document.createElement('canvas');
-                    const context = canvas.getContext('2d');
-                    const viewport = page.getViewport({ scale: 0.5 });
+                    // Initialize PDF.js
+                    pdfjsLib.getDocument({
+                        data: pdfData
+                    }).promise.then(function(pdf) {
+                        pdf.getPage(1).then(function(page) {
+                            const canvas = document.createElement('canvas');
+                            const context = canvas.getContext('2d');
+                            const viewport = page.getViewport({
+                                scale: 0.5
+                            });
 
-                    canvas.height = viewport.height;
-                    canvas.width = viewport.width;
+                            canvas.height = viewport.height;
+                            canvas.width = viewport.width;
 
-                    page.render({ canvasContext: context, viewport: viewport }).promise.then(function () {
-                        const imageData = canvas.toDataURL();
-                        pdfPreview.src = imageData;
+                            page.render({
+                                canvasContext: context,
+                                viewport: viewport
+                            }).promise.then(function() {
+                                const imageData = canvas.toDataURL();
+                                pdfPreview.src = imageData;
+                            });
+                        });
                     });
-                });
-            });
-        };
+                };
 
-        reader.readAsArrayBuffer(file);
-    } else {
-        // Handle cases where the selected file is not a PDF
-        pdfPreview.src = 'images/no-image.png'; // Display a default image
-    }
-});
+                reader.readAsArrayBuffer(file);
+            } else {
+                // Handle cases where the selected file is not a PDF
+                pdfPreview.src = 'images/no-image.png'; // Display a default image
+            }
+        });
     </script>
-
 
 @endsection

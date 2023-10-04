@@ -399,6 +399,7 @@ class HomeController extends Controller
             'highlight' => 'required',
             'city' => 'required',
             'placeAddress' => 'required',
+            'ownerName' => 'required',
             'email' => 'required',
             'phoneNumber1' => 'required',
             'phoneNumber2' => 'required',
@@ -445,6 +446,7 @@ class HomeController extends Controller
             $business->highlight = implode(',', $request->input('highlight'));
             $business->city = $request->input('city');
             $business->placeAddress = $request->input('placeAddress');
+            $business->ownerName = $request->input('ownerName');
             $business->email = $request->input('email');
             $business->phoneNumber1 = $request->input('phoneNumber1');
             $business->phoneNumber2 = $request->input('phoneNumber2');
@@ -517,28 +519,75 @@ class HomeController extends Controller
         }
     }
 
-    public function delete($id)
-    {
-        try {
-            // Find the existing business by ID
-            $business = BusinessList::findOrFail($id);
+    // public function delete($id)
+    // {
+    //     try {
 
-            // Delete the business record from the database
-            $business->delete();
+    //         $business = BusinessList::findOrFail($id);
 
-            // Optionally, you can delete associated files (cover image, gallery images, etc.) here
+    //         $business->delete();
 
-            // Redirect back on success
-            return redirect()
-                ->route('ownerListing')
-                ->with('success', 'Business deleted successfully');
-        } catch (\Exception $e) {
-            // Handle errors and display an error message
-            return redirect()
-                ->route('ownerListing')
-                ->with('error', 'Error: ' . $e->getMessage());
+    //         return redirect()
+    //             ->route('ownerListing')
+    //             ->with('success', 'Business deleted successfully');
+    //     } catch (\Exception $e) {
+
+    //         return redirect()
+    //             ->route('ownerListing')
+    //             ->with('error', 'Error: ' . $e->getMessage());
+    //     }
+    // }
+
+ public function delete($id)
+{
+    try {
+        // Find the record by ID
+        $business = BusinessList::find($id);
+
+        if (!$business) {
+            return back()->with('error', 'Record not found.');
         }
+
+        // Get the image file name associated with the record
+        $coverImageFileName = $business->coverImage; // Assuming coverImage is the image field
+        $galleryImages = json_decode($business->galleryImage, true); // Decode the JSON array of gallery images
+        $documentImageFileName = $business->documentImage; // Assuming documentImage is the PDF field
+
+        // Delete the record from the database
+        $business->delete();
+
+        // Delete the associated image files from storage
+        if ($coverImageFileName) {
+            $coverImagePath = public_path('uploads') . '/' . $coverImageFileName;
+            if (file_exists($coverImagePath)) {
+                unlink($coverImagePath);
+            }
+        }
+
+        if (!empty($galleryImages)) {
+            foreach ($galleryImages as $galleryImage) {
+                $galleryImagePath = public_path('uploads') . '/' . $galleryImage;
+                if (file_exists($galleryImagePath)) {
+                    unlink($galleryImagePath);
+                }
+            }
+        }
+
+        // Delete the associated PDF file from storage
+        if ($documentImageFileName) {
+            $documentImagePath = public_path('uploads') . '/' . $documentImageFileName;
+            if (file_exists($documentImagePath)) {
+                unlink($documentImagePath);
+            }
+        }
+
+        return back()->with('success', 'Record and associated images and PDF deleted successfully');
+    } catch (\Exception $e) {
+        // Handle any exceptions that may occur during deletion
+        return back()->with('error', 'Error: ' . $e->getMessage());
     }
+}
+
 
     public function savePlace(Request $request)
     {
@@ -551,6 +600,7 @@ class HomeController extends Controller
             'highlight' => 'required',
             'city' => 'required',
             'placeAddress' => 'required',
+            'ownerName' => 'required',
             'email' => 'required',
             'phoneNumber1' => 'required',
             'phoneNumber2' => 'required',
@@ -596,6 +646,7 @@ class HomeController extends Controller
             $business->highlight = implode(',', $request->input('highlight'));
             $business->city = $request->input('city');
             $business->placeAddress = $request->input('placeAddress');
+            $business->ownerName = $request->input('ownerName');
             $business->email = $request->input('email');
             $business->phoneNumber1 = $request->input('phoneNumber1');
             $business->phoneNumber2 = $request->input('phoneNumber2');
@@ -770,7 +821,8 @@ class HomeController extends Controller
         $businesses = BusinessList::orderBy('created_at', 'desc')->get();
 
         $similer = BusinessList::where('category', $category)
-            ->orderBy('created_at', 'desc')->take(4)
+            ->orderBy('created_at', 'desc')
+            ->take(4)
             ->get();
 
         $Result = [];
@@ -831,7 +883,9 @@ class HomeController extends Controller
         $MasterCategory = Master::orderBy('created_at', 'asc')
             ->where('type', '=', 'category')
             ->get();
-        $businesses = BusinessList::where('userId', $user->id)->get(); // Fetch all businesses from the database
+        $businesses = BusinessList::orderBy('created_at', 'desc')
+            ->where('userId', $user->id)
+            ->get(); // Fetch all businesses from the database
 
         return view('frontend.ownerListing', compact('businesses', 'Mastercity', 'MasterCategory'));
     }
