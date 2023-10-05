@@ -77,7 +77,7 @@
                         <div class="custom-overlay"></div>
                         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                             aria-hidden="true">
-                            <div class="modal-dialog modal-lg modal-dialog-centered">
+                            <div class="modal-dialog modal-sm modal-dialog-centered">
                                 <div class="modal-content">
 
                                     <!-- Check if the user is not logged in -->

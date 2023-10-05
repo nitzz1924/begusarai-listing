@@ -7563,7 +7563,7 @@ a.place__comments__reply i {
     line-height: 1.5;
     display: -webkit-box;
     display: -ms-flexbox;
-    display: flex;
+    display: grid;
     align-items: center;
     flex-wrap: wrap;
     margin-bottom: 15px;
