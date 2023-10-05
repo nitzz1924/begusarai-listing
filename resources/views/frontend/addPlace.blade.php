@@ -460,7 +460,7 @@
                                 @error('bookingurl')
                                     <div class="has-error mt-2">{{ $message }}</div>
                                 @enderror
-                                    <label class="fieldlabels">Business Video (Youtube Link) :</label>
+                                <label class="fieldlabels">Business Video (Youtube Link) :</label>
                                 <input type="url" placeholder="Your video URL" name="video" id="video">
 
                                 <div class="">
@@ -468,11 +468,11 @@
                                     <input type="file" name="coverImage" id="coverImage" class="upload-file"
                                         data-max-size="1024">
                                     <img class="img_preview" src="images/no-image.png" alt="" />
-                                   
+
                                     @error('coverImage')
                                         <div class="has-error mt-2">{{ $message }}</div>
                                     @enderror
-                                     
+
                                 </div>
 
                                 <div class="">
@@ -482,23 +482,22 @@
                                     <input type="hidden" name="galleryImageCount" id="galleryImageCount"
                                         value="0">
                                     <div class="selected-files-count"></div>
-                                    
+
                                     @error('galleryImage')
                                         <div class="has-error mt-2">{{ $message }}</div>
                                     @enderror
-                                   
-                                </div>
 
+                                </div>
 
                                 <div class="">
                                     <!-- <label class="fieldlabels">Author:</label> -->
-                                    <label for="fieldlabels" class=" fieldlabels" >
+                                    <label for="fieldlabels" class=" fieldlabels">
                                         Author:</label>
-                                        <input type="file" name="logo" id="logo" class="upload-file"
-                                            data-max-size="1024">
-                                        <img class="img_preview" src="images/no-image.png" alt="" />
-                                        <!-- <i class="la la-cloud-upload-alt"></i> -->
-                                    
+                                    <input type="file" name="logo" id="logo" class="upload-file"
+                                        data-max-size="1024">
+                                    <img class="img_preview" src="images/no-image.png" alt="" />
+                                    <!-- <i class="la la-cloud-upload-alt"></i> -->
+
                                     @error('logo')
                                         <div class="has-error mt-2">{{ $message }}</div>
                                     @enderror
@@ -508,12 +507,11 @@
                                     <!-- <label class="fieldlabels"></label> -->
                                     <label for="fieldlabels" class=" fieldlabels">
                                         Business Ownership Proof (Upload PDF):</label>
-                                        <input type="file" name="documentImage" id="documentImage"
-                                            class="upload-file" accept=".pdf">
-                                        <img class="img_preview" src="images/no-image.png" alt=""
-                                            id="pdfPreview">
-                                        <!-- <i class="la la-cloud-upload-alt"></i> -->
-                                    
+                                    <input type="file" name="documentImage" id="documentImage" class="upload-file"
+                                        accept=".pdf">
+                                    <img class="img_preview" src="images/no-image.png" alt="" id="pdfPreview">
+                                    <!-- <i class="la la-cloud-upload-alt"></i> -->
+
                                     @error('documentImage')
                                         <div class="has-error mt-2">{{ $message }}</div>
                                     @enderror
@@ -539,7 +537,8 @@
                                         <h2 class="steps">Step 4 - 4</h2>
                                     </div>
                                 </div> <br><br>
-                                <h2 class="purple-text text-center" style='color:green'><strong>SUCCESS !</strong></h2> <br>
+                                <h2 class="purple-text text-center" style='color:green'><strong>SUCCESS !</strong></h2>
+                                <br>
                                 <div class="row justify-content-center">
                                     <div class="col-3"> <img src="https://i.imgur.com/GwStPmg.png" class="fit-image">
                                     </div>

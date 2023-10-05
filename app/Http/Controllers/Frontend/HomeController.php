@@ -585,7 +585,7 @@ class HomeController extends Controller
             }
         }
 
-        return back()->with('success', 'Record and associated images and PDF deleted successfully');
+        return back()->with('success', 'Record deleted successfully');
     } catch (\Exception $e) {
         // Handle any exceptions that may occur during deletion
         return back()->with('error', 'Error: ' . $e->getMessage());
@@ -711,6 +711,8 @@ class HomeController extends Controller
             $business->save();
 
             // Redirect back with a success message or do something else
+            //  return back()->with('success', 'Business added successfully');
+
             return redirect()
                 ->route('ownerListing')
                 ->with('success', $editId ? 'Business updated successfully' : 'Business added successfully');

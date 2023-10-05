@@ -77,11 +77,22 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                 </div>
             </div>
             <div>
+
                 @if (session('success'))
-                    <div class="alert alert-success-custom p-3">
-                        {{ session('success') }}
+                    <div class="form-card">
+                        <h2 class="text-success text-center">
+                            <i class="fas fa-check-circle fa-4x" style="font-size: 50px;">
+                            </i>
+                        </h2>
+                        <br>
+                        <div class="row justify-content-center">
+                            <div class="col-10 text-center">
+                                <h3 class="text-success">{{ session('success') }}</h3>
+                            </div>
+                        </div>
                     </div>
                 @endif
+
             </div>
 
             <div class="container">
@@ -211,16 +222,16 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                                                 title="list"><i class="la la-list"></i></a> --}}
 
                                             <!-- <a href='#' class="delete" title="Delete"><i
-                                                                                class="la la-trash-alt"></i></a> -->
+                                                                                        class="la la-trash-alt"></i></a> -->
 
                                             <!-- <form method="POST" action="{{ route('delete', ['id' => $business->id]) }}"
-                                                        method="POST"id="deleteForm">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <a type="button" onclick="confirmDelete(this)" data-toggle="modal">
-                                                            <i class="la la-trash-alt"></i>
-                                                        </a>
-                                                    </form> -->
+                                                                method="POST"id="deleteForm">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <a type="button" onclick="confirmDelete(this)" data-toggle="modal">
+                                                                    <i class="la la-trash-alt"></i>
+                                                                </a>
+                                                            </form> -->
                                             <form method="POST" action="{{ route('delete', ['id' => $business->id]) }}"
                                                 id="deleteForm">
                                                 @csrf
