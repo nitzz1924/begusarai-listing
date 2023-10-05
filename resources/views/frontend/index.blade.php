@@ -146,9 +146,9 @@
 
                 <div class="business-category mobile-view">
                     <div class="container">
-                        <h2 class="title title-border-bottom align-center offset-item">
+                        {{-- <h2 class="title title-border-bottom align-center offset-item">
                             Browse Businesses by Category
-                        </h2>
+                        </h2> --}}
 
                         <div class="grid-container">
                             @foreach ($submaster as $index => $value)
