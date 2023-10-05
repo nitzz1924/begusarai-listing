@@ -4699,7 +4699,8 @@ a.place__comments__reply i {
 }
 
 .upload-form {
-    max-width: 660px;
+    max-width: 100%;
+    margin: 20px;
 }
 
 #location-map {
