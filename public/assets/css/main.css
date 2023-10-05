@@ -5624,6 +5624,7 @@ a.close.disabled {
     position: relative;
     width: 100%;
     overflow: hidden;
+    border-radius: 10px;
 }
 .carousel-inner::after {
     display: block;

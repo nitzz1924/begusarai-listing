@@ -201,7 +201,7 @@
                                     <th class="text-center">B. Name</th>
                                     <th class="text-center">Email</th>
                                     <th class="text-center">PH Number</th>
-                               
+
                                     <th class="text-center">City</th>
                                     <th class="text-center">Status</th>
                                     <th class="text-center">View</th>
@@ -235,7 +235,7 @@
                                         </td>
                                         <td class="text-center">{{ $value->email }}</td>
                                         <td class="text-center">{{ $value->phoneNumber1 }}</td>
-                                     
+
                                         <td class="text-center">{{ $value->city }}</td>
                                         <td data-title="Payment" class="text-center">
                                             @if ($value->status == 0)
@@ -247,7 +247,8 @@
                                         </td>
                                         <td class="text-center">
                                             <a href="{{ route('listingDetail', ['id' => $value->id, 'category' => $value->category]) }}"
-                                                class="btn btn-primary d-flex btn-sm " title="View"><i class="la la-eye"
+                                                class="btn btn-primary d-flex btn-sm " title="View"><i
+                                                    class="la la-eye"
                                                     style="font-size: 18px; margin-right: 5px;"></i>View</a>
                                         </td>
                                     </tr>
@@ -305,8 +306,9 @@
 
                                         </td>
                                         <td class="text-center">
-                                            <a href="{{ route('admin.lead.index') }}" class="btn btn-primary d-flex btn-sm "
-                                                title="View"><i class="la la-eye"
+                                            <a href="{{ route('admin.lead.index') }}"
+                                                class="btn btn-primary d-flex btn-sm " title="View"><i
+                                                    class="la la-eye"
                                                     style="font-size: 18px; margin-right: 5px;"></i>View</a>
                                         </td>
 

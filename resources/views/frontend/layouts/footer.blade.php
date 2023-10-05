@@ -41,7 +41,7 @@
                             <li>
                                 <a title="Privacy" href="/returnsPolicy">Refund and Returns Policy </a>
                             </li>
-                            
+
                         </ul>
                     </aside>
                 </div>
@@ -60,7 +60,7 @@
                             </li>
                         </ul>
                     </aside>
-                </div> 
+                </div>
                 <div class="col-lg-3">
                     <aside class="footer__top__nav footer__top__nav--contact">
                         <h2 class="mb-3">Contact Us</h2>
@@ -100,7 +100,8 @@
         <!-- .top-footer -->
         <div class="footer__bottom">
             <p class="footer__bottom__copyright">
-                2023 &copy; <a title="Yuvmedia Team" href="https://yuvmedia.in"><span style="color: #38d6d6">Yuvmedia.in</span></a>. All
+                2023 &copy; <a title="Yuvmedia Team" href="https://yuvmedia.in"><span
+                        style="color: #38d6d6">Yuvmedia.in</span></a>. All
                 rights reserved.
             </p>
         </div>
@@ -120,7 +121,6 @@
                         alt="Google play" /></a>
             </div>
         </div>
-      
     </div>
 </div> -->
 <!-- .landing-banner -->

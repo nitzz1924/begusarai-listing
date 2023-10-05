@@ -444,3 +444,125 @@ body.modal-open .custom-overlay {
         transform: translateX(100%);
     }
 }
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-gap: 10px;
+    padding: 10px;
+}
+
+
+
+
+.grid-item {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+}
+
+.see-more {
+    display: grid !important;
+    align-content: center;
+    padding: 0 !important;
+}
+
+/* CSS for Desktop View */
+@media (max-width: 767px) {
+    .desktop-view {
+        display: none;
+    }
+
+    .business-category {
+        padding: 0 0 !important;
+    }
+    .grid-container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-gap: 10px;
+        padding: 10px;
+    }
+    .bsn-cat-item span.place {
+        display: none;
+    }
+
+    .page-title--small {
+        /* margin-bottom: 20 !important; */
+        height: 70px !important;
+    }
+
+    .page-title--small .page-title__content h1 {
+        font-size: 30px !important;
+        text-align: center !important;
+    }
+    .page-title--small .page-title__content p {
+        text-align: center !important;
+    }
+    
+    .site-header {
+        padding: 10px 0 !important;
+        position: -webkit-sticky !important;
+        position: sticky !important;
+        top: 0 !important;
+        z-index: 1020 !important;
+    }
+}
+
+/* CSS for Mobile View */
+@media (min-width: 768px) {
+    .mobile-view {
+        display: none;
+    }
+    
+}
+
+
+.slider-container {
+    padding-bottom: 60px;
+    position: relative;
+    z-index: 2;
+    background-color: #fff;
+}
+
+/* mobile navigation */
+/* Mobile Bottom Navigation */
+.mobile-bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+
+    /* Give nav its own composite layer */
+    will-change: transform;
+    transform: translateZ(0);
+
+    display: flex;
+
+    height: 70px;
+
+    /* box-shadow: 0 -2px 5px -2px #23D3D3; */
+    background-color: #fff;
+    border-top: 1px solid #23D3D3;
+}
+
+.mobile-bottom-nav__item {
+    flex-grow: 1;
+    text-align: center;
+    font-size: 16px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.mobile-bottom-nav__item--active {
+    /* Dev */
+    color: #23D3D3;
+}
+
+.mobile-bottom-nav__item-content {
+    display: flex;
+    flex-direction: column;
+    font-weight: 600;
+}

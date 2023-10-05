@@ -1149,6 +1149,24 @@ class HomeController extends Controller
             ->with('success', 'FeedBack submitted successfully!');
     }
 
+    public function allCategories()
+    {
+
+        $submaster = Master::orderBy('created_at', 'asc')
+            ->where('type', '=', 'category')
+            ->get();
+        $categoryCount;
+        foreach ($submaster as $list) {
+            $count = BusinessList::where('category', '=', $list->title)
+                ->where('status', '=', '1')
+                ->count();
+            $categoryCount[$list->title] = $count;
+        }
+        return View::make('frontend.allCategories', compact('submaster', 'categoryCount'));
+
+    }
+
+
     public function privacyPolicy()
     {
         return view('frontend.privacyPolicy');
