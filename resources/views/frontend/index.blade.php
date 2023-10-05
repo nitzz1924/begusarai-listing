@@ -77,7 +77,7 @@
                         <div class="custom-overlay"></div>
                         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                             aria-hidden="true">
-                            <div class="modal-dialog modal-lg modal-dialog-centered">
+                            <div class="modal-dialog modal-sm modal-dialog-centered">
                                 <div class="modal-content">
 
                                     <!-- Check if the user is not logged in -->
@@ -146,9 +146,9 @@
 
                 <div class="business-category mobile-view">
                     <div class="container">
-                        <h2 class="title title-border-bottom align-center offset-item">
+                        {{-- <h2 class="title title-border-bottom align-center offset-item">
                             Browse Businesses by Category
-                        </h2>
+                        </h2> --}}
 
                         <div class="grid-container">
                             @foreach ($submaster as $index => $value)

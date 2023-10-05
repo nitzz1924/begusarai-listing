@@ -13,7 +13,6 @@
     display: block;
 }
 
-
 /* 
 /* 
 .form-account{
@@ -120,7 +119,6 @@ input[type="number"] {
     -moz-transform: translate3d(0, 0, 0);
     object-fit: cover;
 }
-
 
 .login-container {
     text-align: center;
@@ -305,7 +303,6 @@ input[type="tel"]:focus {
     }
 }
 
-
 .place-item.layout-02 .author img {
     max-width: 100%; /* Ensure the image doesn't exceed the circular container */
     max-height: 100%; /* Ensure the image doesn't exceed the circular container */
@@ -317,7 +314,6 @@ body.modal-open .modal-backdrop {
     z-index: 0 !important;
 }
 
-
 /* Style for the custom overlay */
 .custom-overlay {
     position: fixed;
@@ -325,7 +321,12 @@ body.modal-open .modal-backdrop {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.6); /* You can adjust the background color and opacity */
+    background-color: rgba(
+        0,
+        0,
+        0,
+        0.6
+    ); /* You can adjust the background color and opacity */
     z-index: 10; /* Place it behind other elements */
     display: none; /* Initially hidden */
 }
@@ -452,9 +453,6 @@ body.modal-open .custom-overlay {
     padding: 10px;
 }
 
-
-
-
 .grid-item {
     border: 1px solid #ccc;
     padding: 10px;
@@ -498,7 +496,7 @@ body.modal-open .custom-overlay {
     .page-title--small .page-title__content p {
         text-align: center !important;
     }
-    
+
     .site-header {
         padding: 10px 0 !important;
         position: -webkit-sticky !important;
@@ -513,9 +511,7 @@ body.modal-open .custom-overlay {
     .mobile-view {
         display: none;
     }
-    
 }
-
 
 .slider-container {
     padding-bottom: 60px;
@@ -543,7 +539,7 @@ body.modal-open .custom-overlay {
 
     /* box-shadow: 0 -2px 5px -2px #23D3D3; */
     background-color: #fff;
-    border-top: 1px solid #23D3D3;
+    border-top: 1px solid #23d3d3;
 }
 
 .mobile-bottom-nav__item {
@@ -558,11 +554,32 @@ body.modal-open .custom-overlay {
 
 .mobile-bottom-nav__item--active {
     /* Dev */
-    color: #23D3D3;
+    color: #23d3d3;
 }
 
 .mobile-bottom-nav__item-content {
     display: flex;
     flex-direction: column;
     font-weight: 600;
+}
+
+.filter-btn {
+    position: fixed;
+    bottom: 12%;
+    z-index: 99;
+    left: 5%;
+}
+
+.filter-btn-a {
+    background-color: rgb(255, 255, 255);
+    padding: 0 13px !important;
+    font-size: 25px !important;
+    width: 60px;
+    align-content: center;
+    display: grid !important;
+    justify-content: center ;
+    border-radius: 70px !important;
+    height: 60px !important;
+    color: #23D3D3;
+    border: 2px;
 }

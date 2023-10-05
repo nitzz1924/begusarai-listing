@@ -2698,8 +2698,9 @@ a.place__comments__reply i {
 }
 
 .similar-places {
-    padding: 40px 0 60px;
+    padding: 0px 0 60px;
     background-color: #f9f9f9;
+    border-radius: 20px;
 }
 
 .places-item {
@@ -7024,8 +7025,8 @@ a.place__comments__reply i {
 }
 .site-main.layout-list .area-places .place-item {
     -webkit-box-flex: 0;
-    -ms-flex: 0 0 100%;
-    flex: 0 0 100%;
+    -ms-flex: 0 0 50%;
+    flex: 0 0 50%;
     max-width: 100%;
 }
 .site-main.layout-list .area-places .place-inner {
@@ -7562,7 +7563,7 @@ a.place__comments__reply i {
     line-height: 1.5;
     display: -webkit-box;
     display: -ms-flexbox;
-    display: flex;
+    display: grid;
     align-items: center;
     flex-wrap: wrap;
     margin-bottom: 15px;
@@ -9024,7 +9025,7 @@ a.place__comments__reply i {
     -webkit-box-flex: 0;
     -ms-flex: 0 0 50%;
     flex: 0 0 50%;
-    max-width: 50%;
+    max-width: 30%;
     padding: 0 15px;
     margin-bottom: 30px;
 }
@@ -10085,6 +10086,8 @@ a.place__comments__reply i {
     text-align: center;
     padding-top: 35px;
     margin: 0 auto;
+    align-content: center;
+    display: grid;
 }
 .bsn-cat-item a:hover {
     padding-top: 25px;
