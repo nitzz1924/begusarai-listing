@@ -508,7 +508,7 @@ class HomeController extends Controller
             // Redirect back on success
             return redirect()
                 ->route('ownerListing')
-                ->with('success', $editId ? 'Business updated successfully' : 'Business added successfully');
+                ->with('success', 'Business updated successfully');
         } catch (ValidationException $e) {
             // Handle validation errors
             return redirect()
