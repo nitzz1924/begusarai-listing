@@ -69,10 +69,10 @@
                                         <td class="fw-bold">
                                             @if ($business->status == 1)
                                                 <a class="fw-bold  btn btn-success"
-                                                    href=" ">Active</a>
+                                                    href="{{ URL::to('admin/listing/active', $business->id) }} ">Active</a>
                                             @elseif ($business->status == 0)
                                                 <a class="fw-bold btn btn-danger"
-                                                    href=" ">Inactive</a>
+                                                    href="{{ URL::to('admin/listing/inactive', $business->id) }} ">Inactive</a>
                                             @else
                                                 Unknown
                                             @endif
