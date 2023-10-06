@@ -70,32 +70,41 @@
 
                 <!-- .site-banner -->
                 {{-- popup modal box --}}
-                <div class="d-grid justify-content-center my-3">
-                    <!-- Button trigger modal -->
-                    <!-- Modal -->
-                    @if (!Auth::check())
-                        <div class="custom-overlay"></div>
-                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                            aria-hidden="true">
-                            <div class="modal-dialog modal-sm modal-dialog-centered">
+                @if (!Auth::check())
+                    <div class="custom-overlay"></div>
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog modal-sm modal-dialog-centered">
+                            <!-- Check if the $popup object exists and has a valid 'logo' property -->
+                            @if ($popup && $popup->logo)
                                 <div class="modal-content">
-
-                                    <!-- Check if the user is not logged in -->
                                     <div
                                         class="position-relative modal-body border-warning rounded border bg-image overlay p-0">
                                         <div class="position-absolute top-0 end-0 btn-close-bg px-1 pb-1 m-1">
                                             <button type="button" class="btn-close popup-close-btn "
                                                 data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
-
                                         <img src="{{ URL::to('uploads/' . $popup->logo) }}" alt="Promo banner"
                                             class="img-fluid rounded-3">
                                     </div>
                                 </div>
-                            </div>
+                            @else
+                                <div class="modal-content " style='background-color:#fff0'>
+                                    <div class="position-relative modal-body  rounded  bg-image  p-0">
+                                        <div class="position-absolute top-0 end-0 btn-close-bg px-1 pb-1 m-1">
+                                            <button type="button" class="btn-close popup-close-btn "
+                                                data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <img src="{{ asset('assets/images/welcome2.png') }}" alt="Default Image"
+                                            class="img-fluid rounded-3">
+
+                                    </div>
+                                </div>
+                            @endif
                         </div>
-                    @endif
-                </div>
+                    </div>
+
+                @endif
 
                 {{-- Desktop categories --}}
                 <div class="business-category desktop-view">

@@ -25,7 +25,7 @@ class SubMasterController extends Controller
 
     public function index(Request $request)
     {
-        $submaster = Master::orderBy('created_at', 'asc')
+        $submaster = Master::orderBy('created_at', 'desc')
             ->where('type', '<>', 'Master')
             ->get();
         return view('backend.admin.submaster.index', compact('submaster'));
@@ -79,7 +79,7 @@ class SubMasterController extends Controller
             }
 
             $submaster->save(); //
-            return redirect()->route('admin.submaster.index');
+            return redirect()->route('admin.setting.index');
         } catch (Exception $e) {
             Log::error($e);
             session()->flash('error', 'An error occurred while saving the record.');
@@ -110,7 +110,7 @@ class SubMasterController extends Controller
     public function edit($id)
     {
         $submaster = Master::where('id', $id)->first();
-        return view('backend.admin.submaster.edit', compact('submaster'));
+        return view('backend.admin.setting.edit', compact('submaster'));
     }
 
     /**
@@ -131,7 +131,7 @@ class SubMasterController extends Controller
             $submaster->title = $request->title;
             $submaster->value = $request->value;
             $submaster->save();
-            return redirect()->route('admin.submaster.index');
+            return redirect()->route('admin.setting.index');
         } catch (\Exception $e) {
             session()->flash('sticky_error', $e->getMessage());
             print_r($e->getMessage());

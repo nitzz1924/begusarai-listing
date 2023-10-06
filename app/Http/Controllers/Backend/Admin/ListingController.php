@@ -155,7 +155,7 @@ class ListingController extends Controller
     public function active($id)
     {
         // dd('Active method called with ID: ' . $id);
-        BusinessList::where('id', $id)->update(['status' => '0']);
+        BusinessList::where('id', $id)->update(['status' => '1']);
         return redirect()->route('admin.listing.index');
     }
 
@@ -163,7 +163,7 @@ class ListingController extends Controller
     {
         // dd('Inactive method called with ID: ' . $id);
         try {
-            BusinessList::where('id', $id)->update(['status' => '1']);
+            BusinessList::where('id', $id)->update(['status' => '0']);
             return redirect()->route('admin.listing.index');
         } catch (\Exception $e) {
             print_r($e->getMessage());
