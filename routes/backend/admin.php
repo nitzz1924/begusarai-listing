@@ -82,10 +82,16 @@ Route::get('/testimonial/inactive/{id}', 'TestimonialController@inactive');
 Route::resource('lead', 'LeadController');
 Route::get('/lead/active/{id}', 'LeadController@active');
 Route::get('/lead/inactive/{id}', 'LeadController@inactive');
+
+
+
 Route::resource('listing', 'ListingController');
- 
+ Route::get('/listing/active/{id}', 'ListingController@active');
+Route::get('/listing/inactive/{id}', 'ListingController@inactive');
+
+
 // Sub-Master Routing
-Route::resource('submaster', 'SubMasterController');
+Route::resource('setting', 'SubMasterController');
 Route::resource('blog', 'BlogController');
 Route::resource('package', 'PackageController');
 Route::get('packages/{id}/edit', 'PackageController@edit')->name('packages.edit');

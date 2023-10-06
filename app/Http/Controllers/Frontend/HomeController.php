@@ -26,7 +26,7 @@ use App\Models\BuyPlan;
 use Carbon\Carbon;
 use Razorpay\Api\Api;
 use DB;
-
+use Log;
 use View;
 
 class HomeController extends Controller
@@ -139,6 +139,10 @@ class HomeController extends Controller
 
     public function index()
     {
+        $IndexPageVideo = Master::orderBy('created_at', 'asc')
+            ->where('type', '=', 'Index_video')
+            ->get();
+ 
         // Get the authenticated user
         $user = auth()->user();
         $businessesCount = BusinessList::count();
@@ -253,7 +257,7 @@ class HomeController extends Controller
             }
         }
 
-        return View::make('frontend.index', compact('submaster', 'businesses', 'Mastercity', 'TestimonialData', 'blog', 'Result', 'popup', 'businessesCount', 'categoryCount', 'cityCount'));
+        return View::make('frontend.index', compact('submaster', 'businesses', 'Mastercity', 'TestimonialData', 'blog', 'Result', 'popup', 'businessesCount', 'categoryCount', 'cityCount' ,'IndexPageVideo'));
     }
 
     // public function toggleBookmark(Request $request, $businessId)
@@ -388,7 +392,7 @@ class HomeController extends Controller
     }
     public function updatePlace(Request $request, $id)
     {
-        // dd($id);
+        
         // Validation rules (same as savePlace)
         $rules = [
             'category' => 'required',
@@ -399,6 +403,7 @@ class HomeController extends Controller
             'highlight' => 'required',
             'city' => 'required',
             'placeAddress' => 'required',
+            'ownerName' => 'required',
             'email' => 'required',
             'phoneNumber1' => 'required',
             'phoneNumber2' => 'required',
@@ -414,6 +419,8 @@ class HomeController extends Controller
             'youtube' => 'nullable', // Changed to validate as a URL
             'video' => 'nullable',
             'documentImage' => 'required|mimes:pdf', // Validate PDF
+            'dType' => 'nullable', // dType field
+            'dNumber' => 'nullable', // CIN field
         ];
 
         foreach (['coverImage', 'logo'] as $fileField) {
@@ -445,6 +452,7 @@ class HomeController extends Controller
             $business->highlight = implode(',', $request->input('highlight'));
             $business->city = $request->input('city');
             $business->placeAddress = $request->input('placeAddress');
+            $business->ownerName = $request->input('ownerName');
             $business->email = $request->input('email');
             $business->phoneNumber1 = $request->input('phoneNumber1');
             $business->phoneNumber2 = $request->input('phoneNumber2');
@@ -459,6 +467,8 @@ class HomeController extends Controller
             $business->businessName = $request->input('businessName');
             $business->youtube = $request->input('youtube');
             $business->video = $request->input('video');
+            $business->dType  = $request->input('dType'); // Update dType field
+            $business->dNumber  = $request->input('dNumber'); // Update CIN field
 
             // Handle file uploads (same as savePlace)
             $allowedExtensions = ['jpg', 'jpeg', 'png', 'svg', 'webp', 'pdf'];
@@ -502,7 +512,7 @@ class HomeController extends Controller
             // Redirect back on success
             return redirect()
                 ->route('ownerListing')
-                ->with('success', $editId ? 'Business updated successfully' : 'Business added successfully');
+                ->with('success', 'Business updated successfully');
         } catch (ValidationException $e) {
             // Handle validation errors
             return redirect()
@@ -517,31 +527,80 @@ class HomeController extends Controller
         }
     }
 
-    public function delete($id)
-    {
-        try {
-            // Find the existing business by ID
-            $business = BusinessList::findOrFail($id);
+    // public function delete($id)
+    // {
+    //     try {
 
-            // Delete the business record from the database
-            $business->delete();
+    //         $business = BusinessList::findOrFail($id);
 
-            // Optionally, you can delete associated files (cover image, gallery images, etc.) here
+    //         $business->delete();
 
-            // Redirect back on success
-            return redirect()
-                ->route('ownerListing')
-                ->with('success', 'Business deleted successfully');
-        } catch (\Exception $e) {
-            // Handle errors and display an error message
-            return redirect()
-                ->route('ownerListing')
-                ->with('error', 'Error: ' . $e->getMessage());
+    //         return redirect()
+    //             ->route('ownerListing')
+    //             ->with('success', 'Business deleted successfully');
+    //     } catch (\Exception $e) {
+
+    //         return redirect()
+    //             ->route('ownerListing')
+    //             ->with('error', 'Error: ' . $e->getMessage());
+    //     }
+    // }
+
+ public function delete($id)
+{
+    try {
+        // Find the record by ID
+        $business = BusinessList::find($id);
+
+        if (!$business) {
+            return back()->with('error', 'Record not found.');
         }
+
+        // Get the image file name associated with the record
+        $coverImageFileName = $business->coverImage; // Assuming coverImage is the image field
+        $galleryImages = json_decode($business->galleryImage, true); // Decode the JSON array of gallery images
+        $documentImageFileName = $business->documentImage; // Assuming documentImage is the PDF field
+
+        // Delete the record from the database
+        $business->delete();
+
+        // Delete the associated image files from storage
+        if ($coverImageFileName) {
+            $coverImagePath = public_path('uploads') . '/' . $coverImageFileName;
+            if (file_exists($coverImagePath)) {
+                unlink($coverImagePath);
+            }
+        }
+
+        if (!empty($galleryImages)) {
+            foreach ($galleryImages as $galleryImage) {
+                $galleryImagePath = public_path('uploads') . '/' . $galleryImage;
+                if (file_exists($galleryImagePath)) {
+                    unlink($galleryImagePath);
+                }
+            }
+        }
+
+        // Delete the associated PDF file from storage
+        if ($documentImageFileName) {
+            $documentImagePath = public_path('uploads') . '/' . $documentImageFileName;
+            if (file_exists($documentImagePath)) {
+                unlink($documentImagePath);
+            }
+        }
+
+        return back()->with('success', 'Record deleted successfully');
+    } catch (\Exception $e) {
+        // Handle any exceptions that may occur during deletion
+        return back()->with('error', 'Error: ' . $e->getMessage());
     }
+}
+
 
     public function savePlace(Request $request)
     {
+        //  dd($request->all()); 
+        //  dd($request->input('cin'));
         $rules = [
             'category' => 'required',
             'placeType' => 'required',
@@ -551,6 +610,7 @@ class HomeController extends Controller
             'highlight' => 'required',
             'city' => 'required',
             'placeAddress' => 'required',
+            'ownerName' => 'required',
             'email' => 'required',
             'phoneNumber1' => 'required',
             'phoneNumber2' => 'required',
@@ -566,6 +626,8 @@ class HomeController extends Controller
             'youtube' => 'nullable', // Changed to validate as a URL
             'video' => 'nullable',
             'documentImage' => 'required|mimes:pdf', // Validate PDF
+            'dType' => 'nullable|string|max:255', // Adjust the validation rules as needed
+            'dNumber' => 'nullable|string|max:255',
         ];
 
         foreach (['coverImage', 'logo'] as $fileField) {
@@ -596,6 +658,7 @@ class HomeController extends Controller
             $business->highlight = implode(',', $request->input('highlight'));
             $business->city = $request->input('city');
             $business->placeAddress = $request->input('placeAddress');
+            $business->ownerName = $request->input('ownerName');
             $business->email = $request->input('email');
             $business->phoneNumber1 = $request->input('phoneNumber1');
             $business->phoneNumber2 = $request->input('phoneNumber2');
@@ -610,7 +673,9 @@ class HomeController extends Controller
             $business->businessName = $request->input('businessName');
             $business->youtube = $request->input('youtube');
             $business->video = $request->input('video');
-
+            $business->dType = $request->input('dType');
+            $business->dNumber = $request->input('dNumber');
+ 
             $allowedExtensions = ['jpg', 'jpeg', 'png', 'svg', 'webp', 'pdf'];
             $destinationPath = public_path('uploads');
 
@@ -645,12 +710,13 @@ class HomeController extends Controller
 
                 // Store the file paths in the database as a JSON array
                 $business->galleryImage = json_encode($filePaths);
-            }
-
+            } 
             // Save the model to the database
             $business->save();
 
             // Redirect back with a success message or do something else
+            //  return back()->with('success', 'Business added successfully');
+
             return redirect()
                 ->route('ownerListing')
                 ->with('success', $editId ? 'Business updated successfully' : 'Business added successfully');
@@ -770,7 +836,8 @@ class HomeController extends Controller
         $businesses = BusinessList::orderBy('created_at', 'desc')->get();
 
         $similer = BusinessList::where('category', $category)
-            ->orderBy('created_at', 'desc')->take(4)
+            ->orderBy('created_at', 'desc')
+            ->take(4)
             ->get();
 
         $Result = [];
@@ -831,7 +898,9 @@ class HomeController extends Controller
         $MasterCategory = Master::orderBy('created_at', 'asc')
             ->where('type', '=', 'category')
             ->get();
-        $businesses = BusinessList::where('userId', $user->id)->get(); // Fetch all businesses from the database
+        $businesses = BusinessList::orderBy('created_at', 'desc')
+            ->where('userId', $user->id)
+            ->get(); // Fetch all businesses from the database
 
         return view('frontend.ownerListing', compact('businesses', 'Mastercity', 'MasterCategory'));
     }
@@ -866,7 +935,7 @@ class HomeController extends Controller
                 ->leftJoin('users_login', 'lead.user_id', '=', 'users_login.id')
                 ->orderBy('lead.created_at', 'desc')
                 ->where('business_id', $list->id)
-                ->where('lead.status', '1')
+                // ->where('lead.status', '1')
                 ->whereDate('lead.created_at', $currentDate)
                 ->get();
 
@@ -875,8 +944,9 @@ class HomeController extends Controller
             $countReview = $countReview + review::where('listing_id', '=', $list->id)->count();
             $countLead =
                 $countLead +
-                Lead::where('status', '=', '1')
-                    ->where('business_id', '=', $list->id)
+                Lead::
+                // where('status', '=', '1')->
+                    where('business_id', '=', $list->id)
                     ->count();
             $countView = $countView + Lead::where('business_id', '=', $list->id)->count();
         }

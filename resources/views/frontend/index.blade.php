@@ -70,33 +70,41 @@
 
                 <!-- .site-banner -->
                 {{-- popup modal box --}}
-                <div class="d-grid justify-content-center my-3">
-                    <!-- Button trigger modal -->
-                    <!-- Modal -->
-                    @if (!Auth::check())
-                        <div class="custom-overlay"></div>
-                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                            aria-hidden="true">
-                            <div class="modal-dialog modal-lg modal-dialog-scrollable modal-dialog-centered">
+                @if (!Auth::check())
+                    <div class="custom-overlay"></div>
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog modal-lg modal-dialog-scrollable modal-dialog-centered">
+                            <!-- Check if the $popup object exists and has a valid 'logo' property -->
+                            @if ($popup && $popup->logo)
                                 <div class="modal-content">
-
-                                    <!-- Check if the user is not logged in -->
                                     <div
                                         class="position-relative modal-body border-warning rounded border bg-image overlay p-0">
                                         <div class="position-absolute top-0 end-0 btn-close-bg px-1 pb-1 m-1">
                                             <button type="button" class="btn-close popup-close-btn "
                                                 data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
-
                                         <img src="{{ URL::to('uploads/' . $popup->logo) }}" alt="Promo banner"
                                             class="img-fluid rounded-3">
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                    @endif
-                </div>
+                            @else
+                                <div class="modal-content " style='background-color:#fff0'>
+                                    <div class="position-relative modal-body  rounded  bg-image  p-0">
+                                        <div class="position-absolute top-0 end-0 btn-close-bg px-1 pb-1 m-1">
+                                            <button type="button" class="btn-close popup-close-btn "
+                                                data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <img src="{{ asset('assets/images/welcome2.png') }}" alt="Default Image"
+                                            class="img-fluid rounded-3">
 
+                                    </div>
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+
+                @endif
 
                 {{-- Desktop categories --}}
                 <div class="business-category desktop-view">
@@ -190,42 +198,27 @@
                             </div>
                             
                             <div class="carousel-inner">
-                                <div class="carousel-item active" data-bs-interval="3000" id="3">
-                                    <div class="">
-                                        <img src="assets/images/home/hero-bg.webp" class="d-block w-100" alt="img1">
+                                @foreach ($IndexPageVideo as $key => $video)
+                                    <div class="carousel-item{{ $key === 0 ? ' active' : '' }}" data-bs-interval="3000">
+                                        <div class="embed-responsive embed-responsive-16by9">
+                                            <iframe class="embed-responsive-item" src="{{ $video->value }}"
+                                                frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
+                                            </iframe>
+                                        </div>
                                     </div>
-                                </div>
-
-                                <div class="carousel-item " data-bs-interval="3000">
-                                    <div class="embed-responsive embed-responsive-16by9" id="1">
-                                        <iframe class="embed-responsive-item "
-                                            src="https://www.youtube.com/embed/YOUR_VIDEO_ID" frameborder="0"
-                                            allowfullscreen></iframe>
-                                    </div>
-                                </div>
-                                <div class="carousel-item" data-bs-interval="3000">
-                                    <div class="embed-responsive embed-responsive-16by9" id="2">
-                                        <iframe class="embed-responsive-item "
-                                            src="https://www.youtube.com/embed/YOUR_VIDEO_ID" frameborder="0"
-                                            allowfullscreen></iframe>
-                                    </div>
-                                </div>
-                                <div class="carousel-item" data-bs-interval="3000">
-                                    <div class="embed-responsive embed-responsive-16by9">
-                                        <video class="embed-responsive-item elVideo" loop="loop" autoplay playsinline
-                                            muted
-                                            src="https://video.wixstatic.com/video/2b2e29_67857aa3bb16417ea7909ddc8d01b6e0/720p/mp4/file.mp4"
-                                            id="video-slider-2"></video>
-                                    </div>
-                                </div>
+                                @endforeach
+                            </div>
+                            <div class="carousel-indicators">
+                                @foreach ($IndexPageVideo as $key => $video)
+                                    <button type="button" data-bs-target="#sliderAutoplaying"
+                                        data-bs-slide-to="{{ $key }}" class="{{ $key === 0 ? 'active' : '' }}">
+                                    </button>
+                                @endforeach
                             </div>
 
                         </div>
                     </div>
                 </div>
-
-
-
 
                 <!-- .business-category -->
                 <div class="trending trending-business">
@@ -391,8 +384,6 @@
                                         <!-- .cities__item -->
                                     </div>
                                 @endforeach
-
-
 
                             </div>
                             <div class="place-slider__nav slick-nav">

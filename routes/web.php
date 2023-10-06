@@ -147,7 +147,7 @@ Route::post('/career', [HomeController::class, 'careerStore'])->name('careerStor
 //bookmark route
 Route::post('/bookmark/{businessId}', [HomeController::class, 'toggleBookmark'])->name('bookmark.toggle');
 Route::get('/searchFilter/{category}/{city}/{highlight}', [HomeController::class, 'searchFilter'])->name('searchFilter');
-Route::get('/update-places', [HomeController::class, 'updatePlaces'])->name('updatePlaces');
+Route::put('/update-places', [HomeController::class, 'updatePlaces'])->name('updatePlaces');
 Route::get('/ownerProfile', [HomeController::class, 'ownerProfile'])->name('ownerProfile');
 Route::post('/ownerProfile/update-profile', [HomeController::class, 'updateprofile'])->name('updateprofile');
 Route::get('/change-password-form', [HomeController::class, 'changePassword'])->name('changePassword');

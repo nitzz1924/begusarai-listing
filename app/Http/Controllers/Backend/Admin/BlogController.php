@@ -191,10 +191,35 @@ class BlogController extends Controller
      * @param  \App\Models\blog  $blog
      * @return \Illuminate\Http\Response
      */
+
     public function destroy($id)
     {
-        $blog = Blog::where(['id' => $id])->delete();
-        return back();
+        try {
+            // Find the Blog record by ID
+            $blog = Blog::find($id);
+
+            if (!$blog) {
+                return back()->with('error', 'Blog not found.');
+            }
+
+            // Delete the associated image file from storage
+            if ($blog->image) {
+                $imagePath = public_path('uploads') . '/' . $blog->image;
+
+                // Check if the file exists before attempting to delete it
+                if (file_exists($imagePath)) {
+                    unlink($imagePath);
+                }
+            }
+
+            // Delete the Blog record from the database
+            $blog->delete();
+
+            return back()->with('success', 'Blog and associated image deleted successfully');
+        } catch (\Exception $e) {
+            // Handle any exceptions that may occur during deletion
+            return back()->with('error', 'Error: ' . $e->getMessage());
+        }
     }
 }
 
