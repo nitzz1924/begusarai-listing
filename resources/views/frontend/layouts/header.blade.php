@@ -11,17 +11,9 @@ $Mastercity = Master::orderBy('created_at', 'asc')
 <header id="header" class="site-header" style="border-bottom: 1px solid #eeeeee;">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-xl-6 col-sm-5 d-flex align-items-center justify-content-between">
-                <div class="site">
+            <div class="col-xl-6 col-sm-5 d-flex align-items-center ">
 
-                    {{-- desktop navigation --}}
-                    <div class="site__brand">
-                        <a title="Logo" href="/" class="site__brand__logo"><img
-                                src="{{ asset('assets/images/begusarai-logo.png') }}" alt="Begusarai" /></a>
-                    </div>
-                    <!-- .site__brand -->
-                </div>
-                <div class="site__menu">
+                <div class="site__menu me-2">
                     <a title="Menu Icon" href="#" class="site__menu__icon">
                         <i class="las la-bars la-24-black"></i>
                     </a>
@@ -154,8 +146,81 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                 </div><!-- .site__menu -->
 
                 {{-- desktop navigation --}}
-
+                <div class="site">
+                    {{-- desktop navigation --}}
+                    <div class="site__brand">
+                        <a title="Logo" href="/" class="site__brand__logo"><img
+                                src="{{ asset('assets/images/begusarai-logo.png') }}" alt="Begusarai" /></a>
+                    </div>
+                    <!-- .site__brand -->
+                </div>
                 <!-- .site -->
+
+                {{-- login dropdown --}}
+                <div class="ms-auto login-container">
+                    @guest
+                        <div class="popup__user login__box open-form">
+                            <a title="Login" href="#" class="open-login btn">Login</a>
+                        </div><!-- .popup__user -->
+                    @else
+                        <div class="popup__menu popup__box login__box">
+                            <ul class="sub-menu">
+                                <?php $user = User_Login::find(auth()->user()->id); ?>
+
+                                @if (Auth::user()->type == 'Guest')
+                                    <li>
+                                        <a class="avatar" href="">
+                                            @if ($user->image)
+                                                <img src="{{ URL::to('/uploads/' . $user->image) }}" title=""
+                                                    alt="">
+                                            @else
+                                                <img src="https://wp.getgolo.com/country-guide/wp-content/themes/golo/assets/images/default-user-image.png"
+                                                    title="guest" alt="guest">
+                                            @endif
+                                            {{-- <span>{{ $user->name }}</span> --}}
+                                        </a>
+                                        <ul class="sub-menu login-menu">
+                                            <li class=""><a href="/ownerProfile">Profile</a></li>
+                                            <li class=""><a href="/ownerWishlist">My Wishlist</a></li>
+                                            <li>
+                                                <a href="/logout">
+                                                    <span>Logout</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                @elseif (Auth::user()->type == 'Owner')
+                                    <li>
+                                        <a class="avatar" href="">
+                                            @if ($user->image)
+                                                <img src="{{ URL::to('/uploads/' . $user->image) }}" title=""
+                                                    alt="">
+                                            @else
+                                                <img src="{{ asset('assets/images/users/default.png') }}"
+                                                    title="Default Avatar" alt="Default Avatar">
+                                            @endif
+                                            {{-- <span>{{ $user->name }}</span> --}}
+                                        </a>
+                                        <ul class="sub-menu login-menu">
+                                            <li class=""><a href="/ownerDashboard">Dashboard</a></li>
+                                            <li class=""><a href="/ownerListing">My Places</a></li>
+                                            <li class=""><a href="/ownerWishlist">My Wishlist</a></li>
+                                            {{-- <li class=""><a href="/businessOwnerPage">Author Listing</a></li> --}}
+                                            <li>
+                                                <hr class="dropdown-divider">
+                                            </li>
+                                            <li>
+                                                <a href="/logout">
+                                                    <span>Logout</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                @endif
+                            </ul>
+                        </div><!-- .popup__menu -->
+                    @endguest
+                </div>
             </div>
             <!-- .col-md-6 -->
 
@@ -256,11 +321,11 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                                     <li class=""><a href="/ownerDashboard">Dashboard</a>
                                     </li>
                                     <!-- <li class=""><a href="/businessOwnerPage">My Page</a>
-                                    </li> -->
+                                        </li> -->
                                     <li class=""><a href="/ownerListing">My Places</a>
                                     </li>
                                     <!-- <li class=""><a href="/ownerLeads">Leads</a>
-                                    </li> -->
+                                        </li> -->
                                     <li class=""><a href="/ownerWishlist">My Wishlist</a>
                                     </li>
                                     {{-- <li class=""><a href="/businessOwnerPage">Author Listing</a>
@@ -393,23 +458,23 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                             </form>
                             <!-- Without Validation Error Form -->
                             <!-- <form action="{{ route('loginForm') }}" method="POST" class="form-log form-content"
-                                id="login">
-                                @csrf
-                                <div class="field-input">
-                                    <input type="tel" placeholder="Enter Phone Number" value=""
-                                        name="mobileNumber" pattern="[0-9]{10}" minlength="10" maxlength="10"
-                                        id="mobileNumber" required />
-                                     
-                                </div>
-                                <div class="field-input">
-                                    <input type="password" placeholder="Password" value="" name="password"
-                                        id="password" required />
-                                    
-                                </div>
-                                <a title="Forgot password" class="forgot_pass" href="/resetPassword">Forgot
-                                    password</a>
-                                <input type="submit" name="submit" value="Login" id="loginSubmit" />
-                            </form> -->
+                                    id="login">
+                                    @csrf
+                                    <div class="field-input">
+                                        <input type="tel" placeholder="Enter Phone Number" value=""
+                                            name="mobileNumber" pattern="[0-9]{10}" minlength="10" maxlength="10"
+                                            id="mobileNumber" required />
+                                         
+                                    </div>
+                                    <div class="field-input">
+                                        <input type="password" placeholder="Password" value="" name="password"
+                                            id="password" required />
+                                        
+                                    </div>
+                                    <a title="Forgot password" class="forgot_pass" href="/resetPassword">Forgot
+                                        password</a>
+                                    <input type="submit" name="submit" value="Login" id="loginSubmit" />
+                                </form> -->
                             <!-- display error message in login Form  -->
 
 
@@ -515,7 +580,7 @@ $Mastercity = Master::orderBy('created_at', 'asc')
             </div>
 
         </nav>
-    </div>  
+    </div>
 </header>
 {{-- -----------------------------------------------reguster form ------------------------------------------ --}}
 <script>

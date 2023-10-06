@@ -137,11 +137,10 @@
                             <!-- .place-slider__nav -->
                         </div>
 
-
-
                     </div>
                 </div>
 
+                
                 {{-- Mobile categories --}}
 
                 <div class="business-category mobile-view">
@@ -184,19 +183,29 @@
                         </h2> --}}
 
                         <div id="sliderAutoplaying" class="carousel slide" data-bs-ride="carousel">
+                            <div class="carousel-indicators">
+                                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                            </div>
+                            
                             <div class="carousel-inner">
-                                <div class="carousel-item active" data-bs-interval="3000">
-                                    <div class="embed-responsive embed-responsive-16by9">
-                                        <video class="embed-responsive-item elVideo" loop="loop" autoplay playsinline
-                                            muted
-                                            src="https://video.wixstatic.com/video/2b2e29_67857aa3bb16417ea7909ddc8d01b6e0/720p/mp4/file.mp4"
-                                            id="video-slider-1"></video>
+                                <div class="carousel-item active" data-bs-interval="3000" id="3">
+                                    <div class="">
+                                        <img src="assets/images/home/hero-bg.webp" class="d-block w-100" alt="img1">
                                     </div>
                                 </div>
 
+                                <div class="carousel-item " data-bs-interval="3000">
+                                    <div class="embed-responsive embed-responsive-16by9" id="1">
+                                        <iframe class="embed-responsive-item "
+                                            src="https://www.youtube.com/embed/YOUR_VIDEO_ID" frameborder="0"
+                                            allowfullscreen></iframe>
+                                    </div>
+                                </div>
                                 <div class="carousel-item" data-bs-interval="3000">
-                                    <div class="embed-responsive embed-responsive-16by9">
-                                        <iframe class="embed-responsive-item"
+                                    <div class="embed-responsive embed-responsive-16by9" id="2">
+                                        <iframe class="embed-responsive-item "
                                             src="https://www.youtube.com/embed/YOUR_VIDEO_ID" frameborder="0"
                                             allowfullscreen></iframe>
                                     </div>
@@ -210,6 +219,7 @@
                                     </div>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 </div>
@@ -621,4 +631,5 @@
             myModal.show();
         });
     </script>
+
 @endsection

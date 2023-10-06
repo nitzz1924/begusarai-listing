@@ -34,23 +34,20 @@
 {{-- <link rel="shortcut icon" href="images/favicon.ico" /> --}}
 <!-- Style CSS -->
 <link rel="stylesheet" type="text/css" href="{{ asset('/assets/frontend-assets/fonts/jost/stylesheet.css') }}" />
-<link rel="stylesheet" type="text/css"
-    href="{{ asset('/assets/frontend-assets/libs/line-awesome/css/line-awesome.min.css') }}" />
-<link rel="stylesheet" type="text/css"
-    href="{{ asset('/assets/frontend-assets/libs/fontawesome-pro/css/fontawesome.css') }}" />
-<link rel="stylesheet" type="text/css"
-    href="{{ asset('/assets/frontend-assets/libs/bootstrap/css/bootstrap.min.css') }}" />
+<link rel="stylesheet" type="text/css" href="{{ asset('/assets/frontend-assets/libs/line-awesome/css/line-awesome.min.css') }}" />
+<link rel="stylesheet" type="text/css" href="{{ asset('/assets/frontend-assets/libs/fontawesome-pro/css/fontawesome.css') }}" />
+<link rel="stylesheet" type="text/css" href="{{ asset('/assets/frontend-assets/libs/bootstrap/css/bootstrap.min.css') }}" />
 <link rel="stylesheet" type="text/css" href="{{ asset('/assets/frontend-assets/libs/slick/slick-theme.css') }}" />
 <link rel="stylesheet" type="text/css" href="{{ asset('/assets/frontend-assets/libs/slick/slick.css') }}" />
-<link rel="stylesheet" type="text/css"
-    href="{{ asset('/assets/frontend-assets/libs/quilljs/css/quill.bubble.css') }}" />
+<link rel="stylesheet" type="text/css" href="{{ asset('/assets/frontend-assets/libs/quilljs/css/quill.bubble.css') }}" />
 <link rel="stylesheet" type="text/css" href="{{ asset('/assets/frontend-assets/libs/quilljs/css/quill.core.css') }}" />
 <link rel="stylesheet" type="text/css" href="{{ asset('/assets/frontend-assets/libs/quilljs/css/quill.snow.css') }}" />
 <link rel="stylesheet" type="text/css" href="{{ asset('/assets/frontend-assets/libs/chosen/chosen.min.css') }}" />
-<link rel="stylesheet" type="text/css"
-    href="{{ asset('/assets/frontend-assets/libs/datetimepicker/jquery.datetimepicker.min.css') }}" />
+<link rel="stylesheet" type="text/css" href="{{ asset('/assets/frontend-assets/libs/datetimepicker/jquery.datetimepicker.min.css') }}" />
 <link rel="stylesheet" type="text/css" href="{{ asset('/assets/frontend-assets/libs/venobox/venobox.css') }}" />
 <link rel="stylesheet" type="text/css" href="{{ asset('/assets/frontend-assets/css/style.css') }}" />
 <link rel="stylesheet" type="text/css" href="{{ asset('/assets/frontend-assets/css/responsive.css') }}" />
 
 <script src="https://kit.fontawesome.com/40bf30a2ca.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+

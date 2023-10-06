@@ -583,3 +583,24 @@ body.modal-open .custom-overlay {
     color: #23D3D3;
     border: 2px;
 }
+
+.login-container {
+    position: relative;
+}
+
+
+.login__box {
+    border-bottom: 0 !important;
+    padding: 0 !important;
+    /* position: absolute; */
+}
+
+.login-menu {
+    position: absolute;
+    background-color: white;
+    width: 160px;
+    padding: 10px !important;
+    border-radius: 10px;
+    margin-top: 0 !important;
+    right: -25%;
+}
