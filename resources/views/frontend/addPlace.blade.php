@@ -537,18 +537,22 @@
                                         <h2 class="steps">Step 4 - 4</h2>
                                     </div>
                                 </div> <br><br>
-                                <h2 class="purple-text text-center" style='color:green'><strong>SUCCESS !</strong></h2>
+                                <h2 class="purple-text text-center" style='color:darksalmon'>
+                                    <strong>Processing ... </strong>
+                                    <i class="las la-cogs" style="font-size: 70px;"></i>
+                                </h2>
+
                                 <br>
                                 <div class="row justify-content-center">
-                                    <div class="col-3"> <img src="https://i.imgur.com/GwStPmg.png" class="fit-image">
-                                    </div>
+
                                 </div> <br><br>
                                 <div class="row justify-content-center">
                                     <div class="col-7 text-center">
-                                        <h5 class="purple-text text-center">You Have Successfully Signed Up</h5>
+                                        <h5 class="purple-text text-center"></h5>
                                     </div>
                                 </div>
                             </div>
+
                         </fieldset>
                     </form>
                 </div>

@@ -935,7 +935,7 @@ class HomeController extends Controller
                 ->leftJoin('users_login', 'lead.user_id', '=', 'users_login.id')
                 ->orderBy('lead.created_at', 'desc')
                 ->where('business_id', $list->id)
-                ->where('lead.status', '1')
+                // ->where('lead.status', '1')
                 ->whereDate('lead.created_at', $currentDate)
                 ->get();
 
@@ -944,8 +944,9 @@ class HomeController extends Controller
             $countReview = $countReview + review::where('listing_id', '=', $list->id)->count();
             $countLead =
                 $countLead +
-                Lead::where('status', '=', '1')
-                    ->where('business_id', '=', $list->id)
+                Lead::
+                // where('status', '=', '1')->
+                    where('business_id', '=', $list->id)
                     ->count();
             $countView = $countView + Lead::where('business_id', '=', $list->id)->count();
         }
