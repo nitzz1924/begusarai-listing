@@ -2,225 +2,6 @@
 @section('title', 'Add Place')
 @section('content')
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0
-        }
-
-        html {
-            height: 100%
-        }
-
-        p {
-            color: grey
-        }
-
-        #heading {
-            text-transform: uppercase;
-            color: #23d3d3;
-            font-weight: normal
-        }
-
-        #msform {
-            text-align: center;
-            position: relative;
-            margin-top: 20px
-        }
-
-        #msform fieldset {
-            background: white;
-            border: 0 none;
-            border-radius: 0.5rem;
-            box-sizing: border-box;
-            width: 100%;
-            margin: 0;
-            padding-bottom: 20px;
-            position: relative
-        }
-
-        .form-card {
-            text-align: left
-        }
-
-        #msform fieldset:not(:first-of-type) {
-            display: none
-        }
-
-        #msform input,
-        #msform textarea {
-            padding: 8px 15px 8px 15px;
-            border: 1px solid #ccc;
-            border-radius: 0px;
-            margin-bottom: 25px;
-            margin-top: 2px;
-            width: 100%;
-            box-sizing: border-box;
-            
-            color: #2C3E50;
-            background-color: #ECEFF1;
-            font-size: 16px;
-            letter-spacing: 1px
-        }
-
-        #msform input:focus,
-        #msform textarea:focus {
-            -moz-box-shadow: none !important;
-            -webkit-box-shadow: none !important;
-            box-shadow: none !important;
-            border: 1px solid #23d3d3;
-            outline-width: 0
-        }
-
-        #msform .action-button {
-            width: 100px;
-            background: #23d3d3;
-            font-weight: bold;
-            color: white;
-            border: 0 none;
-            border-radius: 0px;
-            cursor: pointer;
-            padding: 10px 5px;
-            margin: 10px 0px 10px 5px;
-            float: right
-        }
-
-        #msform .action-button:hover,
-        #msform .action-button:focus {
-            background-color: #311B92
-        }
-
-        #msform .action-button-previous {
-            width: 100px;
-            background: #616161;
-            font-weight: bold;
-            color: white;
-            border: 0 none;
-            border-radius: 0px;
-            cursor: pointer;
-            padding: 10px 5px;
-            margin: 10px 5px 10px 0px;
-            float: right
-        }
-
-        #msform .action-button-previous:hover,
-        #msform .action-button-previous:focus {
-            background-color: #000000
-        }
-
-        .card {
-            z-index: 0;
-            border: none;
-            position: relative
-        }
-
-        .fs-title {
-            font-size: 25px;
-            color: #23d3d3;
-            margin-bottom: 15px;
-            font-weight: normal;
-            text-align: left
-        }
-
-        .purple-text {
-            color: #23d3d3;
-            font-weight: normal
-        }
-
-        .steps {
-            font-size: 25px;
-            color: gray;
-            margin-bottom: 10px;
-            font-weight: normal;
-            text-align: right
-        }
-
-        .fieldlabels {
-            color: gray;
-            text-align: left
-        }
-
-        #progressbar {
-            margin-bottom: 30px;
-            overflow: hidden;
-            color: lightgrey
-        }
-
-        #progressbar .active {
-            color: #23d3d3
-        }
-
-        #progressbar li {
-            list-style-type: none;
-            font-size: 15px;
-            width: 25%;
-            float: left;
-            position: relative;
-            font-weight: 400
-        }
-
-        #progressbar #account:before {
-            font-family: FontAwesome;
-            content: "\f13e"
-        }
-
-        #progressbar #personal:before {
-            font-family: FontAwesome;
-            content: "\f007"
-        }
-
-        #progressbar #payment:before {
-            font-family: FontAwesome;
-            content: "\f030"
-        }
-
-        #progressbar #confirm:before {
-            font-family: FontAwesome;
-            content: "\f00c"
-        }
-
-        #progressbar li:before {
-            width: 50px;
-            height: 50px;
-            line-height: 45px;
-            display: block;
-            font-size: 20px;
-            color: #ffffff;
-            background: lightgray;
-            border-radius: 50%;
-            margin: 0 auto 10px auto;
-            padding: 2px
-        }
-
-        #progressbar li:after {
-            content: '';
-            width: 100%;
-            height: 2px;
-            background: lightgray;
-            position: absolute;
-            left: 0;
-            top: 25px;
-            z-index: -1
-        }
-
-        #progressbar li.active:before,
-        #progressbar li.active:after {
-            background: #23d3d3
-        }
-
-        .progress {
-            height: 20px
-        }
-
-        .progress-bar {
-            background-color: #23d3d3
-        }
-
-        .fit-image {
-            width: 100%;
-            object-fit: cover
-        }
-    </style>
     <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="col-11 col-sm-10 col-md-10 col-lg-6 col-xl-5 text-center p-0 mt-3 mb-2">
@@ -338,8 +119,8 @@
 
                                 <div class="mb-3">
                                     <label class="fieldlabels">City:</label>
-                                    <select data-placeholder="Select City" class="chosen-select form-control"
-                                        id="city" name="city">
+                                    <select data-placeholder="Select City" class=" form-control" id="city"
+                                        name="city">
                                         <option value="" selected disabled>Select City</option>
                                         @foreach ($City as $value)
                                             <option value="{{ $value->title }}">{{ $value->title }}</option>
@@ -353,8 +134,8 @@
                                 <label class="fieldlabels">Booking Type :</label>
 
                                 <div class="mb-3">
-                                    <select data-placeholder="Select Booking Type" class="chosen-select form-control"
-                                        id="bookingType" name="bookingType">
+                                    <select data-placeholder="Select Booking Type" class=" form-control" id="bookingType"
+                                        name="bookingType">
                                         <option value="" selected disabled>Select Booking Type</option>
                                         @foreach ($bookingType as $value)
                                             <option value="{{ $value->title }}">{{ $value->title }}</option>
@@ -394,7 +175,7 @@
                                 <label class="fieldlabels mb-3">Highlight :</label>
                                 <br>
                                 @foreach ($Highlight as $value)
-                                    <label for="highlight_{{ $value->id }}" class="fieldlabels">
+                                    <label for="highlight_{{ $value->id }}" class="fieldlabels custom-checkbox">
                                         <input type="checkbox" name="highlight[]" id="highlight_{{ $value->id }}"
                                             value="{{ $value->title }}">
                                         <span class="checkmark"></span>
@@ -517,7 +298,7 @@
                                     @enderror
                                 </div>
 
-                            
+
 
                             </div>
 
@@ -740,6 +521,19 @@
             } else {
                 // Handle cases where the selected file is not a PDF
                 pdfPreview.src = 'images/no-image.png'; // Display a default image
+            }
+        });
+    </script>
+
+    <script>
+        // Handle the checkbox state
+        $('.custom-checkbox input[type="checkbox"]').on('change', function() {
+            if ($(this).is(':checked')) {
+                // Checkbox is checked
+                $(this).next('.checkmark').css('background-color', '#23d3d3'); // Update selected color
+            } else {
+                // Checkbox is unchecked
+                $(this).next('.checkmark').css('background-color', '#ddd'); // Revert to normal color
             }
         });
     </script>

@@ -1,281 +1,7 @@
 @extends('frontend.layouts.master')
 @section('title', 'Add/Edit Place')
 @section('content')
-    <style>
-        /* Custom styles for the delete modal */
-        .modal-content {
-            background-color: #ffffff;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            animation: fadeInUp 0.3s ease;
-        }
 
-        .modal-header {
-            background-color: #dc3545;
-            color: #fff;
-            border-bottom: none;
-        }
-
-        .modal-title {
-            font-size: 1.5rem;
-        }
-
-        .modal-body {
-            padding: 20px;
-        }
-
-        .modal-footer {
-            border-top: none;
-        }
-
-        .btn-danger {
-            background-color: #dc3545;
-            border-color: #dc3545;
-        }
-
-        .btn-danger:hover {
-            background-color: #c82333;
-            border-color: #bd2130;
-        }
-
-        /* Animation keyframes */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-    </style>
-    <style>
-        .img_preview {
-            max-width: 100px;
-            max-height: 100px;
-            margin-top: 10px;
-        }
-
-        * {
-            margin: 0;
-            padding: 0
-        }
-
-        html {
-            height: 100%
-        }
-
-        p {
-            color: grey
-        }
-
-        #heading {
-            text-transform: uppercase;
-            color: #23d3d3;
-            font-weight: normal
-        }
-
-        #msform {
-            text-align: center;
-            position: relative;
-            margin-top: 20px
-        }
-
-        #msform fieldset {
-            background: white;
-            border: 0 none;
-            border-radius: 0.5rem;
-            box-sizing: border-box;
-            width: 100%;
-            margin: 0;
-            padding-bottom: 20px;
-            position: relative
-        }
-
-        .form-card {
-            text-align: left
-        }
-
-        #msform fieldset:not(:first-of-type) {
-            display: none
-        }
-
-        #msform input,
-        #msform textarea {
-            padding: 8px 15px 8px 15px;
-            border: 1px solid #ccc;
-            border-radius: 0px;
-            margin-bottom: 25px;
-            margin-top: 2px;
-            width: 100%;
-            box-sizing: border-box;
-           
-            color: #2C3E50;
-            background-color: #ECEFF1;
-            font-size: 16px;
-            letter-spacing: 1px
-        }
-
-        #msform input:focus,
-        #msform textarea:focus {
-            -moz-box-shadow: none !important;
-            -webkit-box-shadow: none !important;
-            box-shadow: none !important;
-            border: 1px solid #23d3d3;
-            outline-width: 0
-        }
-
-        #msform .action-button {
-            width: 100px;
-            background: #23d3d3;
-            font-weight: bold;
-            color: white;
-            border: 0 none;
-            border-radius: 0px;
-            cursor: pointer;
-            padding: 10px 5px;
-            margin: 10px 0px 10px 5px;
-            float: right
-        }
-
-        #msform .action-button:hover,
-        #msform .action-button:focus {
-            background-color: #311B92
-        }
-
-        #msform .action-button-previous {
-            width: 100px;
-            background: #616161;
-            font-weight: bold;
-            color: white;
-            border: 0 none;
-            border-radius: 0px;
-            cursor: pointer;
-            padding: 10px 5px;
-            margin: 10px 5px 10px 0px;
-            float: right
-        }
-
-        #msform .action-button-previous:hover,
-        #msform .action-button-previous:focus {
-            background-color: #000000
-        }
-
-        .card {
-            z-index: 0;
-            border: none;
-            position: relative
-        }
-
-        .fs-title {
-            font-size: 25px;
-            color: #23d3d3;
-            margin-bottom: 15px;
-            font-weight: normal;
-            text-align: left
-        }
-
-        .purple-text {
-            color: #23d3d3;
-            font-weight: normal
-        }
-
-        .steps {
-            font-size: 25px;
-            color: gray;
-            margin-bottom: 10px;
-            font-weight: normal;
-            text-align: right
-        }
-
-        .fieldlabels {
-            color: gray;
-            text-align: left
-        }
-
-        #progressbar {
-            margin-bottom: 30px;
-            overflow: hidden;
-            color: lightgrey
-        }
-
-        #progressbar .active {
-            color: #23d3d3
-        }
-
-        #progressbar li {
-            list-style-type: none;
-            font-size: 15px;
-            width: 25%;
-            float: left;
-            position: relative;
-            font-weight: 400
-        }
-
-        #progressbar #account:before {
-            font-family: FontAwesome;
-            content: "\f13e"
-        }
-
-        #progressbar #personal:before {
-            font-family: FontAwesome;
-            content: "\f007"
-        }
-
-        #progressbar #payment:before {
-            font-family: FontAwesome;
-            content: "\f030"
-        }
-
-        #progressbar #confirm:before {
-            font-family: FontAwesome;
-            content: "\f00c"
-        }
-
-        #progressbar li:before {
-            width: 50px;
-            height: 50px;
-            line-height: 45px;
-            display: block;
-            font-size: 20px;
-            color: #ffffff;
-            background: lightgray;
-            border-radius: 50%;
-            margin: 0 auto 10px auto;
-            padding: 2px
-        }
-
-        #progressbar li:after {
-            content: '';
-            width: 100%;
-            height: 2px;
-            background: lightgray;
-            position: absolute;
-            left: 0;
-            top: 25px;
-            z-index: -1
-        }
-
-        #progressbar li.active:before,
-        #progressbar li.active:after {
-            background: #23d3d3
-        }
-
-        .progress {
-            height: 20px
-        }
-
-        .progress-bar {
-            background-color: #23d3d3
-        }
-
-        .fit-image {
-            width: 100%;
-            object-fit: cover
-        }
-    </style>
     <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="col-11 col-sm-10 col-md-10 col-lg-6 col-xl-5 text-center p-0 mt-3 mb-2">
@@ -381,7 +107,7 @@
                                     </option>
                                 </select>
 
-                                <div id="textBoxContainer" style="display: <?php $business->dNumber != '' ? 'block' : 'none'; ?>" class="mb-3">
+                                <div id="textBoxContainer" style="display: <?php $business->dNumber != '' ? 'block' : 'none'; ?>" class="my-3">
                                     <label for="textBox">Enter the details:</label>
                                     <input type="text" id="dNumber"
                                         value="{{ isset($business) ? $business->dNumber : old('dNumber') }}" name="dNumber"
@@ -406,8 +132,8 @@
 
                                 <div class="mb-3">
                                     <label class="fieldlabels">City:</label>
-                                    <select data-placeholder="Select City" class="chosen-select form-control"
-                                        id="city" name="city">
+                                    <select data-placeholder="Select City" class=" form-control" id="city"
+                                        name="city">
                                         <option value="" selected disabled>Select City</option>
                                         @foreach ($data['City'] as $value)
                                             <option
@@ -423,8 +149,8 @@
                                 <label class="fieldlabels">Booking Type :</label>
 
                                 <div class="mb-3">
-                                    <select data-placeholder="Select Booking Type" class="chosen-select form-control"
-                                        id="bookingType" name="bookingType">
+                                    <select data-placeholder="Select Booking Type" class=" form-control" id="bookingType"
+                                        name="bookingType">
                                         <option selected></option>
                                         @foreach ($data['bookingType'] as $value)
                                             <option
@@ -468,14 +194,13 @@
                                 <label class="fieldlabels mb-3">Highlight :</label>
                                 <br>
                                 @foreach ($data['Highlight'] as $value)
-                                    <label for="highlight_{{ $value->id }}">
+                                    <label for="highlight_{{ $value->id }}" class="fieldlabels custom-checkbox">
                                         <input type="checkbox" name="highlight[]" id="highlight_{{ $value->id }}"
                                             value="{{ $value->title }}"
                                             {{ isset($business) && in_array($value->title, $business->highlight) ? 'checked' : '' }}>
+                                        <span class="checkmark"></span>
                                         {{ $value->title }}
-                                        <span class="checkmark">
-                                            <i class="la la-check"></i>
-                                        </span>
+                                        {{-- <i class="la la-check"></i> --}}
                                     </label>
                                 @endforeach
 
@@ -546,9 +271,9 @@
                                 <input type="url" placeholder="Your video URL" name="video" id="video"
                                     value="{{ isset($business) ? $business->video : old('video') }}">
 
-                                <div class='d-flex  mb-4'>
+                                <div class='row mb-4'>
 
-                                    <div class="col-md-6">
+                                    <div class="col-md-12">
                                         <div class="form-group">
                                             <label class="fieldlabels">Cover image:</label>
                                             <div class="input-group">
@@ -557,206 +282,206 @@
                                                         class="custom-file-input upload-file" data-max-size="1024">
                                                     <label class="custom-file-label" for="coverImage">Choose file</label>
                                                 </div>
-                                                <img class="img_preview"
+                                                <div>
+
+                                                    <img class="rounded-3 img-fluid mt-3"
                                                     src="{{ isset($business) && $business->coverImage ? asset('uploads/' . $business->coverImage) : asset('images/no-image.png') }}"
                                                     alt="" />
+                                                </div>
                                             </div>
                                             @error('coverImage')
                                                 <div class="has-error mt-2">{{ $message }}</div>
                                             @enderror
                                         </div>
                                     </div>
+                                    
+                                
 
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="fieldlabels">Author:</label>
-                                            <div class="input-group">
-                                                <div class="custom-file">
-                                                    <input type="file" name="logo" id="logo"
-                                                        class="custom-file-input upload-file" data-max-size="1024">
-                                                    <label class="custom-file-label" for="logo">Choose file</label>
-                                                </div>
-                                                <img class="img_preview"
-                                                    src="{{ isset($business) && $business->logo ? asset('uploads/' . $business->logo) : asset('images/no-image.png') }}"
-                                                    alt="" />
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="fieldlabels">Author:</label>
+                                        <div class="input-group">
+                                            <div class="custom-file">
+                                                <input type="file" name="logo" id="logo"
+                                                    class="custom-file-input upload-file" data-max-size="1024">
+                                                <label class="custom-file-label" for="logo">Choose file</label>
                                             </div>
-                                            @error('logo')
-                                                <div class="has-error mt-2">{{ $message }}</div>
-                                            @enderror
+                                            <div>
+
+                                                <img class=" rounded-3 img-fluid mt-3"
+                                                src="{{ isset($business) && $business->logo ? asset('uploads/' . $business->logo) : asset('images/no-image.png') }}"
+                                                alt="" />
+                                            </div>
                                         </div>
+                                        @error('logo')
+                                            <div class="has-error mt-2">{{ $message }}</div>
+                                        @enderror
                                     </div>
-
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="fieldlabels">Business Photos (Drag & Drop Images Here):</label>
-                                    <div id="drop-area" class="border rounded p-3">
-                                        <label for="galleryImage" class="custom-file-label">Choose files</label>
-                                        <input type="file" name="galleryImage[]" id="galleryImage"
-                                            class="upload-file" data-max-size="1024" multiple accept="image/*">
-                                        <input type="hidden" name="galleryImageCount" id="galleryImageCount"
-                                            value="0">
-                                        <div class="selected-files-count mt-2"></div>
-                                    </div>
-                                    @error('galleryImage')
-                                        <div class="has-error mt-2">{{ $message }}</div>
-                                    @enderror
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="fieldlabels">Business Ownership Proof (Upload PDF):</label>
-                                    <div class="input-group">
-                                        <div class="custom-file">
-                                            <input type="file" name="documentImage" id="documentImage"
-                                                class="custom-file-input upload-file" accept=".pdf">
-                                            <label class="custom-file-label" for="documentImage">Choose file</label>
-                                        </div>
-                                        <img class="img_preview"
-                                            src="{{ isset($business) && $business->documentImage ? asset('uploads/' . $business->documentImage) : asset('images/no-image.png') }}"
-                                            alt="" />
-                                    </div>
-                                    @error('documentImage')
-                                        <div class="has-error mt-2">{{ $message }}</div>
-                                    @enderror
                                 </div>
 
                             </div>
 
-                            <input type="submit" name="submit" value="Submit" class="next action-button"
-                                id="upload-btn" />
-                            <input type="button" name="previous" class="previous action-button-previous"
-                                value="Previous" />
-                        </fieldset>
-
-                         <fieldset>
-                            <div class="form-card">
-                                <div class="row">
-                                    <div class="col-7">
-                                        <h2 class="fs-title">Finish:</h2>
-                                    </div>
-                                    <div class="col-5">
-                                        <h2 class="steps">Step 4 - 4</h2>
-                                    </div>
-                                </div> <br><br>
-                                <h2 class="purple-text text-center" style='color:darksalmon'>
-                                    <strong>Processing ... </strong>
-                                    <i class="las la-cogs" style="font-size: 70px;"></i>
-                                </h2>
-
-                                <br>
-                                <div class="row justify-content-center">
-
-                                </div> <br><br>
-                                <div class="row justify-content-center">
-                                    <div class="col-7 text-center">
-                                        <h5 class="purple-text text-center"></h5>
-                                    </div>
+                            <div class="form-group">
+                                <label class="fieldlabels">Business Photos (Drag & Drop Images Here):</label>
+                                <div id="drop-area" class="border rounded p-3">
+                                    {{-- <label for="galleryImage" class="custom-file-label">Choose files for
+                                            gallery</label> --}}
+                                    <input type="file" name="galleryImage[]" id="galleryImage" class="upload-file mb-0"
+                                        data-max-size="1024" multiple accept="image/*">
+                                    <input type="hidden" name="galleryImageCount" id="galleryImageCount"
+                                        value="0">
+                                    <div class="selected-files-count mt-2"></div>
                                 </div>
+                                @error('galleryImage')
+                                    <div class="has-error mt-2">{{ $message }}</div>
+                                @enderror
                             </div>
 
-                        </fieldset>
-                    </form>
+                            <div class="form-group">
+                                <label class="fieldlabels">Business Ownership Proof (Upload PDF):</label>
+                                <div class="input-group">
+                                    <div class="custom-file">
+                                        <input type="file" name="documentImage" id="documentImage"
+                                            class="custom-file-input upload-file" accept=".pdf">
+                                        <label class="custom-file-label" for="documentImage">Choose file</label>
+                                    </div>
+                                    <img class="img_preview"
+                                        src="{{ isset($business) && $business->documentImage ? asset('uploads/' . $business->documentImage) : asset('images/no-image.png') }}"
+                                        alt="" />
+                                </div>
+                                @error('documentImage')
+                                    <div class="has-error mt-2">{{ $message }}</div>
+                                @enderror
+                            </div>
+
                 </div>
+
+                <input type="submit" name="submit" value="Submit" class="next action-button" id="upload-btn" />
+                <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
+                </fieldset>
+
+                <fieldset>
+                    <div class="form-card">
+                        <div class="row">
+                            <div class="col-7">
+                                <h2 class="fs-title">Finish:</h2>
+                            </div>
+                            <div class="col-5">
+                                <h2 class="steps">Step 4 - 4</h2>
+                            </div>
+                        </div> <br><br>
+                        <h2 class="purple-text text-center" style='color:darksalmon'>
+                            <strong>Processing ... </strong>
+                            <i class="las la-cogs" style="font-size: 70px;"></i>
+                        </h2>
+
+                        <br>
+                        <div class="row justify-content-center">
+
+                        </div> <br><br>
+                        <div class="row justify-content-center">
+                            <div class="col-7 text-center">
+                                <h5 class="purple-text text-center"></h5>
+                            </div>
+                        </div>
+                    </div>
+
+                </fieldset>
+                </form>
             </div>
         </div>
     </div>
-     
+    </div>
+
 
     <script>
-       $(document).ready(function () {
-    var current_fs, next_fs, previous_fs; // fieldsets
-    var opacity;
-    var current = 1;
-    var steps = $("fieldset").length;
+        $(document).ready(function() {
+            var current_fs, next_fs, previous_fs; // fieldsets
+            var opacity;
+            var current = 1;
+            var steps = $("fieldset").length;
 
-    setProgressBar(current);
+            setProgressBar(current);
 
-    // Handle "Next" button click
-    $(".next").click(function () {
-        current_fs = $(this).parent();
-        next_fs = $(this).parent().next();
+            // Handle "Next" button click
+            $(".next").click(function() {
+                current_fs = $(this).parent();
+                next_fs = $(this).parent().next();
 
-        // Add class "active" to the corresponding progress bar step
-        $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
+                // Add class "active" to the corresponding progress bar step
+                $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
 
-        // Show the next fieldset
-        next_fs.show();
+                // Show the next fieldset
+                next_fs.show();
 
-        // Hide the current fieldset with a fade-out animation
-        current_fs.animate(
-            {
-                opacity: 0
-            },
-            {
-                step: function (now) {
-                    // For making fieldset appear animation
-                    opacity = 1 - now;
+                // Hide the current fieldset with a fade-out animation
+                current_fs.animate({
+                    opacity: 0
+                }, {
+                    step: function(now) {
+                        // For making fieldset appear animation
+                        opacity = 1 - now;
 
-                    current_fs.css({
-                        display: "none",
-                        position: "relative"
-                    });
+                        current_fs.css({
+                            display: "none",
+                            position: "relative"
+                        });
 
-                    next_fs.css({
-                        opacity: opacity
-                    });
-                },
-                duration: 500
+                        next_fs.css({
+                            opacity: opacity
+                        });
+                    },
+                    duration: 500
+                });
+
+                setProgressBar(++current);
+            });
+
+            // Handle "Previous" button click
+            $(".previous").click(function() {
+                current_fs = $(this).parent();
+                previous_fs = $(this).parent().prev();
+
+                // Remove class "active" from the corresponding progress bar step
+                $("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
+
+                // Show the previous fieldset
+                previous_fs.show();
+
+                // Hide the current fieldset with a fade-out animation
+                current_fs.animate({
+                    opacity: 0
+                }, {
+                    step: function(now) {
+                        // For making fieldset appear animation
+                        opacity = 1 - now;
+
+                        current_fs.css({
+                            display: "none",
+                            position: "relative"
+                        });
+
+                        previous_fs.css({
+                            opacity: opacity
+                        });
+                    },
+                    duration: 500
+                });
+
+                setProgressBar(--current);
+            });
+
+            function setProgressBar(curStep) {
+                var percent = parseFloat((100 / steps) * curStep);
+                percent = percent.toFixed();
+                $(".progress-bar").css("width", percent + "%");
             }
-        );
 
-        setProgressBar(++current);
-    });
-
-    // Handle "Previous" button click
-    $(".previous").click(function () {
-        current_fs = $(this).parent();
-        previous_fs = $(this).parent().prev();
-
-        // Remove class "active" from the corresponding progress bar step
-        $("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
-
-        // Show the previous fieldset
-        previous_fs.show();
-
-        // Hide the current fieldset with a fade-out animation
-        current_fs.animate(
-            {
-                opacity: 0
-            },
-            {
-                step: function (now) {
-                    // For making fieldset appear animation
-                    opacity = 1 - now;
-
-                    current_fs.css({
-                        display: "none",
-                        position: "relative"
-                    });
-
-                    previous_fs.css({
-                        opacity: opacity
-                    });
-                },
-                duration: 500
-            }
-        );
-
-        setProgressBar(--current);
-    });
-
-    function setProgressBar(curStep) {
-        var percent = parseFloat((100 / steps) * curStep);
-        percent = percent.toFixed();
-        $(".progress-bar").css("width", percent + "%");
-    }
-
-    // Prevent form submission on "Submit" button click
-    $(".submit").click(function () {
-        return false;
-    });
-});
-
+            // Prevent form submission on "Submit" button click
+            $(".submit").click(function() {
+                return false;
+            });
+        });
     </script>
 
     <script>

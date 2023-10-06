@@ -147,7 +147,7 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                                 </ul>
                             </div><!-- .popup__menu -->
 
-                            <div class="footer__bottom ">
+                            <div class="footer__bottom " style="margin-bottom: 20px">
                                 <p class="footer__bottom__copyright">
                                     2023 &copy; <a title="Yuvmedia Team" href="https://yuvmedia.in"><span
                                             style="color: #38d6d6">Yuvmedia.in</span></a>. All

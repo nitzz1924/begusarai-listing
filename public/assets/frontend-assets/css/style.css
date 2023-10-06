@@ -4788,7 +4788,7 @@ a.place__comments__reply i {
     z-index: 1;
 }
 
-.search-choice-close:before {
+/* .search-choice-close:before {
     content: "";
     height: 10px;
     width: 10px;
@@ -4797,7 +4797,17 @@ a.place__comments__reply i {
     background-size: contain;
     background-repeat: no-repeat;
     display: block;
+} */
+/* Customize Chosen selected item close button */
+.search-choice-close:before {
+    content: "\f00d"; /* Unicode character for the Font Awesome 'times' (close) icon */
+    font-family: FontAwesome;
+    font-size: 14px; /* Adjust the size as needed */
+    color: #999; /* Customize the color of the close icon */
+    margin-right: 5px;
+    cursor: pointer;
 }
+
 
 #social .field-3col .remove-social {
     line-height: normal;

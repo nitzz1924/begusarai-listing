@@ -472,7 +472,7 @@ body.modal-open .custom-overlay {
     }
 
     .business-category {
-        padding: 0 0 !important;
+        padding: 10px 0 !important;
     }
     .grid-container {
         display: grid;
@@ -577,17 +577,16 @@ body.modal-open .custom-overlay {
     width: 60px;
     align-content: center;
     display: grid !important;
-    justify-content: center ;
+    justify-content: center;
     border-radius: 70px !important;
     height: 60px !important;
-    color: #23D3D3;
+    color: #23d3d3;
     border: 2px;
 }
 
 .login-container {
     position: relative;
 }
-
 
 .login__box {
     border-bottom: 0 !important;
@@ -610,4 +609,288 @@ body.modal-open .custom-overlay {
 .popup__content {
     max-height: 80vh; /* Set a maximum height for the content */
     overflow-y: auto; /* Enable vertical scrolling if content overflows */
+}
+
+/* add place form */
+
+#heading {
+    text-transform: uppercase;
+    color: #23d3d3;
+    font-weight: normal;
+}
+
+#msform {
+    text-align: center;
+    position: relative;
+    margin-top: 20px;
+}
+
+#msform fieldset {
+    background: white;
+    border: 0 none;
+    border-radius: 0.5rem;
+    box-sizing: border-box;
+    width: 100%;
+    margin: 0;
+    padding-bottom: 20px;
+    position: relative;
+}
+
+.form-card {
+    text-align: left;
+}
+
+#msform fieldset:not(:first-of-type) {
+    display: none;
+}
+
+#msform input,
+#msform textarea {
+    padding: 8px 15px 8px 15px;
+    border: 1px solid #ccc;
+    border-radius: 7px;
+    margin-bottom: 20px;
+    margin-top: 2px;
+    width: 100%;
+    box-sizing: border-box;
+
+    color: #2c3e50;
+    background-color: #f9f9f9;
+    font-size: 16px;
+    letter-spacing: 1px;
+}
+
+#msform input:focus,
+#msform textarea:focus {
+    -moz-box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+    border: 1px solid #23d3d3;
+    outline-width: 0;
+}
+
+#msform .action-button {
+    width: 100px;
+    background: #23d3d3;
+    font-weight: bold;
+    color: white;
+    border: 0 none;
+    border-radius: 10px;
+    cursor: pointer;
+    padding: 10px 5px;
+    margin: 10px 0px 10px 5px;
+    float: right;
+}
+
+#msform .action-button:hover,
+#msform .action-button:focus {
+    background-color: #008989;
+}
+
+#msform .action-button-previous {
+    width: 100px;
+    background: #616161;
+    font-weight: bold;
+    color: white;
+    border: 0 none;
+    border-radius: 10px;
+    cursor: pointer;
+    padding: 10px 5px;
+    margin: 10px 5px 10px 0px;
+    float: right;
+}
+
+#msform .action-button-previous:hover,
+#msform .action-button-previous:focus {
+    background-color: #000000;
+}
+
+.card {
+    z-index: 0;
+    border: none;
+    position: relative;
+}
+
+.fs-title {
+    font-size: 25px;
+    color: #23d3d3;
+    margin-bottom: 15px;
+    font-weight: normal;
+    text-align: left;
+}
+
+.purple-text {
+    color: #23d3d3;
+    font-weight: normal;
+}
+
+.steps {
+    font-size: 25px;
+    color: gray;
+    margin-bottom: 10px;
+    font-weight: normal;
+    text-align: right;
+}
+
+.fieldlabels {
+    color: gray;
+    text-align: left;
+}
+
+#progressbar {
+    margin-bottom: 30px;
+    overflow: hidden;
+    color: lightgrey;
+}
+
+#progressbar .active {
+    color: #23d3d3;
+}
+
+#progressbar li {
+    list-style-type: none;
+    font-size: 15px;
+    width: 25%;
+    float: left;
+    position: relative;
+    font-weight: 400;
+}
+
+#progressbar #account:before {
+    font-family: FontAwesome;
+    content: "\f13e";
+}
+
+#progressbar #personal:before {
+    font-family: FontAwesome;
+    content: "\f007";
+}
+
+#progressbar #payment:before {
+    font-family: FontAwesome;
+    content: "\f030";
+}
+
+#progressbar #confirm:before {
+    font-family: FontAwesome;
+    content: "\f00c";
+}
+
+#progressbar li:before {
+    width: 50px;
+    height: 50px;
+    line-height: 45px;
+    display: block;
+    font-size: 20px;
+    color: #ffffff;
+    background: lightgray;
+    border-radius: 50%;
+    margin: 0 auto 10px auto;
+    padding: 2px;
+}
+
+#progressbar li:after {
+    content: "";
+    width: 100%;
+    height: 2px;
+    background: lightgray;
+    position: absolute;
+    left: 0;
+    top: 25px;
+    z-index: -1;
+}
+
+#progressbar li.active:before,
+#progressbar li.active:after {
+    background: #23d3d3;
+}
+
+.progress {
+    height: 20px;
+}
+
+.progress .progress-bar {
+    background-color: #23d3d3;
+}
+
+.fit-image {
+    width: 100%;
+    object-fit: cover;
+}
+
+.chosen-container-active .chosen-choices {
+    padding: 20px 20px 0 !important;
+}
+
+.chosen-container-multi .chosen-choices {
+    padding: 15px 15px 0 !important;
+    border-radius: 7px;
+}
+
+.chosen-container-multi .chosen-choices li.search-choice {
+    padding: 5px 20px !important;
+    color: #23d3d3 !important;
+    border: 1px solid #23d3d3 !important;
+}
+
+.chosen-container -multi .chosen-choices li.search-choice .search-choice-close {
+    margin: 0px 5px;
+    color: #23d3d3 !important;
+}
+
+.chosen-container-multi .chosen-results {
+    padding: 10px !important;
+}
+
+.chosen-container .chosen-results li {
+    border-radius: 5px;
+    font-size: 16px;
+    padding: 10px 7px !important;
+    margin: 10px !important;
+}
+
+.chosen-container-single .chosen-single {
+    height: 30px !important;
+    font-size: 18px;
+    padding: 3px 0 0 8px !important;
+}
+
+.chosen-container-multi .chosen-choices li.search-choice .search-choice-close {
+    margin: -2px 4px 0;
+}
+
+/* Style the label as a button */
+.custom-checkbox {
+    display: inline-block;
+    background-color: #ddd; /* Normal background color */
+    padding: 8px 16px;
+    border-radius: 4px;
+    margin-right: 10px;
+    cursor: pointer;
+    margin: 5px;
+    display: inline-flex;
+    transition: background-color 0.3s ease;
+}
+
+/* Hide the checkbox */
+.custom-checkbox input[type="checkbox"] {
+    display: none;
+}
+
+/* Style the checkmark inside the label */
+.custom-checkbox .checkmark {
+    position: relative;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #333; /* Normal border color */
+    border-radius: 50%;
+    margin-right: 8px;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Change the background color and border color when the checkbox is checked */
+.custom-checkbox input[type="checkbox"]:checked + .checkmark {
+    background-color: #23d3d3; /* Selected background color */
+    border-color: #23d3d3; /* Selected border color */
 }
