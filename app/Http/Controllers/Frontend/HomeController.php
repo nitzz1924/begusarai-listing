@@ -139,6 +139,10 @@ class HomeController extends Controller
 
     public function index()
     {
+        $IndexPageVideo = Master::orderBy('created_at', 'asc')
+            ->where('type', '=', 'Index_video')
+            ->get();
+ 
         // Get the authenticated user
         $user = auth()->user();
         $businessesCount = BusinessList::count();
@@ -253,7 +257,7 @@ class HomeController extends Controller
             }
         }
 
-        return View::make('frontend.index', compact('submaster', 'businesses', 'Mastercity', 'TestimonialData', 'blog', 'Result', 'popup', 'businessesCount', 'categoryCount', 'cityCount'));
+        return View::make('frontend.index', compact('submaster', 'businesses', 'Mastercity', 'TestimonialData', 'blog', 'Result', 'popup', 'businessesCount', 'categoryCount', 'cityCount' ,'IndexPageVideo'));
     }
 
     // public function toggleBookmark(Request $request, $businessId)

@@ -97,7 +97,6 @@
                     @endif
                 </div>
 
-
                 {{-- Desktop categories --}}
                 <div class="business-category desktop-view">
                     <div class="container">
@@ -136,8 +135,6 @@
                             </div>
                             <!-- .place-slider__nav -->
                         </div>
-
-
 
                     </div>
                 </div>
@@ -185,37 +182,26 @@
 
                         <div id="sliderAutoplaying" class="carousel slide" data-bs-ride="carousel">
                             <div class="carousel-inner">
-                                <div class="carousel-item active" data-bs-interval="3000">
-                                    <div class="embed-responsive embed-responsive-16by9">
-                                        <video class="embed-responsive-item elVideo" loop="loop" autoplay playsinline
-                                            muted
-                                            src="https://video.wixstatic.com/video/2b2e29_67857aa3bb16417ea7909ddc8d01b6e0/720p/mp4/file.mp4"
-                                            id="video-slider-1"></video>
+                                @foreach ($IndexPageVideo as $key => $video)
+                                    <div class="carousel-item{{ $key === 0 ? ' active' : '' }}" data-bs-interval="3000">
+                                        <div class="embed-responsive embed-responsive-16by9">
+                                            <iframe class="embed-responsive-item" src="{{ $video->value }}"
+                                                frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
+                                            </iframe>
+                                        </div>
                                     </div>
-                                </div>
-
-                                <div class="carousel-item" data-bs-interval="3000">
-                                    <div class="embed-responsive embed-responsive-16by9">
-                                        <iframe class="embed-responsive-item"
-                                            src="https://www.youtube.com/embed/YOUR_VIDEO_ID" frameborder="0"
-                                            allowfullscreen></iframe>
-                                    </div>
-                                </div>
-                                <div class="carousel-item" data-bs-interval="3000">
-                                    <div class="embed-responsive embed-responsive-16by9">
-                                        <video class="embed-responsive-item elVideo" loop="loop" autoplay playsinline
-                                            muted
-                                            src="https://video.wixstatic.com/video/2b2e29_67857aa3bb16417ea7909ddc8d01b6e0/720p/mp4/file.mp4"
-                                            id="video-slider-2"></video>
-                                    </div>
-                                </div>
+                                @endforeach
+                            </div>
+                            <div class="carousel-indicators">
+                                @foreach ($IndexPageVideo as $key => $video)
+                                    <button type="button" data-bs-target="#sliderAutoplaying"
+                                        data-bs-slide-to="{{ $key }}" class="{{ $key === 0 ? 'active' : '' }}">
+                                    </button>
+                                @endforeach
                             </div>
                         </div>
                     </div>
                 </div>
-
-
-
 
                 <!-- .business-category -->
                 <div class="trending trending-business">
@@ -381,8 +367,6 @@
                                         <!-- .cities__item -->
                                     </div>
                                 @endforeach
-
-
 
                             </div>
                             <div class="place-slider__nav slick-nav">
