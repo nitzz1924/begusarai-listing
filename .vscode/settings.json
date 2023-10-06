@@ -1,0 +1,5 @@
+{
+    "editor.renderLineHighlight": "gutter",
+    "debug.allowBreakpointsEverywhere": true,
+    "debug.showBreakpointsInOverviewRuler": false
+}
