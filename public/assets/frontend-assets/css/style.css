@@ -983,7 +983,7 @@ textarea:focus {
 .popup__box li {
     list-style: none;
     display: block;
-    margin-bottom: 25px;
+    margin-bottom: 15px;
 }
 .popup__box li:last-child {
     margin-bottom: 0;
@@ -10036,6 +10036,8 @@ a.place__comments__reply i {
     text-align: left;
     z-index: 99;
     display: none;
+    max-height: 200px; 
+    overflow-y: auto; 
 }
 .site-banner__search.layout-02 .search-suggestions ul {
     padding: 7px 0;
@@ -11483,7 +11485,7 @@ a.place__comments__reply i {
 
 .footer__bottom {
     border-top: 1px solid #eeeeee;
-    padding: 32px 0;
+    padding: 22px 0;
 }
 
 .footer__top {

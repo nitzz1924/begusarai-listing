@@ -1104,6 +1104,10 @@ class HomeController extends Controller
     }
 
 
+    public function comingSoon()
+    {
+        return view('frontend.comingSoon');
+    }
     public function privacyPolicy()
     {
         return view('frontend.privacyPolicy');

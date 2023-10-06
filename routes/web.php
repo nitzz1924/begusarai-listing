@@ -30,6 +30,7 @@ Route::get('/pageNotFound', [HomeController::class, 'pageNotFound'])->name('page
 Route::get('/termsAndConditions', [HomeController::class, 'termsAndConditions'])->name('termsAndConditions');
 Route::get('/returnsPolicy ', [HomeController::class, 'returnsPolicy'])->name('returnsPolicy');
 Route::get('/allCategories ', [HomeController::class, 'allCategories'])->name('allCategories');
+Route::get('/comingSoon ', [HomeController::class, 'comingSoon'])->name('comingSoon');
 
 // Business Owner routes - logged in
 Route::get('/ownerDashboard', [HomeController::class, 'ownerDashboard'])->name('ownerDashboard');

@@ -1,6 +1,6 @@
-<footer id="footer" class="footer">
-    <div class="container">
-        <div class="footer__top">
+<div id="footer" class="footer ">
+    <div class="container ">
+        <div class="footer__top desktop-view">
             <div class="row">
                 <div class="col-lg-5">
                     <div class="footer__top__info">
@@ -20,7 +20,7 @@
                 </div>
                 <div class="col-lg-2">
                     <aside class="footer__top__nav">
-                        <h2 class="mb-3">Quick Links</h2>
+                        <h2 class="mb-3">Quick Links</h2>   
                         <ul>
                             <li>
                                 <a title="About Us" href="/aboutUs">About Us</a>
@@ -64,7 +64,6 @@
                 <div class="col-lg-3">
                     <aside class="footer__top__nav footer__top__nav--contact">
                         <h2 class="mb-3">Contact Us</h2>
-
                         <p>
                             Email:
                             <a href="#" class="__cf_email__"
@@ -98,7 +97,7 @@
             </div>
         </div>
         <!-- .top-footer -->
-        <div class="footer__bottom">
+        <div class="footer__bottom ">
             <p class="footer__bottom__copyright">
                 2023 &copy; <a title="Yuvmedia Team" href="https://yuvmedia.in"><span
                         style="color: #38d6d6">Yuvmedia.in</span></a>. All
@@ -108,7 +107,7 @@
         <!-- .top-footer -->
     </div>
     <!-- .container -->
-</footer>
+</div>
 <!-- site-footer -->
 <!-- <div class="landing-banner business-landing-banner">
     <div class="container">

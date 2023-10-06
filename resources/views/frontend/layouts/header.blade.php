@@ -33,87 +33,21 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                         </div>
 
                         <div class="popup__content">
-                            @guest
-                                <div class="popup__user popup__box open-form">
-                                    <a title="Login" href="#" class="open-login">Login</a>
-                                </div><!-- .popup__user -->
-                            @else
-                                <div class="popup__menu popup__box">
-                                    <ul class="sub-menu">
-                                        <?php $user = User_Login::find(auth()->user()->id); ?>
 
-                                        @if (Auth::user()->type == 'Guest')
-                                            <li>
-                                                <a class="avatar" href="">
-                                                    @if ($user->image)
-                                                        <img src="{{ URL::to('/uploads/' . $user->image) }}" title=""
-                                                            alt="">
-                                                    @else
-                                                        <img src="https://wp.getgolo.com/country-guide/wp-content/themes/golo/assets/images/default-user-image.png"
-                                                            title="guest" alt="guest">
-                                                    @endif
-                                                    <span>{{ $user->name }}</span>
-                                                </a>
-                                                <ul class="sub-menu">
-                                                    <li class=""><a href="/ownerProfile">Profile</a></li>
-                                                    <li class=""><a href="/ownerWishlist">My Wishlist</a></li>
-                                                    <li>
-                                                        <a href="/logout">
-                                                            <span>Logout</span>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                        @elseif (Auth::user()->type == 'Owner')
-                                            <li>
-                                                <a class="avatar" href="">
-                                                    @if ($user->image)
-                                                        <img src="{{ URL::to('/uploads/' . $user->image) }}" title=""
-                                                            alt="">
-                                                    @else
-                                                        <img src="{{ asset('assets/images/users/default.png') }}"
-                                                            title="Default Avatar" alt="Default Avatar">
-                                                    @endif
-                                                    <span>{{ $user->name }}</span>
-                                                </a>
-                                                <ul class="sub-menu">
-                                                    <li class=""><a href="/ownerDashboard">Dashboard</a></li>
-                                                    <li class=""><a href="/ownerListing">My Places</a></li>
-                                                    <li class=""><a href="/ownerWishlist">My Wishlist</a></li>
-                                                    {{-- <li class=""><a href="/businessOwnerPage">Author Listing</a></li> --}}
-                                                    <li>
-                                                        <hr class="dropdown-divider">
-                                                    </li>
-                                                    <li>
-                                                        <a href="/logout">
-                                                            <span>Logout</span>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                        @endif
-                                    </ul>
-                                </div><!-- .popup__menu -->
-                            @endguest
+                            @auth
+                                @if (Auth::user()->type == 'Owner')
+                                    <div class="popup__button popup__box pb-0">
+                                        <a title="Add place" href="/addPlace" class="">
+                                            <span>Add place</span>
+                                            <i class="la la-plus"></i>
+                                        </a>
+                                    </div>
+                                    <!-- .popup__button -->
+                                @endif
+                            @endauth
+
                             {{-- Navigation tabs --}}
-                            <div class="popup__menu popup__box">
-                                <ul class="menu-arrow">
-                                    <li>
-                                        <a title="Packages" href="/packages/0">Pricing </a>
-                                    </li>
-                                    <li>
-                                        <a title="Packages" href="/category/0">Ranking </a>
-                                    </li>
-                                    <li>
-                                        <a title="AboutUs" href="/aboutUs">About Us</a>
-                                    </li>
-                                    <li>
-                                        <a title="Contact" href="/contact">Contact Us</a>
-                                    </li>
-                                </ul>
-                            </div><!-- .popup__menu -->
-
-                            <div class="popup__destinations popup__box">
+                            <div class="popup__destinations popup__box ">
                                 <ul class="menu-arrow">
                                     <li>
                                         <a title="Destinations" href="#">Destinations </a>
@@ -130,16 +64,97 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                                     </li>
                                 </ul>
                             </div>
-                            @auth
-                                @if (Auth::user()->type == 'Owner')
-                                    <div class="popup__button popup__box">
-                                        <a title="Add place" href="/addPlace" class="btn">
-                                            <i class="la la-plus"></i>
-                                            <span>Add place</span>
+
+
+
+
+                            <div class="popup__menu popup__box">
+                                <ul class="menu-arrow">
+                                    <h3 class="mb-3">Navigation</h3>
+
+                                    <li>
+                                        <a title="Packages" href="/packages/0">Pricing </a>
+                                    </li>
+                                    <li>
+                                        <a title="Ranking" href="/category/0">Ranking </a>
+                                    </li>
+                                    <li>
+                                        <a title="AboutUs" href="/aboutUs">About Us</a>
+                                    </li>
+                                    <li>
+                                        <a title="Contact" href="/contact">Contact Us</a>
+                                    </li>
+                                    <li>
+                                        <a title="Blogs" href="/blogs">Blog</a>
+                                    </li>
+                                </ul>
+                            </div><!-- .popup__menu -->
+
+
+
+                            <div class="popup__menu popup__box">
+                                <ul class="menu-arrow">
+                                    <h3 class="mb-3">Quick Links</h3>
+
+                                    <li>
+                                        <a title="Privacy" href="/privacyPolicy">Privacy Policy</a>
+                                    </li>
+                                    <li>
+                                        <a title="Privacy" href="/termsAndConditions">Terms and Conditions </a>
+                                    </li>
+                                    <li>
+                                        <a title="Privacy" href="/returnsPolicy">Refund and Returns Policy </a>
+                                    </li>
+                                </ul>
+                            </div><!-- .popup__menu -->
+
+                            <div class="popup__menu popup__box">
+                                <ul class="menu-arrow">
+                                    <h3 class="my-3">Connact With Us</h3>
+                                    <ul>
+                                        <li>
+                                            <a title="testimonial" href="/testimonial">Testimonial</a>
+                                        </li>
+                                        <li>
+                                            <a title="Career" href="/career">Career</a>
+                                        </li>
+                                        <li>
+                                            <a title="Career" href="/faq">Faqs</a>
+                                        </li>
+                                    </ul>
+                            </div><!-- .popup__menu -->
+                            <div class="popup__menu popup__box">
+
+                                <h2 class="mb-3">Contact Us</h2>
+                                <p>
+                                    Email:
+                                    <a href="mailto:contact@inbegusarai.com" class="__cf_email__"
+                                        data-cfemail="email">contact@inbegusarai.com</a>
+                                </p>
+                                <p>Phone: 9693667887 / 06243-316290</p>
+                                <ul class="mt-2">
+                                    <li class="facebook d-inline-block p-2 rounded">
+                                        <a title="Facebook" class="" href="https://www.facebook.com/inbegusarai">
+                                            <i class="la la-facebook-f fs-3 text-white"></i>
                                         </a>
-                                    </div><!-- .popup__button -->
-                                @endif
-                            @endauth
+                                    </li>
+
+                                    <li class="instagram d-inline-block p-2 rounded">
+                                        <a title="Instagram" class="" href="https://instagram.com/in.begusarai">
+                                            <i class="la la-instagram fs-3 text-white "></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div><!-- .popup__menu -->
+
+                            <div class="footer__bottom ">
+                                <p class="footer__bottom__copyright">
+                                    2023 &copy; <a title="Yuvmedia Team" href="https://yuvmedia.in"><span
+                                            style="color: #38d6d6">Yuvmedia.in</span></a>. All
+                                    rights reserved.
+                                </p>
+                            </div>
+
                         </div><!-- .popup__content -->
 
                     </div><!-- .popup -->
@@ -157,7 +172,7 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                 <!-- .site -->
 
                 {{-- login dropdown --}}
-                <div class="ms-auto login-container">
+                <div class="ms-auto login-container mobile-view">
                     @guest
                         <div class="popup__user login__box open-form">
                             <a title="Login" href="#" class="open-login btn">Login</a>
@@ -206,9 +221,9 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                                             <li class=""><a href="/ownerListing">My Places</a></li>
                                             <li class=""><a href="/ownerWishlist">My Wishlist</a></li>
                                             {{-- <li class=""><a href="/businessOwnerPage">Author Listing</a></li> --}}
-                                            <li>
-                                                <hr class="dropdown-divider">
-                                            </li>
+
+                                            <hr class="dropdown-divider">
+
                                             <li>
                                                 <a href="/logout">
                                                     <span>Logout</span>
@@ -544,7 +559,7 @@ $Mastercity = Master::orderBy('created_at', 'asc')
             </div>
 
             <div class="mobile-bottom-nav__item">
-                <a href="">
+                <a href="/comingSoon">
                     <div class="mobile-bottom-nav__item-content">
                         <i class="fa-solid fa-briefcase fs-4 pb-1" style="color: #FEC868"></i>
                         JOB
@@ -562,7 +577,7 @@ $Mastercity = Master::orderBy('created_at', 'asc')
             </div>
 
             <div class="mobile-bottom-nav__item">
-                <a href="">
+                <a href="/comingSoon">
                     <div class="mobile-bottom-nav__item-content">
                         <i class="fa-solid fa-newspaper fs-4 pb-1" style="color: #DAB894"></i>
                         NEWS
@@ -571,7 +586,7 @@ $Mastercity = Master::orderBy('created_at', 'asc')
             </div>
 
             <div class="mobile-bottom-nav__item">
-                <a href="">
+                <a href="/comingSoon">
                     <div class="mobile-bottom-nav__item-content">
                         <i class="fa-solid fa-square-poll-horizontal fs-4 pb-1" style="color: #A7BED3"></i>
                         OPINION

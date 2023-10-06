@@ -603,4 +603,11 @@ body.modal-open .custom-overlay {
     border-radius: 10px;
     margin-top: 0 !important;
     right: -25%;
+    box-shadow: 0 0 10px 0 gray;
+    top: 120%;
+}
+
+.popup__content {
+    max-height: 80vh; /* Set a maximum height for the content */
+    overflow-y: auto; /* Enable vertical scrolling if content overflows */
 }

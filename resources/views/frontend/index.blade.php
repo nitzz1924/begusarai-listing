@@ -77,7 +77,7 @@
                         <div class="custom-overlay"></div>
                         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                             aria-hidden="true">
-                            <div class="modal-dialog modal-sm modal-dialog-centered">
+                            <div class="modal-dialog modal-lg modal-dialog-scrollable modal-dialog-centered">
                                 <div class="modal-content">
 
                                     <!-- Check if the user is not logged in -->
@@ -429,6 +429,8 @@
                                         also gives you the option of enhancing your listing by using attractive images and
                                         videos that showcase the unique features of your goods or services
                                     </p>
+                                    
+
                                     <a href="/aboutUs" class="btn offset-item">Read more</a>
                                 </div>
                             </div>
