@@ -326,7 +326,7 @@
                                 <div id="drop-area" class="border rounded p-3">
                                     {{-- <label for="galleryImage" class="custom-file-label">Choose files for
                                             gallery</label> --}}
-                                    <input type="file" name="galleryImage[]" id="galleryImage" class="upload-file mb-0"
+                                    <input type="file" name="galleryImage[]" id="galleryImage" class="upload-file"
                                         data-max-size="1024" multiple accept="image/*">
                                     <input type="hidden" name="galleryImageCount" id="galleryImageCount"
                                         value="0">

@@ -148,27 +148,27 @@ input[type="number"] {
     color: white;
 }
 
-.pagination nav div div {
+/* .pagination nav div div {
     display: inline-block;
     text-align: center;
     padding: 10px 0;
     width: 100%;
-    /* visibility: hidden; */
-}
-.pagination nav .flex {
+    visibility: hidden;
+} */
+/* .pagination nav .flex {
     visibility: hidden;
     margin-bottom: 10px;
     text-align: center;
-}
-.pagination nav div div .inline-flex {
-    /* visibility: hidden; */
+} */
+/* .pagination nav div div .inline-flex {
+    visibility: hidden;
     margin: 10px;
     border-radius: 50px;
     box-shadow: none !important;
-}
-.pagination nav div div svg {
+} */
+/* .pagination nav div div svg {
     width: 20px;
-}
+} */
 
 .social-icon {
     display: inline-block;

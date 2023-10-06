@@ -2,6 +2,7 @@
 @section('title', 'Blogs')
 @section('content')
 
+
     <main id="main" class="site-main">
         <div class="page-title page-title--small page-title--blog align-left"
             style="background-image: url({{ asset('/frontend-assets/images/bg/bg-blog.png') }});">
@@ -57,9 +58,6 @@
                         </div>
                     </div>
                 </div>
-
-               
-
             </div>
         </div>
     </main><!-- .site-main -->
