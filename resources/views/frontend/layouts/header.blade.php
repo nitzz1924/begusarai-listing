@@ -403,7 +403,7 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                                 <div class="field-inline mb-3" style="justify-content: center;">
                                     <div class="form-group-user">
                                         <div class="row">
-                                            <div class="col-6">
+                                            <div class="col-6 px-1">
                                                 <div class="col-group">
                                                     <label for="guest" class="label-field radio-field">
                                                         <input type="radio" value="guest" id="guest"
@@ -412,7 +412,7 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                                                     </label>
                                                 </div>
                                             </div>
-                                            <div class="col-6">
+                                            <div class="col-6 px-1">
                                                 <div class="col-group">
                                                     <label for="owner" class="label-field radio-field">
                                                         <input type="radio" value="owner" id="owner"
@@ -436,7 +436,7 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                                         </div>
 
                                         <div>
-                                            <button type="button" name="submit-otp" class="OTP-btn1"
+                                            <button type="button" name="submit-otp" class="OTP-btn1 btn"
                                                 value="Send OTP" style="width: 100px;" id="sendOTPButton">Send
                                                 OTP</button>
                                         </div>
@@ -454,8 +454,8 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                                 </div>
 
                                 <!-- Acceptance checkbox -->
-                                <div class="field-check">
-                                    <label for="accept">
+                                <div class="field-check mb-2">
+                                    <label for="accept" style="flex: 0 0 100% !important; max-width: 100% !important;">
                                         <input type="checkbox" id="accept" value="1" name="accept"
                                             class="form-check-input  " required>
                                         @csrf

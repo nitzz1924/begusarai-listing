@@ -81,7 +81,7 @@
                                     <div
                                         class="position-relative modal-body border-warning rounded border bg-image overlay p-0">
                                         <div class="position-absolute top-0 end-0 btn-close-bg px-1 pb-1 m-1">
-                                            <button type="button" class="btn-close popup-close-btn "
+                                            <button type="button" class="btn-closee  "
                                                 data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <img src="{{ URL::to('uploads/' . $popup->logo) }}" alt="Promo banner"
@@ -92,7 +92,7 @@
                                 <div class="modal-content " style='background-color:#fff0'>
                                     <div class="position-relative modal-body  rounded  bg-image  p-0">
                                         <div class="position-absolute top-0 end-0 btn-close-bg px-1 pb-1 m-1">
-                                            <button type="button" class="btn-close popup-close-btn "
+                                            <button type="button" class="btn-closee "
                                                 data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <img src="{{ asset('assets/images/welcome2.png') }}" alt="Default Image"

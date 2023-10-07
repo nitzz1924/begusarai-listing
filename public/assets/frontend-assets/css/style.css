@@ -7778,7 +7778,7 @@ a.place__comments__reply i {
 .restaurant-slider,
 .cuisine-slider,
 .testimonial-slider {
-    margin-bottom: 0 !important;
+    margin-bottom: 0;
     margin-left: -15px;
     margin-right: -15px;
 }
