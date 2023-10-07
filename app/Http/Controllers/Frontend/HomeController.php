@@ -22,6 +22,7 @@ use App\Models\Contact;
 use App\Models\Review;
 use App\Models\Package;
 use App\Models\BuyPlan;
+use App\Models\Popup_ads;
 
 use Carbon\Carbon;
 use Razorpay\Api\Api;
@@ -139,9 +140,15 @@ class HomeController extends Controller
 
     public function index()
     {
-        $IndexPageVideo = Master::orderBy('created_at', 'asc')
-            ->where('type', '=', 'Index_video')
+
+        
+        $IndexPageVideo = Popup_ads::orderBy('created_at', 'asc')
+            ->where('type', '=', 'Home Ads')
             ->get();
+
+
+//  dd($popupHome);
+
 
         // Get the authenticated user
         $user = auth()->user();
@@ -220,9 +227,10 @@ class HomeController extends Controller
                 ->count();
             $cityCount[$list->title] = $count;
         }
-        $popup = Master::orderBy('created_at', 'asc')
-            ->where('type', '=', 'Homepage_popup')
+        $popup = Popup_ads::orderBy('created_at', 'asc')
+            ->where('type', '=', 'Popup Ads')
             ->first();
+      
 
         // Update expair plans --------------------------------------------------------------------------------------------------------------------------------
         $currentDate = now();
@@ -256,8 +264,8 @@ class HomeController extends Controller
                 $resource->save();
             }
         }
-
-        return View::make('frontend.index', compact('submaster', 'businesses', 'Mastercity', 'TestimonialData', 'blog', 'Result', 'popup', 'businessesCount', 'categoryCount', 'cityCount', 'IndexPageVideo'));
+// dd($IndexPageVideo);
+        return View::make('frontend.index', compact('submaster', 'businesses', 'Mastercity', 'TestimonialData', 'blog', 'Result', 'popup',  'businessesCount', 'categoryCount', 'cityCount', 'IndexPageVideo'));
     }
 
     // public function toggleBookmark(Request $request, $businessId)

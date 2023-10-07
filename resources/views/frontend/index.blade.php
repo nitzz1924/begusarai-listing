@@ -84,23 +84,33 @@
                                             <button type="button" class="btn-close popup-close-btn "
                                                 data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
-                                        <img src="{{ URL::to('uploads/' . $popup->logo) }}" alt="Promo banner"
-                                            class="img-fluid rounded-3">
+                                        <a href="{{ $popup->value }}">
+                                            <img src="{{ URL::to('uploads/' . $popup->logo) }}" alt="Promo banner"
+                                                class="img-fluid rounded-3">
+                                        </a>
+
                                     </div>
                                 </div>
                             @else
-                                <div class="modal-content " style='background-color:#fff0'>
-                                    <div class="position-relative modal-body  rounded  bg-image  p-0">
+                                ($content_type->video)
+                                <div class="modal-content">
+                                    <div
+                                        class="position-relative modal-body border-warning rounded border bg-image overlay p-0">
                                         <div class="position-absolute top-0 end-0 btn-close-bg px-1 pb-1 m-1">
                                             <button type="button" class="btn-close popup-close-btn "
                                                 data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
-                                        <img src="{{ asset('assets/images/welcome2.png') }}" alt="Default Image"
-                                            class="img-fluid rounded-3">
+                                        <a href="{{ $popup->value }}">
+                                            <iframe class="embed-responsive-item"
+                                                src="https://www.youtube.com/embed/{{ $popup->value }}?autoplay=1&mute=1&controls=0"
+                                                frameborder="0" width="700" height="500">
+                                            </iframe>
+                                        </a>
 
                                     </div>
                                 </div>
                             @endif
+
                         </div>
                     </div>
 
@@ -148,7 +158,6 @@
                     </div>
                 </div>
 
-                
                 {{-- Mobile categories --}}
 
                 <div class="business-category mobile-view">
@@ -192,31 +201,51 @@
 
                         <div id="sliderAutoplaying" class="carousel slide" data-bs-ride="carousel">
                             <div class="carousel-indicators">
-                                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                                @foreach ($IndexPageVideo as $key => $video)
+                                    <button type="button" data-bs-target="#sliderAutoplaying"
+                                        data-bs-slide-to="{{ $key }}"
+                                        class="{{ $key === 0 ? 'active' : '' }}"></button>
+                                @endforeach
                             </div>
-                            
                             <div class="carousel-inner">
                                 @foreach ($IndexPageVideo as $key => $video)
                                     <div class="carousel-item{{ $key === 0 ? ' active' : '' }}" data-bs-interval="3000">
-                                        <div class="embed-responsive embed-responsive-16by9">
-                                            <iframe class="embed-responsive-item" src="{{ $video->value }}"
-                                                frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
-                                            </iframe>
-                                        </div>
+
+                                     
+
+                                            @if ($video->content_type == 'video')
+                                               <div class="embed-responsive embed-responsive-16by9">
+                                                <iframe class="embed-responsive-item"
+                                                    src="https://www.youtube.com/embed/{{ $video->value }}?autoplay=1&mute=1&controls=0"
+                                                    frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
+                                                </iframe>
+                                                 </div>
+                                            @endif
+
+                                       
+                                        @if ($video->content_type == 'image')
+                                            <div class="embed-responsive  ">
+
+                                                <a href="{{ $video->value }}">
+                                                    <img src="{{ URL::to('uploads/' . $video->logo) }}"
+                                                        alt="Promo banner" >
+                                                </a>
+
+                                            </div>
+                                        @endif
                                     </div>
                                 @endforeach
+
                             </div>
                             <div class="carousel-indicators">
                                 @foreach ($IndexPageVideo as $key => $video)
                                     <button type="button" data-bs-target="#sliderAutoplaying"
-                                        data-bs-slide-to="{{ $key }}" class="{{ $key === 0 ? 'active' : '' }}">
-                                    </button>
+                                        data-bs-slide-to="{{ $key }}"
+                                        class="{{ $key === 0 ? 'active' : '' }}"></button>
                                 @endforeach
                             </div>
-
                         </div>
+
                     </div>
                 </div>
 
@@ -420,7 +449,6 @@
                                         also gives you the option of enhancing your listing by using attractive images and
                                         videos that showcase the unique features of your goods or services
                                     </p>
-                                    
 
                                     <a href="/aboutUs" class="btn offset-item">Read more</a>
                                 </div>

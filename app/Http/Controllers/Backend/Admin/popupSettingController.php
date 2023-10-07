@@ -58,7 +58,7 @@ class popupSettingController extends Controller
             'title' => 'required',
             'type' => 'required',
             'content_type' => 'required',
-            'value' => 'required||url',
+            'value' => 'required',
         ]);
 
         try {
