@@ -38,6 +38,8 @@ class BusinessList extends Model
         'galleryImage',
         'documentImage',
         'logo',
+        'leadStatus',
+
     ];
 
     protected $casts = [

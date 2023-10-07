@@ -170,6 +170,30 @@ class ListingController extends Controller
             die();
         }
     }
+
+
+
+ public function leadActive($id)
+    {
+    //   dd('Active method called with ID: ' . $id);
+        BusinessList::where('id', $id)->update(['leadStatus' => '0']);
+        return redirect()->route('admin.listing.index');
+    }
+
+    public function leadInactive($id)
+    {
+        // dd('Inactive method called with ID: ' . $id);
+        try {
+            BusinessList::where('id', $id)->update(['leadStatus' => '1']);
+            return redirect()->route('admin.listing.index');
+        } catch (\Exception $e) {
+            print_r($e->getMessage());
+            die();
+        }
+    }
+
+
+
 }
 
 // ------------------->>  Print Error Message

@@ -35,6 +35,7 @@
 
                                     <th>Action </th>
                                     <th>Status </th>
+                                    <th>Lead Status </th>
 
                                 </tr>
                             </thead>
@@ -77,10 +78,23 @@
                                                 Unknown
                                             @endif
                                             <br />
-
-
-
                                         </td>
+
+
+                                        <td class="fw-bold">
+                                            @if ($business->leadStatus == 1)
+                                                <a class="fw-bold  btn btn-success"
+                                                    href="{{ URL::to('admin/listing/leadActive', $business->id) }} ">Active</a>
+                                            @elseif ($business->leadStatus == 0)
+                                                <a class="fw-bold btn btn-danger"
+                                                    href="{{ URL::to('admin/listing/leadInactive', $business->id) }} ">Inactive</a>
+                                            @else
+                                                Unknown
+                                            @endif
+                                            <br />
+                                        </td>
+
+
                                     </tr>
                                 @endforeach
 

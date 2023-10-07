@@ -142,7 +142,7 @@ class HomeController extends Controller
         $IndexPageVideo = Master::orderBy('created_at', 'asc')
             ->where('type', '=', 'Index_video')
             ->get();
- 
+
         // Get the authenticated user
         $user = auth()->user();
         $businessesCount = BusinessList::count();
@@ -257,7 +257,7 @@ class HomeController extends Controller
             }
         }
 
-        return View::make('frontend.index', compact('submaster', 'businesses', 'Mastercity', 'TestimonialData', 'blog', 'Result', 'popup', 'businessesCount', 'categoryCount', 'cityCount' ,'IndexPageVideo'));
+        return View::make('frontend.index', compact('submaster', 'businesses', 'Mastercity', 'TestimonialData', 'blog', 'Result', 'popup', 'businessesCount', 'categoryCount', 'cityCount', 'IndexPageVideo'));
     }
 
     // public function toggleBookmark(Request $request, $businessId)
@@ -392,7 +392,6 @@ class HomeController extends Controller
     }
     public function updatePlace(Request $request, $id)
     {
-        
         // Validation rules (same as savePlace)
         $rules = [
             'category' => 'required',
@@ -467,8 +466,8 @@ class HomeController extends Controller
             $business->businessName = $request->input('businessName');
             $business->youtube = $request->input('youtube');
             $business->video = $request->input('video');
-            $business->dType  = $request->input('dType'); // Update dType field
-            $business->dNumber  = $request->input('dNumber'); // Update CIN field
+            $business->dType = $request->input('dType'); // Update dType field
+            $business->dNumber = $request->input('dNumber'); // Update CIN field
 
             // Handle file uploads (same as savePlace)
             $allowedExtensions = ['jpg', 'jpeg', 'png', 'svg', 'webp', 'pdf'];
@@ -546,60 +545,59 @@ class HomeController extends Controller
     //     }
     // }
 
- public function delete($id)
-{
-    try {
-        // Find the record by ID
-        $business = BusinessList::find($id);
+    public function delete($id)
+    {
+        try {
+            // Find the record by ID
+            $business = BusinessList::find($id);
 
-        if (!$business) {
-            return back()->with('error', 'Record not found.');
-        }
-
-        // Get the image file name associated with the record
-        $coverImageFileName = $business->coverImage; // Assuming coverImage is the image field
-        $galleryImages = json_decode($business->galleryImage, true); // Decode the JSON array of gallery images
-        $documentImageFileName = $business->documentImage; // Assuming documentImage is the PDF field
-
-        // Delete the record from the database
-        $business->delete();
-
-        // Delete the associated image files from storage
-        if ($coverImageFileName) {
-            $coverImagePath = public_path('uploads') . '/' . $coverImageFileName;
-            if (file_exists($coverImagePath)) {
-                unlink($coverImagePath);
+            if (!$business) {
+                return back()->with('error', 'Record not found.');
             }
-        }
 
-        if (!empty($galleryImages)) {
-            foreach ($galleryImages as $galleryImage) {
-                $galleryImagePath = public_path('uploads') . '/' . $galleryImage;
-                if (file_exists($galleryImagePath)) {
-                    unlink($galleryImagePath);
+            // Get the image file name associated with the record
+            $coverImageFileName = $business->coverImage; // Assuming coverImage is the image field
+            $galleryImages = json_decode($business->galleryImage, true); // Decode the JSON array of gallery images
+            $documentImageFileName = $business->documentImage; // Assuming documentImage is the PDF field
+
+            // Delete the record from the database
+            $business->delete();
+
+            // Delete the associated image files from storage
+            if ($coverImageFileName) {
+                $coverImagePath = public_path('uploads') . '/' . $coverImageFileName;
+                if (file_exists($coverImagePath)) {
+                    unlink($coverImagePath);
                 }
             }
-        }
 
-        // Delete the associated PDF file from storage
-        if ($documentImageFileName) {
-            $documentImagePath = public_path('uploads') . '/' . $documentImageFileName;
-            if (file_exists($documentImagePath)) {
-                unlink($documentImagePath);
+            if (!empty($galleryImages)) {
+                foreach ($galleryImages as $galleryImage) {
+                    $galleryImagePath = public_path('uploads') . '/' . $galleryImage;
+                    if (file_exists($galleryImagePath)) {
+                        unlink($galleryImagePath);
+                    }
+                }
             }
+
+            // Delete the associated PDF file from storage
+            if ($documentImageFileName) {
+                $documentImagePath = public_path('uploads') . '/' . $documentImageFileName;
+                if (file_exists($documentImagePath)) {
+                    unlink($documentImagePath);
+                }
+            }
+
+            return back()->with('success', 'Record deleted successfully');
+        } catch (\Exception $e) {
+            // Handle any exceptions that may occur during deletion
+            return back()->with('error', 'Error: ' . $e->getMessage());
         }
-
-        return back()->with('success', 'Record deleted successfully');
-    } catch (\Exception $e) {
-        // Handle any exceptions that may occur during deletion
-        return back()->with('error', 'Error: ' . $e->getMessage());
     }
-}
-
 
     public function savePlace(Request $request)
     {
-        //  dd($request->all()); 
+        //  dd($request->all());
         //  dd($request->input('cin'));
         $rules = [
             'category' => 'required',
@@ -675,7 +673,7 @@ class HomeController extends Controller
             $business->video = $request->input('video');
             $business->dType = $request->input('dType');
             $business->dNumber = $request->input('dNumber');
- 
+
             $allowedExtensions = ['jpg', 'jpeg', 'png', 'svg', 'webp', 'pdf'];
             $destinationPath = public_path('uploads');
 
@@ -710,7 +708,7 @@ class HomeController extends Controller
 
                 // Store the file paths in the database as a JSON array
                 $business->galleryImage = json_encode($filePaths);
-            } 
+            }
             // Save the model to the database
             $business->save();
 
@@ -805,31 +803,6 @@ class HomeController extends Controller
 
     public function listingDetail(Request $request, $id, $category)
     {
-        if (Auth::check()) {
-            // Retrieve the authenticated user
-            $user = Auth::user();
-
-            // Check for duplicate lead record
-            $existingLead = Lead::where([
-                'user_id' => $user->id,
-                'business_id' => $id,
-                'created_at' => now()->toDateString(),
-            ])->first();
-
-            if (!$existingLead) {
-                $lead = new Lead();
-                $lead->user_id = $user->id;
-                $lead->name = $user->name;
-                $lead->number = $user->mobileNumber;
-                $lead->message = 'They explored your business profile !';
-
-                $lead->created_at = now()->toDateString();
-                $lead->business_id = $id;
-
-                $lead->save();
-            }
-        }
-
         // $VisitCount = Lead:: where('business_id')  ->get();
         $VisitCount = Lead::where('business_id', $id)->count();
 
@@ -871,6 +844,34 @@ class HomeController extends Controller
         }
 
         $businessesDetail = BusinessList::where('id', $id)->first();
+        if (Auth::check()) {
+            // Retrieve the authenticated user
+            $user = Auth::user();
+
+            // Check for duplicate lead record
+            $existingLead = Lead::where([
+                'user_id' => $user->id,
+                'business_id' => $id,
+                'created_at' => now()->toDateString(),
+            ])->first();
+
+            if (!$existingLead) {
+                $lead = new Lead();
+                
+                $lead->user_id = $user->id;
+                $lead->name = $user->name;
+                $lead->number = $user->mobileNumber;
+                $lead->message = 'They explored your business profile !';
+                $lead->created_at = now()->toDateString();
+                $lead->business_id = $id;
+                if ($businessesDetail->leadStatus === 1) {
+                    $lead->status = 1;
+                } else {
+                    $lead->status = 0;
+                }
+                $lead->save();
+            }
+        }
         $submaster = Master::orderBy('created_at', 'asc')
             ->where('type', '=', 'category')
             ->get();
@@ -935,7 +936,7 @@ class HomeController extends Controller
                 ->leftJoin('users_login', 'lead.user_id', '=', 'users_login.id')
                 ->orderBy('lead.created_at', 'desc')
                 ->where('business_id', $list->id)
-                // ->where('lead.status', '1')
+                ->where('lead.status', '1')
                 ->whereDate('lead.created_at', $currentDate)
                 ->get();
 
@@ -943,9 +944,8 @@ class HomeController extends Controller
             $countLeadlist = array_merge($countLeadlist, $arrayListL);
             $countReview = $countReview + review::where('listing_id', '=', $list->id)->count();
             $countLead =
-                $countLead +
-                Lead::
-                // where('status', '=', '1')->
+                $countLead + Lead
+                   :: where('status', '=', '1')->
                     where('business_id', '=', $list->id)
                     ->count();
             $countView = $countView + Lead::where('business_id', '=', $list->id)->count();
@@ -1158,7 +1158,6 @@ class HomeController extends Controller
 
     public function allCategories()
     {
-
         $submaster = Master::orderBy('created_at', 'asc')
             ->where('type', '=', 'category')
             ->get();
@@ -1170,9 +1169,7 @@ class HomeController extends Controller
             $categoryCount[$list->title] = $count;
         }
         return View::make('frontend.allCategories', compact('submaster', 'categoryCount'));
-
     }
-
 
     public function comingSoon()
     {

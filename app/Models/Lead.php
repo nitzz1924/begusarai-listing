@@ -16,6 +16,7 @@ class Lead extends Model
         'number', // Make sure it's defined as a string or text type
         'message',
         'user_id',
+        'status',
     ];
     
     use HasFactory;
