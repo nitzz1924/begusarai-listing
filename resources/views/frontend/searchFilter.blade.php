@@ -389,10 +389,10 @@
                                                         </h3>
 
 
-                                                        {{-- <div class="place-type list-item">
+                                                        {{-- <div class="place-type  ">
                                                             <span>{{ $value->highlight }}</span>
                                                         </div> --}}
-                                                        <div class="place-type list-item">
+                                                        <div class="place-type  ">
                                                             @php
                                                                 $highlights = explode(',', $value->highlight); // Split the string into an array using a delimiter
                                                                 $highlights = array_slice($highlights, 0, 2); // Get the first two elements of the array
@@ -444,8 +444,8 @@
 
 
                     <div class="container">
-                        <div class="row justify-content-center " style="display: grid;">
-                            <div class="col-md-12 d-flex mt-5 pagination">
+                        <div class="row">
+                            <div class="pagination">
                                 {{ $similer->links() }}
                             </div>
                         </div>

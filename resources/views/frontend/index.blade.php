@@ -305,7 +305,7 @@
 
                                                     <div class="entry-head">
 
-                                                        <div class="place-type list-item">
+                                                        <div class="place-type">
                                                             <span>{{ $value->highlight }}</span>
                                                         </div>
 

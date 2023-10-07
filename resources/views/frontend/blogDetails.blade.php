@@ -35,52 +35,54 @@
                                 <div>
                                     <P>
                                         {{ $blog->post }}
-                                    </P> 
+                                    </P>
                                     <div class="my-3">
-
-                                        <iframe width="560" height="315" src="{{ $blog->videourl }}"
-                                            title="YouTube video player" frameborder="0"
-                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                            allowfullscreen>
-                                        </iframe>
+                                        <div class="embed-responsive embed-responsive-16by9">
+                                            <iframe class="embed-responsive-item" src="{{ $blog->videourl }}"
+                                                title="YouTube video player" frameborder="0"
+                                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                                allowfullscreen>
+                                            </iframe>
+                                        </div>
                                     </div>
+
                                 </div>
                                 <hr>
                                 <!-- .entry-desc -->
                                 <!-- <div class="entry-author">
-                                    <img src="https://wp.getgolo.com/country-guide/wp-content/themes/golo/assets/images/default-user-image.png" alt="Bangkok">
-                                    <div class="author-info">
-                                        <div class="author-title">
-                                            <a title="Ben Cobb" href="#">Ben Cobb</a>
-                                            <ul class="author-social">
-                                                <li>
-                                                    <a href="#">
-                                                        <i class="la la-facebook-f"></i>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="#">
-                                                        <i class="la la-twitter"></i>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="#">
-                                                        <i class="la la-youtube"></i>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="#">
-                                                        <i class="la la-instagram"></i>
-                                                    </a>
-                                                </li>
-                                            </ul>
+                                        <img src="https://wp.getgolo.com/country-guide/wp-content/themes/golo/assets/images/default-user-image.png" alt="Bangkok">
+                                        <div class="author-info">
+                                            <div class="author-title">
+                                                <a title="Ben Cobb" href="#">Ben Cobb</a>
+                                                <ul class="author-social">
+                                                    <li>
+                                                        <a href="#">
+                                                            <i class="la la-facebook-f"></i>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#">
+                                                            <i class="la la-twitter"></i>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#">
+                                                            <i class="la la-youtube"></i>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#">
+                                                            <i class="la la-instagram"></i>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="author-desc">
+                                                <p>I'm a beauty and travel blogger based in Paris. I have two dogs and love
+                                                    drinking coffee in the middle of night.</p>
+                                            </div>
                                         </div>
-                                        <div class="author-desc">
-                                            <p>I'm a beauty and travel blogger based in Paris. I have two dogs and love
-                                                drinking coffee in the middle of night.</p>
-                                        </div>
-                                    </div>
-                                </div>  -->
+                                    </div>  -->
                             </div><!-- .entry-content -->
                             {{-- <div class="related-post">
                             <h2>Related Articles</h2>

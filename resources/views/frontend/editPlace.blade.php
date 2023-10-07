@@ -274,123 +274,130 @@
                                 <div class='row mb-4'>
 
                                     <div class="col-md-12">
+                                        <div class="form-group ">
+                                            
+                                                <label class="fieldlabels">Cover image:</label>
+                                                <div class="input-group">
+                                                    <div class="custom-file">
+                                                        <input type="file" name="coverImage" id="coverImage"
+                                                            class="custom-file-input upload-file" data-max-size="1024">
+                                                        <label class="custom-file-label" for="coverImage">Choose
+                                                            file</label>
+                                                    </div>
+
+                                                    <div class="mt-3 d-grid justify-items-center">
+                                                        <img class="rounded-3 img-fluids shadow"
+                                                            src="{{ isset($business) && $business->coverImage ? asset('uploads/' . $business->coverImage) : asset('images/no-image.png') }}"
+                                                            alt="" />
+                                                    </div>
+                                                </div>
+                                                @error('coverImage')
+                                                    <div class="has-error mt-2">{{ $message }}</div>
+                                                @enderror
+                                            
+
+                                            
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="col-md-12">
                                         <div class="form-group">
-                                            <label class="fieldlabels">Cover image:</label>
+                                            <label class="fieldlabels">Author:</label>
                                             <div class="input-group">
                                                 <div class="custom-file">
-                                                    <input type="file" name="coverImage" id="coverImage"
+                                                    <input type="file" name="logo" id="logo"
                                                         class="custom-file-input upload-file" data-max-size="1024">
-                                                    <label class="custom-file-label" for="coverImage">Choose file</label>
+                                                    <label class="custom-file-label" for="logo">Choose file</label>
                                                 </div>
-                                                <div>
 
-                                                    <img class="rounded-3 img-fluid mt-3"
-                                                    src="{{ isset($business) && $business->coverImage ? asset('uploads/' . $business->coverImage) : asset('images/no-image.png') }}"
-                                                    alt="" />
+                                                <div class="mt-3 d-grid justify-items-center ">
+                                                    <img class="rounded-3 img-fluids shadow"
+                                                        src="{{ isset($business) && $business->logo ? asset('uploads/' . $business->logo) : asset('images/no-image.png') }}"
+                                                        alt="" />
                                                 </div>
                                             </div>
-                                            @error('coverImage')
+                                            @error('logo')
                                                 <div class="has-error mt-2">{{ $message }}</div>
                                             @enderror
                                         </div>
                                     </div>
-                                    
-                                
 
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label class="fieldlabels">Author:</label>
-                                        <div class="input-group">
-                                            <div class="custom-file">
-                                                <input type="file" name="logo" id="logo"
-                                                    class="custom-file-input upload-file" data-max-size="1024">
-                                                <label class="custom-file-label" for="logo">Choose file</label>
-                                            </div>
-                                            <div>
-
-                                                <img class=" rounded-3 img-fluid mt-3"
-                                                src="{{ isset($business) && $business->logo ? asset('uploads/' . $business->logo) : asset('images/no-image.png') }}"
-                                                alt="" />
-                                            </div>
-                                        </div>
-                                        @error('logo')
-                                            <div class="has-error mt-2">{{ $message }}</div>
-                                        @enderror
-                                    </div>
                                 </div>
 
-                            </div>
-
-                            <div class="form-group">
-                                <label class="fieldlabels">Business Photos (Drag & Drop Images Here):</label>
-                                <div id="drop-area" class="border rounded p-3">
-                                    {{-- <label for="galleryImage" class="custom-file-label">Choose files for
+                                <div class="form-group">
+                                    <label class="fieldlabels">Business Photos (Drag & Drop Images Here):</label>
+                                    <div id="drop-area" class="border rounded p-3">
+                                        {{-- <label for="galleryImage" class="custom-file-label">Choose files for
                                             gallery</label> --}}
-                                    <input type="file" name="galleryImage[]" id="galleryImage" class="upload-file"
-                                        data-max-size="1024" multiple accept="image/*">
-                                    <input type="hidden" name="galleryImageCount" id="galleryImageCount"
-                                        value="0">
-                                    <div class="selected-files-count mt-2"></div>
-                                </div>
-                                @error('galleryImage')
-                                    <div class="has-error mt-2">{{ $message }}</div>
-                                @enderror
-                            </div>
-
-                            <div class="form-group">
-                                <label class="fieldlabels">Business Ownership Proof (Upload PDF):</label>
-                                <div class="input-group">
-                                    <div class="custom-file">
-                                        <input type="file" name="documentImage" id="documentImage"
-                                            class="custom-file-input upload-file" accept=".pdf">
-                                        <label class="custom-file-label" for="documentImage">Choose file</label>
+                                        <input type="file" name="galleryImage[]" id="galleryImage"
+                                            class="upload-file" data-max-size="1024" multiple accept="image/*">
+                                        <input type="hidden" name="galleryImageCount" id="galleryImageCount"
+                                            value="0">
+                                        <div class="selected-files-count mt-2"></div>
                                     </div>
-                                    <img class="img_preview"
-                                        src="{{ isset($business) && $business->documentImage ? asset('uploads/' . $business->documentImage) : asset('images/no-image.png') }}"
-                                        alt="" />
+                                    @error('galleryImage')
+                                        <div class="has-error mt-2">{{ $message }}</div>
+                                    @enderror
                                 </div>
-                                @error('documentImage')
-                                    <div class="has-error mt-2">{{ $message }}</div>
-                                @enderror
+
+                                <div class="form-group">
+                                    <label class="fieldlabels">Business Ownership Proof (Upload PDF):</label>
+                                    <div class="input-group">
+                                        <div class="custom-file">
+                                            <input type="file" name="documentImage" id="documentImage"
+                                                class="custom-file-input upload-file" accept=".pdf">
+                                            <label class="custom-file-label" for="documentImage">Choose file</label>
+                                        </div>
+                                        <img class="img_preview"
+                                            src="{{ isset($business) && $business->documentImage ? asset('uploads/' . $business->documentImage) : asset('images/no-image.png') }}"
+                                            alt="" />
+                                    </div>
+                                    @error('documentImage')
+                                        <div class="has-error mt-2">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
                             </div>
 
+                            <input type="submit" name="submit" value="Submit" class="next action-button"
+                                id="upload-btn" />
+                            <input type="button" name="previous" class="previous action-button-previous"
+                                value="Previous" />
+                        </fieldset>
+
+                        <fieldset>
+                            <div class="form-card">
+                                <div class="row">
+                                    <div class="col-7">
+                                        <h2 class="fs-title">Finish:</h2>
+                                    </div>
+                                    <div class="col-5">
+                                        <h2 class="steps">Step 4 - 4</h2>
+                                    </div>
+                                </div> <br><br>
+                                <h2 class="purple-text text-center" style='color:darksalmon'>
+                                    <strong>Processing ... </strong>
+                                    <i class="las la-cogs" style="font-size: 70px;"></i>
+                                </h2>
+
+                                <br>
+                                <div class="row justify-content-center">
+
+                                </div> <br><br>
+                                <div class="row justify-content-center">
+                                    <div class="col-7 text-center">
+                                        <h5 class="purple-text text-center"></h5>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </fieldset>
+                    </form>
                 </div>
-
-                <input type="submit" name="submit" value="Submit" class="next action-button" id="upload-btn" />
-                <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
-                </fieldset>
-
-                <fieldset>
-                    <div class="form-card">
-                        <div class="row">
-                            <div class="col-7">
-                                <h2 class="fs-title">Finish:</h2>
-                            </div>
-                            <div class="col-5">
-                                <h2 class="steps">Step 4 - 4</h2>
-                            </div>
-                        </div> <br><br>
-                        <h2 class="purple-text text-center" style='color:darksalmon'>
-                            <strong>Processing ... </strong>
-                            <i class="las la-cogs" style="font-size: 70px;"></i>
-                        </h2>
-
-                        <br>
-                        <div class="row justify-content-center">
-
-                        </div> <br><br>
-                        <div class="row justify-content-center">
-                            <div class="col-7 text-center">
-                                <h5 class="purple-text text-center"></h5>
-                            </div>
-                        </div>
-                    </div>
-
-                </fieldset>
-                </form>
             </div>
         </div>
-    </div>
     </div>
 
 

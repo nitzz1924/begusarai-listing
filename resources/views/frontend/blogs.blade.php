@@ -50,11 +50,9 @@
                 </div><!-- .isotope__grid -->
 
                 <div class="container">
-                    <div class="row justify-content-center " style="display: grid;">
-                        <div class="">
-                            <div class="col-md-12 d-flex mt-5 pagination">
-                                {{ $blog->links() }}
-                            </div>
+                    <div class="row">
+                        <div class=" pagination">
+                            {{ $blog->links() }}
                         </div>
                     </div>
                 </div>

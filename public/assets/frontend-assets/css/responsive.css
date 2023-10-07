@@ -1018,7 +1018,11 @@
         margin-bottom: 0;
     }
     .upgrade-box img {
-        display: none;
+        /* display: none !important; */
+        top: 134px;
+        right: 4px;
+        bottom: 0px;
+        height: 45%;
     }
     .upgrade-box {
         padding: 30px;

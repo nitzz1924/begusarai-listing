@@ -440,7 +440,7 @@
                                             <label for="content">Review:</label>
                                             <textarea name="content" id="content" rows="4" required></textarea>
                                         </div>
-                                        <button type="submit">Submit Review</button>
+                                        <button class="btn" type="submit">Submit Review</button>
                                     </form>
                                     <?php 
                                             }else{
@@ -524,7 +524,7 @@
                                     
                                     <div class="text-center">
 
-                                        <button type="submit">Send a Message</button>
+                                        <button class="btn" type="submit">Send a Message</button>
                                     </div>
                                 </form>
 
@@ -606,12 +606,12 @@
                                         </div>
                                         <div class="entry-detail">
                                             <div class="entry-head">
-                                                <div class="place-type list-item">
+                                                <div class="place-type">
                                                     <span>{{ $value->highlight }}</span>
                                                 </div>
                                                 <!-- <div class="place-city">
-                                                                                                                                                           <a href="#">Paris</a>
-                                                                                                                                                       </div> -->
+                                                    <a href="#">Paris</a>
+                                                </div> -->
                                             </div>
                                             <h3 class="place-title">
 

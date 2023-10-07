@@ -507,7 +507,7 @@ body.modal-open .custom-overlay {
 }
 
 /* CSS for Mobile View */
-@media (min-width: 768px) {
+@media (min-width: 992px) {
     .mobile-view {
         display: none;
     }
@@ -893,4 +893,27 @@ body.modal-open .custom-overlay {
 .custom-checkbox input[type="checkbox"]:checked + .checkmark {
     background-color: #23d3d3; /* Selected background color */
     border-color: #23d3d3; /* Selected border color */
+}
+
+.avatar .la-angle-down {
+    display: none !important;
+}
+
+audio, canvas, embed, iframe, img, object, svg, video {
+    display: inherit !important;
+}
+
+
+/* Set a fixed width and height for the image */
+.img-fluids {
+    width: 50%; /* Adjust the width as needed for desktop */
+    height: auto; /* Automatically adjust the height */
+}
+
+/* Use media queries to adjust the image size for mobile */
+@media (max-width: 767px) {
+    .img-fluids {
+        width: 100%; /* Make the image full width on mobile */
+        height: auto; /* Automatically adjust the height */
+    }
 }
