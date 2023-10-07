@@ -864,10 +864,10 @@ class HomeController extends Controller
                 $lead->message = 'They explored your business profile !';
                 $lead->created_at = now()->toDateString();
                 $lead->business_id = $id;
-                if ($businessesDetail->leadStatus === 1) {
-                    $lead->status = 1;
+                if ($businessesDetail->leadStatus == 1) {
+                    $lead->status = '1';
                 } else {
-                    $lead->status = 0;
+                    $lead->status = '0';
                 }
                 $lead->save();
             }
