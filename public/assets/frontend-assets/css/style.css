@@ -10419,7 +10419,7 @@ a.place__comments__reply i {
     margin-bottom: 30px;
 }
 .business-about .business-about-info a.btn {
-    background-color: #ffffff;
+    background-color: #ffffff !important;
     color: #2d2d2d;
     font-family: "Jost";
     font-size: 14px;
