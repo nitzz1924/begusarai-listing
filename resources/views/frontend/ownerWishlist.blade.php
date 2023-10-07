@@ -45,7 +45,7 @@
                                                     @if ($value->bookmark_status != null)
                                                         <i class="la la-bookmark large" style="color: #ffb429;"></i>
                                                     @else
-                                                        <i class="la la-bookmark large" style="color:black"></i>
+                                                        <i class="la la-bookmark large" style="color: #ffb429"></i>
                                                     @endif
                                                 </span>
                                             </a>
@@ -92,7 +92,7 @@
                                             </h3>
 
                                             <div class="entry-head">
-                                                <div class="place-type list-item">
+                                                <div class="place-type  ">
                                                     <span>{{ $value->highlight }}</span>
                                                 </div>
                                                 <div class="place-city">

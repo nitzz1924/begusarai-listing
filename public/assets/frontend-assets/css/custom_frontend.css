@@ -148,27 +148,27 @@ input[type="number"] {
     color: white;
 }
 
-.pagination nav div div {
+/* .pagination nav div div {
     display: inline-block;
     text-align: center;
     padding: 10px 0;
     width: 100%;
-    /* visibility: hidden; */
-}
-.pagination nav .flex {
+    visibility: hidden;
+} */
+/* .pagination nav .flex {
     visibility: hidden;
     margin-bottom: 10px;
     text-align: center;
-}
-.pagination nav div div .inline-flex {
-    /* visibility: hidden; */
+} */
+/* .pagination nav div div .inline-flex {
+    visibility: hidden;
     margin: 10px;
     border-radius: 50px;
     box-shadow: none !important;
-}
-.pagination nav div div svg {
+} */
+/* .pagination nav div div svg {
     width: 20px;
-}
+} */
 
 .social-icon {
     display: inline-block;
@@ -507,7 +507,7 @@ body.modal-open .custom-overlay {
 }
 
 /* CSS for Mobile View */
-@media (min-width: 768px) {
+@media (min-width: 992px) {
     .mobile-view {
         display: none;
     }
@@ -893,4 +893,39 @@ body.modal-open .custom-overlay {
 .custom-checkbox input[type="checkbox"]:checked + .checkmark {
     background-color: #23d3d3; /* Selected background color */
     border-color: #23d3d3; /* Selected border color */
+}
+
+.avatar .la-angle-down {
+    display: none !important;
+}
+
+audio, canvas, embed, iframe, img, object, svg, video {
+    display: inherit !important;
+}
+
+
+/* Set a fixed width and height for the image */
+.img-fluids {
+    width: 50%; /* Adjust the width as needed for desktop */
+    height: auto; /* Automatically adjust the height */
+}
+
+/* Use media queries to adjust the image size for mobile */
+@media (max-width: 767px) {
+    .img-fluids {
+        width: 100%; /* Make the image full width on mobile */
+        height: auto; /* Automatically adjust the height */
+    }
+}
+
+.btn-closee {
+    box-sizing: content-box;
+    width: 1em;
+    height: 1em;
+    padding: .25em .25em;
+    color: #000;
+    background: transparent url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23000'%3e%3cpath d='M.293.293a1 1 0 011.414 0L8 6.586 14.293.293a1 1 0 111.414 1.414L9.414 8l6.293 6.293a1 1 0 01-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 01-1.414-1.414L6.586 8 .293 1.707a1 1 0 010-1.414z'/%3e%3c/svg%3e") center/1em auto no-repeat !important;
+    border: 0;
+    border-radius: .25rem;
+    opacity: .5;
 }

@@ -163,10 +163,10 @@
 
                     {{-- offcanvas filter --}}
                     <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample"
-                        aria-labelledby="offcanvasExampleLabel">
-                        <div class="offcanvas-header">
-                            <h5 class="offcanvas-title" id="offcanvasExampleLabel">Filter</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
+                        aria-labelledby="offcanvasExampleLabel" style="max-width: 90%">
+                        <div class="offcanvas-header pb-0">
+                            <h2 class="offcanvas-title fs-2" id="offcanvasExampleLabel">Filter</h2>
+                            <button type="button" class="btn-closee" data-bs-dismiss="offcanvas"
                                 aria-label="Close"></button>
                         </div>
                         <div class="offcanvas-body">
@@ -177,7 +177,7 @@
                                         <a href="#" class="clear-filter"><i class="fal fa-sync"></i>Clear all</a>
                                         <a href="#" class="close-filter"><i class="las la-times"></i></a>
                                     </div> --}}
-                                    <div class="filter-box">
+                                    <div class="filter-box mt-0">
                                         <h3>Cities</h3>
                                         <div class="filter-list">
                                             <div class="filter-group">
@@ -389,10 +389,10 @@
                                                         </h3>
 
 
-                                                        {{-- <div class="place-type list-item">
+                                                        {{-- <div class="place-type  ">
                                                             <span>{{ $value->highlight }}</span>
                                                         </div> --}}
-                                                        <div class="place-type list-item">
+                                                        <div class="place-type  ">
                                                             @php
                                                                 $highlights = explode(',', $value->highlight); // Split the string into an array using a delimiter
                                                                 $highlights = array_slice($highlights, 0, 2); // Get the first two elements of the array
@@ -444,8 +444,8 @@
 
 
                     <div class="container">
-                        <div class="row justify-content-center " style="display: grid;">
-                            <div class="col-md-12 d-flex mt-5 pagination">
+                        <div class="row">
+                            <div class="pagination">
                                 {{ $similer->links() }}
                             </div>
                         </div>

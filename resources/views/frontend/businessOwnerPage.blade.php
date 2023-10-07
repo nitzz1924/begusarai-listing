@@ -47,7 +47,7 @@
                                         </div>
                                         <div class="entry-detail">
                                             <div class="entry-head">
-                                                <div class="place-type list-item">
+                                                <div class="place-type  ">
                                                     <span>Restaurant</span>
                                                 </div>
                                                 <div class="place-city">
@@ -91,7 +91,7 @@
                                         </div>
                                         <div class="entry-detail">
                                             <div class="entry-head">
-                                                <div class="place-type list-item">
+                                                <div class="place-type  ">
                                                     <span>Gym</span>
                                                 </div>
                                                 <div class="place-city">
@@ -134,7 +134,7 @@
                                         </div>
                                         <div class="entry-detail">
                                             <div class="entry-head">
-                                                <div class="place-type list-item">
+                                                <div class="place-type  ">
                                                     <span>Massage</span>
                                                 </div>
                                                 <div class="place-city">
@@ -178,7 +178,7 @@
                                         </div>
                                         <div class="entry-detail">
                                             <div class="entry-head">
-                                                <div class="place-type list-item">
+                                                <div class="place-type  ">
                                                     <span>Clothing Shop</span>
                                                 </div>
                                                 <div class="place-city">
@@ -217,7 +217,7 @@
                                         </div>
                                         <div class="entry-detail">
                                             <div class="entry-head">
-                                                <div class="place-type list-item">
+                                                <div class="place-type  ">
                                                     <span>Restaurant</span>
                                                 </div>
                                                 <div class="place-city">
@@ -257,7 +257,7 @@
                                         </div>
                                         <div class="entry-detail">
                                             <div class="entry-head">
-                                                <div class="place-type list-item">
+                                                <div class="place-type  ">
                                                     <span>Nightlife</span>
                                                 </div>
                                                 <div class="place-city">

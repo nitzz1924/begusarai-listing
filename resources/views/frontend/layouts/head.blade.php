@@ -51,3 +51,4 @@
 <script src="https://kit.fontawesome.com/40bf30a2ca.js" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
 
+{{-- <script src="https://cdn.tailwindcss.com"></script> --}}

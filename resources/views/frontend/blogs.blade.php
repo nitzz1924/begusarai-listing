@@ -2,6 +2,7 @@
 @section('title', 'Blogs')
 @section('content')
 
+
     <main id="main" class="site-main">
         <div class="page-title page-title--small page-title--blog align-left"
             style="background-image: url({{ asset('/frontend-assets/images/bg/bg-blog.png') }});">
@@ -49,17 +50,12 @@
                 </div><!-- .isotope__grid -->
 
                 <div class="container">
-                    <div class="row justify-content-center " style="display: grid;">
-                        <div class="">
-                            <div class="col-md-12 d-flex mt-5 pagination">
-                                {{ $blog->links() }}
-                            </div>
+                    <div class="row">
+                        <div class=" pagination">
+                            {{ $blog->links() }}
                         </div>
                     </div>
                 </div>
-
-               
-
             </div>
         </div>
     </main><!-- .site-main -->
