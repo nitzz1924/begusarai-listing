@@ -122,6 +122,13 @@
                         Settings
                      </a>
                  </li>
+                  <li  class='zoom-on-hover'>
+                     <a href="{{ URL::to('/admin/popupSetting') }} " >
+                         <i class="metismenu-icon bi bi-gear-wide-connected"></i>
+                       Ads Featured Settings
+                     </a>
+                 </li>
+
                  <li  class='zoom-on-hover'>
                      <a href="{{ URL::to('/admin/package') }}">
                          <i class="metismenu-icon fa-regular fa-credit-card"></i>

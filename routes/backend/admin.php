@@ -95,6 +95,8 @@ Route::get('/listing/leadInactive/{id}', 'ListingController@leadInactive');
 
 // Sub-Master Routing
 Route::resource('setting', 'SubMasterController');
+Route::resource('popupSetting', 'popupSettingController');
+
 Route::resource('blog', 'BlogController');
 Route::resource('package', 'PackageController');
 Route::get('packages/{id}/edit', 'PackageController@edit')->name('packages.edit');
