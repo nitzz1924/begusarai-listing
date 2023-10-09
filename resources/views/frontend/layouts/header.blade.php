@@ -14,7 +14,7 @@ $Mastercity = Master::orderBy('created_at', 'asc')
             <div class="col-xl-6 col-sm-5 d-flex align-items-center ">
 
                 <div class="site__menu me-2">
-                    <a title="Menu Icon" href="#" class="site__menu__icon">
+                    <a title="Menu Icon" href="#" class="site_menu_icon">
                         <i class="las la-bars la-24-black"></i>
                     </a>
                     <div class="popup-background"></div>
@@ -24,10 +24,10 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                             <i class="las la-times la-24-black"></i>
                         </a><!-- .popup__close -->
 
-                        <div class="popup__menu popup__box">
+                        <div class="popup_menu popup_box">
 
                             <div class="site__brand">
-                                <a title="Logo" href="/" class="site__brand__logo"><img
+                                <a title="Logo" href="/" class="site_brand_logo"><img
                                         src="{{ asset('assets/images/begusarai-logo.png') }}" alt="Begusarai" /></a>
                             </div>
                         </div>
@@ -36,7 +36,7 @@ $Mastercity = Master::orderBy('created_at', 'asc')
 
                             @auth
                                 @if (Auth::user()->type == 'Owner')
-                                    <div class="popup__button popup__box pb-0">
+                                    <div class="popup_button popup_box pb-0">
                                         <a title="Add place" href="/addPlace" class="">
                                             <span>Add place</span>
                                             <i class="la la-plus"></i>
@@ -47,7 +47,7 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                             @endauth
 
                             {{-- Navigation tabs --}}
-                            <div class="popup__destinations popup__box ">
+                            <div class="popup_destinations popup_box ">
                                 <ul class="menu-arrow">
                                     <li>
                                         <a title="Destinations" href="#">Destinations </a>
@@ -65,10 +65,7 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                                 </ul>
                             </div>
 
-
-
-
-                            <div class="popup__menu popup__box">
+                            <div class="popup_menu popup_box">
                                 <ul class="menu-arrow">
                                     <h3 class="mb-3">Navigation</h3>
 
@@ -90,9 +87,7 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                                 </ul>
                             </div><!-- .popup__menu -->
 
-
-
-                            <div class="popup__menu popup__box">
+                            <div class="popup_menu popup_box">
                                 <ul class="menu-arrow">
                                     <h3 class="mb-3">Quick Links</h3>
 
@@ -108,7 +103,7 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                                 </ul>
                             </div><!-- .popup__menu -->
 
-                            <div class="popup__menu popup__box">
+                            <div class="popup_menu popup_box">
                                 <ul class="menu-arrow">
                                     <h3 class="my-3">Connact With Us</h3>
                                     <ul>
@@ -123,12 +118,12 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                                         </li>
                                     </ul>
                             </div><!-- .popup__menu -->
-                            <div class="popup__menu popup__box">
+                            <div class="popup_menu popup_box">
 
                                 <h2 class="mb-3">Contact Us</h2>
                                 <p>
                                     Email:
-                                    <a href="mailto:contact@inbegusarai.com" class="__cf_email__"
+                                    <a href="mailto:contact@inbegusarai.com" class="_cf_email_"
                                         data-cfemail="email">contact@inbegusarai.com</a>
                                 </p>
                                 <p>Phone: 9693667887 / 06243-316290</p>
@@ -148,7 +143,7 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                             </div><!-- .popup__menu -->
 
                             <div class="footer__bottom " style="margin-bottom: 20px">
-                                <p class="footer__bottom__copyright">
+                                <p class="footer_bottom_copyright">
                                     2023 &copy; <a title="Yuvmedia Team" href="https://yuvmedia.in"><span
                                             style="color: #38d6d6">Yuvmedia.in</span></a>. All
                                     rights reserved.
@@ -164,7 +159,7 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                 <div class="site">
                     {{-- desktop navigation --}}
                     <div class="site__brand">
-                        <a title="Logo" href="/" class="site__brand__logo"><img
+                        <a title="Logo" href="/" class="site_brand_logo"><img
                                 src="{{ asset('assets/images/begusarai-logo.png') }}" alt="Begusarai" /></a>
                     </div>
                     <!-- .site__brand -->
@@ -174,11 +169,11 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                 {{-- login dropdown --}}
                 <div class="ms-auto login-container mobile-view">
                     @guest
-                        <div class="popup__user login__box open-form">
+                        <div class="popup_user login_box open-form">
                             <a title="Login" href="#" class="open-login btn">Login</a>
                         </div><!-- .popup__user -->
                     @else
-                        <div class="popup__menu popup__box login__box">
+                        <div class="popup_menu popupbox login_box">
                             <ul class="sub-menu">
                                 <?php $user = User_Login::find(auth()->user()->id); ?>
 
@@ -198,7 +193,7 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                                             <li class=""><a href="/ownerProfile">Profile</a></li>
                                             <li class=""><a href="/ownerWishlist">My Wishlist</a></li>
                                             <li>
-                                                <a href="/logout">
+                                                <a href="{{ route('logout') }}">
                                                     <span>Logout</span>
                                                 </a>
                                             </li>
@@ -398,9 +393,10 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                                 class="form-sign form-content form-account" id="signup">
 
                                 @csrf
- 
-                                    <div id="validation-errors" style="color: red;text-align: center;margin-top: -20px;margin-bottom: 20px;">
-                                    </div>
+
+                                <div id="validation-errors"
+                                    style="color: red;text-align: center;margin-top: -20px;margin-bottom: 20px;">
+                                </div>
                                 </span>
 
                                 <!-- Radio buttons for account type -->
@@ -434,7 +430,7 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                                     <div class="field-inline">
                                         <div class="field-input-number">
                                             <input type="tel" placeholder="Phone Number" value=""
-                                                id="mobileNumber" name="mobileNumber" pattern="[0-9]{10}"
+                                                id="mobileNumberotp" name="mobileNumberotp" pattern="[0-9]{10}"
                                                 maxlength="10" minlength="10" required />
 
                                         </div>
@@ -449,7 +445,7 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                                     <div class="field-input">
                                         <input type="tel" id="verificationCode" placeholder="OTP" value=""
                                             name="verificationCode" pattern="[0-9]{6}" maxlength="6" minlength="6"
-                                            required readonly />
+                                            required />
                                         <input type="hidden" id="generatedOTP" placeholder="OTP" value=""
                                             name="generatedOTP" />
 
@@ -459,7 +455,8 @@ $Mastercity = Master::orderBy('created_at', 'asc')
 
                                 <!-- Acceptance checkbox -->
                                 <div class="field-check mb-2">
-                                    <label for="accept" style="flex: 0 0 100% !important; max-width: 100% !important;">
+                                    <label for="accept"
+                                        style="flex: 0 0 100% !important; max-width: 100% !important;">
                                         <input type="checkbox" id="accept" value="1" name="accept"
                                             class="form-check-input  " required>
                                         @csrf
@@ -476,27 +473,6 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                                 <input type="submit" name="submit" value="Verify" />
                             </form>
                             <!-- Without Validation Error Form -->
-                            <!-- <form action="{{ route('loginForm') }}" method="POST" class="form-log form-content"
-                                    id="login">
-                                    @csrf
-                                    <div class="field-input">
-                                        <input type="tel" placeholder="Enter Phone Number" value=""
-                                            name="mobileNumber" pattern="[0-9]{10}" minlength="10" maxlength="10"
-                                            id="mobileNumber" required />
-                                         
-                                    </div>
-                                    <div class="field-input">
-                                        <input type="password" placeholder="Password" value="" name="password"
-                                            id="password" required />
-                                        
-                                    </div>
-                                    <a title="Forgot password" class="forgot_pass" href="/resetPassword">Forgot
-                                        password</a>
-                                    <input type="submit" name="submit" value="Login" id="loginSubmit" />
-                                </form> -->
-                            <!-- display error message in login Form  -->
-
-
 
                             <form action="{{ route('loginForm') }}" method="POST" class="form-log form-content"
                                 id="login">
@@ -553,7 +529,7 @@ $Mastercity = Master::orderBy('created_at', 'asc')
         {{-- mobile navigation --}}
         <nav class="mobile-bottom-nav">
 
-            <div class="mobile-bottom-nav__item mobile-bottom-nav__item--active">
+            <div class="mobile-bottom-nav_item mobile-bottom-nav_item--active">
                 <a href="/">
                     <div class="mobile-bottom-nav__item-content">
                         <i class="fa-solid fa-house fs-4 pb-1" style="color: #C6E2E9"></i>
@@ -639,7 +615,7 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                                 'Please correct the following errors:');
                             $('#error_description_type').text(response.errors.type);
                             $('#error_description_mobileNumber').text(response.errors
-                                .mobileNumber);
+                                .mobileNumberotp);
                             $('#error_description_verificationCode').text(response.errors
                                 .verificationCode);
                             $('#error_description_accept').text(response.errors.accept);
@@ -661,19 +637,49 @@ $Mastercity = Master::orderBy('created_at', 'asc')
 
         $('#sendOTPButton').on('click', function(event) {
             event.preventDefault(); // Prevent the form from submitting
-
+            var bnymber = document.getElementById("mobileNumberotp").value;
             // Generate a random 6-digit OTP
             var randomOTP = Math.floor(100000 + Math.random() * 900000);
+            const url = 'https://hisocial.in/api/send';
 
+            // Data to send in the request body
+            const data = {
+                type: 'text',
+                message: 'This OTP is valid for 5 minutes. Do not share this OTP with anyone. For assistance, call our support team at  ' +
+                    randomOTP + " .",
+                instance_id: '651EB1464D20F',
+                access_token: '651e6533248d5',
+                number: '91' + bnymber,
+            };
+
+            // Create and configure the request
+            const requestOptions = {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded' // Set the content type
+                },
+                body: new URLSearchParams(data) // Serialize the data
+            };
+
+            // Make the POST request
+            fetch(url, requestOptions)
+                .then(response => response.json())
+                .then(data => {
+
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
             // Set the generated OTP in the input field
             $('#verificationCode').val(randomOTP);
             $('#generatedOTP').val(randomOTP);
             // Enable the input field
             $('#verificationCode').removeAttr('readonly');
+
         });
     });
 </script>
-        <!-- --------------------------------------Login Validation-----------------------------------  -->
+<!-- --------------------------------------Login Validation-----------------------------------  -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     $(document).ready(function() {
@@ -699,14 +705,11 @@ $Mastercity = Master::orderBy('created_at', 'asc')
     });
 </script>
 
-              <!-- --------------------------------------Login Validation-----------------------------------  -->
-
-
-
+<!-- --------------------------------------Login Validation-----------------------------------  -->
 
 <script>
-    $(document).ready(function () {
-        $('#signup').on('submit', function (e) {
+    $(document).ready(function() {
+        $('#signup').on('submit', function(e) {
             e.preventDefault();
 
             // Serialize the form data
@@ -718,7 +721,7 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                 url: '{{ route('signup') }}',
                 data: formData,
                 dataType: 'json',
-                success: function (response) {
+                success: function(response) {
                     if (response.success) {
                         // Redirect to the password setup page
                         window.location.href = response.redirect;
@@ -728,21 +731,19 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                         $('#validation-errors').html(errors).show();
                     }
                 },
-                error: function (xhr, textStatus, errorThrown) {
+                error: function(xhr, textStatus, errorThrown) {
                     console.log(xhr.responseText);
                 }
             });
         });
 
         // Add an event listener to the "Send OTP" button to generate and send OTP
-        $('#sendOTPButton').on('click', function () {
+        $('#sendOTPButton').on('click', function() {
             // Implement OTP sending logic here
             // You can send an Ajax request to send OTP and update the "readonly" input field.
         });
     });
 </script>
-
-
 
 <script>
     var navItems = document.querySelectorAll(".mobile-bottom-nav__item");

@@ -76,8 +76,8 @@ class HomeController extends Controller
     }
     public function logout()
     {
-        Auth::guard('user')->logout();
-        return redirect()->intended('/');
+         Auth::logout(); 
+        return redirect('/');
     }
 
     public function signup(Request $request)
@@ -85,7 +85,7 @@ class HomeController extends Controller
         // Validate the form data
         $validator = Validator::make($request->all(), [
             'type' => 'required|in:guest,owner',
-            'mobileNumber' => 'required|digits:10',
+            'mobileNumberotp' => 'required|digits:10',
 
             function ($attribute, $value, $fail) use ($request) {
                 // Check if the mobileNumber already exists in the database
@@ -120,7 +120,7 @@ class HomeController extends Controller
             // Create a new Login_User instance and fill it with the validated data
             $user = new User_Login();
             $user->type = $request->input('type');
-            $user->mobileNumber = $request->input('mobileNumber');
+            $user->mobileNumber = $request->input('mobileNumberotp');
             $user->verificationCode = $request->input('verificationCode');
             $user->save();
 
@@ -140,16 +140,20 @@ class HomeController extends Controller
                 // Handle other exceptions
                 return response()->json(['success' => false, 'errors' => [$e->getMessage()]]);
             }
-        }
+       }
     }
 
     public function index()
     {
+
+        
         $IndexPageVideo = Popup_ads::orderBy('created_at', 'asc')
             ->where('type', '=', 'Home Ads')
             ->get();
 
-        //  dd($popupHome);
+
+//  dd($popupHome);
+
 
         // Get the authenticated user
         $user = auth()->user();
@@ -231,6 +235,7 @@ class HomeController extends Controller
         $popup = Popup_ads::orderBy('created_at', 'asc')
             ->where('type', '=', 'Popup Ads')
             ->first();
+      
 
         // Update expair plans --------------------------------------------------------------------------------------------------------------------------------
         $currentDate = now();
@@ -264,8 +269,8 @@ class HomeController extends Controller
                 $resource->save();
             }
         }
-        // dd($IndexPageVideo);
-        return View::make('frontend.index', compact('submaster', 'businesses', 'Mastercity', 'TestimonialData', 'blog', 'Result', 'popup', 'businessesCount', 'categoryCount', 'cityCount', 'IndexPageVideo'));
+// dd($IndexPageVideo);
+        return View::make('frontend.index', compact('submaster', 'businesses', 'Mastercity', 'TestimonialData', 'blog', 'Result', 'popup',  'businessesCount', 'categoryCount', 'cityCount', 'IndexPageVideo'));
     }
 
     // public function toggleBookmark(Request $request, $businessId)
@@ -865,7 +870,7 @@ class HomeController extends Controller
 
             if (!$existingLead) {
                 $lead = new Lead();
-
+                
                 $lead->user_id = $user->id;
                 $lead->name = $user->name;
                 $lead->number = $user->mobileNumber;
@@ -952,9 +957,9 @@ class HomeController extends Controller
             $countLeadlist = array_merge($countLeadlist, $arrayListL);
             $countReview = $countReview + review::where('listing_id', '=', $list->id)->count();
             $countLead =
-                $countLead +
-                Lead::where('status', '=', '1')
-                    ->where('business_id', '=', $list->id)
+                $countLead + Lead
+                   :: where('status', '=', '1')->
+                    where('business_id', '=', $list->id)
                     ->count();
             $countView = $countView + Lead::where('business_id', '=', $list->id)->count();
         }
