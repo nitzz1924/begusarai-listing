@@ -133,22 +133,23 @@ class HomeController extends Controller
             //   return view('frontend.setPassword', compact('user'));
             return response()->json(['success' => true, 'redirect' => route('setPassword', compact('user'))]);
         } catch (\Exception $e) {
-            // Handle any exceptions that occur during the database operation
-            return response()->json(['success' => false, 'errors' => ['An error occurred during signup.']]);
+            if (strpos($e->getMessage(), 'Duplicate entry') !== false) {
+                // Handle duplicate entry error (user already exists)
+                return response()->json(['success' => false, 'errors' => ['This mobile number is already registered.']]);
+            } else {
+                // Handle other exceptions
+                return response()->json(['success' => false, 'errors' => [$e->getMessage()]]);
+            }
         }
     }
 
     public function index()
     {
-
-        
         $IndexPageVideo = Popup_ads::orderBy('created_at', 'asc')
             ->where('type', '=', 'Home Ads')
             ->get();
 
-
-//  dd($popupHome);
-
+        //  dd($popupHome);
 
         // Get the authenticated user
         $user = auth()->user();
@@ -230,7 +231,6 @@ class HomeController extends Controller
         $popup = Popup_ads::orderBy('created_at', 'asc')
             ->where('type', '=', 'Popup Ads')
             ->first();
-      
 
         // Update expair plans --------------------------------------------------------------------------------------------------------------------------------
         $currentDate = now();
@@ -264,8 +264,8 @@ class HomeController extends Controller
                 $resource->save();
             }
         }
-// dd($IndexPageVideo);
-        return View::make('frontend.index', compact('submaster', 'businesses', 'Mastercity', 'TestimonialData', 'blog', 'Result', 'popup',  'businessesCount', 'categoryCount', 'cityCount', 'IndexPageVideo'));
+        // dd($IndexPageVideo);
+        return View::make('frontend.index', compact('submaster', 'businesses', 'Mastercity', 'TestimonialData', 'blog', 'Result', 'popup', 'businessesCount', 'categoryCount', 'cityCount', 'IndexPageVideo'));
     }
 
     // public function toggleBookmark(Request $request, $businessId)
@@ -865,7 +865,7 @@ class HomeController extends Controller
 
             if (!$existingLead) {
                 $lead = new Lead();
-                
+
                 $lead->user_id = $user->id;
                 $lead->name = $user->name;
                 $lead->number = $user->mobileNumber;
@@ -952,9 +952,9 @@ class HomeController extends Controller
             $countLeadlist = array_merge($countLeadlist, $arrayListL);
             $countReview = $countReview + review::where('listing_id', '=', $list->id)->count();
             $countLead =
-                $countLead + Lead
-                   :: where('status', '=', '1')->
-                    where('business_id', '=', $list->id)
+                $countLead +
+                Lead::where('status', '=', '1')
+                    ->where('business_id', '=', $list->id)
                     ->count();
             $countView = $countView + Lead::where('business_id', '=', $list->id)->count();
         }

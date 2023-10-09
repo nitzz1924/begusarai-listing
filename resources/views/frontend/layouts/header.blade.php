@@ -398,6 +398,10 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                                 class="form-sign form-content form-account" id="signup">
 
                                 @csrf
+ 
+                                    <div id="validation-errors" style="color: red;text-align: center;margin-top: -20px;margin-bottom: 20px;">
+                                    </div>
+                                </span>
 
                                 <!-- Radio buttons for account type -->
                                 <div class="field-inline mb-3" style="justify-content: center;">
@@ -669,7 +673,7 @@ $Mastercity = Master::orderBy('created_at', 'asc')
         });
     });
 </script>
-
+        <!-- --------------------------------------Login Validation-----------------------------------  -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     $(document).ready(function() {
@@ -694,6 +698,50 @@ $Mastercity = Master::orderBy('created_at', 'asc')
         });
     });
 </script>
+
+              <!-- --------------------------------------Login Validation-----------------------------------  -->
+
+
+
+
+<script>
+    $(document).ready(function () {
+        $('#signup').on('submit', function (e) {
+            e.preventDefault();
+
+            // Serialize the form data
+            var formData = $(this).serialize();
+
+            // Send an Ajax POST request to the signup route
+            $.ajax({
+                type: 'POST',
+                url: '{{ route('signup') }}',
+                data: formData,
+                dataType: 'json',
+                success: function (response) {
+                    if (response.success) {
+                        // Redirect to the password setup page
+                        window.location.href = response.redirect;
+                    } else {
+                        // Display validation errors
+                        var errors = response.errors.join('<br>');
+                        $('#validation-errors').html(errors).show();
+                    }
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    console.log(xhr.responseText);
+                }
+            });
+        });
+
+        // Add an event listener to the "Send OTP" button to generate and send OTP
+        $('#sendOTPButton').on('click', function () {
+            // Implement OTP sending logic here
+            // You can send an Ajax request to send OTP and update the "readonly" input field.
+        });
+    });
+</script>
+
 
 
 <script>
