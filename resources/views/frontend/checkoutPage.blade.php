@@ -3,9 +3,9 @@
 @section('content')
 
     <main id="main" class="site-main">
-           
-         
-        <div class="page-title page-title--small align-left" style="background-image: url({{ asset('assets/images/bg-checkout.png') }});">
+
+        <div class="page-title page-title--small align-left"
+            style="background-image: url({{ asset('assets/images/bg-checkout.png') }});">
             <div class="container">
                 <div class="page-title__content">
                     <h1 class="page-title__name">Payment</h1>
@@ -98,6 +98,14 @@
                                                     name="amount" id="amount">
                                             </div>
                                         </div>
+
+                                        <div class="col-md-6">
+                                            <div class="field-input">
+                                                <label for="gst">GST (18%)</label>
+                                                <span id="gstAmount"></span>
+                                            </div>
+                                        </div>
+
                                     </div>
                                     <input type="hidden" value="{{ $planidv }}" name="planId" id="planId">
                                 </div>
@@ -146,7 +154,6 @@
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js" type="text/javascript"></script>
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-
 
     <script>
         // Wait for the document to be ready before attaching the click event
@@ -207,5 +214,23 @@
             });
         });
     </script>
+    <!-- ---------------------------------- Add 18% GST code -------------------------------- -->
+    <script>
+        // JavaScript to calculate and display GST amount
+        $(document).ready(function() {
+            // Get the initial price from the input
+            var initialPrice = parseFloat($("#amount").val());
 
+            // Calculate GST amount
+            var gstAmount = initialPrice * 0.18;
+            gstAmount = gstAmount.toFixed(2); // Round to two decimal places
+
+            // Calculate total price including GST
+            var totalPriceIncludingGST = initialPrice + parseFloat(gstAmount);
+
+            // Display GST amount and total price including GST
+            $("#gstAmount").text("GST: ₹" + gstAmount);
+            $("#amount").val("₹" + totalPriceIncludingGST.toFixed(2));
+        });
+    </script>
 @endsection

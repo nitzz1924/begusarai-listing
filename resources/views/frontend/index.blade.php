@@ -113,8 +113,67 @@
 
                         </div>
                     </div>
+                    
+                    @endif
+                    
+                    {{-- Featured Slider container --}}
+                    <div class="slider-container" style="margin-top: 50px;">
+                        <div class="container">
+                            {{-- <h2 class="title title-border-bottom align-center offset-item">
+                                Featured
+                            </h2> --}}
+    
+                            <div id="sliderAutoplaying" class="carousel slide" data-bs-ride="carousel">
+                                <div class="carousel-indicators">
+                                    @foreach ($IndexPageVideo as $key => $video)
+                                        <button type="button" data-bs-target="#sliderAutoplaying"
+                                            data-bs-slide-to="{{ $key }}"
+                                            class="{{ $key === 0 ? 'active' : '' }}"></button>
+                                    @endforeach
+                                </div>
+                                <div class="carousel-inner">
+                                    @foreach ($IndexPageVideo as $key => $video)
+                                        <div class="carousel-item{{ $key === 0 ? ' active' : '' }}" data-bs-interval="3000">
+    
+                                         
+    
+                                                @if ($video->content_type == 'video')
+                                                   <div class="embed-responsive embed-responsive-16by9">
+                                                    <iframe class="embed-responsive-item"
+                                                        src="https://www.youtube.com/embed/{{ $video->value }}?autoplay=1&mute=1&controls=0"
+                                                        frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
+                                                    </iframe>
+                                                     </div>
+                                                @endif
+    
+                                           
+                                            @if ($video->content_type == 'image')
+                                                <div class="embed-responsive  ">
+    
+                                                    <a href="{{ $video->value }}">
+                                                        <img src="{{ URL::to('uploads/' . $video->logo) }}"
+                                                            alt="Promo banner" >
+                                                    </a>
+    
+                                                </div>
+                                            @endif
+                                        </div>
+                                    @endforeach
+    
+                                </div>
+                                <div class="carousel-indicators">
+                                    @foreach ($IndexPageVideo as $key => $video)
+                                        <button type="button" data-bs-target="#sliderAutoplaying"
+                                            data-bs-slide-to="{{ $key }}"
+                                            class="{{ $key === 0 ? 'active' : '' }}"></button>
+                                    @endforeach
+                                </div>
+                            </div>
+    
+                        </div>
+                    </div>
 
-                @endif
+
 
                 {{-- Desktop categories --}}
                 <div class="business-category desktop-view">
@@ -192,62 +251,6 @@
                     </div>
                 </div>
 
-                {{-- Featured Slider container --}}
-                <div class="slider-container">
-                    <div class="container">
-                        {{-- <h2 class="title title-border-bottom align-center offset-item">
-                            Featured
-                        </h2> --}}
-
-                        <div id="sliderAutoplaying" class="carousel slide" data-bs-ride="carousel">
-                            <div class="carousel-indicators">
-                                @foreach ($IndexPageVideo as $key => $video)
-                                    <button type="button" data-bs-target="#sliderAutoplaying"
-                                        data-bs-slide-to="{{ $key }}"
-                                        class="{{ $key === 0 ? 'active' : '' }}"></button>
-                                @endforeach
-                            </div>
-                            <div class="carousel-inner">
-                                @foreach ($IndexPageVideo as $key => $video)
-                                    <div class="carousel-item{{ $key === 0 ? ' active' : '' }}" data-bs-interval="3000">
-
-                                     
-
-                                            @if ($video->content_type == 'video')
-                                               <div class="embed-responsive embed-responsive-16by9">
-                                                <iframe class="embed-responsive-item"
-                                                    src="https://www.youtube.com/embed/{{ $video->value }}?autoplay=1&mute=1&controls=0"
-                                                    frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
-                                                </iframe>
-                                                 </div>
-                                            @endif
-
-                                       
-                                        @if ($video->content_type == 'image')
-                                            <div class="embed-responsive  ">
-
-                                                <a href="{{ $video->value }}">
-                                                    <img src="{{ URL::to('uploads/' . $video->logo) }}"
-                                                        alt="Promo banner" >
-                                                </a>
-
-                                            </div>
-                                        @endif
-                                    </div>
-                                @endforeach
-
-                            </div>
-                            <div class="carousel-indicators">
-                                @foreach ($IndexPageVideo as $key => $video)
-                                    <button type="button" data-bs-target="#sliderAutoplaying"
-                                        data-bs-slide-to="{{ $key }}"
-                                        class="{{ $key === 0 ? 'active' : '' }}"></button>
-                                @endforeach
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
 
                 <!-- .business-category -->
                 <div class="trending trending-business">

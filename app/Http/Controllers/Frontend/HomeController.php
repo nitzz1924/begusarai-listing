@@ -76,7 +76,7 @@ class HomeController extends Controller
     }
     public function logout()
     {
-         Auth::logout(); 
+        Auth::logout();
         return redirect('/');
     }
 
@@ -140,20 +140,16 @@ class HomeController extends Controller
                 // Handle other exceptions
                 return response()->json(['success' => false, 'errors' => [$e->getMessage()]]);
             }
-       }
+        }
     }
 
     public function index()
     {
-
-        
         $IndexPageVideo = Popup_ads::orderBy('created_at', 'asc')
             ->where('type', '=', 'Home Ads')
             ->get();
 
-
-//  dd($popupHome);
-
+        //  dd($popupHome);
 
         // Get the authenticated user
         $user = auth()->user();
@@ -235,7 +231,6 @@ class HomeController extends Controller
         $popup = Popup_ads::orderBy('created_at', 'asc')
             ->where('type', '=', 'Popup Ads')
             ->first();
-      
 
         // Update expair plans --------------------------------------------------------------------------------------------------------------------------------
         $currentDate = now();
@@ -269,8 +264,8 @@ class HomeController extends Controller
                 $resource->save();
             }
         }
-// dd($IndexPageVideo);
-        return View::make('frontend.index', compact('submaster', 'businesses', 'Mastercity', 'TestimonialData', 'blog', 'Result', 'popup',  'businessesCount', 'categoryCount', 'cityCount', 'IndexPageVideo'));
+        // dd($IndexPageVideo);
+        return View::make('frontend.index', compact('submaster', 'businesses', 'Mastercity', 'TestimonialData', 'blog', 'Result', 'popup', 'businessesCount', 'categoryCount', 'cityCount', 'IndexPageVideo'));
     }
 
     // public function toggleBookmark(Request $request, $businessId)
@@ -870,7 +865,7 @@ class HomeController extends Controller
 
             if (!$existingLead) {
                 $lead = new Lead();
-                
+
                 $lead->user_id = $user->id;
                 $lead->name = $user->name;
                 $lead->number = $user->mobileNumber;
@@ -957,9 +952,9 @@ class HomeController extends Controller
             $countLeadlist = array_merge($countLeadlist, $arrayListL);
             $countReview = $countReview + review::where('listing_id', '=', $list->id)->count();
             $countLead =
-                $countLead + Lead
-                   :: where('status', '=', '1')->
-                    where('business_id', '=', $list->id)
+                $countLead +
+                Lead::where('status', '=', '1')
+                    ->where('business_id', '=', $list->id)
                     ->count();
             $countView = $countView + Lead::where('business_id', '=', $list->id)->count();
         }
@@ -1124,7 +1119,10 @@ class HomeController extends Controller
             $api = new Api(env('RAZORPAY_KEY_ID'), env('RAZORPAY_KEY_SECRET'));
             // Create a Razorpay order
             $order = $api->order->create([
-                'amount' => $planData->price != null ? $planData->price * 100 : 0,
+                // Pass value of 18% GST and display here for razorpay display add GST value --------
+                // 'amount' => $planData->price != null ? $planData->price * 100 : 0,
+                'amount' => $planData->price != null ? $planData->price * 100 + $planData->price * 100 * 0.18 : 0,
+
                 'currency' => 'INR',
                 'receipt' => 'order_rcptid_' . $businessId,
                 'notes' => [

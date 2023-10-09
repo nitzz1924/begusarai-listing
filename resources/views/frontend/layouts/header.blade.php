@@ -445,7 +445,7 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                                     <div class="field-input">
                                         <input type="tel" id="verificationCode" placeholder="OTP" value=""
                                             name="verificationCode" pattern="[0-9]{6}" maxlength="6" minlength="6"
-                                            required />
+                                              />
                                         <input type="hidden" id="generatedOTP" placeholder="OTP" value=""
                                             name="generatedOTP" />
 
@@ -458,7 +458,7 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                                     <label for="accept"
                                         style="flex: 0 0 100% !important; max-width: 100% !important;">
                                         <input type="checkbox" id="accept" value="1" name="accept"
-                                            class="form-check-input  " required>
+                                            class="form-check-input  "  >
                                         @csrf
                                         Accept the <a title="Terms" href="#">Terms</a> and <a
                                             title="Privacy Policy" href="#">Privacy Policy</a>
