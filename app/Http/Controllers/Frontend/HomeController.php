@@ -778,11 +778,12 @@ class HomeController extends Controller
         return view('frontend.setPassword', compact('User_id'));
     }
 
-    public function SubmitPassword(Request $request)
+    public function submitPassword(Request $request)
     {
+        // Validate the request data
         $validator = Validator::make($request->all(), [
             'first_name' => 'required',
-             'type' => 'required|in:guest,owner',
+            'type' => 'required|in:guest,owner',
             'new_password' => 'required|min:6|confirmed', // Ensure 'new_password' and 're_new' match
         ]);
 
@@ -793,24 +794,36 @@ class HomeController extends Controller
                 ->withInput();
         }
 
+        // Find the user record by mobileNumber
         $record = User_Login::where('id', $request->mobileNumber)->first();
 
         if ($record) {
-            // Record found: Update it
+            // Update the user record with the provided data
             $record->name = $request->input('first_name');
             $record->type = $request->input('type');
             $record->password = bcrypt($request->input('new_password')); // Hash the password
             $record->status = '1';
             $record->save();
+
+            // Attempt to authenticate the user
+            $credentials = [
+                'mobileNumber' => $record->mobileNumber,
+                'password' => $request->input('new_password'),
+            ];
+
+            if (Auth::guard('user')->attempt($credentials)) {
+                // Authentication passed
+                return redirect()
+                    ->route('index') // Replace 'dashboard' with the actual route you want to redirect to after login
+                    ->with('success', 'Welcome to our community! Your account has been successfully created.');
+            }
         }
 
+        // Handle the case where the user record was not found or authentication failed
         return redirect()
-            ->route('index')
-            ->with('success', 'Welcome to our community! Your account has been successfully created.');
-
-
+            ->back()
+            ->with('error', 'Registration failed. Please try again.');
     }
-
     public function listingDetail(Request $request, $id, $category)
     {
         // $VisitCount = Lead:: where('business_id')  ->get();
@@ -1286,7 +1299,6 @@ class HomeController extends Controller
             ->where('type', '=', 'highlight')
             ->get();
 
-        
         return view('frontend.searchFilter', compact('Result', 'submaster', 'submasterCategory', 'submasterHighlight', 'similer'));
     }
 
