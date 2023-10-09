@@ -399,31 +399,7 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                                 </div>
                                 </span>
 
-                                <!-- Radio buttons for account type -->
-                                <div class="field-inline mb-3" style="justify-content: center;">
-                                    <div class="form-group-user">
-                                        <div class="row">
-                                            <div class="col-6 px-1">
-                                                <div class="col-group">
-                                                    <label for="guest" class="label-field radio-field">
-                                                        <input type="radio" value="guest" id="guest"
-                                                            name="type" checked>
-                                                        <span><i class="las la-user"></i>User</span>
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <div class="col-6 px-1">
-                                                <div class="col-group">
-                                                    <label for="owner" class="label-field radio-field">
-                                                        <input type="radio" value="owner" id="owner"
-                                                            name="type">
-                                                        <span><i class="las la-briefcase"></i>Business Owner</span>
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                               
 
                                 <!-- Phone number and OTP input fields -->
                                 <div class="">
@@ -529,7 +505,7 @@ $Mastercity = Master::orderBy('created_at', 'asc')
         {{-- mobile navigation --}}
         <nav class="mobile-bottom-nav">
 
-            <div class="mobile-bottom-nav_item mobile-bottom-nav_item--active">
+            <div class="mobile-bottom-nav__item active">
                 <a href="/">
                     <div class="mobile-bottom-nav__item-content">
                         <i class="fa-solid fa-house fs-4 pb-1" style="color: #C6E2E9"></i>
@@ -670,8 +646,7 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                 .catch(error => {
                     console.error('Error:', error);
                 });
-            // Set the generated OTP in the input field
-            $('#verificationCode').val(randomOTP);
+            // Set the generated OTP in the input field 
             $('#generatedOTP').val(randomOTP);
             // Enable the input field
             $('#verificationCode').removeAttr('readonly');

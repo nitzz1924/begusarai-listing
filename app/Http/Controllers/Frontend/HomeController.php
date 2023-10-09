@@ -84,7 +84,6 @@ class HomeController extends Controller
     {
         // Validate the form data
         $validator = Validator::make($request->all(), [
-            'type' => 'required|in:guest,owner',
             'mobileNumberotp' => 'required|digits:10',
 
             function ($attribute, $value, $fail) use ($request) {
@@ -119,7 +118,6 @@ class HomeController extends Controller
         try {
             // Create a new Login_User instance and fill it with the validated data
             $user = new User_Login();
-            $user->type = $request->input('type');
             $user->mobileNumber = $request->input('mobileNumberotp');
             $user->verificationCode = $request->input('verificationCode');
             $user->save();
@@ -784,6 +782,7 @@ class HomeController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'first_name' => 'required',
+             'type' => 'required|in:guest,owner',
             'new_password' => 'required|min:6|confirmed', // Ensure 'new_password' and 're_new' match
         ]);
 
@@ -799,6 +798,7 @@ class HomeController extends Controller
         if ($record) {
             // Record found: Update it
             $record->name = $request->input('first_name');
+            $record->type = $request->input('type');
             $record->password = bcrypt($request->input('new_password')); // Hash the password
             $record->status = '1';
             $record->save();
@@ -806,7 +806,9 @@ class HomeController extends Controller
 
         return redirect()
             ->route('index')
-            ->with('success', 'Thank you For Creating Account.');
+            ->with('success', 'Welcome to our community! Your account has been successfully created.');
+
+
     }
 
     public function listingDetail(Request $request, $id, $category)
@@ -1272,11 +1274,19 @@ class HomeController extends Controller
             // dd($subvalue->title, $value->category, $subvalue->value);
         }
 
+        $submasterCategory = Master::orderBy('created_at', 'asc')
+            ->where('type', '=', 'category')
+            ->get();
+
         $submaster = Master::orderBy('created_at', 'asc')
             ->where('type', '=', 'city')
             ->get();
 
-        // Return the view with the paginated $businesses
+        $submasterHighlight = Master::orderBy('created_at', 'asc')
+            ->where('type', '=', 'highlight')
+            ->get();
+
+        
         return view('frontend.searchFilter', compact('Result', 'submaster', 'submasterCategory', 'submasterHighlight', 'similer'));
     }
 

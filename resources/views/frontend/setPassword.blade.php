@@ -10,7 +10,6 @@
             </div>
             <!-- .member-wrap-top -->
 
-            
             @if ($errors->any())
                 <div class="alert alert-danger">
                     <ul>
@@ -21,11 +20,33 @@
                 </div>
             @endif
 
-
-
             <form action="{{ route('SubmitPassword') }}" method="POST" class="member-profile form-underline">
                 @csrf
                 <h3>New User</h3>
+                <div class="field-inline mb-3" style="justify-content: center;">
+                    <div class="form-group-user">
+                        <div class="row">
+                            <div class="col-6 px-1">
+                                <div class="col-group">
+                                    <label for="guest" class="label-field radio-field">
+                                        <input type="radio" value="guest" id="guest" name="type" checked>
+                                        <span><i class="las la-user"></i>User</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-6 px-1">
+                                <div class="col-group">
+                                    <label for="owner" class="label-field radio-field">
+                                        <input type="radio" value="owner" id="owner" name="type">
+                                        <span><i class="las la-briefcase"></i>Business Owner</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
                 <input type="hidden" name="mobileNumber" placeholder="" value="{{ $User_id }}" id="mobileNumber">
 
                 <div class="field-input">
@@ -33,9 +54,7 @@
                     <input type="text" name="first_name" placeholder="Invan" id="first_name"
                         value="{{ old('first_name') }}">
 
-
                 </div>
-
 
                 <div class="field-input">
                     <label for="new_password">New password</label>
@@ -52,26 +71,14 @@
                     <input type="submit" value="Set password">
                 </div>
             </form>
-            
-            <div class="login-container my-5">
-                <span class="login-message"> 
-                    <a href="#"
-                        class=" btn-add-to-wishlist open-login test" data-place-id=""
-                        data-business-id="">
-                        <span>Please Login First </span>
-                    </a>
-                </span>
-
-            </div>
 
             
 
-            <!-- .member-profile -->
+            
 
-        </div><!-- .member-wrap -->
+        </div> 
     </div>
 
-    </main><!-- .site-main -->
-
+    </main> 
 
 @endsection
