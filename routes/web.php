@@ -146,7 +146,14 @@ Route::post('/career', [HomeController::class, 'careerStore'])->name('careerStor
 
 //bookmark route
 Route::post('/bookmark/{businessId}', [HomeController::class, 'toggleBookmark'])->name('bookmark.toggle');
-Route::get('/searchFilter/{category}/{city}/{highlight}', [HomeController::class, 'searchFilter'])->name('searchFilter');
+Route::get('/searchFilter/{category?}/{city?}/{highlight?}', [HomeController::class, 'searchFilter'])->name('searchFilter');
+ 
+
+// Define a POST route for submitting the form data
+Route::post('/showFilterData', [HomeController::class, 'showFilterData'])->name('showFilterData');
+
+
+
 Route::put('/update-places', [HomeController::class, 'updatePlaces'])->name('updatePlaces');
 Route::get('/ownerProfile', [HomeController::class, 'ownerProfile'])->name('ownerProfile');
 Route::post('/ownerProfile/update-profile', [HomeController::class, 'updateprofile'])->name('updateprofile');

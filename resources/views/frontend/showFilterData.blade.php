@@ -234,14 +234,14 @@
                     <div class="top-area top-area-filter">
                         <div class="filter-left">
                             <span class="result-count">
-                                @if (count($Result) == 0)
+                                @if (count($filteredData) == 0)
                                     Result not found
                                 @else
-                                    <span class="count">{{ count($Result) }}</span> Results found
+                                    <span class="count">{{ count($filteredData) }}</span> Results found
                                 @endif
                             </span>
 
-                            @foreach ($Result as $value)
+                            @foreach ($filteredData as $value)
                                 <!-- Loop content goes here -->
                                 <div class="result-item">
                                     <!-- Content for each result item goes here -->
@@ -277,7 +277,7 @@
 
                             <div class="row">
 
-                                @foreach ($Result as $value)
+                                @foreach ($filteredData as $value)
                                     @if ($value->status == 1)
                                         {{-- <div class="card bg-light">
                                             <a class="card-img-top" href="{{ URL::to('listingDetail/' . $value->id . '/' . $value->category) }}">
@@ -361,9 +361,10 @@
                                                                 href="{{ URL::to('listingDetail/' . $value->id . '/' . $value->category) }}">{{ $value->businessName }}</a>
                                                         </h3>
 
-                                                        {{-- <div class="place-type  ">
+                                                       
+                                                         <!-- <div class="place-type  ">
                                                             <span>{{ $value->highlight }}</span>
-                                                        </div> --}}
+                                                        </div> -->
                                                         <div class="place-type  ">
                                                             @php
                                                                 $highlights = explode(',', $value->highlight); // Split the string into an array using a delimiter
@@ -415,7 +416,7 @@
                     <div class="container">
                         <div class="row">
                             <div class="pagination">
-                                {{ $similer->links() }}
+
                             </div>
                         </div>
                     </div>

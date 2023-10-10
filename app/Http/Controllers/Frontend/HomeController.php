@@ -1320,6 +1320,50 @@ class HomeController extends Controller
         return view('frontend.searchFilter', compact('Result', 'submaster', 'submasterCategory', 'submasterHighlight', 'similer'));
     }
 
+    public function showFilterData(Request $request)
+    {
+        $submasterCategory = Master::orderBy('created_at', 'asc')
+            ->where('type', '=', 'category')
+            ->get();
+
+        $submaster = Master::orderBy('created_at', 'asc')
+            ->where('type', '=', 'city')
+            ->get();
+
+        $submasterHighlight = Master::orderBy('created_at', 'asc')
+            ->where('type', '=', 'highlight')
+            ->get();
+        $selectedCities = $request->input('city', []); // Default to an empty array if no selection is made
+        $selectedCategories = $request->input('category', []);
+        $selectedHighlights = $request->input('highlight', []);
+
+        // Start building the query
+        $query = BusinessList::where('status', '=', '1');
+
+        if (count($selectedCities) > 0) {
+            $query->whereIn('city', $selectedCities);
+        }
+
+        if (count($selectedCategories) > 0) {
+            $query->whereIn('category', $selectedCategories);
+        }
+
+        if (count($selectedHighlights) > 0) {
+            // Use orWhere to combine multiple highlight filters
+            $query->where(function ($highlightQuery) use ($selectedHighlights) {
+                foreach ($selectedHighlights as $list) {
+                    $highlightQuery->orWhereJsonContains('highlight', $list);
+                    // Add a "LIKE" filter here
+                    $highlightQuery->orWhere('highlight', 'LIKE', "%$list%");
+                }
+            });
+        }
+        // Execute the query and get the results
+        $filteredData = $query->get();
+
+        return view('frontend.showFilterData', compact('filteredData', 'submasterCategory', 'submaster', 'submasterHighlight'));
+    }
+
     // public function User()
     // {
 

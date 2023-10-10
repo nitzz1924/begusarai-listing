@@ -9113,7 +9113,7 @@ a.place__comments__reply i {
 
 .filterForm .form-button {
     margin-top: 20px;
-    display: none;
+    /* display: none; */
 }
 .filterForm .filter-head {
     display: -webkit-box;
