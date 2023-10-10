@@ -956,4 +956,6 @@ video {
     object-fit: cover;
     width: 1200px;
     height: 675px;
+    object-position: center;
+
 }
