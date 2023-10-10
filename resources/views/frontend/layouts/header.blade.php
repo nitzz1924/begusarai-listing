@@ -14,7 +14,7 @@ $Mastercity = Master::orderBy('created_at', 'asc')
             <div class="col-xl-6 col-sm-5 d-flex align-items-center ">
 
                 <div class="site__menu me-2">
-                    <a title="Menu Icon" href="#" class="site_menu_icon">
+                    <a title="Menu Icon" href="#" class="site__menu__icon">
                         <i class="las la-bars la-24-black"></i>
                     </a>
                     <div class="popup-background"></div>
@@ -24,10 +24,10 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                             <i class="las la-times la-24-black"></i>
                         </a><!-- .popup__close -->
 
-                        <div class="popup_menu popup_box">
+                        <div class="popup__menu popup__box">
 
                             <div class="site__brand">
-                                <a title="Logo" href="/" class="site_brand_logo"><img
+                                <a title="Logo" href="/" class="site__brand__logo"><img
                                         src="{{ asset('assets/images/begusarai-logo.png') }}" alt="Begusarai" /></a>
                             </div>
                         </div>
@@ -36,7 +36,7 @@ $Mastercity = Master::orderBy('created_at', 'asc')
 
                             @auth
                                 @if (Auth::user()->type == 'Owner')
-                                    <div class="popup_button popup_box pb-0">
+                                    <div class="popup__button popup__box pb-0">
                                         <a title="Add place" href="/addPlace" class="">
                                             <span>Add place</span>
                                             <i class="la la-plus"></i>
@@ -47,7 +47,7 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                             @endauth
 
                             {{-- Navigation tabs --}}
-                            <div class="popup_destinations popup_box ">
+                            <div class="popup__destinations popup__box ">
                                 <ul class="menu-arrow">
                                     <li>
                                         <a title="Destinations" href="#">Destinations </a>
@@ -65,7 +65,7 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                                 </ul>
                             </div>
 
-                            <div class="popup_menu popup_box">
+                            <div class="popup__button popup__box">
                                 <ul class="menu-arrow">
                                     <h3 class="mb-3">Navigation</h3>
 
@@ -87,7 +87,7 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                                 </ul>
                             </div><!-- .popup__menu -->
 
-                            <div class="popup_menu popup_box">
+                            <div class="popup__button popup__box">
                                 <ul class="menu-arrow">
                                     <h3 class="mb-3">Quick Links</h3>
 
@@ -103,7 +103,7 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                                 </ul>
                             </div><!-- .popup__menu -->
 
-                            <div class="popup_menu popup_box">
+                            <div class="popup__button popup__box">
                                 <ul class="menu-arrow">
                                     <h3 class="my-3">Connact With Us</h3>
                                     <ul>
@@ -118,7 +118,7 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                                         </li>
                                     </ul>
                             </div><!-- .popup__menu -->
-                            <div class="popup_menu popup_box">
+                            <div class="popup__button popup__box">
 
                                 <h2 class="mb-3">Contact Us</h2>
                                 <p>
@@ -143,7 +143,7 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                             </div><!-- .popup__menu -->
 
                             <div class="footer__bottom " style="margin-bottom: 20px">
-                                <p class="footer_bottom_copyright">
+                                <p class="footer__bottom__copyright">
                                     2023 &copy; <a title="Yuvmedia Team" href="https://yuvmedia.in"><span
                                             style="color: #38d6d6">Yuvmedia.in</span></a>. All
                                     rights reserved.
@@ -159,7 +159,7 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                 <div class="site">
                     {{-- desktop navigation --}}
                     <div class="site__brand">
-                        <a title="Logo" href="/" class="site_brand_logo"><img
+                        <a title="Logo" href="/" class="site__brand__logo"><img
                                 src="{{ asset('assets/images/begusarai-logo.png') }}" alt="Begusarai" /></a>
                     </div>
                     <!-- .site__brand -->
@@ -169,11 +169,11 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                 {{-- login dropdown --}}
                 <div class="ms-auto login-container mobile-view">
                     @guest
-                        <div class="popup_user login_box open-form">
+                        <div class="popup__user login__box open-form">
                             <a title="Login" href="#" class="open-login btn">Login</a>
                         </div><!-- .popup__user -->
                     @else
-                        <div class="popup_menu popupbox login_box">
+                        <div class="popup__menu popup__box login__box">
                             <ul class="sub-menu">
                                 <?php $user = User_Login::find(auth()->user()->id); ?>
 
@@ -399,8 +399,6 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                                 </div>
                                 </span>
 
-                               
-
                                 <!-- Phone number and OTP input fields -->
                                 <div class="">
                                     <div class="field-inline">
@@ -420,8 +418,8 @@ $Mastercity = Master::orderBy('created_at', 'asc')
 
                                     <div class="field-input">
                                         <input type="tel" id="verificationCode" placeholder="OTP" value=""
-                                            name="verificationCode" pattern="[0-9]{6}" maxlength="6" minlength="6"
-                                              />
+                                            name="verificationCode" pattern="[0-9]{6}" maxlength="6"
+                                            minlength="6" />
                                         <input type="hidden" id="generatedOTP" placeholder="OTP" value=""
                                             name="generatedOTP" />
 
@@ -434,7 +432,7 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                                     <label for="accept"
                                         style="flex: 0 0 100% !important; max-width: 100% !important;">
                                         <input type="checkbox" id="accept" value="1" name="accept"
-                                            class="form-check-input  "  >
+                                            class="form-check-input  ">
                                         @csrf
                                         Accept the <a title="Terms" href="#">Terms</a> and <a
                                             title="Privacy Policy" href="#">Privacy Policy</a>
@@ -505,7 +503,8 @@ $Mastercity = Master::orderBy('created_at', 'asc')
         {{-- mobile navigation --}}
         <nav class="mobile-bottom-nav">
 
-            <div class="mobile-bottom-nav__item active">
+            {{-- <div class="mobile-bottom-nav__item active"> --}}
+            <div class="mobile-bottom-nav__item mobile-bottom-nav__item--active">
                 <a href="/">
                     <div class="mobile-bottom-nav__item-content">
                         <i class="fa-solid fa-house fs-4 pb-1" style="color: #C6E2E9"></i>
