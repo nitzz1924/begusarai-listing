@@ -26,7 +26,7 @@
                         @foreach ($submaster as $index => $value)
                             {{-- @if ($index < 11) --}}
                                 <!-- Display the first 11 category items -->
-                                <div class="bsn-cat-item rosy-pink">
+                                <div class="bsn-cat-item cyan">
                                     <a
                                         href="{{ route('searchFilter', ['category' => $value->title, 'city' => 'all', 'highlight' => 'all']) }}">
                                         <i class="{{ $value->value }}"></i>

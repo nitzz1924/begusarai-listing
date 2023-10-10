@@ -995,8 +995,8 @@ textarea:focus {
     margin-right: 0;
 }
 .popup__box li a i {
-    vertical-align: 1px;
-    margin-left: 3px;
+    /* vertical-align: 1px; */
+    /* margin-left: 3px; */
     transition: all 0.3s;
     font-size: 12px;
 }
@@ -10137,6 +10137,9 @@ a.place__comments__reply i {
 
 .bsn-cat-item.rosy-pink a {
     background-color: #f0626c;
+}
+.bsn-cat-item.cyan a {
+    background-color: #23D3D3;
 }
 
 .bsn-cat-item.purple a {
