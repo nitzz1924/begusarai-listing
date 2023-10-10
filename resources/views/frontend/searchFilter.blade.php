@@ -131,8 +131,8 @@
                         <div class="form-button align-center">
                             <a href="#" class="btn">Apply</a>
                         </div>
-                    </form>
-                    <form action="#" class="sortForm" id="sortForm">
+                    <!-- </form>
+                     
                         <div class="filter-head">
                             <h2>Sort</h2>
                             <a href="#" class="clear-filter">Clear filter</a>
@@ -142,14 +142,13 @@
                         <div class="form-button align-center">
                             <a href="#" class="btn">Apply</a>
                         </div>
-                    </form>
+                    </form> -->
                 </div><!-- .archive-fillter -->
 
                 <div class="main-primary">
                     <div class="filter-mobile justify-content-center    ">
                         <ul class="position-relative">
-                            {{-- <li><a class="mb-filter mb-open" href="#filterForm">Filter</a></li> --}}
-                            {{-- <li><a class="mb-sort mb-open" href="#sortForm">Sort</a></li> --}}
+                           
 
                             <li class=" filter-btn"><a class=" filter-btn-a " href="#filterForm" data-bs-toggle="offcanvas"
                                     data-bs-target="#offcanvasExample" aria-controls="offcanvasExample"><i
@@ -157,11 +156,10 @@
                             </li>
 
                         </ul>
-                        {{-- <div class="mb-maps"><a class="mb-maps" href="#"><i class="las la-map-marked-alt"></i></a>
-                        </div> --}}
+                       
                     </div>
 
-                    {{-- offcanvas filter --}}
+                    {{-- offcanvas filter mobile filter --}}
                     <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample"
                         aria-labelledby="offcanvasExampleLabel" style="max-width: 90%">
                         <div class="offcanvas-header pb-0">
@@ -240,21 +238,12 @@
                                         <a href="#" class="btn">Apply</a>
                                     </div>
                                 </form>
-                                {{-- <form action="#" class="sortForm" id="sortForm">
-                                    <div class="filter-head">
-                                        <h2>Sort</h2>
-                                        <a href="#" class="clear-filter">Clear filter</a>
-                                        <a href="#" class="close-filter"><i class="las la-times"></i></a>
-                                    </div>
-
-                                    <div class="form-button align-center">
-                                        <a href="#" class="btn">Apply</a>
-                                    </div>
-                                </form> --}}
+                               
                             </div><!-- .archive-fillter -->
 
                         </div>
                     </div>
+                    {{-- offcanvas filter mobile filter end--}}
 
 
                     <div class="top-area top-area-filter">
