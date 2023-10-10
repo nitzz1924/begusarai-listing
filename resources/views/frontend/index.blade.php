@@ -148,7 +148,7 @@
                             </div>
                             <div class="carousel-inner">
                                 @foreach ($IndexPageVideo as $key => $video)
-                                    <div class="carousel-item{{ $key === 0 ? ' active' : '' }}" data-bs-interval="3000" data-pause="hover" style="max-height: 200px;">
+                                    <div class="carousel-item carousel-item-slider{{ $key === 0 ? ' active' : '' }}" data-bs-interval="3000" data-pause="hover">
 
                                         @if ($video->content_type == 'video')
                                             <div class="embed-responsive embed-responsive-16by9">

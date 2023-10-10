@@ -1214,6 +1214,10 @@
         margin-bottom: 5px;
     }
 
+    .carousel-item-slider {
+        max-height: 200px;
+    }
+    
     .popup-form.open {
         left: 0;
     }
@@ -2001,7 +2005,10 @@
     .popup-form.open {
         left: 15px;
     }
-
+    .carousel-item-slider {
+        max-height: 200px;
+    }
+    
     .area-places .place-item {
         -webkit-box-flex: 0;
         -ms-flex: 0 0 100%;
