@@ -53,7 +53,7 @@
                         <label for="duration">Duration (in months/years):</label>
                         <select id="duration" name="duration" class="form-control custom-select" required>
                             <option value="" selected>Select</option>
-                            @for ($i = 1; $i <= 10; $i++)
+                            @for ($i = 1; $i <= 12; $i++)
                                 <option value="{{ $i }}" {{ old('duration') == $i ? 'selected' : '' }}>
                                     {{ $i }}</option>
                             @endfor
