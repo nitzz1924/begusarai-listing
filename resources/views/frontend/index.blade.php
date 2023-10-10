@@ -26,10 +26,10 @@
 
                     <div class="overlay overlay_2">
                     </div>
-                    <div class="container pt-5 d-grid align-content-center">
+                    <div class="container pt-5 pb-3 d-grid align-content-center">
                         <div class="site-banner__content">
                             <h1 class="site-banner__title">Business Listing</h1>
-                            <p>
+                            <p class="desktop-view">
                                 <i>{{ count($Mastercity) }}</i> cities, <i>{{ count($submaster) }}</i> categories,
                                 <i>{{ $businessesCount }}</i> listings.
                             </p>
@@ -132,13 +132,13 @@
                 @endif
 
                 {{-- Featured Slider container --}}
-                <div class="slider-container" style="margin-top: 50px;">
+                <div class="slider-container">
                     <div class="container">
                         {{-- <h2 class="title title-border-bottom align-center offset-item">
                                 Featured
                             </h2> --}}
 
-                        <div id="sliderAutoplaying" class="carousel slide" data-bs-ride="carousel">
+                        <div id="sliderAutoplaying" class="carousel slide" data-bs-ride="carousel" >
                             <div class="carousel-indicators">
                                 @foreach ($IndexPageVideo as $key => $video)
                                     <button type="button" data-bs-target="#sliderAutoplaying"
@@ -148,7 +148,7 @@
                             </div>
                             <div class="carousel-inner">
                                 @foreach ($IndexPageVideo as $key => $video)
-                                    <div class="carousel-item{{ $key === 0 ? ' active' : '' }}" data-bs-interval="3000">
+                                    <div class="carousel-item{{ $key === 0 ? ' active' : '' }}" data-bs-interval="3000" data-pause="hover">
 
                                         @if ($video->content_type == 'video')
                                             <div class="embed-responsive embed-responsive-16by9">
@@ -160,10 +160,10 @@
                                         @endif
 
                                         @if ($video->content_type == 'image')
-                                            <div class="embed-responsive  ">
+                                            <div class="embed-responsive ">
 
                                                 <a href="{{ $video->value }}">
-                                                    <img src="{{ URL::to('uploads/' . $video->logo) }}" alt="Promo banner">
+                                                    <img src="{{ URL::to('uploads/' . $video->logo) }}" alt="Promo banner" class="promo-img">
                                                 </a>
 
                                             </div>
@@ -199,7 +199,7 @@
                                 data-mobilescroll="2" data-mobilearrows="false">
 
                                 @foreach ($submaster as $value)
-                                    <div class="bsn-cat-item rosy-pink">
+                                    <div class="bsn-cat-item cyan">
                                         <a
                                             href="{{ route('searchFilter', ['category' => $value->title, 'city' => 'all', 'highlight' => 'all']) }}">
                                             <i class="{{ $value->value }}"></i>
@@ -238,7 +238,7 @@
                             @foreach ($submaster as $index => $value)
                                 @if ($index < 11)
                                     <!-- Display the first 11 category items -->
-                                    <div class="bsn-cat-item rosy-pink">
+                                    <div class="bsn-cat-item cyan">
                                         <a
                                             href="{{ route('searchFilter', ['category' => $value->title, 'city' => 'all', 'highlight' => 'all']) }}">
                                             <i class="{{ $value->value }}"></i>
@@ -663,5 +663,35 @@
             myModal.show();
         });
     </script>
+
+
+{{-- Slider pause on slide --}}
+{{-- <script>
+    $(document).ready(function() {
+        var isInteracting = false;
+        var carousel = $('#sliderAutoplaying');
+
+        // Pause the carousel when the user interacts with it
+        carousel.on('slide.bs.carousel', function() {
+            isInteracting = true;
+            carousel.carousel('pause');
+        });
+
+        // Resume auto-sliding after a delay (e.g., 3 seconds)
+        var delay = 3000; // Adjust the delay as needed
+
+        function resumeAutoSlide() {
+            if (!isInteracting) {
+                carousel.carousel('next'); // Auto slide to the next item
+            }
+            isInteracting = false; // Reset interaction flag
+            setTimeout(resumeAutoSlide, delay);
+        }
+
+        // Start auto-sliding
+        resumeAutoSlide();
+    });
+</script> --}}
+
 
 @endsection

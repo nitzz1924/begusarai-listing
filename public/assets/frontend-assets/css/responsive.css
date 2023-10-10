@@ -263,8 +263,8 @@
         right: 25px;
     }
     .container {
-        padding-left: 25px;
-        padding-right: 25px;
+        padding-left: 15px;
+        padding-right: 15px;
     }
     .footer__top__info,
     .footer__top__nav {
@@ -549,7 +549,7 @@
         width: 100px;
         height: 100px;
         border-radius: 10px;
-        margin-bottom: 15px;
+        margin-bottom: 5px;
     }
 
     .bsn-cat-item i {
@@ -559,6 +559,8 @@
 
     .bsn-cat-item span.title {
         font-size: 15px;
+        padding: 2px;
+        line-height: 16px;
     }
     .site__search.layout-02.open {
         max-width: 100%;
@@ -1204,6 +1206,36 @@
         padding-left: 0;
     }
 
+    .bsn-cat-item a {
+        width: 75px;
+        height: 70px;
+        padding-top: 15px;
+        margin-bottom: 5px;
+    }
+
+    .site-banner__search .site-banner__search__input {
+        line-height: 45px;
+    }
+
+    .site-banner__search.layout-02 .field-submit button{
+        height: 35px;
+        line-height: 35px;
+        width: 35px;
+    }
+
+    .bsn-cat-item span.title {
+        font-size: 13px;
+    }
+
+    .grid-container {
+        grid-template-columns: repeat(4, 1fr);
+        
+    }
+
+    .home-main .site-banner__content h1 {
+        font-size: 35px;
+    }
+
     .area-places .place-item {
         flex: 0 0 100%;
         max-width: 100%;
@@ -1416,7 +1448,7 @@
         font-size: 18px;
     }
     .home-main .site-banner {
-        height: 40vh;
+        height: 16vh;
     }
     .home-main .site-banner:after {
         height: 40px;
@@ -2071,13 +2103,14 @@
         padding-bottom: 40px;
     }
     .bsn-cat-item a {
-        width: 90px;
-        height: 90px;
+        width: 75px;
+        height: 70px;
         padding-top: 15px;
+        margin-bottom: 5px;
     }
 
     .bsn-cat-item span.title {
-        font-size: 14px;
+        font-size: 13px;
     }
 
     .bsn-cat-item i {
@@ -2172,5 +2205,16 @@
     }
     .blogs-wrap.layout-02 {
         padding: 40px 0;
+    }
+
+    .grid-container {
+        grid-template-columns: repeat(4, 1fr);
+        
+    }
+
+    .promo-img {
+        object-fit: cover;
+        width: 350px;
+        height: 186px;
     }
 }

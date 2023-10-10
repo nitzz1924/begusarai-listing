@@ -42,8 +42,11 @@
                                 <div class="col-lg-4">
                                     <div class="pricing-item shadow">
                                         <div class="best-deal">{{ $package->title }}</div>
-                                        <img src="{{ asset('assets\images\packages\Feature-Listing.png') }}"
+                                        <div class="d-grid justify-content-center">
+
+                                            <img src="{{ asset('assets\images\packages\Feature-Listing.png') }}"
                                             class="rounded-3 shadow" alt="Featured Listing">
+                                        </div>
                                         <h3>{{ $package->type }}</h3>
                                         <div class="price-container">
                                             <div class="price">

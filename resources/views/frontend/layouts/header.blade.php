@@ -68,7 +68,10 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                             <div class="popup__button popup__box">
                                 <ul class="menu-arrow">
                                     <h3 class="mb-3">Navigation</h3>
-
+                                    
+                                    <li>
+                                        <a title="Blogs" href="/blogs">Blog</a>
+                                    </li>
                                     <li>
                                         <a title="Packages" href="/packages/0">Pricing </a>
                                     </li>
@@ -78,12 +81,7 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                                     <li>
                                         <a title="AboutUs" href="/aboutUs">About Us</a>
                                     </li>
-                                    <li>
-                                        <a title="Contact" href="/contact">Contact Us</a>
-                                    </li>
-                                    <li>
-                                        <a title="Blogs" href="/blogs">Blog</a>
-                                    </li>
+                                    
                                 </ul>
                             </div><!-- .popup__menu -->
 
@@ -105,17 +103,21 @@ $Mastercity = Master::orderBy('created_at', 'asc')
 
                             <div class="popup__button popup__box">
                                 <ul class="menu-arrow">
-                                    <h3 class="my-3">Connact With Us</h3>
+                                    <h3 class="my-3">Connect With Us</h3>
                                     <ul>
                                         <li>
                                             <a title="testimonial" href="/testimonial">Testimonial</a>
                                         </li>
                                         <li>
+                                            <a title="Contact" href="/contact">Contact Us</a>
+                                        </li>
+                                        <li>
                                             <a title="Career" href="/career">Career</a>
                                         </li>
                                         <li>
-                                            <a title="Career" href="/faq">Faqs</a>
+                                            <a title="Career" href="/faq">FAQs</a>
                                         </li>
+                                        
                                     </ul>
                             </div><!-- .popup__menu -->
                             <div class="popup__button popup__box">
