@@ -66,8 +66,8 @@
             <div class="col-left">
 
                 <div class="archive-filter">
-                     <form action="{{ route('showFilterData') }}"  method="POST" class="filterForm" id="filterForm">
-                         @csrf 
+                    <form action="{{ route('showFilterData') }}" method="POST" class="filterForm" id="filterForm">
+                        @csrf
                         <div class="filter-head">
                             <h2>Filter</h2>
                             <a href="#" class="clear-filter"><i class="fal fa-sync"></i>Clear all</a>
@@ -130,8 +130,8 @@
                         </div>
 
                         <div class="form-button align-center">
-                                            <button type="submit" class="btn">Apply</button>
-                                        </div>
+                            <button type="submit" class="btn">Apply</button>
+                        </div>
                     </form>
                 </div>
 
@@ -159,7 +159,7 @@
                         <div class="offcanvas-body">
                             <div class="">
                                 <form action="{{ route('showFilterData') }}" class="filterForm" id="filterForm">
-                                       @csrf 
+                                    @csrf
                                     <div class="filter-box mt-0">
                                         <h3>Cities</h3>
                                         <div class="filter-list">
@@ -219,12 +219,10 @@
                                         </div>
                                     </div>
 
-                                     
-                                        
-                                        <div class="form-button align-center">
-                                            <button type="submit" class="btn">Apply</button>
-                                        </div>
-                                     
+                                    <div class="form-button align-center">
+                                        <button type="submit" class="btn">Apply</button>
+                                    </div>
+
                                 </form>
 
                             </div><!-- .archive-fillter -->
@@ -236,14 +234,14 @@
                     <div class="top-area top-area-filter">
                         <div class="filter-left">
                             <span class="result-count">
-                                @if (count($Result) == 0)
+                                @if (count($filteredData) == 0)
                                     Result not found
                                 @else
-                                    <span class="count">{{ count($Result) }}</span> Results found
+                                    <span class="count">{{ count($filteredData) }}</span> Results found
                                 @endif
                             </span>
 
-                            @foreach ($Result as $value)
+                            @foreach ($filteredData as $value)
                                 <!-- Loop content goes here -->
                                 <div class="result-item">
                                     <!-- Content for each result item goes here -->
@@ -279,7 +277,7 @@
 
                             <div class="row">
 
-                                @foreach ($Result as $value)
+                                @foreach ($filteredData as $value)
                                     @if ($value->status == 1)
                                         {{-- <div class="card bg-light">
                                             <a class="card-img-top" href="{{ URL::to('listingDetail/' . $value->id . '/' . $value->category) }}">
@@ -363,10 +361,11 @@
                                                                 href="{{ URL::to('listingDetail/' . $value->id . '/' . $value->category) }}">{{ $value->businessName }}</a>
                                                         </h3>
 
-                                                        {{-- <div class="place-type  ">
+                                                       
+                                                         <!-- <div class="place-type  ">
                                                             <span>{{ $value->highlight }}</span>
-                                                        </div> --}}
-                                                         <div class="place-type  ">
+                                                        </div> -->
+                                                        <div class="place-type  ">
                                                             @php
                                                                 $highlights = explode(',', $value->highlight); // Split the string into an array using a delimiter
                                                                 $highlights = array_slice($highlights, 0, 4); // Get the first two elements of the array
@@ -376,7 +375,6 @@
                                                             @endforeach
                                                             ...
                                                         </div>
-
 
                                                         <div class="place-city">
                                                             <a
@@ -418,7 +416,7 @@
                     <div class="container">
                         <div class="row">
                             <div class="pagination">
-                                {{ $similer->links() }}
+
                             </div>
                         </div>
                     </div>

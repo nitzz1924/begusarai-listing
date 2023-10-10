@@ -620,8 +620,12 @@ $Mastercity = Master::orderBy('created_at', 'asc')
             // Data to send in the request body
             const data = {
                 type: 'text',
-                message: 'This OTP is valid for 5 minutes. Do not share this OTP with anyone. For assistance, call our support team at  ' +
-                    randomOTP + " .",
+                message: 'Dear customer, use this One Time Password  ' +
+                    randomOTP + " to sign up to your Inbegusarai account. This OTP will be valid for the next 5 mins.",
+
+                    // $message: 'Dear customer, use this One Time Password ' + $randomOTP + ' to login to your Inbegusarai account. This OTP will be valid for the next 5 mins.',
+
+
                 instance_id: '651EB1464D20F',
                 access_token: '651e6533248d5',
                 number: '91' + bnymber,
