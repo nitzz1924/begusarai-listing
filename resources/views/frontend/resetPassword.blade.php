@@ -25,7 +25,8 @@
                     </div>
                 @endif
             </div>
-            <form action="{{ route('submitResetPassword') }}" method="POST" class="member-profile form-underline">
+            <form action="{{ route('resetPassword') }}" method="POST" class="member-profile form-underline"
+                id='submitResetPassword'>
                 @csrf
 
                 <div class="field-inline align-items-center">
@@ -36,8 +37,8 @@
                     </div>
 
                     <div>
-                        <button type="button" name="submit-otp" value="Send OTP" class="OTP-btn send-otp-button"
-                            style="width: 100px;" id="sendOTPButton">Send OTP</button>
+                        <button type="submit" name="submit-otp" value="Send OTP" class="OTP-btn1 btn" style="width: 100px;"
+                            id="sendOTPButton2">Send OTP</button>
                     </div>
                 </div>
 
@@ -65,37 +66,83 @@
             </form>
 
         </div><!-- .member-wrap -->
-    </div>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            document.querySelector('.send-otp-button').addEventListener('click', function(event) {
-                event.preventDefault();
-                var randomOTP = Math.floor(100000 + Math.random() * 900000);
-                document.getElementById('RverificationCode').value =
-                    randomOTP; // Set the OTP in the RverificationCode input
-                document.getElementById('RgeneratedOTP').value =
-                    randomOTP; // Set the same OTP in the hidden generatedOTP input
-                document.getElementById('RverificationCode').removeAttribute(
-                    'readonly'); // Enable the input field
-                console.log('Generated OTP:', randomOTP);
-            });
-        });
-    </script>
-    <!-- <script>
-        $(document).ready(function() {
-            $('.send-otp-button').on('click', function(event) {
-                event.preventDefault();
-                var randomOTP = Math.floor(100000 + Math.random() * 900000);
-                $('#verificationCode').removeAttr('readonly');
-                document.getElementById('verificationCode').value = randomOTP;
-                $('#generatedOTP').val(randomOTP); // Set the same OTP in the hidden generatedOTP input
-                $('#verificationCode').val(randomOTP); // Set the OTP in the verificationCode input
-                // Enable the input field
-                console.log('Generated OTP:', randomOTP);
-            });
-        });
-    </script> -->
+        <script>
+            $(document).ready(function() {
+                $('#submitResetPassword').on('submit', function(e) {
+                    e.preventDefault();
 
-@endsection
+                    $.ajax({
+                        type: 'POST',
+                        url: $(this).attr('action'),
+                        data: $(this).serialize(),
+                        success: function(response) {
+                            if (response.success) {
+                                window.location.href = response.redirect;
+                            } else {
+                                $('#error-message').text(response.message);
+                            }
+                        },
+                        error: function(xhr, textStatus, errorThrown) {
+                            console.error(xhr.responseText);
+                        }
+                    });
+                });
+            });
+        </script>
+        <script>
+            $(document).ready(function() {
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $('#sendOTPButton2').on('click', function(event) {
+                    event.preventDefault();
+                    var bnymber = document.getElementById("phone_number").value;
+
+                    // Generate a random 6-digit OTP
+                    var randomOTP = Math.floor(100000 + Math.random() * 900000);
+                    const url = 'https://hisocial.in/api/send';
+
+                    // Data to send in the request body
+                    const data = {
+                        type: 'text',
+                        message: 'Dear customer, use this One Time Password ' +
+                            randomOTP +
+                            ' to reset your password. This OTP will be valid for the next 5 mins.',
+                        instance_id: '651EB1464D20F',
+                        access_token: '651e6533248d5',
+                        number: '91' + bnymber,
+
+                    };
+
+                    // Create and configure the request
+                    const requestOptions = {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded'
+                        },
+                        body: new URLSearchParams(data)
+                    };
+
+                    // Make the POST request
+                    fetch(url, requestOptions)
+                        .then(response => response.json())
+                        .then(data => {
+                            // Handle the response if needed
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                        });
+
+                    // Set the generated OTP in the input field
+                    $('#RgeneratedOTP').val(randomOTP);
+                    // Enable the input field
+
+                    $('#RverificationCode').removeAttr('readonly');
+                });
+            });
+        </script>
+
+    @endsection
