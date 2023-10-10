@@ -784,7 +784,11 @@ class HomeController extends Controller
         $validator = Validator::make($request->all(), [
             'first_name' => 'required',
             'type' => 'required|in:guest,owner',
-            'new_password' => 'required|min:6|confirmed', // Ensure 'new_password' and 're_new' match
+            'new_password' => 'required|min:6|confirmed', // Ensure 'new_password' and 'new_password_confirmation' match
+            'address_filing' => 'required', // Add validation for 'address_filing'
+            'block_number' => 'required_if:address_filing,from_begusarai', // Add validation for 'block_number' if 'from_begusarai' is selected
+            'village_ward' => 'required_if:address_filing,from_begusarai', // Add validation for 'village_ward' if 'from_begusarai' is selected
+            'city_name' => 'required_if:address_filing,outside_begusarai', // Add validation for 'city_name' if 'outside_begusarai' is selected
         ]);
 
         if ($validator->fails()) {
@@ -803,6 +807,19 @@ class HomeController extends Controller
             $record->type = $request->input('type');
             $record->password = bcrypt($request->input('new_password')); // Hash the password
             $record->status = '1';
+
+            // Set the additional fields based on the 'address_filing' value
+            $record->address_filing = $request->input('address_filing');
+            if ($request->input('address_filing') === 'from_begusarai') {
+                $record->block_number = $request->input('block_number');
+                $record->village_ward = $request->input('village_ward');
+                $record->city_name = null; // Set 'city_name' to null for 'from_begusarai'
+            } elseif ($request->input('address_filing') === 'outside_begusarai') {
+                $record->block_number = null; // Set 'block_number' to null for 'outside_begusarai'
+                $record->village_ward = null; // Set 'village_ward' to null for 'outside_begusarai'
+                $record->city_name = $request->input('city_name');
+            }
+
             $record->save();
 
             // Attempt to authenticate the user
@@ -814,7 +831,7 @@ class HomeController extends Controller
             if (Auth::guard('user')->attempt($credentials)) {
                 // Authentication passed
                 return redirect()
-                    ->route('index') // Replace 'dashboard' with the actual route you want to redirect to after login
+                    ->route('index') // Replace 'index' with the actual route you want to redirect to after login
                     ->with('success', 'Welcome to our community! Your account has been successfully created.');
             }
         }
@@ -824,6 +841,7 @@ class HomeController extends Controller
             ->back()
             ->with('error', 'Registration failed. Please try again.');
     }
+
     public function listingDetail(Request $request, $id, $category)
     {
         // $VisitCount = Lead:: where('business_id')  ->get();
