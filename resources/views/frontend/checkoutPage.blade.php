@@ -129,8 +129,10 @@
                         <div class="col-lg-4">
                             <div class="pricing-item shadow">
                                 <div class="best-deal">{{ $planData->title }}</div>
-                                <img src="{{ asset('assets\images\packages\Feature-Listing.png') }}"
-                                    class="rounded-3 shadow" alt="Featured Listing">
+                                <div class="d-grid justify-content-center">
+                                    <img src="{{ asset('assets\images\packages\Feature-Listing.png') }}"
+                                        class="rounded-3 shadow" alt="Featured Listing">
+                                </div>
                                 <h3>{{ $planData->type }}</h3>
                                 <div class="price-container">
                                     <div class="price">
