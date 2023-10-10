@@ -47,7 +47,7 @@
                                             <img src="{{ asset('assets\images\packages\Feature-Listing.png') }}"
                                             class="rounded-3 shadow" alt="Featured Listing">
                                         </div>
-                                        <h3>{{ $package->type }}</h3>
+                                        <h3>{{ $package->title }}</h3>
                                         <div class="price-container">
                                             <div class="price">
                                                 <span class="currency">₹</span>{{ $package->price }}

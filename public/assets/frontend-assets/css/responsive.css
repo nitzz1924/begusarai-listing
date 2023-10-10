@@ -702,6 +702,11 @@
         background-position: left 0 center;
     }
 
+    #iframe-content {
+        width: 356px;
+        height: 203px;
+    }
+
     .place-item.layout-02 .entry-head .place-city {
         position: relative;
         padding-left: 0px;
