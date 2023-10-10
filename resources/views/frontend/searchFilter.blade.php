@@ -131,24 +131,12 @@
                         <div class="form-button align-center">
                             <a href="#" class="btn">Apply</a>
                         </div>
-                    <!-- </form>
-                     
-                        <div class="filter-head">
-                            <h2>Sort</h2>
-                            <a href="#" class="clear-filter">Clear filter</a>
-                            <a href="#" class="close-filter"><i class="las la-times"></i></a>
-                        </div>
-
-                        <div class="form-button align-center">
-                            <a href="#" class="btn">Apply</a>
-                        </div>
-                    </form> -->
-                </div><!-- .archive-fillter -->
+                    </form>
+                </div>
 
                 <div class="main-primary">
                     <div class="filter-mobile justify-content-center    ">
                         <ul class="position-relative">
-                           
 
                             <li class=" filter-btn"><a class=" filter-btn-a " href="#filterForm" data-bs-toggle="offcanvas"
                                     data-bs-target="#offcanvasExample" aria-controls="offcanvasExample"><i
@@ -156,7 +144,7 @@
                             </li>
 
                         </ul>
-                       
+
                     </div>
 
                     {{-- offcanvas filter mobile filter --}}
@@ -238,13 +226,12 @@
                                         <a href="#" class="btn">Apply</a>
                                     </div>
                                 </form>
-                               
+
                             </div><!-- .archive-fillter -->
 
                         </div>
                     </div>
-                    {{-- offcanvas filter mobile filter end--}}
-
+                    {{-- offcanvas filter mobile filter end --}}
 
                     <div class="top-area top-area-filter">
                         <div class="filter-left">
@@ -312,7 +299,6 @@
                                             </div>
                                         </div> --}}
 
-
                                         <div class="place-item layout-02 place-hover" data-maps_name="mattone_restaurant">
                                             <div class="place-inner">
                                                 <div class="place-thumb hover-img">
@@ -377,7 +363,6 @@
                                                                 href="{{ URL::to('listingDetail/' . $value->id . '/' . $value->category) }}">{{ $value->businessName }}</a>
                                                         </h3>
 
-
                                                         {{-- <div class="place-type  ">
                                                             <span>{{ $value->highlight }}</span>
                                                         </div> --}}
@@ -390,8 +375,6 @@
                                                                 <span>{{ $highlight }}</span>
                                                             @endforeach
                                                         </div>
-
-
 
                                                         <div class="place-city">
                                                             <a
@@ -422,7 +405,6 @@
                                             </div>
                                         </div>
 
-
                                         {{-- </div> --}}
                                     @endif
                                 @endforeach
@@ -430,7 +412,6 @@
                             {{-- </div> --}}
                         </div>
                     </div><!-- .area-places -->
-
 
                     <div class="container">
                         <div class="row">
@@ -441,12 +422,10 @@
                     </div>
                 </div>
 
+            </div>
+        </div>
 
-            </div><!-- .main-primary -->
-        </div><!-- .col-left -->
-
-        </div><!-- .archive-city -->
-    </main><!-- .site-main -->
+    </main>
 
     <script>
         $(document).ready(function() {
