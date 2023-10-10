@@ -6,7 +6,7 @@
     <div class="page-title page-title--small align-left" style="background-image: url(assets/images/home/hero-bg.webp); background-size: auto; background-position: bottom right;">
         <div class="container">
             <div class="page-title__content">
-                <h1 class="page-title__name"><span style="color: #ffa3a3;">404</span> Error</h1>
+                <h1 class="page-title__name">404 Error</h1>
                 <p class="page-title__slogan">Sorry, we couldn't find that page.</p>
             </div>
         </div>	
