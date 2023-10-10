@@ -1975,6 +1975,12 @@
         background-image: inherit !important;
         padding: 40px;
     }
+     .promo-img {
+        object-fit: cover;
+        width: 383px;
+        height: 186px;
+        object-position:center;
+    }
 }
 @media only screen and (max-width: 375px) {
     .places-item .places-item__thumb img {
