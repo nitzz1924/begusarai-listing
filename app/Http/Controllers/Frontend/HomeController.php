@@ -1348,17 +1348,16 @@ class HomeController extends Controller
             $query->whereIn('category', $selectedCategories);
         }
 
-        
-if (count($selectedHighlights) > 0) {
-    // Use orWhere to combine multiple highlight filters
-    $query->where(function ($highlightQuery) use ($selectedHighlights) {
-        foreach ($selectedHighlights as $list) {
-            $highlightQuery->orWhereJsonContains('highlight', $list);
-            // Add a "LIKE" filter here
-            $highlightQuery->orWhere('highlight', 'LIKE', "%$list%");
+        if (count($selectedHighlights) > 0) {
+            // Use orWhere to combine multiple highlight filters
+            $query->where(function ($highlightQuery) use ($selectedHighlights) {
+                foreach ($selectedHighlights as $list) {
+                    $highlightQuery->orWhereJsonContains('highlight', $list);
+                    // Add a "LIKE" filter here
+                    $highlightQuery->orWhere('highlight', 'LIKE', "%$list%");
+                }
+            });
         }
-    });
-}
         // Execute the query and get the results
         $filteredData = $query->get();
 

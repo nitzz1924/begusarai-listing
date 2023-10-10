@@ -66,8 +66,8 @@
             <div class="col-left">
 
                 <div class="archive-filter">
-                     <form action="{{ route('showFilterData') }}"  method="POST" class="filterForm" id="filterForm">
-                         @csrf 
+                    <form action="{{ route('showFilterData') }}" method="POST" class="filterForm" id="filterForm">
+                        @csrf
                         <div class="filter-head">
                             <h2>Filter</h2>
                             <a href="#" class="clear-filter"><i class="fal fa-sync"></i>Clear all</a>
@@ -130,8 +130,8 @@
                         </div>
 
                         <div class="form-button align-center">
-                                            <button type="submit" class="btn">Apply</button>
-                                        </div>
+                            <button type="submit" class="btn">Apply</button>
+                        </div>
                     </form>
                 </div>
 
@@ -159,7 +159,7 @@
                         <div class="offcanvas-body">
                             <div class="">
                                 <form action="{{ route('showFilterData') }}" class="filterForm" id="filterForm">
-                                       @csrf 
+                                    @csrf
                                     <div class="filter-box mt-0">
                                         <h3>Cities</h3>
                                         <div class="filter-list">
@@ -219,12 +219,10 @@
                                         </div>
                                     </div>
 
-                                     
-                                        
-                                        <div class="form-button align-center">
-                                            <button type="submit" class="btn">Apply</button>
-                                        </div>
-                                     
+                                    <div class="form-button align-center">
+                                        <button type="submit" class="btn">Apply</button>
+                                    </div>
+
                                 </form>
 
                             </div><!-- .archive-fillter -->
@@ -366,7 +364,7 @@
                                                         {{-- <div class="place-type  ">
                                                             <span>{{ $value->highlight }}</span>
                                                         </div> --}}
-                                                         <div class="place-type  ">
+                                                        <div class="place-type  ">
                                                             @php
                                                                 $highlights = explode(',', $value->highlight); // Split the string into an array using a delimiter
                                                                 $highlights = array_slice($highlights, 0, 4); // Get the first two elements of the array
@@ -376,7 +374,6 @@
                                                             @endforeach
                                                             ...
                                                         </div>
-
 
                                                         <div class="place-city">
                                                             <a
