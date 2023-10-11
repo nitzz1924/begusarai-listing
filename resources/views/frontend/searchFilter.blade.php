@@ -2,64 +2,6 @@
 @section('title', 'Search Filter')
 @section('content')
 
-    <style>
-        .card {
-            max-width: 30em;
-            flex-direction: row;
-            background-color: #696969;
-            border: 0;
-            box-shadow: 0 7px 7px rgba(0, 0, 0, 0.18);
-            margin: 3em auto;
-        }
-
-        .card.dark {
-            color: #fff;
-        }
-
-        .card.card.bg-light-subtle .card-title {
-            color: dimgrey;
-        }
-
-        .card img {
-            /* max-width: 25%; */
-            margin: auto;
-            /* padding: 0.5em; */
-            border-radius: 0.7em;
-        }
-
-        .card-body {
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .text-section {
-            max-width: 60%;
-        }
-
-        .cta-section {
-            max-width: 40%;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            justify-content: space-between;
-        }
-
-        .cta-section .btn {
-            padding: 0.3em 0.5em;
-            /* color: #696969; */
-        }
-
-        .card.bg-light-subtle .cta-section .btn {
-            background-color: #898989;
-            border-color: #898989;
-        }
-
-        @media screen and (max-width: 475px) {
-            .card {
-                font-size: 0.9em;
-            }
-        }
-    </style>
 
     <main id="main" class="site-main">
         <div class="archive-city">
@@ -158,25 +100,25 @@
                         </div>
                         <div class="offcanvas-body">
                             <div class="">
-                                <form action="{{ route('showFilterData') }}" class="filterForm" id="filterForm">
+                                <form action="{{ route('showFilterData') }}" method="POST" class="filterForm" id="filterForm">
                                     @csrf
-                                    <div class="filter-box mt-0">
+                                    
+                                    <div class="filter-box">
                                         <h3>Cities</h3>
                                         <div class="filter-list">
                                             <div class="filter-group">
                                                 <ul>
                                                     @foreach ($submaster as $value)
                                                         <li>
-                                                            <input type="checkbox" class="mx-1 mb-2" id="city"
-                                                                name=" city[]" value="{{ $value->title }}">
+                                                            <input type="checkbox" class="mx-1 mb-2" id="city" name=" city[]"
+                                                                value="{{ $value->title }}">
                                                             {{ $value->title }}
                                                         </li>
                                                     @endforeach
                                                 </ul>
-
+            
                                             </div>
-                                            <a href="#" class="more open-more" data-close="Close"
-                                                data-more="More">More</a>
+                                            <a href="#" class="more open-more" data-close="Close" data-more="More">More</a>
                                         </div>
                                     </div>
                                     <div class="filter-box">
@@ -186,43 +128,40 @@
                                                 <ul>
                                                     @foreach ($submasterCategory as $value)
                                                         <li>
-                                                            <input type="checkbox" class="mx-1 mb-2" id="category"
-                                                                name="category[]" value=" {{ $value->title }}">
+                                                            <input type="checkbox" class="mx-1 mb-2" id="category" name="category[]"
+                                                                value=" {{ $value->title }}">
                                                             {{ $value->title }}
-
+            
                                                         </li>
                                                     @endforeach
                                                 </ul>
                                             </div>
-                                            <a href="#" class="more open-more" data-close="Close"
-                                                data-more="More">More</a>
+                                            <a href="#" class="more open-more" data-close="Close" data-more="More">More</a>
                                         </div>
                                     </div>
                                     <div class="filter-box">
                                         <h3>HighLights</h3>
                                         <div class="filter-list">
                                             <div class="filter-group">
-
+            
                                                 <ul>
                                                     @foreach ($submasterHighlight as $value)
                                                         <li class="">
-                                                            <input type="checkbox" class="mx-1 mb-2" id="highlight"
-                                                                name="highlight[]" value="{{ $value->title }}">
-
+                                                            <input type="checkbox" class="mx-1 mb-2" id="highlight" name="highlight[]"
+                                                                value="{{ $value->title }}">
+            
                                                             {{ $value->title }}
                                                         </li>
                                                     @endforeach
                                                 </ul>
                                             </div>
-                                            <a href="#" class="more open-more" data-close="Close"
-                                                data-more="More">More</a>
+                                            <a href="#" class="more open-more" data-close="Close" data-more="More">More</a>
                                         </div>
                                     </div>
-
+            
                                     <div class="form-button align-center">
                                         <button type="submit" class="btn">Apply</button>
                                     </div>
-
                                 </form>
 
                             </div><!-- .archive-fillter -->

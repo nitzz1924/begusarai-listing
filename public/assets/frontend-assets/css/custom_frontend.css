@@ -954,6 +954,13 @@ video {
 
 .promo-img {
     object-fit: cover;
-    width: 1200px;
-    height: 675px;
+    width: 1536px;
+    height: 864px;
+    object-position: center;
+
+}
+
+#iframe-content {
+    width: 795px;
+    height: 445px;
 }

@@ -1,7 +1,7 @@
 <div class="app-footer">
 
     <div class="col-12 text-center rounded-top" style="bottom: 0; font-weight: bold;padding: 10px;">
-        Developed by<a href="http://yuvmedia.com/"> Yuvmedia</a> || &nbsp; {{ date('Y') }}
+        Developed by<a href="https://rudraashwitechnology.com/"> RUDRAASHWI TECHNOLOGY</a> || &nbsp; {{ date('Y') }}
       
     </div>
 </div>

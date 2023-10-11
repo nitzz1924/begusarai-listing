@@ -99,8 +99,8 @@
         <!-- .top-footer -->
         <div class="footer__bottom ">
             <p class="footer__bottom__copyright">
-                2023 &copy; <a title="Yuvmedia Team" href="https://yuvmedia.in"><span
-                        style="color: #38d6d6">Yuvmedia.in</span></a>. All
+                2023 &copy; <a title="RUDRAASHWI TECHNOLOGY" href="https://rudraashwitechnology.com/"><span
+                        style="color: #38d6d6">RUDRAASHWI TECHNOLOGY</span></a>. All
                 rights reserved.
             </p>
         </div>

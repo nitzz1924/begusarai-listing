@@ -6,7 +6,7 @@
 <meta name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no"/>
 <meta name="description" content="laravel, laravel-boilerplate">
-<meta name="author" content="Yuvmedia">
+<meta name="author" content="RUDRAASHWI TECHNOLOGY">
 <meta name="msapplication-tap-highlight" content="no">
 <meta name="robots" content="index, follow">
 <meta name="csrf-token" content="{{ csrf_token() }}">

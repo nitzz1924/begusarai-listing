@@ -133,10 +133,12 @@
                                                 aria-label="Close"></button>
                                         </div>
                                         <a href="{{ $popup->value }}">
-                                            <iframe class="embed-responsive-item"
-                                                src="https://www.youtube.com/embed/{{ $popup->value }}?autoplay=1&mute=1&controls=0"
-                                                frameborder="0" width="700" height="395">
-                                            </iframe>
+                                            
+                                                <iframe class="embed-responsive-item " id="iframe-content"
+                                                    src="https://www.youtube.com/embed/{{ $popup->value }}?autoplay=1&mute=1&controls=0"
+                                                    frameborder="0" >
+                                                </iframe>
+                                            
                                         </a>
 
                                     </div>
@@ -155,7 +157,7 @@
                                 Featured
                             </h2> --}}
 
-                        <div id="sliderAutoplaying" class="carousel slide" data-bs-ride="carousel" >
+                        <div id="sliderAutoplaying" class="carousel slide" data-bs-ride="carousel">
                             <div class="carousel-indicators">
                                 @foreach ($IndexPageVideo as $key => $video)
                                     <button type="button" data-bs-target="#sliderAutoplaying"
@@ -165,7 +167,8 @@
                             </div>
                             <div class="carousel-inner">
                                 @foreach ($IndexPageVideo as $key => $video)
-                                    <div class="carousel-item{{ $key === 0 ? ' active' : '' }}" data-bs-interval="3000" data-pause="hover">
+                                    <div class="carousel-item carousel-item-slider{{ $key === 0 ? ' active' : '' }}"
+                                        data-bs-interval="3000" data-pause="hover">
 
                                         @if ($video->content_type == 'video')
                                             <div class="embed-responsive embed-responsive-16by9">
@@ -180,7 +183,8 @@
                                             <div class="embed-responsive ">
 
                                                 <a href="{{ $video->value }}">
-                                                    <img src="{{ URL::to('uploads/' . $video->logo) }}" alt="Promo banner" class="promo-img">
+                                                    <img src="{{ URL::to('uploads/' . $video->logo) }}" alt="Promo banner"
+                                                        class="promo-img">
                                                 </a>
 
                                             </div>
@@ -349,8 +353,7 @@
                                                     <!-- Add debugging statements -->
 
                                                     <a href="#" class="author" title="Author">
-                                                        <img
-                                                            src="{{ URL::to('uploads/' . $value->logo) }}"alt="Author" />
+                                                        <img src="{{ URL::to('uploads/' . $value->logo) }}"alt="Author" />
                                                     </a>
                                                     <!-- <div class="feature">Featured</div> -->
                                                 </div>
@@ -682,8 +685,8 @@
     </script>
 
 
-{{-- Slider pause on slide --}}
-{{-- <script>
+    {{-- Slider pause on slide --}}
+    {{-- <script>
     $(document).ready(function() {
         var isInteracting = false;
         var carousel = $('#sliderAutoplaying');
