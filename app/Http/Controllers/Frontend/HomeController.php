@@ -1528,6 +1528,7 @@ class HomeController extends Controller
 
     public function submitResetPasswordForm(Request $request)
     {
+        //   dd($request);
         $validator = Validator::make($request->all(), [
             'phone_number' => 'required|digits:10',
             'RverificationCode' => 'required|digits:6',
@@ -1535,36 +1536,28 @@ class HomeController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return redirect()
-                ->route('resetPassword')
-                ->withErrors($validator)
-                ->withInput();
+            return response()->json(['success' => false, 'message' => ' Oops!  Try again with the right info']);
         }
 
         $user = User_Login::where('mobileNumber', $request->input('phone_number'))->first();
 
         if (!$user) {
-            return redirect()
-                ->route('resetPassword')
-                ->withErrors(['phone_number' => 'This number is not registered, Please sign up first!'])
-                ->withInput();
+            return response()->json(['success' => false, 'message' => ' Oops!  Try again with the right info']);
         }
 
         $generatedOTP = $request->input('RgeneratedOTP');
         $verificationCode = $request->input('RverificationCode');
 
         if ($generatedOTP != $verificationCode) {
-            return redirect()
-                ->route('resetPassword')
-                ->withErrors(['RverificationCode' => 'The OTP is invalid.'])
-                ->withInput();
+            return response()->json(['success' => false, 'message' => ' Oops!  Try again with the right info']);
         }
 
         $user->password = bcrypt($request->input('new_password'));
         $user->save();
-
-        return redirect()
-            ->route('resetPassword')
-            ->with('success', 'Password reset successfully.');
+        session()->flash('success', 'Reset password successfully');
+        return response()->json(['success' => true]);
+        // return redirect()
+        //     ->route('index')
+        //     ->with('success', 'Password reset successfully.');
     }
 }

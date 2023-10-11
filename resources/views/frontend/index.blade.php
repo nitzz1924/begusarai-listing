@@ -4,6 +4,23 @@
 
     <body>
 
+<script>
+    @if(isset($successMessage))
+        alert('{{ $successMessage }}');
+    @endif
+
+    @if(isset($errorMessage))
+        alert('{{ $errorMessage }}');
+    @endif
+</script>
+
+
+        <script>
+            @if(isset($successMessage))
+                alert('{{ $successMessage }}');
+            @endif
+        </script>
+
         @if (session('success'))
             <div class="form-card" style="margin-top: 30px;margin-bottom: 30px;">
                 <h2 class="text-success text-center">

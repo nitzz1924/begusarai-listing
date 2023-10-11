@@ -173,5 +173,10 @@ Route::get('/faq', [HomeController::class, 'Faq'])->name('Faq');
 // Route::get('/resetPassword', [HomeController::class, 'showResetPasswordForm'])->name('resetPassword');
 // Route::get('/resetPassword', [HomeController::class, 'submitResetPasswordForm'])->name('submitResetPassword');
 
+// Route::get('/resetPassword', [HomeController::class, 'resetPassword'])->name('resetPassword');
+// Route::post('/resetPassword/submitResetPassword', [HomeController::class, 'submitResetPasswordForm'])->name('submitResetPassword');
+// Route::get('/resetPassword', [HomeController::class, 'resetPassword'])->name('resetPassword');
+// Route::post('/resetPassword', [HomeController::class, 'submitResetPasswordForm'])->name('submitResetPassword');
+// routes/web.php
 Route::get('/resetPassword', [HomeController::class, 'showResetPasswordForm'])->name('resetPassword');
-Route::post('/submitResetPassword', [HomeController::class, 'submitResetPasswordForm'])->name('submitResetPassword');
+Route::post('/resetPassword', [HomeController::class, 'submitResetPasswordForm']);
