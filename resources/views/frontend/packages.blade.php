@@ -39,7 +39,7 @@
                     <div class="pricing-inner">
                         <div class="row">
                             @foreach ($packages as $package)
-                                <div class="col-lg-4">
+                                <div class="col-lg-4 mt-3">
                                     <div class="pricing-item shadow">
                                         <div class="best-deal">{{ $package->title }}</div>
                                         <div class="d-grid justify-content-center">
@@ -65,7 +65,7 @@
                                                 class="btn" title="Get Started">Get Started</a>
                                         @endif
                                         <ul>
-                                            <li>{{ $package->duration }} Expiration Date </li>
+                                            <li>{{ $package->duration=="12"?"1 Year":"$package->duration Month" }} </li>
                                             <li>{{ $package->noOfPlace }} Place Listing </li>
                                             <li>{{ $package->featuredListings }} Featured Listings </li>
                                             {{-- <li>{{ $package->featuredType }}</li> --}}

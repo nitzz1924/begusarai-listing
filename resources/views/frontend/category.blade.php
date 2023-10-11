@@ -21,10 +21,10 @@
         }
     </style>
     <main id="main" class="site-main">
-        
-        <div class="page-title page-title--small align-left"style="background-image: url({{ asset('assets/images/bg-checkout.png') }}); 
- background-size: auto; background-position: bottom right;">
-        
+
+        <div class="page-title page-title--small align-left"style="background-image: url({{ asset('assets/images/bg-checkout.png') }});
+     background-size: auto; background-position: bottom right;">
+
             <div class="container">
                 <div class="page-title__content">
                     <h1 class="page-title__name">Our Ranking</h1>
@@ -44,12 +44,12 @@
                         <div class="row">
 
                             @foreach ($ranking as $value)
-                                <div class="col-lg-4">
+                                <div class="col-lg-4 mt-3">
                                     <div class="pricing-item">
                                         <h3>{{ $value->title }}</h3>
                                         <p>{{ $value->noOfPlace }} For Rank</p>
                                         <div class="price"><span class="currency">₹</span>{{ $value->price }}<span
-                                                class="time">{{ $package->durationMY == 0 ? 'Monthly' : 'Yearly' }}</span>
+                                                class="time">{{ $package->duration == '12' ? '1 Year' : "$package->duration Month" }}</span>
                                         </div>
 
                                         @php
@@ -58,7 +58,7 @@
                                                 switch ($value->featuredType) {
                                                     case 'city_listing':
                                                         $isActive = $businesses->city_ranking == '11';
-                                            
+
                                                         break;
                                                     case 'category_listing':
                                                         $isActive = $businesses->category_ranking == '11';
