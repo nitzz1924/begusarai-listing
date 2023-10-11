@@ -13,82 +13,86 @@
     </style>
     <div class="container">
         <div class="member-wrap d-grid justify-content-center">
-            <div class="member-wrap-top mt-5">
-                <h2>Reset Your Password</h2>
-            </div>
-            <!-- .member-wrap-top -->
-
-            @if ($errors->any())
-                <div class="alert alert-danger ">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
+            <div class="card mt-4  open-login" id='message'style='display:none'>
+                <div class="card-header" style='color:green'>
+                    Login
                 </div>
-            @endif
-            <div class="alert alert-success ">
-                @if (session('success'))
-                    <div style="color: green">
-                        {{ session('success') }}
+                <div class="card-body">
+                    <h5 class="card-title" >Reset password successfully!</h5>
+                    <p class="card-text">Make sure you've entered the right username and password.</p>
+                    <a href="#" class="btn btn-primary" style="width: -webkit-fill-available;">Login</a>
+                </div>
+            </div>
+            <div id="form-result">
+
+                <div class="member-wrap-top mt-5">
+                    <h2>Reset Your Password</h2>
+                </div>
+                <!-- .member-wrap-top -->
+
+                @if ($errors->any())
+                    <div class="alert alert-danger ">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
                     </div>
                 @endif
-            </div>
 
-            <form action="{{ route('resetPassword') }}" method="POST" class="member-profile form-underline"
-                id='submitResetPassword'>
-                @csrf
+                <form action="{{ route('resetPassword') }}" method="POST" class="member-profile form-underline"
+                    id='submitResetPassword'>
+                    @csrf
 
-                <div class="field-inline align-items-center">
-                    <div class="field-input-number">
-                        <label for="phone_number">Enter Your Phone Number</label>
-                        <input type="tel" name="phone_number" placeholder="Please enter a 10-digit phone number"
-                            id="phone_number" pattern="[0-9]{10}" minlength="10" maxlength="10" required>
-                        @error('phone_number')
+                    <div class="field-inline align-items-center">
+                        <div class="field-input-number">
+                            <label for="phone_number">Enter Your Phone Number</label>
+                            <input type="tel" name="phone_number" placeholder="Please enter a 10-digit phone number"
+                                id="phone_number" pattern="[0-9]{10}" minlength="10" maxlength="10" required>
+                            @error('phone_number')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div>
+                            <button type="submit" name="submit-otp" value="Send OTP" class="OTP-btn1 btn"
+                                style="width: 100px;" id="sendOTPButton2">Send OTP</button>
+
+                        </div>
+                    </div>
+
+                    <div class="field-input">
+                        <input type="tel" id="RverificationCode" placeholder="OTP" value=""
+                            name="RverificationCode" pattern="[0-9]{6}" maxlength="6" minlength="6" required />
+                        <input type="hidden" id="RgeneratedOTP" placeholder="OTP" value="" name="RgeneratedOTP" />
+                        @error('RverificationCode')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>
 
-                    <div>
-                        <button type="submit" name="submit-otp" value="Send OTP" class="OTP-btn1 btn" style="width: 100px;"
-                            id="sendOTPButton2">Send OTP</button>
-
+                    <div class="field-input">
+                        <label for="new_password">New password</label>
+                        <input type="password" name="new_password" placeholder="Enter new password" id="new_password"
+                            required autocomplete="new-password">
+                        @error('new_password')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
                     </div>
-                </div>
 
-                <div class="field-input">
-                    <input type="tel" id="RverificationCode" placeholder="OTP" value="" name="RverificationCode"
-                        pattern="[0-9]{6}" maxlength="6" minlength="6" required />
-                    <input type="hidden" id="RgeneratedOTP" placeholder="OTP" value="" name="RgeneratedOTP" />
-                    @error('RverificationCode')
-                        <div class="text-danger">{{ $message }}</div>
-                    @enderror
-                </div>
+                    <div class="field-input">
+                        <label for="new_password_confirmation">Re-enter new password</label>
+                        <input type="password" name="new_password_confirmation" placeholder="Re-enter new password" required
+                            id="new_password_confirmation" autocomplete="new-password">
+                        @error('new_password_confirmation')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
 
-                <div class="field-input">
-                    <label for="new_password">New password</label>
-                    <input type="password" name="new_password" placeholder="Enter new password" id="new_password" required
-                        autocomplete="new-password">
-                    @error('new_password')
-                        <div class="text-danger">{{ $message }}</div>
-                    @enderror
-                </div>
-
-                <div class="field-input">
-                    <label for="new_password_confirmation">Re-enter new password</label>
-                    <input type="password" name="new_password_confirmation" placeholder="Re-enter new password" required
-                        id="new_password_confirmation" autocomplete="new-password">
-                    @error('new_password_confirmation')
-                        <div class="text-danger">{{ $message }}</div>
-                    @enderror
-                </div>
-
-                <div class="field-submit">
-                    <input type="submit" value="Reset password">
-                </div>
-            </form>
-            <div id="success-message"></div>
-            <div id="error-message"></div>
+                    <div class="field-submit">
+                        <input type="submit" value="Reset password">
+                    </div>
+                </form>
+            </div>
         </div><!-- .member-wrap -->
 
         <script>
@@ -105,8 +109,11 @@
                             if (response.success) {
                                 var successMessage = 'Reset password successfully';
                                 alert(successMessage);
-                                $('#success-message').css('color', 'green').text(successMessage);
-                                window.location.href = "/";
+                                $('#message').css('display', 'block');
+                                $('#form-result').css('display', 'none');
+
+                                // $('#success-message').css('color', 'green').text(successMessage);
+                                // window.location.href = "/";
                                 // You can add the success message to a JavaScript variable to use it in the view file
                                 window.successMessage = successMessage;
                             } else {
