@@ -48,13 +48,13 @@
                                 <td>
                                     <input type="text" name="businessId" id="businessId" style="display:none" value='{{$bid}}' />
                                     <select class="formInput" name="day" id="day">
-                                        <option value="Sun">Sun</option>
-                                        <option value="Mon">Mon</option>
-                                        <option value="Tues">Tues</option>
-                                        <option value="Wednes">Wednes</option>
-                                        <option value="Thurs">Thurs</option>
-                                        <option value="Fri">Fri</option>
-                                        <option value="Satur">Satur</option>
+                                        <option value="Sunday">Sun</option>
+                                        <option value="Monday">Mon</option>
+                                        <option value="Tuesday">Tues</option>
+                                        <option value="Wednesday">Wednes</option>
+                                        <option value="Thursday">Thurs</option>
+                                        <option value="Friday">Fri</option>
+                                        <option value="Saturday">Satur</option>
                                     </select>
                                 </td>
                                 <td>
@@ -71,8 +71,10 @@
                         @foreach ($duration as $value)
                             <tr>
                                 <td>{{ $value->day }}</td>
-                                <td>{{ $value->opening_time }}</td>
-                                <td>{{ $value->end_time }}</td>
+                                <td>{{ \Carbon\Carbon::parse($value->opening_time)->format('h:i A') }}</td>
+
+                                
+                                <td>{{ \Carbon\Carbon::parse($value->end_time)->format('h:i A') }}</td>
                                 <td>
                                     <form action="{{ route('deleteDuration', ['id' => $value->id]) }}" method="post">
                                         @csrf
