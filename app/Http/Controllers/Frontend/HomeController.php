@@ -402,31 +402,20 @@ class HomeController extends Controller
         // Validation rules (same as savePlace)
         $rules = [
             'category' => 'required',
-            'placeType' => 'nullable',
+       
             'description' => 'required',
-            'price' => 'nullable',
-            // 'duration' => 'nullable',
-            'highlight' => 'nullable',
+           
+       
+            
             'city' => 'required',
             'placeAddress' => 'required',
             'ownerName' => 'required',
-            'email' => 'nullable',
-            'phoneNumber1' => 'required',
-            'phoneNumber2' => 'nullable',
-            'whatsappNo' => 'nullable',
-            'websiteUrl' => 'nullable', // Changed to validate as a URL
-            'additionalFields' => 'nullable', // Changed to validate as a URL
-            'facebook' => 'nullable', // Changed to validate as a URL
-            'instagram' => 'nullable', // Changed to validate as a URL
-            'twitter' => 'nullable',
-            'bookingType' => 'nullable',
-            'bookingurl' => 'nullable', // Changed to validate as a URL
+             
+            'phoneNumber1' => 'required', 
             'businessName' => 'required',
-            'youtube' => 'nullable', // Changed to validate as a URL
-            'video' => 'nullable',
+               'coverImage' => 'required|image|mimes:jpg,jpeg,png,svg,webp',
             'documentImage' => 'required|mimes:pdf', // Validate PDF
-            'dType' => 'nullable|string|max:255', // Adjust the validation rules as needed
-            'dNumber' => 'nullable|string|max:255',
+       
         ];
 
         foreach (['coverImage', 'logo'] as $fileField) {
@@ -442,7 +431,7 @@ class HomeController extends Controller
             }
         }
 
-        $this->validate($request, $rules);
+      
         $this->validate($request, $rules);
 
         // Find the existing business by ID
@@ -455,7 +444,7 @@ class HomeController extends Controller
             $business->highlight = $request->has('highlight') ? implode(',', $request->input('highlight')) : 'null';
             $business->description = $request->input('description');
             $business->price = $request->input('price');
-            // $business->duration = $request->input('duration');
+           
             $business->city = $request->input('city');
             $business->placeAddress = $request->input('placeAddress');
             $business->ownerName = $request->input('ownerName');
@@ -517,7 +506,7 @@ class HomeController extends Controller
 
             // Redirect back on success
             return redirect()
-                ->route('ownerListing')
+                  ->route('addDuration', ['id' => $business->id])
                 ->with('success', 'Business updated successfully');
         } catch (ValidationException $e) {
             // Handle validation errors
@@ -604,34 +593,24 @@ class HomeController extends Controller
 
     public function savePlace(Request $request)
     {
+   
         //  dd($request->input('cin'));
         $rules = [
             'category' => 'required',
-            'placeType' => 'nullable',
+       
             'description' => 'required',
-            'price' => 'nullable',
-            // 'duration' => 'nullable',
-            'highlight' => 'nullable',
+           
+       
+            
             'city' => 'required',
             'placeAddress' => 'required',
             'ownerName' => 'required',
-            'email' => 'nullable',
-            'phoneNumber1' => 'required',
-            'phoneNumber2' => 'nullable',
-            'whatsappNo' => 'nullable',
-            'websiteUrl' => 'nullable', // Changed to validate as a URL
-            'additionalFields' => 'nullable', // Changed to validate as a URL
-            'facebook' => 'nullable', // Changed to validate as a URL
-            'instagram' => 'nullable', // Changed to validate as a URL
-            'twitter' => 'nullable',
-            'bookingType' => 'nullable',
-            'bookingurl' => 'nullable', // Changed to validate as a URL
+             
+            'phoneNumber1' => 'required', 
             'businessName' => 'required',
-            'youtube' => 'nullable', // Changed to validate as a URL
-            'video' => 'nullable',
+               'coverImage' => 'required|image|mimes:jpg,jpeg,png,svg,webp',
             'documentImage' => 'required|mimes:pdf', // Validate PDF
-            'dType' => 'nullable|string|max:255', // Adjust the validation rules as needed
-            'dNumber' => 'nullable|string|max:255',
+             
         ];
 
         foreach (['coverImage', 'logo'] as $fileField) {
@@ -647,7 +626,7 @@ class HomeController extends Controller
             }
         }
 
-        $this->validate($request, $rules);
+       
         $this->validate($request, $rules);
         $editId = $request->input('editId');
         $business = $editId ? BusinessList::findOrFail($editId) : new BusinessList();
@@ -725,7 +704,7 @@ class HomeController extends Controller
             //  return back()->with('success', 'Business added successfully');
 
             return redirect()
-                ->route('addDuration/{id}')
+                           ->route('addDuration', ['id' => $business->id])
                 ->with('success', $editId ? 'Business updated successfully' : 'Business added successfully');
         } catch (ValidationException $e) {
             // Handle validation errors
