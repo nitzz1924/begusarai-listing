@@ -186,5 +186,6 @@ Route::post('/addPlace/savePlace', [HomeController::class, 'savePlace'])->name('
 
 
 
-Route::get('/addDuration', [HomeController::class, 'addDuration'])->name('addDuration');
+Route::get('/addDuration/{id}', [HomeController::class, 'addDuration'])->name('addDuration');
 Route::post('/addDuration/saveDuration', [HomeController::class, 'saveDuration'])->name('saveDuration');
+Route::delete('/delete-duration/{id}', [HomeController::class, 'deleteDuration'])->name('deleteDuration');

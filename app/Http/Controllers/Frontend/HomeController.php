@@ -25,7 +25,6 @@ use App\Models\BuyPlan;
 use App\Models\Popup_ads;
 use App\Models\Duration;
 
-
 use Carbon\Carbon;
 use Razorpay\Api\Api;
 use DB;
@@ -605,8 +604,6 @@ class HomeController extends Controller
 
     public function savePlace(Request $request)
     {
-      
-      
         //  dd($request->input('cin'));
         $rules = [
             'category' => 'required',
@@ -728,7 +725,7 @@ class HomeController extends Controller
             //  return back()->with('success', 'Business added successfully');
 
             return redirect()
-                ->route('ownerListing')
+                ->route('addDuration/{id}')
                 ->with('success', $editId ? 'Business updated successfully' : 'Business added successfully');
         } catch (ValidationException $e) {
             // Handle validation errors
@@ -1567,29 +1564,56 @@ class HomeController extends Controller
         //     ->with('success', 'Password reset successfully.');
     }
 
-    public function addDuration(Request $request)
+    public function addDuration($bid)
     {
-      return view('frontend.addDuration');
+       // dd($id);
+        $duration = Duration::orderBy('created_at', 'desc')->get();
+
+        return view('frontend.addDuration', compact('duration','bid'));
     }
-     public function saveDuration(Request $request)
+
+    
+    public function saveDuration(Request $request)
     {
+      
         $validatedData = $request->validate([
             'day' => 'required|string|max:10',
             'opening_time' => 'required|date_format:H:i',
             'end_time' => 'required|date_format:H:i',
         ]);
-
+        $bId=$request->businessId;
         // Create a new Duration instance and fill it with the validated data
         $duration = new Duration();
         $duration->day = $validatedData['day'];
+        $duration->businessId =  $bId;
         $duration->opening_time = $validatedData['opening_time'];
         $duration->end_time = $validatedData['end_time'];
 
         // Save the record to the database
         $duration->save();
 
-        return redirect()
-            ->route('addDuration')
-            ->with('success', 'Duration added successfully');
+       return redirect()->route('addDuration', ['id' => $bId])->with('success', 'Duration added successfully');
+
     }
+
+
+    public function deleteDuration($id)
+{
+    // Find the record by its ID
+    $duration = Duration::find($id);
+    $bid=$duration->businessId;
+    if ($duration) {
+        // Delete the record
+        $duration->delete();
+
+      return redirect()->route('addDuration', ['id' => $bid])
+            ->with('success', 'Duration deleted successfully');
+    }
+
+    return redirect()
+        ->route('addDuration')
+        ->with('error', 'Duration not found');
+}
+
+
 }

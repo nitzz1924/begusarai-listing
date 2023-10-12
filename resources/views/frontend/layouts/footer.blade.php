@@ -97,7 +97,7 @@
             </div>
         </div>
         <!-- .top-footer -->
-        <div class="footer__bottom ">
+        <div class="footer__bottom desktop-view ">
             <p class="footer__bottom__copyright">
                 2023 &copy; <a title="RUDRAASHWI TECHNOLOGY" href="https://rudraashwitechnology.com/"><span
                         style="color: #38d6d6">RUDRAASHWI TECHNOLOGY</span></a>. All
