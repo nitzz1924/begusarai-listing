@@ -10,7 +10,7 @@
                 <div>All Lead</div>
                 <div class="d-inline-block ml-3 pb-3">
 
-                  
+
 
                 </div>
             </div>
@@ -35,6 +35,7 @@
 
                                     <th>Action </th>
                                     <th>Status </th>
+                                    <th>Featured</th>
                                     <th>Lead Status </th>
 
                                 </tr>
@@ -44,16 +45,13 @@
                                 @foreach ($businesses as $business)
                                     <tr>
                                         <td class="serial-number">{{ $loop->iteration }}</td>
-
                                         <td class="fw-bold text-nowrap ">{{ $business->businessName }}</td>
                                         <td class="fw-bold text-nowrap ">{{ $business->phoneNumber1 }}</td>
                                         <td class="fw-bold">{{ $business->email }}</td>
-
                                         <td class="fw-bold">{{ $business->placeAddress }}</td>
                                         <td class="d-flex">
-
-                                            <form action="{{ route('admin.listing.destroy',$business->id)}}" method="POST"
-                                                id="deleteForm">
+                                            <form action="{{ route('admin.listing.destroy', $business->id) }}"
+                                                method="POST" id="deleteForm">
                                                 @method('DELETE')
                                                 @csrf
                                                 <button type="submit" class="btn btn-danger ms-3 text-nowrap"
@@ -61,11 +59,7 @@
 
                                                     <i class="metismenu-icon bi bi-trash3"></i>
                                                 </button>
-                                            </form> 
-
-                                       
-
-
+                                            </form>
                                         </td>
                                         <td class="fw-bold">
                                             @if ($business->status == 1)
@@ -79,8 +73,18 @@
                                             @endif
                                             <br />
                                         </td>
-
-
+                                        <td class="fw-bold">
+                                            @if ($business->home_featured == 11)
+                                                <a class="fw-bold  btn btn-success"
+                                                    href="{{ URL::to('admin/listing/homefeturedActive', $business->id) }} ">Active</a>
+                                            @elseif ($business->home_featured < 11)
+                                                <a class="fw-bold btn btn-danger"
+                                                    href="{{ URL::to('admin/listing/homefeturedinactive', $business->id) }} ">Inactive</a>
+                                            @else
+                                                Unknown
+                                            @endif
+                                            <br />
+                                        </td>
                                         <td class="fw-bold">
                                             @if ($business->leadStatus == 1)
                                                 <a class="fw-bold  btn btn-success"
@@ -116,7 +120,7 @@
     </style>
 
 
-<script>
+    <script>
         function confirmDelete(button) {
             if (confirm("Are you sure you want to delete this item?")) {
                 var form = button.parentElement; // Get the parent element of the button, which is the form
@@ -125,7 +129,7 @@
                 alert("Delete operation cancelled.");
             }
         }
-    </script> 
+    </script>
 
     <script>
         new DataTable('#example');

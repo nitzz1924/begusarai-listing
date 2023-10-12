@@ -158,7 +158,18 @@ class ListingController extends Controller
         BusinessList::where('id', $id)->update(['status' => '0']);
         return redirect()->route('admin.listing.index');
     }
-
+    public function homefeturedActive($id)
+    {
+        // dd('Active method called with ID: ' . $id);
+        BusinessList::where('id', $id)->update(['home_featured' => '6']);
+        return redirect()->route('admin.listing.index');
+    }
+public function homefeturedinactive($id)
+    {
+        // dd('Active method called with ID: ' . $id);
+        BusinessList::where('id', $id)->update(['home_featured' => '11']);
+        return redirect()->route('admin.listing.index');
+    }
     public function inactive($id)
     {
         // dd('Inactive method called with ID: ' . $id);

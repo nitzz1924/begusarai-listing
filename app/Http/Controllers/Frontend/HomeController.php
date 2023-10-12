@@ -400,34 +400,16 @@ class HomeController extends Controller
     }
     public function updatePlace(Request $request, $id)
     {
+      
         // Validation rules (same as savePlace)
         $rules = [
             'category' => 'required',
-            'placeType' => 'nullable',
             'description' => 'required',
-            'price' => 'nullable',
-            // 'duration' => 'nullable',
-            'highlight' => 'nullable',
             'city' => 'required',
             'placeAddress' => 'required',
             'ownerName' => 'required',
-            'email' => 'nullable',
             'phoneNumber1' => 'required',
-            'phoneNumber2' => 'nullable',
-            'whatsappNo' => 'nullable',
-            'websiteUrl' => 'nullable', // Changed to validate as a URL
-            'additionalFields' => 'nullable', // Changed to validate as a URL
-            'facebook' => 'nullable', // Changed to validate as a URL
-            'instagram' => 'nullable', // Changed to validate as a URL
-            'twitter' => 'nullable',
-            'bookingType' => 'nullable',
-            'bookingurl' => 'nullable', // Changed to validate as a URL
             'businessName' => 'required',
-            'youtube' => 'nullable', // Changed to validate as a URL
-            'video' => 'nullable',
-            'documentImage' => 'required|mimes:pdf', // Validate PDF
-            'dType' => 'nullable|string|max:255', // Adjust the validation rules as needed
-            'dNumber' => 'nullable|string|max:255',
         ];
 
         foreach (['coverImage', 'logo'] as $fileField) {
@@ -444,7 +426,6 @@ class HomeController extends Controller
         }
 
         $this->validate($request, $rules);
-        $this->validate($request, $rules);
 
         // Find the existing business by ID
         $business = BusinessList::findOrFail($id);
@@ -452,11 +433,11 @@ class HomeController extends Controller
             // Update business properties
             $business->userId = Auth::id();
             $business->category = $request->input('category');
-            $business->placeType = $request->has('placeType') ? implode(',', $request->input('placeType')) : 'null';
-            $business->highlight = $request->has('highlight') ? implode(',', $request->input('highlight')) : 'null';
+            $business->placeType = $request->has('placeType') ? implode(',', $request->input('placeType')) : ' ';
+            $business->highlight = $request->has('highlight') ? implode(',', $request->input('highlight')) : ' ';
             $business->description = $request->input('description');
             $business->price = $request->input('price');
-            // $business->duration = $request->input('duration');
+
             $business->city = $request->input('city');
             $business->placeAddress = $request->input('placeAddress');
             $business->ownerName = $request->input('ownerName');
@@ -518,7 +499,7 @@ class HomeController extends Controller
 
             // Redirect back on success
             return redirect()
-                ->route('ownerListing')
+                ->route('addDuration', ['id' => $business->id])
                 ->with('success', 'Business updated successfully');
         } catch (ValidationException $e) {
             // Handle validation errors
@@ -610,31 +591,17 @@ class HomeController extends Controller
         //  dd($request->input('cin'));
         $rules = [
             'category' => 'required',
-            'placeType' => 'nullable',
+
             'description' => 'required',
-            'price' => 'nullable',
-            // 'duration' => 'nullable',
-            'highlight' => 'nullable',
+
             'city' => 'required',
             'placeAddress' => 'required',
             'ownerName' => 'required',
-            'email' => 'nullable',
+
             'phoneNumber1' => 'required',
-            'phoneNumber2' => 'nullable',
-            'whatsappNo' => 'nullable',
-            'websiteUrl' => 'nullable', // Changed to validate as a URL
-            'additionalFields' => 'nullable', // Changed to validate as a URL
-            'facebook' => 'nullable', // Changed to validate as a URL
-            'instagram' => 'nullable', // Changed to validate as a URL
-            'twitter' => 'nullable',
-            'bookingType' => 'nullable',
-            'bookingurl' => 'nullable', // Changed to validate as a URL
             'businessName' => 'required',
-            'youtube' => 'nullable', // Changed to validate as a URL
-            'video' => 'nullable',
+            'coverImage' => 'required|image|mimes:jpg,jpeg,png,svg,webp',
             'documentImage' => 'required|mimes:pdf', // Validate PDF
-            'dType' => 'nullable|string|max:255', // Adjust the validation rules as needed
-            'dNumber' => 'nullable|string|max:255',
         ];
 
         foreach (['coverImage', 'logo'] as $fileField) {
@@ -651,15 +618,14 @@ class HomeController extends Controller
         }
 
         $this->validate($request, $rules);
-        $this->validate($request, $rules);
         $editId = $request->input('editId');
         $business = $editId ? BusinessList::findOrFail($editId) : new BusinessList();
 
         try {
             $business->userId = Auth::id();
             $business->category = $request->input('category');
-            $business->placeType = $request->has('placeType') ? implode(',', $request->input('placeType')) : 'null';
-            $business->highlight = $request->has('highlight') ? implode(',', $request->input('highlight')) : 'null';
+            $business->placeType = $request->has('placeType') ? implode(',', $request->input('placeType')) : ' ';
+            $business->highlight = $request->has('highlight') ? implode(',', $request->input('highlight')) : ' ';
 
             $business->description = $request->input('description');
             $business->price = $request->input('price');
@@ -728,7 +694,7 @@ class HomeController extends Controller
             //  return back()->with('success', 'Business added successfully');
 
             return redirect()
-                ->route('ownerListing')
+                ->route('addDuration', ['id' => $business->id])
                 ->with('success', $editId ? 'Business updated successfully' : 'Business added successfully');
         } catch (ValidationException $e) {
             // Handle validation errors
@@ -850,6 +816,10 @@ class HomeController extends Controller
 
     public function listingDetail(Request $request, $id, $category)
     {
+        $duration = Duration::orderBy('created_at', 'asc')
+            ->where('businessId', $id)
+            ->get();
+
         // $VisitCount = Lead:: where('business_id')  ->get();
         $VisitCount = Lead::where('business_id', $id)->count();
 
@@ -930,7 +900,7 @@ class HomeController extends Controller
             ->where('listing_id', $id)
             ->get();
 
-        return view('frontend.listingDetail', compact('businessesDetail', 'submaster', 'businesses', 'Result', 'reviews', 'VisitCount'));
+        return view('frontend.listingDetail', compact('businessesDetail', 'submaster', 'businesses', 'Result', 'reviews', 'VisitCount', 'duration'));
     }
     public function blogDetails(Request $request, $id)
     {
@@ -1567,21 +1537,28 @@ class HomeController extends Controller
         //     ->with('success', 'Password reset successfully.');
     }
 
-    public function addDuration(Request $request)
+    public function addDuration( $bid)
     {
-      return view('frontend.addDuration');
+        // dd($id);
+        $duration = Duration::orderBy('created_at', 'asc')->where('businessId', $bid)->get();
+
+        return view('frontend.addDuration', compact('duration', 'bid'));
     }
-     public function saveDuration(Request $request)
+
+ 
+
+    public function saveDuration(Request $request)
     {
         $validatedData = $request->validate([
             'day' => 'required|string|max:10',
             'opening_time' => 'required|date_format:H:i',
             'end_time' => 'required|date_format:H:i',
         ]);
-
+        $bId = $request->businessId;
         // Create a new Duration instance and fill it with the validated data
         $duration = new Duration();
         $duration->day = $validatedData['day'];
+        $duration->businessId = $bId;
         $duration->opening_time = $validatedData['opening_time'];
         $duration->end_time = $validatedData['end_time'];
 
@@ -1589,7 +1566,26 @@ class HomeController extends Controller
         $duration->save();
 
         return redirect()
-            ->route('addDuration')
+            ->route('addDuration', ['id' => $bId])
             ->with('success', 'Duration added successfully');
+    }
+
+    public function deleteDuration($id)
+    {
+        // Find the record by its ID
+        $duration = Duration::find($id);
+        $bid = $duration->businessId;
+        if ($duration) {
+            // Delete the record
+            $duration->delete();
+
+            return redirect()
+                ->route('addDuration', ['id' => $bid])
+                ->with('success', 'Duration deleted successfully');
+        }
+
+        return redirect()
+            ->route('addDuration')
+            ->with('error', 'Duration not found');
     }
 }
