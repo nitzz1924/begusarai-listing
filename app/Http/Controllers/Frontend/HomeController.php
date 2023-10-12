@@ -25,6 +25,7 @@ use App\Models\BuyPlan;
 use App\Models\Popup_ads;
 use App\Models\Duration;
 
+
 use Carbon\Carbon;
 use Razorpay\Api\Api;
 use DB;
@@ -589,6 +590,8 @@ class HomeController extends Controller
 
     public function savePlace(Request $request)
     {
+      
+      
         //  dd($request->input('cin'));
         $rules = [
             'category' => 'required',
@@ -1538,7 +1541,7 @@ class HomeController extends Controller
         //     ->with('success', 'Password reset successfully.');
     }
 
-    public function addDuration($bid)
+    public function addDuration( $bid)
     {
         // dd($id);
         $duration = Duration::orderBy('created_at', 'asc')->where('businessId', $bid)->get();

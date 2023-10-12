@@ -1,13 +1,54 @@
 <?php
 use App\Models\Master;
+use App\Models\Popup_ads;
 use App\Models\User_Login;
 
 $Mastercity = Master::orderBy('created_at', 'asc')
     ->where('type', '=', 'City')
     ->get();
+$popup = Popup_ads::orderBy('created_at', 'asc')
+    ->where('type', '=', 'Popup Ads')
+    ->first();
 
 ?>
+<div class="modal fade" id="exampleModalFullscreen" tabindex="-1" aria-labelledby="exampleModalFullscreenLabel"
+    style="display: none;" aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-danger white" data-bs-dismiss="modal" aria-label="Close">X</button>
+            </div>
+            <div class="modal-body d-grid align-items-center">
+                @if ($popup && $popup->logo)
+                    <div class="position-relative bg-image overlay p-0">
 
+                        <a href="{{ $popup->value }}">
+                            <img src="{{ URL::to('uploads/' . $popup->logo) }}" alt="Promo banner"
+                                class="img-fluid rounded-3">
+                        </a>
+
+
+                    </div>
+                @else
+                    <div class="position-relative modal-body bg-image overlay p-0">
+
+                        <a href="{{ $popup->value }}">
+
+                            <iframe class="embed-responsive-item " id="iframe-content"
+                                src="https://www.youtube.com/embed/{{ $popup->value }}?autoplay=1&mute=1&controls=0"
+                                frameborder="0">
+                            </iframe>
+
+                        </a>
+
+                    </div>
+                @endif
+
+            </div>
+
+        </div>
+    </div>
+</div>
 <header id="header" class="site-header" style="border-bottom: 1px solid #eeeeee;">
     <div class="container-fluid">
         <div class="row">
@@ -68,7 +109,7 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                             <div class="popup__button popup__box">
                                 <ul class="menu-arrow">
                                     <h3 class="mb-3">Navigation</h3>
-                                    
+
                                     <li>
                                         <a title="Blogs" href="/blogs">Blog</a>
                                     </li>
@@ -81,7 +122,7 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                                     <li>
                                         <a title="AboutUs" href="/aboutUs">About Us</a>
                                     </li>
-                                    
+
                                 </ul>
                             </div><!-- .popup__menu -->
 
@@ -117,7 +158,7 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                                         <li>
                                             <a title="Career" href="/faq">FAQs</a>
                                         </li>
-                                        
+
                                     </ul>
                             </div><!-- .popup__menu -->
                             <div class="popup__button popup__box">
@@ -131,13 +172,15 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                                 <p>Phone: 9693667887 / 06243-316290</p>
                                 <ul class="mt-2">
                                     <li class="facebook d-inline-block p-2 rounded">
-                                        <a title="Facebook" class="" href="https://www.facebook.com/inbegusarai">
+                                        <a title="Facebook" class=""
+                                            href="https://www.facebook.com/inbegusarai">
                                             <i class="la la-facebook-f fs-3 text-white"></i>
                                         </a>
                                     </li>
 
                                     <li class="instagram d-inline-block p-2 rounded">
-                                        <a title="Instagram" class="" href="https://instagram.com/in.begusarai">
+                                        <a title="Instagram" class=""
+                                            href="https://instagram.com/in.begusarai">
                                             <i class="la la-instagram fs-3 text-white "></i>
                                         </a>
                                     </li>
@@ -146,8 +189,10 @@ $Mastercity = Master::orderBy('created_at', 'asc')
 
                             <div class="footer__bottom " style="margin-bottom: 20px">
                                 <p class="footer__bottom__copyright">
-                                    2023 &copy; <a title="RUDRAASHWI TECHNOLOGY" href="https://rudraashwitechnology.com/"><span
-                                            style="color: #38d6d6">RUDRAASHWI TECHNOLOGY</span></a>. All
+                                    2023 &copy; <a title="RUDRAASHWI TECHNOLOGY"
+                                        href="https://rudraashwitechnology.com/"><span
+                                            style="color: #38d6d6">RUDRAASHWI
+                                            TECHNOLOGY</span></a>. All
                                     rights reserved.
                                 </p>
                             </div>
@@ -167,9 +212,6 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                     <!-- .site__brand -->
                 </div>
                 <!-- .site -->
-<div>
-    <a title="Login" href="/addDuration" >addDuration</a> 
-</div> 
                 {{-- login dropdown --}}
                 <div class="ms-auto login-container mobile-view">
                     @guest
@@ -625,9 +667,10 @@ $Mastercity = Master::orderBy('created_at', 'asc')
             const data = {
                 type: 'text',
                 message: 'Dear customer, use this One Time Password  ' +
-                    randomOTP + " to sign up to your Inbegusarai account. This OTP will be valid for the next 5 mins.",
+                    randomOTP +
+                    " to sign up to your Inbegusarai account. This OTP will be valid for the next 5 mins.",
 
-                    // $message: 'Dear customer, use this One Time Password ' + $randomOTP + ' to login to your Inbegusarai account. This OTP will be valid for the next 5 mins.',
+                // $message: 'Dear customer, use this One Time Password ' + $randomOTP + ' to login to your Inbegusarai account. This OTP will be valid for the next 5 mins.',
 
 
                 instance_id: '651EB1464D20F',

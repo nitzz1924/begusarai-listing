@@ -79,8 +79,7 @@ input[type="number"] {
 /* hero section banner */
 .overlay {
     position: absolute;
-    background: rgba(0, 0, 0, 0.5);
-
+    background: rgba(0, 0, 0, 0.9);
     /* center overlay text */
     display: flex;
     align-items: center;
@@ -307,7 +306,6 @@ input[type="tel"]:focus {
 body.modal-open .modal-backdrop {
     z-index: 0 !important;
 }
-
 /* Style for the custom overlay */
 .custom-overlay {
     position: fixed;
@@ -319,9 +317,9 @@ body.modal-open .modal-backdrop {
         0,
         0,
         0,
-        0.6
+        0.9
     ); /* You can adjust the background color and opacity */
-    z-index: 10; /* Place it behind other elements */
+    z-index: 2000; /* Place it behind other elements */
     display: none; /* Initially hidden */
 }
 
@@ -957,7 +955,6 @@ video {
     width: 1536px;
     height: 864px;
     object-position: center;
-
 }
 
 #iframe-content {

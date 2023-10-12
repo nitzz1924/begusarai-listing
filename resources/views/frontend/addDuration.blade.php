@@ -46,7 +46,8 @@
                             @csrf
                             <tr>
                                 <td>
-                                    <input type="text" name="businessId" id="businessId" style="display:none" value='{{$bid}}' />
+                                    <input type="text" name="businessId" id="businessId" style="display:none"
+                                        value='{{ $bid }}' />
                                     <select class="formInput" name="day" id="day">
                                         <option value="Sunday">Sun</option>
                                         <option value="Monday">Mon</option>

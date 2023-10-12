@@ -91,7 +91,8 @@ Route::get('/listing/inactive/{id}', 'ListingController@inactive');
 
 Route::get('/listing/leadActive/{id}', 'ListingController@leadActive');
 Route::get('/listing/leadInactive/{id}', 'ListingController@leadInactive');
-
+Route::get('/listing/homefeturedActive/{id}', 'ListingController@homefeturedActive');
+Route::get('/listing/homefeturedinactive/{id}', 'ListingController@homefeturedinactive');
 
 // Sub-Master Routing
 Route::resource('setting', 'SubMasterController');
