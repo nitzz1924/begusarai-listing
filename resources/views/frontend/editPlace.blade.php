@@ -32,7 +32,8 @@
                                         <h2 class="steps">Step 1 - 4</h2>
                                     </div>
                                 </div>
-                                <label class="fieldlabels">Business Name: *</label>
+                                <label class="fieldlabels">Business Name: <span
+                                        style='color:red'>*</span></label>
                                 <input type="text" placeholder="What is the name of the place" name="businessName"
                                     id="businessName" class="form-control"
                                     value="{{ isset($business) ? $business->businessName : old('businessName') }}">
@@ -40,39 +41,40 @@
                                 @error('businessName')
                                     <div class="has-error mt-2">{{ $message }}</div>
                                 @enderror
-                                <label class="fieldlabels">Owner Name:</label>
+                                <label class="fieldlabels">Owner Name/Authorized person:<span style='color:red'>*</span></label>
                                 <input type="text" placeholder="Owner Name" id="ownerName" name="ownerName"
                                     class="form-control"
                                     value="{{ isset($business) ? $business->ownerName : old('ownerName') }}">
                                 @error('ownerName')
                                     <div class="has-error mt-2">{{ $message }}</div>
                                 @enderror
-                                <label class="fieldlabels">Price: *</label>
+                                <label class="fieldlabels">Price: </label>
                                 <input type="text" placeholder="Price" name="price" id="price" class="form-control"
                                     value="{{ isset($business) ? $business->price : old('price') }}">
                                 @error('price')
                                     <div class="has-error mt-2">{{ $message }}</div>
                                 @enderror
 
-                                <label class="fieldlabels">Business Description: *</label>
+                                <label class="fieldlabels">Business Description: <span style='color:red'>*</span></label>
                                 <textarea placeholder="Description" id="description" name="description" rows="4" cols="65"
                                     class="form-control">{{ isset($business) ? $business->description : old('description') }}</textarea>
                                 @error('description')
                                     <div class="has-error mt-2">{{ $message }}</div>
                                 @enderror
 
-                                <label class="fieldlabels">Duration: *</label>
+                                <!-- <label class="fieldlabels">Duration: *</label>
                                 <input type="text" placeholder="Duration" id="duration" name="duration"
                                     value="{{ isset($business) ? $business->duration : old('duration') }}"
                                     class="form-control">
                                 @error('duration')
                                     <div class="has-error mt-2">{{ $message }}</div>
-                                @enderror
+                                @enderror -->
 
-                                <label class="fieldlabels">Category: *</label>
+                                <label class="fieldlabels">Category: <span style='color:red'>*</span></label>
+
                                 <select data-placeholder="Select Category" class=" form-control mb-3" id="category"
                                     name="category">
-                                    <option selected disable>Select</option>
+                                    <option  value="" selected disable>Select</option>
                                     @foreach ($data['category'] as $value)
                                         <option
                                             {{ isset($business) && $business->category == $value->title ? 'selected' : '' }}>
@@ -83,10 +85,10 @@
                                     <div class="has-error mt-2">{{ $message }}</div>
                                 @enderror
 
-                                <label class="fieldlabels">Place Type: *</label>
+                                <label class="fieldlabels">Place Type: </label>
                                 <select data-placeholder="Select Place Type" multiple class="chosen-select form-control"
                                     id="placeType" name="placeType[]">
-                                    <option disabled>Select</option>
+                                    <option value="" selected disabled>Select</option>
                                     @foreach ($data['Placetype'] as $value)
                                         <option
                                             {{ isset($business) && in_array($value->title, $business->placeType) ? 'selected' : '' }}>
@@ -97,10 +99,10 @@
                                     <div class="has-error mt-2">{{ $message }}</div>
                                 @enderror
 
-                                <label class="fieldlabels mt-4">Select an option: </label>
+                                <label class="fieldlabels mt-4">Business id Number:  </label>
                                 <select data-placeholder="Select Place option" id="dType" name="dType"
                                     class=" form-control" onchange="showTextBox()" class="mb-3">
-                                    <option value="none">Select an option</option>
+                                    <option value="" selected disabled>Select an option</option>
                                     <option value="gst" @if ($business->dType === 'gst') selected @endif>GST (optional)
                                     </option>
                                     <option value="cin" @if ($business->dType === 'cin') selected @endif>CIN (optional)
@@ -131,7 +133,7 @@
                                 </div>
 
                                 <div class="mb-3">
-                                    <label class="fieldlabels">City:</label>
+                                    <label class="fieldlabels">City:<span style='color:red'>*</span></label>
                                     <select data-placeholder="Select City" class=" form-control" id="city"
                                         name="city">
                                         <option value="" selected disabled>Select City</option>
@@ -151,7 +153,7 @@
                                 <div class="mb-3">
                                     <select data-placeholder="Select Booking Type" class=" form-control" id="bookingType"
                                         name="bookingType">
-                                        <option selected></option>
+                                        <option  value="" selected disabled></option>
                                         @foreach ($data['bookingType'] as $value)
                                             <option
                                                 {{ isset($business) && $business->bookingType == $value->title ? 'selected' : '' }}>
@@ -225,7 +227,7 @@
                                     </div>
                                 </div>
 
-                                <label class="fieldlabels">Business Address:</label>
+                                <label class="fieldlabels">Business Address:<span style='color:red'>*</span></label>
                                 <input type="text" placeholder="Full ontact Info" id="placeAddress"
                                     name="placeAddress" class="form-control "
                                     value="{{ isset($business) ? $business->placeAddress : old('placeAddress') }}">
@@ -241,7 +243,7 @@
                                 @enderror
                                 <label class="fieldlabels">Email:</label>
 
-                                <label class="fieldlabels">Business Number :</label>
+                                <label class="fieldlabels">Business Number:<span style='color:red'>*</span></label>
                                 <input type="tel" placeholder="Your phone number" name="phoneNumber1"
                                     id="phoneNumber1" class="form-control  "
                                     value="{{ isset($business) ? $business->phoneNumber1 : old('phoneNumber1') }}">
@@ -276,7 +278,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group ">
                                             
-                                                <label class="fieldlabels">Cover image:</label>
+                                                <label class="fieldlabels">Cover image:<span style='color:red'>*</span></label>
                                                 <div class="input-group">
                                                     <div class="custom-file">
                                                         <input type="file" name="coverImage" id="coverImage"
@@ -304,7 +306,7 @@
 
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label class="fieldlabels">Author:</label>
+                                            <label class="fieldlabels">Author:<span style='color:red'>*</span></label>
                                             <div class="input-group">
                                                 <div class="custom-file">
                                                     <input type="file" name="logo" id="logo"
@@ -327,7 +329,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="fieldlabels">Business Photos (Drag & Drop Images Here):</label>
+                                    <label class="fieldlabels">Business Photos (Drag & Drop Images Here Max 5 ):</label>
                                     <div id="drop-area" class="border rounded p-3">
                                         {{-- <label for="galleryImage" class="custom-file-label">Choose files for
                                             gallery</label> --}}
@@ -344,6 +346,8 @@
 
                                 <div class="form-group">
                                     <label class="fieldlabels">Business Ownership Proof (Upload PDF):</label>
+                                    <label for="fieldlabels" class=" " style='color:red'>
+                                        No business docs? Use Aadhar card for ID verification. </label>
                                     <div class="input-group">
                                         <div class="custom-file">
                                             <input type="file" name="documentImage" id="documentImage"
@@ -354,8 +358,8 @@
                                             src="{{ isset($business) && $business->documentImage ? asset('uploads/' . $business->documentImage) : asset('images/no-image.png') }}"
                                             alt="" />
                                     </div>
-                                    @error('documentImage')
-                                        <div class="has-error mt-2">{{ $message }}</div>
+                                         @error('documentImage')
+                                        <div class="has-error mt-2">The all image field are required.</div>
                                     @enderror
                                 </div>
 

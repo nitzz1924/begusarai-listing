@@ -400,32 +400,32 @@ class HomeController extends Controller
     {
         // Validation rules (same as savePlace)
         $rules = [
-            'category' => 'required',
-            'placeType' => 'required',
+           'category' => 'required',
+            'placeType' => 'nullable',
             'description' => 'required',
             'price' => 'nullable',
-            'duration' => 'required',
-            'highlight' => 'required',
+            // 'duration' => 'nullable',
+            'highlight' => 'nullable',
             'city' => 'required',
             'placeAddress' => 'required',
             'ownerName' => 'required',
-            'email' => 'required',
+            'email' => 'nullable',
             'phoneNumber1' => 'required',
-            'phoneNumber2' => 'required',
+            'phoneNumber2' => 'nullable',
             'whatsappNo' => 'nullable',
-            'websiteUrl' => 'required|url', // Changed to validate as a URL
+            'websiteUrl' => 'nullable', // Changed to validate as a URL
             'additionalFields' => 'nullable', // Changed to validate as a URL
             'facebook' => 'nullable', // Changed to validate as a URL
             'instagram' => 'nullable', // Changed to validate as a URL
             'twitter' => 'nullable',
-            'bookingType' => 'required',
-            'bookingurl' => 'required|url', // Changed to validate as a URL
+            'bookingType' => 'nullable',
+            'bookingurl' => 'nullable', // Changed to validate as a URL
             'businessName' => 'required',
             'youtube' => 'nullable', // Changed to validate as a URL
             'video' => 'nullable',
             'documentImage' => 'required|mimes:pdf', // Validate PDF
-            'dType' => 'nullable', // dType field
-            'dNumber' => 'nullable', // CIN field
+            'dType' => 'nullable|string|max:255', // Adjust the validation rules as needed
+            'dNumber' => 'nullable|string|max:255',
         ];
 
         foreach (['coverImage', 'logo'] as $fileField) {
@@ -450,11 +450,11 @@ class HomeController extends Controller
             // Update business properties
             $business->userId = Auth::id();
             $business->category = $request->input('category');
-            $business->placeType = implode(',', $request->input('placeType'));
+             $business->placeType = $request->has('placeType') ? implode(',', $request->input('placeType')) : 'null';
+            $business->highlight = $request->has('highlight') ? implode(',', $request->input('highlight')) : 'null';
             $business->description = $request->input('description');
             $business->price = $request->input('price');
-            $business->duration = $request->input('duration');
-            $business->highlight = implode(',', $request->input('highlight'));
+            // $business->duration = $request->input('duration');
             $business->city = $request->input('city');
             $business->placeAddress = $request->input('placeAddress');
             $business->ownerName = $request->input('ownerName');
