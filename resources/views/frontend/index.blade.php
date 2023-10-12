@@ -165,7 +165,6 @@
                                                 class="img-fluid rounded-3">
                                         </a>
 
-
                                     </div>
                                 @else
                                     <div class="position-relative modal-body bg-image overlay p-0">
@@ -188,8 +187,6 @@
                     </div>
                 </div>
                 {{-- @endif --}}
-
-
 
                 {{-- Featured Slider container --}}
                 <div class="slider-container">
@@ -339,10 +336,21 @@
                                         <div class="place-item layout-02 place-hover">
                                             <div class="place-inner">
                                                 <div class="place-thumb hover-img">
+                                                    <?php 
+                                                if(Auth::user()){
+                                                ?>
                                                     <a class="entry-thumb"
                                                         href="{{ URL::to('listingDetail/' . $value->id . '/' . $value->category) }}">
                                                         <img src="{{ URL::to('uploads/' . $value->coverImage) }}" />
                                                     </a>
+
+                                                    <?php 
+                                                        }else{
+                                                        ?>
+                                                    <a class="entry-thumb  open-login" href="">
+                                                        <img src="{{ URL::to('uploads/' . $value->coverImage) }}" />
+                                                    </a>
+                                                    <?php }?>
 
                                                     <?php 
                                                 if(Auth::user()){
@@ -400,8 +408,19 @@
                                                 </div>
                                                 <div class="entry-detail">
                                                     <h3 class="place-title">
+                                                        <?php 
+                                                if(Auth::user()){
+                                                ?>
+
                                                         <a
                                                             href="{{ URL::to('listingDetail/' . $value->id . '/' . $value->category) }}">{{ $value->businessName }}</a>
+                                                        <?php 
+                                                    }else{
+                                                    ?>
+                                                        <a
+                                                            href="" class="open-login ">{{ $value->businessName }}</a>
+                                                        <?php }?>
+
                                                     </h3>
 
                                                     <div class="entry-head">
