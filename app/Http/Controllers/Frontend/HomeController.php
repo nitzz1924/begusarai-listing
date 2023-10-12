@@ -437,8 +437,8 @@ class HomeController extends Controller
             // Update business properties
             $business->userId = Auth::id();
             $business->category = $request->input('category');
-            $business->placeType = $request->has('placeType') ? implode(',', $request->input('placeType')) : 'null';
-            $business->highlight = $request->has('highlight') ? implode(',', $request->input('highlight')) : 'null';
+            $business->placeType = $request->has('placeType') ? implode(',', $request->input('placeType')) : ' ';
+            $business->highlight = $request->has('highlight') ? implode(',', $request->input('highlight')) : ' ';
             $business->description = $request->input('description');
             $business->price = $request->input('price');
 
@@ -628,8 +628,8 @@ class HomeController extends Controller
         try {
             $business->userId = Auth::id();
             $business->category = $request->input('category');
-            $business->placeType = $request->has('placeType') ? implode(',', $request->input('placeType')) : 'null';
-            $business->highlight = $request->has('highlight') ? implode(',', $request->input('highlight')) : 'null';
+            $business->placeType = $request->has('placeType') ? implode(',', $request->input('placeType')) : ' ';
+            $business->highlight = $request->has('highlight') ? implode(',', $request->input('highlight')) : ' ';
 
             $business->description = $request->input('description');
             $business->price = $request->input('price');
