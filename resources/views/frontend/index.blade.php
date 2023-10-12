@@ -4,19 +4,18 @@
 
     <body>
 
-<script>
-    @if(isset($successMessage))
-        alert('{{ $successMessage }}');
-    @endif
+        <script>
+            @if (isset($successMessage))
+                alert('{{ $successMessage }}');
+            @endif
 
-    @if(isset($errorMessage))
-        alert('{{ $errorMessage }}');
-    @endif
-</script>
-
+            @if (isset($errorMessage))
+                alert('{{ $errorMessage }}');
+            @endif
+        </script>
 
         <script>
-            @if(isset($successMessage))
+            @if (isset($successMessage))
                 alert('{{ $successMessage }}');
             @endif
         </script>
@@ -45,12 +44,15 @@
                     </div>
                     <div class="container pt-5 pb-3 d-grid align-content-center">
                         <div class="site-banner__content">
-                            <h1 class="site-banner__title">Business Listing</h1>
+                            <h1 class="site-banner__title">Find</h1>
+                            <h1 class="site-banner__subtitle mb-2" style='color:white'>Everything in Begusarai</h1>
+
                             <p class="desktop-view">
                                 <i>{{ count($Mastercity) }}</i> cities, <i>{{ count($submaster) }}</i> categories,
                                 <i>{{ $businessesCount }}</i> listings.
                             </p>
-                            <form action="#" class="site-banner__search layout-02">
+                            <form action="#" class="site-banner__search layout-02"
+                                style="border: 1.5px solid #23d3d3;">
                                 @csrf
                                 <div class="field-input">
                                     <label for="s">Find</label>
@@ -133,12 +135,12 @@
                                                 aria-label="Close"></button>
                                         </div>
                                         <a href="{{ $popup->value }}">
-                                            
-                                                <iframe class="embed-responsive-item " id="iframe-content"
-                                                    src="https://www.youtube.com/embed/{{ $popup->value }}?autoplay=1&mute=1&controls=0"
-                                                    frameborder="0" >
-                                                </iframe>
-                                            
+
+                                            <iframe class="embed-responsive-item " id="iframe-content"
+                                                src="https://www.youtube.com/embed/{{ $popup->value }}?autoplay=1&mute=1&controls=0"
+                                                frameborder="0">
+                                            </iframe>
+
                                         </a>
 
                                     </div>
@@ -684,7 +686,6 @@
         });
     </script>
 
-
     {{-- Slider pause on slide --}}
     {{-- <script>
     $(document).ready(function() {
@@ -712,6 +713,5 @@
         resumeAutoSlide();
     });
 </script> --}}
-
 
 @endsection

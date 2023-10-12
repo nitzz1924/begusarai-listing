@@ -31,14 +31,15 @@
                                         <h2 class="steps">Step 1 - 4</h2>
                                     </div>
                                 </div>
-                                <label class="fieldlabels">Business Name (Owner and Authorized person):<span
+                                <label class="fieldlabels">Business Name:<span
                                         style='color:red'>*</span></label>
                                 <input type="text" placeholder="What is the name of the place" name="businessName"
                                     id="businessName" class="form-control">
                                 @error('businessName')
                                     <div class="has-error mt-2">{{ $message }}</div>
                                 @enderror
-                                <label class="fieldlabels">Owner Name:<span style='color:red'>*</span></label>
+                      
+                                <label class="fieldlabels">Owner Name/Authorized person:<span style='color:red'>*</span></label>
                                 <input type="text" placeholder="Owner Name" id="ownerName" name="ownerName"
                                     class="form-control ">
                                 @error('ownerName')
@@ -58,12 +59,12 @@
                                     <div class="has-error mt-2">{{ $message }}</div>
                                 @enderror
 
-                                <label class="fieldlabels">Business Timing: <span style='color:red'>*</span></label>
+                                <!-- <label class="fieldlabels">Business Timing: <span style='color:red'>*</span></label>
                                 <input type="text" placeholder="Duration" id="duration" name="duration"
                                     class="form-control">
                                 @error('duration')
                                     <div class="has-error mt-2">{{ $message }}</div>
-                                @enderror
+                                @enderror -->
 
                                 <label class="fieldlabels">Category: <span style='color:red'>*</span></label>
                                 <select data-placeholder="Select Category" class=" form-control mb-3" id="category"

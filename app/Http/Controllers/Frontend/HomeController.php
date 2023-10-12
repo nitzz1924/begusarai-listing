@@ -610,7 +610,7 @@ class HomeController extends Controller
             'placeType' => 'nullable',
             'description' => 'required',
             'price' => 'nullable',
-            'duration' => 'required',
+            // 'duration' => 'nullable',
             'highlight' => 'nullable',
             'city' => 'required',
             'placeAddress' => 'required',
@@ -660,7 +660,7 @@ class HomeController extends Controller
 
             $business->description = $request->input('description');
             $business->price = $request->input('price');
-            $business->duration = $request->input('duration');
+            // $business->duration = $request->input('duration');
            
             $business->city = $request->input('city');
             $business->placeAddress = $request->input('placeAddress');
