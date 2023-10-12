@@ -319,7 +319,7 @@ body.modal-open .modal-backdrop {
         0,
         0,
         0,
-        0.6
+        0.8
     ); /* You can adjust the background color and opacity */
     z-index: 10; /* Place it behind other elements */
     display: none; /* Initially hidden */
@@ -957,7 +957,6 @@ video {
     width: 1536px;
     height: 864px;
     object-position: center;
-
 }
 
 #iframe-content {

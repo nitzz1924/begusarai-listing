@@ -51,8 +51,7 @@
                                 <i>{{ count($Mastercity) }}</i> cities, <i>{{ count($submaster) }}</i> categories,
                                 <i>{{ $businessesCount }}</i> listings.
                             </p>
-                            <form action="#" class="site-banner__search layout-02"
-                                style="border: 1.5px solid #23d3d3;">
+                            <form action="#" class="site-banner__search layout-02" style="border: 1.5px solid #23d3d3;">
                                 @csrf
                                 <div class="field-input">
                                     <label for="s">Find</label>
@@ -104,53 +103,53 @@
 
                 <!-- .site-banner -->
                 {{-- popup modal box --}}
-                @if (!Auth::check())
-                    <div class="custom-overlay"></div>
-                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                        aria-hidden="true">
-                        <div class="modal-dialog modal-lg modal-dialog-scrollable modal-dialog-centered">
-                            <!-- Check if the $popup object exists and has a valid 'logo' property -->
-                            @if ($popup && $popup->logo)
-                                <div class="modal-content">
-                                    <div
-                                        class="position-relative modal-body border-warning rounded border bg-image overlay p-0">
-                                        <div class="position-absolute top-0 end-0 btn-close-bg px-1 pb-1 m-1">
-                                            <button type="button" class="btn-closee  " data-bs-dismiss="modal"
-                                                aria-label="Close"></button>
-                                        </div>
-                                        <a href="{{ $popup->value }}">
-                                            <img src="{{ URL::to('uploads/' . $popup->logo) }}" alt="Promo banner"
-                                                class="img-fluid rounded-3">
-                                        </a>
-
+                {{-- @if (!Auth::check()) --}}
+                <div class="custom-overlay"></div>
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-lg modal-dialog-scrollable modal-dialog-centered">
+                        <!-- Check if the $popup object exists and has a valid 'logo' property -->
+                        @if ($popup && $popup->logo)
+                            <div class="modal-content">
+                                <div
+                                    class="position-relative modal-body border-warning rounded border bg-image overlay p-0">
+                                    <div class="position-absolute top-0 end-0 btn-close-bg px-1 pb-1 m-1">
+                                        <button type="button" class="btn-closee  " data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
                                     </div>
+                                    <a href="{{ $popup->value }}">
+                                        <img src="{{ URL::to('uploads/' . $popup->logo) }}" alt="Promo banner"
+                                            class="img-fluid rounded-3">
+                                    </a>
+
                                 </div>
-                            @else
-                                <!-- ($content_type->video) -->
-                                <div class="modal-content">
-                                    <div
-                                        class="position-relative modal-body border-warning rounded border bg-image overlay p-0">
-                                        <div class="position-absolute top-0 end-0 btn-close-bg px-1 pb-1 m-1">
-                                            <button type="button" class="btn-closee " data-bs-dismiss="modal"
-                                                aria-label="Close"></button>
-                                        </div>
-                                        <a href="{{ $popup->value }}">
-
-                                            <iframe class="embed-responsive-item " id="iframe-content"
-                                                src="https://www.youtube.com/embed/{{ $popup->value }}?autoplay=1&mute=1&controls=0"
-                                                frameborder="0">
-                                            </iframe>
-
-                                        </a>
-
+                            </div>
+                        @else
+                            <!-- ($content_type->video) -->
+                            <div class="modal-content">
+                                <div
+                                    class="position-relative modal-body border-warning rounded border bg-image overlay p-0">
+                                    <div class="position-absolute top-0 end-0 btn-close-bg px-1 pb-1 m-1">
+                                        <button type="button" class="btn-closee " data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
                                     </div>
-                                </div>
-                            @endif
+                                    <a href="{{ $popup->value }}">
 
-                        </div>
+                                        <iframe class="embed-responsive-item " id="iframe-content"
+                                            src="https://www.youtube.com/embed/{{ $popup->value }}?autoplay=1&mute=1&controls=0"
+                                            frameborder="0">
+                                        </iframe>
+
+                                    </a>
+
+                                </div>
+                            </div>
+                        @endif
+
                     </div>
+                </div>
 
-                @endif
+                {{-- @endif --}}
 
                 {{-- Featured Slider container --}}
                 <div class="slider-container">

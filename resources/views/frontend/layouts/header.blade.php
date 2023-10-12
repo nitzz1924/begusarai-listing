@@ -68,7 +68,7 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                             <div class="popup__button popup__box">
                                 <ul class="menu-arrow">
                                     <h3 class="mb-3">Navigation</h3>
-                                    
+
                                     <li>
                                         <a title="Blogs" href="/blogs">Blog</a>
                                     </li>
@@ -81,7 +81,7 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                                     <li>
                                         <a title="AboutUs" href="/aboutUs">About Us</a>
                                     </li>
-                                    
+
                                 </ul>
                             </div><!-- .popup__menu -->
 
@@ -117,7 +117,7 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                                         <li>
                                             <a title="Career" href="/faq">FAQs</a>
                                         </li>
-                                        
+
                                     </ul>
                             </div><!-- .popup__menu -->
                             <div class="popup__button popup__box">
@@ -146,8 +146,9 @@ $Mastercity = Master::orderBy('created_at', 'asc')
 
                             <div class="footer__bottom " style="margin-bottom: 20px">
                                 <p class="footer__bottom__copyright">
-                                    2023 &copy; <a title="RUDRAASHWI TECHNOLOGY" href="https://rudraashwitechnology.com/"><span
-                                            style="color: #38d6d6">RUDRAASHWI TECHNOLOGY</span></a>. All
+                                    2023 &copy; <a title="RUDRAASHWI TECHNOLOGY"
+                                        href="https://rudraashwitechnology.com/"><span style="color: #38d6d6">RUDRAASHWI
+                                            TECHNOLOGY</span></a>. All
                                     rights reserved.
                                 </p>
                             </div>
@@ -167,8 +168,8 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                     <!-- .site__brand -->
                 </div>
                 <!-- .site -->
-<!-- <div>
-    <a title="Login" href="/addDuration" >addDuration</a> 
+                <!-- <div>
+    <a title="Login" href="/addDuration" >addDuration</a>
 </div> -->
                 {{-- login dropdown --}}
                 <div class="ms-auto login-container mobile-view">
@@ -625,9 +626,10 @@ $Mastercity = Master::orderBy('created_at', 'asc')
             const data = {
                 type: 'text',
                 message: 'Dear customer, use this One Time Password  ' +
-                    randomOTP + " to sign up to your Inbegusarai account. This OTP will be valid for the next 5 mins.",
+                    randomOTP +
+                    " to sign up to your Inbegusarai account. This OTP will be valid for the next 5 mins.",
 
-                    // $message: 'Dear customer, use this One Time Password ' + $randomOTP + ' to login to your Inbegusarai account. This OTP will be valid for the next 5 mins.',
+                // $message: 'Dear customer, use this One Time Password ' + $randomOTP + ' to login to your Inbegusarai account. This OTP will be valid for the next 5 mins.',
 
 
                 instance_id: '651EB1464D20F',
