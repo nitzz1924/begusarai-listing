@@ -123,10 +123,6 @@ Route::get('/ownerListing', [HomeController::class, 'ownerListing'])->name('owne
  
 Route::delete('/business/delete/{id}', 'Frontend\HomeController@delete')->name('delete');
 
-
-Route::get('/addPlace', [HomeController::class, 'addPlace'])->name('addPlace');
-Route::post('/addPlace/savePlace', [HomeController::class, 'savePlace'])->name('savePlace');
-
 Route::get('/editPlace/{id}', [HomeController::class, 'editPlace'])->name('editPlace');
 
 Route::put('/editPlace/updatePlace/{id}', [HomeController::class, 'updatePlace'])->name('updatePlace');
@@ -147,7 +143,7 @@ Route::post('/career', [HomeController::class, 'careerStore'])->name('careerStor
 //bookmark route
 Route::post('/bookmark/{businessId}', [HomeController::class, 'toggleBookmark'])->name('bookmark.toggle');
 Route::get('/searchFilter/{category?}/{city?}/{highlight?}', [HomeController::class, 'searchFilter'])->name('searchFilter');
- 
+
 
 // Define a POST route for submitting the form data
 Route::post('/showFilterData', [HomeController::class, 'showFilterData'])->name('showFilterData');
@@ -180,3 +176,15 @@ Route::get('/faq', [HomeController::class, 'Faq'])->name('Faq');
 // routes/web.php
 Route::get('/resetPassword', [HomeController::class, 'showResetPasswordForm'])->name('resetPassword');
 Route::post('/resetPassword', [HomeController::class, 'submitResetPasswordForm']);
+
+
+
+
+Route::get('/addPlace', [HomeController::class, 'addPlace'])->name('addPlace');
+Route::post('/addPlace/savePlace', [HomeController::class, 'savePlace'])->name('savePlace');
+
+
+
+
+Route::get('/addDuration', [HomeController::class, 'addDuration'])->name('addDuration');
+Route::post('/addDuration/saveDuration', [HomeController::class, 'saveDuration'])->name('saveDuration');

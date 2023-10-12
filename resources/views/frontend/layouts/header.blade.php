@@ -167,7 +167,9 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                     <!-- .site__brand -->
                 </div>
                 <!-- .site -->
-
+<!-- <div>
+    <a title="Login" href="/addDuration" >addDuration</a> 
+</div> -->
                 {{-- login dropdown --}}
                 <div class="ms-auto login-container mobile-view">
                     @guest

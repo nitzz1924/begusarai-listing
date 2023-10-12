@@ -23,6 +23,8 @@ use App\Models\Review;
 use App\Models\Package;
 use App\Models\BuyPlan;
 use App\Models\Popup_ads;
+use App\Models\Duration;
+
 
 use Carbon\Carbon;
 use Razorpay\Api\Api;
@@ -400,7 +402,7 @@ class HomeController extends Controller
     {
         // Validation rules (same as savePlace)
         $rules = [
-           'category' => 'required',
+            'category' => 'required',
             'placeType' => 'nullable',
             'description' => 'required',
             'price' => 'nullable',
@@ -450,7 +452,7 @@ class HomeController extends Controller
             // Update business properties
             $business->userId = Auth::id();
             $business->category = $request->input('category');
-             $business->placeType = $request->has('placeType') ? implode(',', $request->input('placeType')) : 'null';
+            $business->placeType = $request->has('placeType') ? implode(',', $request->input('placeType')) : 'null';
             $business->highlight = $request->has('highlight') ? implode(',', $request->input('highlight')) : 'null';
             $business->description = $request->input('description');
             $business->price = $request->input('price');
@@ -603,7 +605,8 @@ class HomeController extends Controller
 
     public function savePlace(Request $request)
     {
-        // dd($request->all());
+      
+      
         //  dd($request->input('cin'));
         $rules = [
             'category' => 'required',
@@ -661,7 +664,7 @@ class HomeController extends Controller
             $business->description = $request->input('description');
             $business->price = $request->input('price');
             // $business->duration = $request->input('duration');
-           
+
             $business->city = $request->input('city');
             $business->placeAddress = $request->input('placeAddress');
             $business->ownerName = $request->input('ownerName');
@@ -674,13 +677,13 @@ class HomeController extends Controller
             $business->facebook = $request->input('facebook');
             $business->instagram = $request->input('instagram');
             $business->twitter = $request->input('twitter');
-            $business->bookingType = $request->input('bookingType') ;
+            $business->bookingType = $request->input('bookingType');
             $business->bookingurl = $request->input('bookingurl');
             $business->businessName = $request->input('businessName');
             $business->youtube = $request->input('youtube');
             $business->video = $request->input('video');
-            $business->dType = $request->input('dType')  ;
-            $business->dNumber = $request->input('dNumber') ;
+            $business->dType = $request->input('dType');
+            $business->dNumber = $request->input('dNumber');
 
             $allowedExtensions = ['jpg', 'jpeg', 'png', 'svg', 'webp', 'pdf'];
             $destinationPath = public_path('uploads');
@@ -1562,5 +1565,31 @@ class HomeController extends Controller
         // return redirect()
         //     ->route('index')
         //     ->with('success', 'Password reset successfully.');
+    }
+
+    public function addDuration(Request $request)
+    {
+      return view('frontend.addDuration');
+    }
+     public function saveDuration(Request $request)
+    {
+        $validatedData = $request->validate([
+            'day' => 'required|string|max:10',
+            'opening_time' => 'required|date_format:H:i',
+            'end_time' => 'required|date_format:H:i',
+        ]);
+
+        // Create a new Duration instance and fill it with the validated data
+        $duration = new Duration();
+        $duration->day = $validatedData['day'];
+        $duration->opening_time = $validatedData['opening_time'];
+        $duration->end_time = $validatedData['end_time'];
+
+        // Save the record to the database
+        $duration->save();
+
+        return redirect()
+            ->route('addDuration')
+            ->with('success', 'Duration added successfully');
     }
 }
