@@ -63,10 +63,10 @@
                                 @enderror
 
                                 <!-- <label class="fieldlabels">Duration: *</label>
-                                                                                                                                                                                                                                                                        <input type="text" placeholder="Duration" id="duration" name="duration"
-                                                                                                                                                                                                                                                                            value="{{ isset($business) ? $business->duration : old('duration') }}"
-                                                                                                                                                                                                                                                                            class="form-control">
-                                                                                                                                                                                                                                                                        @error('duration')
+                                                                                                                                                                                                                                                                            <input type="text" placeholder="Duration" id="duration" name="duration"
+                                                                                                                                                                                                                                                                                value="{{ isset($business) ? $business->duration : old('duration') }}"
+                                                                                                                                                                                                                                                                                class="form-control">
+                                                                                                                                                                                                                                                                            @error('duration')
         <div class="has-error mt-2">{{ $message }}</div>
     @enderror -->
 

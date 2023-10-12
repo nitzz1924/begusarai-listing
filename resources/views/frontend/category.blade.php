@@ -22,8 +22,9 @@
     </style>
     <main id="main" class="site-main">
 
-        <div class="page-title page-title--small align-left"style="background-image: url({{ asset('assets/images/bg-checkout.png') }});
-         background-size: auto; background-position: bottom right;">
+        <div
+            class="page-title page-title--small align-left"style="background-image: url({{ asset('assets/images/bg-checkout.png') }});
+                                                                                                                                                     background-size: auto; background-position: bottom right;">
 
             <div class="container">
                 <div class="page-title__content">
@@ -34,9 +35,6 @@
 
         <div class="site-content">
             <div class="pricing-area">
-
-                @foreach ($packages as $package)
-                @endforeach
 
                 <div class="container">
                     <h2 class="title align-center">Choose the right category to rank in.</h2>
@@ -49,7 +47,7 @@
                                         <h3>{{ $value->title }}</h3>
                                         <p>{{ $value->noOfPlace }} For Rank</p>
                                         <div class="price"><span class="currency">₹</span>{{ $value->price }}<span
-                                                class="time">{{ $package->duration == '12' ? '1 Year' : "$package->duration Month" }}</span>
+                                                class="time">{{ $value->duration == 12 ? '1 Year' : $value->duration . ' Month' }}</span>
                                         </div>
 
                                         @php
