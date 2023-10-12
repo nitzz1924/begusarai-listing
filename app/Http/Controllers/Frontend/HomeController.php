@@ -603,29 +603,29 @@ class HomeController extends Controller
 
     public function savePlace(Request $request)
     {
-        //  dd($request->all());
+        // dd($request->all());
         //  dd($request->input('cin'));
         $rules = [
             'category' => 'required',
-            'placeType' => 'required',
+            'placeType' => 'nullable',
             'description' => 'required',
             'price' => 'nullable',
             'duration' => 'required',
-            'highlight' => 'required',
+            'highlight' => 'nullable',
             'city' => 'required',
             'placeAddress' => 'required',
             'ownerName' => 'required',
-            'email' => 'required',
+            'email' => 'nullable',
             'phoneNumber1' => 'required',
-            'phoneNumber2' => 'required',
+            'phoneNumber2' => 'nullable',
             'whatsappNo' => 'nullable',
-            'websiteUrl' => 'required|url', // Changed to validate as a URL
+            'websiteUrl' => 'nullable', // Changed to validate as a URL
             'additionalFields' => 'nullable', // Changed to validate as a URL
             'facebook' => 'nullable', // Changed to validate as a URL
             'instagram' => 'nullable', // Changed to validate as a URL
             'twitter' => 'nullable',
-            'bookingType' => 'required',
-            'bookingurl' => 'required|url', // Changed to validate as a URL
+            'bookingType' => 'nullable',
+            'bookingurl' => 'nullable', // Changed to validate as a URL
             'businessName' => 'required',
             'youtube' => 'nullable', // Changed to validate as a URL
             'video' => 'nullable',
@@ -655,11 +655,13 @@ class HomeController extends Controller
         try {
             $business->userId = Auth::id();
             $business->category = $request->input('category');
-            $business->placeType = implode(',', $request->input('placeType'));
+            $business->placeType = $request->has('placeType') ? implode(',', $request->input('placeType')) : 'null';
+            $business->highlight = $request->has('highlight') ? implode(',', $request->input('highlight')) : 'null';
+
             $business->description = $request->input('description');
             $business->price = $request->input('price');
             $business->duration = $request->input('duration');
-            $business->highlight = implode(',', $request->input('highlight'));
+           
             $business->city = $request->input('city');
             $business->placeAddress = $request->input('placeAddress');
             $business->ownerName = $request->input('ownerName');
@@ -672,13 +674,13 @@ class HomeController extends Controller
             $business->facebook = $request->input('facebook');
             $business->instagram = $request->input('instagram');
             $business->twitter = $request->input('twitter');
-            $business->bookingType = $request->input('bookingType');
+            $business->bookingType = $request->input('bookingType') ;
             $business->bookingurl = $request->input('bookingurl');
             $business->businessName = $request->input('businessName');
             $business->youtube = $request->input('youtube');
             $business->video = $request->input('video');
-            $business->dType = $request->input('dType');
-            $business->dNumber = $request->input('dNumber');
+            $business->dType = $request->input('dType')  ;
+            $business->dNumber = $request->input('dNumber') ;
 
             $allowedExtensions = ['jpg', 'jpeg', 'png', 'svg', 'webp', 'pdf'];
             $destinationPath = public_path('uploads');
@@ -716,6 +718,7 @@ class HomeController extends Controller
                 $business->galleryImage = json_encode($filePaths);
             }
             // Save the model to the database
+            // dd($business);
             $business->save();
 
             // Redirect back with a success message or do something else
@@ -1095,7 +1098,7 @@ class HomeController extends Controller
     {
         $lead = Lead::orderBy('created_at', 'asc')
             ->where('business_id', '=', $id)
-            ->where('status', '=', '1')
+            // ->where('status', '=', '1')
             ->get();
 
         return view('frontend.ownerLeads', compact('lead'));

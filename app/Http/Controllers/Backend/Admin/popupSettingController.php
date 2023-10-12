@@ -30,7 +30,7 @@ class popupSettingController extends Controller
         $model = Popup_ads::orderBy('created_at', 'desc')
             //    ->where('type', '=', 'ads_featured')
             ->get();
-        return view('backend.admin.popupsetting.index', compact('model'));
+        return view('backend.admin.popupSetting.index', compact('model'));
     }
 
     /**
@@ -43,7 +43,7 @@ class popupSettingController extends Controller
         $model = Master::orderby('created_at', 'desc')
             ->where('type', '=', 'ads_featured')
             ->get();
-        return view('backend.admin.popupsetting.create', compact('model'));
+        return view('backend.admin.popupSetting.create', compact('model'));
     }
 
     /**
@@ -129,7 +129,7 @@ class popupSettingController extends Controller
     public function edit($id)
     {
         $submaster = Popup_ads::where('id', $id)->first();
-        return view('backend.admin.popupsetting.edit', compact('submaster'));
+        return view('backend.admin.popupSetting.edit', compact('submaster'));
     }
 
     /**
@@ -150,7 +150,7 @@ class popupSettingController extends Controller
             $submaster->title = $request->title;
             $submaster->value = $request->value;
             $submaster->save();
-            return redirect()->route('admin.popupsetting.index');
+            return redirect()->route('admin.popupSetting.index');
         } catch (\Exception $e) {
             session()->flash('sticky_error', $e->getMessage());
             print_r($e->getMessage());

@@ -31,43 +31,44 @@
                                         <h2 class="steps">Step 1 - 4</h2>
                                     </div>
                                 </div>
-                                <label class="fieldlabels">Business Name: *</label>
+                                <label class="fieldlabels">Business Name (Owner and Authorized person):<span
+                                        style='color:red'>*</span></label>
                                 <input type="text" placeholder="What is the name of the place" name="businessName"
                                     id="businessName" class="form-control">
                                 @error('businessName')
                                     <div class="has-error mt-2">{{ $message }}</div>
                                 @enderror
-                                <label class="fieldlabels">Owner Name:</label>
+                                <label class="fieldlabels">Owner Name:<span style='color:red'>*</span></label>
                                 <input type="text" placeholder="Owner Name" id="ownerName" name="ownerName"
                                     class="form-control ">
                                 @error('ownerName')
                                     <div class="has-error mt-2">{{ $message }}</div>
                                 @enderror
-                                <label class="fieldlabels">Price: *</label>
+                                <label class="fieldlabels">Price: </label>
                                 <input type="text" placeholder="Price" name="price" id="price"
                                     class="form-control">
                                 @error('price')
                                     <div class="has-error mt-2">{{ $message }}</div>
                                 @enderror
 
-                                <label class="fieldlabels">Business Description: *</label>
+                                <label class="fieldlabels">Business Description: <span style='color:red'>*</span></label>
                                 <textarea placeholder="Description" id="description" name="description" rows="4" cols="65"
                                     class="form-control"></textarea>
                                 @error('description')
                                     <div class="has-error mt-2">{{ $message }}</div>
                                 @enderror
 
-                                <label class="fieldlabels">Duration: *</label>
+                                <label class="fieldlabels">Business Timing: <span style='color:red'>*</span></label>
                                 <input type="text" placeholder="Duration" id="duration" name="duration"
                                     class="form-control">
                                 @error('duration')
                                     <div class="has-error mt-2">{{ $message }}</div>
                                 @enderror
 
-                                <label class="fieldlabels">Category: *</label>
+                                <label class="fieldlabels">Category: <span style='color:red'>*</span></label>
                                 <select data-placeholder="Select Category" class=" form-control mb-3" id="category"
                                     name="category">
-                                    <option selected disable>Select</option>
+                                    <option value="" selected disable>Select</option>
                                     @foreach ($category as $value)
                                         <option>{{ $value->title }}</option>
                                     @endforeach
@@ -76,10 +77,10 @@
                                     <div class="has-error mt-2">{{ $message }}</div>
                                 @enderror
 
-                                <label class="fieldlabels">Place Type: *</label>
+                                <label class="fieldlabels">Place Type: </label>
                                 <select data-placeholder="Select Place Type" multiple class="chosen-select form-control"
                                     id="placeType" name="placeType[]">
-                                    <option disabled>Select</option>
+                                    <option value="" selected disabled>Select</option>
                                     @foreach ($Placetype as $value)
                                         <option>{{ $value->title }}</option>
                                     @endforeach
@@ -88,10 +89,10 @@
                                     <div class="has-error mt-2">{{ $message }}</div>
                                 @enderror
 
-                                <label class="fieldlabels mt-4">Select an option: </label>
+                                <label class="fieldlabels mt-4">Business id Number: </label>
                                 <select data-placeholder="Select Place option" id="dType" name="dType"
                                     class=" form-control" onchange="showTextBox()" class="mb-3">
-                                    <option value="none">Select an option</option>
+                                    <option value="" selected disabled>Select an option (optional)</option>
                                     <option value="gst">GST (optional)</option>
                                     <option value="cin">CIN (optional)</option>
                                 </select>
@@ -118,7 +119,7 @@
                                 </div>
 
                                 <div class="mb-3">
-                                    <label class="fieldlabels">City:</label>
+                                    <label class="fieldlabels">City:<span style='color:red'>*</span></label>
                                     <select data-placeholder="Select City" class=" form-control" id="city"
                                         name="city">
                                         <option value="" selected disabled>Select City</option>
@@ -204,7 +205,7 @@
                                     </div>
                                 </div>
 
-                                <label class="fieldlabels">Business Address:</label>
+                                <label class="fieldlabels">Business Address:<span style='color:red'>*</span></label>
                                 <input type="text" placeholder="Full Address" id="placeAddress" name="placeAddress"
                                     class="form-control">
                                 @error('placeAddress')
@@ -216,15 +217,14 @@
                                 @error('email')
                                     <div class="has-error mt-2">{{ $message }}</div>
                                 @enderror
-                                <label class="fieldlabels">Email:</label>
 
-                                <label class="fieldlabels">Business Number :</label>
+                                <label class="fieldlabels">Business Number:<span style='color:red'>*</span></label>
                                 <input type="tel" placeholder="Your phone number" name="phoneNumber1"
                                     id="phoneNumber1" class="form-control ">
                                 @error('phoneNumber1')
                                     <div class="has-error mt-2">{{ $message }}</div>
                                 @enderror
-                                <label class="fieldlabels">Phone number 2 (optional) :</label>
+                                <label class="fieldlabels">Phone number 2:</label>
                                 <input type="tel" placeholder="Your phone number" name="phoneNumber2"
                                     id="phoneNumber2">
                                 @error('phoneNumber2')
@@ -245,7 +245,7 @@
                                 <input type="url" placeholder="Your video URL" name="video" id="video">
 
                                 <div class="">
-                                    <label class="fieldlabels">Cover image:</label>
+                                    <label class="fieldlabels">Cover image:<span style='color:red'>*</span></label>
                                     <input type="file" name="coverImage" id="coverImage" class="upload-file"
                                         data-max-size="1024">
                                     <img class="img_preview" src="images/no-image.png" alt="" />
@@ -257,7 +257,8 @@
                                 </div>
 
                                 <div class="">
-                                    <label class="fieldlabels">Business Photos (Drag & Drop Images Here):</label>
+                                    <label class="fieldlabels">Business Photos (Drag & Drop Images Here Max 5 ):<span
+                                            style='color:red'>*</span></label>
                                     <input type="file" name="galleryImage[]" id="galleryImage" class="upload-file"
                                         data-max-size="1024" multiple accept="image/*">
                                     <input type="hidden" name="galleryImageCount" id="galleryImageCount"
@@ -273,7 +274,7 @@
                                 <div class="">
                                     <!-- <label class="fieldlabels">Author:</label> -->
                                     <label for="fieldlabels" class=" fieldlabels">
-                                        Author:</label>
+                                        Author:<span style='color:red'>*</span></label>
                                     <input type="file" name="logo" id="logo" class="upload-file"
                                         data-max-size="1024">
                                     <img class="img_preview" src="images/no-image.png" alt="" />
@@ -287,18 +288,19 @@
                                 <div class="">
                                     <!-- <label class="fieldlabels"></label> -->
                                     <label for="fieldlabels" class=" fieldlabels">
-                                        Business Ownership Proof (Upload PDF):</label>
+                                        Business Ownership Proof (Upload PDF):<span style='color:red'>*</span></label>
+                                        <label for="fieldlabels" class=" " style='color:red'>
+
+                                        No business docs? Use Aadhar card for ID verification. </label>
+
                                     <input type="file" name="documentImage" id="documentImage" class="upload-file"
                                         accept=".pdf">
                                     <img class="img_preview" src="images/no-image.png" alt="" id="pdfPreview">
-                                    <!-- <i class="la la-cloud-upload-alt"></i> -->
-
+                                    
                                     @error('documentImage')
-                                        <div class="has-error mt-2">{{ $message }}</div>
+                                        <div class="has-error mt-2">The all image field are required.</div>
                                     @enderror
                                 </div>
-
-
 
                             </div>
 
