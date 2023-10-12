@@ -104,10 +104,10 @@
                 <!-- .site-banner -->
                 {{-- popup modal box --}}
                 {{-- @if (!Auth::check()) --}}
-                <div class="custom-overlay"></div>
-                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+
+                {{-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                     aria-hidden="true">
-                    <div class="modal-dialog modal-lg modal-dialog-scrollable modal-dialog-centered">
+                    <div class="modal-dialog modal-fullscreen-sm-down">
                         <!-- Check if the $popup object exists and has a valid 'logo' property -->
                         @if ($popup && $popup->logo)
                             <div class="modal-content">
@@ -147,9 +147,49 @@
                         @endif
 
                     </div>
-                </div>
+                </div> --}}
+                <div class="modal fade" id="exampleModalFullscreen" tabindex="-1"
+                    aria-labelledby="exampleModalFullscreenLabel" style="display: none;" aria-hidden="true">
+                    <div class="modal-dialog modal-fullscreen">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body d-grid align-items-center">
+                                @if ($popup && $popup->logo)
+                                    <div class="position-relative bg-image overlay p-0">
 
+                                        <a href="{{ $popup->value }}">
+                                            <img src="{{ URL::to('uploads/' . $popup->logo) }}" alt="Promo banner"
+                                                class="img-fluid rounded-3">
+                                        </a>
+
+
+                                    </div>
+                                @else
+                                    <div class="position-relative modal-body bg-image overlay p-0">
+
+                                        <a href="{{ $popup->value }}">
+
+                                            <iframe class="embed-responsive-item " id="iframe-content"
+                                                src="https://www.youtube.com/embed/{{ $popup->value }}?autoplay=1&mute=1&controls=0"
+                                                frameborder="0">
+                                            </iframe>
+
+                                        </a>
+
+                                    </div>
+                                @endif
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
                 {{-- @endif --}}
+
+
 
                 {{-- Featured Slider container --}}
                 <div class="slider-container">
@@ -680,7 +720,7 @@
     <script>
         // Use JavaScript to trigger the modal on page load
         window.addEventListener('DOMContentLoaded', function() {
-            var myModal = new bootstrap.Modal(document.getElementById('exampleModal'));
+            var myModal = new bootstrap.Modal(document.getElementById('exampleModalFullscreen'));
             myModal.show();
         });
     </script>

@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     @include('frontend.layouts.head')
 </head>
+
 <body>
+    {{-- <div class="custom-overlay"></div> --}}
     <div id="wrapper">
 
         @include('frontend.layouts.header')
-        <div class="container-fluid g-0">    
+        <div class="container-fluid g-0">
             <section>
                 @yield('content')
             </section>
@@ -18,4 +21,5 @@
         </div>
     </div>
 </body>
+
 </html>
