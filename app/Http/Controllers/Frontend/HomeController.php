@@ -400,20 +400,16 @@ class HomeController extends Controller
     }
     public function updatePlace(Request $request, $id)
     {
+      
         // Validation rules (same as savePlace)
         $rules = [
             'category' => 'required',
-
             'description' => 'required',
-
             'city' => 'required',
             'placeAddress' => 'required',
             'ownerName' => 'required',
-
             'phoneNumber1' => 'required',
             'businessName' => 'required',
-            'coverImage' => 'required|image|mimes:jpg,jpeg,png,svg,webp',
-            'documentImage' => 'required|mimes:pdf', // Validate PDF
         ];
 
         foreach (['coverImage', 'logo'] as $fileField) {
