@@ -96,7 +96,8 @@
                     </div><!-- .member-wrap-top -->
 
                     <div class="upgrade-box">
-                        <h1>Choose a plan to submit your place!</h1>
+                        <span><b>Step 1.</b></span><h1>Add your business listing!</h1>
+                        <span><b>Step 2.</b><h1></span>Choose a plan to submit your place!</h1>
                         <p>Pay as you go service, cancel anytime.</p>
                         <a href="/packages/0" class="btn" title="Upgrade now">Upgrade now</a>
                         <img src="{{ asset('assets/frontend-assets/images/assets/img-people.svg') }}" alt="Upgrade now">

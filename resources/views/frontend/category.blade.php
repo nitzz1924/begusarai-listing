@@ -23,7 +23,7 @@
     <main id="main" class="site-main">
 
         <div class="page-title page-title--small align-left"style="background-image: url({{ asset('assets/images/bg-checkout.png') }});
-     background-size: auto; background-position: bottom right;">
+         background-size: auto; background-position: bottom right;">
 
             <div class="container">
                 <div class="page-title__content">
@@ -73,8 +73,12 @@
                                             }
                                         @endphp
 
-                                        @if ($id == 0)
-                                            <a href="/ownerListing" class="btn" title="Get Started">Get Started</a>
+                                        @if ($businessId == 0)
+                                            @if (auth()->user() != null)
+                                                <a href="/ownerListing" class="btn" title="Get Started">Get Started</a>
+                                            @else
+                                                <a href="#" class="btn open-login" title="Get Started">Login</a>
+                                            @endif
                                         @else
                                             @if ($isActive)
                                                 @if (auth()->user() != null)

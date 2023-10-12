@@ -1026,10 +1026,10 @@
     }
     .upgrade-box img {
         /* display: none !important; */
-        top: 134px;
+        top: 207px;
         right: 4px;
         bottom: 0px;
-        height: 45%;
+        height: 35%;
     }
     .upgrade-box {
         padding: 30px;
