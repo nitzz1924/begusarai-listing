@@ -96,8 +96,11 @@
                     </div><!-- .member-wrap-top -->
 
                     <div class="upgrade-box">
-                        <span><b>Step 1.</b></span><h1>Add your business listing!</h1>
-                        <span><b>Step 2.</b><h1></span>Choose a plan to submit your place!</h1>
+                        <span><b>Step 1.</b></span>
+                        <h1>Add your business listing!</h1>
+                        <span><b>Step 2.</b>
+                            <h1>
+                        </span>Choose a plan to submit your place!</h1>
                         <p>Pay as you go service, cancel anytime.</p>
                         <a href="/packages/0" class="btn" title="Upgrade now">Upgrade now</a>
                         <img src="{{ asset('assets/frontend-assets/images/assets/img-people.svg') }}" alt="Upgrade now">
@@ -110,7 +113,7 @@
                                 <div class="item blue">
                                     <h3>Active Places</h3>
                                     <span class="number">
-                                        {{ $ActivePlaces}}
+                                        {{ $ActivePlaces }}
 
                                     </span>
                                     <span class="line"></span>
@@ -120,10 +123,10 @@
                                 <div class="item green">
                                     <h3>Total Leads</h3>
                                     <span class="number">
-                                        
-                                    
-                                    {{ $countLead }}</span>
-                                                                        
+
+
+                                        {{ $countLead }}</span>
+
                                     <span class="line"></span>
                                 </div>
                             </div>
@@ -131,14 +134,14 @@
                                 <div class="item yellow">
                                     <h3>Total Reviews</h3>
                                     <span class="number">
-                                       {{$countReview}}
+                                        {{ $countReview }}
                                     </span>
                                     <span class="line"></span>
                                 </div>
                             </div>
 
 
-                            
+
                             <div class="col-lg-3 col-6">
                                 <div class="item purple">
                                     <h3>Total Views</h3>
@@ -152,11 +155,12 @@
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="ob-item">
-                                   
+
                                     <div class="ob-head">
                                         <h3>Recent Leads</h3>
                                         @if (count($businesses) > 0)
-                                            <a href="{{ route('ownerLeads', ['id' => $businesses[0]->id]) }}" class="view-all" title="View All">View all</a>
+                                            <a href="{{ route('ownerLeads', ['id' => $businesses[0]->id]) }}"
+                                                class="view-all" title="View All">View all</a>
                                         @endif
                                     </div>
 
@@ -186,15 +190,16 @@
                                 <div class="ob-item">
                                     <div class="ob-head">
                                         <h3>New Reviews</h3>
-                                    
+
                                         @if (count($businesses) > 0)
-                                            <a href="{{ route('ownerListing', ['id' => $businesses[0]->id]) }}" class="view-all" title="View All">View all</a>
+                                            <a href="{{ route('ownerListing', ['id' => $businesses[0]->id]) }}"
+                                                class="view-all" title="View All">View all</a>
                                         @endif
                                     </div>
                                     <div class="ob-content">
                                         <ul class="place__comments">
 
-                                            @foreach($countReviewlist as $review)
+                                            @foreach ($countReviewlist as $review)
                                                 <li>
                                                     <div class="place__author">
                                                         <div class="place__author__avatar">
@@ -226,7 +231,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="place__comments__content">
-                                                        <p>{{ $review['content']}}
+                                                        <p>{{ $review['content'] }}
                                                         </p>
                                                     </div>
 
@@ -236,7 +241,7 @@
                                     </div>
                                 </div>
                             </div>
-                     
+
                         </div>
                     </div><!-- .owner-box -->
                 </div><!-- .member-wrap -->

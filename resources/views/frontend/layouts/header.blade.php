@@ -15,8 +15,10 @@ $popup = Popup_ads::orderBy('created_at', 'asc')
     style="display: none;" aria-hidden="true">
     <div class="modal-dialog modal-fullscreen">
         <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="btn-danger white" data-bs-dismiss="modal" aria-label="Close">X</button>
+            <div class="modal-header" style="border-bottom: 0px">
+                <h5 class="modal-title"></h5>
+                <button type="button" class="btn-danger white px-2 border rounded-3" data-bs-dismiss="modal"
+                    aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
             </div>
             <div class="modal-body d-grid align-items-center">
                 @if ($popup && $popup->logo)
