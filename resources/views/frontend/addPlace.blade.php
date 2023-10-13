@@ -220,7 +220,7 @@
                                 @enderror
 
                                 <label class="fieldlabels">Business Number:<span style='color:red'>*</span></label>
-                                <input type="tel" placeholder="Your phone number" name="phoneNumber1"
+                                <input type="number" placeholder="Your phone number" name="phoneNumber1"
                                     id="phoneNumber1" class="form-control ">
                                 @error('phoneNumber1')
                                     <div class="has-error mt-2">{{ $message }}</div>
@@ -299,7 +299,7 @@
                                     <img class="img_preview" src="images/no-image.png" alt="" id="pdfPreview">
                                     
                                     @error('documentImage')
-                                        <div class="has-error mt-2">The all image field are required.</div>
+                                        <div class="has-error mt-2">{{ $message }}</div>
                                     @enderror
                                 </div>
 

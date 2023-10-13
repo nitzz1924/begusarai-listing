@@ -25,7 +25,6 @@ use App\Models\BuyPlan;
 use App\Models\Popup_ads;
 use App\Models\Duration;
 
-
 use Carbon\Carbon;
 use Razorpay\Api\Api;
 use DB;
@@ -400,16 +399,15 @@ class HomeController extends Controller
     }
     public function updatePlace(Request $request, $id)
     {
-      
         // Validation rules (same as savePlace)
         $rules = [
+            'businessName' => 'required|string|max:255|unique:businesslist',
+            'ownerName' => 'required|string|max:255|regex:/^[A-Za-z\s]+$/',
+            'description' => 'required|string|min:50|max:500',
             'category' => 'required',
-            'description' => 'required',
             'city' => 'required',
             'placeAddress' => 'required',
-            'ownerName' => 'required',
-            'phoneNumber1' => 'required',
-            'businessName' => 'required',
+            'phoneNumber1' => 'required|regex:/^\d{10}$/',
         ];
 
         foreach (['coverImage', 'logo'] as $fileField) {
@@ -586,23 +584,22 @@ class HomeController extends Controller
 
     public function savePlace(Request $request)
     {
-      
-      
         //  dd($request->input('cin'));
         $rules = [
+            'businessName' => 'required|string|max:255|unique:businesslist',
+            'ownerName' => 'required|string|max:255|regex:/^[A-Za-z\s]+$/',
+            'description' => 'required|string|min:50|max:500',
             'category' => 'required',
-
-            'description' => 'required',
-
             'city' => 'required',
             'placeAddress' => 'required',
-            'ownerName' => 'required',
-
-            'phoneNumber1' => 'required',
-            'businessName' => 'required',
-            'coverImage' => 'required|image|mimes:jpg,jpeg,png,svg,webp',
-            'documentImage' => 'required|mimes:pdf', // Validate PDF
+            'phoneNumber1' => 'required|regex:/^\d{10}$/',
+            'coverImage' => 'required|image|mimes:jpg,jpeg,png,svg,webp|max:2048', // Adjust the 'max' value as needed (in kilobytes) 2mb
+            'documentImage' => 'required|mimes:pdf|max:2048', // Adjust the 'max' value as needed (in kilobytes) 2 mb
         ];
+
+
+
+
 
         foreach (['coverImage', 'logo'] as $fileField) {
             if ($request->hasFile($fileField)) {
@@ -1537,15 +1534,15 @@ class HomeController extends Controller
         //     ->with('success', 'Password reset successfully.');
     }
 
-    public function addDuration( $bid)
+    public function addDuration($bid)
     {
         // dd($id);
-        $duration = Duration::orderBy('created_at', 'asc')->where('businessId', $bid)->get();
+        $duration = Duration::orderBy('created_at', 'asc')
+            ->where('businessId', $bid)
+            ->get();
 
         return view('frontend.addDuration', compact('duration', 'bid'));
     }
-
- 
 
     public function saveDuration(Request $request)
     {
