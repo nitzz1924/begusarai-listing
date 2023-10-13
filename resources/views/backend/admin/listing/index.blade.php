@@ -26,15 +26,15 @@
                                 <tr>
                                     <th>#</th>
 
-                                    <th class="text-nowrap">Name</th>
-                                    <th class="text-nowrap">Number</th>
-                                    <th class="text-nowrap">Email</th>
-                                    <th class="text-nowrap">Address</th>
+                                    <th class="text-nowrap text-center">Name</th>
+                                    <th class="text-nowrap text-center">Number</th>
+                                    <th class="text-nowrap text-center">Email</th>
+                                    <th class="text-nowrap text-center">Address</th>
 
-                                    <th>Action </th>
-                                    <th>Status </th>
-                                    <th>Featured</th>
-                                    <th>Lead Status </th>
+                                    <th class="text-nowrap text-center">Status </th>
+                                    <th class="text-nowrap text-center">Featured</th>
+                                    <th class="text-nowrap text-center">Lead Status </th>
+                                    <th class="text-nowrap text-center">Action </th>
 
                                 </tr>
                             </thead>
@@ -47,18 +47,6 @@
                                         <td class="fw-bold text-nowrap ">{{ $business->phoneNumber1 }}</td>
                                         <td class="fw-bold">{{ $business->email }}</td>
                                         <td class="fw-bold">{{ $business->placeAddress }}</td>
-                                        <td class="d-flex">
-                                            <form action="{{ route('admin.listing.destroy', $business->id) }}"
-                                                method="POST" id="deleteForm">
-                                                @method('DELETE')
-                                                @csrf
-                                                <button type="submit" class="btn btn-danger ms-3 text-nowrap"
-                                                    onclick="confirmDelete(this)">
-
-                                                    <i class="metismenu-icon bi bi-trash3"></i>
-                                                </button>
-                                            </form>
-                                        </td>
                                         <td class="fw-bold">
                                             @if ($business->status == 1)
                                                 <a class="fw-bold  btn btn-success"
@@ -71,8 +59,6 @@
                                             @endif
                                             <br />
                                         </td>
-
-
 
                                         <td class="fw-bold">
                                             @if ($business->home_featured == 11)
@@ -97,6 +83,29 @@
                                                 Unknown
                                             @endif
                                             <br />
+                                        </td>
+
+                                        <td class="d-flex">
+                                            <a href="{{ route('listingDetail', ['id' => $business->id, 'category' => $business->category]) }}"
+                                                type="button" class="btn fw-bold btn-primary d-flex"
+                                                data-mdb-ripple-color="dark">
+                                                <i class="metismenu-icon bi bi-eye pe-1"></i>  
+                                            </a>
+
+                                            <a href="{{ route('editPlace', ['id' => $business->id]) }}" type="button"
+                                                class="btn ms-3 btn fw-bold btn-success d-flex" data-mdb-ripple-color="dark">
+                                                <i class="metismenu-icon bi bi-gear-wide-connected pe-1"></i>  
+                                            </a>
+
+                                            <form action="{{ route('admin.listing.destroy', $business->id) }}"
+                                                method="POST" id="deleteForm">
+                                                @method('DELETE')
+                                                @csrf
+                                                <button type="submit" class="btn btn-danger ms-3 text-nowrap"
+                                                    onclick="confirmDelete(this)">
+                                                    <i class="metismenu-icon bi bi-trash3"></i>  
+                                                </button>
+                                            </form>
                                         </td>
 
                                     </tr>
