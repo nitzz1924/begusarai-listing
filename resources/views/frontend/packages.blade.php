@@ -49,14 +49,15 @@
                                         </div>
                                         <h3>{{ $package->type }}</h3>
                                         <div class="price-container">
-                                            <div class="price">
+                                            <div class="price" style='margin-left: 59px;'>
                                                 <span class="currency">₹</span>{{ $package->price }}
                                             </div>
-                                            <div class="strike">₹{{ $package->off }}</div>
+                                            <div class="">18% GST</div>
+                                            
                                         </div>
                                         @if ($businessId == 0)
                                             @if (auth()->user() != null)
-                                                <a href="/ownerListing" class="btn" title="Get Started">Get Started</a>
+                                                <a href="/ownerListing" class="btn" title="Get Started">{{ ($package->price*18/100)+ $package->price}}/-</a>
                                             @else
                                                 <a href="#" class="btn open-login" title="Get Started">Login</a>
                                             @endif
@@ -70,6 +71,7 @@
                                             <li>{{ $package->featuredListings }} Featured Listings </li>
                                             {{-- <li>{{ $package->featuredType }}</li> --}}
                                             <li>{{ ucwords(str_replace('_', ' ', $package->featuredType)) }}</li>
+                                             
                                         </ul>
                                     </div>
                                 </div>
