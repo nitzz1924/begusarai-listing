@@ -2,7 +2,6 @@
 @section('title', 'Search Filter')
 @section('content')
 
-
     <main id="main" class="site-main">
         <div class="archive-city">
             <div class="col-left">
@@ -100,9 +99,10 @@
                         </div>
                         <div class="offcanvas-body">
                             <div class="">
-                                <form action="{{ route('showFilterData') }}" method="POST" class="filterForm" id="filterForm">
+                                <form action="{{ route('showFilterData') }}" method="POST" class="filterForm"
+                                    id="filterForm">
                                     @csrf
-                                    
+
                                     <div class="filter-box">
                                         <h3>Cities</h3>
                                         <div class="filter-list">
@@ -110,15 +110,16 @@
                                                 <ul>
                                                     @foreach ($submaster as $value)
                                                         <li>
-                                                            <input type="checkbox" class="mx-1 mb-2" id="city" name=" city[]"
-                                                                value="{{ $value->title }}">
+                                                            <input type="checkbox" class="mx-1 mb-2" id="city"
+                                                                name=" city[]" value="{{ $value->title }}">
                                                             {{ $value->title }}
                                                         </li>
                                                     @endforeach
                                                 </ul>
-            
+
                                             </div>
-                                            <a href="#" class="more open-more" data-close="Close" data-more="More">More</a>
+                                            <a href="#" class="more open-more" data-close="Close"
+                                                data-more="More">More</a>
                                         </div>
                                     </div>
                                     <div class="filter-box">
@@ -128,37 +129,39 @@
                                                 <ul>
                                                     @foreach ($submasterCategory as $value)
                                                         <li>
-                                                            <input type="checkbox" class="mx-1 mb-2" id="category" name="category[]"
-                                                                value=" {{ $value->title }}">
+                                                            <input type="checkbox" class="mx-1 mb-2" id="category"
+                                                                name="category[]" value=" {{ $value->title }}">
                                                             {{ $value->title }}
-            
+
                                                         </li>
                                                     @endforeach
                                                 </ul>
                                             </div>
-                                            <a href="#" class="more open-more" data-close="Close" data-more="More">More</a>
+                                            <a href="#" class="more open-more" data-close="Close"
+                                                data-more="More">More</a>
                                         </div>
                                     </div>
                                     <div class="filter-box">
                                         <h3>HighLights</h3>
                                         <div class="filter-list">
                                             <div class="filter-group">
-            
+
                                                 <ul>
                                                     @foreach ($submasterHighlight as $value)
                                                         <li class="">
-                                                            <input type="checkbox" class="mx-1 mb-2" id="highlight" name="highlight[]"
-                                                                value="{{ $value->title }}">
-            
+                                                            <input type="checkbox" class="mx-1 mb-2" id="highlight"
+                                                                name="highlight[]" value="{{ $value->title }}">
+
                                                             {{ $value->title }}
                                                         </li>
                                                     @endforeach
                                                 </ul>
                                             </div>
-                                            <a href="#" class="more open-more" data-close="Close" data-more="More">More</a>
+                                            <a href="#" class="more open-more" data-close="Close"
+                                                data-more="More">More</a>
                                         </div>
                                     </div>
-            
+
                                     <div class="form-button align-center">
                                         <button type="submit" class="btn">Apply</button>
                                     </div>
@@ -218,31 +221,24 @@
 
                                 @foreach ($filteredData as $value)
                                     @if ($value->status == 1)
-                                        {{-- <div class="card bg-light">
-                                            <a class="card-img-top" href="{{ URL::to('listingDetail/' . $value->id . '/' . $value->category) }}">
-                                                <img src="{{ URL::to('uploads/' . $value->coverImage) }}"
-                                                alt="place_img">
-                                            </a>
-                                            <div class="card-body">
-                                                <div class="text-section">
-                                                    <h5 class="card-title">Card title</h5>
-                                                    <p class="card-text">Some quick example text to build on the card's
-                                                        content.</p>
-                                                </div>
-                                                <div class="cta-section">
-                                                    <div>$129.00</div>
-                                                    <a href="#" class="btn btn-light">Buy Now</a>
-                                                </div>
-                                            </div>
-                                        </div> --}}
-
                                         <div class="place-item layout-02 place-hover" data-maps_name="mattone_restaurant">
                                             <div class="place-inner">
                                                 <div class="place-thumb hover-img">
+                                                    <?php 
+                                                if(Auth::user()){
+                                                ?>
                                                     <a class="entry-thumb"
-                                                        href="{{ URL::to('listingDetail/' . $value->id . '/' . $value->category) }}">
+                                                        href="{{ URL::to('listingDetail/' . $value->category . '/' . Str::slug($value->businessName) . '-' . $value->id) }}">
                                                         <img src="{{ URL::to('uploads/' . $value->coverImage) }}" />
                                                     </a>
+
+                                                    <?php 
+                                                        }else{
+                                                        ?>
+                                                    <a class="entry-thumb  open-login" href="">
+                                                        <img src="{{ URL::to('uploads/' . $value->coverImage) }}" />
+                                                    </a>
+                                                    <?php }?>
                                                     <?php 
                                                 if(Auth::user()){
                                                 ?>
@@ -287,8 +283,7 @@
                                                             @endforeach --}}
 
                                                     <a href="#" class="author" title="Author">
-                                                        <img
-                                                            src="{{ URL::to('uploads/' . $value->logo) }}"alt="Author" />
+                                                        <img src="{{ URL::to('uploads/' . $value->logo) }}"alt="Author" />
                                                     </a>
                                                     <!-- <div class="feature">Featured</div> -->
                                                 </div>
@@ -296,14 +291,23 @@
                                                     <div class="entry-head">
 
                                                         <h3 class="place-title">
+                                                            <?php 
+                                                            if(Auth::user()){
+                                                            ?>
+
                                                             <a
-                                                                href="{{ URL::to('listingDetail/' . $value->id . '/' . $value->category) }}">{{ $value->businessName }}</a>
+                                                                href="{{ URL::to('listingDetail/' . $value->category . '/' . Str::slug($value->businessName) . '-' . $value->id) }}">{{ $value->businessName }}</a>
+                                                            <?php 
+                                                            }else{
+                                                            ?>
+                                                            <a href=""
+                                                                class="open-login ">{{ $value->businessName }}</a>
+                                                            <?php }?>
                                                         </h3>
 
-                                                       
-                                                         <!-- <div class="place-type  ">
-                                                            <span>{{ $value->highlight }}</span>
-                                                        </div> -->
+                                                        <!-- <div class="place-type  ">
+                                                                    <span>{{ $value->highlight }}</span>
+                                                                </div> -->
                                                         <div class="place-type  ">
                                                             @php
                                                                 $highlights = explode(',', $value->highlight); // Split the string into an array using a delimiter
