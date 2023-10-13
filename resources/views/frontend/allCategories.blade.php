@@ -30,7 +30,7 @@
                                     <a
                                         href="{{ route('searchFilter', ['category' => $value->title, 'city' => 'all', 'highlight' => 'all']) }}">
                                         <i class="{{ $value->value }}"></i>
-                                        <span class="title">{{ $value->title }}</span>
+                                        <span class="title">{{ str_replace('-', ' ', $value->title) }}</span>
                                         <span class="place">{{ $categoryCount[$value->title] }}</span>
                                     </a>
                                 </div>

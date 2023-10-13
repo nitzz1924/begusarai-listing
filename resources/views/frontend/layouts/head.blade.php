@@ -3,7 +3,7 @@
 <title> @yield('title') | InBegusarai </title>
 <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no user-scalable=no" name="viewport">
 <meta name="Description" lang="en" content="ADD SITE DESCRIPTION">
-<meta name="author" content="ADD AUTHOR INFORMATION">
+<meta name="author" content="InBegusarai">
 <meta name="robots" content="index, follow">
 <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -26,10 +26,9 @@
 <meta charset="utf-8" />
 <meta name="viewport"
     content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-<title>Golo | Business Listing</title>
+ 
 <meta name="robots" content="index, follow" />
-<meta name="keywords" content="" />
-<meta name="description" content="" />
+
 <!-- favicons -->
 {{-- <link rel="shortcut icon" href="images/favicon.ico" /> --}}
 <!-- Style CSS -->
