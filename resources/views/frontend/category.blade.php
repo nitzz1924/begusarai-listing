@@ -49,7 +49,7 @@
                                         <h3>{{ $value->title }}</h3>
                                         <p>{{ $value->noOfPlace }} For Rank</p>
                                         <div class="price"><span class="currency">₹</span>{{ $value->price }}<span
-                                                class="time">{{ $package->duration == '12' ? '1 Year' : "$package->duration Month" }}</span>
+                                                class="time">{{ $value->duration == '12' ? '1 Year' : "$value->duration Month" }}</span>
                                         </div>
 
                                         @php

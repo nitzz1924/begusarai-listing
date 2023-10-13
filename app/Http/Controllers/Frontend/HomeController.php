@@ -1071,7 +1071,7 @@ class HomeController extends Controller
     {
         $lead = Lead::orderBy('created_at', 'asc')
             ->where('business_id', '=', $id)
-            // ->where('status', '=', '1')
+            ->where('status', '=', '1')
             ->get();
 
         return view('frontend.ownerLeads', compact('lead'));

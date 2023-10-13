@@ -7,10 +7,8 @@
                 <div class="page-title-icon">
                     <i class="bi bi-tags icon-gradient bg-mean-fruit"> </i>
                 </div>
-                <div>All Lead</div>
+                <div>All Listing</div>
                 <div class="d-inline-block ml-3 pb-3">
-
-
 
                 </div>
             </div>
@@ -73,31 +71,33 @@
                                             @endif
                                             <br />
                                         </td>
+
+
+
                                         <td class="fw-bold">
                                             @if ($business->home_featured == 11)
-                                                <a class="fw-bold  btn btn-success"
-                                                    href="{{ URL::to('admin/listing/homefeturedActive', $business->id) }} ">Active</a>
+                                                <a class="fw-bold  btn  btn-danger"
+                                                    href="{{ URL::to('admin/listing/homefeturedActive', $business->id) }} ">Inactive</a>
                                             @elseif ($business->home_featured < 11)
-                                                <a class="fw-bold btn btn-danger"
-                                                    href="{{ URL::to('admin/listing/homefeturedinactive', $business->id) }} ">Inactive</a>
+                                                <a class="fw-bold btn btn-success"
+                                                    href="{{ URL::to('admin/listing/homefeturedinactive', $business->id) }} ">Active</a>
                                             @else
                                                 Unknown
                                             @endif
                                             <br />
                                         </td>
                                         <td class="fw-bold">
-                                            @if ($business->leadStatus == 1)
-                                                <a class="fw-bold  btn btn-success"
-                                                    href="{{ URL::to('admin/listing/leadActive', $business->id) }} ">Active</a>
-                                            @elseif ($business->leadStatus == 0)
-                                                <a class="fw-bold btn btn-danger"
+                                            @if ($business->leadStatus == 0)
+                                                <a class="fw-bold  btn btn-danger"
                                                     href="{{ URL::to('admin/listing/leadInactive', $business->id) }} ">Inactive</a>
+                                            @elseif ($business->leadStatus == 1)
+                                                <a class="fw-bold btn  btn-success"
+                                                    href="{{ URL::to('admin/listing/leadActive', $business->id) }} ">Active</a>
                                             @else
                                                 Unknown
                                             @endif
                                             <br />
                                         </td>
-
 
                                     </tr>
                                 @endforeach
@@ -118,7 +118,6 @@
             }
         }
     </style>
-
 
     <script>
         function confirmDelete(button) {
