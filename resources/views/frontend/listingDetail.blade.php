@@ -247,10 +247,12 @@ use App\Models\User_Login;
                             <h3 class="place__title--additional">
                                 Video
                             </h3>
-
+                            <?php $urlfile = explode('=',$businessesDetail->video );
+                            $urlvideo = end($urlfile); ?> 
+                            
                             <div class="embed-responsive embed-responsive-16by9">
                                 <iframe class="embed-responsive-item " id="iframe-content"
-                                    src="{{ $businessesDetail->video }}" frameborder="0">
+                                    src="https://www.youtube.com/embed/{{ $urlvideo }}?autoplay=0&mute=1&controls=0" frameborder="0">
                                 </iframe>
 
                             </div>
