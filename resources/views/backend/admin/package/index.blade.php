@@ -49,7 +49,7 @@
                                     <th>Duration</th>
                                     <th>Duration Type</th>
                                     <th>Price</th>
-                                    <th>High Price</th>
+                                    <!-- <th>High Price</th> -->
                                     <th>Number of Places</th>
                                     <th>Featured Listings</th>
                                     <th>Featured Type</th>
@@ -64,7 +64,7 @@
                                         <td>{{ $package->duration }}</td>
                                         <td>{{ $package->durationMY == 0 ? 'Months' : 'Years' }}</td>
                                         <td>{{ $package->price }}</td>
-                                        <td>{{ $package->off }}</td>
+                                        <!-- <td>{{ $package->off }}</td> -->
                                         <td>{{ $package->noOfPlace }}</td>
                                         <td>{{ $package->featuredListings }}</td>
                                         <td>{{ $package->featuredType }}</td>

@@ -7,10 +7,8 @@
                 <div class="page-title-icon">
                     <i class="bi bi-tags icon-gradient bg-mean-fruit"> </i>
                 </div>
-                <div>All Lead</div>
+                <div>All Listing</div>
                 <div class="d-inline-block ml-3 pb-3">
-
-
 
                 </div>
             </div>
@@ -28,15 +26,15 @@
                                 <tr>
                                     <th>#</th>
 
-                                    <th class="text-nowrap">Name</th>
-                                    <th class="text-nowrap">Number</th>
-                                    <th class="text-nowrap">Email</th>
-                                    <th class="text-nowrap">Address</th>
+                                    <th class="text-nowrap text-center">Name</th>
+                                    <th class="text-nowrap text-center">Number</th>
+                                    <th class="text-nowrap text-center">Email</th>
+                                    <th class="text-nowrap text-center">Address</th>
 
-                                    <th>Action </th>
-                                    <th>Status </th>
-                                    <th>Featured</th>
-                                    <th>Lead Status </th>
+                                    <th class="text-nowrap text-center">Status </th>
+                                    <th class="text-nowrap text-center">Featured</th>
+                                    <th class="text-nowrap text-center">Lead Status </th>
+                                    <th class="text-nowrap text-center">Action </th>
 
                                 </tr>
                             </thead>
@@ -49,18 +47,6 @@
                                         <td class="fw-bold text-nowrap ">{{ $business->phoneNumber1 }}</td>
                                         <td class="fw-bold">{{ $business->email }}</td>
                                         <td class="fw-bold">{{ $business->placeAddress }}</td>
-                                        <td class="d-flex">
-                                            <form action="{{ route('admin.listing.destroy', $business->id) }}"
-                                                method="POST" id="deleteForm">
-                                                @method('DELETE')
-                                                @csrf
-                                                <button type="submit" class="btn btn-danger ms-3 text-nowrap"
-                                                    onclick="confirmDelete(this)">
-
-                                                    <i class="metismenu-icon bi bi-trash3"></i>
-                                                </button>
-                                            </form>
-                                        </td>
                                         <td class="fw-bold">
                                             @if ($business->status == 1)
                                                 <a class="fw-bold  btn btn-success"
@@ -73,31 +59,55 @@
                                             @endif
                                             <br />
                                         </td>
+
                                         <td class="fw-bold">
                                             @if ($business->home_featured == 11)
-                                                <a class="fw-bold  btn btn-success"
-                                                    href="{{ URL::to('admin/listing/homefeturedActive', $business->id) }} ">Active</a>
+                                                <a class="fw-bold  btn  btn-danger"
+                                                    href="{{ URL::to('admin/listing/homefeturedActive', $business->id) }} ">Inactive</a>
                                             @elseif ($business->home_featured < 11)
-                                                <a class="fw-bold btn btn-danger"
-                                                    href="{{ URL::to('admin/listing/homefeturedinactive', $business->id) }} ">Inactive</a>
+                                                <a class="fw-bold btn btn-success"
+                                                    href="{{ URL::to('admin/listing/homefeturedinactive', $business->id) }} ">Active</a>
                                             @else
                                                 Unknown
                                             @endif
                                             <br />
                                         </td>
                                         <td class="fw-bold">
-                                            @if ($business->leadStatus == 1)
-                                                <a class="fw-bold  btn btn-success"
-                                                    href="{{ URL::to('admin/listing/leadActive', $business->id) }} ">Active</a>
-                                            @elseif ($business->leadStatus == 0)
-                                                <a class="fw-bold btn btn-danger"
+                                            @if ($business->leadStatus == 0)
+                                                <a class="fw-bold  btn btn-danger"
                                                     href="{{ URL::to('admin/listing/leadInactive', $business->id) }} ">Inactive</a>
+                                            @elseif ($business->leadStatus == 1)
+                                                <a class="fw-bold btn  btn-success"
+                                                    href="{{ URL::to('admin/listing/leadActive', $business->id) }} ">Active</a>
                                             @else
                                                 Unknown
                                             @endif
                                             <br />
                                         </td>
 
+                                        <td class="d-flex">
+                                            <a href="{{ URL::to('listingDetail/' . $business->category . '/' . Str::slug($business->businessName) . '-' . $business->id) }}"
+                                                type="button" class="btn fw-bold btn-primary d-flex"
+                                                data-mdb-ripple-color="dark">
+                                                <i class="metismenu-icon bi bi-eye pe-1"></i>
+                                            </a>
+
+                                            <a href="{{ route('editPlace', ['id' => $business->id]) }}" type="button"
+                                                class="btn ms-3 btn fw-bold btn-success d-flex"
+                                                data-mdb-ripple-color="dark">
+                                                <i class="metismenu-icon bi bi-gear-wide-connected pe-1"></i>
+                                            </a>
+
+                                            <form action="{{ route('admin.listing.destroy', $business->id) }}"
+                                                method="POST" id="deleteForm">
+                                                @method('DELETE')
+                                                @csrf
+                                                <button type="submit" class="btn btn-danger ms-3 text-nowrap"
+                                                    onclick="confirmDelete(this)">
+                                                    <i class="metismenu-icon bi bi-trash3"></i>
+                                                </button>
+                                            </form>
+                                        </td>
 
                                     </tr>
                                 @endforeach
@@ -118,7 +128,6 @@
             }
         }
     </style>
-
 
     <script>
         function confirmDelete(button) {

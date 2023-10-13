@@ -1,6 +1,12 @@
 @extends('frontend.layouts.master')
-@section('title', 'Listing Details')
+
+@section('title', $businessesDetail->businessName)
+@section('meta_description', $businessesDetail->description)
+@section('og_image', asset('uploads/' . $businessesDetail->coverImage))
+<!-- Use Laravel's `asset` function to generate the image URL -->
+
 @section('content')
+
     <?php
     
     use App\Models\User_Login;
@@ -270,43 +276,89 @@
                                 {{-- <div class="maps">
                                     <div id="map"></div>
                                 </div> --}}
+
                                 <div class="address">
                                     <i class="la la-map-marker"></i>
-                                    {{ $businessesDetail->placeAddress }}
-                                    <a href="#" title="Direction">( {{ $businessesDetail->city }})</a>
+                                    <span> {{ $businessesDetail->placeAddress }} </span><br>
+                                    <br>
+                                    <span><a href="https://www.google.com/maps/search/?api=1&query={{ urlencode($businessesDetail->placeAddress . ' ' . $businessesDetail->city) }}"
+                                            target="_blank" title="Directions">({{ $businessesDetail->city }})</a></span>
                                 </div>
-                            </div><!-- .place__box -->
+
+                            </div>
+
+                            <div class="place__box place__box-map">
+                                <h3 class="place__title--additional">
+                                    Video
+                                </h3>
+
+                                <div class="embed-responsive embed-responsive-16by9">
+                                    <iframe class="embed-responsive-item " id="iframe-content"
+                                        src="{{ $businessesDetail->video }}" frameborder="0">
+                                    </iframe>
+
+                                </div>
+
+                            </div>
+
                             <div class="place__box">
                                 <h3>Contact Info</h3>
                                 <ul class="place__contact">
                                     <li>
                                         <i class="la la-phone"></i>
                                         <a title=""
-                                            href="">{{ $businessesDetail->phoneNumber1 }},{{ $businessesDetail->phoneNumber2 }}</a>
+                                            href="tel:{{ $businessesDetail->phoneNumber1 }}">{{ $businessesDetail->phoneNumber1 }}</a>
+
+                                        <br />
+                                        <a title=""
+                                            href="tel:{{ $businessesDetail->phoneNumber2 }}">{{ $businessesDetail->phoneNumber2 }}</a>
+
                                     </li>
-                                    <li>
-                                        <i class="la la-whatsapp"></i>
-                                        <a title="" href="">{{ $businessesDetail->whatsappNo }}</a>
-                                    </li>
-                                    <li>
-                                        <i class="la la-globe"></i>
-                                        <a title="www.abcsite.com" href="">{{ $businessesDetail->websiteUrl }}</a>
-                                    </li>
-                                    <li>
-                                        <i class="la la-facebook-f"></i>
-                                        <a title="fb.com/abc"
-                                            href="fb.com/abc.html">{{ $businessesDetail->facebook }}</a>
-                                    </li>
-                                    <li>
-                                        <i class="la la-instagram"></i>
-                                        <a title="instagram.com/abc"
-                                            href="instagram.com/abc.html">{{ $businessesDetail->instagram }}</a>
-                                    </li>
-                                    <li>
-                                        <i class="la la-twitter"></i>
-                                        <a title="instagram.com/abc"
-                                            href="instagram.com/abc.html">{{ $businessesDetail->twitter }}</a>
-                                    </li>
+                                    <ul>
+                                        @if ($businessesDetail->whatsappNo)
+                                            <li>
+                                                <i class="la la-whatsapp"></i>
+                                                <a title=""
+                                                    href="https://wa.me/{{ $businessesDetail->whatsappNo }}">{{ $businessesDetail->whatsappNo }}</a>
+                                            </li>
+                                        @endif
+
+                                        @if ($businessesDetail->websiteUrl)
+                                            <li>
+                                                <i class="la la-globe"></i>
+                                                <a title="Website" href="{{ $businessesDetail->websiteUrl }}"
+                                                    target="_blank">{{ $businessesDetail->websiteUrl }}</a>
+                                            </li>
+                                        @endif
+
+                                        @if ($businessesDetail->facebook)
+                                            <li>
+                                                <i class="la la-facebook-f"></i>
+                                                <a title="Facebook" href="{{ $businessesDetail->facebook }}"
+                                                    target="_blank">{{ $businessesDetail->facebook }}</a>
+
+                                            </li>
+                                        @endif
+
+                                        @if ($businessesDetail->instagram)
+                                            <li>
+                                                <i class="la la-instagram"></i>
+                                                <a title="Instagram" href="{{ $businessesDetail->instagram }}"
+                                                    target="_blank">{{ $businessesDetail->instagram }}</a>
+
+                                            </li>
+                                        @endif
+
+                                        @if ($businessesDetail->twitter)
+                                            <li>
+                                                <i class="la la-twitter"></i>
+                                                <a title="Twitter" href="{{ $businessesDetail->twitter }}"
+                                                    target="_blank">{{ $businessesDetail->twitter }}</a>
+
+                                            </li>
+                                        @endif
+                                    </ul>
+
                                 </ul>
                             </div><!-- .place__box -->
 
@@ -321,9 +373,9 @@
                                                 <td class="day">{{ $value->day }}</td>
                                                 <td class="time">
                                                     {{ \Carbon\Carbon::parse($value->opening_time)->format('h:i A') }}
-                                                    - 
+                                                    -
                                                     {{ \Carbon\Carbon::parse($value->end_time)->format('h:i A') }}
-                                            
+
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -532,7 +584,7 @@
                                         <div class="place-inner">
                                             <div class="place-thumb hover-img">
                                                 <a class="entry-thumb"
-                                                    href="{{ URL::to('listingDetail/' . $value->id . '/' . $value->category) }}">
+                                                    href="{{ URL::to('listingDetail/' . $value->category . '/' . Str::slug($value->businessName) . '-' . $value->id) }}">
 
                                                     <img src="{{ URL::to('uploads/' . $value->coverImage) }}" />
 
@@ -592,14 +644,12 @@
                                                     <div class="place-type">
                                                         <span>{{ $value->highlight }}</span>
                                                     </div>
-                                                    <!-- <div class="place-city">
-                                                                                <a href="#">Paris</a>
-                                                                            </div> -->
+
                                                 </div>
                                                 <h3 class="place-title">
 
                                                     <a
-                                                        href="{{ URL::to('listingDetail/' . $value->id . '/' . $value->category) }}">{{ $value->businessName }}</a>
+                                                        href="{{ URL::to('listingDetail/' . $value->category . '/' . Str::slug($value->businessName) . '-' . $value->id) }}">{{ $value->businessName }}</a>
                                                 </h3>
                                                 <div class="open-now">
                                                     <i class="las la-door-open"></i>Open now

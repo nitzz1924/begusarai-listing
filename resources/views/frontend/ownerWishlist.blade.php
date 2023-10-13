@@ -31,10 +31,11 @@
                                 <div class="place-item layout-02 place-hover">
                                     <div class="place-inner">
                                         <div class="place-thumb hover-img">
-                                            <a class="entry-thumb"
-                                                href="{{ URL::to('listingDetail/' . $value->id . '/' . $value->category) }}">
-                                                <img src="{{ URL::to('uploads/' . $value->coverImage) }}" />
-                                            </a>
+                                             <a class="entry-thumb"
+                                                        href="{{ URL::to('listingDetail/' . $value->category . '/' . Str::slug($value->businessName).'-'.$value->id ) }}">
+                                                        <img src="{{ URL::to('uploads/' . $value->coverImage) }}" />
+                                                    </a>
+
                                             <?php 
                                                 if(Auth::user()){
                                                 ?>
@@ -88,7 +89,7 @@
                                         <div class="entry-detail">
                                             
                                             <h3 class="place-title">
-                                                <a href="{{ URL::to('listingDetail/' . $value->id . '/' . $value->category) }}">{{ $value->businessName }}</a>
+                                                <a href="{{ URL::to('listingDetail/' . $value->category . '/' . Str::slug($value->businessName).'-'.$value->id ) }}">{{ $value->businessName }}</a>
                                             </h3>
 
                                             <div class="entry-head">

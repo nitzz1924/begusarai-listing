@@ -220,7 +220,7 @@
                                 @enderror
 
                                 <label class="fieldlabels">Business Number:<span style='color:red'>*</span></label>
-                                <input type="tel" placeholder="Your phone number" name="phoneNumber1"
+                                <input type="number" placeholder="Your phone number" name="phoneNumber1"
                                     id="phoneNumber1" class="form-control ">
                                 @error('phoneNumber1')
                                     <div class="has-error mt-2">{{ $message }}</div>
@@ -242,8 +242,8 @@
                                 @error('bookingurl')
                                     <div class="has-error mt-2">{{ $message }}</div>
                                 @enderror
-                                <label class="fieldlabels">Business Video (Youtube Link) :</label>
-                                <input type="url" placeholder="Your video URL" name="video" id="video">
+                                <label class="fieldlabels">Business Video (Youtube Link <b style='color:black'>iframe</b>) :</label>
+                                <input type="url" placeholder="https://www.youtube.com/embed/Lr2Xur5I-NU?,,...." name="video" id="video">
 
                                 <div class="">
                                     <label class="fieldlabels">Cover image:<span style='color:red'>*</span></label>
@@ -299,7 +299,7 @@
                                     <img class="img_preview" src="images/no-image.png" alt="" id="pdfPreview">
                                     
                                     @error('documentImage')
-                                        <div class="has-error mt-2">The all image field are required.</div>
+                                        <div class="has-error mt-2">{{ $message }}</div>
                                     @enderror
                                 </div>
 

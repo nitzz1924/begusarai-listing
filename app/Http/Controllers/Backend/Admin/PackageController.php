@@ -27,8 +27,8 @@ class PackageController extends Controller
  
 public function index()
 {
-    $master = Master::orderBy('created_at', 'asc')->where('type','=','Master')->get();
-    $packages = Package::all();
+    $master = Master::orderBy('created_at', 'desc')->where('type','=','Master')->get();
+    $packages = Package:: orderBy('created_at', 'desc')->get();
     return view('backend.admin.package.index', compact('packages' , 'master'));
 }
 
@@ -39,7 +39,7 @@ public function index()
      */
     public function create()
     {
-        $master = Master::orderBy('created_at', 'asc')->where('type','=','Package')->get();
+        $master = Master::orderBy('created_at', 'desc')->where('type','=','Package')->get();
         return view('backend.admin.package.create' , compact('master'));
     }
 
@@ -60,7 +60,7 @@ public function index()
 
             'durationMY' => 'required ', 
             'price' => 'required|numeric ', 
-            'off' => 'required|numeric ', 
+            // 'off' => 'required|numeric ', 
             'noOfPlace' => 'required|numeric ', 
             'featuredListings' => 'required|numeric', 
             'featuredType' => 'required', 
@@ -74,7 +74,7 @@ public function index()
             $package->duration = $request->input('duration');
             $package->durationMY = $request->input('durationMY'); 
             $package->price = $request->input('price');
-            $package->off = $request->input('off');
+            // $package->off = $request->input('off');
             $package->noOfPlace = $request->input('noOfPlace');
             $package->featuredListings = $request->input('featuredListings');
             $package->featuredType = $request->input('featuredType');
@@ -124,6 +124,7 @@ public function index()
         return view('backend.admin.package.edit', compact('package','master'));
     }
 
+    
     /**
      * Update the specified resource in storage.
      *
@@ -139,7 +140,7 @@ public function index()
             'duration' => 'required',
             'durationMY' => 'required',
             'price' => 'required|numeric',
-            'off' => 'required|numeric',
+            // 'off' => 'required|numeric',
             'noOfPlace' => 'required|numeric',
             'featuredListings' => 'required|numeric',
             'featuredType' => 'required',
@@ -153,7 +154,7 @@ public function index()
             $package->duration = $request->input('duration');
             $package->durationMY = $request->input('durationMY'); 
             $package->price = $request->input('price');
-            $package->off = $request->input('off');
+            // $package->off = $request->input('off');
             $package->noOfPlace = $request->input('noOfPlace');
             $package->featuredListings = $request->input('featuredListings');
             $package->featuredType = $request->input('featuredType');

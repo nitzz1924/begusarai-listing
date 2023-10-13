@@ -23,7 +23,7 @@
     <main id="main" class="site-main">
 
         <div class="page-title page-title--small align-left"style="background-image: url({{ asset('assets/images/bg-checkout.png') }});
-         background-size: auto; background-position: bottom right;">
+                 background-size: auto; background-position: bottom right;">
 
             <div class="container">
                 <div class="page-title__content">
@@ -44,12 +44,19 @@
                         <div class="row">
 
                             @foreach ($ranking as $value)
-                                <div class="col-lg-4 mt-3">
+                                <div class="col-lg-4 mt-3 ">
                                     <div class="pricing-item">
                                         <h3>{{ $value->title }}</h3>
                                         <p>{{ $value->noOfPlace }} For Rank</p>
-                                        <div class="price"><span class="currency">₹</span>{{ $value->price }}<span
-                                                class="time">{{ $package->duration == '12' ? '1 Year' : "$package->duration Month" }}</span>
+                                        <div class='price-container'>
+                                            <div class="price" style='margin-left: 59px;'>
+                                                <span class="currency">₹</span>
+                                                {{ $value->price }}
+                                                <span class="time">
+                                                    {{ $value->duration == '12' ? '1 Year' : "$value->duration Month" }}
+                                                </span>
+                                            </div>
+                                              <div class="">18% GST</div>
                                         </div>
 
                                         @php
@@ -75,7 +82,7 @@
 
                                         @if ($businessId == 0)
                                             @if (auth()->user() != null)
-                                                <a href="/ownerListing" class="btn" title="Get Started">Get Started</a>
+                                                <a href="/ownerListing" class="btn" title="Get Started">{{ ($value->price*18/100)+ $value->price}}/-</a>
                                             @else
                                                 <a href="#" class="btn open-login" title="Get Started">Login</a>
                                             @endif
