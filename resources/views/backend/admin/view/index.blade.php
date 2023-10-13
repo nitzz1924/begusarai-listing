@@ -228,7 +228,7 @@
                                                         </div> 
                                                     </div>
                                                     <div class="widget-content-left flex2">
-                                                        <div class=" fs-5  fw-bold">{{ $value->businessName }}</div>
+                                                        <div class="   fw-bold">{{ $value->businessName }}</div>
                                                     </div>
                                                 </div>
                                             </div>

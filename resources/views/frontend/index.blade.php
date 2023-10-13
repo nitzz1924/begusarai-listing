@@ -61,8 +61,7 @@
                                         <ul>
                                             @foreach ($submaster as $value)
                                                 <li>
-                                                    <a href="{{ route('searchFilter', ['category' => $value->title, 'city' => 'all', 'highlight' => 'all']) }}"
-                                                        data-category="{{ $value->title }}">
+                                                    <a data-category="{{ $value->title }}">
                                                         <i class="{{ $value->value }}"></i>
                                                         <span>{{ $value->title }}</span>
                                                     </a>
@@ -80,8 +79,7 @@
                                         <ul>
                                             @foreach ($Mastercity as $value)
                                                 <li>
-                                                    <a href="{{ route('searchFilter', ['category' => 'all', 'city' => $value->title, 'highlight' => 'all']) }}"
-                                                        data-city="{{ $value->title }}">
+                                                    <a data-city="{{ $value->title }}">
                                                         <span>{{ $value->title }}</span>
                                                     </a>
                                                 </li>
@@ -262,7 +260,7 @@
                                         <a
                                             href="{{ route('searchFilter', ['category' => $value->title, 'city' => 'all', 'highlight' => 'all']) }}">
                                             <i class="{{ $value->value }}"></i>
-                                            <span class="title">{{ $value->title }}</span>
+                                            <span class="title"> {{ str_replace('-', ' ', $value->title) }}</span>
                                             <span class="place">{{ $categoryCount[$value->title] }}</span>
                                         </a>
                                     </div>
@@ -301,7 +299,7 @@
                                         <a
                                             href="{{ route('searchFilter', ['category' => $value->title, 'city' => 'all', 'highlight' => 'all']) }}">
                                             <i class="{{ $value->value }}"></i>
-                                            <span class="title">{{ $value->title }}</span>
+                                            <span class="title">{{ str_replace('-', ' ', $value->title) }}</span>
                                             {{-- <span class="place">{{ $categoryCount[$value->title] }}</span> --}}
                                         </a>
                                     </div>
@@ -398,7 +396,9 @@
                                                             @endif
                                                         @endforeach
 
-                                                        <span>{{ $value->category }}</span>
+                                                        <span> {{ str_replace('-', ' ', $value->category) }}</span>
+                                                       
+
                                                     </a>
                                                     <!-- Add debugging statements -->
 
@@ -698,15 +698,6 @@
                 }
             });
         });
-
-        listItems.forEach((li) => {
-            li.addEventListener('click', () => {
-                const link = li.querySelector('a');
-                if (link) {
-                    window.location.href = link.getAttribute('href');
-                }
-            });
-        });
     </script>
     {{-- -------------------------------------------------2 Search Filter --}}
 
@@ -724,15 +715,6 @@
                     li.style.display = 'block';
                 } else {
                     li.style.display = 'none';
-                }
-            });
-        });
-
-        locationItems.forEach((li) => {
-            li.addEventListener('click', () => {
-                const locationLink = li.querySelector('a');
-                if (locationLink) {
-                    window.location.href = locationLink.getAttribute('href');
                 }
             });
         });
@@ -773,5 +755,50 @@
         resumeAutoSlide();
     });
 </script> --}}
+    <script>
+        // Get the search button element
+        var searchButton = document.querySelector('.field-submit button');
 
+        // Add a click event listener to the search button
+        searchButton.addEventListener('click', function() {
+            // Get the values of the "s" and "where" inputs
+            var searchInputValue = document.querySelector('#s').value;
+            var whereInputValue = document.querySelector('#loca').value;
+
+            // Redirect to the desired URL with the values
+            var redirectURL = "/searchFilter/" + searchInputValue + "/" + whereInputValue + "/all";
+            window.location.href = redirectURL;
+
+            // Prevent the default form submission
+            event.preventDefault();
+        });
+    </script>
+    <script>
+        // Get the <a> element with the data-city attribute
+        var aElement = document.querySelector('a[data-city]');
+        var aElement = document.querySelector('a[data-category]');
+        // Add a click event listener to the <a> element
+        aElement.addEventListener('click', function(event) {
+            // Prevent the default behavior of the <a> element
+            event.preventDefault();
+
+            // Get the data-city value
+            var dataCityValue = aElement.getAttribute('data-city');
+
+            // Set the data-city value in the "s" name text box
+            var sInput = document.querySelector('#where');
+            sInput.value = dataCityValue;
+        });
+        aElement.addEventListener('click', function(event) {
+            // Prevent the default behavior of the <a> element
+            event.preventDefault();
+
+            // Get the data-city value
+            var dataCityValue = aElement.getAttribute('data-category');
+
+            // Set the data-city value in the "s" name text box
+            var sInput = document.querySelector('#s');
+            sInput.value = dataCityValue;
+        });
+    </script>
 @endsection
