@@ -417,8 +417,8 @@
                                                         <?php 
                                                     }else{
                                                     ?>
-                                                        <a
-                                                            href="" class="open-login ">{{ $value->businessName }}</a>
+                                                        <a href=""
+                                                            class="open-login ">{{ $value->businessName }}</a>
                                                         <?php }?>
 
                                                     </h3>
