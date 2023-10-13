@@ -242,8 +242,8 @@
                                 @error('bookingurl')
                                     <div class="has-error mt-2">{{ $message }}</div>
                                 @enderror
-                                <label class="fieldlabels">Business Video (Youtube Link) :</label>
-                                <input type="url" placeholder="Your video URL" name="video" id="video">
+                                <label class="fieldlabels">Business Video (Youtube Link <b style='color:black'>iframe</b>) :</label>
+                                <input type="url" placeholder="https://www.youtube.com/embed/Lr2Xur5I-NU?,,...." name="video" id="video">
 
                                 <div class="">
                                     <label class="fieldlabels">Cover image:<span style='color:red'>*</span></label>

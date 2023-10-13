@@ -285,7 +285,22 @@
                                             target="_blank" title="Directions">({{ $businessesDetail->city }})</a></span>
                                 </div>
 
-                            </div><!-- .place__box -->
+                            </div>
+
+                            <div class="place__box place__box-map">
+                                <h3 class="place__title--additional">
+                                    Video
+                                </h3>
+
+                                <div class="embed-responsive embed-responsive-16by9">
+                                    <iframe class="embed-responsive-item " id="iframe-content"
+                                        src="{{ $businessesDetail->video }}" frameborder="0">
+                                    </iframe>
+
+                                </div>
+
+                            </div>
+
                             <div class="place__box">
                                 <h3>Contact Info</h3>
                                 <ul class="place__contact">
@@ -319,7 +334,8 @@
                                         @if ($businessesDetail->facebook)
                                             <li>
                                                 <i class="la la-facebook-f"></i>
-                                              <a title="Facebook" href="{{ $businessesDetail->facebook }}" target="_blank">{{ $businessesDetail->facebook }}</a>
+                                                <a title="Facebook" href="{{ $businessesDetail->facebook }}"
+                                                    target="_blank">{{ $businessesDetail->facebook }}</a>
 
                                             </li>
                                         @endif
@@ -327,7 +343,8 @@
                                         @if ($businessesDetail->instagram)
                                             <li>
                                                 <i class="la la-instagram"></i>
-                                                <a title="Instagram" href="{{ $businessesDetail->instagram }}" target="_blank">{{ $businessesDetail->instagram }}</a>
+                                                <a title="Instagram" href="{{ $businessesDetail->instagram }}"
+                                                    target="_blank">{{ $businessesDetail->instagram }}</a>
 
                                             </li>
                                         @endif
@@ -335,7 +352,8 @@
                                         @if ($businessesDetail->twitter)
                                             <li>
                                                 <i class="la la-twitter"></i>
-                                               <a title="Twitter" href="{{ $businessesDetail->twitter }}" target="_blank">{{ $businessesDetail->twitter }}</a>
+                                                <a title="Twitter" href="{{ $businessesDetail->twitter }}"
+                                                    target="_blank">{{ $businessesDetail->twitter }}</a>
 
                                             </li>
                                         @endif
@@ -566,7 +584,7 @@
                                         <div class="place-inner">
                                             <div class="place-thumb hover-img">
                                                 <a class="entry-thumb"
-                                                    href="{{ URL::to('listingDetail/' . $value->category . '/' . Str::slug($value->businessName).'-'.$value->id ) }}">
+                                                    href="{{ URL::to('listingDetail/' . $value->category . '/' . Str::slug($value->businessName) . '-' . $value->id) }}">
 
                                                     <img src="{{ URL::to('uploads/' . $value->coverImage) }}" />
 
@@ -626,12 +644,12 @@
                                                     <div class="place-type">
                                                         <span>{{ $value->highlight }}</span>
                                                     </div>
-                                                   
+
                                                 </div>
                                                 <h3 class="place-title">
 
                                                     <a
-                                                        href="{{ URL::to('listingDetail/' . $value->category . '/' . Str::slug($value->businessName).'-'.$value->id ) }}">{{ $value->businessName }}</a>
+                                                        href="{{ URL::to('listingDetail/' . $value->category . '/' . Str::slug($value->businessName) . '-' . $value->id) }}">{{ $value->businessName }}</a>
                                                 </h3>
                                                 <div class="open-now">
                                                     <i class="las la-door-open"></i>Open now
