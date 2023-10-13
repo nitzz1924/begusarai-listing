@@ -24,7 +24,7 @@
 
         <div
             class="page-title page-title--small align-left"style="background-image: url({{ asset('assets/images/bg-checkout.png') }});
-                                                                                                                                                     background-size: auto; background-position: bottom right;">
+                                                                                                                                                             background-size: auto; background-position: bottom right;">
 
             <div class="container">
                 <div class="page-title__content">

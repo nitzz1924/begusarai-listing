@@ -1234,13 +1234,18 @@ class HomeController extends Controller
                 ->orderBy('city_ranking', 'asc')
                 ->paginate(10);
         }
-
         if ($city == 'all' && $highlight == 'all' && $category == 'all') {
             $similer = BusinessList::where('status', '1')
                 ->orderBy('created_at', 'desc')
                 ->paginate(10);
         }
-
+        if ($city != 'all' && $highlight == 'all' && $category != 'all') {
+            $similer = BusinessList::where('category', $category)
+                ->where('city', $city)
+                ->where('status', '1')
+                ->orderBy('created_at', 'desc')
+                ->paginate(10);
+        }
         $submasterCategory = Master::orderBy('created_at', 'asc')
             ->where('type', '=', 'category')
             ->get();
