@@ -340,10 +340,11 @@
                                                 if(Auth::user()){
                                                 ?>
                                                     <a class="entry-thumb"
-                                                        href="{{ URL::to('listingDetail/' . $value->id . '/' . $value->category) }}">
+                                                        href="{{ URL::to('listingDetail/' . $value->category . '/' . Str::slug($value->businessName).'-'.$value->id ) }}">
                                                         <img src="{{ URL::to('uploads/' . $value->coverImage) }}" />
                                                     </a>
 
+                                                    
                                                     <?php 
                                                         }else{
                                                         ?>
@@ -409,14 +410,15 @@
                                                 <div class="entry-detail">
                                                     <h3 class="place-title">
                                                         <?php 
-                                                if(Auth::user()){
-                                                ?>
+                                                        if(Auth::user()){
+                                                        ?>
 
                                                         <a
-                                                            href="{{ URL::to('listingDetail/' . $value->id . '/' . $value->category) }}">{{ $value->businessName }}</a>
+                                                            href="{{ URL::to('listingDetail/' . $value->category . '/' . Str::slug($value->businessName).'-'.$value->id ) }}">{{ $value->businessName }}</a>
+                                                            
                                                         <?php 
-                                                    }else{
-                                                    ?>
+                                                        }else{
+                                                        ?>
                                                         <a href=""
                                                             class="open-login ">{{ $value->businessName }}</a>
                                                         <?php }?>

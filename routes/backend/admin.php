@@ -86,6 +86,7 @@ Route::get('/lead/inactive/{id}', 'LeadController@inactive');
 
 
 Route::resource('listing', 'ListingController');
+
 Route::get('/listing/active/{id}', 'ListingController@active');
 Route::get('/listing/inactive/{id}', 'ListingController@inactive');
 

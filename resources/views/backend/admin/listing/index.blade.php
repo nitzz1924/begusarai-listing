@@ -86,15 +86,16 @@
                                         </td>
 
                                         <td class="d-flex">
-                                            <a href="{{ route('listingDetail', ['id' => $business->id, 'category' => $business->category]) }}"
+                                            <a href="{{ URL::to('listingDetail/' . $business->category . '/' . Str::slug($business->businessName) . '-' . $business->id) }}"
                                                 type="button" class="btn fw-bold btn-primary d-flex"
                                                 data-mdb-ripple-color="dark">
-                                                <i class="metismenu-icon bi bi-eye pe-1"></i>  
+                                                <i class="metismenu-icon bi bi-eye pe-1"></i>
                                             </a>
 
                                             <a href="{{ route('editPlace', ['id' => $business->id]) }}" type="button"
-                                                class="btn ms-3 btn fw-bold btn-success d-flex" data-mdb-ripple-color="dark">
-                                                <i class="metismenu-icon bi bi-gear-wide-connected pe-1"></i>  
+                                                class="btn ms-3 btn fw-bold btn-success d-flex"
+                                                data-mdb-ripple-color="dark">
+                                                <i class="metismenu-icon bi bi-gear-wide-connected pe-1"></i>
                                             </a>
 
                                             <form action="{{ route('admin.listing.destroy', $business->id) }}"
@@ -103,7 +104,7 @@
                                                 @csrf
                                                 <button type="submit" class="btn btn-danger ms-3 text-nowrap"
                                                     onclick="confirmDelete(this)">
-                                                    <i class="metismenu-icon bi bi-trash3"></i>  
+                                                    <i class="metismenu-icon bi bi-trash3"></i>
                                                 </button>
                                             </form>
                                         </td>

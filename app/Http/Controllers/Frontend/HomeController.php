@@ -811,8 +811,11 @@ class HomeController extends Controller
             ->with('error', 'Registration failed. Please try again.');
     }
 
-    public function listingDetail(Request $request, $id, $category)
+    public function listingDetail(Request $request, $category, $url)
     {
+        $parts = explode('-',$url);
+        $id = end($parts);
+
         $duration = Duration::orderBy('created_at', 'asc')
             ->where('businessId', $id)
             ->get();

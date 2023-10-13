@@ -566,7 +566,7 @@
                                         <div class="place-inner">
                                             <div class="place-thumb hover-img">
                                                 <a class="entry-thumb"
-                                                    href="{{ URL::to('listingDetail/' . $value->id . '/' . $value->category) }}">
+                                                    href="{{ URL::to('listingDetail/' . $value->category . '/' . Str::slug($value->businessName).'-'.$value->id ) }}">
 
                                                     <img src="{{ URL::to('uploads/' . $value->coverImage) }}" />
 
@@ -626,14 +626,12 @@
                                                     <div class="place-type">
                                                         <span>{{ $value->highlight }}</span>
                                                     </div>
-                                                    <!-- <div class="place-city">
-                                                                                                                            <a href="#">Paris</a>
-                                                                                                                        </div> -->
+                                                   
                                                 </div>
                                                 <h3 class="place-title">
 
                                                     <a
-                                                        href="{{ URL::to('listingDetail/' . $value->id . '/' . $value->category) }}">{{ $value->businessName }}</a>
+                                                        href="{{ URL::to('listingDetail/' . $value->category . '/' . Str::slug($value->businessName).'-'.$value->id ) }}">{{ $value->businessName }}</a>
                                                 </h3>
                                                 <div class="open-now">
                                                     <i class="las la-door-open"></i>Open now
