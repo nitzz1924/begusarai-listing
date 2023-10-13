@@ -221,11 +221,11 @@
                                         <td class="text-center">
                                             <div class="widget-content p-0">
                                                 <div class="widget-content-wrapper">
-                                                    <div class="widget-content-left mr-3">
-                                                        <div class="widget-content-left">
-                                                            <img class="rounded-circle" src="assets/images/avatars/1.jpg"
-                                                                alt="" width="40">
-                                                        </div>
+                                                    <div class="widget-content-left">
+                                                        <div class="widget-content-left" style="width: 32px; height: 32px;">
+                                                            <img class="rounded-circle" src="{{ URL::to('uploads/' . $value->logo) }}"
+                                                                alt="b-img"  style="width: 32px; height: 32px; object-fit: cover; max-width: 100%; max-height: 100%;">
+                                                        </div> 
                                                     </div>
                                                     <div class="widget-content-left flex2">
                                                         <div class=" fs-5  fw-bold">{{ $value->businessName }}</div>
