@@ -27,8 +27,8 @@ class PackageController extends Controller
  
 public function index()
 {
-    $master = Master::orderBy('created_at', 'asc')->where('type','=','Master')->get();
-    $packages = Package::all();
+    $master = Master::orderBy('created_at', 'desc')->where('type','=','Master')->get();
+    $packages = Package:: orderBy('created_at', 'desc')->get();
     return view('backend.admin.package.index', compact('packages' , 'master'));
 }
 
@@ -39,7 +39,7 @@ public function index()
      */
     public function create()
     {
-        $master = Master::orderBy('created_at', 'asc')->where('type','=','Package')->get();
+        $master = Master::orderBy('created_at', 'desc')->where('type','=','Package')->get();
         return view('backend.admin.package.create' , compact('master'));
     }
 
@@ -124,6 +124,7 @@ public function index()
         return view('backend.admin.package.edit', compact('package','master'));
     }
 
+    
     /**
      * Update the specified resource in storage.
      *

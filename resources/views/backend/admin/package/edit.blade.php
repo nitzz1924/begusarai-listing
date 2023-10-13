@@ -80,8 +80,8 @@
                         <label for="durationMY">Duration Type:</label>
                         <select id="durationMY" name="durationMY"
                             class="form-control custom-select @error('durationMY') is-invalid @enderror" required>
-                            <option value="" selected>Select</option>
-                            <option value="0" {{ old('durationMY', $package->durationMY) == '0' ? 'selected' : '' }}>
+                          
+                            <option value="0" selected {{ old('durationMY', $package->durationMY) == '0' ? 'selected' : '' }}>
                                 months
                             </option>
                         </select>
@@ -91,7 +91,7 @@
                     </div>
                     <div class="form-group col-md-6">
                         <label for="price">Price:</label>
-                        <input type="text" id="price" name="price"
+                        <input type="number" id="price" name="price"
                             class="form-control @error('price') is-invalid @enderror"
                             value="{{ old('price', $package->price) }}" required>
                         {{-- @error('price')

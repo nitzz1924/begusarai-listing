@@ -65,8 +65,8 @@
                     <div class="form-group col-md-6">
                         <label for="durationMY">Duration Type:</label>
                         <select  id="durationMY" name="durationMY" class="form-control custom-select" required>
-                            <option  value="" selected>Select</option>
-                            <option  value="0" {{ old('durationMY') == '0' ? 'selected' : '' }}>months</option>
+                         
+                            <option  value="0" selected {{ old('durationMY') == '0' ? 'selected' : '' }}>months</option>
                           
                         </select>
                         @error('durationMY')
@@ -75,7 +75,7 @@
                     </div>
                     <div class="form-group col-md-6">
                         <label for="price">Price:</label>
-                        <input type="text" id="price" name="price" class="form-control"
+                        <input type="number" id="price" name="price" class="form-control"
                             value="{{ old('price') }}" required>
                         @error('price')
                             <div class="text-danger">{{ $message }}</div>
