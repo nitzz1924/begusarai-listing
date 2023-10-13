@@ -81,14 +81,14 @@
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>
-                    <div class="form-group col-md-6">
+                    <!-- <div class="form-group col-md-6">
                         <label for="off">High Price:</label>
                         <input type="text" id="off" name="off" class="form-control"
                             value="{{ old('off') }}" required>
                         @error('off')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
-                    </div>
+                    </div> -->
                     
               
 

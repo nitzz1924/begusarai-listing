@@ -60,7 +60,7 @@ public function index()
 
             'durationMY' => 'required ', 
             'price' => 'required|numeric ', 
-            'off' => 'required|numeric ', 
+            // 'off' => 'required|numeric ', 
             'noOfPlace' => 'required|numeric ', 
             'featuredListings' => 'required|numeric', 
             'featuredType' => 'required', 
@@ -74,7 +74,7 @@ public function index()
             $package->duration = $request->input('duration');
             $package->durationMY = $request->input('durationMY'); 
             $package->price = $request->input('price');
-            $package->off = $request->input('off');
+            // $package->off = $request->input('off');
             $package->noOfPlace = $request->input('noOfPlace');
             $package->featuredListings = $request->input('featuredListings');
             $package->featuredType = $request->input('featuredType');
@@ -139,7 +139,7 @@ public function index()
             'duration' => 'required',
             'durationMY' => 'required',
             'price' => 'required|numeric',
-            'off' => 'required|numeric',
+            // 'off' => 'required|numeric',
             'noOfPlace' => 'required|numeric',
             'featuredListings' => 'required|numeric',
             'featuredType' => 'required',
@@ -153,7 +153,7 @@ public function index()
             $package->duration = $request->input('duration');
             $package->durationMY = $request->input('durationMY'); 
             $package->price = $request->input('price');
-            $package->off = $request->input('off');
+            // $package->off = $request->input('off');
             $package->noOfPlace = $request->input('noOfPlace');
             $package->featuredListings = $request->input('featuredListings');
             $package->featuredType = $request->input('featuredType');
