@@ -35,9 +35,6 @@
         <div class="site-content">
             <div class="pricing-area">
 
-                @foreach ($packages as $package)
-                @endforeach
-
                 <div class="container">
                     <h2 class="title align-center">Choose the right category to rank in.</h2>
                     <div class="pricing-inner">
