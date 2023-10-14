@@ -19,7 +19,7 @@
     <div class="card">
         <h5 class="card-header">SubMaster</h5>
         <div class="card-body">
-            <form id='create' action="{{ Route('admin.setting.store') }}" enctype="multipart/form-data" method="post"
+            <form id='create' action="{{ Route('admin.submaster.store') }}" enctype="multipart/form-data" method="post"
                 accept-charset="utf-8" class="needs-validation" novalidate>
                 @csrf
                 <div id="status"></div>

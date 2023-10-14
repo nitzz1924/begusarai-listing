@@ -117,7 +117,7 @@
                  </li> -->
 
                  <li  class='zoom-on-hover'>
-                     <a href="{{ URL::to('/admin/setting') }} " >
+                     <a href="{{ URL::to('/admin/submaster') }} " >
                          <i class="metismenu-icon bi bi-gear-wide-connected"></i>
                         Settings
                      </a>

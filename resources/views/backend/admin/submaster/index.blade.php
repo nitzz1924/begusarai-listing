@@ -10,7 +10,7 @@
                 <div>All Sub-Master</div>
                 <div class="d-inline-block ml-3 pb-3">
 
-                    <a href="{{ URL::to('admin/setting/create') }}" class="btn btn-success">
+                    <a href="{{ URL::to('admin/submaster/create') }}" class="btn btn-success">
                         <i class="bi bi-plus-lg"></i>
                         Add Sub Master
                     </a>
@@ -49,13 +49,13 @@
                                         <!-- <td class="fw-bold">{{ $value->value }}</td> -->
                                         <td style="  width: 58px;"><img  class="img-thumbnail img-fluid tool-img-edit" src="{{ URL::to('/uploads/' . $value->logo) }}" /></td>
                                         <td class="d-flex">
-                                            <!-- <a href="{{ Route('admin.setting.edit', $value->id) }}"class="btn fw-bold btn-primary text-nowrap"
+                                              <a href="{{ Route('admin.submaster.edit', $value->id) }}"class="btn fw-bold btn-primary text-nowrap"
                                                 data-mdb-ripple-color="dark">
                                                 <i class="metismenu-icon bi bi-gear-wide-connected"></i>
                                                 Edit
-                                            </a> -->
+                                            </a>  
                                             {{-- delete --}}
-                                            <form action="{{ route('admin.setting.destroy', $value->id) }}" method="POST"
+                                            <form action="{{ route('admin.submaster.destroy', $value->id) }}" method="POST"
                                                 id="deleteForm">
                                                 @method('DELETE')
                                                 @csrf

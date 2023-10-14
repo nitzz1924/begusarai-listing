@@ -79,11 +79,11 @@ class SubMasterController extends Controller
             }
 
             $submaster->save(); //
-            return redirect()->route('admin.setting.index');
+            return redirect()->route('admin.submaster.index');
         } catch (Exception $e) {
-            Log::error($e);
-            session()->flash('error', 'An error occurred while saving the record.');
-
+            session()->flash('sticky_error', $e->getMessage());
+            print_r($e->getMessage());
+            die();
             return back();
         }
     }
@@ -109,35 +109,46 @@ class SubMasterController extends Controller
      */
     public function edit($id)
     {
-        $submaster = Master::where('id', $id)->first();
-        return view('backend.admin.setting.edit', compact('submaster'));
+        $submaster = Master::find($id);
+        $master = Master::orderBy('created_at', 'desc')
+            ->where('type', '=', 'Master')
+            ->get();
+        return view('backend.admin.submaster.edit', compact('submaster', 'master'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\submaster  $submaster
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         $request->validate([
+            'type' => 'required',
             'title' => 'required',
             'value' => 'required',
+            'logo' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Modify the file validation as needed.
         ]);
-        try {
-            $submaster = Master::find($id);
-            $submaster->title = $request->title;
-            $submaster->value = $request->value;
-            $submaster->save();
-            return redirect()->route('admin.setting.index');
-        } catch (\Exception $e) {
-            session()->flash('sticky_error', $e->getMessage());
-            print_r($e->getMessage());
-            die();
-            return back();
+
+        $submaster = Master::find($id);
+        $submaster->type = $request->input('type');
+        $submaster->title = $request->input('title');
+        $submaster->value = $request->input('value');
+
+        // logo/Image Session
+        if ($request->hasFile('logo')) {
+            $extension = strtolower($request->file('logo')->getClientOriginalExtension());
+            if ($extension == 'jpg' || $extension == 'jpeg' || $extension == 'png' || $extension == 'svg' || $extension == 'webp') {
+                if ($request->file('logo')->isValid()) {
+                    $destinationPath = public_path('uploads');
+                    $extension = $request->file('logo')->getClientOriginalExtension();
+                    $fileName = time() . '.' . $extension; // renameing logo
+                    $request->file('logo')->move($destinationPath, $fileName);
+                    $submaster->logo = $fileName;
+                }
+            }
         }
+
+        $submaster->save();
+
+        return redirect()
+            ->route('admin.submaster.index')
+            ->with('success', 'SubMaster updated successfully.');
     }
 
     /**
