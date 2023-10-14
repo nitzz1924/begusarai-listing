@@ -2,15 +2,55 @@
 @section('title', 'Set Password')
 @section('content')
 
+    <script>
+        @if (isset($successMessage))
+            alert('{{ $successMessage }}');
+        @endif
+
+        @if (isset($errorMessage))
+            alert('{{ $errorMessage }}');
+        @endif
+    </script>
+
+    <script>
+        @if (isset($successMessage))
+            alert('{{ $successMessage }}');
+        @endif
+    </script>
+
+    @if (session('success'))
+        <div class="form-card" style="margin-top: 30px;margin-bottom: 30px;">
+            <h2 class="text-success text-center">
+                <i class="fas fa-check-circle fa-4x" style="font-size: 50px;">
+                </i>
+            </h2>
+            <br>
+            <div class="row justify-content-center">
+                <div class="col-10 text-center">
+                    <h3 class="text-success">{{ session('success') }}</h3>
+                </div>
+            </div>
+        </div>
+    @endif
     <div class="container my-5">
-        <div class="member-wrap d-grid justify-content-center">
+        <div class="card mt-4  open-login" id='message'style='display:none; margin-left: 500px;margin-right: 500px;margin-bottom: 60px;'>
+            <div class="card-header" style='color:green'>
+             
+                Login
+            </div>
+            <div class="card-body">
+                
+                <a href="#" class="btn btn-primary" style="width: -webkit-fill-available;">Login</a>
+            </div>
+        </div>
+        <div class="member-wrap d-grid justify-content-center" id="form-result" style='display:block'>  
+            <form action="{{ route('SubmitPassword') }}" method="POST"
+            class="form-underline form-sign form-content form-account" id='submitResetPassword'>
+            @csrf
+            <p>Select Account Type</p>
             <div class="member-wrap-top">
                 <h2>Setup Your Password</h2>
             </div>
-            <form action="{{ route('SubmitPassword') }}" method="POST"
-                class="form-underline form-sign form-content form-account">
-                @csrf
-                <p>Select Account Type</p>
                 <div class="field-inline mt-2 mb-3">
                     <div class="form-group-user">
                         <div class="row">
@@ -46,7 +86,7 @@
                 </div>
 
                 <p>Setup your password</p>
-                
+
                 <div class="form-input">
                     <label for="new_password">New Password</label>
                     <input type="password" name="new_password" placeholder="Enter new password" id="new_password">
@@ -107,12 +147,54 @@
                 </div>
 
                 <div class="form-actions">
-                    <button type="submit" class="btn mt-3" >Submit</button>
+                    <button type="submit" class="btn mt-3">Submit</button>
                 </div>
             </form>
 
         </div>
     </div>
+    <script>
+        $(document).ready(function() {
+            $('#submitResetPassword').on('submit', function(e) {
+                e.preventDefault();
+
+                $.ajax({
+                    type: 'POST',
+                    url: $(this).attr('action'),
+                    data: $(this).serialize(),
+
+                    success: function(response) {
+
+                        if (response.success) {
+
+                            var successMessage = response.message;
+                            alert(successMessage);
+                            $('#message').css('display', 'block');
+                            $('#form-result').css('display', 'none');
+
+                            window.successMessage = successMessage;
+                        } else {
+                            // Registration failed
+                            if (response.message) {
+                                alert(response.message);
+                            } else {
+                                alert(
+                                'Registration failed. Please try again.'); // Display a default error message
+                            }
+                            $('#error-message').css('color', 'red').text(response.message);
+
+                            // You can also perform other actions, such as clearing form fields or showing additional error information.
+                        }
+                    },
+
+
+                    error: function(xhr, textStatus, errorThrown) {
+                        console.error(xhr.responseText);
+                    }
+                });
+            });
+        });
+    </script>
     <script>
         $(document).ready(function() {
             $('#address_filing').change(function() {

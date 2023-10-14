@@ -2,8 +2,6 @@
 @section('title', ' All Users')
 @section('content')
 
-
-
     <div class="app-page-title">
         <div class="page-title-wrapper">
             <div class="page-title-heading">
@@ -21,7 +19,7 @@
                     <div class="table-responsive">
                         <table id="example" class="table table-striped table-bordered" style="width:100%">
                             <thead class="table-dark">
-                                <tr >
+                                <tr>
                                     <th>#</th>
                                     <th>User Name</th>
                                     <th>Mo. Number</th>
@@ -39,7 +37,18 @@
                                         <td class="fw-bold text-nowrap">{{ $value->name }}</td>
                                         <td class="fw-bold">{{ $value->mobileNumber }}</td>
                                         <td class="fw-bold">{{ $value->verificationCode }}</td>
-                                        <td class="fw-bold">{{ $value->password }}</td>
+                                        <!-- <td class="fw-bold">{{ $value->password }}</td> -->
+                                        <td class="fw-bold">
+                                            @php
+                                                try {
+                                                    $decryptedValue = Crypt::decryptString($value->password);
+                                                    echo $decryptedValue;
+                                                } catch (Illuminate\Contracts\Encryption\DecryptException $e) {
+                                                    echo 'Decryption failed or the data is invalid.';
+                                                }
+                                            @endphp
+                                        </td>
+
                                         <td style="width: 58px;">
                                             @if (!$value->image)
                                                 <img class="img-thumbnail img-fluid tool-img-edit" style="width: 51px;"
@@ -49,10 +58,6 @@
                                                     src="{{ URL::to('/uploads/' . $value->image) }}" />
                                             @endif
                                         </td>
-
-
-
-
 
                                         <td class="fw-bold">
                                             @if ($value->status == 1)

@@ -30,7 +30,7 @@ use Razorpay\Api\Api;
 use DB;
 use Log;
 use View;
-
+use Illuminate\Support\Facades\Crypt;
 class HomeController extends Controller
 {
     use AuthenticatesUsers;
@@ -597,10 +597,6 @@ class HomeController extends Controller
             'documentImage' => 'required|mimes:pdf|max:2048', // Adjust the 'max' value as needed (in kilobytes) 2 mb
         ];
 
-
-
-
-
         foreach (['coverImage', 'logo'] as $fileField) {
             if ($request->hasFile($fileField)) {
                 // Dynamically add validation rules for the file fields if they are present in the request.
@@ -774,7 +770,7 @@ class HomeController extends Controller
             // Update the user record with the provided data
             $record->name = $request->input('first_name');
             $record->type = $request->input('type');
-            $record->password = bcrypt($request->input('new_password')); // Hash the password
+            $record->password = Crypt::encryptString($request->input('new_password'));
             $record->status = '1';
 
             // Set the additional fields based on the 'address_filing' value
@@ -791,29 +787,28 @@ class HomeController extends Controller
 
             $record->save();
 
-            // Attempt to authenticate the user
-            $credentials = [
-                'mobileNumber' => $record->mobileNumber,
-                'password' => $request->input('new_password'),
-            ];
+            // // Attempt to authenticate the user
+            // $credentials = [
+            //     'mobileNumber' => $record->mobileNumber,
+            //     'password' => $request->input('new_password'),
+            // ];
 
-            if (Auth::guard('user')->attempt($credentials)) {
+            if ($record) {
                 // Authentication passed
-                return redirect()
-                    ->route('index') // Replace 'index' with the actual route you want to redirect to after login
-                    ->with('success', 'Welcome to our community! Your account has been successfully created.');
+              
+                return response()->json(['success' => true, 'message' => 'Account created successfully']);
+
+            } else {
+                return response()->json(['success' => false, 'message' => 'Registration failed. Please try again.'], 400);
             }
         }
 
         // Handle the case where the user record was not found or authentication failed
-        return redirect()
-            ->back()
-            ->with('error', 'Registration failed. Please try again.');
     }
 
     public function listingDetail(Request $request, $category, $url)
     {
-        $parts = explode('-',$url);
+        $parts = explode('-', $url);
         $id = end($parts);
 
         $duration = Duration::orderBy('created_at', 'asc')
@@ -1533,7 +1528,7 @@ class HomeController extends Controller
             return response()->json(['success' => false, 'message' => ' Oops!  Try again with the right info']);
         }
 
-        $user->password = bcrypt($request->input('new_password'));
+        $user->password = Crypt::encryptString($request->input('new_password'));
         $user->save();
         session()->flash('success', 'Reset password successfully');
         return response()->json(['success' => true]);
