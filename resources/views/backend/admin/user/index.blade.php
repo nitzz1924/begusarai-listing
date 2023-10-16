@@ -31,9 +31,20 @@
                                 </tr>
                             </thead>
                             <tbody>
+
+                                @php
+                                    $counter = 1; // Initialize the counter
+                                @endphp
+
                                 @foreach ($user as $value)
+                                    @if ($value->id === 1)
+                                        @continue
+                                    @endif
                                     <tr>
-                                        <td class="serial-number">{{ $loop->iteration }}</td>
+                                        <td class="serial-number">{{ $counter }}</td>
+                                        @php
+                                            $counter++; // Increment the counter for the next iteration
+                                        @endphp
                                         <td class="fw-bold text-nowrap">{{ $value->name }}</td>
                                         <td class="fw-bold">{{ $value->mobileNumber }}</td>
                                         <td class="fw-bold">{{ $value->verificationCode }}</td>
