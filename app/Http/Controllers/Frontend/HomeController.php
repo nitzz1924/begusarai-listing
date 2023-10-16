@@ -31,6 +31,8 @@ use DB;
 use Log;
 use View;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Contracts\Encryption\DecryptException;
+
 class HomeController extends Controller
 {
     use AuthenticatesUsers;
@@ -58,6 +60,7 @@ class HomeController extends Controller
     //     return back()->withErrors(['password' => 'Invalid credentials']);
     // }
 
+   
     public function loginForm(Request $request)
     {
         $request->validate([
@@ -65,16 +68,18 @@ class HomeController extends Controller
             'password' => 'required',
         ]);
 
-        $credentials = $request->only('mobileNumber', 'password');
+        $user = User_Login::where('mobileNumber', $request->input('mobileNumber'))->first();
 
-        if (Auth::guard('user')->attempt($credentials)) {
-            // Authentication passed
-            return response()->json(['success' => true, 'redirect' => '/']);
+        if ($user && Crypt::decryptString($user->password) === $request->input('password')) {
+            Auth::guard('user')->login($user);
+            return response()->json(['success' => true, 'redirect' => '/', 'user' => $user]);
         }
 
         // If authentication fails, return an error message
         return response()->json(['success' => false, 'message' => ' Oops!  Try again with the right info']);
     }
+
+    
     public function logout()
     {
         Auth::logout();
@@ -797,7 +802,6 @@ class HomeController extends Controller
                 // Authentication passed
               
                 return response()->json(['success' => true, 'message' => 'Account created successfully']);
-
             } else {
                 return response()->json(['success' => false, 'message' => 'Registration failed. Please try again.'], 400);
             }
