@@ -406,13 +406,13 @@ class HomeController extends Controller
     {
         // Validation rules (same as savePlace)
         $rules = [
-            'businessName' => 'required|string|max:255|unique:businesslist',
-            'ownerName' => 'required|string|max:255|regex:/^[A-Za-z\s]+$/',
-            'description' => 'required|string|min:50|max:500',
+            'businessName' => 'required',
+            'ownerName' => 'required',
+            'description' => 'required',
             'category' => 'required',
             'city' => 'required',
             'placeAddress' => 'required',
-            'phoneNumber1' => 'required|regex:/^\d{10}$/',
+            'phoneNumber1' => 'required',
         ];
 
         foreach (['coverImage', 'logo'] as $fileField) {
@@ -591,15 +591,15 @@ class HomeController extends Controller
     {
         //  dd($request->input('cin'));
         $rules = [
-            'businessName' => 'required|string|max:255|unique:businesslist',
-            'ownerName' => 'required|string|max:255|regex:/^[A-Za-z\s]+$/',
-            'description' => 'required|string|min:50|max:500',
+            'businessName' => 'required',
+            'ownerName' => 'required',
+            'description' => 'required',
             'category' => 'required',
             'city' => 'required',
             'placeAddress' => 'required',
-            'phoneNumber1' => 'required|regex:/^\d{10}$/',
-            'coverImage' => 'required|image|mimes:jpg,jpeg,png,svg,webp|max:2048', // Adjust the 'max' value as needed (in kilobytes) 2mb
-            'documentImage' => 'required|mimes:pdf|max:2048', // Adjust the 'max' value as needed (in kilobytes) 2 mb
+            'phoneNumber1' => 'required',
+            'coverImage' => 'required|image|mimes:jpg,jpeg,png,svg,webp|max:1048', // Adjust the 'max' value as needed (in kilobytes) 2mb
+            'documentImage' => 'required|mimes:pdf|max:1048', // Adjust the 'max' value as needed (in kilobytes) 2 mb
         ];
 
         foreach (['coverImage', 'logo'] as $fileField) {
