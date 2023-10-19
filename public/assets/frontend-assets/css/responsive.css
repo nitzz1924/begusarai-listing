@@ -1219,6 +1219,10 @@
         margin-bottom: 5px;
     }
 
+    .author-img {
+        max-width: 50%;
+    }
+
     .carousel-item-slider {
         max-height: 200px;
     }

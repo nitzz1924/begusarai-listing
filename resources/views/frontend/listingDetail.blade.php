@@ -470,12 +470,14 @@ use App\Models\User_Login;
                             <h3>Agent</h3>
                             <div class="card mb-3" style="max-width: 540px;">
                                 <div class="row g-0">
-                                    <div class="col-md-4">
-                                        <img src="{{ URL::to('uploads/' . $businessesDetail->logo) }}"
-                                            class="img-fluid rounded p-3" alt="author-img"
-                                            style="object-fit: fill; height: 100%">
+                                    <div class="col-md-4 ">
+                                        {{-- <div class="d-grid justify-items-center"> --}}
+                                            <img src="{{ URL::to('uploads/' . $businessesDetail->logo) }}"
+                                            class="img-fluid author-img rounded p-3" alt="author-img"
+                                            style="object-fit: cover; height: 100%; object-position: center;" >
+                                        {{-- </div> --}}
                                     </div>
-                                    <div class="col-md-8">
+                                    <div class="col-md-8 d-grid align-items-center">
                                         <div class="card-body">
                                             <h5 class="card-title fs-5">{{ $businessesDetail->businessName }}</h5>
                                             <p class="card-text">
@@ -495,7 +497,7 @@ use App\Models\User_Login;
                                             <div class="mt-2">
                                                 
                                                 <a title="call-now"  href="tel:{{ $businessesDetail->phoneNumber1 }}">
-                                                    <button class="btn">Contant Now</button>
+                                                    <button class="btn">Contact Now</button>
                                                 </a>
                                             </div>
                                         </div>
