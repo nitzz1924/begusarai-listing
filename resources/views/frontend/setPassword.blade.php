@@ -165,12 +165,12 @@
 
                     success: function(response) {
 
-                        if (response.success) {
+                       if (response.success) {
+            var successMessage = response.message;
+            alert(successMessage);
 
-                            var successMessage = response.message;
-                            alert(successMessage);
-                            $('#message').css('display', 'block');
-                            $('#form-result').css('display', 'none');
+            // Redirect to the '/' page on success
+            window.location.href = '/';
 
                             window.successMessage = successMessage;
                         } else {

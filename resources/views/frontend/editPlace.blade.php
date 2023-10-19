@@ -303,9 +303,11 @@
 
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label class="fieldlabels">Business Photos (Drag & Drop Images Here Max 5
-                                            ):<span class="text-danger">* Maximum image size:2MB (W:1080× H:600)
-                                            </span></label>
+                                        <label for="fieldlabels" class=" fieldlabels">
+                                            Author:<span class="text-danger">* Maximum image size: 2MB(W:1080×
+                                                H:600)</span>
+
+                                        </label>
                                         <div class="input-group">
                                             <input type="file" name="logo" id="logo" data-max-size="1024">
 
@@ -323,10 +325,9 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="fieldlabels" class=" fieldlabels">
-                                    Author:<span class="text-danger">* Maximum image size: 2MB(W:1080× H:600)</span>
-
-                                </label>
+                                <label class="fieldlabels">Business Photos (Drag & Drop Images Here Max 5 ):<span
+                                        class="text-danger">* Maximum image size:2MB (W:1080× H:600)
+                                    </span></label>
                                 <div id="drop-area" class="border rounded p-3">
 
                                     <input type="file" name="galleryImage[]" id="galleryImage" data-max-size="1024"

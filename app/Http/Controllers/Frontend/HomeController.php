@@ -79,7 +79,6 @@ class HomeController extends Controller
         return response()->json(['success' => false, 'message' => ' Oops!  Try again with the right info']);
     }
 
-    
     public function logout()
     {
         Auth::logout();
@@ -792,11 +791,25 @@ class HomeController extends Controller
 
             $record->save();
 
-            // // Attempt to authenticate the user
-            // $credentials = [
-            //     'mobileNumber' => $record->mobileNumber,
-            //     'password' => $request->input('new_password'),
-            // ];
+    //          $record->save();
+
+             
+    //         $credentials = [
+    //             'mobileNumber' => $record->mobileNumber,
+    //             'password' => Crypt::encryptString($request->input('new_password')),
+    //         ];
+ 
+
+
+    // $user = User_Login::where('mobileNumber', $request->input('mobileNumber'))->first();
+ 
+    //     if ($user && Crypt::decryptString($user->password) === $request->input('new_password')) {
+    //         Auth::guard('user')->login($user);
+    //         return response()->json(['success' => true, 'redirect' => '/', 'user' => $user]);
+    //     }  else {
+    //             return response()->json(['success' => false, 'message' => 'Registration failed. Please try again.'], 400);
+    //         }
+    //     }
 
             if ($record) {
                 // Authentication passed
@@ -1281,9 +1294,16 @@ class HomeController extends Controller
             $value->rating = $averageRating;
             $value->count = count($reviews);
             $Result[] = $value;
+            
+
             // Debugging statements
             // dd($subvalue->title, $value->category, $subvalue->value);
         }
+        // Sort the $Result array by 'rating' in descending order
+        $ResultFirst = collect($Result)
+            ->sortByDesc('count')
+            ->values()
+            ->all();
 
         $submasterCategory = Master::orderBy('created_at', 'asc')
             ->where('type', '=', 'category')
@@ -1297,7 +1317,7 @@ class HomeController extends Controller
             ->where('type', '=', 'highlight')
             ->get();
 
-        return view('frontend.searchFilter', compact('Result', 'submaster', 'submasterCategory', 'submasterHighlight', 'similer'));
+        return view('frontend.searchFilter', compact('Result','ResultFirst', 'submaster', 'submasterCategory', 'submasterHighlight', 'similer'));
     }
 
     public function showFilterData(Request $request)
