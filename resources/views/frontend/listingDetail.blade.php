@@ -13,7 +13,25 @@
 <?php
 
 use App\Models\User_Login;
+function getYouTubeVideoId($url) {
+    $parsedUrl = parse_url($url);
+    
+    if ($parsedUrl === false) {
+        return null;
+    }
 
+    if ($parsedUrl['host'] === 'www.youtube.com' && isset($parsedUrl['query'])) {
+        parse_str($parsedUrl['query'], $query);
+        if (isset($query['v'])) {
+            return $query['v'];
+        }
+    } elseif ($parsedUrl['host'] === 'youtu.be' && isset($parsedUrl['path'])) {
+        $path = trim($parsedUrl['path'], '/');
+        return Str::afterLast($path, '/');
+    }
+
+    return null;
+}
 ?>
 <style>
     .bookmark-added {
@@ -253,15 +271,10 @@ use App\Models\User_Login;
                             <h3 class="place__title--additional">
                                 Video
                             </h3>
-                            <?php $urlfile = explode('=', $businessesDetail->video);
-                            $urlvideo = end($urlfile); ?>
-
+                            <?php $urlfile = getYouTubeVideoId($businessesDetail->video);
+                            ?>
                             <div class="embed-responsive embed-responsive-16by9">
-                                <iframe class="embed-responsive-item " id="iframe-content"
-                                    src="https://www.youtube.com/embed/{{ $urlvideo }}?autoplay=0&mute=1&controls=0"
-                                    frameborder="0">
-                                </iframe>
-
+                             <iframe width="560" height="315" src="https://www.youtube.com/embed/{{$urlfile}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                             </div>
 
                         </div>
