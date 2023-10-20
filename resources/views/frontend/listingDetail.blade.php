@@ -219,7 +219,7 @@ use App\Models\User_Login;
 
                             </div>
                         </div><!-- .place__box -->
-                        <div class="place__box place__box-overview">
+                        <div class="place__box   place__box-overview">
                             <h3>Overview</h3>
                             <div class="place__desc">{{ $businessesDetail->description }}</div><!-- .place__desc -->
                             <a href="#" class="show-more" title="Show More">Show more</a>
@@ -247,12 +247,13 @@ use App\Models\User_Login;
                             <h3 class="place__title--additional">
                                 Video
                             </h3>
-                            <?php $urlfile = explode('=',$businessesDetail->video );
-                            $urlvideo = end($urlfile); ?> 
-                            
+                            <?php $urlfile = explode('=', $businessesDetail->video);
+                            $urlvideo = end($urlfile); ?>
+
                             <div class="embed-responsive embed-responsive-16by9">
                                 <iframe class="embed-responsive-item " id="iframe-content"
-                                    src="https://www.youtube.com/embed/{{ $urlvideo }}?autoplay=0&mute=1&controls=0" frameborder="0">
+                                    src="https://www.youtube.com/embed/{{ $urlvideo }}?autoplay=0&mute=1&controls=0"
+                                    frameborder="0">
                                 </iframe>
 
                             </div>
@@ -463,8 +464,47 @@ use App\Models\User_Login;
                                 <?php }?>
                             </ul>
                         </div>
-                        <div class="review-form">
-                            <!-- Review form goes here -->
+
+                        <div class="place__box   place__box-overview">
+
+                            <h3>Agent</h3>
+                            <div class="card mb-3" style="max-width: 540px;">
+                                <div class="row g-0">
+                                    <div class="col-md-4 ">
+                                        {{-- <div class="d-grid justify-items-center"> --}}
+                                            <img src="{{ URL::to('uploads/' . $businessesDetail->logo) }}"
+                                            class="img-fluid author-img rounded p-3" alt="author-img"
+                                            style="object-fit: cover; height: 100%; object-position: center;" >
+                                        {{-- </div> --}}
+                                    </div>
+                                    <div class="col-md-8 d-grid align-items-center">
+                                        <div class="card-body">
+                                            <h5 class="card-title fs-5">{{ $businessesDetail->businessName }}</h5>
+                                            <p class="card-text">
+                                            <ul class="place__contact">
+                                                <li>
+                                                    <i class="la la-phone text-info"></i>
+                                                    <a title=""
+                                                        href="tel:{{ $businessesDetail->phoneNumber1 }}">{{ $businessesDetail->phoneNumber1 }}</a>
+                                                </li>
+                                                <li>
+                                                    <i class="fa-regular fa-envelope text-info"></i>
+                                                    <a
+                                                        href="mailto:{{ $businessesDetail->email }}">{{ $businessesDetail->email }}</a>
+                                                </li>
+                                            </ul>
+                                            </p>
+                                            <div class="mt-2">
+                                                
+                                                <a title="call-now"  href="tel:{{ $businessesDetail->phoneNumber1 }}">
+                                                    <button class="btn">Contact Now</button>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
 
                     </div>

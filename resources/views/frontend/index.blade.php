@@ -397,13 +397,13 @@
                                                         @endforeach
 
                                                         <span> {{ str_replace('-', ' ', $value->category) }}</span>
-                                                       
+                                                    
 
                                                     </a>
                                                     <!-- Add debugging statements -->
 
                                                     <a href="#" class="author" title="Author">
-                                                        <img src="{{ URL::to('uploads/' . $value->logo) }}"alt="Author" />
+                                                        <img src="{{ URL::to('uploads/' . $value->logo) }}" alt="Author" />
                                                     </a>
                                                     <!-- <div class="feature">Featured</div> -->
                                                 </div>
