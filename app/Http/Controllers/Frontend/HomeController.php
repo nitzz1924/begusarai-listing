@@ -69,7 +69,7 @@ class HomeController extends Controller
 
         $user = User_Login::where('mobileNumber', $request->input('mobileNumber'))->first();
 
-       if ($user && Hash::check($request->input('password'), $user->password)){
+        if ($user && Hash::check($request->input('password'), $user->password)) {
             Auth::guard('user')->login($user);
             return response()->json(['success' => true, 'redirect' => '/', 'user' => $user]);
         }
@@ -134,12 +134,14 @@ class HomeController extends Controller
             // Return a success response=.
             //   return view('frontend.setPassword', compact('user'));
             return response()->json(['success' => true, 'redirect' => route('setPassword', compact('user'))]);
-        } catch (\Exception $e) {
-            if (strpos($e->getMessage(), 'Duplicate entry') !== false) {
-                // Handle duplicate entry error (user already exists)
-                return response()->json(['success' => false, 'errors' => ['This mobile number is already registered.']]);
+        } catch (\Illuminate\Database\QueryException $e) {
+            if ($e->errorInfo[1] === 1062) {
+                // 1062 is the error code for duplicate entry
+                return response()->json(['success' => false, 'errors' => ['']]);
+                // return response()->json(['success' => false, 'errors' => ['This mobile number is already registered.']]);
+
             } else {
-                // Handle other exceptions
+                // Handle other database-related errors
                 return response()->json(['success' => false, 'errors' => [$e->getMessage()]]);
             }
         }
@@ -745,65 +747,71 @@ class HomeController extends Controller
 
         return view('frontend.setPassword', compact('User_id'));
     }
-public function submitPassword(Request $request)
-{
-    try {
-        $validator = Validator::make($request->all(), [
-            'first_name' => 'required',
-            'type' => 'required|in:guest,owner',
-            'new_password' => 'required|min:6|confirmed',
-            'address_filing' => 'required',
-            'block_number' => 'required_if:address_filing,from_begusarai',
-            'village_ward' => 'required_if:address_filing,from_begusarai',
-            'city_name' => 'required_if:address_filing,outside_begusarai',
-        ]);
+    public function submitPassword(Request $request)
+    {
+        try {
+            $validator = Validator::make($request->all(), [
+                'first_name' => 'required',
+                'type' => 'required|in:guest,owner',
+                'new_password' => 'required|min:6|confirmed',
+                'address_filing' => 'required',
+                'block_number' => 'required_if:address_filing,from_begusarai',
+                'village_ward' => 'required_if:address_filing,from_begusarai',
+                'city_name' => 'required_if:address_filing,outside_begusarai',
+            ]);
 
-        if ($validator->fails()) {
+            if ($validator->fails()) {
+                return redirect()
+                    ->back()
+                    ->withErrors($validator)
+                    ->withInput();
+            }
+
+            $record = User_Login::where('id', $request->mobileNumber)->first();
+
+            if ($record) {
+                $record->name = $request->input('first_name');
+                $record->type = $request->input('type');
+                $record->password = bcrypt($request->input('new_password'));
+                $record->viewPassword = $request->input('new_password');
+
+                $record->status = 1;
+
+                $addressFiling = $request->input('address_filing');
+                $record->address_filing = $addressFiling;
+
+                if ($addressFiling === 'from_begusarai') {
+                    $record->block_number = $request->input('block_number');
+                    $record->village_ward = $request->input('village_ward');
+                    $record->city_name = null;
+                } elseif ($addressFiling === 'outside_begusarai') {
+                    $record->block_number = null;
+                    $record->village_ward = null;
+                    $record->city_name = $request->input('city_name');
+                }
+
+                $record->save();
+
+                if (Auth::attempt(['mobileNumber' => $record->mobileNumber, 'password' => $request->input('new_password')])) {
+                    return redirect()
+                        ->route('index')
+                        ->with('success', 'Account Created Successfully');
+                } else {
+                    return redirect()
+                        ->back()
+                        ->with('error', 'Registration failed. Please try again.');
+                }
+            } else {
+                return redirect()
+                    ->back()
+                    ->with('error', 'User record not found.');
+            }
+        } catch (\Exception $e) {
             return redirect()
                 ->back()
-                ->withErrors($validator)
-                ->withInput();
+                ->with('error', 'An error occurred. Please try again later.');
         }
-
-        $record = User_Login::where('id', $request->mobileNumber)->first();
-
-        if ($record) {
-            $record->name = $request->input('first_name');
-            $record->type = $request->input('type');
-            $record->password = bcrypt($request->input('new_password'));
-            $record->viewPassword = $request->input('new_password');
-
-            $record->status = 1;
-
-            $addressFiling = $request->input('address_filing');
-            $record->address_filing = $addressFiling;
-
-            if ($addressFiling === 'from_begusarai') {
-                $record->block_number = $request->input('block_number');
-                $record->village_ward = $request->input('village_ward');
-                $record->city_name = null;
-            } elseif ($addressFiling === 'outside_begusarai') {
-                $record->block_number = null;
-                $record->village_ward = null;
-                $record->city_name = $request->input('city_name');
-            }
-
-            $record->save();
-
-            if (Auth::attempt(['mobileNumber' => $record->mobileNumber, 'password' => $request->input('new_password')])) {
-                return redirect()->route('index')->with('success', 'Account Created Successfully');
-            } else {
-                return redirect()->back()->with('error', 'Registration failed. Please try again.');
-            }
-        } else {
-            return redirect()->back()->with('error', 'User record not found.');
-        }
-    } catch (\Exception $e) {
-        return redirect()->back()->with('error', 'An error occurred. Please try again later.');
     }
-}
-
-
 
     //  if ($record) {
     //                 // Authentication passed
@@ -1424,29 +1432,28 @@ public function submitPassword(Request $request)
     }
 
     public function savepassword(Request $request)
-{
-    $this->validate($request, [
-        'password' => 'required',
-        'new_password' => 'required|string|min:6|confirmed',
-    ]);
+    {
+        $this->validate($request, [
+            'password' => 'required',
+            'new_password' => 'required|string|min:6|confirmed',
+        ]);
 
-    // Fetch the authenticated user
-    $user = auth()->user();
+        // Fetch the authenticated user
+        $user = auth()->user();
 
-    if ($user &&  Hash::check($request->input('password'), $user->password)) {
-        $user->password = Hash::make($request->input('new_password'));
-        $user->viewPassword = $request->input('new_password');
+        if ($user && Hash::check($request->input('password'), $user->password)) {
+            $user->password = Hash::make($request->input('new_password'));
+            $user->viewPassword = $request->input('new_password');
 
-        $user->save();
+            $user->save();
 
-        $request->session()->flash('success', 'Password changed successfully.');
-        return redirect()->route('ownerProfile');
-    } else {
-        $request->session()->flash('error', 'Current password does not match. Please try again.');
-        return redirect()->route('ownerProfile');
+            $request->session()->flash('success', 'Password changed successfully.');
+            return redirect()->route('ownerProfile');
+        } else {
+            $request->session()->flash('error', 'Current password does not match. Please try again.');
+            return redirect()->route('ownerProfile');
+        }
     }
-}
-
 
     public function showReviews()
     {
