@@ -99,7 +99,7 @@
                             <div class="has-error mt-2">{{ $message }}</div>
                             @enderror
 
-                            <label class="fieldlabels mt-4">Business id Number: </label>
+                            <label class="fieldlabels mt-4"> Business Register Number: </label>
                             <select data-placeholder="Select Place option" id="dType" name="dType" class=" form-control"
                                 onchange="showTextBox()" class="mb-3">
                                 <option value="" selected disabled>Select an option</option>

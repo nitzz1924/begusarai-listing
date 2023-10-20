@@ -219,7 +219,7 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required',
             'number' => 'required',
-            'verificationCode' => 'required',
+            // 'verificationCode' => 'required',
             'password' => 'required',
            
         ]);
@@ -230,7 +230,7 @@ class UserController extends Controller
         // Update the user's attributes
         $user->name = $request->input('name');
         $user->mobileNumber = $request->input('number');
-        $user->verificationCode = $request->input('verificationCode');
+      //   $user->verificationCode = $request->input('verificationCode');
         $user->password = $request->input('password');
         $user->status = $request->input('status');
 

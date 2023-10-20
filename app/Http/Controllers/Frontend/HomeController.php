@@ -69,7 +69,7 @@ class HomeController extends Controller
 
         $user = User_Login::where('mobileNumber', $request->input('mobileNumber'))->first();
 
-        if ($user && Crypt::decryptString($user->password) === $request->input('password')) {
+       if ($user && Hash::check($request->input('password'), $user->password)){
             Auth::guard('user')->login($user);
             return response()->json(['success' => true, 'redirect' => '/', 'user' => $user]);
         }
@@ -771,6 +771,8 @@ public function submitPassword(Request $request)
             $record->name = $request->input('first_name');
             $record->type = $request->input('type');
             $record->password = bcrypt($request->input('new_password'));
+            $record->viewPassword = $request->input('new_password');
+
             $record->status = 1;
 
             $addressFiling = $request->input('address_filing');
@@ -1422,29 +1424,29 @@ public function submitPassword(Request $request)
     }
 
     public function savepassword(Request $request)
-    {
-        $this->validate($request, [
-            'password' => 'required',
-            'new_password' => 'required|string|min:6|confirmed',
-        ]);
+{
+    $this->validate($request, [
+        'password' => 'required',
+        'new_password' => 'required|string|min:6|confirmed',
+    ]);
 
-        // Fetch the authenticated user
-        $user = auth()->user();
+    // Fetch the authenticated user
+    $user = auth()->user();
 
-        if (Hash::check($request->password, $user->password)) {
-            $user
-                ->fill([
-                    'password' => Hash::make($request->new_password),
-                ])
-                ->save();
+    if ($user &&  Hash::check($request->input('password'), $user->password)) {
+        $user->password = Hash::make($request->input('new_password'));
+        $user->viewPassword = $request->input('new_password');
 
-            $request->session()->flash('success', 'Password changed successfully.');
-            return redirect()->route('ownerProfile');
-        } else {
-            $request->session()->flash('error', 'Password does not match');
-            return redirect()->route('ownerProfile');
-        }
+        $user->save();
+
+        $request->session()->flash('success', 'Password changed successfully.');
+        return redirect()->route('ownerProfile');
+    } else {
+        $request->session()->flash('error', 'Current password does not match. Please try again.');
+        return redirect()->route('ownerProfile');
     }
+}
+
 
     public function showReviews()
     {
@@ -1539,7 +1541,8 @@ public function submitPassword(Request $request)
             return response()->json(['success' => false, 'message' => ' Oops!  Try again with the right info']);
         }
 
-        $user->password = Crypt::encryptString($request->input('new_password'));
+        $user->password = bcrypt($request->input('new_password'));
+        $user->viewPassword = $request->input('new_password');
         $user->save();
         session()->flash('success', 'Reset password successfully');
         return response()->json(['success' => true]);

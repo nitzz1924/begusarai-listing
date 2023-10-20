@@ -221,7 +221,13 @@ use App\Models\User_Login;
                         </div><!-- .place__box -->
                         <div class="place__box   place__box-overview">
                             <h3>Overview</h3>
-                            <div class="place__desc">{{ $businessesDetail->description }}</div><!-- .place__desc -->
+                            <div class="place__desc">{{ $businessesDetail->description }} <br><br>
+                            @if($businessesDetail->dType && $businessesDetail->dNumber)
+                            <b>{{ $businessesDetail->dType }}</b> -  {{ $businessesDetail->dNumber }} 
+                            @endif
+                        
+                             </div>
+                        
                             <a href="#" class="show-more" title="Show More">Show more</a>
                         </div>
 
