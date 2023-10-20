@@ -1,5 +1,5 @@
 @extends('frontend.layouts.master')
-@section('title', 'Search Filter')
+@section('title', $titleurl)
 @section('content')
 
     <main id="main" class="site-main">

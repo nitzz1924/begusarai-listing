@@ -1231,11 +1231,13 @@ class HomeController extends Controller
 
     public function searchFilter(Request $request, $category, $city, $highlight)
     {
+        $titleurl="";
         if ($city == 'all' && $highlight == 'all' && $category != 'all') {
             $similer = BusinessList::where('category', $category)
                 ->where('status', '1')
                 ->orderBy('category_ranking', 'asc')
                 ->paginate(10);
+                $titleurl=$category;
         }
 
         if ($city != 'all' && $highlight == 'all' && $category == 'all') {
@@ -1243,11 +1245,13 @@ class HomeController extends Controller
                 ->where('status', '1')
                 ->orderBy('city_ranking', 'asc')
                 ->paginate(10);
+                $titleurl=$city;
         }
         if ($city == 'all' && $highlight == 'all' && $category == 'all') {
             $similer = BusinessList::where('status', '1')
                 ->orderBy('created_at', 'desc')
                 ->paginate(10);
+                  $titleurl="Search Listing";
         }
         if ($city != 'all' && $highlight == 'all' && $category != 'all') {
             $similer = BusinessList::where('category', $category)
@@ -1255,6 +1259,7 @@ class HomeController extends Controller
                 ->where('status', '1')
                 ->orderBy('created_at', 'desc')
                 ->paginate(10);
+                 $titleurl=$city." | ".$category;
         }
         $submasterCategory = Master::orderBy('created_at', 'asc')
             ->where('type', '=', 'category')
@@ -1314,11 +1319,12 @@ class HomeController extends Controller
             ->where('type', '=', 'highlight')
             ->get();
 
-        return view('frontend.searchFilter', compact('Result', 'ResultFirst', 'submaster', 'submasterCategory', 'submasterHighlight', 'similer'));
+        return view('frontend.searchFilter', compact('Result', 'ResultFirst', 'submaster', 'submasterCategory', 'submasterHighlight', 'similer','titleurl'));
     }
 
     public function showFilterData(Request $request)
     {
+        
         $submasterCategory = Master::orderBy('created_at', 'asc')
             ->where('type', '=', 'category')
             ->get();
