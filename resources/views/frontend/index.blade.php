@@ -250,10 +250,10 @@
 
                         <div class="slick-sliders offset-item">
 
-                            <div class="slick-slider business-cat-slider slider-pd30" data-item="6" data-arrows="true"
-                                data-itemScroll="6" data-dots="true" data-centerPadding="50" data-tabletitem="3"
-                                data-tabletscroll="3" data-smallpcitem="4" data-smallpcscroll="4" data-mobileitem="3"
-                                data-mobilescroll="2" data-mobilearrows="false">
+                            <div class="slick-slider business-cat-slider slider-pd30" data-item="8" data-arrows="true"
+                                data-itemScroll="1" data-dots="true" data-centerPadding="50" data-tabletitem="4"
+                                data-tabletscroll="1" data-smallpcitem="1" data-smallpcscroll="1" data-mobileitem="4"
+                                data-mobilescroll="1" data-mobilearrows="false">
 
                                 @foreach ($submaster as $value)
                                     <div class="bsn-cat-item cyan">
@@ -324,9 +324,9 @@
                             Trending Business Places
                         </h2>
                         <div class="slick-sliders offset-item">
-                            <div class="slick-slider trending-slider slider-pd30" data-item="4" data-arrows="true"
-                                data-itemScroll="4" data-dots="true" data-centerPadding="30" data-tabletitem="2"
-                                data-tabletscroll="2" data-smallpcscroll="3" data-smallpcitem="3" data-mobileitem="1"
+                            <div id="businesslisting" class="slick-slider trending-slider slider-pd30" data-item="5" data-arrows="true"
+                                data-itemScroll="1" data-dots="true" data-centerPadding="30" data-tabletitem="2"
+                                data-tabletscroll="1" data-smallpcscroll="1" data-smallpcitem="1" data-mobileitem="1"
                                 data-mobilescroll="1" data-mobilearrows="false">
 
                                 @foreach ($Result as $value)
@@ -338,11 +338,11 @@
                                                 if(Auth::user()){
                                                 ?>
                                                     <a class="entry-thumb"
-                                                        href="{{ URL::to('listingDetail/' . $value->category . '/' . Str::slug($value->businessName).'-'.$value->id ) }}">
+                                                        href="{{ URL::to('listingDetail/' . $value->category . '/' . Str::slug($value->businessName) . '-' . $value->id) }}">
                                                         <img src="{{ URL::to('uploads/' . $value->coverImage) }}" />
                                                     </a>
 
-                                                    
+
                                                     <?php 
                                                         }else{
                                                         ?>
@@ -397,13 +397,14 @@
                                                         @endforeach
 
                                                         <span> {{ str_replace('-', ' ', $value->category) }}</span>
-                                                    
+
 
                                                     </a>
                                                     <!-- Add debugging statements -->
 
                                                     <a href="#" class="author" title="Author">
-                                                        <img src="{{ URL::to('uploads/' . $value->logo) }}" alt="Author" />
+                                                        <img src="{{ URL::to('uploads/' . $value->logo) }}"
+                                                            alt="Author" />
                                                     </a>
                                                     <!-- <div class="feature">Featured</div> -->
                                                 </div>
@@ -414,8 +415,8 @@
                                                         ?>
 
                                                         <a
-                                                            href="{{ URL::to('listingDetail/' . $value->category . '/' . Str::slug($value->businessName).'-'.$value->id ) }}">{{ $value->businessName }}</a>
-                                                            
+                                                            href="{{ URL::to('listingDetail/' . $value->category . '/' . Str::slug($value->businessName) . '-' . $value->id) }}">{{ $value->businessName }}</a>
+
                                                         <?php 
                                                         }else{
                                                         ?>
@@ -558,7 +559,7 @@
                         </h2>
                         <div class="slick-sliders offset-item">
                             <div class="slick-slider testimonial-slider layout-02 slider-pd30" data-item="2"
-                                data-arrows="true" data-itemScroll="2" data-dots="true" data-centerPadding="30"
+                                data-arrows="true" data-itemScroll="1" data-dots="true" data-centerPadding="30"
                                 data-tabletitem="1" data-tabletscroll="1" data-mobileitem="1" data-mobilescroll="1"
                                 data-mobilearrows="false">
 
@@ -801,4 +802,6 @@
             sInput.value = dataCityValue;
         });
     </script>
+
+
 @endsection

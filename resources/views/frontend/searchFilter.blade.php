@@ -549,7 +549,7 @@
         });
     </script>
 
-    <script>
+    {{-- <script>
         function switchLayout(layoutType) {
             $('.place-layout a').removeClass('active');
             $('.place-layout a[data-layout="' + layoutType + '"]').addClass('active');
@@ -580,6 +580,6 @@
             var layoutType = $(this).data('layout');
             switchLayout(layoutType);
         });
-    </script>
+    </script> --}}
 
 @endsection

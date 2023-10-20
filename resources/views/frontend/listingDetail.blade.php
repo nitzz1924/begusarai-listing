@@ -467,7 +467,7 @@ use App\Models\User_Login;
 
                         <div class="place__box   place__box-overview">
 
-                            <h3>Agent</h3>
+                            <h3>Authorized Person</h3>
                             <div class="card mb-3" style="max-width: 540px;">
                                 <div class="row g-0">
                                     <div class="col-md-4 ">
@@ -479,7 +479,7 @@ use App\Models\User_Login;
                                     </div>
                                     <div class="col-md-8 d-grid align-items-center">
                                         <div class="card-body">
-                                            <h5 class="card-title fs-5">{{ $businessesDetail->businessName }}</h5>
+                                            <h5 class="card-title fs-5">{{ $businessesDetail->ownerName }}</h5>
                                             <p class="card-text">
                                             <ul class="place__contact">
                                                 <li>
@@ -497,7 +497,8 @@ use App\Models\User_Login;
                                             <div class="mt-2">
                                                 
                                                 <a title="call-now"  href="tel:{{ $businessesDetail->phoneNumber1 }}">
-                                                    <button class="btn">Contact Now</button>
+                                                    
+                                                    <button class="btn"><i class="la la-phone me-1"></i>Call Now</button>
                                                 </a>
                                             </div>
                                         </div>
