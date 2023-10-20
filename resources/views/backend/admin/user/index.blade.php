@@ -53,14 +53,29 @@
 
                                 <td class="fw-bold">
                                     @if(empty($value->address_filing))
-                                    Begusarai
+
                                     @else
                                     {{ ucwords(str_replace('_', ' ', $value->address_filing)) }}
+
                                     @endif
-                                    ( {{ $value->city_name }})
+
                                 </td>
-                                <td class="fw-bold">{{ $value->block_number }}</td>
-                                <td class="fw-bold">{{ $value->village_ward }}</td>
+                                <td class="fw-bold">@if(!empty($value->block_number))
+                                    {{ $value->block_number }}
+                                    @elseif(!empty($value->city_name))
+                                    {{ $value->city_name }}
+                                    @else
+                                    Default Value
+                                    @endif
+                                </td>
+                                <td class="fw-bold"> @if(!empty($value->block_number))
+                                    {{ $value->village_ward }}
+                                    @elseif(!empty($value->city_name))
+                                    {{ $value->city_name }}
+                                    @else
+                                    Default Value
+                                    @endif
+                                </td>
                                 <td class="fw-bold">{{ $value->viewPassword }}</td>
 
                                 <td style="width: 58px;">
