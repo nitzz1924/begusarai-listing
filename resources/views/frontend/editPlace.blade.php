@@ -171,7 +171,7 @@
                                 @enderror
                             </div>
 
-                            <label class="fieldlabels">Social Networks :</label>
+                            <label class="fieldlabels">YouTube channel URL:</label>
                             <input type="url" placeholder="Your YouTube URL" name="youtube" id="youtube"
                                 class="form-control ">
 
