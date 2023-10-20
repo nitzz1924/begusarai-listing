@@ -11,7 +11,7 @@
                     <ul>
                         <li><a href="/ownerDashboard">Dashboard</a></li>
                         <!-- <li><a href="/ownerLeads">Leads</a></li> -->
-                        <li><a href="/ownerListing">My places</a></li>
+                        <li><a href="/ownerListing">My business</a></li>
                         <li class="active"><a href="/ownerWishlist">Wishlist</a></li>
                         <li><a href="/ownerProfile">Profile</a></li>
                     </ul>

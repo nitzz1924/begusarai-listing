@@ -261,7 +261,7 @@ $popup = Popup_ads::orderBy('created_at', 'asc')
                                         </a>
                                         <ul class="sub-menu login-menu">
                                             <li class=""><a href="/ownerDashboard">Dashboard</a></li>
-                                            <li class=""><a href="/ownerListing">My Places</a></li>
+                                            <li class=""><a href="/ownerListing">My business</a></li>
                                             <li class=""><a href="/ownerWishlist">My Wishlist</a></li>
                                             {{-- <li class=""><a href="/businessOwnerPage">Author Listing</a></li> --}}
 
@@ -380,7 +380,7 @@ $popup = Popup_ads::orderBy('created_at', 'asc')
                                     </li>
                                     <!-- <li class=""><a href="/businessOwnerPage">My Page</a>
                                         </li> -->
-                                    <li class=""><a href="/ownerListing">My Places</a>
+                                    <li class=""><a href="/ownerListing">My business</a>
                                     </li>
                                     <!-- <li class=""><a href="/ownerLeads">Leads</a>
                                         </li> -->

@@ -2,54 +2,69 @@
 @section('title', 'Blog Detail')
 @section('content')
 
-    <main id="main" class="site-main">
-        <div class="blog-banner">
+<main id="main" class="site-main">
+    <div class="blog-banner">
 
 
-            <img src="{{ URL::to('uploads/' . $blog->image) }}">
-        </div><!-- .blog-banner -->
-        <div class="blog-content">
-            <div class="container">
-                <div class="row 
+        <img src="{{ URL::to('uploads/' . $blog->image) }}">
+    </div><!-- .blog-banner -->
+    <div class="blog-content">
+        <div class="container">
+            <div class="row 
     justify-content-center">
-                    <div class="col-lg-10">
-                        <div class="blog-left">
-                            <ul class="breadcrumbs">
-                                <li> {{ $blog->type }}</li>
-                            </ul><!-- .breadcrumbs -->
-                            <div class="entry-content">
-                                <h1> {{ $blog->title }}</h1>
-                                <ul class="entry-meta">
-                                    <li>
+                <div class="col-lg-10">
+                    <div class="blog-left">
+                        <ul class="breadcrumbs">
+                            <li> {{ $blog->type }}</li>
+                        </ul><!-- .breadcrumbs -->
+                        <div class="entry-content">
+                            <h1> {{ $blog->title }}</h1>
+                            <ul class="entry-meta">
+                                <!-- <li>
                                         by <a title="Ben Cobb" href="#">Ben Cobb</a>
                                     </li>
                                     <li>22 July 2019</li>
-                                    <li>3 comments</li>
-                                </ul>
-                                <div class="entry-desc">
-                                    <P>
-                                        {{ $blog->description }}
-                                    </P>
+                                    <li>3 comments</li> -->
+                            </ul>
+                            <div class="entry-desc">
+                                <P>
+                                    {{ $blog->description }}
+                                </P>
 
-                                </div>
-                                <div>
-                                    <P>
-                                        {{ $blog->post }}
-                                    </P>
-                                    <div class="my-3">
-                                        <div class="embed-responsive embed-responsive-16by9">
-                                            <iframe class="embed-responsive-item" src="{{ $blog->videourl }}"
-                                                title="YouTube video player" frameborder="0"
-                                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                                allowfullscreen>
-                                            </iframe>
-                                        </div>
+                            </div>
+                            <div>
+                                <P>
+                                    {{ $blog->post }}
+                                </P>
+                                <br>
+                                <?php $urlfile = explode('=',$blog->videourl );
+                            $urlvideo = end($urlfile); ?>
+                                <div class="my-3">
+                                    <div class="embed-responsive embed-responsive-16by9">
+                                        <iframe class="embed-responsive-item "
+                                            src="https://www.youtube.com/embed/{{ $urlvideo }}?autoplay=0&mute=1&controls=0"
+                                            frameborder="0">
+                                        </iframe>
                                     </div>
-
                                 </div>
-                                <hr>
-                                <!-- .entry-desc -->
-                                <!-- <div class="entry-author">
+
+                            </div>
+
+
+
+
+
+
+
+                            <br>
+                            <br>
+                            <br>
+
+
+
+                            <hr>
+                            <!-- .entry-desc -->
+                            <!-- <div class="entry-author">
                                         <img src="https://wp.getgolo.com/country-guide/wp-content/themes/golo/assets/images/default-user-image.png" alt="Bangkok">
                                         <div class="author-info">
                                             <div class="author-title">
@@ -83,8 +98,8 @@
                                             </div>
                                         </div>
                                     </div>  -->
-                            </div><!-- .entry-content -->
-                            {{-- <div class="related-post">
+                        </div><!-- .entry-content -->
+                        {{-- <div class="related-post">
                             <h2>Related Articles</h2>
                             <div class="related-grid columns-3">
                                 <article class="hover__box post">
@@ -122,8 +137,8 @@
                                 </article>
                             </div>
                         </div> --}}
-                            <!-- .related-post -->
-                            {{-- <div class="place__box place__box--reviews entry-comment">
+                        <!-- .related-post -->
+                        {{-- <div class="place__box place__box--reviews entry-comment">
                             <h3 class="place__title--reviews">3 Comments</h3>
                             <ul class="place__comments">
                                 <li>
@@ -187,14 +202,14 @@
                             </ul>
                             <p class="place__login"><a title="Login" href="#">Login </a>to reviews</p>
                         </div> --}}
-                            <!-- .place__box -->
-                        </div><!-- .place__left -->
-                    </div>
-
+                        <!-- .place__box -->
+                    </div><!-- .place__left -->
                 </div>
+
             </div>
-        </div><!-- .blog-content -->
-    </main><!-- .site-main -->
+        </div>
+    </div><!-- .blog-content -->
+</main><!-- .site-main -->
 
 
 @endsection
