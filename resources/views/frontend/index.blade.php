@@ -729,33 +729,7 @@
         });
     </script>
 
-    {{-- Slider pause on slide --}}
-    {{-- <script>
-    $(document).ready(function() {
-        var isInteracting = false;
-        var carousel = $('#sliderAutoplaying');
-
-        // Pause the carousel when the user interacts with it
-        carousel.on('slide.bs.carousel', function() {
-            isInteracting = true;
-            carousel.carousel('pause');
-        });
-
-        // Resume auto-sliding after a delay (e.g., 3 seconds)
-        var delay = 3000; // Adjust the delay as needed
-
-        function resumeAutoSlide() {
-            if (!isInteracting) {
-                carousel.carousel('next'); // Auto slide to the next item
-            }
-            isInteracting = false; // Reset interaction flag
-            setTimeout(resumeAutoSlide, delay);
-        }
-
-        // Start auto-sliding
-        resumeAutoSlide();
-    });
-</script> --}}
+    
     <script>
         // Get the search button element
         var searchButton = document.querySelector('.field-submit button');
