@@ -9,9 +9,10 @@
             <div class="member-menu">
                 <div class="container">
                     <ul>
-                        <li><a href="/ownerDashboard">Dashboard</a></li>
-                        <!-- <li><a href="/ownerLeads">Leads</a></li> -->
-                        <li><a href="/ownerListing">My business</a></li>
+                         @if (Auth::user()->type == 'Owner')
+                    <li class="active"><a href="/ownerDashboard">Dashboard</a></li>
+                    <li><a href="/ownerListing">My business</a></li>
+                    @endif
                         <li class="active"><a href="/ownerWishlist">Wishlist</a></li>
                         <li><a href="/ownerProfile">Profile</a></li>
                     </ul>
