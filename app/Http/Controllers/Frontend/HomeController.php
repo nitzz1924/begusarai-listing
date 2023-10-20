@@ -60,7 +60,6 @@ class HomeController extends Controller
     //     return back()->withErrors(['password' => 'Invalid credentials']);
     // }
 
-   
     public function loginForm(Request $request)
     {
         $request->validate([
@@ -163,11 +162,11 @@ class HomeController extends Controller
             })
                 ->select('businesslist.*', 'bookmarks.id AS bookmark_status')
                 ->orderBy('businesslist.home_featured', 'asc')
-                ->take(4)
+                ->take(6)
                 ->get();
         } else {
             $businesses = BusinessList::orderBy('home_featured', 'asc')
-                ->take(4)
+                ->take(6)
                 ->get();
         }
         $Result = [];
@@ -746,18 +745,17 @@ class HomeController extends Controller
 
         return view('frontend.setPassword', compact('User_id'));
     }
-
-    public function submitPassword(Request $request)
-    {
-        // Validate the request data
+public function submitPassword(Request $request)
+{
+    try {
         $validator = Validator::make($request->all(), [
             'first_name' => 'required',
             'type' => 'required|in:guest,owner',
-            'new_password' => 'required|min:6|confirmed', // Ensure 'new_password' and 'new_password_confirmation' match
-            'address_filing' => 'required', // Add validation for 'address_filing'
-            'block_number' => 'required_if:address_filing,from_begusarai', // Add validation for 'block_number' if 'from_begusarai' is selected
-            'village_ward' => 'required_if:address_filing,from_begusarai', // Add validation for 'village_ward' if 'from_begusarai' is selected
-            'city_name' => 'required_if:address_filing,outside_begusarai', // Add validation for 'city_name' if 'outside_begusarai' is selected
+            'new_password' => 'required|min:6|confirmed',
+            'address_filing' => 'required',
+            'block_number' => 'required_if:address_filing,from_begusarai',
+            'village_ward' => 'required_if:address_filing,from_begusarai',
+            'city_name' => 'required_if:address_filing,outside_begusarai',
         ]);
 
         if ($validator->fails()) {
@@ -767,61 +765,51 @@ class HomeController extends Controller
                 ->withInput();
         }
 
-        // Find the user record by mobileNumber
         $record = User_Login::where('id', $request->mobileNumber)->first();
 
         if ($record) {
-            // Update the user record with the provided data
             $record->name = $request->input('first_name');
             $record->type = $request->input('type');
-            $record->password = Crypt::encryptString($request->input('new_password'));
-            $record->status = '1';
+            $record->password = bcrypt($request->input('new_password'));
+            $record->status = 1;
 
-            // Set the additional fields based on the 'address_filing' value
-            $record->address_filing = $request->input('address_filing');
-            if ($request->input('address_filing') === 'from_begusarai') {
+            $addressFiling = $request->input('address_filing');
+            $record->address_filing = $addressFiling;
+
+            if ($addressFiling === 'from_begusarai') {
                 $record->block_number = $request->input('block_number');
                 $record->village_ward = $request->input('village_ward');
-                $record->city_name = null; // Set 'city_name' to null for 'from_begusarai'
-            } elseif ($request->input('address_filing') === 'outside_begusarai') {
-                $record->block_number = null; // Set 'block_number' to null for 'outside_begusarai'
-                $record->village_ward = null; // Set 'village_ward' to null for 'outside_begusarai'
+                $record->city_name = null;
+            } elseif ($addressFiling === 'outside_begusarai') {
+                $record->block_number = null;
+                $record->village_ward = null;
                 $record->city_name = $request->input('city_name');
             }
 
             $record->save();
 
-    //          $record->save();
-
-             
-    //         $credentials = [
-    //             'mobileNumber' => $record->mobileNumber,
-    //             'password' => Crypt::encryptString($request->input('new_password')),
-    //         ];
- 
-
-
-    // $user = User_Login::where('mobileNumber', $request->input('mobileNumber'))->first();
- 
-    //     if ($user && Crypt::decryptString($user->password) === $request->input('new_password')) {
-    //         Auth::guard('user')->login($user);
-    //         return response()->json(['success' => true, 'redirect' => '/', 'user' => $user]);
-    //     }  else {
-    //             return response()->json(['success' => false, 'message' => 'Registration failed. Please try again.'], 400);
-    //         }
-    //     }
-
-            if ($record) {
-                // Authentication passed
-              
-                return response()->json(['success' => true, 'message' => 'Account created successfully']);
+            if (Auth::attempt(['mobileNumber' => $record->mobileNumber, 'password' => $request->input('new_password')])) {
+                return redirect()->route('index')->with('success', 'Account Created Successfully');
             } else {
-                return response()->json(['success' => false, 'message' => 'Registration failed. Please try again.'], 400);
+                return redirect()->back()->with('error', 'Registration failed. Please try again.');
             }
+        } else {
+            return redirect()->back()->with('error', 'User record not found.');
         }
-
-        // Handle the case where the user record was not found or authentication failed
+    } catch (\Exception $e) {
+        return redirect()->back()->with('error', 'An error occurred. Please try again later.');
     }
+}
+
+
+
+    //  if ($record) {
+    //                 // Authentication passed
+
+    //                 return response()->json(['success' => true, 'message' => 'Account created successfully']);
+    //             } else {
+    //                 return response()->json(['success' => false, 'message' => 'Registration failed. Please try again.'], 400);
+    //             }
 
     public function listingDetail(Request $request, $category, $url)
     {
@@ -1294,7 +1282,6 @@ class HomeController extends Controller
             $value->rating = $averageRating;
             $value->count = count($reviews);
             $Result[] = $value;
-            
 
             // Debugging statements
             // dd($subvalue->title, $value->category, $subvalue->value);
@@ -1317,7 +1304,7 @@ class HomeController extends Controller
             ->where('type', '=', 'highlight')
             ->get();
 
-        return view('frontend.searchFilter', compact('Result','ResultFirst', 'submaster', 'submasterCategory', 'submasterHighlight', 'similer'));
+        return view('frontend.searchFilter', compact('Result', 'ResultFirst', 'submaster', 'submasterCategory', 'submasterHighlight', 'similer'));
     }
 
     public function showFilterData(Request $request)
