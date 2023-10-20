@@ -56,21 +56,26 @@
                             @enderror
 
                             <label class="fieldlabels">Business Description: <span style='color:red'>*</span></label>
-                            <textarea placeholder="Description" id="description" name="description" rows="4" cols="65"
-                                class="form-control">{{ isset($business) ? $business->description : old('description') }}</textarea>
+                            {{-- CKeditor --}}
+                            <textarea name="description" id="description" placeholder="Description" class="form-control">
+                                {{ isset($business) ? $business->description : old('description') }}
+                            </textarea>
+
+                            {{-- <textarea placeholder="Description" id="description" name="description" rows="4" cols="65"
+                                class="form-control">{{ isset($business) ? $business->description : old('description') }}</textarea> --}}
                             @error('description')
                             <div class="has-error mt-2">{{ $message }}</div>
                             @enderror
 
                             <!-- <label class="fieldlabels">Duration: *</label>
-                                                                                                                                                                                                                                                                                <input type="text" placeholder="Duration" id="duration" name="duration"
-                                                                                                                                                                                                                                                                                    value="{{ isset($business) ? $business->duration : old('duration') }}"
-                                                                                                                                                                                                                                                                                    class="form-control">
-                                                                                                                                                                                                                                                                                @error('duration')
-        <div class="has-error mt-2">{{ $message }}</div>
-    @enderror -->
+                                <input type="text" placeholder="Duration" id="duration" name="duration"
+                                    value="{{ isset($business) ? $business->duration : old('duration') }}"
+                                    class="form-control">
+                                @error('duration')
+                                    <div class="has-error mt-2">{{ $message }}</div>
+                                @enderror -->
 
-                            <label class="fieldlabels">Category: <span style='color:red'>*</span></label>
+                            <label class="fieldlabels mt-3">Category: <span style='color:red'>*</span></label>
 
                             <select data-placeholder="Select Category" class=" form-control mb-3" id="category"
                                 name="category">
@@ -519,6 +524,9 @@ function showTextBox() {
         textBoxContainer.style.display = "none";
     }
 }
+
+var editor = CKEDITOR.replace('description', {});
+
 </script>
 
 @endsection

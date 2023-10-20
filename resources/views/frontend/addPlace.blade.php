@@ -52,8 +52,11 @@
                             @enderror
 
                             <label class="fieldlabels">Business Description: <span style='color:red'>*</span></label>
-                            <textarea placeholder="Description" id="description" name="description" rows="4" cols="65"
-                                class="form-control"></textarea>
+                            {{-- CKeditor --}}
+                            <textarea name="description" id="description" placeholder="Description" class="form-control"></textarea>
+
+                            {{-- <textarea placeholder="Description" id="description" name="description" rows="4" cols="65"
+                                class="form-control"></textarea> --}}
                             @error('description')
                             <div class="has-error mt-2">{{ $message }}</div>
                             @enderror
@@ -65,7 +68,7 @@
                                     <div class="has-error mt-2">{{ $message }}</div>
                                 @enderror -->
 
-                            <label class="fieldlabels">Category: <span style='color:red'>*</span></label>
+                            <label class="fieldlabels mt-3 ">Category: <span style='color:red'>*</span></label>
                             <select data-placeholder="Select Category" class=" form-control mb-3" id="category"
                                 name="category">
                                 <option value="" selected disable>Select</option>
@@ -548,6 +551,9 @@ $('.custom-checkbox input[type="checkbox"]').on('change', function() {
         $(this).next('.checkmark').css('background-color', '#ddd'); // Revert to normal color
     }
 });
+
+var editor = CKEDITOR.replace('description', {});
+
 </script>
 
 @endsection

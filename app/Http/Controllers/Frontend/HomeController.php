@@ -164,11 +164,11 @@ class HomeController extends Controller
             })
                 ->select('businesslist.*', 'bookmarks.id AS bookmark_status')
                 ->orderBy('businesslist.home_featured', 'asc')
-                ->take(6)
+                ->take(5)
                 ->get();
         } else {
             $businesses = BusinessList::orderBy('home_featured', 'asc')
-                ->take(6)
+                ->take(5)
                 ->get();
         }
         $Result = [];
