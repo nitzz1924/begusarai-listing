@@ -30,6 +30,7 @@
                                     <th class="text-nowrap text-center">Number</th>
                                     <th class="text-nowrap text-center">Email</th>
                                     <th class="text-nowrap text-center">Address</th>
+                                    <th class="text-nowrap text-center">Doc.Image </th>
 
                                     <th class="text-nowrap text-center">Status </th>
                                     <th class="text-nowrap text-center">Featured</th>
@@ -47,6 +48,17 @@
                                         <td class="fw-bold text-nowrap ">{{ $business->phoneNumber1 }}</td>
                                         <td class="fw-bold">{{ $business->email }}</td>
                                         <td class="fw-bold">{{ $business->placeAddress }}</td>
+
+                                        <td class="fw-bold">
+
+                                            <a class="btn btn-dark"
+                                                href="{{ isset($business) && $business->documentImage ? asset('uploads/' . $business->documentImage) : asset('images/no-image.png') }}"
+                                                alt="" download>
+                                                Uploaded Document <i class="fa fa-file"></i>
+                                            </a>
+
+                                        </td>
+
                                         <td class="fw-bold">
                                             @if ($business->status == 1)
                                                 <a class="fw-bold  btn btn-success"
