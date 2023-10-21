@@ -24,7 +24,6 @@ use App\Models\Package;
 use App\Models\BuyPlan;
 use App\Models\Popup_ads;
 use App\Models\Duration;
-
 use Carbon\Carbon;
 use Razorpay\Api\Api;
 use DB;
@@ -139,7 +138,6 @@ class HomeController extends Controller
                 // 1062 is the error code for duplicate entry
                 return response()->json(['success' => false, 'errors' => ['']]);
                 // return response()->json(['success' => false, 'errors' => ['This mobile number is already registered.']]);
-
             } else {
                 // Handle other database-related errors
                 return response()->json(['success' => false, 'errors' => [$e->getMessage()]]);
@@ -1231,13 +1229,13 @@ class HomeController extends Controller
 
     public function searchFilter(Request $request, $category, $city, $highlight)
     {
-        $titleurl="";
+        $titleurl = '';
         if ($city == 'all' && $highlight == 'all' && $category != 'all') {
             $similer = BusinessList::where('category', $category)
                 ->where('status', '1')
                 ->orderBy('category_ranking', 'asc')
                 ->paginate(10);
-                $titleurl=$category;
+            $titleurl = $category;
         }
 
         if ($city != 'all' && $highlight == 'all' && $category == 'all') {
@@ -1245,13 +1243,13 @@ class HomeController extends Controller
                 ->where('status', '1')
                 ->orderBy('city_ranking', 'asc')
                 ->paginate(10);
-                $titleurl=$city;
+            $titleurl = $city;
         }
         if ($city == 'all' && $highlight == 'all' && $category == 'all') {
             $similer = BusinessList::where('status', '1')
                 ->orderBy('created_at', 'desc')
                 ->paginate(10);
-                  $titleurl="Search Listing";
+            $titleurl = 'Search Listing';
         }
         if ($city != 'all' && $highlight == 'all' && $category != 'all') {
             $similer = BusinessList::where('category', $category)
@@ -1259,7 +1257,7 @@ class HomeController extends Controller
                 ->where('status', '1')
                 ->orderBy('created_at', 'desc')
                 ->paginate(10);
-                 $titleurl=$city." | ".$category;
+            $titleurl = $city . ' | ' . $category;
         }
         $submasterCategory = Master::orderBy('created_at', 'asc')
             ->where('type', '=', 'category')
@@ -1270,7 +1268,7 @@ class HomeController extends Controller
             ->get();
 
         $Result = [];
-
+ $OpenStatus = '';
         foreach ($similer as $value) {
             $reviews = DB::table('reviews')
                 ->select('reviews.*', 'users_login.image')
@@ -1281,6 +1279,39 @@ class HomeController extends Controller
 
             $totalRating = 0;
             $totalReviews = count($reviews);
+           $duration = Duration::orderBy('created_at', 'asc')
+    ->where('businessId', $value->id)
+    ->get();
+
+$today = Carbon::now()->format('l');
+$OpenStatus = 'Close Now'; // Default to closed unless we find an open status
+
+if (count($duration) > 0) {
+    foreach ($duration as $timeItem) {
+        if ($timeItem->day == $today) {
+            $currentTime = Carbon::now();
+             $startTime="";
+ $endTime="";
+            if($timeItem->opening_time != '24 x 7'){
+            $startTime = Carbon::createFromFormat('h:i A', $timeItem->opening_time);
+            $endTime = Carbon::createFromFormat('h:i A', $timeItem->end_time);
+
+            }
+            else
+            {
+                  $OpenStatus = 'Open Now';
+                   break;
+            }
+           
+            if ($currentTime->between($startTime, $endTime)) {
+                $OpenStatus = 'Open Now';
+                break; // Exit the loop since we found an open status
+            }
+        }
+    }
+}
+
+// $OpenStatus now contains the status: 'Open Now' or 'Close Now'
 
             foreach ($reviews as $review) {
                 $totalRating += $review->rating;
@@ -1296,6 +1327,7 @@ class HomeController extends Controller
             // Merge the average rating into the business data
             $value->rating = $averageRating;
             $value->count = count($reviews);
+            $value->timestatus=$OpenStatus;
             $Result[] = $value;
 
             // Debugging statements
@@ -1319,12 +1351,11 @@ class HomeController extends Controller
             ->where('type', '=', 'highlight')
             ->get();
 
-        return view('frontend.searchFilter', compact('Result', 'ResultFirst', 'submaster', 'submasterCategory', 'submasterHighlight', 'similer','titleurl'));
+        return view('frontend.searchFilter', compact('Result', 'ResultFirst', 'submaster', 'submasterCategory', 'submasterHighlight', 'similer', 'titleurl'));
     }
 
     public function showFilterData(Request $request)
     {
-        
         $submasterCategory = Master::orderBy('created_at', 'asc')
             ->where('type', '=', 'category')
             ->get();
