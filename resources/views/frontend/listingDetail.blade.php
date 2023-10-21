@@ -16,7 +16,8 @@ use App\Models\User_Login;
 function getYouTubeVideoId($url) {
     $parsedUrl = parse_url($url);
     
-    if ($parsedUrl === false) {
+   
+    if ($parsedUrl === false || !isset($parsedUrl['host'])) {
         return null;
     }
 
@@ -353,11 +354,8 @@ function getYouTubeVideoId($url) {
                                         <tr>
                                             <td class="day">{{ $value->day }}</td>
                                             <td class="time">
-                                                {{ \Carbon\Carbon::parse($value->opening_time)->format('h:i A') }}
-                                                -
-                                                {{ \Carbon\Carbon::parse($value->end_time)->format('h:i A') }}
-
-                                            </td>
+                                          {{ $value->opening_time == "24 x 7" ? "24 x 7 Open" : ($value->opening_time == "Closed" ? "Closed" : $value->opening_time . " to " . $value->end_time) }}
+    </td>
                                         </tr>
                                     @endforeach
                                 </tbody>

@@ -1578,8 +1578,8 @@ class HomeController extends Controller
     {
         $validatedData = $request->validate([
             'day' => 'required|string|max:10',
-            'opening_time' => 'required|date_format:H:i',
-            'end_time' => 'required|date_format:H:i',
+            'opening_time' => 'required',
+            'end_time' => 'required',
         ]);
         $bId = $request->businessId;
         // Create a new Duration instance and fill it with the validated data
