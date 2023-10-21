@@ -170,7 +170,7 @@ class HomeController extends Controller
                 ->get();
         }
         $Result = [];
-
+$OpenStatus = '';
         foreach ($businesses as $value) {
             $reviews = DB::table('reviews')
                 ->select('reviews.*', 'users_login.image')
@@ -181,6 +181,36 @@ class HomeController extends Controller
 
             $totalRating = 0;
             $totalReviews = count($reviews);
+  $duration = Duration::orderBy('created_at', 'asc')
+    ->where('businessId', $value->id)
+    ->get();
+$today = Carbon::now()->format('l');
+$OpenStatus = 'Close Now'; // Default to closed unless we find an open status
+
+if (count($duration) > 0) {
+    foreach ($duration as $timeItem) {
+        if ($timeItem->day == $today) {
+            $currentTime = Carbon::now();
+             $startTime="";
+ $endTime="";
+            if($timeItem->opening_time != '24 x 7'){
+            $startTime = Carbon::createFromFormat('h:i A', $timeItem->opening_time);
+            $endTime = Carbon::createFromFormat('h:i A', $timeItem->end_time);
+
+            }
+            else
+            {
+                  $OpenStatus = 'Open Now';
+                   break;
+            }
+           
+            if ($currentTime->between($startTime, $endTime)) {
+                $OpenStatus = 'Open Now';
+                break; // Exit the loop since we found an open status
+            }
+        }
+    }
+}
 
             foreach ($reviews as $review) {
                 $totalRating += $review->rating;
@@ -196,6 +226,7 @@ class HomeController extends Controller
             // Merge the average rating into the business data
             $value->rating = $averageRating;
             $value->count = count($reviews);
+              $value->timestatus=$OpenStatus;
             $Result[] = $value;
         }
 
@@ -839,7 +870,7 @@ class HomeController extends Controller
             ->get();
 
         $Result = [];
-
+          $OpenStatus = '';
         foreach ($similer as $value) {
             $reviews = DB::table('reviews')
                 ->select('reviews.*', 'users_login.image')
@@ -850,6 +881,37 @@ class HomeController extends Controller
 
             $totalRating = 0;
             $totalReviews = count($reviews);
+  $duration = Duration::orderBy('created_at', 'asc')
+    ->where('businessId', $value->id)
+    ->get();
+
+$today = Carbon::now()->format('l');
+$OpenStatus = 'Close Now'; // Default to closed unless we find an open status
+
+if (count($duration) > 0) {
+    foreach ($duration as $timeItem) {
+        if ($timeItem->day == $today) {
+            $currentTime = Carbon::now();
+             $startTime="";
+ $endTime="";
+            if($timeItem->opening_time != '24 x 7'){
+            $startTime = Carbon::createFromFormat('h:i A', $timeItem->opening_time);
+            $endTime = Carbon::createFromFormat('h:i A', $timeItem->end_time);
+
+            }
+            else
+            {
+                  $OpenStatus = 'Open Now';
+                   break;
+            }
+           
+            if ($currentTime->between($startTime, $endTime)) {
+                $OpenStatus = 'Open Now';
+                break; // Exit the loop since we found an open status
+            }
+        }
+    }
+}
 
             foreach ($reviews as $review) {
                 $totalRating += $review->rating;
@@ -865,6 +927,7 @@ class HomeController extends Controller
             // Merge the average rating into the business data
             $value->rating = $averageRating;
             $value->count = count($reviews);
+             $value->timestatus=$OpenStatus;
             $Result[] = $value;
         }
 
@@ -1016,7 +1079,7 @@ class HomeController extends Controller
             ->get();
 
         $Result = [];
-
+$OpenStatus = '';
         foreach ($businesses as $value) {
             $reviews = DB::table('reviews')
                 ->select('reviews.*', 'users_login.image')
@@ -1027,7 +1090,37 @@ class HomeController extends Controller
 
             $totalRating = 0;
             $totalReviews = count($reviews);
+$duration = Duration::orderBy('created_at', 'asc')
+    ->where('businessId', $value->id)
+    ->get();
+    
+$today = Carbon::now()->format('l');
+$OpenStatus = 'Close Now'; // Default to closed unless we find an open status
 
+if (count($duration) > 0) {
+    foreach ($duration as $timeItem) {
+        if ($timeItem->day == $today) {
+            $currentTime = Carbon::now();
+             $startTime="";
+ $endTime="";
+            if($timeItem->opening_time != '24 x 7'){
+            $startTime = Carbon::createFromFormat('h:i A', $timeItem->opening_time);
+            $endTime = Carbon::createFromFormat('h:i A', $timeItem->end_time);
+
+            }
+            else
+            {
+                  $OpenStatus = 'Open Now';
+                   break;
+            }
+           
+            if ($currentTime->between($startTime, $endTime)) {
+                $OpenStatus = 'Open Now';
+                break; // Exit the loop since we found an open status
+            }
+        }
+    }
+}
             foreach ($reviews as $review) {
                 $totalRating += $review->rating;
             }
@@ -1042,6 +1135,7 @@ class HomeController extends Controller
             // Merge the average rating into the business data
             $value->rating = $averageRating;
             $value->count = count($reviews);
+             $value->timestatus=$OpenStatus;
             $Result[] = $value;
         }
 
@@ -1394,8 +1488,77 @@ if (count($duration) > 0) {
         }
         // Execute the query and get the results
         $filteredData = $query->get();
+        $OpenStatus = '';
+        foreach ($filteredData as $value) {
+            $reviews = DB::table('reviews')
+                ->select('reviews.*', 'users_login.image')
+                ->leftJoin('users_login', 'reviews.user_id', '=', 'users_login.id')
+                ->orderBy('reviews.created_at', 'desc')
+                ->where('listing_id', $value->id)
+                ->get();
 
-        return view('frontend.showFilterData', compact('filteredData', 'submasterCategory', 'submaster', 'submasterHighlight'));
+            $totalRating = 0;
+            $totalReviews = count($reviews);
+           $duration = Duration::orderBy('created_at', 'asc')
+    ->where('businessId', $value->id)
+    ->get();
+
+$today = Carbon::now()->format('l');
+$OpenStatus = 'Close Now'; // Default to closed unless we find an open status
+
+if (count($duration) > 0) {
+    foreach ($duration as $timeItem) {
+        if ($timeItem->day == $today) {
+            $currentTime = Carbon::now();
+             $startTime="";
+ $endTime="";
+            if($timeItem->opening_time != '24 x 7'){
+            $startTime = Carbon::createFromFormat('h:i A', $timeItem->opening_time);
+            $endTime = Carbon::createFromFormat('h:i A', $timeItem->end_time);
+
+            }
+            else
+            {
+                  $OpenStatus = 'Open Now';
+                   break;
+            }
+           
+            if ($currentTime->between($startTime, $endTime)) {
+                $OpenStatus = 'Open Now';
+                break; // Exit the loop since we found an open status
+            }
+        }
+    }
+}
+
+// $OpenStatus now contains the status: 'Open Now' or 'Close Now'
+
+            foreach ($reviews as $review) {
+                $totalRating += $review->rating;
+            }
+
+            if ($totalReviews > 0) {
+                $averageRating = $totalRating / $totalReviews;
+                $averageRating = number_format($averageRating, 1); // Display average rating with 1 decimal place
+            } else {
+                $averageRating = 0; // No reviews available
+            }
+
+            // Merge the average rating into the business data
+            $value->rating = $averageRating;
+            $value->count = count($reviews);
+            $value->timestatus=$OpenStatus;
+            $Result[] = $value;
+
+            // Debugging statements
+            // dd($subvalue->title, $value->category, $subvalue->value);
+        }
+        // Sort the $Result array by 'rating' in descending order
+        $ResultFirst = collect($Result)
+            ->sortByDesc('count')
+            ->values()
+            ->all();    
+        return view('frontend.showFilterData', compact('ResultFirst', 'submasterCategory', 'submaster', 'submasterHighlight'));
     }
 
     // public function User()

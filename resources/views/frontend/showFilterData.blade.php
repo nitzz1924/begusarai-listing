@@ -176,14 +176,14 @@
                     <div class="top-area top-area-filter">
                         <div class="filter-left">
                             <span class="result-count">
-                                @if (count($filteredData) == 0)
+                                @if (count($ResultFirst) == 0)
                                     Result not found
                                 @else
-                                    <span class="count">{{ count($filteredData) }}</span> Results found
+                                    <span class="count">{{ count($ResultFirst) }}</span> Results found
                                 @endif
                             </span>
 
-                            @foreach ($filteredData as $value)
+                            @foreach ($ResultFirst as $value)
                                 <!-- Loop content goes here -->
                                 <div class="result-item">
                                     <!-- Content for each result item goes here -->
@@ -219,9 +219,9 @@
 
                             <div class="row">
 
-                                @foreach ($filteredData as $value)
+                                @foreach ($ResultFirst as $value)
                                     @if ($value->status == 1)
-                                        <div class="place-item layout-02 place-hover" data-maps_name="mattone_restaurant">
+                                        <div class="place-item layout-02 place-hover">
                                             <div class="place-inner">
                                                 <div class="place-thumb hover-img">
                                                     <?php 
@@ -232,6 +232,7 @@
                                                         <img src="{{ URL::to('uploads/' . $value->coverImage) }}" />
                                                     </a>
 
+
                                                     <?php 
                                                         }else{
                                                         ?>
@@ -239,6 +240,7 @@
                                                         <img src="{{ URL::to('uploads/' . $value->coverImage) }}" />
                                                     </a>
                                                     <?php }?>
+
                                                     <?php 
                                                 if(Auth::user()){
                                                 ?>
@@ -246,6 +248,7 @@
                                                         data-place-id="{{ $value->id }}"
                                                         data-business-id="{{ $value->id }}">
                                                         <span class="icon-heart">
+
                                                             @if ($value->bookmark_status != null)
                                                                 <i class="la la-bookmark large"
                                                                     style="color: #ffb429;"></i>
@@ -255,82 +258,78 @@
                                                         </span>
                                                     </a>
                                                     <?php 
-                                                                }else{
-                                                                ?>
+                                            }else{
+                                            ?>
 
                                                     <div class="login-container">
                                                         <span class="login-message"> <a href="#"
                                                                 class=" btn-add-to-wishlist open-login test"
                                                                 data-place-id="" data-business-id="">
                                                                 <span class="icon-heart">
+
                                                                     <i class="la la-bookmark large"
                                                                         style="color:black"></i>
+
                                                                 </span>
                                                             </a></span>
+
                                                     </div>
+
                                                     <?php }?>
 
-                                                    {{-- @foreach ($submaster as $subvalue)
-                                                                <a class="entry-category rosy-pink"
-                                                                    href="{{ route('searchFilter', ['category' => $value->category, 'city' => 'all', 'highlight' => 'all']) }}">
-                                                                    @if ($subvalue->title === $value->category)
-                                                                        <i
-                                                                            class="{{ $subvalue->value ?? 'fa fa-question' }}"></i>
-                                                                    @endif
+                                                    <a class="entry-category rosy-pink"
+                                                        href="{{ route('searchFilter', ['category' => $value->category, 'city' => 'all', 'highlight' => 'all']) }}">
 
-                                                                    <span>{{ $value->category }}</span>
-                                                                </a>
-                                                            @endforeach --}}
+                                                        @foreach ($submaster as $subvalue)
+                                                            @if ($subvalue->title === $value->category)
+                                                                <i class="{{ $subvalue->value }}"></i>
+                                                            @endif
+                                                        @endforeach
+
+                                                        <span> {{ str_replace('-', ' ', $value->category) }}</span>
+
+
+                                                    </a>
+                                                    <!-- Add debugging statements -->
 
                                                     <a href="#" class="author" title="Author">
-                                                        <img src="{{ URL::to('uploads/' . $value->logo) }}"alt="Author" />
+                                                        <img src="{{ URL::to('uploads/' . $value->logo) }}"
+                                                            alt="Author" />
                                                     </a>
                                                     <!-- <div class="feature">Featured</div> -->
                                                 </div>
                                                 <div class="entry-detail">
+                                                    <h3 class="place-title">
+                                                        <?php 
+                                                        if(Auth::user()){
+                                                        ?>
+
+                                                        <a
+                                                            href="{{ URL::to('listingDetail/' . $value->category . '/' . Str::slug($value->businessName) . '-' . $value->id) }}">{{ $value->businessName }}</a>
+
+                                                        <?php 
+                                                        }else{
+                                                        ?>
+                                                        <a href=""
+                                                            class="open-login ">{{ $value->businessName }}</a>
+                                                        <?php }?>
+
+                                                    </h3>
+
                                                     <div class="entry-head">
 
-                                                        <h3 class="place-title">
-                                                            <?php 
-                                                            if(Auth::user()){
-                                                            ?>
-
-                                                            <a
-                                                                href="{{ URL::to('listingDetail/' . $value->category . '/' . Str::slug($value->businessName) . '-' . $value->id) }}">{{ $value->businessName }}</a>
-                                                            <?php 
-                                                            }else{
-                                                            ?>
-                                                            <a href=""
-                                                                class="open-login ">{{ $value->businessName }}</a>
-                                                            <?php }?>
-                                                        </h3>
-
-                                                        <!-- <div class="place-type  ">
-                                                                    <span>{{ $value->highlight }}</span>
-                                                                </div> -->
-                                                        <div class="place-type  ">
-                                                            @php
-                                                                $highlights = explode(',', $value->highlight); // Split the string into an array using a delimiter
-                                                                $highlights = array_slice($highlights, 0, 4); // Get the first two elements of the array
-                                                            @endphp
-                                                            @foreach ($highlights as $highlight)
-                                                                <span style="font-size:13px;">{{ $highlight }},</span>
-                                                            @endforeach
-                                                            ...
+                                                        <div class="place-type">
+                                                            <span>{{ $value->highlight }}</span>
                                                         </div>
 
                                                         <div class="place-city">
                                                             <a
                                                                 href="{{ route('searchFilter', ['category' => 'all', 'city' => $value->city, 'highlight' => 'all']) }}">{{ $value->city }}</a>
                                                         </div>
-
                                                     </div>
 
-                                                    {{-- <div class="open-now">
-                                                        <i class="las la-door-open"></i>Open now
-                                                    </div> --}}
-                                                    <div class="place-price">
-                                                        <span>{{ $value->price }}</span>
+                                                  <div class='{{$value->timestatus=="Close Now"?"close-now":"open-now"}}'>
+                                                        <i class="las la-door-open"></i>{{$value->timestatus}}
                                                     </div>
                                                     <div class="entry-bottom">
                                                         <div class="place-preview">
@@ -342,13 +341,13 @@
                                                             <span class="count-reviews">({{ $value->count }}
                                                                 Reviews)</span>
                                                         </div>
-
+                                                        <div class="place-price">
+                                                            <span>{{ $value->price }}</span>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-
-                                        {{-- </div> --}}
                                     @endif
                                 @endforeach
                             </div>

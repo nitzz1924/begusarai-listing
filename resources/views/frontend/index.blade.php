@@ -438,8 +438,8 @@
                                                         </div>
                                                     </div>
 
-                                                    <div class="open-now">
-                                                        <i class="las la-door-open"></i>Open now
+                                                  <div class='{{$value->timestatus=="Close Now"?"close-now":"open-now"}}'>
+                                                        <i class="las la-door-open"></i>{{$value->timestatus}}
                                                     </div>
                                                     <div class="entry-bottom">
                                                         <div class="place-preview">
