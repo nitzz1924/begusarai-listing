@@ -29,19 +29,18 @@ $popup = Popup_ads::orderBy('created_at', 'asc')
                                 class="img-fluid rounded-3">
                         </a>
 
-
                     </div>
                 @else
                     <div class="position-relative modal-body bg-image overlay p-0">
 
-                        <a href="{{ $popup->value }}">
-
-                            <iframe class="embed-responsive-item " id="iframe-content"
-                                src="https://www.youtube.com/embed/{{ $popup->value }}?autoplay=1&mute=1&controls=0"
-                                frameborder="0">
-                            </iframe>
-
-                        </a>
+                        @if ($popup && $popup->value)
+                            <a href="{{ $popup->value }}">
+                                <iframe class="embed-responsive-item" id="iframe-content"
+                                    src="https://www.youtube.com/embed/{{ $popup->value }}?autoplay=1&mute=1&controls=0"
+                                    frameborder="0">
+                                </iframe>
+                            </a>
+                        @endif
 
                     </div>
                 @endif
@@ -451,7 +450,10 @@ $popup = Popup_ads::orderBy('created_at', 'asc')
                                 <div class="">
                                     <div class="field-inline">
                                         <div class="field-input-number">
-                                            <input type="tel" placeholder="Phone Number" value=""
+                                            <label for="mobileNumber">Enter Phone Number<span
+                                                    style="color: red;">*</span></label>
+
+                                            <input type="tel" placeholder=" " value=""
                                                 id="mobileNumberotp" name="mobileNumberotp" pattern="[0-9]{10}"
                                                 maxlength="10" minlength="10" required />
 
@@ -465,7 +467,9 @@ $popup = Popup_ads::orderBy('created_at', 'asc')
                                     </div>
 
                                     <div class="field-input">
-                                        <input type="tel" id="verificationCode" placeholder="OTP" value=""
+                                        <label for="mobileNumber">OTP<span style="color: red;">*</span></label>
+
+                                        <input type="tel" id="verificationCode" placeholder="" value=""
                                             name="verificationCode" pattern="[0-9]{6}" maxlength="6"
                                             minlength="6" />
                                         <input type="hidden" id="generatedOTP" placeholder="OTP" value=""
@@ -504,12 +508,18 @@ $popup = Popup_ads::orderBy('created_at', 'asc')
                                     </div>
                                 </span>
                                 <div class="field-input">
-                                    <input type="tel" placeholder="Enter Phone Number" value=""
-                                        name="mobileNumber" pattern="[0-9]{10}" minlength="10" maxlength="10"
-                                        id="mobileNumber" required />
+                                    <label for="mobileNumber">Enter Phone Number<span
+                                            style="color: red;">*</span></label>
+
+                                    <input type="tel" placeholder="" value="" name="mobileNumber"
+                                        pattern="[0-9]{10}" minlength="10" maxlength="10" id="mobileNumber"
+                                        required />
                                 </div>
                                 <div class="field-input">
-                                    <input type="password" placeholder="Password" value="" name="password"
+                                    <label for="mobileNumber">Enter Your Password<span
+                                            style="color: red;">*</span></label>
+
+                                    <input type="password" placeholder=" " value="" name="password"
                                         id="password" required />
                                 </div>
                                 <a title="Forgot password" class="forgot_pass" href="/resetPassword">Forgot

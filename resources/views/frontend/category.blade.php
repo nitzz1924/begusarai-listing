@@ -79,8 +79,10 @@
 
                                         @if ($businessId == 0)
                                             @if (auth()->user() != null)
-                                                <a href="/ownerListing" class="btn" title="Get Started">{{ ($value->price*18/100)+ $value->price}}/-</a>
+                                                <a href="/ownerListing" class="btn" title="Get Started">with GST: ₹{{ ($value->price*18/100)+ $value->price}}/-</a>
+                                                
                                             @else
+                                                <p>With GST: ₹{{ ($value->price*18/100)+ $value->price}}/-</p>
                                                 <a href="#" class="btn open-login" title="Get Started">Login</a>
                                             @endif
                                         @else
@@ -88,7 +90,10 @@
                                                 @if (auth()->user() != null)
                                                     <a href="/checkoutPage/{{ $businessId }}/{{ $userId }}/{{ $value->id }}"
                                                         class="btn" title="Get Started">Get Started</a>
+                                                        <p>With GST: ₹{{ ($value->price*18/100)+ $value->price}}/-</p>
+                                                        
                                                 @else
+                                                    <p>With GST: ₹{{ ($value->price*18/100)+ $value->price}}/-</p>
                                                     <a href="#" class="btn open-login" title="Get Started">Login</a>
                                                 @endif
                                             @else

@@ -41,29 +41,32 @@
                             @foreach ($packages as $package)
                                 <div class="col-lg-4 mt-3">
                                     <div class="pricing-item shadow">
-                                        <div class="best-deal">{{ $package->title }}</div>
+                                        <!--<div class="best-deal">{{ $package->title }}</div>-->
                                         <div class="d-grid justify-content-center">
 
                                             <img src="{{ asset('assets\images\packages\Feature-Listing.png') }}"
                                             class="rounded-3 shadow" alt="Featured Listing">
                                         </div>
-                                        <h3>{{ $package->type }}</h3>
+                                        <h3>{{ $package->title }}</h3>
                                         <div class="price-container">
                                             <div class="price" style='margin-left: 59px;'>
                                                 <span class="currency">₹</span>{{ $package->price }}
                                             </div>
-                                            <div class="">18% GST</div>
+                                            <div class="">+18% GST</div>
                                             
                                         </div>
                                         @if ($businessId == 0)
                                             @if (auth()->user() != null)
-                                                <a href="/ownerListing" class="btn" title="Get Started">{{ ($package->price*18/100)+ $package->price}}/-</a>
+                                                <a href="/ownerListing" class="btn" title="Get Started">with GST: ₹{{ ($package->price*18/100)+ $package->price}}/-</a>
+                                                
                                             @else
+                                            <p>with GST: ₹{{ ($package->price*18/100)+ $package->price}}/-</p>
                                                 <a href="#" class="btn open-login" title="Get Started">Login</a>
                                             @endif
                                         @else
                                             <a href="/checkoutPage/{{ $businessId }}/{{ $userId }}/{{ $package->id }}"
                                                 class="btn" title="Get Started">Get Started</a>
+                                                <p>with GST: ₹{{ ($package->price*18/100)+ $package->price}}/-</p>
                                         @endif
                                         <ul>
                                             <li>{{ $package->duration=="12"?"1 Year":"$package->duration Month" }} </li>

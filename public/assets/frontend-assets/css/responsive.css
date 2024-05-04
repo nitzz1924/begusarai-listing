@@ -1218,11 +1218,11 @@
         padding-top: 15px;
         margin-bottom: 5px;
     }
-
+    
     .author-img {
-        max-width: 50%;
+        max-width: 50% !important;
     }
-
+    
     .carousel-item-slider {
         max-height: 200px;
     }
@@ -2111,7 +2111,7 @@
     .landing-title h2,
     .footer.layout-03 h2,
     .landing-plugins h2 {
-        font-size: 32px;
+        font-size: 15px;
     }
     .landing-demo,
     .landing-plugins {

@@ -246,7 +246,8 @@
                                             @endif
                                         </td>
                                         <td class="text-center">
-                                            <a href="{{ route('listingDetail', ['id' => $value->id, 'category' => $value->category]) }}"
+                                           
+                                            <a href="{{ URL::to('listingDetail/' . $value->category . '/' . Str::slug($value->businessName) . '-' . $value->id) }}"
                                                 class="btn btn-primary d-flex btn-sm " title="View"><i
                                                     class="la la-eye"
                                                     style="font-size: 18px; margin-right: 5px;"></i>View</a>

@@ -48,10 +48,11 @@ alert('{{ $successMessage }}');
         <form action="{{ route('SubmitPassword') }}" method="POST"
             class="form-underline form-sign form-content form-account" id='submitResetPassword'>
             @csrf
-            <p>Select Account Type</p>
+            
             <div class="member-wrap-top">
                 <h2>Setup Your Password</h2>
             </div>
+            <p>Select Account Type</p>
             <div class="field-inline mt-2 mb-3">
                 <div class="form-group-user">
                     <div class="row">

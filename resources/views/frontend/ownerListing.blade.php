@@ -67,9 +67,9 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                 <div class="container">
                     <ul>
                         @if (Auth::user()->type == 'Owner')
-                    <li class="active"><a href="/ownerDashboard">Dashboard</a></li>
-                    <li><a href="/ownerListing">My business</a></li>
-                    @endif
+                            <li><a href="/ownerDashboard">Dashboard</a></li>
+                            <li class="active"><a href="/ownerListing">My business</a></li>
+                        @endif
 
                         <li><a href="/ownerWishlist">Wishlist</a></li>
                         <li><a href="/ownerProfile">Profile</a></li>
@@ -147,132 +147,154 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                     </div>
 
                     <div class="table-responsive">
+                        @if (Auth::user()->type == 'Owner')
 
-                        <table class="member-place-list table-responsive">
+                            <table class="member-place-list table-responsive">
 
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Name</th>
-                                    <th>City</th>
-                                    <th>Category</th>
-                                    <th>Leads</th>
-                                    <th>Status</th>
-                                    <th> Payment</th>
-                                    <th style="display:table-footer-group">Ranking Plans</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-
-                            <tbody>
-                                @foreach ($businesses as $business)
+                                <thead>
                                     <tr>
+                                        <th>ID</th>
+                                        <th>Name</th>
+                                        <th>City</th>
+                                        <th>Category</th>
+                                        <th>Leads</th>
+                                        <th>Status</th>
+                                        <th> Payment</th>
+                                        <th style="display:table-footer-group">Ranking Plans</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
 
-                                        <td data-title="ID">{{ $loop->iteration }}</td>
-                                        <td data-title="Name">{{ $business->businessName }}</td>
-                                        <td data-title="City">{{ $business->city }}</td>
-                                        <td data-title="Category">{{ $business->category }}</td>
-                                        <td data-title="Leads">
-                                            <a href="{{ route('ownerLeads', ['id' => $business->id]) }}" class="list"
-                                                style="display: {{ $business->status == 0 ? 'none' : 'block' }}"
-                                                title="Leads    ">
-                                                <button class="btn">Check</button>
-                                            </a>
-                                        </td>
-                                        <td data-title="Status"
-                                            style="color: {{ $business->status == 0 ? '#ffad2d' : 'green' }}">
-                                            {{ $business->status == 0 ? 'Pending' : 'Approved' }}
-                                        </td>
-                                        <td data-title="Payment">
-                                            @if ($business->status == 0)
-                                                <a href="/packages/{{ $business->id }}" class="btn-sm btn-warning">
-                                                    Activate Plan
-                                                </a>
-                                            @else
-                                                <span class="status-label" style="color: green;">
-                                                    <i class="fas fa-check-circle " style="font-size: 20px;"></i>
-                                                    Paid
-                                                </span>
-                                            @endif
-                                        </td>
+                                <tbody>
 
-                                        <td data-title="category">
-                                            @if ($business->status != 0)
-                                                <a href="/category/{{ $business->id }}" class="btn-sm btn-warning">
-                                                    Activate Plan
-                                                </a>
-                                            @else
-                                                <span class="status-label" style="color: red;">
-                                                    <i class="fas fa-check-circle " style="font-size: 20px;"></i>
-                                                    Not Verifid
-                                                </span>
-                                            @endif
-                                        </td>
+                                    @if (count($businesses) > 0)
 
-                                        <td data-title="Action" class="place-action d-flex action-btn">
-                                            <a href="{{ route('editPlace', ['id' => $business->id]) }}" class="edit"
-                                                title="Edit">
-                                                <i class="las la-edit"></i>
-                                            </a>
+                                        @foreach ($businesses as $business)
+                                            <tr>
 
-                                            <a href="{{ URL::to('listingDetail/' . $business->category . '/' . Str::slug($business->businessName).'-'.$business->id ) }}"
-                                                class="view" title="View"><i class="la la-eye"></i></a>
+                                                <td data-title="ID">{{ $loop->iteration }}</td>
+                                                <td data-title="Name">{{ $business->businessName }}</td>
+                                                <td data-title="City">{{ $business->city }}</td>
+                                                <td data-title="Category">{{ $business->category }}</td>
+                                                <td data-title="Leads">
+                                                    <a href="{{ route('ownerLeads', ['id' => $business->id]) }}"
+                                                        class="list"
+                                                        style="display: {{ $business->status == 0 ? 'none' : 'block' }}"
+                                                        title="Leads    ">
+                                                        <button class="btn">Check</button>
+                                                    </a>
+                                                </td>
+                                                <td data-title="Status"
+                                                    style="color: {{ $business->status == 0 ? '#ffad2d' : 'green' }}">
+                                                    {{ $business->status == 0 ? 'Pending' : 'Approved' }}
+                                                </td>
+                                                <td data-title="Payment">
+                                                    @if ($business->status == 0)
+                                                        <a href="/packages/{{ $business->id }}" class="btn-sm btn-warning">
+                                                            Activate Plan
+                                                        </a>
+                                                    @else
+                                                        <span class="status-label" style="color: green;">
+                                                            <i class="fas fa-check-circle " style="font-size: 20px;"></i>
+                                                            Paid
+                                                        </span>
+                                                    @endif
+                                                </td>
 
-                                            {{-- <a href="{{ route('ownerLeads', ['id' => $business->id]) }}" class="list"
+                                                <td data-title="category">
+                                                    @if ($business->status != 0)
+                                                        <a href="/category/{{ $business->id }}" class="btn-sm btn-warning">
+                                                            Activate Plan
+                                                        </a>
+                                                    @else
+                                                        <span class="status-label" style="color: red;">
+                                                   <i class="fas fa-exclamation-triangle" style="color: red;"></i>
+
+
+
+                                                            Not verified 
+                                                        </span>
+                                                    @endif
+                                                </td>
+
+                                                <td data-title="Action" class="place-action d-flex action-btn">
+                                                    <a href="{{ route('editPlace', ['id' => $business->id]) }}"
+                                                        class="edit" title="Edit">
+                                                        <i class="las la-edit"></i>
+                                                    </a>
+
+                                                    <a href="{{ URL::to('listingDetail/' . $business->category . '/' . Str::slug($business->businessName) . '-' . $business->id) }}"
+                                                        class="view" title="View"><i class="la la-eye"></i></a>
+
+                                                    {{-- <a href="{{ route('ownerLeads', ['id' => $business->id]) }}" class="list"
                                                 style="display: {{ $business->status == 0 ? 'none' : 'block' }}"
                                                 title="list"><i class="la la-list"></i></a> --}}
 
-                                            <!-- <a href='#' class="delete" title="Delete"><i
-                                                                                        class="la la-trash-alt"></i></a> -->
+                                                    <!-- <a href='#' class="delete" title="Delete"><i
+                                                                                                class="la la-trash-alt"></i></a> -->
 
-                                            <!-- <form method="POST" action="{{ route('delete', ['id' => $business->id]) }}"
-                                                                method="POST"id="deleteForm">
-                                                                @csrf
-                                                                @method('DELETE')
-                                                                <a type="button" onclick="confirmDelete(this)" data-toggle="modal">
-                                                                    <i class="la la-trash-alt"></i>
-                                                                </a>
-                                                            </form> -->
-                                            <form method="POST" action="{{ route('delete', ['id' => $business->id]) }}"
-                                                id="deleteForm">
-                                                @csrf
-                                                @method('DELETE')
-                                                <a type="button" class=" " data-toggle="modal"
-                                                    data-target="#deleteModal">
-                                                    <i class="la la-trash-alt"></i>
-                                                </a>
-                                            </form>
+                                                    <!-- <form method="POST" action="{{ route('delete', ['id' => $business->id]) }}"
+                                                                        method="POST"id="deleteForm">
+                                                                        @csrf
+                                                                        @method('DELETE')
+                                                                        <a type="button" onclick="confirmDelete(this)" data-toggle="modal">
+                                                                            <i class="la la-trash-alt"></i>
+                                                                        </a>
+                                                                    </form> -->
+                                                    <form method="POST"
+                                                        action="{{ route('delete', ['id' => $business->id]) }}"
+                                                        id="deleteForm">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <a type="button" class=" " data-toggle="modal"
+                                                            data-target="#deleteModal">
+                                                            <i class="la la-trash-alt"></i>
+                                                        </a>
+                                                    </form>
 
-                                        </td>
-                                    </tr>
-                                @endforeach
-                                <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog"
-                                    aria-labelledby="deleteModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="deleteModalLabel" style="color:white">Confirm
-                                                    Deletion</h5>
-                                                <button type="button" class="close" data-dismiss="modal"
-                                                    aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                Are you sure you want to delete this item?
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary"
-                                                    data-dismiss="modal">Cancel</button>
-                                                <button type="submit" form="deleteForm"
-                                                    class="btn btn-danger">Delete</button>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    @else
+                                        <br>
+                                        <div style="color:#ff7070">
+                                            <p>1. Please add listings first.</p>
+                                            <p>2. Choose your plan</p>
+                                        </div>
+                                        <br><br>
+                                    @endif
+
+                                    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog"
+                                        aria-labelledby="deleteModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="deleteModalLabel" style="color:white">
+                                                        Confirm
+                                                        Deletion</h5>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    Are you sure you want to delete this item?
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-dismiss="modal">Cancel</button>
+                                                    <button type="submit" form="deleteForm"
+                                                        class="btn btn-danger">Delete</button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
 
-                            </tbody>
-                        </table>
+                                </tbody>
+                            </table>
+                        @else
+                            Your account type is guest, Please reguster/login with owner Account.
+                        @endif
                     </div>
 
                 </div>

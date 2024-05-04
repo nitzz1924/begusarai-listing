@@ -170,7 +170,7 @@ class HomeController extends Controller
                 ->get();
         }
         $Result = [];
-$OpenStatus = '';
+        $OpenStatus = '';
         foreach ($businesses as $value) {
             $reviews = DB::table('reviews')
                 ->select('reviews.*', 'users_login.image')
@@ -181,36 +181,37 @@ $OpenStatus = '';
 
             $totalRating = 0;
             $totalReviews = count($reviews);
-  $duration = Duration::orderBy('created_at', 'asc')
-    ->where('businessId', $value->id)
-    ->get();
-$today = Carbon::now()->format('l');
-$OpenStatus = 'Close Now'; // Default to closed unless we find an open status
+            $duration = Duration::orderBy('created_at', 'asc')
+                ->where('businessId', $value->id)
+                ->get();
+            $today = Carbon::now()->format('l');
+            $OpenStatus = 'Close Now'; // Default to closed unless we find an open status
 
-if (count($duration) > 0) {
-    foreach ($duration as $timeItem) {
-        if ($timeItem->day == $today) {
-            $currentTime = Carbon::now();
-             $startTime="";
- $endTime="";
-            if($timeItem->opening_time != '24 x 7'){
-            $startTime = Carbon::createFromFormat('h:i A', $timeItem->opening_time);
-            $endTime = Carbon::createFromFormat('h:i A', $timeItem->end_time);
+            if (count($duration) > 0) {
+                foreach ($duration as $timeItem) {
+                    if ($timeItem->day == $today || $timeItem->day == "All days") {
+                        $currentTime = Carbon::now();
+                        $startTime = '';
+                        $endTime = '';
+                         if ($timeItem->opening_time == '24 x 7'){
+                            $OpenStatus = 'Open Now';
+                            break;
+                        }
 
-            }
-            else
-            {
-                  $OpenStatus = 'Open Now';
-                   break;
-            }
-           
-            if ($currentTime->between($startTime, $endTime)) {
-                $OpenStatus = 'Open Now';
-                break; // Exit the loop since we found an open status
+                        if ($timeItem->opening_time != '24 x 7') {
+                            $startTime = Carbon::createFromFormat('h:i A', $timeItem->opening_time);
+                            $endTime = Carbon::createFromFormat('h:i A', $timeItem->end_time);
+                        }
+
+                        if ($currentTime->between($startTime, $endTime)) {
+                            
+                            $OpenStatus = 'Open Now';
+                            break; // Exit the loop since we found an open status
+                       
+                    }
+                }
             }
         }
-    }
-}
 
             foreach ($reviews as $review) {
                 $totalRating += $review->rating;
@@ -226,7 +227,7 @@ if (count($duration) > 0) {
             // Merge the average rating into the business data
             $value->rating = $averageRating;
             $value->count = count($reviews);
-              $value->timestatus=$OpenStatus;
+            $value->timestatus = $OpenStatus;
             $Result[] = $value;
         }
 
@@ -870,7 +871,7 @@ if (count($duration) > 0) {
             ->get();
 
         $Result = [];
-          $OpenStatus = '';
+        $OpenStatus = '';
         foreach ($similer as $value) {
             $reviews = DB::table('reviews')
                 ->select('reviews.*', 'users_login.image')
@@ -881,37 +882,39 @@ if (count($duration) > 0) {
 
             $totalRating = 0;
             $totalReviews = count($reviews);
-  $duration = Duration::orderBy('created_at', 'asc')
-    ->where('businessId', $value->id)
-    ->get();
+            $duration = Duration::orderBy('created_at', 'asc')
+                ->where('businessId', $value->id)
+                ->get();
 
-$today = Carbon::now()->format('l');
-$OpenStatus = 'Close Now'; // Default to closed unless we find an open status
+            $today = Carbon::now()->format('l');
+            $OpenStatus = 'Close Now'; // Default to closed unless we find an open status
 
-if (count($duration) > 0) {
-    foreach ($duration as $timeItem) {
-        if ($timeItem->day == $today) {
-            $currentTime = Carbon::now();
-             $startTime="";
- $endTime="";
-            if($timeItem->opening_time != '24 x 7'){
-            $startTime = Carbon::createFromFormat('h:i A', $timeItem->opening_time);
-            $endTime = Carbon::createFromFormat('h:i A', $timeItem->end_time);
+             if (count($duration) > 0) {
+                foreach ($duration as $timeItem) {
+                    if ($timeItem->day == $today || $timeItem->day == "All days") {
+                        $currentTime = Carbon::now();
+                        $startTime = '';
+                        $endTime = '';
+                         if ($timeItem->opening_time == '24 x 7'){
+                            $OpenStatus = 'Open Now';
+                            break;
+                        }
 
-            }
-            else
-            {
-                  $OpenStatus = 'Open Now';
-                   break;
-            }
-           
-            if ($currentTime->between($startTime, $endTime)) {
-                $OpenStatus = 'Open Now';
-                break; // Exit the loop since we found an open status
+                        if ($timeItem->opening_time != '24 x 7') {
+                            $startTime = Carbon::createFromFormat('h:i A', $timeItem->opening_time);
+                            $endTime = Carbon::createFromFormat('h:i A', $timeItem->end_time);
+                        }
+
+                        if ($currentTime->between($startTime, $endTime)) {
+                            
+                            $OpenStatus = 'Open Now';
+                            break; // Exit the loop since we found an open status
+                       
+                    }
+                }
             }
         }
-    }
-}
+
 
             foreach ($reviews as $review) {
                 $totalRating += $review->rating;
@@ -927,7 +930,7 @@ if (count($duration) > 0) {
             // Merge the average rating into the business data
             $value->rating = $averageRating;
             $value->count = count($reviews);
-             $value->timestatus=$OpenStatus;
+            $value->timestatus = $OpenStatus;
             $Result[] = $value;
         }
 
@@ -980,6 +983,7 @@ if (count($duration) > 0) {
     }
     public function ownerListing()
     {
+        if (Auth::check()) {
         $user = auth()->user();
         $Mastercity = Master::orderBy('created_at', 'asc')
             ->where('type', '=', 'City')
@@ -992,6 +996,11 @@ if (count($duration) > 0) {
             ->get(); // Fetch all businesses from the database
 
         return view('frontend.ownerListing', compact('businesses', 'Mastercity', 'MasterCategory'));
+        }
+        else{
+            return redirect()->route('index');
+
+        }
     }
 
     public function ownerDashboard()
@@ -1079,7 +1088,7 @@ if (count($duration) > 0) {
             ->get();
 
         $Result = [];
-$OpenStatus = '';
+        $OpenStatus = '';
         foreach ($businesses as $value) {
             $reviews = DB::table('reviews')
                 ->select('reviews.*', 'users_login.image')
@@ -1090,37 +1099,39 @@ $OpenStatus = '';
 
             $totalRating = 0;
             $totalReviews = count($reviews);
-$duration = Duration::orderBy('created_at', 'asc')
-    ->where('businessId', $value->id)
-    ->get();
-    
-$today = Carbon::now()->format('l');
-$OpenStatus = 'Close Now'; // Default to closed unless we find an open status
+            $duration = Duration::orderBy('created_at', 'asc')
+                ->where('businessId', $value->id)
+                ->get();
 
-if (count($duration) > 0) {
-    foreach ($duration as $timeItem) {
-        if ($timeItem->day == $today) {
-            $currentTime = Carbon::now();
-             $startTime="";
- $endTime="";
-            if($timeItem->opening_time != '24 x 7'){
-            $startTime = Carbon::createFromFormat('h:i A', $timeItem->opening_time);
-            $endTime = Carbon::createFromFormat('h:i A', $timeItem->end_time);
+            $today = Carbon::now()->format('l');
+            $OpenStatus = 'Close Now'; // Default to closed unless we find an open status
 
-            }
-            else
-            {
-                  $OpenStatus = 'Open Now';
-                   break;
-            }
-           
-            if ($currentTime->between($startTime, $endTime)) {
-                $OpenStatus = 'Open Now';
-                break; // Exit the loop since we found an open status
+             if (count($duration) > 0) {
+                foreach ($duration as $timeItem) {
+                    if ($timeItem->day == $today || $timeItem->day == "All days") {
+                        $currentTime = Carbon::now();
+                        $startTime = '';
+                        $endTime = '';
+                         if ($timeItem->opening_time == '24 x 7'){
+                            $OpenStatus = 'Open Now';
+                            break;
+                        }
+
+                        if ($timeItem->opening_time != '24 x 7') {
+                            $startTime = Carbon::createFromFormat('h:i A', $timeItem->opening_time);
+                            $endTime = Carbon::createFromFormat('h:i A', $timeItem->end_time);
+                        }
+
+                        if ($currentTime->between($startTime, $endTime)) {
+                            
+                            $OpenStatus = 'Open Now';
+                            break; // Exit the loop since we found an open status
+                       
+                    }
+                }
             }
         }
-    }
-}
+
             foreach ($reviews as $review) {
                 $totalRating += $review->rating;
             }
@@ -1135,7 +1146,7 @@ if (count($duration) > 0) {
             // Merge the average rating into the business data
             $value->rating = $averageRating;
             $value->count = count($reviews);
-             $value->timestatus=$OpenStatus;
+            $value->timestatus = $OpenStatus;
             $Result[] = $value;
         }
 
@@ -1362,7 +1373,7 @@ if (count($duration) > 0) {
             ->get();
 
         $Result = [];
- $OpenStatus = '';
+        $OpenStatus = '';
         foreach ($similer as $value) {
             $reviews = DB::table('reviews')
                 ->select('reviews.*', 'users_login.image')
@@ -1373,39 +1384,41 @@ if (count($duration) > 0) {
 
             $totalRating = 0;
             $totalReviews = count($reviews);
-           $duration = Duration::orderBy('created_at', 'asc')
-    ->where('businessId', $value->id)
-    ->get();
+            $duration = Duration::orderBy('created_at', 'asc')
+                ->where('businessId', $value->id)
+                ->get();
 
-$today = Carbon::now()->format('l');
-$OpenStatus = 'Close Now'; // Default to closed unless we find an open status
+            $today = Carbon::now()->format('l');
+            $OpenStatus = 'Close Now'; // Default to closed unless we find an open status
 
-if (count($duration) > 0) {
-    foreach ($duration as $timeItem) {
-        if ($timeItem->day == $today) {
-            $currentTime = Carbon::now();
-             $startTime="";
- $endTime="";
-            if($timeItem->opening_time != '24 x 7'){
-            $startTime = Carbon::createFromFormat('h:i A', $timeItem->opening_time);
-            $endTime = Carbon::createFromFormat('h:i A', $timeItem->end_time);
+             if (count($duration) > 0) {
+                foreach ($duration as $timeItem) {
+                    if ($timeItem->day == $today || $timeItem->day == "All days") {
+                        $currentTime = Carbon::now();
+                        $startTime = '';
+                        $endTime = '';
+                         if ($timeItem->opening_time == '24 x 7'){
+                            $OpenStatus = 'Open Now';
+                            break;
+                        }
 
-            }
-            else
-            {
-                  $OpenStatus = 'Open Now';
-                   break;
-            }
-           
-            if ($currentTime->between($startTime, $endTime)) {
-                $OpenStatus = 'Open Now';
-                break; // Exit the loop since we found an open status
+                        if ($timeItem->opening_time != '24 x 7') {
+                            $startTime = Carbon::createFromFormat('h:i A', $timeItem->opening_time);
+                            $endTime = Carbon::createFromFormat('h:i A', $timeItem->end_time);
+                        }
+
+                        if ($currentTime->between($startTime, $endTime)) {
+                            
+                            $OpenStatus = 'Open Now';
+                            break; // Exit the loop since we found an open status
+                       
+                    }
+                }
             }
         }
-    }
-}
 
-// $OpenStatus now contains the status: 'Open Now' or 'Close Now'
+
+            // $OpenStatus now contains the status: 'Open Now' or 'Close Now'
 
             foreach ($reviews as $review) {
                 $totalRating += $review->rating;
@@ -1421,7 +1434,7 @@ if (count($duration) > 0) {
             // Merge the average rating into the business data
             $value->rating = $averageRating;
             $value->count = count($reviews);
-            $value->timestatus=$OpenStatus;
+            $value->timestatus = $OpenStatus;
             $Result[] = $value;
 
             // Debugging statements
@@ -1499,39 +1512,41 @@ if (count($duration) > 0) {
 
             $totalRating = 0;
             $totalReviews = count($reviews);
-           $duration = Duration::orderBy('created_at', 'asc')
-    ->where('businessId', $value->id)
-    ->get();
+            $duration = Duration::orderBy('created_at', 'asc')
+                ->where('businessId', $value->id)
+                ->get();
 
-$today = Carbon::now()->format('l');
-$OpenStatus = 'Close Now'; // Default to closed unless we find an open status
+            $today = Carbon::now()->format('l');
+            $OpenStatus = 'Close Now'; // Default to closed unless we find an open status
 
-if (count($duration) > 0) {
-    foreach ($duration as $timeItem) {
-        if ($timeItem->day == $today) {
-            $currentTime = Carbon::now();
-             $startTime="";
- $endTime="";
-            if($timeItem->opening_time != '24 x 7'){
-            $startTime = Carbon::createFromFormat('h:i A', $timeItem->opening_time);
-            $endTime = Carbon::createFromFormat('h:i A', $timeItem->end_time);
+            if (count($duration) > 0) {
+                foreach ($duration as $timeItem) {
+                    if ($timeItem->day == $today || $timeItem->day == "All days") {
+                        $currentTime = Carbon::now();
+                        $startTime = '';
+                        $endTime = '';
+                         if ($timeItem->opening_time == '24 x 7'){
+                            $OpenStatus = 'Open Now';
+                            break;
+                        }
 
-            }
-            else
-            {
-                  $OpenStatus = 'Open Now';
-                   break;
-            }
-           
-            if ($currentTime->between($startTime, $endTime)) {
-                $OpenStatus = 'Open Now';
-                break; // Exit the loop since we found an open status
+                        if ($timeItem->opening_time != '24 x 7') {
+                            $startTime = Carbon::createFromFormat('h:i A', $timeItem->opening_time);
+                            $endTime = Carbon::createFromFormat('h:i A', $timeItem->end_time);
+                        }
+
+                        if ($currentTime->between($startTime, $endTime)) {
+                            
+                            $OpenStatus = 'Open Now';
+                            break; // Exit the loop since we found an open status
+                       
+                    }
+                }
             }
         }
-    }
-}
 
-// $OpenStatus now contains the status: 'Open Now' or 'Close Now'
+
+            // $OpenStatus now contains the status: 'Open Now' or 'Close Now'
 
             foreach ($reviews as $review) {
                 $totalRating += $review->rating;
@@ -1547,7 +1562,7 @@ if (count($duration) > 0) {
             // Merge the average rating into the business data
             $value->rating = $averageRating;
             $value->count = count($reviews);
-            $value->timestatus=$OpenStatus;
+            $value->timestatus = $OpenStatus;
             $Result[] = $value;
 
             // Debugging statements
@@ -1557,7 +1572,7 @@ if (count($duration) > 0) {
         $ResultFirst = collect($Result)
             ->sortByDesc('count')
             ->values()
-            ->all();    
+            ->all();
         return view('frontend.showFilterData', compact('ResultFirst', 'submasterCategory', 'submaster', 'submasterHighlight'));
     }
 

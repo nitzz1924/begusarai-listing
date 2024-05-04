@@ -9,7 +9,7 @@
                 <div class="container">
                     <ul>
                          @if (Auth::user()->type == 'Owner')
-                    <li class="active"><a href="/ownerDashboard">Dashboard</a></li>
+                    <li><a href="/ownerDashboard">Dashboard</a></li>
                     <li><a href="/ownerListing">My business</a></li>
                     @endif
                         <li><a href="/ownerWishlist">Wishlist</a></li>

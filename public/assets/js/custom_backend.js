@@ -17,6 +17,3 @@ $(function () {
         readURL(input);
     });
 });
-
-
-CKEDITOR.replace( '#description' );

@@ -558,7 +558,7 @@ body.modal-open .custom-overlay {
 
 .filter-btn {
     position: fixed;
-    bottom: 10%;
+    bottom: 12%;
     z-index: 99;
     left: 5%;
 }
