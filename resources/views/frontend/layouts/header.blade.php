@@ -12,8 +12,8 @@ $popup = Popup_ads::orderBy('created_at', 'asc')
 
 ?>
 <div class="modal fade" id="exampleModalFullscreen" tabindex="-1" aria-labelledby="exampleModalFullscreenLabel"
-    style="display: none;" aria-hidden="true">
-    <div class="modal-dialog modal-fullscreen">
+    style="display: none; background-color: black;" aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen-sm-down ">
         <div class="modal-content">
             <div class="modal-header" style="border-bottom: 0px">
                 <h5 class="modal-title"></h5>
@@ -50,6 +50,7 @@ $popup = Popup_ads::orderBy('created_at', 'asc')
         </div>
     </div>
 </div>
+
 <header id="header" class="site-header" style="border-bottom: 1px solid #eeeeee;">
     <div class="container-fluid">
         <div class="row">
@@ -572,10 +573,10 @@ $popup = Popup_ads::orderBy('created_at', 'asc')
             </div>
 
             <div class="mobile-bottom-nav__item">
-                <a href="/comingSoon">
+                <a href="/allCategories">
                     <div class="mobile-bottom-nav__item-content">
-                        <i class="fa-solid fa-briefcase fs-4 pb-1" style="color: #FEC868"></i>
-                        JOB
+                        <i class="fa-solid fa-folder-tree fs-4 pb-1" style="color: #FEC868"></i>
+                        Categories
                     </div>
                 </a>
             </div>
@@ -585,15 +586,6 @@ $popup = Popup_ads::orderBy('created_at', 'asc')
                     <div class="mobile-bottom-nav__item-content">
                         <i class="fa-solid fa-square-rss fs-4 pb-1" style="color: #FFCAAF"></i>
                         BLOG
-                    </div>
-                </a>
-            </div>
-
-            <div class="mobile-bottom-nav__item">
-                <a href="/comingSoon">
-                    <div class="mobile-bottom-nav__item-content">
-                        <i class="fa-solid fa-newspaper fs-4 pb-1" style="color: #DAB894"></i>
-                        NEWS
                     </div>
                 </a>
             </div>

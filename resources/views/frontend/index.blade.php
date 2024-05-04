@@ -245,26 +245,22 @@
                             Browse Businesses by Category
                         </h2> --}}
 
-                    <div class="grid-container">
+                    <div class="grid-container" id="categoryContainer">
                         @foreach ($submaster as $index => $value)
-                        @if ($index < 11) <!-- Display the first 11 category items -->
-                            <div class="bsn-cat-item cyan">
-                                <a
-                                    href="{{ route('searchFilter', ['category' => $value->title, 'city' => 'all', 'highlight' => 'all']) }}">
+                            <div class="bsn-cat-item cyan @if ($index >= 11) hidden initially-hidden @endif">
+                                <a href="{{ route('searchFilter', ['category' => $value->title, 'city' => 'all', 'highlight' => 'all']) }}">
                                     <i class="{{ $value->value }}"></i>
-                                    <span class="title">{{ str_replace('-', ' ', $value->title) }}</span>
-                                    {{-- <span class="place">{{ $categoryCount[$value->title] }}</span> --}}
+                                    <span class="title text-lowercase">{{ str_replace('-', ' ', $value->title) }}</span>
                                 </a>
                             </div>
-                            @endif
-                            @endforeach
+                        @endforeach
 
-                            <!-- Display the "See More" button after the first 11 categories -->
-                            <div class="bsn-cat-item green p-0">
-                                <a href="/allCategories" class="see-more">
-                                    <span class="title">See More</span>
-                                </a>
-                            </div>
+                        <!-- Display the "See More" button after the first 11 categories -->
+                        <div class="bsn-cat-item green p-0">
+                            <a href="#" class="see-more" onclick="toggleCategories()">
+                                <span class="title">See More</span>
+                            </a>
+                        </div>
                     </div>
 
                 </div>
@@ -718,5 +714,28 @@ aElement.addEventListener('click', function(event) {
     sInput.value = dataCityValue;
 });
 </script>
+
+
+<script>
+    var categoriesVisible = false; // Initialize the state variable
+
+    function toggleCategories() {
+        // Toggle visibility of initially hidden category items beyond the first 11
+        var initiallyHiddenCategories = document.querySelectorAll('.bsn-cat-item.cyan.initially-hidden');
+        initiallyHiddenCategories.forEach(function(category) {
+            category.classList.toggle('hidden');
+        });
+
+        // Update the state variable
+        categoriesVisible = !categoriesVisible;
+
+        // Update the text of the "See More" button based on the current state
+        var seeMoreButton = document.querySelector('.see-more');
+        seeMoreButton.querySelector('.title').textContent = categoriesVisible ? 'See Less' : 'See More';
+    }
+</script>
+
+
+
 
 @endsection

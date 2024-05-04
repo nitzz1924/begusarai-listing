@@ -452,7 +452,7 @@ body.modal-open .custom-overlay {
 }
 
 .see-more {
-    display: grid !important;
+    /* display: grid !important; */
     align-content: center;
     padding: 0 !important;
 }
