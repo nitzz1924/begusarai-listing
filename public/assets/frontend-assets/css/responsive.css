@@ -1202,7 +1202,6 @@
         font-size: 24px;
         vertical-align: -7px;
     }
-    
 }
 @media only screen and (max-width: 575px) {
     .intro__meta .intro__meta__item {
@@ -1218,15 +1217,15 @@
         padding-top: 15px;
         margin-bottom: 5px;
     }
-    
+
     .author-img {
         max-width: 50% !important;
     }
-    
+
     .carousel-item-slider {
         max-height: 200px;
     }
-    
+
     .popup-form.open {
         left: 0;
     }
@@ -1235,7 +1234,7 @@
         line-height: 45px;
     }
 
-    .site-banner__search.layout-02 .field-submit button{
+    .site-banner__search.layout-02 .field-submit button {
         height: 35px;
         line-height: 35px;
         width: 35px;
@@ -1247,7 +1246,6 @@
 
     .grid-container {
         grid-template-columns: repeat(4, 1fr);
-        
     }
 
     .home-main .site-banner__content h1 {
@@ -2010,14 +2008,10 @@
         left: 15px;
         right: 15px;
     }
-
-    .popup-form.open {
-        left: 15px;
-    }
     .carousel-item-slider {
         max-height: 200px;
     }
-    
+
     .area-places .place-item {
         -webkit-box-flex: 0;
         -ms-flex: 0 0 100%;
@@ -2076,7 +2070,12 @@
         width: auto;
     }
     .popup-form.open {
-        top: 15px;
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        bottom: 0px;
+        margin-bottom: 0px !important;
+        align-content: center;
     }
     .post {
         margin-bottom: 20px;
@@ -2240,7 +2239,6 @@
 
     .grid-container {
         grid-template-columns: repeat(4, 1fr);
-        
     }
 
     .promo-img {
@@ -2248,6 +2246,5 @@
         width: 350px;
         height: 194px;
         object-position: center;
-
     }
 }

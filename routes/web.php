@@ -67,12 +67,12 @@ Route::group(
 );
 
 // User Auth
-Route::prefix('user_login')->group(function () {
-    Route::get('login', 'Auth\User\LoginController@login')->name('user.auth.login');
-    Route::post('login', 'Auth\User\LoginController@loginUser')->name('user.auth.loginUser');
-    Route::post('logout', 'Auth\User\LoginController@logout')->name('user.auth.logout');
-    Route::get('logout', 'Auth\User\LoginController@logout');
-});
+// Route::prefix('user_login')->group(function () {
+//     Route::get('login', 'Auth\User\LoginController@login')->name('user.auth.login');
+//     Route::post('login', 'Auth\User\LoginController@loginUser')->name('user.auth.loginUser');
+//     Route::post('logout', 'Auth\User\LoginController@logout')->name('user.auth.logout');
+//     Route::get('logout', 'Auth\User\LoginController@logout');
+// });
 
 // User Dashboard
 Route::group(
@@ -120,7 +120,6 @@ Route::middleware(['auth'])->group(function () {
 Route::post('/add-business', 'HomeController@store')->name('business.store');
 Route::get('/ownerListing', [HomeController::class, 'ownerListing'])->name('ownerListing');
 
- 
 Route::delete('/business/delete/{id}', 'Frontend\HomeController@delete')->name('delete');
 
 Route::get('/editPlace/{id}', [HomeController::class, 'editPlace'])->name('editPlace');

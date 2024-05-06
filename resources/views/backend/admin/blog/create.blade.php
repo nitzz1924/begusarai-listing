@@ -67,9 +67,9 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="post" class="form-label">Post:</label>
-                    <textarea class="form-control" name="post" id="post"></textarea>
-                    @error('post')
+                    <label for="postcontent" class="form-label">Blog Post:</label>
+                    <textarea class="form-control" name="postcontent" id="postcontent"></textarea>
+                    @error('postcontent')
                         <div class="has-error mt-2">{{ $message }}</div>
                     @enderror
                 </div> <!-- Image Upload -->

@@ -61,7 +61,7 @@ class BlogController extends Controller
             'description' => 'required',
             'type' => 'required',
             'keyword' => 'required',
-            'post' => 'required',
+            'postcontent' => 'required',
         ]);
 
         // Upload the image
@@ -86,7 +86,7 @@ class BlogController extends Controller
             'description' => $request->input('description'),
             'type' => $request->input('type'),
             'keyword' => $request->input('keyword'),
-            'post' => $request->input('post'),
+            'post' => $request->input('postcontent'),
             'image' => $imagePath, // Store the file name in the 'image' column
             'videourl' => $request->input('videourl'),
         ]);
@@ -146,7 +146,7 @@ class BlogController extends Controller
             'description' => 'required',
             'type' => 'required',
             'keyword' => 'required',
-            'post' => 'required',
+            'postcontent' => 'required',
         ]);
 
         // Find the blog entry to update
@@ -157,8 +157,14 @@ class BlogController extends Controller
         $blog->description = $request->input('description');
         $blog->type = $request->input('type');
         $blog->keyword = $request->input('keyword');
-        $blog->post = $request->input('post');
+        // $blog->post = $request->input('postcontent');
         $imagePath = $blog->image; // Store the current image path
+        $videoPath = $blog->videourl; // Store the current image path
+
+        $postcontent = $request->input('postcontent');
+        Log::info('Post Content from Request: ' . $postcontent); // Log the value to see if it's correct
+        $blog->post = $postcontent;
+
 
         // Handle the image upload if a new image is provided
         if ($request->hasFile('image')) {
@@ -177,8 +183,8 @@ class BlogController extends Controller
         // Update the 'image' column with the new or existing image path
         $blog->image = $imagePath;
 
-        $blog->videourl = $request->input('videourl');
-        $blog->save();
+        // $blog->videourl = $request->input('videourl');
+        $blog->videourl = $videoPath;
 
         return redirect()
             ->route('admin.blog.index')

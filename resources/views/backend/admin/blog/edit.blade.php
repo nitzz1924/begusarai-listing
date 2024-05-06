@@ -24,7 +24,7 @@
             <!-- Description -->
             <div class="form-group">
                 <label for="description">Description</label>
-                <textarea class="form-control" id="description" name="description" rows="4" required>{{ old('description', $blog->description) }}</textarea>
+                <textarea class="form-control" id="description" name="description" rows="1" required>{{ old('description', $blog->description) }}</textarea>
             </div>
 
 
@@ -58,12 +58,13 @@
 
 
             <div class="mb-3">
-                <label for="post" class="form-label">Post:</label>
-                <textarea class="form-control" name="post" id="post">   value="{{ old('title', $blog->post) }}"</textarea>
-                @error('post')
+                <label for="postcontent" class="form-label">Blog Post:</label>
+                <textarea class="form-control" name="postcontent" id="post" rows="4">{{ $blog->post }}</textarea>
+                @error('postcontent')
                     <div class="has-error mt-2">{{ $message }}</div>
                 @enderror
             </div>
+
 
 
             <!-- Current Image -->
@@ -88,7 +89,8 @@
 
             <div class="mb-3">
                 <label for="videourl" class="form-label">Video URL:</label>
-                <input type="text" class="form-control" name="videourl" id="videourl" value="videourl">
+                <input type="text" class="form-control" name="videourl" id="videourl"
+                    value="{{ old('title', $blog->videourl) }}">
                 @error('videourl')
                     <div class="has-error mt-2">{{ $message }}</div>
                 @enderror

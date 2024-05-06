@@ -544,6 +544,12 @@ body.modal-open .custom-overlay {
     flex-direction: column;
     justify-content: center;
 }
+.mobile-bottom-nav__item:hover {
+    /* background-color: #23d3d3; */
+}
+.mobile-bottom-nav__item a:active {
+    color: #23d3d3;
+}
 
 .mobile-bottom-nav__item--active {
     /* Dev */
@@ -960,4 +966,32 @@ video {
 #iframe-content {
     width: 795px;
     height: 445px;
+}
+
+.collapse {
+    visibility: inherit !important;
+}
+
+.accordion-button:not(.collapsed) {
+    color: #0cd0e4 !important;
+    background-color: #e7f9ff !important;
+}
+.accordion-button:focus {
+    border-color: #0cd0e4 !important;
+}
+
+#timer {
+    text-align: center;
+    color: black;
+}
+
+.btn.disabled, .btn:disabled, fieldset:disabled .btn  #sendOTPButton {
+    pointer-events: none;
+    opacity: 0.65;
+    background-color: #4b4b4b !important;
+}
+.popup-form .form-container {
+    max-width: 400px;
+    width: 100%;
+
 }
