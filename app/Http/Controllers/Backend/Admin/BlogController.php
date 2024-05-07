@@ -139,6 +139,7 @@ class BlogController extends Controller
     public function update(Request $request, $id)
     {
         // Validate form data
+        // dd($all);
         $request->validate([
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Allow image to be optional
             'videourl' => 'required',
@@ -151,7 +152,7 @@ class BlogController extends Controller
 
         // Find the blog entry to update
         $blog = Blog::findOrFail($id);
-
+        
         // Update the blog entry
         $blog->title = $request->input('title');
         $blog->description = $request->input('description');
@@ -160,10 +161,7 @@ class BlogController extends Controller
         // $blog->post = $request->input('postcontent');
         $imagePath = $blog->image; // Store the current image path
         $videoPath = $blog->videourl; // Store the current image path
-
-        $postcontent = $request->input('postcontent');
-        Log::info('Post Content from Request: ' . $postcontent); // Log the value to see if it's correct
-        $blog->post = $postcontent;
+        $blog->post = $request->input('postcontent');
 
 
         // Handle the image upload if a new image is provided
@@ -185,7 +183,7 @@ class BlogController extends Controller
 
         // $blog->videourl = $request->input('videourl');
         $blog->videourl = $videoPath;
-
+        $blog->save();
         return redirect()
             ->route('admin.blog.index')
             ->with('success', 'Blog updated successfully.');

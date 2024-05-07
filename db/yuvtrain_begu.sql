@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: May 04, 2024 at 12:55 PM
--- Server version: 5.7.23-23
--- PHP Version: 8.1.27
+-- Host: 127.0.0.1
+-- Generation Time: May 07, 2024 at 07:15 AM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -33,11 +33,11 @@ CREATE TABLE `admins` (
   `email` varchar(255) DEFAULT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
   `password` varchar(255) NOT NULL,
-  `status` tinyint(4) NOT NULL DEFAULT '1',
+  `status` tinyint(4) NOT NULL DEFAULT 1,
   `remember_token` varchar(100) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `admins`
@@ -60,14 +60,22 @@ CREATE TABLE `blogs` (
   `type` varchar(200) NOT NULL,
   `keyword` varchar(255) NOT NULL,
   `post` text NOT NULL,
-  `uploaded_by` int(11) DEFAULT '1',
+  `uploaded_by` int(11) DEFAULT 1,
   `image` varchar(255) DEFAULT 'assets/images/blog/default.png',
   `videourl` text NOT NULL,
-  `status` tinyint(4) DEFAULT '1',
+  `status` tinyint(4) DEFAULT 1,
   `postbyId` bigint(20) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `blogs`
+--
+
+INSERT INTO `blogs` (`id`, `title`, `description`, `type`, `keyword`, `post`, `uploaded_by`, `image`, `videourl`, `status`, `postbyId`, `created_at`, `updated_at`) VALUES
+(1, 'Test Title', 'Test description for blog', 'begusarai Blog 1', 'keywords', 'Test description for blogTest description for blogTest description for blogTest description for blogTest description for blogTest description for blogTest description for blogTest description for blogTest description for blogTest description for blogTest description for blogTest description for blogTest description for blogTest description for blogTest description for blogTest description for blogTest description for blogTest description for blogTest description for blog', 1, '1714989588.jpg', 'https://www.youtube.com/watch?v=jRKkudbOwjM', 1, NULL, '2024-05-06 10:28:25', '2024-05-06 10:31:38'),
+(2, 'blog 12345', 'blog 2 description', 'begusarai Blog 1', 'test blog 2', 'text content for blog 2asd', 1, '1715058779.jpeg', 'https://www.youtube.com/watch?v=jRKkudbOwjM', 1, NULL, '2024-05-06 11:38:23', '2024-05-07 05:42:59');
 
 -- --------------------------------------------------------
 
@@ -81,7 +89,7 @@ CREATE TABLE `bookmarks` (
   `user_id` int(20) NOT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `bookmarks`
@@ -108,7 +116,7 @@ CREATE TABLE `businesslist` (
   `businessName` varchar(255) DEFAULT NULL,
   `category` varchar(255) DEFAULT NULL,
   `placeType` varchar(255) DEFAULT NULL,
-  `description` text,
+  `description` text DEFAULT NULL,
   `price` varchar(255) DEFAULT NULL,
   `duration` varchar(255) DEFAULT NULL,
   `highlight` varchar(255) DEFAULT NULL,
@@ -136,17 +144,17 @@ CREATE TABLE `businesslist` (
   `video` varchar(255) DEFAULT NULL,
   `status` enum('0','1','','') NOT NULL DEFAULT '0',
   `planStatus` enum('0','1','2','') NOT NULL DEFAULT '0',
-  `category_ranking` int(255) NOT NULL DEFAULT '11',
-  `city_ranking` int(255) DEFAULT '11',
-  `featured_ranking` int(255) NOT NULL DEFAULT '11',
-  `home_featured` int(255) NOT NULL DEFAULT '11',
-  `search_results` int(255) NOT NULL DEFAULT '11',
+  `category_ranking` int(255) NOT NULL DEFAULT 11,
+  `city_ranking` int(255) DEFAULT 11,
+  `featured_ranking` int(255) NOT NULL DEFAULT 11,
+  `home_featured` int(255) NOT NULL DEFAULT 11,
+  `search_results` int(255) NOT NULL DEFAULT 11,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
   `dType` varchar(255) DEFAULT NULL,
   `dNumber` varchar(255) DEFAULT NULL,
   `leadStatus` enum('0','1') NOT NULL DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `businesslist`
@@ -184,7 +192,7 @@ CREATE TABLE `buy_plan` (
   `expair_at` datetime NOT NULL,
   `status` enum('1','0') NOT NULL DEFAULT '1',
   `updated_at` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `buy_plan`
@@ -224,7 +232,7 @@ CREATE TABLE `career` (
   `status` enum('0','1') NOT NULL DEFAULT '0',
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC;
 
 -- --------------------------------------------------------
 
@@ -239,9 +247,9 @@ CREATE TABLE `contact` (
   `email` varchar(255) NOT NULL,
   `cnumber` varchar(255) NOT NULL,
   `message` varchar(255) NOT NULL,
-  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `created_at` datetime DEFAULT current_timestamp(),
+  `updated_at` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `contact`
@@ -270,8 +278,8 @@ CREATE TABLE `failed_jobs` (
   `queue` text NOT NULL,
   `payload` longtext NOT NULL,
   `exception` longtext NOT NULL,
-  `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -289,7 +297,7 @@ CREATE TABLE `lead` (
   `status` varchar(255) DEFAULT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `lead`
@@ -458,7 +466,7 @@ CREATE TABLE `master` (
   `status` varchar(255) NOT NULL DEFAULT 'Active',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `master`
@@ -551,7 +559,7 @@ CREATE TABLE `migrations` (
   `id` int(10) UNSIGNED NOT NULL,
   `migration` varchar(255) NOT NULL,
   `batch` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `migrations`
@@ -583,7 +591,7 @@ CREATE TABLE `model_has_permissions` (
   `permission_id` bigint(20) UNSIGNED NOT NULL,
   `model_type` varchar(255) NOT NULL,
   `model_id` bigint(20) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -595,7 +603,7 @@ CREATE TABLE `model_has_roles` (
   `role_id` bigint(20) UNSIGNED NOT NULL,
   `model_type` varchar(255) NOT NULL,
   `model_id` bigint(20) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `model_has_roles`
@@ -615,12 +623,12 @@ CREATE TABLE `oauth_access_tokens` (
   `user_id` bigint(20) UNSIGNED DEFAULT NULL,
   `client_id` bigint(20) UNSIGNED NOT NULL,
   `name` varchar(255) DEFAULT NULL,
-  `scopes` text,
+  `scopes` text DEFAULT NULL,
   `revoked` tinyint(1) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `expires_at` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `oauth_access_tokens`
@@ -683,12 +691,14 @@ INSERT INTO `oauth_access_tokens` (`id`, `user_id`, `client_id`, `name`, `scopes
 ('7237fb3309a1f9fbdc368aae545772945a3a9717ea3dfbe9fc462eb16d33146ce199f410d39626b5', 1, 4, 'adminApiToken', '[]', 0, '2023-09-15 12:13:14', '2023-09-15 12:13:14', '2024-09-15 17:43:14'),
 ('72619892c8310ec3fb3d1c00dfc42a9226715a2a3ac4c2e6eba9052c899a1697de0c58c5a13996cb', 1, 4, 'adminApiToken', '[]', 0, '2023-10-11 11:44:09', '2023-10-11 11:44:09', '2024-10-11 17:14:09'),
 ('72b5711d7a2d92c9a272f215b739ea3afef71b3571567acc342c20f4245626ebb5607a30df4e955f', 2, 4, 'adminApiToken', '[]', 0, '2024-03-18 05:12:01', '2024-03-18 05:12:01', '2025-03-18 10:42:01'),
+('7427953d964857ff674ed5852a74e93a014340c094bb3657cb2dc83e906c0249144eafa1c780c75f', 2, 4, 'adminApiToken', '[]', 0, '2024-05-06 10:20:56', '2024-05-06 10:20:56', '2025-05-06 15:50:56'),
 ('74dde390ef0dfe1e0bb5969e8cea0eccf2a1899b3ffb04cea97af5d7967d301d1877aaf44178fb84', 2, 4, 'adminApiToken', '[]', 0, '2023-10-12 15:12:06', '2023-10-12 15:12:06', '2024-10-12 20:42:06'),
 ('74ff4b70b41833ab81203a2a2141c327739032770ed25dd3c6cf689fd475d578a0f50427539592d0', 1, 4, 'adminApiToken', '[]', 0, '2023-09-18 05:29:36', '2023-09-18 05:29:36', '2024-09-18 10:59:36'),
 ('77b00e1bc1b67d5485699227743fce9a373be306981b4e5609c5cf1de4ab7b0bf49e74924503f866', 2, 4, 'adminApiToken', '[]', 0, '2023-10-11 10:50:33', '2023-10-11 10:50:33', '2024-10-11 16:20:33'),
 ('77e00bb4c445d82f6fa939489cc7ecf0a1f5203a5916b7946ef97816b41ae6703df53bfb679ccbef', 1, 4, 'adminApiToken', '[]', 0, '2023-09-07 05:05:11', '2023-09-07 05:05:11', '2024-09-07 10:35:11'),
 ('7e0e53353cbdb040e993cff65816b4dd41221139351c507451e34ac7e3301ebf39646a4f3260d791', 1, 4, 'adminApiToken', '[]', 0, '2023-10-13 11:20:29', '2023-10-13 11:20:29', '2024-10-13 16:50:29'),
 ('8126bf299d71105d4936a847f49f46fe1bd5a34bcf56f018719291091e183de993a32a412705e80a', 1, 4, 'adminApiToken', '[]', 0, '2023-10-11 08:53:38', '2023-10-11 08:53:38', '2024-10-11 14:23:38'),
+('82792ebdd1f5cc9101807cf78605dd4133aa3830f1a1ada162b02a0682caf79b5f1435efce339340', 2, 4, 'adminApiToken', '[]', 0, '2024-05-07 05:18:14', '2024-05-07 05:18:14', '2025-05-07 10:48:14'),
 ('864703c0946a4289699c76235a5e29763311b232604d9e934a2806f5e7225d073003a8c3d28eedfd', 2, 4, 'adminApiToken', '[]', 0, '2024-03-11 12:13:04', '2024-03-11 12:13:04', '2025-03-11 17:43:04'),
 ('88cf5da31e2e53a53ea50c1307b5d6e50791db94cc3726f64d525b258d2f31baad5667cfe4c0f666', 1, 4, 'adminApiToken', '[]', 0, '2023-09-04 07:15:09', '2023-09-04 07:15:09', '2024-09-04 12:45:09'),
 ('8ca3f8184b4b39115c3e1b55481e7aae525b69379b83fea4d5df554753edc7068a15dd514d28ce79', 1, 4, 'adminApiToken', '[]', 0, '2023-10-13 04:34:23', '2023-10-13 04:34:23', '2024-10-13 10:04:23'),
@@ -758,10 +768,10 @@ CREATE TABLE `oauth_auth_codes` (
   `id` varchar(100) NOT NULL,
   `user_id` bigint(20) UNSIGNED NOT NULL,
   `client_id` bigint(20) UNSIGNED NOT NULL,
-  `scopes` text,
+  `scopes` text DEFAULT NULL,
   `revoked` tinyint(1) NOT NULL,
   `expires_at` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -781,7 +791,7 @@ CREATE TABLE `oauth_clients` (
   `revoked` tinyint(1) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `oauth_clients`
@@ -805,7 +815,7 @@ CREATE TABLE `oauth_personal_access_clients` (
   `client_id` bigint(20) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `oauth_personal_access_clients`
@@ -826,7 +836,7 @@ CREATE TABLE `oauth_refresh_tokens` (
   `access_token_id` varchar(100) NOT NULL,
   `revoked` tinyint(1) NOT NULL,
   `expires_at` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -839,18 +849,18 @@ CREATE TABLE `package` (
   `type` varchar(255) NOT NULL,
   `title` varchar(255) NOT NULL,
   `duration` int(11) NOT NULL,
-  `duration_type` int(11) NOT NULL DEFAULT '0',
+  `duration_type` int(11) NOT NULL DEFAULT 0,
   `durationMY` enum('0','1') NOT NULL,
   `price` varchar(255) NOT NULL,
   `off` varchar(255) NOT NULL,
   `noOfPlace` varchar(255) NOT NULL,
   `featuredListings` varchar(255) NOT NULL,
   `featuredType` enum('home_featured','city_listing','category_listing','search_ results') NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `discount` decimal(10,2) NOT NULL DEFAULT '0.00',
-  `places` int(11) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `discount` decimal(10,2) NOT NULL DEFAULT 0.00,
+  `places` int(11) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `package`
@@ -874,7 +884,7 @@ CREATE TABLE `password_resets` (
   `email` varchar(255) NOT NULL,
   `token` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -888,7 +898,7 @@ CREATE TABLE `permissions` (
   `guard_name` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `permissions`
@@ -930,9 +940,9 @@ CREATE TABLE `popup_ads` (
   `content_type` enum('image','video','','') NOT NULL,
   `value` varchar(255) DEFAULT NULL,
   `logo` varchar(255) DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `popup_ads`
@@ -957,11 +967,11 @@ CREATE TABLE `reviews` (
   `user_id` bigint(20) NOT NULL,
   `rating` int(11) NOT NULL,
   `avatar` varchar(255) NOT NULL,
-  `content` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `content` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `listing_id` bigint(20) NOT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `reviews`
@@ -995,7 +1005,7 @@ CREATE TABLE `roles` (
   `guard_name` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `roles`
@@ -1015,21 +1025,21 @@ INSERT INTO `roles` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VAL
 CREATE TABLE `role_has_permissions` (
   `permission_id` bigint(20) UNSIGNED NOT NULL,
   `role_id` bigint(20) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `role_has_permissions`
 --
 
 INSERT INTO `role_has_permissions` (`permission_id`, `role_id`) VALUES
-(18, 2),
-(19, 2),
-(20, 2),
-(21, 2),
 (17, 3),
+(18, 2),
 (18, 3),
+(19, 2),
 (19, 3),
+(20, 2),
 (20, 3),
+(21, 2),
 (21, 3);
 
 -- --------------------------------------------------------
@@ -1042,10 +1052,10 @@ CREATE TABLE `sessions` (
   `id` varchar(255) NOT NULL,
   `user_id` bigint(20) UNSIGNED DEFAULT NULL,
   `ip_address` varchar(45) DEFAULT NULL,
-  `user_agent` text,
+  `user_agent` text DEFAULT NULL,
   `payload` text NOT NULL,
   `last_activity` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `sessions`
@@ -1080,11 +1090,11 @@ CREATE TABLE `settings` (
   `social_google` varchar(255) DEFAULT 'https://www.google.com/',
   `social_youtube` varchar(255) DEFAULT 'https://www.youtube.com/',
   `layout` varchar(255) NOT NULL DEFAULT '1',
-  `maps` text,
+  `maps` text DEFAULT NULL,
   `running_year` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `settings`
@@ -1107,7 +1117,7 @@ CREATE TABLE `testimonial` (
   `status` enum('0','1') NOT NULL DEFAULT '0',
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `testimonial`
@@ -1133,9 +1143,9 @@ CREATE TABLE `time_duration` (
   `day` varchar(10) NOT NULL,
   `opening_time` varchar(255) NOT NULL,
   `end_time` varchar(255) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `time_duration`
@@ -1231,11 +1241,11 @@ CREATE TABLE `users` (
   `verificationCode` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `file_path` varchar(255) DEFAULT 'assets/images/users/default.png',
-  `status` tinyint(4) DEFAULT '1',
+  `status` tinyint(4) DEFAULT 1,
   `remember_token` varchar(100) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `users`
@@ -1265,11 +1275,11 @@ CREATE TABLE `users_login` (
   `village_ward` varchar(255) DEFAULT NULL,
   `city_name` varchar(255) DEFAULT NULL,
   `image` varchar(255) DEFAULT NULL,
-  `status` tinyint(4) DEFAULT '0',
+  `status` tinyint(4) DEFAULT 0,
   `remember_token` varchar(100) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci ROW_FORMAT=DYNAMIC;
 
 --
 -- Dumping data for table `users_login`
@@ -1525,7 +1535,7 @@ ALTER TABLE `admins`
 -- AUTO_INCREMENT for table `blogs`
 --
 ALTER TABLE `blogs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `bookmarks`
