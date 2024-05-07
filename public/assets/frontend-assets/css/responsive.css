@@ -572,6 +572,7 @@
     .header-landing .right-header .right-header__button {
         display: inline-block;
         margin-right: 25px;
+        align-content: center;
     }
     .landing-menu {
         display: none;
