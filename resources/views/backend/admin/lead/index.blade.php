@@ -112,30 +112,17 @@ function confirmDelete(button) {
 }
 </script>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script>
-// new DataTable('#example');
+    $(document).ready(function() {
+        $('#example').DataTable({
+            layout: {
+                topStart: {
+                    buttons: ['copy', 'csv', 'excel', 'pdf', 'print']
+                }
+            },
 
-// $(document).ready(function() {
-//     $('#example').DataTable({
-//         dom: 'Bfrtip',
-//         buttons: [
-//             'copy', 'csv', 'excel', 'pdf', 'print'
-//         ]
-//     });
-// });
-$(document).ready(function() {
-    $('#example').DataTable({
-        dom: 'lBfrtip', // Include 'l' for the length menu
-        buttons: ['copy', 'csv', 'excel', 'pdf', 'print'],
-        "lengthMenu": [
-            [10, 25, 50, -1],
-            [10, 25, 50, "All"]
-        ], // Length options and labels
-        "pageLength": 10 // Set the initial number of rows displayed
+        });
     });
-});
 </script>
-
-
-
 @stop

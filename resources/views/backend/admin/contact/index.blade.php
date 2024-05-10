@@ -37,7 +37,7 @@
                                     <th class="text-nowrap">Email</th>
                                     <th class="text-nowrap">Message</th>
                                     <th>Action </th>
-                                   
+
                                 </tr>
                             </thead>
 
@@ -66,7 +66,7 @@
                                                 </button>
                                             </form>
                                         </td>
-                                     
+
                                     </tr>
                                 @endforeach
 
@@ -100,8 +100,18 @@
         }
     </script>
 
-    <script>
-        new DataTable('#example');
-    </script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#example').DataTable({
+            layout: {
+                topStart: {
+                    buttons: ['copy', 'csv', 'excel', 'pdf', 'print']
+                }
+            },
+
+        });
+    });
+</script>
 
 @stop

@@ -73,17 +73,17 @@ class ViewController extends Controller
             ->orderBy('lead.created_at', 'desc')
             ->get();
 
-        
+
         $userCount = User_Login::orderBy('created_at', 'asc')->count();
-        
-       
+
+
         // Get the current date in the format 'Y-m-d'
         $currentDate = Carbon::now()->toDateString();
-        
+
         // Query the User_Login table to count users registered on the current date
         $CurrentUserCount = User_Login::whereDate('created_at', $currentDate)->count();
         $activePlans = BusinessList::orderBy('created_at', 'desc')->where('status', '1')->count();
-        
+
         $CurrentActivePlan = BusinessList::whereDate('created_at', $currentDate)->where('status', '1')->count();
 
         return view('backend.admin.view.index', compact('Result', 'category', 'city', 'lead', 'Todayleads', 'userCount','activePlans','CurrentUserCount','CurrentActivePlan'));
@@ -194,6 +194,11 @@ class ViewController extends Controller
     {
         $master = Master::where(['id' => $id])->delete();
         return back();
+    }
+
+    public function adduser()
+    {
+        return view('backend.admin.user.adduser');
     }
 }
 

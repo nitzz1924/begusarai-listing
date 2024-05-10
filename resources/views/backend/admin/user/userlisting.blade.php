@@ -8,8 +8,10 @@
                     <i class="bi bi-tags icon-gradient bg-mean-fruit"> </i>
                 </div>
                 <div>All Listing</div>
-                <div class="d-inline-block ml-3 pb-3">
-
+                <div>
+                    <a href="#">
+                        <button type="button" class="btn btn-success"><i class="bi bi-plus-lg"></i>&nbsp;Add Listing</button>
+                    </a>
                 </div>
             </div>
         </div>
@@ -41,7 +43,7 @@
                             </thead>
 
                             <tbody>
-                                @foreach ($businesses as $business)
+                                @foreach ($businessdata as $business)
                                     <tr>
                                         <td class="serial-number">{{ $loop->iteration }}</td>
                                         <td class="fw-bold text-nowrap ">{{ $business->businessName }}</td>

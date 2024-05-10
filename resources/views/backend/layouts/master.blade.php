@@ -20,5 +20,6 @@
         @include('backend.layouts.datatable')
     </div>
 </div>
+
 </body>
 </html>

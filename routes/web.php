@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\Backend\Admin\ViewController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Backend\AuthController;
+use App\Http\Controllers\Backend\Admin\UserController;
 
 Route::group(
     [
@@ -188,3 +190,7 @@ Route::post('/addPlace/savePlace', [HomeController::class, 'savePlace'])->name('
 Route::get('/addDuration/{id}', [HomeController::class, 'addDuration'])->name('addDuration');
 Route::post('/addDuration/saveDuration', [HomeController::class, 'saveDuration'])->name('saveDuration');
 Route::delete('/delete-duration/{id}', [HomeController::class, 'deleteDuration'])->name('deleteDuration');
+
+Route::get('/adduser',[ViewController::class,'adduser'])->name('adduser');
+Route::post('/createuser',[UserController::class,'createuser'])->name('createuser');
+Route::get('/userlistings/{id}',[UserController::class,'userlistings'])->name('userlistings');
