@@ -420,116 +420,119 @@ $popup = Popup_ads::orderBy('created_at', 'asc')->where('type', '=', 'Popup Ads'
 
                     {{-- sign pop form starts here --}}
                     <div class="popup popup-form">
-                        
-                            <a title="Close" href="#" class="popup__close">
-                                <i class="las la-times la-24-black"></i> </a><!-- .popup__close -->
-                            <ul class="choose-form">
-                                <li class="nav-signup">
-                                    <a title="Sign Up" href="#signup">Sign Up</a>
-                                </li>
-                                <li class="nav-login">
-                                    <a title="Log In" href="#login">Log In</a>
-                                </li>
-                            </ul>
+                        <div class="site__brand">
+                            <a title="Logo" href="/" class="site__brand__logo"><img
+                                    src="{{ asset('assets/images/begusarai-logo.png') }}" alt="Begusarai" /></a>
+                        </div>
+                        <a title="Close" href="#" class="popup__close">
+                            <i class="las la-times la-24-black"></i> </a><!-- .popup__close -->
+                        <ul class="choose-form">
+                            <li class="nav-signup">
+                                <a title="Sign Up" href="#signup">Sign Up</a>
+                            </li>
+                            <li class="nav-login">
+                                <a title="Log In" href="#login">Log In</a>
+                            </li>
+                        </ul>
 
-                            <div class="popup-content ">
+                        <div class="popup-content ">
 
-                                <form action="{{ route('signup') }}" method="POST"
-                                    class="form-sign form-content form-account pt-3" id="signup">
+                            <form action="{{ route('signup') }}" method="POST"
+                                class="form-sign form-content form-account pt-3" id="signup">
 
-                                    @csrf
+                                @csrf
 
-                                    <div id="validation-errors"
-                                        style="color: red;text-align: center;margin-top: -20px;margin-bottom: 20px;">
-                                    </div>
-                                    </span>
+                                <div id="validation-errors"
+                                    style="color: red;text-align: center;margin-top: -20px;margin-bottom: 20px;">
+                                </div>
+                                </span>
 
-                                    <!-- Phone number and OTP input fields -->
-                                    <div class="">
-                                        <div class="field-inline">
-                                            <div class="field-input-number">
-                                                <label for="mobileNumber">Enter Phone Number<span
-                                                        style="color: red;">*</span></label>
+                                <!-- Phone number and OTP input fields -->
+                                <div class="">
+                                    <div class="field-inline">
+                                        <div class="field-input-number">
+                                            <label for="mobileNumber">Enter Phone Number<span
+                                                    style="color: red;">*</span></label>
 
-                                                <input type="tel" placeholder="Enter 10 digits" value=""
-                                                    id="mobileNumberotp" name="mobileNumberotp" pattern="[0-9]{10}"
-                                                    maxlength="10" minlength="10" required />
-
-                                            </div>
-
-                                            <div class="d-grid align-content-center">
-                                                <button type="button" name="submit-otp" class="OTP-btn1 btn"
-                                                    value="Send OTP" style="width: 100px;" id="sendOTPButton"
-                                                    onclick="startResendTimer()">Send
-                                                    OTP
-                                                </button>
-
-                                            </div>
-                                        </div>
-                                        <p id="timer"></p>
-                                        <div class="field-input">
-                                            <label for="mobileNumber">OTP<span style="color: red;">*</span></label>
-
-                                            <input type="tel" id="verificationCode" placeholder="Enter OTP here"
-                                                value="" name="verificationCode" pattern="[0-9]{6}" maxlength="6"
-                                                minlength="6" />
-                                            <input type="hidden" id="generatedOTP" placeholder="OTP" value=""
-                                                name="generatedOTP" />
+                                            <input type="tel" placeholder="Enter 10 digits" value=""
+                                                id="mobileNumberotp" name="mobileNumberotp" pattern="[0-9]{10}"
+                                                maxlength="10" minlength="10" required />
 
                                         </div>
 
-                                    </div>
+                                        <div class="d-grid align-content-center">
+                                            <button type="button" name="submit-otp" class="OTP-btn1 btn"
+                                                value="Send OTP" style="width: 100px;" id="sendOTPButton"
+                                                onclick="startResendTimer()">Send
+                                                OTP
+                                            </button>
 
-                                    <!-- Acceptance checkbox -->
-                                    <div class="field-check mb-2">
-                                        <label for="accept"
-                                            style="flex: 0 0 100% !important; max-width: 100% !important;">
-                                            <input type="checkbox" id="accept" value="1" name="accept"
-                                                class="form-check-input  ">
-                                            @csrf
-                                            Accept the <a title="Terms" href="#">Terms</a> and <a
-                                                title="Privacy Policy" href="#">Privacy Policy</a>
-                                            <span class="checkmark">
-                                                <i class="la la-check"></i>
-                                            </span>
-
-                                        </label>
-
-                                    </div>
-
-                                    <input type="submit" name="submit" value="Verify" />
-                                </form>
-                                <!-- Without Validation Error Form -->
-
-                                <form action="{{ route('loginForm') }}" method="POST" class="form-log form-content"
-                                    id="login">
-                                    @csrf
-                                    <span>
-                                        <div id="error-message" style="color: red; text-align: center; margin-top: 10px;">
                                         </div>
-                                    </span>
+                                    </div>
+                                    <p id="timer"></p>
                                     <div class="field-input">
-                                        <label for="mobileNumber">Enter Phone Number<span
-                                                style="color: red;">*</span></label>
+                                        <label for="mobileNumber">OTP<span style="color: red;">*</span></label>
 
-                                        <input type="tel" placeholder="" value="" name="mobileNumber"
-                                            pattern="[0-9]{10}" minlength="10" maxlength="10" id="mobileNumber"
-                                            required />
+                                        <input type="tel" id="verificationCode" placeholder="Enter OTP here"
+                                            value="" name="verificationCode" pattern="[0-9]{6}" maxlength="6"
+                                            minlength="6" />
+                                        <input type="hidden" id="generatedOTP" placeholder="OTP" value=""
+                                            name="generatedOTP" />
+
                                     </div>
-                                    <div class="field-input">
-                                        <label for="mobileNumber">Enter Your Password<span
-                                                style="color: red;">*</span></label>
 
-                                        <input type="password" placeholder=" " value="" name="password"
-                                            id="password" required />
+                                </div>
+
+                                <!-- Acceptance checkbox -->
+                                <div class="field-check mb-2">
+                                    <label for="accept"
+                                        style="flex: 0 0 100% !important; max-width: 100% !important;">
+                                        <input type="checkbox" id="accept" value="1" name="accept"
+                                            class="form-check-input  ">
+                                        @csrf
+                                        Accept the <a title="Terms" href="#">Terms</a> and <a
+                                            title="Privacy Policy" href="#">Privacy Policy</a>
+                                        <span class="checkmark">
+                                            <i class="la la-check"></i>
+                                        </span>
+
+                                    </label>
+
+                                </div>
+
+                                <input type="submit" name="submit" value="Verify" />
+                            </form>
+                            <!-- Without Validation Error Form -->
+
+                            <form action="{{ route('loginForm') }}" method="POST" class="form-log form-content"
+                                id="login">
+                                @csrf
+                                <span>
+                                    <div id="error-message" style="color: red; text-align: center; margin-top: 10px;">
                                     </div>
-                                    <a title="Forgot password" class="forgot_pass" href="/resetPassword">Forgot
-                                        password</a>
-                                    <input type="submit" name="submit" value="Login" id="loginSubmit" />
-                                </form>
+                                </span>
+                                <div class="field-input">
+                                    <label for="mobileNumber">Enter Phone Number<span
+                                            style="color: red;">*</span></label>
 
-                            </div>
-                        
+                                    <input type="tel" placeholder="" value="" name="mobileNumber"
+                                        pattern="[0-9]{10}" minlength="10" maxlength="10" id="mobileNumber"
+                                        required />
+                                </div>
+                                <div class="field-input">
+                                    <label for="mobileNumber">Enter Your Password<span
+                                            style="color: red;">*</span></label>
+
+                                    <input type="password" placeholder=" " value="" name="password"
+                                        id="password" required />
+                                </div>
+                                <a title="Forgot password" class="forgot_pass" href="/resetPassword">Forgot
+                                    password</a>
+                                <input type="submit" name="submit" value="Login" id="loginSubmit" />
+                            </form>
+
+                        </div>
+
                     </div>
 
                     <?php 
@@ -790,50 +793,48 @@ $popup = Popup_ads::orderBy('created_at', 'asc')->where('type', '=', 'Popup Ads'
 </script>
 {{-- -----------------------------------------------Login form ------------------------------------------ --}}
 <script>
-    
-let timer;
-let countdown = 60; // Set the countdown duration in seconds
+    let timer;
+    let countdown = 60; // Set the countdown duration in seconds
 
-function startResendTimer() {
-    // Get the input element
-    const mobileNumberInput = document.getElementById('mobileNumberotp');
-    
-    // Check if the input is not empty and matches the pattern and minlength
-    if (mobileNumberInput.value.trim() !== '' &&
-        mobileNumberInput.value.match(/^\d{10}$/) &&
-        mobileNumberInput.value.length === 10) {
-        
-        // Disable the button during the countdown
-        document.getElementById('sendOTPButton').disabled = true;
-        document.getElementById('sendOTPButton').innerHTML = "Wait...";
+    function startResendTimer() {
+        // Get the input element
+        const mobileNumberInput = document.getElementById('mobileNumberotp');
 
-        // Start the countdown
-        timer = setInterval(updateTimer, 1000);
-    } else {
-        // Show an error message or handle invalid input as needed
-        alert('Please enter a valid 10-digit phone number.');
+        // Check if the input is not empty and matches the pattern and minlength
+        if (mobileNumberInput.value.trim() !== '' &&
+            mobileNumberInput.value.match(/^\d{10}$/) &&
+            mobileNumberInput.value.length === 10) {
+
+            // Disable the button during the countdown
+            document.getElementById('sendOTPButton').disabled = true;
+            document.getElementById('sendOTPButton').innerHTML = "Wait...";
+
+            // Start the countdown
+            timer = setInterval(updateTimer, 1000);
+        } else {
+            // Show an error message or handle invalid input as needed
+            alert('Please enter a valid 10-digit phone number.');
+        }
     }
-}
 
-function updateTimer() {
-    const timerElement = document.getElementById('timer');
-    
-    if (countdown > 0) {
-        timerElement.textContent = `Resend in ${countdown} seconds`;
-        countdown--;
-    } else {
-        // Enable the button when the countdown reaches zero
-        document.getElementById('sendOTPButton').disabled = false;
-        document.getElementById('sendOTPButton').innerHTML = "Resend";
+    function updateTimer() {
+        const timerElement = document.getElementById('timer');
 
-        timerElement.textContent = 'Press resend...';
-        
-        // Reset countdown for the next attempt
-        countdown = 60;
-        
-        // Stop the timer
-        clearInterval(timer);
+        if (countdown > 0) {
+            timerElement.textContent = `Resend in ${countdown} seconds`;
+            countdown--;
+        } else {
+            // Enable the button when the countdown reaches zero
+            document.getElementById('sendOTPButton').disabled = false;
+            document.getElementById('sendOTPButton').innerHTML = "Resend";
+
+            timerElement.textContent = 'Press resend...';
+
+            // Reset countdown for the next attempt
+            countdown = 60;
+
+            // Stop the timer
+            clearInterval(timer);
+        }
     }
-}
-
 </script>
