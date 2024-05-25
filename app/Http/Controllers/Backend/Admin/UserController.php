@@ -10,10 +10,12 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\ValidationException;
 use Yajra\DataTables\DataTables;
-
+use App\Models\Master;
 use View;
 use DB;
+use Auth;
 
 class UserController extends Controller
 {
@@ -307,10 +309,115 @@ class UserController extends Controller
 
     public function userlistings($id)
     {
+        $userid = $id;
         $businessdata = BusinessList::where('userId', '=', $id)->get();
         // dd($businessdata);
-        return view('backend.admin.user.userlisting', compact('businessdata'));
+        return view('backend.admin.user.userlisting', compact('businessdata', 'userid'));
     }
+
+    public function viewlistingform($id)
+    {
+        $userid = $id;
+        $types = ['category', 'Placetype', 'Highlight', 'City', 'bookingType'];
+        $data = [];
+
+        foreach ($types as $type) {
+            $data[$type] = Master::orderBy('created_at', 'desc')
+                ->where('type', $type)
+                ->get();
+        }
+        $data['userid'] = $userid;
+        return view('backend.admin.listing.addlistting', $data);
+    }
+
+    public function createbusinessListing(Request $request)
+    {
+        //dd($request->all());
+        // Validate the request data
+        $validatedData = $request->validate([
+            'businessName' => 'required',
+            'ownerName' => 'required',
+            'description' => 'required',
+            'category' => 'required',
+            'city' => 'required',
+            'placeAddress' => 'required',
+            'phoneNumber1' => 'required',
+            'coverImage' => 'required|image|mimes:jpg,jpeg,png,svg,webp|max:2048', // Adjust the 'max' value as needed (in kilobytes) 2mb
+            'documentImage' => 'required|mimes:pdf|max:2048', // Adjust the 'max' value as needed (in kilobytes) 2 mb
+        ]);
+
+        try {
+            // Create a new BusinessList instance or retrieve existing instance if editId is provided
+            $editId = $request->input('editId');
+            $business = $editId ? BusinessList::findOrFail($editId) : new BusinessList();
+
+            // Set the values of the business properties from the request data
+            $business->userId = $request->userid;
+            $business->category = $request->input('category');
+            $business->placeType = $request->has('placeType') ? implode(',', $request->input('placeType')) : ' ';
+            $business->highlight = $request->has('highlight') ? implode(',', $request->input('highlight')) : ' ';
+            $business->description = $request->input('description');
+            $business->price = $request->input('price');
+            $business->city = $request->input('city');
+            $business->placeAddress = $request->input('placeAddress');
+            $business->ownerName = $request->input('ownerName');
+            $business->email = $request->input('email');
+            $business->phoneNumber1 = $request->input('phoneNumber1');
+            $business->phoneNumber2 = $request->input('phoneNumber2');
+            $business->whatsappNo = $request->input('whatsappNo');
+            $business->websiteUrl = $request->input('websiteUrl');
+            $business->additionalFields = $request->input('additionalFields');
+            $business->facebook = $request->input('facebook');
+            $business->instagram = $request->input('instagram');
+            $business->twitter = $request->input('twitter');
+            $business->bookingType = $request->input('bookingType');
+            $business->bookingurl = $request->input('bookingurl');
+            $business->businessName = $request->input('businessName');
+            $business->youtube = $request->input('youtube');
+            $business->video = $request->input('video');
+            $business->dType = $request->input('dType');
+            $business->dNumber = $request->input('dNumber');
+
+            // Move and store uploaded files
+            $destinationPath = public_path('uploads');
+
+            if ($request->hasFile('coverImage')) {
+                $coverImage = $request->file('coverImage');
+                $coverImageName = time() . '_cover.' . $coverImage->getClientOriginalExtension();
+                $coverImage->move($destinationPath, $coverImageName);
+                $business->coverImage = $coverImageName;
+            }
+
+            if ($request->hasFile('documentImage')) {
+                $documentImage = $request->file('documentImage');
+                $documentImageName = time() . '_document.' . $documentImage->getClientOriginalExtension();
+                $documentImage->move($destinationPath, $documentImageName);
+                $business->documentImage = $documentImageName;
+            }
+            // Handle gallery images if provided
+            $galleryImages = $request->file('galleryImage');
+            if (!empty($galleryImages)) {
+                $filePaths = [];
+
+                foreach ($galleryImages as $file) {
+                    $galleryImageName = time() . '_' . uniqid() . '.' . $file->getClientOriginalExtension();
+                    $file->move($destinationPath, $galleryImageName);
+                    $filePaths[] = $galleryImageName;
+                }
+
+                // Store the file paths in the database as a JSON array
+                $business->galleryImage = json_encode($filePaths);
+            }
+            // Save the model to the database
+            $business->save();
+            // Redirect back with a success message
+            return back()->with('success', $editId ? 'Business updated successfully' : 'Business added successfully');
+        } catch (Exception $e) {
+            // Handle errors
+            return back()->with('error', 'Error: ' . $e->getMessage());
+        }
+    }
+
 }
 
 

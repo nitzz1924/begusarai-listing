@@ -186,11 +186,12 @@ Route::post('/addPlace/savePlace', [HomeController::class, 'savePlace'])->name('
 
 
 
-
+//Latest Update Routes
 Route::get('/addDuration/{id}', [HomeController::class, 'addDuration'])->name('addDuration');
 Route::post('/addDuration/saveDuration', [HomeController::class, 'saveDuration'])->name('saveDuration');
 Route::delete('/delete-duration/{id}', [HomeController::class, 'deleteDuration'])->name('deleteDuration');
-
-Route::get('/adduser',[ViewController::class,'adduser'])->name('adduser');
-Route::post('/createuser',[UserController::class,'createuser'])->name('createuser');
-Route::get('/userlistings/{id}',[UserController::class,'userlistings'])->name('userlistings');
+Route::get('/adduser', [ViewController::class, 'adduser'])->name('adduser');
+Route::post('/createuser', [UserController::class, 'createuser'])->name('createuser');
+Route::get('/userlistings/{id}', [UserController::class, 'userlistings'])->name('userlistings');
+Route::get('/viewlistingform/{id}', [UserController::class, 'viewlistingform'])->name('viewlistingform');
+Route::post('/createbusinessListing', [UserController::class, 'createbusinessListing'])->name('createbusinessListing');

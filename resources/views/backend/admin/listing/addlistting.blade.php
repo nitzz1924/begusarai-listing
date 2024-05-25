@@ -1,15 +1,15 @@
-@extends('frontend.layouts.master')
-@section('title', 'Add Place')
+@extends('backend.layouts.master')
+@extends('frontend.layouts.head')
+@section('title', 'Addtools')
 @section('content')
-
 <div class="container-fluid">
     <div class="row justify-content-center">
         <div class="col-11 col-sm-10 col-md-10 col-lg-6 col-xl-5 text-center p-0 mt-3 mb-2">
             <div class="card px-1 pt-4 pb-0 mt-3 mb-3">
                 <h2 id="heading">Ready to promote your business?</h2>
                 <p>Fill all form field to go to next step</p>
-                <form action="{{ route('savePlace') }}" method="POST" class="upload-form" enctype="multipart/form-data"
-                    id="msform">
+                <form action="{{ route('createbusinessListing') }}" method="POST" class="upload-form"
+                    enctype="multipart/form-data" id="msform">
                     @csrf
                     <ul id="progressbar">
                         <li class="active" id="account"><strong>Genaral info</strong></li>
@@ -38,6 +38,9 @@
                             <div class="has-error mt-2">{{ $message }}</div>
                             @enderror
 
+                            {{--User ID--}}
+                            <input type="hidden" name="userid" value="{{$userid}}">
+
                             <label class="fieldlabels">Owner Name/Authorized person:<span
                                     style='color:red'>*</span></label>
                             <input type="text" placeholder="Owner Name" id="ownerName" name="ownerName"
@@ -53,20 +56,21 @@
 
                             <label class="fieldlabels">Business Description: <span style='color:red'>*</span></label>
                             {{-- CKeditor --}}
-                            <textarea name="description" id="description" placeholder="Description" class="form-control"></textarea>
+                            <textarea name="description" id="description" placeholder="Description"
+                                class="form-control"></textarea>
 
-                            {{-- <textarea placeholder="Description" id="description" name="description" rows="4" cols="65"
-                                class="form-control"></textarea> --}}
+                            {{-- <textarea placeholder="Description" id="description" name="description" rows="4"
+                                cols="65" class="form-control"></textarea> --}}
                             @error('description')
                             <div class="has-error mt-2">{{ $message }}</div>
                             @enderror
 
                             <!-- <label class="fieldlabels">Business Timing: <span style='color:red'>*</span></label>
-                                <input type="text" placeholder="Duration" id="duration" name="duration"
-                                    class="form-control">
-                                @error('duration')
-                                    <div class="has-error mt-2">{{ $message }}</div>
-                                @enderror -->
+                                        <input type="text" placeholder="Duration" id="duration" name="duration"
+                                            class="form-control">
+                                        @error('duration')
+        <div class="has-error mt-2">{{ $message }}</div>
+    @enderror -->
 
                             <label class="fieldlabels mt-3 ">Category: <span style='color:red'>*</span></label>
                             <select data-placeholder="Select Category" class=" form-control mb-3" id="category"
@@ -301,9 +305,6 @@
                                     Business Ownership Proof (Upload PDF):<span class="text-danger">* Maximum image
                                         size: 2MB(W:1080× H:600) </span></label>
                                 <p class="text-danger"></p>
-
-
-
                                 <input type="file" name="documentImage" id="documentImage" class="upload-file"
                                     accept=".pdf">
                                 <img class="img_preview" src="images/no-image.png" alt="" id="pdfPreview">
@@ -356,203 +357,201 @@
 </div>
 
 <script>
-$(document).ready(function() {
+    $(document).ready(function() {
 
-    var current_fs, next_fs, previous_fs; //fieldsets
-    var opacity;
-    var current = 1;
-    var steps = $("fieldset").length;
+            var current_fs, next_fs, previous_fs; //fieldsets
+            var opacity;
+            var current = 1;
+            var steps = $("fieldset").length;
 
-    setProgressBar(current);
+            setProgressBar(current);
 
-    $(".next").click(function() {
+            $(".next").click(function() {
 
-        current_fs = $(this).parent();
-        next_fs = $(this).parent().next();
+                current_fs = $(this).parent();
+                next_fs = $(this).parent().next();
 
-        //Add Class Active
-        $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
+                //Add Class Active
+                $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
 
-        //show the next fieldset
-        next_fs.show();
-        //hide the current fieldset with style
-        current_fs.animate({
-            opacity: 0
-        }, {
-            step: function(now) {
-                // for making fielset appear animation
-                opacity = 1 - now;
+                //show the next fieldset
+                next_fs.show();
+                //hide the current fieldset with style
+                current_fs.animate({
+                    opacity: 0
+                }, {
+                    step: function(now) {
+                        // for making fielset appear animation
+                        opacity = 1 - now;
 
-                current_fs.css({
-                    'display': 'none',
-                    'position': 'relative'
+                        current_fs.css({
+                            'display': 'none',
+                            'position': 'relative'
+                        });
+                        next_fs.css({
+                            'opacity': opacity
+                        });
+                    },
+                    duration: 500
                 });
-                next_fs.css({
-                    'opacity': opacity
-                });
-            },
-            duration: 500
-        });
-        setProgressBar(++current);
-    });
-
-    $(".previous").click(function() {
-
-        current_fs = $(this).parent();
-        previous_fs = $(this).parent().prev();
-
-        //Remove class active
-        $("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
-
-        //show the previous fieldset
-        previous_fs.show();
-
-        //hide the current fieldset with style
-        current_fs.animate({
-            opacity: 0
-        }, {
-            step: function(now) {
-                // for making fielset appear animation
-                opacity = 1 - now;
-
-                current_fs.css({
-                    'display': 'none',
-                    'position': 'relative'
-                });
-                previous_fs.css({
-                    'opacity': opacity
-                });
-            },
-            duration: 500
-        });
-        setProgressBar(--current);
-    });
-
-    function setProgressBar(curStep) {
-        var percent = parseFloat(100 / steps) * curStep;
-        percent = percent.toFixed();
-        $(".progress-bar")
-            .css("width", percent + "%")
-    }
-
-    $(".submit").click(function() {
-        return false;
-    })
-
-});
-</script>
-<script>
-function showTextBox() {
-    console.log('open Extra Filed')
-    var selectField = document.getElementById("dType");
-    var textBoxContainer = document.getElementById("textBoxContainer");
-
-    if (selectField.value === "gst") {
-
-        textBoxContainer.style.display = "block";
-    } else if (selectField.value === "cin") {
-
-        textBoxContainer.style.display = "block";
-    } else {
-
-        textBoxContainer.style.display = "none";
-    }
-}
-</script>
-
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-    const dropArea = document.getElementById("drop-area");
-    const galleryImageInput = document.getElementById("galleryImage");
-    const galleryImageCountInput = document.getElementById("galleryImageCount");
-
-    ["dragenter", "dragover", "dragleave", "drop"].forEach((eventName) => {
-        dropArea.addEventListener(eventName, preventDefault, false);
-    });
-
-    function preventDefault(e) {
-        e.preventDefault();
-        e.stopPropagation();
-    }
-
-    dropArea.addEventListener("drop", handleDrop, false);
-    galleryImageInput.addEventListener("change", updateGalleryImageCount);
-
-    function handleDrop(e) {
-        const files = e.dataTransfer.files;
-        const inputElement = galleryImageInput;
-        inputElement.files = files;
-
-        // Update label text to show the number of files dropped
-        const label = dropArea.querySelector("label");
-        label.textContent = files.length === 1 ? "1 file selected" : `${files.length} files selected`;
-
-        // Update the hidden input field with the count
-        galleryImageCountInput.value = files.length;
-    }
-
-    function updateGalleryImageCount() {
-        const files = galleryImageInput.files;
-        galleryImageCountInput.value = files.length;
-    }
-});
-document.getElementById('documentImage').addEventListener('change', function(e) {
-    const file = e.target.files[0];
-    const pdfPreview = document.getElementById('pdfPreview');
-
-    if (file && file.type === 'application/pdf') {
-        const reader = new FileReader();
-
-        reader.onload = function(e) {
-            const pdfData = new Uint8Array(e.target.result);
-
-            // Initialize PDF.js
-            pdfjsLib.getDocument({
-                data: pdfData
-            }).promise.then(function(pdf) {
-                pdf.getPage(1).then(function(page) {
-                    const canvas = document.createElement('canvas');
-                    const context = canvas.getContext('2d');
-                    const viewport = page.getViewport({
-                        scale: 0.5
-                    });
-
-                    canvas.height = viewport.height;
-                    canvas.width = viewport.width;
-
-                    page.render({
-                        canvasContext: context,
-                        viewport: viewport
-                    }).promise.then(function() {
-                        const imageData = canvas.toDataURL();
-                        pdfPreview.src = imageData;
-                    });
-                });
+                setProgressBar(++current);
             });
-        };
 
-        reader.readAsArrayBuffer(file);
-    } else {
-        // Handle cases where the selected file is not a PDF
-        pdfPreview.src = 'images/no-image.png'; // Display a default image
-    }
-});
+            $(".previous").click(function() {
+
+                current_fs = $(this).parent();
+                previous_fs = $(this).parent().prev();
+
+                //Remove class active
+                $("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
+
+                //show the previous fieldset
+                previous_fs.show();
+
+                //hide the current fieldset with style
+                current_fs.animate({
+                    opacity: 0
+                }, {
+                    step: function(now) {
+                        // for making fielset appear animation
+                        opacity = 1 - now;
+
+                        current_fs.css({
+                            'display': 'none',
+                            'position': 'relative'
+                        });
+                        previous_fs.css({
+                            'opacity': opacity
+                        });
+                    },
+                    duration: 500
+                });
+                setProgressBar(--current);
+            });
+
+            function setProgressBar(curStep) {
+                var percent = parseFloat(100 / steps) * curStep;
+                percent = percent.toFixed();
+                $(".progress-bar")
+                    .css("width", percent + "%")
+            }
+
+            $(".submit").click(function() {
+                return false;
+            })
+
+        });
+</script>
+<script>
+    function showTextBox() {
+            console.log('open Extra Filed')
+            var selectField = document.getElementById("dType");
+            var textBoxContainer = document.getElementById("textBoxContainer");
+
+            if (selectField.value === "gst") {
+
+                textBoxContainer.style.display = "block";
+            } else if (selectField.value === "cin") {
+
+                textBoxContainer.style.display = "block";
+            } else {
+
+                textBoxContainer.style.display = "none";
+            }
+        }
 </script>
 
 <script>
-// Handle the checkbox state
-$('.custom-checkbox input[type="checkbox"]').on('change', function() {
-    if ($(this).is(':checked')) {
-        // Checkbox is checked
-        $(this).next('.checkmark').css('background-color', '#23d3d3'); // Update selected color
-    } else {
-        // Checkbox is unchecked
-        $(this).next('.checkmark').css('background-color', '#ddd'); // Revert to normal color
-    }
-});
+    document.addEventListener("DOMContentLoaded", function() {
+            const dropArea = document.getElementById("drop-area");
+            const galleryImageInput = document.getElementById("galleryImage");
+            const galleryImageCountInput = document.getElementById("galleryImageCount");
 
-var editor = CKEDITOR.replace('description', {});
+            ["dragenter", "dragover", "dragleave", "drop"].forEach((eventName) => {
+                dropArea.addEventListener(eventName, preventDefault, false);
+            });
 
+            function preventDefault(e) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+
+            dropArea.addEventListener("drop", handleDrop, false);
+            galleryImageInput.addEventListener("change", updateGalleryImageCount);
+
+            function handleDrop(e) {
+                const files = e.dataTransfer.files;
+                const inputElement = galleryImageInput;
+                inputElement.files = files;
+
+                // Update label text to show the number of files dropped
+                const label = dropArea.querySelector("label");
+                label.textContent = files.length === 1 ? "1 file selected" : `${files.length} files selected`;
+
+                // Update the hidden input field with the count
+                galleryImageCountInput.value = files.length;
+            }
+
+            function updateGalleryImageCount() {
+                const files = galleryImageInput.files;
+                galleryImageCountInput.value = files.length;
+            }
+        });
+        document.getElementById('documentImage').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            const pdfPreview = document.getElementById('pdfPreview');
+
+            if (file && file.type === 'application/pdf') {
+                const reader = new FileReader();
+
+                reader.onload = function(e) {
+                    const pdfData = new Uint8Array(e.target.result);
+
+                    // Initialize PDF.js
+                    pdfjsLib.getDocument({
+                        data: pdfData
+                    }).promise.then(function(pdf) {
+                        pdf.getPage(1).then(function(page) {
+                            const canvas = document.createElement('canvas');
+                            const context = canvas.getContext('2d');
+                            const viewport = page.getViewport({
+                                scale: 0.5
+                            });
+
+                            canvas.height = viewport.height;
+                            canvas.width = viewport.width;
+
+                            page.render({
+                                canvasContext: context,
+                                viewport: viewport
+                            }).promise.then(function() {
+                                const imageData = canvas.toDataURL();
+                                pdfPreview.src = imageData;
+                            });
+                        });
+                    });
+                };
+
+                reader.readAsArrayBuffer(file);
+            } else {
+                // Handle cases where the selected file is not a PDF
+                pdfPreview.src = 'images/no-image.png'; // Display a default image
+            }
+        });
 </script>
 
+<script>
+    // Handle the checkbox state
+        $('.custom-checkbox input[type="checkbox"]').on('change', function() {
+            if ($(this).is(':checked')) {
+                // Checkbox is checked
+                $(this).next('.checkmark').css('background-color', '#23d3d3'); // Update selected color
+            } else {
+                // Checkbox is unchecked
+                $(this).next('.checkmark').css('background-color', '#ddd'); // Revert to normal color
+            }
+        });
+
+        var editor = CKEDITOR.replace('description', {});
+</script>
 @endsection
