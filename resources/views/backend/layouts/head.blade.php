@@ -35,9 +35,9 @@
 </script>
 
 
-{{-- <script src="{{ asset('/frontend-assets/js/bootstrap.min.js') }}"></script> 
+<script src="{{ asset('/frontend-assets/js/bootstrap.min.js') }}"></script>
 
-<link rel="stylesheet" href="frontend-assets/css/bootstrap.min.css">  --}}
+<link rel="stylesheet" href="frontend-assets/css/bootstrap.min.css">
 
 
 

@@ -2,7 +2,7 @@
 
     <div class="col-12 text-center rounded-top" style="bottom: 0; font-weight: bold;padding: 10px;">
         Developed by<a href="https://rudraashwitechnology.com/"> RUDRAASHWI TECHNOLOGY</a> || &nbsp; {{ date('Y') }}
-      
+
     </div>
 </div>
 <script src="{{ asset('/assets/js/main.js') }}"></script>
@@ -33,7 +33,6 @@
 
 <script src="{{ asset('assets/js/jquery.printElement.min.js') }}"></script>
 <script src="{{ asset('/assets/frontend-assets/libs/bootstrap/js/bootstrap.min.js') }}"></script>
-
 <script>
     $.fn.modal.Constructor.prototype.enforceFocus = function() {};
 </script>
@@ -61,3 +60,4 @@
 
     }
 </script>
+

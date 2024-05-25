@@ -9808,6 +9808,8 @@ button,
     display: flex;
     align-content: center;
     align-items: center;
+    width: 100%;
+    justify-content: space-between;
 }
 .app-page-title .page-title-subheading {
     padding: 3px 0 0;

@@ -9,6 +9,11 @@
                 <i class="pe-7s-users icon-gradient bg-mean-fruit"></i>
             </div>
             <div>All Users</div>
+            <div>
+                <a href="{{route('adduser')}}">
+                    <button type="button" class="btn btn-success"><i class="bi bi-plus-lg"></i>&nbsp;Add User</button>
+                </a>
+            </div>
         </div>
     </div>
 </div>
@@ -17,7 +22,7 @@
         <div class="main-card mb-3 card">
             <div class="card-body">
                 <div class="table-responsive">
-                    <table id="example" class="table table-striped table-bordered" style="width:100%">
+                    <table id="example" class="table table-nowrap table-bordered" style="width:100%">
                         <thead class="table-dark">
                             <tr>
                                 <th>#</th>
@@ -112,6 +117,11 @@
                                             <i class="metismenu-icon bi bi-trash3"></i>
                                         </button>
                                     </form>
+                                    <a href="/userlistings/{{$value->id}}">
+                                        <button type="button" class="btn btn-secondary ms-3 text-nowrap">
+                                            <i class="metismenu-icon bi bi-eye"></i>&nbsp;View Listings
+                                        </button>
+                                    </a>
                                 </td>
                             </tr>
                             @endforeach
@@ -122,18 +132,17 @@
         </div>
     </div>
 </div>
-
 <style>
-@media screen and (min-width: 768px) {
-    #myModal .modal-dialog {
-        width: 70%;
-        border-radius: 5px;
+    @media screen and (min-width: 768px) {
+        #myModal .modal-dialog {
+            width: 70%;
+            border-radius: 5px;
+        }
     }
-}
 </style>
 
 <script>
-function confirmDelete(button) {
+    function confirmDelete(button) {
     if (confirm("Are you sure you want to delete this item?")) {
         var form = button.parentElement; // Get the parent element of the button, which is the form
         form.submit();
@@ -143,7 +152,18 @@ function confirmDelete(button) {
 }
 </script>
 
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script>
-new DataTable('#example');
+    $(document).ready(function() {
+        $('#example').DataTable({
+            layout: {
+                topStart: {
+                    buttons: ['copy', 'csv', 'excel', 'pdf', 'print']
+                }
+            },
+
+        });
+    });
 </script>
 @stop

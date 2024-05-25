@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -15,7 +14,6 @@ use App\Models\BusinessList;
 use App\Models\Master;
 use App\Models\Testimonial;
 use App\Models\Lead;
-
 use App\Models\Bookmark;
 use App\Models\Career;
 use App\Models\Contact;
@@ -204,10 +202,10 @@ class HomeController extends Controller
                         }
 
                         if ($currentTime->between($startTime, $endTime)) {
-                            
+
                             $OpenStatus = 'Open Now';
                             break; // Exit the loop since we found an open status
-                       
+
                     }
                 }
             }
@@ -906,10 +904,10 @@ class HomeController extends Controller
                         }
 
                         if ($currentTime->between($startTime, $endTime)) {
-                            
+
                             $OpenStatus = 'Open Now';
                             break; // Exit the loop since we found an open status
-                       
+
                     }
                 }
             }
@@ -1123,10 +1121,10 @@ class HomeController extends Controller
                         }
 
                         if ($currentTime->between($startTime, $endTime)) {
-                            
+
                             $OpenStatus = 'Open Now';
                             break; // Exit the loop since we found an open status
-                       
+
                     }
                 }
             }
@@ -1408,10 +1406,10 @@ class HomeController extends Controller
                         }
 
                         if ($currentTime->between($startTime, $endTime)) {
-                            
+
                             $OpenStatus = 'Open Now';
                             break; // Exit the loop since we found an open status
-                       
+
                     }
                 }
             }
@@ -1536,10 +1534,10 @@ class HomeController extends Controller
                         }
 
                         if ($currentTime->between($startTime, $endTime)) {
-                            
+
                             $OpenStatus = 'Open Now';
                             break; // Exit the loop since we found an open status
-                       
+
                     }
                 }
             }

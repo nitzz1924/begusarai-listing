@@ -77,7 +77,7 @@ Route::resource('career', 'CareerController');
 
 Route::get('/testimonial/active/{id}', 'TestimonialController@active');
 Route::get('/testimonial/inactive/{id}', 'TestimonialController@inactive');
- 
+
 
 Route::resource('lead', 'LeadController');
 Route::get('/lead/active/{id}', 'LeadController@active');

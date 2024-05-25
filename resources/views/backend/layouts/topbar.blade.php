@@ -59,12 +59,21 @@
                             </div>
                         </div>
                         <div class="widget-content-left  ml-3 header-user-info">
-                            <div class="widget-heading">
-                                {{ Auth::user()->name }}
-                            </div>
-                            <div class="widget-subheading">
-                                {{ Auth::user()->email }}
-                            </div>
+                            @if(Auth::user())
+                                <div class="widget-heading">
+                                    {{ Auth::user()->name }}
+                                </div>
+                                <div class="widget-subheading">
+                                    {{ Auth::user()->email }}
+                                </div>
+                            @else
+                                <div class="widget-heading">
+                                    Guest
+                                </div>
+                                <div class="widget-subheading">
+                                    guest@inbegusarai.com
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </div>
