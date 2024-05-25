@@ -595,7 +595,7 @@ $popup = Popup_ads::orderBy('created_at', 'asc')->where('type', '=', 'Popup Ads'
             </div>
 
             <div class="mobile-bottom-nav__item">
-                <a href="/allCategories">
+                <a href="/packages/0">
                     <div class="mobile-bottom-nav__item-content">
                         <i class="fa-solid fa-filter-circle-dollar fs-4 pb-1" style="color: #FEC868"></i>
                         Pricing

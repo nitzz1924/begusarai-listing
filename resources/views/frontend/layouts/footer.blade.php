@@ -20,7 +20,7 @@
                 </div>
                 <div class="col-lg-2">
                     <aside class="footer__top__nav">
-                        <h2 class="mb-3">Quick Links</h2>   
+                        <h2 class="mb-3">Quick Links</h2>
                         <ul>
                             <li>
                                 <a title="About Us" href="/aboutUs">About Us</a>
@@ -31,7 +31,7 @@
                             <li>
                                 <a title="Contact" href="/contact">Contact Us</a>
                             </li>
-                            </li>
+
                             <li>
                                 <a title="Privacy" href="/privacyPolicy">Privacy Policy</a>
                             </li>
@@ -97,7 +97,7 @@
             </div>
         </div>
         <!-- .top-footer -->
-        <div class="footer__bottom ">
+        <div class="footer__bottom desktop-view">
             <p class="footer__bottom__copyright">
                 2023 &copy; <a title="RUDRAASHWI TECHNOLOGY" href="https://rudraashwitechnology.com/"><span
                         style="color: #38d6d6">RUDRAASHWI TECHNOLOGY</span></a>. All
