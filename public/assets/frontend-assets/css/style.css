@@ -1115,6 +1115,9 @@ a.site__menu__icon {
     vertical-align: middle;
     margin-right: 23px;
 }
+.popup-form .site__brand {
+    margin-bottom: 20px;
+}
 
 .site__search {
     line-height: 40px;
