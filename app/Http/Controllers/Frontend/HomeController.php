@@ -617,17 +617,16 @@ class HomeController extends Controller
 
     public function savePlace(Request $request)
     {
-        //  dd($request->input('cin'));
+        //dd($request->all());
         $rules = [
             'businessName' => 'required',
             'ownerName' => 'required',
             'description' => 'required',
             'category' => 'required',
             'city' => 'required',
-            'placeAddress' => 'required',
-            'phoneNumber1' => 'required',
-            'coverImage' => 'required|image|mimes:jpg,jpeg,png,svg,webp|max:1048', // Adjust the 'max' value as needed (in kilobytes) 2mb
-            'documentImage' => 'required|mimes:pdf|max:1048', // Adjust the 'max' value as needed (in kilobytes) 2 mb
+            // 'placeAddress' => 'required',
+            // 'coverImage' => 'required|image|mimes:jpg,jpeg,png,svg,webp|max:1048', // Adjust the 'max' value as needed (in kilobytes) 2mb
+            // 'documentImage' => 'required|mimes:pdf|max:1048', // Adjust the 'max' value as needed (in kilobytes) 2 mb
         ];
 
         foreach (['coverImage', 'logo'] as $fileField) {
@@ -649,10 +648,9 @@ class HomeController extends Controller
 
         try {
             $business->userId = Auth::id();
-            $business->category = $request->input('category');
             $business->placeType = $request->has('placeType') ? implode(',', $request->input('placeType')) : ' ';
             $business->highlight = $request->has('highlight') ? implode(',', $request->input('highlight')) : ' ';
-
+            $business->category = $request->input('category');
             $business->description = $request->input('description');
             $business->price = $request->input('price');
             // $business->duration = $request->input('duration');

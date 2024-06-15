@@ -111,12 +111,12 @@ $popup = Popup_ads::orderBy('created_at', 'asc')->where('type', '=', 'Popup Ads'
                                     <li>
                                         <a title="Blogs" href="/blogs">Blog</a>
                                     </li>
-                                    <li>
+                                    {{-- <li>
                                         <a title="Packages" href="/packages/0">Pricing </a>
                                     </li>
                                     <li>
                                         <a title="Ranking" href="/category/0">Ranking </a>
-                                    </li>
+                                    </li> --}}
                                     <li>
                                         <a title="AboutUs" href="/aboutUs">About Us</a>
                                     </li>
@@ -286,12 +286,12 @@ $popup = Popup_ads::orderBy('created_at', 'asc')->where('type', '=', 'Popup Ads'
                             <li>
                                 <a href="/" title="Home">Home</a>
                             </li>
-                            <li>
+                            {{-- <li>
                                 <a title="Packages" href="/packages/0">Pricing </a>
                             </li>
                             <li>
                                 <a title="Ranking" href="/category/0">Ranking </a>
-                            </li>
+                            </li> --}}
                             <li>
                                 <a title="Destinations" href="#">Destinations</a>
                                 <ul class="sub-menu">
@@ -312,7 +312,7 @@ $popup = Popup_ads::orderBy('created_at', 'asc')->where('type', '=', 'Popup Ads'
                                 <?php $user = User_Login::find(auth()->user()->id); ?>
                             @endauth
 
-                            <?php 
+                            <?php
                             if(Auth::user()){
 
                             if (Auth::user()->type=='Guest'){
@@ -345,11 +345,11 @@ $popup = Popup_ads::orderBy('created_at', 'asc')->where('type', '=', 'Popup Ads'
                                     </li>
                                 </ul>
                             </li>
-                            <?php 
+                            <?php
                         }     }
                         ?>
 
-                            <?php 
+                            <?php
                             if(Auth::user()){
 
                             if (Auth::user()->type=='Owner'){
@@ -395,7 +395,7 @@ $popup = Popup_ads::orderBy('created_at', 'asc')->where('type', '=', 'Popup Ads'
                                         </a>
                                     </li>
                             </li>
-                            <?php 
+                            <?php
                                 }}
                                 ?>
 
@@ -403,13 +403,13 @@ $popup = Popup_ads::orderBy('created_at', 'asc')->where('type', '=', 'Popup Ads'
                         </ul>
                     </nav>
 
-                    <?php 
+                    <?php
                     if (Auth::user()==null){
                     ?>
                     <div class="right-header__login">
                         <a title="Login" class="open-login" href="#">Login</a>
                     </div>
-                    <?php 
+                    <?php
                     }
                     ?>
                     {{-- logged in Business owner --}}
@@ -535,7 +535,7 @@ $popup = Popup_ads::orderBy('created_at', 'asc')->where('type', '=', 'Popup Ads'
 
                     </div>
 
-                    <?php 
+                    <?php
                         if(Auth::user()){
 
                         if (Auth::user()->type=='Owner'){
@@ -548,7 +548,7 @@ $popup = Popup_ads::orderBy('created_at', 'asc')->where('type', '=', 'Popup Ads'
                         </a>
                     </div>
 
-                    <?php 
+                    <?php
                     }}
                     ?>
 
@@ -706,7 +706,7 @@ $popup = Popup_ads::orderBy('created_at', 'asc')->where('type', '=', 'Popup Ads'
                 .catch(error => {
                     console.error('Error:', error);
                 });
-            // Set the generated OTP in the input field 
+            // Set the generated OTP in the input field
             $('#generatedOTP').val(randomOTP);
             // Enable the input field
             $('#verificationCode').removeAttr('readonly');

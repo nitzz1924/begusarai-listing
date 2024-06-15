@@ -15,8 +15,8 @@
 use App\Models\User_Login;
 function getYouTubeVideoId($url) {
     $parsedUrl = parse_url($url);
-    
-   
+
+
     if ($parsedUrl === false || !isset($parsedUrl['host'])) {
         return null;
     }
@@ -192,7 +192,6 @@ function getYouTubeVideoId($url) {
                                 <div class="place__reviews reviews">
                                     <span class="place__reviews__number reviews__number">
                                         <span>
-
                                             @php
                                                 $totalRating = 0;
                                                 $totalReviews = count($reviews);
@@ -224,7 +223,7 @@ function getYouTubeVideoId($url) {
                         <div>
                             Total Visits: {{ $VisitCount }}
                         </div>
-                        <div class="place__box place__box-hightlight">
+                        {{-- <div class="place__box place__box-hightlight">
                             <div class="hightlight-grid">
                                 <div class="place__amenities">
 
@@ -237,17 +236,18 @@ function getYouTubeVideoId($url) {
                                 </div>
 
                             </div>
-                        </div><!-- .place__box -->
+                        </div> --}}
                         <div class="place__box   place__box-overview">
                             <h3>Overview</h3>
-                            <div class="place__desc">{!! $businessesDetail->description !!} <br><br>
+                            <div class="place__desc">{!! $businessesDetail->description !!}
                             @if($businessesDetail->dType && $businessesDetail->dNumber)
-                            <b>{{ $businessesDetail->dType }}</b> -  {{ $businessesDetail->dNumber }} 
+                            <b>{{ $businessesDetail->dType }}</b> -  {{ $businessesDetail->dNumber }}
                             @endif
-                        
+
                              </div>
-                        
+
                             <a href="#" class="show-more" title="Show More">Show more</a>
+                            <a href="#" class="show-less" title="Show Less" style="display: none;">Show less</a>
                         </div>
 
                         <div class="place__box place__box-map">
@@ -263,7 +263,7 @@ function getYouTubeVideoId($url) {
                                 <span> {{ $businessesDetail->placeAddress }} </span><br>
                                 <br>
                                 <span><a href="https://www.google.com/maps/search/?api=1&query={{ urlencode($businessesDetail->placeAddress . ' ' . $businessesDetail->city) }}"
-                                        target="_blank" title="Directions">({{ $businessesDetail->city }})</a></span>
+                                        target="_blank" title="Directions"><button class="btn btn-primary btn-sm border-0">View {{ $businessesDetail->city }} on Map</button></a></span>
                             </div>
 
                         </div>
@@ -286,7 +286,7 @@ function getYouTubeVideoId($url) {
                         <div class="place__box">
                             <h3>Contact Info</h3>
                             <ul class="place__contact">
-                                <li>
+                                {{-- <li>
                                     <i class="la la-phone"></i>
                                     <a title=""
                                         href="tel:{{ $businessesDetail->phoneNumber1 }}">{{ $businessesDetail->phoneNumber1 }}</a>
@@ -295,13 +295,20 @@ function getYouTubeVideoId($url) {
                                     <a title=""
                                         href="tel:{{ $businessesDetail->phoneNumber2 }}">{{ $businessesDetail->phoneNumber2 }}</a>
 
-                                </li>
+                                </li> --}}
                                 <ul>
                                     @if ($businessesDetail->whatsappNo)
                                         <li>
-                                            <i class="la la-whatsapp"></i>
-                                            <a title=""
-                                                href="https://wa.me/{{ $businessesDetail->whatsappNo }}">{{ $businessesDetail->whatsappNo }}</a>
+                                            <div class="d-flex justify-content-start align-items-center">
+                                                <a href="https://wa.me/{{ $businessesDetail->whatsappNo }}"  title="">
+                                                    <button class="btn me-2 d-grid align-items-center"><i class="la la-whatsapp me-2"></i>
+                                                {{ $businessesDetail->whatsappNo }}</button>
+                                            </a>
+                                                <a href="tel:{{ $businessesDetail->phoneNumber1 }}"  title="">
+                                                    <button class="btn me-2 d-grid align-items-center"><i class="la la-phone me-2"></i>
+                                                {{ $businessesDetail->whatsappNo }}</button>
+                                            </a>
+                                            </div>
                                         </li>
                                     @endif
 
@@ -428,7 +435,7 @@ function getYouTubeVideoId($url) {
                                         <a title="Reply" href="#" class="place__comments__reply"></a>
                                     </li>
                                 @endforeach
-                                <?php 
+                                <?php
                                                 if(Auth::user()){
                                                 ?>
                                 <form method="POST"
@@ -464,7 +471,7 @@ function getYouTubeVideoId($url) {
                                     </div>
                                     <button class="btn" type="submit">Submit Review</button>
                                 </form>
-                                <?php 
+                                <?php
                                             }else{
                                             ?>
 
@@ -512,9 +519,9 @@ function getYouTubeVideoId($url) {
                                             </ul>
                                             </p>
                                             <div class="mt-2">
-                                                
+
                                                 <a title="call-now"  href="tel:{{ $businessesDetail->phoneNumber1 }}">
-                                                    
+
                                                     <button class="btn"><i class="la la-phone me-1"></i>Call Now</button>
                                                 </a>
                                             </div>
@@ -608,7 +615,7 @@ function getYouTubeVideoId($url) {
                                                 <img src="{{ URL::to('uploads/' . $value->coverImage) }}" />
 
                                             </a>
-                                            <?php 
+                                            <?php
                                                 if(Auth::user()){
                                                 ?>
                                             <a href="#" class="golo-add-to-wishlist btn-add-to-wishlist"
@@ -623,7 +630,7 @@ function getYouTubeVideoId($url) {
                                                     @endif
                                                 </span>
                                             </a>
-                                            <?php 
+                                            <?php
                                             }else{
                                             ?>
 
@@ -650,7 +657,7 @@ function getYouTubeVideoId($url) {
                                                     @endif
                                                 @endforeach
 
-                                                </i><span>{{ $value->category }}</span>
+                                                </i><sview>{{ $value->category }}</sview pan>
                                             </a>
                                             <a href="#" class="author" title="Author">
                                                 <img src="{{ URL::to('uploads/' . $value->logo) }}"alt="Author" />

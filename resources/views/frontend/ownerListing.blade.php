@@ -212,7 +212,7 @@ $Mastercity = Master::orderBy('created_at', 'asc')
 
 
 
-                                                            Not verified 
+                                                            Not verified
                                                         </span>
                                                     @endif
                                                 </td>

@@ -698,8 +698,8 @@
     }
 }
 @media only screen and (max-width: 767px) {
-    
-    
+
+
     .banner-apps {
         padding: 60px 0 120px;
         background-position: left 0 center;
@@ -1490,7 +1490,7 @@
         font-size: 18px;
     }
     .home-main .site-banner {
-        height: 16vh;
+        height: 22vh;
     }
     .home-main .site-banner:after {
         height: 40px;

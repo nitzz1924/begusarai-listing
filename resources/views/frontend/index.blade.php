@@ -42,7 +42,7 @@
 
                 <div class="overlay overlay_2">
                 </div>
-                <div class="container pt-5 pb-3 d-grid align-content-center">
+                <div class="container pt-0 pb-0 d-grid align-content-center">
                     <div class="site-banner__content">
                         <h1 class="site-banner__title">Find</h1>
                         <h1 class="site-banner__subtitle mb-2" style='color:white'>Everything in Begusarai</h1>
@@ -283,7 +283,7 @@
                             <div class="place-item layout-02 place-hover">
                                 <div class="place-inner">
                                     <div class="place-thumb hover-img">
-                                        <?php 
+                                        <?php
                                                 if(Auth::user()){
                                                 ?>
                                         <a class="entry-thumb"
@@ -291,7 +291,7 @@
                                             <img src="{{ URL::to('uploads/' . $value->coverImage) }}" />
                                         </a>
 
-                                        <?php 
+                                        <?php
                                                         }else{
                                                         ?>
                                         <a class="entry-thumb  open-login" href="">
@@ -299,7 +299,7 @@
                                         </a>
                                         <?php }?>
 
-                                        <?php 
+                                        <?php
                                                 if(Auth::user()){
                                                 ?>
                                         <a href="#" class="golo-add-to-wishlist btn-add-to-wishlist"
@@ -313,7 +313,7 @@
                                                 @endif
                                             </span>
                                         </a>
-                                        <?php 
+                                        <?php
                                             }else{
                                             ?>
 
@@ -353,14 +353,14 @@
                                     </div>
                                     <div class="entry-detail">
                                         <h3 class="place-title">
-                                            <?php 
+                                            <?php
                                                         if(Auth::user()){
                                                         ?>
 
                                             <a
                                                 href="{{ URL::to('listingDetail/' . $value->category . '/' . Str::slug($value->businessName) . '-' . $value->id) }}">{{ $value->businessName }}</a>
 
-                                            <?php 
+                                            <?php
                                                         }else{
                                                         ?>
                                             <a href="" class="open-login ">{{ $value->businessName }}</a>

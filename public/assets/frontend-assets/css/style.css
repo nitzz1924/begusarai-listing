@@ -2337,6 +2337,9 @@ a.site__menu__icon {
     line-height: 1.44;
     font-size: 16px;
     margin-bottom: 30px;
+    max-height: 100px; /* Adjust this as needed */
+    overflow: hidden;
+    transition: max-height 0.5s ease-out;
 }
 
 .btn {
@@ -3097,9 +3100,9 @@ a.place__comments__reply i {
 }
 @media (max-width: 767px) {
     .pagination {
-        
+
         /* margin-left: -207px; */
-        
+
     }
 }
 
@@ -3923,9 +3926,9 @@ a.place__comments__reply i {
 }
 
 .popup-form input[type="submit"]:hover {
-    
+
     background-color: #00b4b4;
-    
+
 }
 .popup-form input[type="checkbox"] {
     width: auto;
@@ -5366,9 +5369,9 @@ a.place__comments__reply i {
 .single .place__box-overview .place__desc {
     font-size: 18px;
     line-height: 1.56;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     position: relative;
-    height: 137px;
+    /* height: 137px; */
     overflow: hidden;
     transition: all 0.3s;
 }
@@ -5376,9 +5379,9 @@ a.place__comments__reply i {
     content: "";
     position: absolute;
     object-fit: contain;
-    background-image: -webkit-linear-gradient(rgba(255, 255, 255, 0), #ffffff);
+    /* background-image: -webkit-linear-gradient(rgba(255, 255, 255, 0), #ffffff);
     background-image: -o-linear-gradient(rgba(255, 255, 255, 0), #ffffff);
-    background-image: linear-gradient(rgba(255, 255, 255, 0), #ffffff);
+    background-image: linear-gradient(rgba(255, 255, 255, 0), #ffffff); */
     height: 53px;
     left: 0;
     bottom: 0;
@@ -5389,6 +5392,8 @@ a.place__comments__reply i {
 }
 .single .place__box-overview .place__desc.open {
     height: 100%;
+    max-height: none;
+    overflow: visible;
 }
 .single .place__box-overview .place__desc.open:after {
     content: "";
@@ -5974,9 +5979,9 @@ a.place__comments__reply i {
 }
 
 .form-underline input[type="submit"]:hover {
-    
+
     background-color: #00b4b4;
-    
+
 }
 .form-underline input[type="checkbox"] {
     width: auto;
@@ -7143,12 +7148,12 @@ a.place__comments__reply i {
 }
 
 .home-main .site-banner {
-    height: 70vh;
+    /* height: 70vh; */
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
     position: relative;
-    
+
 }
 .home-main .site-banner:after {
     content: "";
@@ -9432,7 +9437,7 @@ a.place__comments__reply i {
     color: #2d2d2d;
     line-height: 42px;
     margin-bottom: 20px;
-   
+
 }
 .pricing-item .price .currency {
     font-size: 24px;
@@ -9994,7 +9999,7 @@ a.place__comments__reply i {
     .field-input:nth-child(2)
     .site-banner__search__input {
     padding: 0 20px 0 0;
-    
+
 }
 .site-banner__search.layout-02 .field-submit {
     margin-top: 0;
@@ -10050,8 +10055,8 @@ a.place__comments__reply i {
     text-align: left;
     z-index: 99;
     display: none;
-    max-height: 200px; 
-    overflow-y: auto; 
+    max-height: 200px;
+    overflow-y: auto;
 }
 .site-banner__search.layout-02 .search-suggestions ul {
     padding: 7px 0;
