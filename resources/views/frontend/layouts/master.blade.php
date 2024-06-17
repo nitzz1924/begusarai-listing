@@ -3,12 +3,13 @@
 
 <head>
     @include('frontend.layouts.head')
+
 </head>
 
 <body>
+
     {{-- <div class="custom-overlay"></div> --}}
     <div id="wrapper">
-
         @include('frontend.layouts.header')
         <div class="container-fluid g-0">
             <section>

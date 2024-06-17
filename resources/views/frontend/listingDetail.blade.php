@@ -10,10 +10,11 @@
 @section('meta_description', $businessesDetail->description)
 @section('og_image', asset('uploads/' . $businessesDetail->coverImage))
 
+
 <?php
 
 use App\Models\User_Login;
-function getYouTubeVideoId($url) {
+    function getYouTubeVideoId1($url) {
     $parsedUrl = parse_url($url);
 
 
@@ -119,7 +120,6 @@ function getYouTubeVideoId($url) {
         color: white;
     }
 </style>
-
 <main id="main" class="site-main single single-02">
     <div class="place">
         <div class="slick-sliders">
@@ -352,7 +352,7 @@ function getYouTubeVideoId($url) {
                             <h3 class="place__title--additional">
                                 Video
                             </h3>
-                            <?php $urlfile = getYouTubeVideoId($businessesDetail->video);
+                            <?php $urlfile = getYouTubeVideoId1($businessesDetail->video);
                             ?>
                             <div class="embed-responsive embed-responsive-16by9">
                                 <iframe width="560" height="315" src="https://www.youtube.com/embed/{{$urlfile}}"

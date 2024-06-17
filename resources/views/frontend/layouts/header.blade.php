@@ -1,11 +1,16 @@
 <?php
 use App\Models\Master;
-use App\Models\Popup_ads;
 use App\Models\User_Login;
 
 $Mastercity = Master::orderBy('created_at', 'asc')->where('type', '=', 'City')->get();
+
+?>
+<?php
+use App\Models\Popup_ads;
+
 $popup = Popup_ads::orderBy('created_at', 'asc')->where('type', '=', 'Popup Ads')->first();
-function getYouTubeVideoId($url) {
+
+    function getYouTubeVideoId($url) {
     $parsedUrl = parse_url($url);
 
 
@@ -25,6 +30,7 @@ function getYouTubeVideoId($url) {
 
     return null;
 }
+
 ?>
 
 <div class="modal fade" id="exampleModalFullscreen" tabindex="-1" aria-labelledby="exampleModalFullscreenLabel"
@@ -605,7 +611,7 @@ function getYouTubeVideoId($url) {
                     </a>
                 </div>
 
-                <div class="mobile-bottom-nav__item">
+                {{-- <div class="mobile-bottom-nav__item">
                     <a href="/packages/0">
                         <div class="mobile-bottom-nav__item-content">
                             <i class="fa-solid fa-filter-circle-dollar fs-4 pb-1" style="color: #FEC868"></i>
@@ -613,7 +619,7 @@ function getYouTubeVideoId($url) {
 
                         </div>
                     </a>
-                </div>
+                </div> --}}
 
         </nav>
     </div>

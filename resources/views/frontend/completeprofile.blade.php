@@ -109,8 +109,8 @@
                                 <div class="has-error mt-2">{{ $message }}</div>
                                 @enderror
 
-                                <label class="fieldlabels">Additional Fields :</label>
-                                <input class="form-control mb-3" type="url" placeholder="Your additional fields url"
+                                <label class="fieldlabels">Tagline :</label>
+                                <input class="form-control mb-3" type="text" placeholder="Your tagline here"
                                     name="additionalFields" id="additionalFields"
                                     value="{{ isset($business) ? $business->additionalFields : old('additionalFields') }}">
                                 <label class="fieldlabels mb-3">Highlight :</label>

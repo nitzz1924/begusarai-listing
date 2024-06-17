@@ -1,3 +1,4 @@
+
 <div id="footer" class="footer ">
     <div class="container ">
         <div class="footer__top desktop-view">

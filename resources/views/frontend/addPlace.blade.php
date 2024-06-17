@@ -35,7 +35,10 @@
                                     @error('businessName')
                                     <div class="has-error mt-2">{{ $message }}</div>
                                     @enderror
-
+                                    <label class="fieldlabels">Tagline :</label>
+                                    <input class="form-control mb-3" type="text" placeholder="Your tagline here"
+                                        name="additionalFields" id="additionalFields"
+                                        value="">
                                     <label class="fieldlabels">Owner Name/Authorized person:<span
                                             style='color:red'>*</span></label>
                                     <input type="text" placeholder="Owner Name" id="ownerName" name="ownerName"

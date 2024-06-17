@@ -217,16 +217,16 @@
                     <div class="area-places">
                         <div class="container">
 
-                            
+
 
                             <div class="row">
-                            
+
                                 @foreach ($ResultFirst as $index => $value)
                                     @if ($index === 0 && $value->status == 1)
                                         <div class="place-item layout-02 place-hover" data-maps_name="mattone_restaurant">
                                             <div class="place-inner">
                                                 <div class="place-thumb hover-img">
-                                                    <?php 
+                                                    <?php
                                                 if(Auth::user()){
                                                 ?>
                                                     <a class="entry-thumb"
@@ -234,14 +234,14 @@
                                                         <img src="{{ URL::to('uploads/' . $value->coverImage) }}" />
                                                     </a>
 
-                                                    <?php 
+                                                    <?php
                                                         }else{
                                                         ?>
                                                     <a class="entry-thumb  open-login" href="">
                                                         <img src="{{ URL::to('uploads/' . $value->coverImage) }}" />
                                                     </a>
                                                     <?php }?>
-                                                    <?php 
+                                                    <?php
                                                 if(Auth::user()){
                                                 ?>
                                                     <a href="#" class="golo-add-to-wishlist btn-add-to-wishlist"
@@ -256,7 +256,7 @@
                                                             @endif
                                                         </span>
                                                     </a>
-                                                    <?php 
+                                                    <?php
                                                                 }else{
                                                                 ?>
 
@@ -293,13 +293,13 @@
                                                     <div class="entry-head">
 
                                                         <h3 class="place-title">
-                                                            <?php 
+                                                            <?php
                                                 if(Auth::user()){
                                                 ?>
 
                                                             <a
                                                                 href="{{ URL::to('listingDetail/' . $value->category . '/' . Str::slug($value->businessName) . '-' . $value->id) }}">{{ $value->businessName }}</a>
-                                                            <?php 
+                                                            <?php
                                                     }else{
                                                     ?>
                                                             <a href=""
@@ -310,15 +310,8 @@
                                                         {{-- <div class="place-type  ">
                                                             <span>{{ $value->highlight }}</span>
                                                         </div> --}}
-                                                        <div class="place-type  ">
-                                                            @php
-                                                                $highlights = explode(',', $value->highlight); // Split the string into an array using a delimiter
-                                                                $highlights = array_slice($highlights, 0, 4); // Get the first two elements of the array
-                                                            @endphp
-                                                            @foreach ($highlights as $highlight)
-                                                                <span style="font-size:13px;">{{ $highlight }},</span>
-                                                            @endforeach
-                                                            ...
+                                                        <div class="place-type">
+                                                            <span>{{ $value->additionalFields }}</span>
                                                         </div>
 
                                                         <div class="place-city">
@@ -362,7 +355,7 @@
                                         <div class="place-item layout-02 place-hover" data-maps_name="mattone_restaurant">
                                             <div class="place-inner">
                                                 <div class="place-thumb hover-img">
-                                                    <?php 
+                                                    <?php
                                                 if(Auth::user()){
                                                 ?>
                                                     <a class="entry-thumb"
@@ -370,14 +363,14 @@
                                                         <img src="{{ URL::to('uploads/' . $value->coverImage) }}" />
                                                     </a>
 
-                                                    <?php 
+                                                    <?php
                                                         }else{
                                                         ?>
                                                     <a class="entry-thumb  open-login" href="">
                                                         <img src="{{ URL::to('uploads/' . $value->coverImage) }}" />
                                                     </a>
                                                     <?php }?>
-                                                    <?php 
+                                                    <?php
                                                 if(Auth::user()){
                                                 ?>
                                                     <a href="#" class="golo-add-to-wishlist btn-add-to-wishlist"
@@ -392,7 +385,7 @@
                                                             @endif
                                                         </span>
                                                     </a>
-                                                    <?php 
+                                                    <?php
                                                                 }else{
                                                                 ?>
 
@@ -429,13 +422,13 @@
                                                     <div class="entry-head">
 
                                                         <h3 class="place-title">
-                                                            <?php 
+                                                            <?php
                                                 if(Auth::user()){
                                                 ?>
 
                                                             <a
                                                                 href="{{ URL::to('listingDetail/' . $value->category . '/' . Str::slug($value->businessName) . '-' . $value->id) }}">{{ $value->businessName }}</a>
-                                                            <?php 
+                                                            <?php
                                                     }else{
                                                     ?>
                                                             <a href=""
@@ -443,18 +436,8 @@
                                                             <?php }?>
                                                         </h3>
 
-                                                        {{-- <div class="place-type  ">
-                                                            <span>{{ $value->highlight }}</span>
-                                                        </div> --}}
-                                                        <div class="place-type  ">
-                                                            @php
-                                                                $highlights = explode(',', $value->highlight); // Split the string into an array using a delimiter
-                                                                $highlights = array_slice($highlights, 0, 4); // Get the first two elements of the array
-                                                            @endphp
-                                                            @foreach ($highlights as $highlight)
-                                                                <span style="font-size:13px;">{{ $highlight }},</span>
-                                                            @endforeach
-                                                            ...
+                                                        <div class="place-type">
+                                                            <span>{{ $value->additionalFields }}</span>
                                                         </div>
 
                                                         <div class="place-city">

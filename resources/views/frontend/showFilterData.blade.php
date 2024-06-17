@@ -224,7 +224,7 @@
                                         <div class="place-item layout-02 place-hover">
                                             <div class="place-inner">
                                                 <div class="place-thumb hover-img">
-                                                    <?php 
+                                                    <?php
                                                 if(Auth::user()){
                                                 ?>
                                                     <a class="entry-thumb"
@@ -233,7 +233,7 @@
                                                     </a>
 
 
-                                                    <?php 
+                                                    <?php
                                                         }else{
                                                         ?>
                                                     <a class="entry-thumb  open-login" href="">
@@ -241,7 +241,7 @@
                                                     </a>
                                                     <?php }?>
 
-                                                    <?php 
+                                                    <?php
                                                 if(Auth::user()){
                                                 ?>
                                                     <a href="#" class="golo-add-to-wishlist btn-add-to-wishlist"
@@ -257,7 +257,7 @@
                                                             @endif
                                                         </span>
                                                     </a>
-                                                    <?php 
+                                                    <?php
                                             }else{
                                             ?>
 
@@ -300,14 +300,14 @@
                                                 </div>
                                                 <div class="entry-detail">
                                                     <h3 class="place-title">
-                                                        <?php 
+                                                        <?php
                                                         if(Auth::user()){
                                                         ?>
 
                                                         <a
                                                             href="{{ URL::to('listingDetail/' . $value->category . '/' . Str::slug($value->businessName) . '-' . $value->id) }}">{{ $value->businessName }}</a>
 
-                                                        <?php 
+                                                        <?php
                                                         }else{
                                                         ?>
                                                         <a href=""

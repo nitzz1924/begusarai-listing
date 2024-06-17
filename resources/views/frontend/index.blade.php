@@ -371,7 +371,7 @@
                                         <div class="entry-head">
 
                                             <div class="place-type">
-                                                <span>{{ $value->highlight }}</span>
+                                                <span>{{ $value->additionalFields }}</span>
                                             </div>
 
                                             <div class="place-city">
