@@ -29,8 +29,8 @@ use Log;
 use View;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Contracts\Encryption\DecryptException;
-
-class HomeController extends Controller
+use Exception;
+ class HomeController extends Controller
 {
     use AuthenticatesUsers;
 
@@ -1819,5 +1819,105 @@ class HomeController extends Controller
         return redirect()
             ->route('addDuration')
             ->with('error', 'Duration not found');
+    }
+
+
+
+    //New Functions
+    public function completeProfile($id)
+    {
+        $types = ['category', 'Placetype', 'Highlight', 'City', 'bookingType'];
+        $data = [];
+
+        foreach ($types as $type) {
+            $data[$type] = Master::orderBy('created_at', 'desc')
+                ->where('type', $type)
+                ->get();
+        }
+
+        $business = BusinessList::findOrFail($id);
+        // dd($business);
+        $business->placeType = explode(',', $business->placeType);
+        $business->highlight = explode(',', $business->highlight);
+
+        return view('frontend.completeprofile', compact('data', 'business'));
+    }
+
+    public function updateHighlights(Request $request, $id){
+        // dd($request->all());
+        $business = BusinessList::findOrFail($id);
+        try {
+            $business->userId = Auth::id();
+            $business->city = $request->input('city');
+            $business->bookingType = $request->input('bookingType');
+            $business->youtube = $request->input('youtube');
+            $business->facebook = $request->input('facebook');
+            $business->instagram = $request->input('instagram');
+            $business->twitter = $request->input('twitter');
+            $business->websiteUrl = $request->input('websiteUrl');
+            $business->additionalFields = $request->input('additionalFields');
+            $business->highlight = $request->has('highlight') ? implode(',', $request->input('highlight')) : ' ';
+            $business->save();
+            return back()->with('success', 'Updated..!!');
+        }catch(Exception $exception){
+            // return redirect()->route('completeProfile');
+            return redirect()->route('completeProfile')->with('error', $exception->getMessage());
+        }
+    }
+    public function updateLocations(Request $request, $id){
+        // dd($request->all());
+        $business = BusinessList::findOrFail($id);
+        try {
+            $business->userId = Auth::id();
+            $business->placeAddress = $request->input('placeAddress');
+            $business->email = $request->input('email');
+            $business->phoneNumber1 = $request->input('phoneNumber1');
+            $business->phoneNumber2 = $request->input('phoneNumber2');
+            $business->whatsappNo = $request->input('whatsappNo');
+            $business->bookingurl = $request->input('bookingurl');
+            $business->video = $request->input('video');
+
+            // Handle file uploads (same as savePlace)
+            $allowedExtensions = ['jpg', 'jpeg', 'png', 'svg', 'webp', 'pdf'];
+            $destinationPath = public_path('uploads');
+
+            foreach (['coverImage', 'documentImage', 'logo'] as $fileField) {
+                if ($request->hasFile($fileField)) {
+                    $file = $request->file($fileField);
+                    $extension = strtolower($file->getClientOriginalExtension());
+
+                    if (in_array($extension, $allowedExtensions) && $file->isValid()) {
+                        $fileName = time() . '.' . $extension;
+                        $file->move($destinationPath, $fileName);
+                        $business->$fileField = $fileName;
+                    } else {
+                        // Handle invalid files for coverImage, documentImage, and logo
+                    }
+                }
+            }
+            if (!empty($galleryImages)) {
+                $filePaths = [];
+
+                foreach ($galleryImages as $file) {
+                    $extension = strtolower($file->getClientOriginalExtension());
+
+                    if (in_array($extension, $allowedExtensions) && $file->isValid()) {
+                        $fileName = time() . '_' . uniqid() . '.' . $extension;
+                        $file->move($destinationPath, $fileName);
+                        $filePaths[] = $fileName;
+                    } else {
+                        // Handle invalid files for galleryImage
+                    }
+                }
+
+                // Store the file paths in the database as a JSON array
+                $business->galleryImage = json_encode($filePaths);
+            }
+            $business->save();
+            return back()->with('success', 'Updated..!!');
+        }catch(Exception $exception){
+            // return redirect()->route('completeProfile');
+            return redirect()->route('completeProfile')->with('error', $exception->getMessage());
+        }
     }
 }

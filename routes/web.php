@@ -195,3 +195,10 @@ Route::post('/createuser', [UserController::class, 'createuser'])->name('createu
 Route::get('/userlistings/{id}', [UserController::class, 'userlistings'])->name('userlistings');
 Route::get('/viewlistingform/{id}', [UserController::class, 'viewlistingform'])->name('viewlistingform');
 Route::post('/createbusinessListing', [UserController::class, 'createbusinessListing'])->name('createbusinessListing');
+
+
+//New Routes
+Route::get('/completeProfile/{id}', [HomeController::class, 'completeProfile'])->name('completeProfile');
+Route::put('/updateHighlights/{id}', [HomeController::class, 'updateHighlights'])->name('updateHighlights');
+Route::put('/updateLocations/{id}', [HomeController::class, 'updateLocations'])->name('updateLocations');
+

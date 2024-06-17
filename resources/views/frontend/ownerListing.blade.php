@@ -157,10 +157,11 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                                         <th>Name</th>
                                         <th>City</th>
                                         <th>Category</th>
-                                        <th>Leads</th>
+                                        {{-- <th>Leads</th> --}}
                                         <th>Status</th>
-                                        <th> Payment</th>
-                                        <th style="display:table-footer-group">Ranking Plans</th>
+                                        <th>Profile</th>
+                                        {{-- <th> Payment</th> --}}
+                                        {{-- <th style="display:table-footer-group">Ranking Plans</th> --}}
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -176,19 +177,24 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                                                 <td data-title="Name">{{ $business->businessName }}</td>
                                                 <td data-title="City">{{ $business->city }}</td>
                                                 <td data-title="Category">{{ $business->category }}</td>
-                                                <td data-title="Leads">
+                                                {{-- <td data-title="Leads">
                                                     <a href="{{ route('ownerLeads', ['id' => $business->id]) }}"
                                                         class="list"
                                                         style="display: {{ $business->status == 0 ? 'none' : 'block' }}"
                                                         title="Leads    ">
                                                         <button class="btn">Check</button>
                                                     </a>
-                                                </td>
+                                                </td> --}}
                                                 <td data-title="Status"
                                                     style="color: {{ $business->status == 0 ? '#ffad2d' : 'green' }}">
                                                     {{ $business->status == 0 ? 'Pending' : 'Approved' }}
                                                 </td>
-                                                <td data-title="Payment">
+                                                <td>
+                                                    <a href="{{ route('completeProfile', ['id' => $business->id]) }}">
+                                                        <button type="button" class="btn-primary rounded btn-sm"><i class="fas fa-user fs-6 text-white"></i>Complete your Profile</button>
+                                                    </a>
+                                                </td>
+                                                {{-- <td data-title="Payment">
                                                     @if ($business->status == 0)
                                                         <a href="/packages/{{ $business->id }}" class="btn-sm btn-warning">
                                                             Activate Plan
@@ -199,9 +205,9 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                                                             Paid
                                                         </span>
                                                     @endif
-                                                </td>
+                                                </td> --}}
 
-                                                <td data-title="category">
+                                                {{-- <td data-title="category">
                                                     @if ($business->status != 0)
                                                         <a href="/category/{{ $business->id }}" class="btn-sm btn-warning">
                                                             Activate Plan
@@ -215,7 +221,7 @@ $Mastercity = Master::orderBy('created_at', 'asc')
                                                             Not verified
                                                         </span>
                                                     @endif
-                                                </td>
+                                                </td> --}}
 
                                                 <td data-title="Action" class="place-action d-flex action-btn">
                                                     <a href="{{ route('editPlace', ['id' => $business->id]) }}"
