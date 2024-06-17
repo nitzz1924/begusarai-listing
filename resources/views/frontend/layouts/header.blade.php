@@ -5,8 +5,28 @@ use App\Models\User_Login;
 
 $Mastercity = Master::orderBy('created_at', 'asc')->where('type', '=', 'City')->get();
 $popup = Popup_ads::orderBy('created_at', 'asc')->where('type', '=', 'Popup Ads')->first();
+function getYouTubeVideoId($url) {
+    $parsedUrl = parse_url($url);
 
+
+    if ($parsedUrl === false || !isset($parsedUrl['host'])) {
+        return null;
+    }
+
+    if ($parsedUrl['host'] === 'www.youtube.com' && isset($parsedUrl['query'])) {
+        parse_str($parsedUrl['query'], $query);
+        if (isset($query['v'])) {
+            return $query['v'];
+        }
+    } elseif ($parsedUrl['host'] === 'youtu.be' && isset($parsedUrl['path'])) {
+        $path = trim($parsedUrl['path'], '/');
+        return Str::afterLast($path, '/');
+    }
+
+    return null;
+}
 ?>
+
 <div class="modal fade" id="exampleModalFullscreen" tabindex="-1" aria-labelledby="exampleModalFullscreenLabel"
     style="display: none; background-color: black;" aria-hidden="true">
     <div class="modal-dialog modal-fullscreen-sm-down ">
@@ -18,27 +38,28 @@ $popup = Popup_ads::orderBy('created_at', 'asc')->where('type', '=', 'Popup Ads'
             </div>
             <div class="modal-body d-grid align-items-center">
                 @if ($popup && $popup->logo)
-                    <div class="position-relative bg-image overlay p-0">
+                <div class="position-relative bg-image overlay p-0">
 
-                        <a href="{{ $popup->value }}">
-                            <img src="{{ URL::to('uploads/' . $popup->logo) }}" alt="Promo banner"
-                                class="img-fluid rounded-3">
-                        </a>
+                    <a href="{{ $popup->value }}">
+                        <img src="{{ URL::to('uploads/' . $popup->logo) }}" alt="Promo banner"
+                            class="img-fluid rounded-3">
+                    </a>
 
-                    </div>
+                </div>
                 @else
-                    <div class="position-relative modal-body bg-image overlay p-0">
+                <div class="position-relative modal-body bg-image overlay p-0">
+                    <?php $urlfile = getYouTubeVideoId($popup->value);
+                            ?>
+                    @if ($popup && $popup->value)
+                    <a href="{{ $popup->value }}">
+                        <iframe class="embed-responsive-item" id="iframe-content"
+                            src="https://www.youtube.com/embed/{{$urlfile}}?autoplay=1&mute=1&controls=0"
+                            frameborder="0">
+                        </iframe>
+                    </a>
+                    @endif
 
-                        @if ($popup && $popup->value)
-                            <a href="{{ $popup->value }}">
-                                <iframe class="embed-responsive-item" id="iframe-content"
-                                    src="https://www.youtube.com/embed/{{ $popup->value }}?autoplay=1&mute=1&controls=0"
-                                    frameborder="0">
-                                </iframe>
-                            </a>
-                        @endif
-
-                    </div>
+                </div>
                 @endif
 
             </div>
@@ -74,15 +95,15 @@ $popup = Popup_ads::orderBy('created_at', 'asc')->where('type', '=', 'Popup Ads'
                         <div class="popup__content">
 
                             @auth
-                                @if (Auth::user()->type == 'Owner')
-                                    <div class="popup__button popup__box pb-0">
-                                        <a title="Add place" href="/addPlace" class="">
-                                            <span>Add place</span>
-                                            <i class="la la-plus"></i>
-                                        </a>
-                                    </div>
-                                    <!-- .popup__button -->
-                                @endif
+                            @if (Auth::user()->type == 'Owner')
+                            <div class="popup__button popup__box pb-0">
+                                <a title="Add place" href="/addPlace" class="">
+                                    <span>Add place</span>
+                                    <i class="la la-plus"></i>
+                                </a>
+                            </div>
+                            <!-- .popup__button -->
+                            @endif
                             @endauth
 
                             {{-- Navigation tabs --}}
@@ -92,12 +113,12 @@ $popup = Popup_ads::orderBy('created_at', 'asc')->where('type', '=', 'Popup Ads'
                                         <a title="Destinations" href="#">Destinations </a>
                                         <ul class="sub-menu">
                                             @foreach ($Mastercity as $value)
-                                                <li>
-                                                    <a
-                                                        href="{{ route('searchFilter', ['category' => 'all', 'city' => $value->title, 'highlight' => 'all']) }}">
-                                                        {{ $value->title }}
-                                                    </a>
-                                                </li>
+                                            <li>
+                                                <a
+                                                    href="{{ route('searchFilter', ['category' => 'all', 'city' => $value->title, 'highlight' => 'all']) }}">
+                                                    {{ $value->title }}
+                                                </a>
+                                            </li>
                                             @endforeach
                                         </ul>
                                     </li>
@@ -170,15 +191,13 @@ $popup = Popup_ads::orderBy('created_at', 'asc')->where('type', '=', 'Popup Ads'
                                 <p>Phone: 9693667887 / 06243-316290</p>
                                 <ul class="mt-2">
                                     <li class="facebook d-inline-block p-2 rounded">
-                                        <a title="Facebook" class=""
-                                            href="https://www.facebook.com/inbegusarai">
+                                        <a title="Facebook" class="" href="https://www.facebook.com/inbegusarai">
                                             <i class="la la-facebook-f fs-3 text-white"></i>
                                         </a>
                                     </li>
 
                                     <li class="instagram d-inline-block p-2 rounded">
-                                        <a title="Instagram" class=""
-                                            href="https://instagram.com/in.begusarai">
+                                        <a title="Instagram" class="" href="https://instagram.com/in.begusarai">
                                             <i class="la la-instagram fs-3 text-white "></i>
                                         </a>
                                     </li>
@@ -188,8 +207,7 @@ $popup = Popup_ads::orderBy('created_at', 'asc')->where('type', '=', 'Popup Ads'
                             <div class="footer__bottom " style="margin-bottom: 20px">
                                 <p class="footer__bottom__copyright">
                                     2023 &copy; <a title="RUDRAASHWI TECHNOLOGY"
-                                        href="https://rudraashwitechnology.com/"><span
-                                            style="color: #38d6d6">RUDRAASHWI
+                                        href="https://rudraashwitechnology.com/"><span style="color: #38d6d6">RUDRAASHWI
                                             TECHNOLOGY</span></a>. All
                                     rights reserved.
                                 </p>
@@ -213,66 +231,64 @@ $popup = Popup_ads::orderBy('created_at', 'asc')->where('type', '=', 'Popup Ads'
                 {{-- login dropdown --}}
                 <div class="ms-auto login-container mobile-view">
                     @guest
-                        <div class="popup__user login__box open-form">
-                            <a title="Login" href="#" class="open-login btn">Login</a>
-                        </div><!-- .popup__user -->
+                    <div class="popup__user login__box open-form">
+                        <a title="Login" href="#" class="open-login btn">Login</a>
+                    </div><!-- .popup__user -->
                     @else
-                        <div class="popup__menu popup__box login__box">
-                            <ul class="sub-menu">
-                                <?php $user = User_Login::find(auth()->user()->id); ?>
+                    <div class="popup__menu popup__box login__box">
+                        <ul class="sub-menu">
+                            <?php $user = User_Login::find(auth()->user()->id); ?>
 
-                                @if (Auth::user()->type == 'Guest')
+                            @if (Auth::user()->type == 'Guest')
+                            <li>
+                                <a class="avatar" href="">
+                                    @if ($user->image)
+                                    <img src="{{ URL::to('/uploads/' . $user->image) }}" title="" alt="">
+                                    @else
+                                    <img src="https://wp.getgolo.com/country-guide/wp-content/themes/golo/assets/images/default-user-image.png"
+                                        title="guest" alt="guest">
+                                    @endif
+                                    {{-- <span>{{ $user->name }}</span> --}}
+                                </a>
+                                <ul class="sub-menu login-menu">
+                                    <li class=""><a href="/ownerProfile">Profile</a></li>
+                                    <li class=""><a href="/ownerWishlist">My Wishlist</a></li>
                                     <li>
-                                        <a class="avatar" href="">
-                                            @if ($user->image)
-                                                <img src="{{ URL::to('/uploads/' . $user->image) }}" title=""
-                                                    alt="">
-                                            @else
-                                                <img src="https://wp.getgolo.com/country-guide/wp-content/themes/golo/assets/images/default-user-image.png"
-                                                    title="guest" alt="guest">
-                                            @endif
-                                            {{-- <span>{{ $user->name }}</span> --}}
+                                        <a href="{{ route('logout') }}">
+                                            <span>Logout</span>
                                         </a>
-                                        <ul class="sub-menu login-menu">
-                                            <li class=""><a href="/ownerProfile">Profile</a></li>
-                                            <li class=""><a href="/ownerWishlist">My Wishlist</a></li>
-                                            <li>
-                                                <a href="{{ route('logout') }}">
-                                                    <span>Logout</span>
-                                                </a>
-                                            </li>
-                                        </ul>
                                     </li>
-                                @elseif (Auth::user()->type == 'Owner')
+                                </ul>
+                            </li>
+                            @elseif (Auth::user()->type == 'Owner')
+                            <li>
+                                <a class="avatar" href="">
+                                    @if ($user->image)
+                                    <img src="{{ URL::to('/uploads/' . $user->image) }}" title="" alt="">
+                                    @else
+                                    <img src="{{ asset('assets/images/users/default.png') }}" title="Default Avatar"
+                                        alt="Default Avatar">
+                                    @endif
+                                    {{-- <span>{{ $user->name }}</span> --}}
+                                </a>
+                                <ul class="sub-menu login-menu">
+                                    <li class=""><a href="/ownerDashboard">Dashboard</a></li>
+                                    <li class=""><a href="/ownerListing">My business</a></li>
+                                    <li class=""><a href="/ownerWishlist">My Wishlist</a></li>
+                                    {{-- <li class=""><a href="/businessOwnerPage">Author Listing</a></li> --}}
+
+                                    <hr class="dropdown-divider">
+
                                     <li>
-                                        <a class="avatar" href="">
-                                            @if ($user->image)
-                                                <img src="{{ URL::to('/uploads/' . $user->image) }}" title=""
-                                                    alt="">
-                                            @else
-                                                <img src="{{ asset('assets/images/users/default.png') }}"
-                                                    title="Default Avatar" alt="Default Avatar">
-                                            @endif
-                                            {{-- <span>{{ $user->name }}</span> --}}
+                                        <a href="/logout">
+                                            <span>Logout</span>
                                         </a>
-                                        <ul class="sub-menu login-menu">
-                                            <li class=""><a href="/ownerDashboard">Dashboard</a></li>
-                                            <li class=""><a href="/ownerListing">My business</a></li>
-                                            <li class=""><a href="/ownerWishlist">My Wishlist</a></li>
-                                            {{-- <li class=""><a href="/businessOwnerPage">Author Listing</a></li> --}}
-
-                                            <hr class="dropdown-divider">
-
-                                            <li>
-                                                <a href="/logout">
-                                                    <span>Logout</span>
-                                                </a>
-                                            </li>
-                                        </ul>
                                     </li>
-                                @endif
-                            </ul>
-                        </div><!-- .popup__menu -->
+                                </ul>
+                            </li>
+                            @endif
+                        </ul>
+                    </div><!-- .popup__menu -->
                     @endguest
                 </div>
             </div>
@@ -297,19 +313,19 @@ $popup = Popup_ads::orderBy('created_at', 'asc')->where('type', '=', 'Popup Ads'
                                 <ul class="sub-menu">
 
                                     @foreach ($Mastercity as $value)
-                                        <li>
-                                            <a
-                                                href="{{ route('searchFilter', ['category' => 'all', 'city' => $value->title, 'highlight' => 'all']) }}">
-                                                {{ $value->title }}
-                                            </a>
-                                        </li>
+                                    <li>
+                                        <a
+                                            href="{{ route('searchFilter', ['category' => 'all', 'city' => $value->title, 'highlight' => 'all']) }}">
+                                            {{ $value->title }}
+                                        </a>
+                                    </li>
                                     @endforeach
 
                                 </ul>
                             </li>
 
                             @auth
-                                <?php $user = User_Login::find(auth()->user()->id); ?>
+                            <?php $user = User_Login::find(auth()->user()->id); ?>
                             @endauth
 
                             <?php
@@ -321,18 +337,17 @@ $popup = Popup_ads::orderBy('created_at', 'asc')->where('type', '=', 'Popup Ads'
                                 <a class="avatar" href="">
 
                                     @if ($user->image)
-                                        <img src="{{ URL::to('/uploads/' . $user->image) }}" title=""
-                                            alt="">
+                                    <img src="{{ URL::to('/uploads/' . $user->image) }}" title="" alt="">
 
-                                        <span>
-                                            {{ $user->name }}
-                                        </span>
+                                    <span>
+                                        {{ $user->name }}
+                                    </span>
                                     @else
-                                        <img src="https://wp.getgolo.com/country-guide/wp-content/themes/golo/assets/images/default-user-image.png"
-                                            title="guest" alt="guest">
-                                        <span>
-                                            {{ $user->name }}
-                                        </span>
+                                    <img src="https://wp.getgolo.com/country-guide/wp-content/themes/golo/assets/images/default-user-image.png"
+                                        title="guest" alt="guest">
+                                    <span>
+                                        {{ $user->name }}
+                                    </span>
                                     @endif
                                 </a>
                                 <ul class="sub-menu">
@@ -357,18 +372,17 @@ $popup = Popup_ads::orderBy('created_at', 'asc')->where('type', '=', 'Popup Ads'
                             <li>
                                 <a class="avatar" href="">
                                     @if ($user->image)
-                                        <img src="{{ URL::to('/uploads/' . $user->image) }}" title=""
-                                            alt="">
+                                    <img src="{{ URL::to('/uploads/' . $user->image) }}" title="" alt="">
 
-                                        <span>
-                                            {{ $user->name }}
-                                        </span>
+                                    <span>
+                                        {{ $user->name }}
+                                    </span>
                                     @else
-                                        <img src="{{ asset('assets/images/users/default.png') }}"
-                                            title="Default Avatar" alt="Default Avatar">
-                                        <span>
-                                            {{ $user->name }}
-                                        </span>
+                                    <img src="{{ asset('assets/images/users/default.png') }}" title="Default Avatar"
+                                        alt="Default Avatar">
+                                    <span>
+                                        {{ $user->name }}
+                                    </span>
                                     @endif
                                 </a>
                                 <ul class="sub-menu">
@@ -473,9 +487,8 @@ $popup = Popup_ads::orderBy('created_at', 'asc')->where('type', '=', 'Popup Ads'
                                     <div class="field-input">
                                         <label for="mobileNumber">OTP<span style="color: red;">*</span></label>
 
-                                        <input type="tel" id="verificationCode" placeholder="Enter OTP here"
-                                            value="" name="verificationCode" pattern="[0-9]{6}" maxlength="6"
-                                            minlength="6" />
+                                        <input type="tel" id="verificationCode" placeholder="Enter OTP here" value=""
+                                            name="verificationCode" pattern="[0-9]{6}" maxlength="6" minlength="6" />
                                         <input type="hidden" id="generatedOTP" placeholder="OTP" value=""
                                             name="generatedOTP" />
 
@@ -485,13 +498,12 @@ $popup = Popup_ads::orderBy('created_at', 'asc')->where('type', '=', 'Popup Ads'
 
                                 <!-- Acceptance checkbox -->
                                 <div class="field-check mb-2">
-                                    <label for="accept"
-                                        style="flex: 0 0 100% !important; max-width: 100% !important;">
+                                    <label for="accept" style="flex: 0 0 100% !important; max-width: 100% !important;">
                                         <input type="checkbox" id="accept" value="1" name="accept"
                                             class="form-check-input  ">
                                         @csrf
-                                        Accept the <a title="Terms" href="#">Terms</a> and <a
-                                            title="Privacy Policy" href="#">Privacy Policy</a>
+                                        Accept the <a title="Terms" href="#">Terms</a> and <a title="Privacy Policy"
+                                            href="#">Privacy Policy</a>
                                         <span class="checkmark">
                                             <i class="la la-check"></i>
                                         </span>
@@ -515,16 +527,15 @@ $popup = Popup_ads::orderBy('created_at', 'asc')->where('type', '=', 'Popup Ads'
                                     <label for="mobileNumber">Enter Phone Number<span
                                             style="color: red;">*</span></label>
 
-                                    <input type="tel" placeholder="" value="" name="mobileNumber"
-                                        pattern="[0-9]{10}" minlength="10" maxlength="10" id="mobileNumber"
-                                        required />
+                                    <input type="tel" placeholder="" value="" name="mobileNumber" pattern="[0-9]{10}"
+                                        minlength="10" maxlength="10" id="mobileNumber" required />
                                 </div>
                                 <div class="field-input">
                                     <label for="mobileNumber">Enter Your Password<span
                                             style="color: red;">*</span></label>
 
-                                    <input type="password" placeholder=" " value="" name="password"
-                                        id="password" required />
+                                    <input type="password" placeholder=" " value="" name="password" id="password"
+                                        required />
                                 </div>
                                 <a title="Forgot password" class="forgot_pass" href="/resetPassword">Forgot
                                     password</a>
@@ -567,42 +578,42 @@ $popup = Popup_ads::orderBy('created_at', 'asc')->where('type', '=', 'Popup Ads'
         <nav class="mobile-bottom-nav">
 
             {{-- <div class="mobile-bottom-nav__item active"> --}}
-            <div class="mobile-bottom-nav__item ">
-                <a href="/">
-                    <div class="mobile-bottom-nav__item-content">
-                        <i class="fa-solid fa-house fs-4 pb-1" style="color: #C6E2E9"></i>
-                        Home
-                    </div>
-                </a>
-            </div>
+                <div class="mobile-bottom-nav__item ">
+                    <a href="/">
+                        <div class="mobile-bottom-nav__item-content">
+                            <i class="fa-solid fa-house fs-4 pb-1" style="color: #C6E2E9"></i>
+                            Home
+                        </div>
+                    </a>
+                </div>
 
-            <div class="mobile-bottom-nav__item">
-                <a href="/searchFilter/all/all/all">
-                    <div class="mobile-bottom-nav__item-content">
-                        <i class="fa-regular fa-rectangle-list fs-4 pb-1" style="color: #E6AFFF"></i>
-                        Listings
-                    </div>
-                </a>
-            </div>
+                <div class="mobile-bottom-nav__item">
+                    <a href="/searchFilter/all/all/all">
+                        <div class="mobile-bottom-nav__item-content">
+                            <i class="fa-regular fa-rectangle-list fs-4 pb-1" style="color: #E6AFFF"></i>
+                            Listings
+                        </div>
+                    </a>
+                </div>
 
-            <div class="mobile-bottom-nav__item">
-                <a href="/blogs">
-                    <div class="mobile-bottom-nav__item-content">
-                        <i class="fa-solid fa-square-rss fs-4 pb-1" style="color: #FFCAAF"></i>
-                        Blog
-                    </div>
-                </a>
-            </div>
+                <div class="mobile-bottom-nav__item">
+                    <a href="/blogs">
+                        <div class="mobile-bottom-nav__item-content">
+                            <i class="fa-solid fa-square-rss fs-4 pb-1" style="color: #FFCAAF"></i>
+                            Blog
+                        </div>
+                    </a>
+                </div>
 
-            <div class="mobile-bottom-nav__item">
-                <a href="/packages/0">
-                    <div class="mobile-bottom-nav__item-content">
-                        <i class="fa-solid fa-filter-circle-dollar fs-4 pb-1" style="color: #FEC868"></i>
-                        Pricing
+                <div class="mobile-bottom-nav__item">
+                    <a href="/packages/0">
+                        <div class="mobile-bottom-nav__item-content">
+                            <i class="fa-solid fa-filter-circle-dollar fs-4 pb-1" style="color: #FEC868"></i>
+                            Pricing
 
-                    </div>
-                </a>
-            </div>
+                        </div>
+                    </a>
+                </div>
 
         </nav>
     </div>

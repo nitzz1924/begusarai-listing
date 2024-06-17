@@ -1,11 +1,11 @@
 @extends('frontend.layouts.master')
 @section('content')
 
-    <meta property="og:title" content="{{ $businessesDetail->businessName }}" />
-    <meta property="og:image" content="{{ asset('uploads/' . $businessesDetail->coverImage) }}" />
-    <meta property="og:description" content="{{ $businessesDetail->description }}" />
+<meta property="og:title" content="{{ $businessesDetail->businessName }}" />
+<meta property="og:image" content="{{ asset('uploads/' . $businessesDetail->coverImage) }}" />
+<meta property="og:description" content="{{ $businessesDetail->description }}" />
 
-    <!-- Set the page title and additional metadata -->
+<!-- Set the page title and additional metadata -->
 @section('title', $businessesDetail->businessName)
 @section('meta_description', $businessesDetail->description)
 @section('og_image', asset('uploads/' . $businessesDetail->coverImage))
@@ -108,6 +108,16 @@ function getYouTubeVideoId($url) {
     button:hover {
         background-color: #2790ff;
     }
+
+    .btn-whatsapp {
+        background-color: #25D366;
+        color: white;
+    }
+
+    .btn-whatsapp:hover {
+        background-color: #1ebe57;
+        color: white;
+    }
 </style>
 
 <main id="main" class="site-main single single-02">
@@ -119,13 +129,13 @@ function getYouTubeVideoId($url) {
                 data-mobilepadding="30px">
 
                 @if ($businessesDetail->galleryImage)
-                    @foreach (json_decode($businessesDetail->galleryImage) as $image)
-                        <div class="place-slider__item bd">
-                            <a title="Place Slider Image" href="#">
-                                <img src="{{ URL::to('uploads/' . $image) }}" alt="slider-01">
-                            </a>
-                        </div>
-                    @endforeach
+                @foreach (json_decode($businessesDetail->galleryImage) as $image)
+                <div class="place-slider__item bd">
+                    <a title="Place Slider Image" href="#">
+                        <img src="{{ URL::to('uploads/' . $image) }}" alt="slider-01">
+                    </a>
+                </div>
+                @endforeach
                 @endif
 
             </div><!-- .page-title -->
@@ -162,24 +172,24 @@ function getYouTubeVideoId($url) {
                 <div class="col-lg-8">
 
                     @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
                     @endif
                     @if (session('error'))
-                        <div class="alert alert-danger">
-                            {{ session('error') }}
-                        </div>
+                    <div class="alert alert-danger">
+                        {{ session('error') }}
+                    </div>
                     @endif
 
                     @if (session('success'))
-                        <div class="alert alert-success" style="color:green">
-                            {{ session('success') }}
-                        </div>
+                    <div class="alert alert-success" style="color:green">
+                        {{ session('success') }}
+                    </div>
                     @endif
                     <div class="place__left">
                         <ul class="place__breadcrumbs breadcrumbs mt-1">
@@ -193,17 +203,17 @@ function getYouTubeVideoId($url) {
                                     <span class="place__reviews__number reviews__number">
                                         <span>
                                             @php
-                                                $totalRating = 0;
-                                                $totalReviews = count($reviews);
-                                                foreach ($reviews as $review) {
-                                                    $totalRating += $review->rating;
-                                                }
-                                                if ($totalReviews > 0) {
-                                                    $averageRating = $totalRating / $totalReviews;
-                                                    echo number_format($averageRating, 1); // Display average rating with 1 decimal place
-                                                } else {
-                                                    echo '0'; // No reviews available
-                                                }
+                                            $totalRating = 0;
+                                            $totalReviews = count($reviews);
+                                            foreach ($reviews as $review) {
+                                            $totalRating += $review->rating;
+                                            }
+                                            if ($totalReviews > 0) {
+                                            $averageRating = $totalRating / $totalReviews;
+                                            echo number_format($averageRating, 1); // Display average rating with 1
+                                            } else {
+                                            echo '0'; // No reviews available
+                                            }
                                             @endphp
                                         </span>
                                         <i class="la la-star"></i>
@@ -223,14 +233,83 @@ function getYouTubeVideoId($url) {
                         <div>
                             Total Visits: {{ $VisitCount }}
                         </div>
+                        <div class="place__box mt-2 mb-3">
+                            <h3>Contact Info</h3>
+                            <ul class="place__contact">
+                                {{-- <li>
+                                    <i class="la la-phone"></i>
+                                    <a title="" href="tel:{{ $businessesDetail->phoneNumber1 }}">{{
+                                        $businessesDetail->phoneNumber1 }}</a>
+
+                                    <br />
+                                    <a title="" href="tel:{{ $businessesDetail->phoneNumber2 }}">{{
+                                        $businessesDetail->phoneNumber2 }}</a>
+
+                                </li> --}}
+                                <ul>
+                                    @if ($businessesDetail->whatsappNo)
+                                    <li>
+                                        <div class="d-flex justify-content-start align-items-center">
+                                            <a href="https://wa.me/{{ $businessesDetail->whatsappNo }}" title="">
+                                                <button class="btn-whatsapp me-2 d-flex align-items-center">
+                                                    <i class="fab fa-whatsapp me-2"></i>WhatsApp Now
+                                                </button>
+                                            </a>
+                                            <a href="tel:{{ $businessesDetail->phoneNumber1 }}" title="">
+                                                <button class="btn-primary rounded d-flex align-items-center">
+                                                    <i class="la la-phone me-2"></i> Call us Now
+                                                </button>
+                                            </a>
+                                        </div>
+                                    </li>
+                                    @endif
+
+                                    @if ($businessesDetail->websiteUrl)
+                                    <li>
+                                        <i class="la la-globe"></i>
+                                        <a title="Website" href="{{ $businessesDetail->websiteUrl }}" target="_blank">{{
+                                            $businessesDetail->websiteUrl }}</a>
+                                    </li>
+                                    @endif
+
+                                    @if ($businessesDetail->facebook)
+                                    <li>
+                                        <i class="la la-facebook-f"></i>
+                                        <a title="Facebook" href="{{ $businessesDetail->facebook }}" target="_blank">{{
+                                            $businessesDetail->facebook }}</a>
+
+                                    </li>
+                                    @endif
+
+                                    @if ($businessesDetail->instagram)
+                                    <li>
+                                        <i class="la la-instagram"></i>
+                                        <a title="Instagram" href="{{ $businessesDetail->instagram }}"
+                                            target="_blank">{{ $businessesDetail->instagram }}</a>
+
+                                    </li>
+                                    @endif
+
+                                    @if ($businessesDetail->twitter)
+                                    <li>
+                                        <i class="la la-twitter"></i>
+                                        <a title="Twitter" href="{{ $businessesDetail->twitter }}" target="_blank">{{
+                                            $businessesDetail->twitter }}</a>
+
+                                    </li>
+                                    @endif
+                                </ul>
+
+                            </ul>
+                        </div>
                         {{-- <div class="place__box place__box-hightlight">
                             <div class="hightlight-grid">
                                 <div class="place__amenities">
 
                                     @foreach ($submaster as $subvalue)
-                                        @if ($subvalue->title === $businessesDetail->category)
-                                            <i class="{{ $subvalue->value }}"></i>
-                                        @endif
+                                    @if ($subvalue->title === $businessesDetail->category)
+                                    <i class="{{ $subvalue->value }}"></i>
+                                    @endif
                                     @endforeach
                                     <span>{{ $businessesDetail->category }}</span>
                                 </div>
@@ -240,11 +319,11 @@ function getYouTubeVideoId($url) {
                         <div class="place__box   place__box-overview">
                             <h3>Overview</h3>
                             <div class="place__desc">{!! $businessesDetail->description !!}
-                            @if($businessesDetail->dType && $businessesDetail->dNumber)
-                            <b>{{ $businessesDetail->dType }}</b> -  {{ $businessesDetail->dNumber }}
-                            @endif
+                                @if($businessesDetail->dType && $businessesDetail->dNumber)
+                                <b>{{ $businessesDetail->dType }}</b> - {{ $businessesDetail->dNumber }}
+                                @endif
 
-                             </div>
+                            </div>
 
                             <a href="#" class="show-more" title="Show More">Show more</a>
                             <a href="#" class="show-less" title="Show Less" style="display: none;">Show less</a>
@@ -255,15 +334,16 @@ function getYouTubeVideoId($url) {
                                 Location
                             </h3>
                             {{-- <div class="maps">
-                                    <div id="map"></div>
-                                </div> --}}
+                                <div id="map"></div>
+                            </div> --}}
 
                             <div class="address">
                                 <i class="la la-map-marker"></i>
                                 <span> {{ $businessesDetail->placeAddress }} </span><br>
                                 <br>
                                 <span><a href="https://www.google.com/maps/search/?api=1&query={{ urlencode($businessesDetail->placeAddress . ' ' . $businessesDetail->city) }}"
-                                        target="_blank" title="Directions"><button class="btn btn-primary btn-sm border-0">View {{ $businessesDetail->city }} on Map</button></a></span>
+                                        target="_blank" title="Directions"><button
+                                            class="btn btn-primary btn-sm border-0 text-white">Address on Google Map</button></a></span>
                             </div>
 
                         </div>
@@ -275,7 +355,10 @@ function getYouTubeVideoId($url) {
                             <?php $urlfile = getYouTubeVideoId($businessesDetail->video);
                             ?>
                             <div class="embed-responsive embed-responsive-16by9">
-                             <iframe width="560" height="315" src="https://www.youtube.com/embed/{{$urlfile}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                                <iframe width="560" height="315" src="https://www.youtube.com/embed/{{$urlfile}}"
+                                    title="YouTube video player" frameborder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                    allowfullscreen></iframe>
                             </div>
 
                         </div>
@@ -283,73 +366,7 @@ function getYouTubeVideoId($url) {
                             {{ $businessesDetail->coverImage }}
                         </div>
 
-                        <div class="place__box">
-                            <h3>Contact Info</h3>
-                            <ul class="place__contact">
-                                {{-- <li>
-                                    <i class="la la-phone"></i>
-                                    <a title=""
-                                        href="tel:{{ $businessesDetail->phoneNumber1 }}">{{ $businessesDetail->phoneNumber1 }}</a>
 
-                                    <br />
-                                    <a title=""
-                                        href="tel:{{ $businessesDetail->phoneNumber2 }}">{{ $businessesDetail->phoneNumber2 }}</a>
-
-                                </li> --}}
-                                <ul>
-                                    @if ($businessesDetail->whatsappNo)
-                                        <li>
-                                            <div class="d-flex justify-content-start align-items-center">
-                                                <a href="https://wa.me/{{ $businessesDetail->whatsappNo }}"  title="">
-                                                    <button class="btn me-2 d-grid align-items-center"><i class="la la-whatsapp me-2"></i>
-                                                {{ $businessesDetail->whatsappNo }}</button>
-                                            </a>
-                                                <a href="tel:{{ $businessesDetail->phoneNumber1 }}"  title="">
-                                                    <button class="btn me-2 d-grid align-items-center"><i class="la la-phone me-2"></i>
-                                                {{ $businessesDetail->whatsappNo }}</button>
-                                            </a>
-                                            </div>
-                                        </li>
-                                    @endif
-
-                                    @if ($businessesDetail->websiteUrl)
-                                        <li>
-                                            <i class="la la-globe"></i>
-                                            <a title="Website" href="{{ $businessesDetail->websiteUrl }}"
-                                                target="_blank">{{ $businessesDetail->websiteUrl }}</a>
-                                        </li>
-                                    @endif
-
-                                    @if ($businessesDetail->facebook)
-                                        <li>
-                                            <i class="la la-facebook-f"></i>
-                                            <a title="Facebook" href="{{ $businessesDetail->facebook }}"
-                                                target="_blank">{{ $businessesDetail->facebook }}</a>
-
-                                        </li>
-                                    @endif
-
-                                    @if ($businessesDetail->instagram)
-                                        <li>
-                                            <i class="la la-instagram"></i>
-                                            <a title="Instagram" href="{{ $businessesDetail->instagram }}"
-                                                target="_blank">{{ $businessesDetail->instagram }}</a>
-
-                                        </li>
-                                    @endif
-
-                                    @if ($businessesDetail->twitter)
-                                        <li>
-                                            <i class="la la-twitter"></i>
-                                            <a title="Twitter" href="{{ $businessesDetail->twitter }}"
-                                                target="_blank">{{ $businessesDetail->twitter }}</a>
-
-                                        </li>
-                                    @endif
-                                </ul>
-
-                            </ul>
-                        </div><!-- .place__box -->
 
                         <div class="place__box place__box-open">
                             <h3 class="place__title--additional">
@@ -358,12 +375,14 @@ function getYouTubeVideoId($url) {
                             <table class="open-table">
                                 <tbody>
                                     @foreach ($duration as $value)
-                                        <tr>
-                                            <td class="day">{{ $value->day }}</td>
-                                            <td class="time">
-                                          {{ $value->opening_time == "24 x 7" ? "24 x 7 Open" : ($value->opening_time == "Closed" ? "Closed" : $value->opening_time . " to " . $value->end_time) }}
-    </td>
-                                        </tr>
+                                    <tr>
+                                        <td class="day">{{ $value->day }}</td>
+                                        <td class="time">
+                                            {{ $value->opening_time == "24 x 7" ? "24 x 7 Open" : ($value->opening_time
+                                            == "Closed" ? "Closed" : $value->opening_time . " to " . $value->end_time)
+                                            }}
+                                        </td>
+                                    </tr>
                                     @endforeach
                                 </tbody>
                             </table>
@@ -374,17 +393,18 @@ function getYouTubeVideoId($url) {
                                 <span style="color: #23d3d3ff; ">
 
                                     @php
-                                        $totalRating = 0;
-                                        $totalReviews = count($reviews);
-                                        foreach ($reviews as $review) {
-                                            $totalRating += $review->rating;
-                                        }
-                                        if ($totalReviews > 0) {
-                                            $averageRating = $totalRating / $totalReviews;
-                                            echo number_format($averageRating, 1); // Display average rating with 1 decimal place
-                                        } else {
-                                            echo '0'; // No reviews available
-                                        }
+                                    $totalRating = 0;
+                                    $totalReviews = count($reviews);
+                                    foreach ($reviews as $review) {
+                                    $totalRating += $review->rating;
+                                    }
+                                    if ($totalReviews > 0) {
+                                        $averageRating = $totalRating / $totalReviews;
+                                        echo number_format($averageRating, 1); // Display average rating with 1 decimal
+                                    }
+                                    else {
+                                        echo '0'; // No reviews available
+                                    }
                                     @endphp
                                 </span>
                                 Starts
@@ -394,46 +414,44 @@ function getYouTubeVideoId($url) {
                             <ul class="place__comments">
 
                                 @auth
-                                    <?php $user = User_Login::find(auth()->user()->id); ?>
+                                <?php $user = User_Login::find(auth()->user()->id); ?>
                                 @endauth
                                 @foreach ($reviews as $review)
-                                    <li>
-                                        <div class="place__author">
-                                            <div class="place__author__avatar">
-                                                <a title="{{ $review->author }}" href="#">
-                                                    @if ($review->image)
-                                                        <img src="{{ URL::to('/uploads/' . $review->image) }}"
-                                                            title="" alt="">
-                                                    @else
-                                                        <img src="https://wp.getgolo.com/country-guide/wp-content/themes/golo/assets/images/default-user-image.png"
-                                                            title="guest" alt="guest">
-                                                    @endif
-                                                </a>
-                                            </div>
-                                            <div class="place__author__info">
-                                                <a title="{{ $review->author }}"
-                                                    href="#">{{ $review->author }}</a>
-                                                <div class="place__author__star">
-                                                    @for ($i = 0; $i < $review->rating; $i++)
-                                                        <i class="la la-star filled-star"></i>
-                                                        <!-- Add a class for filled stars -->
+                                <li>
+                                    <div class="place__author">
+                                        <div class="place__author__avatar">
+                                            <a title="{{ $review->author }}" href="#">
+                                                @if ($review->image)
+                                                <img src="{{ URL::to('/uploads/' . $review->image) }}" title="" alt="">
+                                                @else
+                                                <img src="https://wp.getgolo.com/country-guide/wp-content/themes/golo/assets/images/default-user-image.png"
+                                                    title="guest" alt="guest">
+                                                @endif
+                                            </a>
+                                        </div>
+                                        <div class="place__author__info">
+                                            <a title="{{ $review->author }}" href="#">{{ $review->author }}</a>
+                                            <div class="place__author__star">
+                                                @for ($i = 0; $i < $review->rating; $i++)
+                                                    <i class="la la-star filled-star"></i>
+                                                    <!-- Add a class for filled stars -->
                                                     @endfor
                                                     <span style="width: {{ $review->rating * 20 }}%;">
                                                         @for ($i = 0; $i < 5 - $review->rating; $i++)
                                                             <i class="la la-star"></i>
-                                                        @endfor
+                                                            @endfor
                                                     </span>
-                                                </div>
-                                                <span
-                                                    class="time">{{ \Carbon\Carbon::parse($review->created_at)->format('F j, Y') }}</span>
                                             </div>
+                                            <span class="time">{{ \Carbon\Carbon::parse($review->created_at)->format('F
+                                                j, Y') }}</span>
+                                        </div>
 
-                                        </div>
-                                        <div class="place__comments__content">
-                                            <p>{{ $review->content }}</p>
-                                        </div>
-                                        <a title="Reply" href="#" class="place__comments__reply"></a>
-                                    </li>
+                                    </div>
+                                    <div class="place__comments__content">
+                                        <p>{{ $review->content }}</p>
+                                    </div>
+                                    <a title="Reply" href="#" class="place__comments__reply"></a>
+                                </li>
                                 @endforeach
                                 <?php
                                                 if(Auth::user()){
@@ -444,8 +462,7 @@ function getYouTubeVideoId($url) {
                                     @csrf
                                     <div class="form-group">
 
-                                        <div class="star-rating"
-                                            style="
+                                        <div class="star-rating" style="
                                             display: flex;
                                         ">
                                             <input type="radio" name="rating" id="star1" value="1" />
@@ -477,8 +494,8 @@ function getYouTubeVideoId($url) {
 
                                 <div class="login-container">
                                     <span class="login-message">
-                                        <a href="#" class=" btn-add-to-wishlist open-login test"
-                                            data-place-id="" data-business-id="">
+                                        <a href="#" class=" btn-add-to-wishlist open-login test" data-place-id=""
+                                            data-business-id="">
                                             <span>Please Login First </span>
                                         </a>
                                     </span>
@@ -497,9 +514,10 @@ function getYouTubeVideoId($url) {
                                     <div class="col-md-4 ">
                                         {{-- <div class="d-grid justify-items-center"> --}}
                                             <img src="{{ URL::to('uploads/' . $businessesDetail->logo) }}"
-                                            class="img-fluid author-img rounded p-3" alt="author-img"
-                                            style="object-fit: cover; height: 100%; object-position: center;" >
-                                        {{-- </div> --}}
+                                                class="img-fluid author-img rounded p-3" alt="author-img"
+                                                style="object-fit: cover; height: 100%; object-position: center;">
+                                            {{--
+                                        </div> --}}
                                     </div>
                                     <div class="col-md-8 d-grid align-items-center">
                                         <div class="card-body">
@@ -508,21 +526,22 @@ function getYouTubeVideoId($url) {
                                             <ul class="place__contact">
                                                 <li>
                                                     <i class="la la-phone text-info"></i>
-                                                    <a title=""
-                                                        href="tel:{{ $businessesDetail->phoneNumber1 }}">{{ $businessesDetail->phoneNumber1 }}</a>
+                                                    <a title="" href="tel:{{ $businessesDetail->phoneNumber1 }}">{{
+                                                        $businessesDetail->phoneNumber1 }}</a>
                                                 </li>
                                                 <li>
                                                     <i class="fa-regular fa-envelope text-info"></i>
-                                                    <a
-                                                        href="mailto:{{ $businessesDetail->email }}">{{ $businessesDetail->email }}</a>
+                                                    <a href="mailto:{{ $businessesDetail->email }}">{{
+                                                        $businessesDetail->email }}</a>
                                                 </li>
                                             </ul>
                                             </p>
                                             <div class="mt-2">
 
-                                                <a title="call-now"  href="tel:{{ $businessesDetail->phoneNumber1 }}">
+                                                <a title="call-now" href="tel:{{ $businessesDetail->phoneNumber1 }}">
 
-                                                    <button class="btn"><i class="la la-phone me-1"></i>Call Now</button>
+                                                    <button class="btn"><i class="la la-phone me-1"></i>Call
+                                                        Now</button>
                                                 </a>
                                             </div>
                                         </div>
@@ -544,19 +563,16 @@ function getYouTubeVideoId($url) {
                             </div>
 
                             @if (session('success'))
-                                <div class="alert alert-success alert-dismissible fade show custom-alert"
-                                    role="alert">
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <div>
-                                            <span
-                                                style="color:green;text-agline:center; ">{{ session('success') }}</span>
-                                        </div>
-                                        <button type="button" class="close" data-dismiss="alert"
-                                            aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
+                            <div class="alert alert-success alert-dismissible fade show custom-alert" role="alert">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <span style="color:green;text-agline:center; ">{{ session('success') }}</span>
                                     </div>
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
                                 </div>
+                            </div>
                             @endif
 
                             <form method="POST" action="{{ route('LeadStore') }}">
@@ -565,25 +581,25 @@ function getYouTubeVideoId($url) {
                                 <input type="hidden" name="business_id" value="{{ $businessesDetail->id }}">
                                 <div class="form-group">
                                     <label for="name">Your Name</label>
-                                    <input type="text" id="name" name="name"
-                                        placeholder="Enter your name" required>
+                                    <input type="text" id="name" name="name" placeholder="Enter your name" required>
                                     @error('name')
-                                        <div class="text-danger">{{ $message }}</div>
+                                    <div class="text-danger">{{ $message }}</div>
                                     @enderror
                                 </div>
 
                                 <div class="form-group">
                                     <label for="number">Your Phone Number</label>
-                                    <input type="number" id="number" name="number"
-                                        placeholder="Enter your phone number" required>
+                                    <input type="number" id="number" name="number" placeholder="Enter your phone number"
+                                        required>
                                     @error('number')
-                                        <div class="text-danger">{{ $message }}</div>
+                                    <div class="text-danger">{{ $message }}</div>
                                     @enderror
                                 </div>
 
                                 <div class="form-group">
                                     <label for="message">Message</label>
-                                    <textarea class="form-control" id="message" name="message" rows="4" required>{{ old('message') }}</textarea>
+                                    <textarea class="form-control" id="message" name="message" rows="4"
+                                        required>{{ old('message') }}</textarea>
                                 </div>
 
                                 <div class="text-center">
@@ -604,100 +620,101 @@ function getYouTubeVideoId($url) {
             <div class="similar-places__content">
                 <div class="row">
                     @foreach ($Result as $value)
-                        @if ($value->status == 1)
-                            <div class="col-md-3  mb-3">
-                                <div class="place-item layout-02 place-hover">
-                                    <div class="place-inner">
-                                        <div class="place-thumb hover-img">
-                                            <a class="entry-thumb"
-                                                href="{{ URL::to('listingDetail/' . $value->category . '/' . Str::slug($value->businessName) . '-' . $value->id) }}">
+                    @if ($value->status == 1)
+                    <div class="col-md-3  mb-3">
+                        <div class="place-item layout-02 place-hover">
+                            <div class="place-inner">
+                                <div class="place-thumb hover-img">
+                                    <a class="entry-thumb"
+                                        href="{{ URL::to('listingDetail/' . $value->category . '/' . Str::slug($value->businessName) . '-' . $value->id) }}">
 
-                                                <img src="{{ URL::to('uploads/' . $value->coverImage) }}" />
+                                        <img src="{{ URL::to('uploads/' . $value->coverImage) }}" />
 
-                                            </a>
-                                            <?php
+                                    </a>
+                                    <?php
                                                 if(Auth::user()){
                                                 ?>
-                                            <a href="#" class="golo-add-to-wishlist btn-add-to-wishlist"
-                                                data-place-id="{{ $value->id }}"
-                                                data-business-id="{{ $value->id }}">
-                                                <span class="icon-heart">
+                                    <a href="#" class="golo-add-to-wishlist btn-add-to-wishlist"
+                                        data-place-id="{{ $value->id }}" data-business-id="{{ $value->id }}">
+                                        <span class="icon-heart">
 
-                                                    @if ($value->bookmark_status != null)
-                                                        <i class="la la-bookmark large" style="color: #ffb429;"></i>
-                                                    @else
-                                                        <i class="la la-bookmark large" style="color:black"></i>
-                                                    @endif
-                                                </span>
-                                            </a>
-                                            <?php
+                                            @if ($value->bookmark_status != null)
+                                            <i class="la la-bookmark large" style="color: #ffb429;"></i>
+                                            @else
+                                            <i class="la la-bookmark large" style="color:black"></i>
+                                            @endif
+                                        </span>
+                                    </a>
+                                    <?php
                                             }else{
                                             ?>
 
-                                            <div class="login-container">
-                                                <span class="login-message"> <a href="#"
-                                                        class=" btn-add-to-wishlist open-login test" data-place-id=""
-                                                        data-business-id="">
-                                                        <span class="icon-heart">
+                                    <div class="login-container">
+                                        <span class="login-message"> <a href="#"
+                                                class=" btn-add-to-wishlist open-login test" data-place-id=""
+                                                data-business-id="">
+                                                <span class="icon-heart">
 
-                                                            <i class="la la-bookmark large" style="color:black"></i>
+                                                    <i class="la la-bookmark large" style="color:black"></i>
 
-                                                        </span>
-                                                    </a></span>
+                                                </span>
+                                            </a></span>
 
-                                            </div>
+                                    </div>
 
-                                            <?php }?>
+                                    <?php }?>
 
-                                            <a class="entry-category rosy-pink" href="#">
+                                    <a class="entry-category rosy-pink" href="#">
 
-                                                @foreach ($submaster as $subvalue)
-                                                    @if ($subvalue->title === $value->category)
-                                                        <i class="{{ $subvalue->value }}"></i>
-                                                    @endif
-                                                @endforeach
+                                        @foreach ($submaster as $subvalue)
+                                        @if ($subvalue->title === $value->category)
+                                        <i class="{{ $subvalue->value }}"></i>
+                                        @endif
+                                        @endforeach
 
-                                                </i><sview>{{ $value->category }}</sview pan>
-                                            </a>
-                                            <a href="#" class="author" title="Author">
-                                                <img src="{{ URL::to('uploads/' . $value->logo) }}"alt="Author" />
+                                        </i>
+                                        <sview>{{ $value->category }}</sview pan>
+                                    </a>
+                                    <a href="#" class="author" title="Author">
+                                        <img src="{{ URL::to('uploads/' . $value->logo) }}" alt="Author" />
 
-                                            </a>
-                                            <!-- <div class="feature">Featured</div> -->
+                                    </a>
+                                    <!-- <div class="feature">Featured</div> -->
+                                </div>
+                                <div class="entry-detail">
+                                    <div class="entry-head">
+                                        <div class="place-type">
+                                            <span>{{ $value->highlight }}</span>
                                         </div>
-                                        <div class="entry-detail">
-                                            <div class="entry-head">
-                                                <div class="place-type">
-                                                    <span>{{ $value->highlight }}</span>
-                                                </div>
 
+                                    </div>
+                                    <h3 class="place-title">
+
+                                        <a
+                                            href="{{ URL::to('listingDetail/' . $value->category . '/' . Str::slug($value->businessName) . '-' . $value->id) }}">{{
+                                            $value->businessName }}</a>
+                                    </h3>
+                                    <div class='{{$value->timestatus=="Close Now"?"close-now":"open-now"}}'>
+                                        <i class="las la-door-open"></i>{{$value->timestatus}}
+                                    </div>
+                                    <div class="entry-bottom">
+                                        <div class="place-preview">
+                                            <div class="place-rating">
+
+                                                <span>{{ $value->rating }}</span>
+                                                <i class="la la-star"></i>
                                             </div>
-                                            <h3 class="place-title">
-
-                                                <a
-                                                    href="{{ URL::to('listingDetail/' . $value->category . '/' . Str::slug($value->businessName) . '-' . $value->id) }}">{{ $value->businessName }}</a>
-                                            </h3>
-                                           <div class='{{$value->timestatus=="Close Now"?"close-now":"open-now"}}'>
-                                                        <i class="las la-door-open"></i>{{$value->timestatus}}
-                                                    </div>
-                                            <div class="entry-bottom">
-                                                <div class="place-preview">
-                                                    <div class="place-rating">
-
-                                                        <span>{{ $value->rating }}</span>
-                                                        <i class="la la-star"></i>
-                                                    </div>
-                                                    <span class="count-reviews">({{ $value->count }} Reviews)</span>
-                                                </div>
-                                                <div class="place-price">
-                                                    <span>{{ $value->price }}</span>
-                                                </div>
-                                            </div>
+                                            <span class="count-reviews">({{ $value->count }} Reviews)</span>
+                                        </div>
+                                        <div class="place-price">
+                                            <span>{{ $value->price }}</span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        @endif
+                        </div>
+                    </div>
+                    @endif
                     @endforeach
                 </div>
             </div>
