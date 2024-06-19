@@ -35,13 +35,14 @@ $popup = Popup_ads::orderBy('created_at', 'asc')->where('type', '=', 'Popup Ads'
 
 <div class="modal fade" id="exampleModalFullscreen" tabindex="-1" aria-labelledby="exampleModalFullscreenLabel"
     style="display: none; background-color: black;" aria-hidden="true">
-    <div class="modal-dialog modal-fullscreen-sm-down ">
+    <div class="modal-dialog modal-fullscreen ">
         <div class="modal-content">
             <div class="modal-header" style="border-bottom: 0px">
-                <h5 class="modal-title"></h5>
+                <div class="modal-title text-center w-100  text-white fs-5">For more details click on photo anywhere.</div>
                 <button type="button" class="btn-danger white px-2 border rounded-3" data-bs-dismiss="modal"
                     aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
             </div>
+            {{-- <h1 class="text-white fs-4">For More Details Click on photo anywhere.</h1> --}}
             <div class="modal-body d-grid align-items-center">
                 @if ($popup && $popup->logo)
                 <div class="position-relative bg-image overlay p-0">
@@ -67,7 +68,9 @@ $popup = Popup_ads::orderBy('created_at', 'asc')->where('type', '=', 'Popup Ads'
 
                 </div>
                 @endif
-
+            </div>
+            <div class="modal-footer border-0">
+                <div class="text-white  w-100 text-center fs-5">अधिक जानकारी के लिए फ़ोटो पे कहीं भी click करें</div>
             </div>
 
         </div>
