@@ -249,14 +249,19 @@ use App\Models\User_Login;
                                 <ul>
                                     @if ($businessesDetail->whatsappNo)
                                     <li>
-                                        <div class="d-flex justify-content-start align-items-center">
-                                            <a href="https://wa.me/{{ $businessesDetail->whatsappNo }}" title="">
-                                                <button class="btn-whatsapp me-2 d-flex align-items-center">
+                                        <div
+                                            class="d-flex justify-content-start align-items-center flex-md-row flex-column">
+                                            <a class="max-vw-75 mb-md-2 mb-2 me-md-2 text-center mediawhatsapp"
+                                                href="https://wa.me/{{ $businessesDetail->whatsappNo }}" title="">
+                                                <button
+                                                    class="btn-whatsapp me-2 d-flex align-items-center justify-content-center w-md-25 w-100">
                                                     <i class="fab fa-whatsapp me-2"></i>WhatsApp Now
                                                 </button>
                                             </a>
-                                            <a href="tel:{{ $businessesDetail->phoneNumber1 }}" title="">
-                                                <button class="btn-primary rounded d-flex align-items-center">
+                                            <a class="max-vw-75 mb-md-2 mb-2 text-center mediacall"
+                                                href="tel:{{ $businessesDetail->phoneNumber1 }}" title="">
+                                                <button
+                                                    class="btn-primary rounded me-2 d-flex align-items-center justify-content-center w-100">
                                                     <i class="la la-phone me-2"></i> Call us Now
                                                 </button>
                                             </a>
@@ -343,7 +348,8 @@ use App\Models\User_Login;
                                 <br>
                                 <span><a href="https://www.google.com/maps/search/?api=1&query={{ urlencode($businessesDetail->placeAddress . ' ' . $businessesDetail->city) }}"
                                         target="_blank" title="Directions"><button
-                                            class="btn btn-primary btn-sm border-0 text-white">Address on Google Map</button></a></span>
+                                            class="btn btn-primary btn-sm border-0 text-white">Address on Google
+                                            Map</button></a></span>
                             </div>
 
                         </div>
@@ -399,11 +405,11 @@ use App\Models\User_Login;
                                     $totalRating += $review->rating;
                                     }
                                     if ($totalReviews > 0) {
-                                        $averageRating = $totalRating / $totalReviews;
-                                        echo number_format($averageRating, 1); // Display average rating with 1 decimal
+                                    $averageRating = $totalRating / $totalReviews;
+                                    echo number_format($averageRating, 1); // Display average rating with 1 decimal
                                     }
                                     else {
-                                        echo '0'; // No reviews available
+                                    echo '0'; // No reviews available
                                     }
                                     @endphp
                                 </span>
@@ -511,7 +517,7 @@ use App\Models\User_Login;
                             <h3>Authorized Person</h3>
                             <div class="card mb-3" style="max-width: 540px;">
                                 <div class="row g-0">
-                                    <div class="col-md-4 ">
+                                    <div class="col-md-4 personimgmedia">
                                         {{-- <div class="d-grid justify-items-center"> --}}
                                             <img src="{{ URL::to('uploads/' . $businessesDetail->logo) }}"
                                                 class="img-fluid author-img rounded p-3" alt="author-img"
@@ -520,20 +526,25 @@ use App\Models\User_Login;
                                         </div> --}}
                                     </div>
                                     <div class="col-md-8 d-grid align-items-center">
-                                        <div class="card-body">
-                                            <h5 class="card-title fs-5">{{ $businessesDetail->ownerName }}</h5>
+                                        <div class="card-body persondetailsmedia">
+                                            <h5 class="card-title fs-5 mb-2">{{ $businessesDetail->ownerName }}</h5>
                                             <p class="card-text">
                                             <ul class="place__contact">
+                                                @if($businessesDetail->phoneNumber1)
                                                 <li>
                                                     <i class="la la-phone text-info"></i>
-                                                    <a title="" href="tel:{{ $businessesDetail->phoneNumber1 }}">{{
+                                                    <a class="mb-2" href="tel:{{ $businessesDetail->phoneNumber1 }}">{{
                                                         $businessesDetail->phoneNumber1 }}</a>
                                                 </li>
+                                                @endif
+
+                                                @if($businessesDetail->email)
                                                 <li>
                                                     <i class="fa-regular fa-envelope text-info"></i>
-                                                    <a href="mailto:{{ $businessesDetail->email }}">{{
+                                                    <a class="mb-2"  href="mailto:{{ $businessesDetail->email }}">{{
                                                         $businessesDetail->email }}</a>
                                                 </li>
+                                                @endif
                                             </ul>
                                             </p>
                                             <div class="mt-2">

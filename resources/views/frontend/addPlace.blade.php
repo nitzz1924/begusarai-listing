@@ -72,7 +72,7 @@
                                         @enderror -->
 
                                     <label class="fieldlabels mt-3 ">Category: <span style='color:red'>*</span></label>
-                                    <select data-placeholder="Select Category" class=" form-control mb-3" id="category"
+                                    <select data-placeholder="Select Category" class=" form-control mb-3 chosen-select" id="category"
                                         name="category">
                                         <option value="" selected disable>Select</option>
                                         @foreach ($category as $value)
@@ -84,7 +84,7 @@
                                     @enderror
 
                                     <label class="fieldlabels">Place Type: </label>
-                                    <select data-placeholder="Select Place Type" multiple
+                                    <select data-placeholder="Select Place Type mt-3" multiple
                                         class="chosen-select form-control" id="placeType" name="placeType[]">
                                         <option value="" selected disabled>Select</option>
                                         @foreach ($Placetype as $value)

@@ -2025,6 +2025,17 @@
     }
 }
 @media only screen and (max-width: 375px) {
+    .mediawhatsapp,.mediacall{
+        width: 100%;
+    }
+    .personimgmedia{
+        display: flex;
+        justify-content: center;
+    }
+    .persondetailsmedia{
+        text-align: center;
+    }
+
     .places-item .places-item__thumb img {
         width: 100%;
     }

@@ -2,6 +2,28 @@
 @section('title', 'Complete Profile')
 @section('content')
 <div class="container-fluid">
+    <style>
+        .has-error {
+            color: red;
+            font-size: 0.875rem;
+        }
+
+        .form-control:invalid {
+            border-color: red;
+        }
+
+        .form-control:invalid:focus {
+            border-color: red;
+            box-shadow: 0 0 5px red;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 1rem;
+            margin-top: 10px;
+            display: none;
+        }
+    </style>
     @if ($mymess = Session::get('success'))
     <div class="alert border-0 alert-success text-center" role="alert" id="successAlert">
         <strong>{{ $mymess }}</strong>
@@ -43,13 +65,14 @@
                     <div class="tab-pane fade show active p-4" id="pills-home" role="tabpanel"
                         aria-labelledby="pills-home-tab" tabindex="0">
                         <form action="{{ route('updateHighlights', ['id' => $business->id]) }}" method="POST"
-                            class="upload-form" enctype="multipart/form-data" id="msform">
+                            class="upload-form" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
                             <div class="form-card">
                                 <div class="mb-3">
                                     <label class="fieldlabels">City:<span style='color:red'>*</span></label>
-                                    <select data-placeholder="Select City" class=" form-control" id="city" name="city">
+                                    <select data-placeholder="Select City" class=" form-control" required id="city"
+                                        name="city">
                                         <option value="" selected disabled>Select City</option>
                                         @foreach ($data['City'] as $value)
                                         <option {{ isset($business) && $business->city == $value->title ? 'selected' :
@@ -137,14 +160,23 @@
                     </div>
                     <div class="tab-pane fade  p-4" id="pills-profile" role="tabpanel"
                         aria-labelledby="pills-profile-tab" tabindex="0">
+                        @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        @endif
                         <form action="{{ route('updateLocations', ['id' => $business->id]) }}" method="POST"
                             class="upload-form" enctype="multipart/form-data" id="msform">
                             @csrf
                             @method('PUT')
                             <div class="form-card">
                                 <label class="fieldlabels">Business Address:<span style='color:red'>*</span></label>
-                                <input type="text" placeholder="Full ontact Info" id="placeAddress" name="placeAddress"
-                                    class="form-control mb-3"
+                                <input type="text" required placeholder="Full Contact Info" id="placeAddress"
+                                    name="placeAddress" class="form-control mb-3"
                                     value="{{ isset($business) ? $business->placeAddress : old('placeAddress') }}">
                                 @error('placeAddress')
                                 <div class="has-error mt-2">{{ $message }}</div>
@@ -154,15 +186,10 @@
                                 <input type="email" placeholder="Your email address" id="email" name="email"
                                     class="form-control mb-3"
                                     value="{{ isset($business) ? $business->email : old('email') }}">
-                                @error('email')
-                                <div class="has-error mt-2">{{ $message }}</div>
-                                @enderror
-
-                                <label class="fieldlabels">Email:</label>
 
                                 <label class="fieldlabels">Business Number:<span style='color:red'>*</span></label>
-                                <input type="tel" placeholder="Your phone number" name="phoneNumber1" id="phoneNumber1"
-                                    class="form-control mb-3 "
+                                <input type="tel" required placeholder="Your phone number" name="phoneNumber1"
+                                    id="phoneNumber1" class="form-control mb-3"
                                     value="{{ isset($business) ? $business->phoneNumber1 : old('phoneNumber1') }}">
                                 @error('phoneNumber1')
                                 <div class="has-error mt-2">{{ $message }}</div>
@@ -172,9 +199,6 @@
                                 <input class="form-control mb-3" type="tel" placeholder="Your phone number"
                                     name="phoneNumber2" id="phoneNumber2"
                                     value="{{ isset($business) ? $business->phoneNumber2 : old('phoneNumber2') }}">
-                                @error('phoneNumber2')
-                                <div class="has-error mt-2">{{ $message }}</div>
-                                @enderror
 
                                 <label class="fieldlabels">Business Whatsapp :</label>
                                 <input type="tel" placeholder="Your WhatsApp number" name="whatsappNo" id="whatsappNo"
@@ -185,9 +209,7 @@
                                 <input class="form-control mb-3" type="url" placeholder="Your booking URL"
                                     name="bookingurl" id="bookingurl"
                                     value="{{ isset($business) ? $business->bookingurl : old('bookingurl') }}">
-                                @error('bookingurl')
-                                <div class="has-error mt-2">{{ $message }}</div>
-                                @enderror
+
                                 <label class="fieldlabels">Business Video (Youtube Link) :</label>
                                 <input class="form-control mb-3" type="url" placeholder="Your video URL" name="video"
                                     id="video" value="{{ isset($business) ? $business->video : old('video') }}">
@@ -195,14 +217,14 @@
                                 <div class='row mb-4'>
                                     <div class="col-md-12">
                                         <div class="form-group">
-
                                             <label class="fieldlabels">Cover image:
-                                                <span class="text-danger">* Maximum image size:
+                                                <span class="text-secondary"><span class="text-danger">* </span>Maximum
+                                                    image size:
                                                     2MB (W:1080× H:600)
                                                 </span>
                                             </label>
                                             <div class="input-group">
-                                                <input type="file" class="form-control mb-3" name="coverImage"
+                                                <input type="file" required class="form-control mb-3" name="coverImage"
                                                     id="coverImage" data-max-size="1024">
                                                 <div class="mt-3 d-grid justify-items-center">
                                                     <img class="rounded-3 img-fluids shadow"
@@ -210,42 +232,35 @@
                                                         alt="" style="height: 100px;" />
                                                 </div>
                                             </div>
-                                            @error('coverImage')
-                                            <div class="has-error mt-2">{{ $message }}</div>
-                                            @enderror
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="fieldlabels" class=" fieldlabels">
-                                                Author:<span class="text-danger">* Maximum image size: 2MB(W:1080×
+                                                Author:<span class="text-secondary"><span class="text-danger">*
+                                                    </span>Maximum image size: 2MB(W:1080×
                                                     H:600)</span>
-
                                             </label>
                                             <div class="input-group">
-                                                <input class="form-control mb-3" type="file" name="logo" id="logo"
-                                                    data-max-size="1024">
-
-
+                                                <input class="form-control mb-3" required type="file" name="logo"
+                                                    id="logo" data-max-size="1024">
                                                 <div class="mt-3 d-grid justify-items-center ">
                                                     <img class="rounded-3 img-fluids shadow"
                                                         src="{{ isset($business) && $business->logo ? asset('uploads/' . $business->logo) : asset('images/no-image.png') }}"
                                                         alt="" style="height: 100px;" />
                                                 </div>
                                             </div>
-                                            @error('logo')
-                                            <div class="has-error mt-2">{{ $message }}</div>
-                                            @enderror
                                         </div>
                                     </div>
                                 </div>
+
                                 <div class="form-group">
                                     <label class="fieldlabels">Business Photos (Drag & Drop Images Here Max 5 ):<span
-                                            class="text-danger">* Maximum image size:2MB (W:1080× H:600)
+                                            class="text-secondary"><span class="text-danger">* </span>Maximum image
+                                            size:2MB (W:1080× H:600)
                                         </span></label>
                                     <div id="drop-area" class="border rounded p-3">
-
-                                        <input type="file" class="form-control mb-3" name="galleryImage[]"
+                                        <input type="file" class="form-control mb-3" required name="galleryImage[]"
                                             id="galleryImage" data-max-size="1024" multiple accept="image/*">
                                         <input type="hidden" name="galleryImageCount" id="galleryImageCount" value="0">
                                         <div class="selected-files-count mt-2"></div>
@@ -259,18 +274,15 @@
                                             @endif
                                         </div>
                                     </div>
-
-                                    @error('galleryImage')
-                                    <div class="has-error mt-2">{{ $message }}</div>
-                                    @enderror
                                 </div>
 
                                 <div class="form-group">
                                     <label for="fieldlabels" class=" fieldlabels">
-                                        Business Ownership Proof (Upload PDF):<span class="text-danger">* Maximum image
+                                        Business Ownership Proof (Upload PDF):<span class="text-secondary"><span
+                                                class="text-danger">* </span>Maximum image
                                             size: 2MB(W:1080× H:600) </span></label>
                                     <div class="input-group">
-                                        <input class="form-control mb-3" type="file" name="documentImage"
+                                        <input class="form-control mb-3" type="file" required name="documentImage"
                                             id="documentImage" accept=".pdf">
                                         <a class="btn btn-dark"
                                             href="{{ isset($business) && $business->documentImage ? asset('uploads/' . $business->documentImage) : asset('images/no-image.png') }}"
@@ -278,13 +290,12 @@
                                     </div>
                                     <p>No business docs?
                                         Use Aadhar card for ID verification.</p>
-                                    @error('documentImage')
-                                    <div class="has-error mt-2">The all image field are required.</div>
-                                    @enderror
                                 </div>
+
                                 <div class="d-flex justify-content-end mt-3">
                                     <button type="submit" class="btn btn-success">Update</button>
                                 </div>
+
                             </div>
                         </form>
                     </div>
@@ -293,6 +304,20 @@
         </div>
     </div>
 </div>
+<script>
+    document.getElementById('msform').addEventListener('submit', function(event) {
+        var placeAddress = document.getElementById('placeAddress').value.trim();
+        console.log(placeAddress);
+        if (!placeAddress) {
+            event.preventDefault(); // Prevent form submission
+            alert('error-message');
+            document.getElementById('error-message').style.display = 'block'; // Display error message
+        } else {
+            alert('error-message');
+            document.getElementById('error-message').style.display = 'block'; // Hide error message if filled
+        }
+    });
+</script>
 <script>
     $(document).ready(function() {
 
@@ -501,4 +526,5 @@ var editor = CKEDITOR.replace('description', {});
         $('#dangerAlert').fadeOut('slow');
     }, 2000);
 </script>
+
 @endsection

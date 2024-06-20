@@ -561,10 +561,10 @@ $popup = Popup_ads::orderBy('created_at', 'asc')->where('type', '=', 'Popup Ads'
                         if (Auth::user()->type=='Owner'){
                         ?>
 
-                    <div class="right-header__button btn">
+                    <div class="right-header__button">
                         <a title="Add place" href="/addPlace">
-                            <i class="las la-plus la-24-white"></i>
-                            <span>Add Listing</span>
+                            <button type="button" class="btn btn-primary border-0"><i class="las la-briefcase fs-6"></i>
+                                Add Listing</button>
                         </a>
                     </div>
 

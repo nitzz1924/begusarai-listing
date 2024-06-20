@@ -1868,6 +1868,17 @@ use Exception;
         // dd($request->all());
         $business = BusinessList::findOrFail($id);
         try {
+            $validator = Validator::make($request->all(), [
+                'placeAddress' => 'required',
+                'phoneNumber1' => 'required',
+            ]);
+
+            if ($validator->fails()) {
+                return redirect()
+                    ->back()
+                    ->withErrors($validator)
+                    ->withInput();
+            }
             $business->userId = Auth::id();
             $business->placeAddress = $request->input('placeAddress');
             $business->email = $request->input('email');
